@@ -1,0 +1,36 @@
+west ( 
+p_datai0 p_datai1 p_datai2 p_datai3
+p_datai4 p_datai5 p_datai6 p_datai7
+p_inst0 p_inst1 p_inst2 p_inst3
+p_vddi
+p_memory_read p_memory_write
+p_datai8 p_datai9 p_datai10 p_datai11
+p_datai12 p_datai13 p_datai14 p_datai15
+ )
+north( 
+p_datao0 p_datao1 p_datao2 p_datao3
+p_datao4 p_datao5 p_datao6 p_datao7
+p_inst4 p_inst5 p_inst6 p_inst7
+p_ck p_vssi 
+p_preset
+p_datao8 p_datao9 p_datao10 p_datao11
+p_datao12 p_datao13 p_datao14 p_datao15
+)
+east ( 
+p_iadrs0 p_iadrs1 p_iadrs2 p_iadrs3
+p_iadrs4 p_iadrs5 p_iadrs6 p_iadrs7
+p_inst8 p_inst9 p_inst10 p_inst11
+p_vdde
+p_inst_read p_inst_write
+p_iadrs8 p_iadrs9 p_iadrs10 p_iadrs11
+p_iadrs12 p_iadrs13 p_iadrs14 p_iadrs15
+)
+south(
+p_adrs0 p_adrs1 p_adrs2 p_adrs3
+p_adrs4 p_adrs5 p_adrs6 p_adrs7
+p_inst12 p_inst13 p_inst14 p_inst15
+p_vsse 
+p_hlt p_wb
+p_adrs8 p_adrs9 p_adrs10 p_adrs11
+p_adrs12 p_adrs13 p_adrs14 p_adrs15
+)

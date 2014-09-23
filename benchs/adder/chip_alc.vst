@@ -1,0 +1,322 @@
+-- Entity Declaration
+
+ENTITY chip IS
+  PORT (
+  ck : in BIT ;
+  a : in BIT_VECTOR (3 downto 0) ;
+  b : in BIT_VECTOR (3 downto 0) ;
+  f : out BIT_VECTOR (3 downto 0) ;
+  vdde : in BIT ;	-- vdd
+  vsse : in BIT ;	-- vdd
+  vddi: in BIT ;	-- vdd
+  vssi: in BIT 	-- vss
+  );
+END chip;
+
+-- Architecture Declaration
+
+ARCHITECTURE VST OF chip IS
+
+Component adder
+  PORT (
+  m_clock : in BIT ;
+  p_reset : in BIT ;
+  a : in BIT_VECTOR (3 downto 0) ;
+  b : in BIT_VECTOR (3 downto 0) ;
+  f : out BIT_VECTOR (3 downto 0) ;
+  vdd : in BIT ;	-- vdd
+  vss : in BIT 	-- vss
+  );
+END component;
+
+Component pck_msp
+  port (
+  pad : in BIT;	-- pad
+  ck : out BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pi_msp
+  port (
+  pad : in BIT;	-- pad
+  t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvddeck_msp
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvsseck_msp
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvddick_msp
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvssick_msp
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component po_msp
+  port (
+  i : in BIT;	-- t
+  pad : out BIT;	-- pad
+  ck : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+signal a_i : bit_vector ( 3 downto 0);
+signal b_i : bit_vector ( 3 downto 0);
+signal f_i : bit_vector ( 3 downto 0);
+signal cki : bit;
+signal ckc : bit;
+
+
+BEGIN
+
+core : adder
+  port map (
+  a => a_i,
+  b => b_i,
+  f => f_i,
+  m_clock => ckc,
+  p_reset => vssi,
+  vdd => vddi,
+  vss => vssi
+  );
+
+p_ck: pck_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      pad  => ck,
+      ck=>cki
+   );
+
+p_vdde: pvddeck_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+p_vsse: pvsseck_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+
+p_vddi: pvddick_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+p_vssi: pvssick_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+p_a0 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck=>cki,
+      pad  => a(0),
+      t    => a_i(0)
+   );
+
+p_a1 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(1),
+      t    => a_i(1)
+   );
+
+p_a2 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(2),
+      t    => a_i(2)
+   );
+
+p_a3 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(3),
+      t    => a_i(3)
+   );
+
+p_b0 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => b(0),
+      t    => b_i(0)
+   );
+
+p_b1 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => b(1),
+      t    => b_i(1)
+   );
+
+p_b2 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => b(2),
+      t    => b_i(2)
+   );
+
+p_b3 : pi_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => b(3),
+      t    => b_i(3)
+   );
+
+p_f0 : po_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => f(0),
+      i    => f_i(0)
+   );
+
+p_f1 : po_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => f(1),
+      i    => f_i(1)
+   );
+
+p_f2 : po_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => f(2),
+      i    => f_i(2)
+   );
+
+p_f3 : po_msp
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => f(3),
+      i    => f_i(3)
+   );
+
+end VST;

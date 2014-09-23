@@ -1,0 +1,46 @@
+N:an4_x2_2_sig:-1:156 ps
+N:an4_x2_sig:-1:161 ps
+N:iv1_x2_sig:-1:36 ps
+N:m_clock:-1:0 ps
+N:n_ctype:-1:87 ps
+N:n_dec:-1:0 ps
+N:n_itype:-1:135 ps
+N:n_op 0:-1:0 ps
+N:n_op 1:-1:0 ps
+N:n_op 2:-1:0 ps
+N:n_op 3:-1:0 ps
+N:n_rtype:-1:87 ps
+N:not_n_dec:-1:42 ps
+N:not_n_op_1:-1:36 ps
+N:not_n_op_2:-1:36 ps
+N:not_n_op_3:-1:36 ps
+N:not_v_net_0:-1:36 ps
+N:not_v_net_1:-1:36 ps
+N:p_reset:-1:0 ps
+B:n_ctype_ins:-1:87 ps
+B:n_rtype_ins:-1:87 ps
+B:n_itype_ins:32:135 ps
+B:not_n_op_1:-1:36 ps
+B:not_n_op_2:-1:36 ps
+B:not_n_op_3:-1:36 ps
+B:not_n_dec_ins:-1:36 ps
+B:not_v_net_0_ins:-1:202 ps
+B:an4_x2_2_ins:-1:156 ps
+B:not_v_net_1_ins:32:207 ps
+B:an4_x2_ins:32:161 ps
+B:iv1_x2_ins:32:36 ps
+C:n_op 0:32:0 ps
+C:n_op 1:-1:0 ps
+C:n_op 2:-1:0 ps
+C:n_op 3:-1:0 ps
+C:n_itype:32:135 ps
+C:n_rtype:-1:87 ps
+C:n_ctype:-1:87 ps
+C:n_dec:-1:0 ps
+C:m_clock:-1:0 ps
+C:p_reset:-1:0 ps
+P:n_op_0:n_op_0:iv1_x2_ins:32:36 ps
+P:iv1_x2_ins:iv1_x2_sig:an4_x2_ins:32:36 ps
+P:an4_x2_ins:an4_x2_sig:not_v_net_1_ins:32:36 ps
+P:not_v_net_1_ins:not_v_net_1:n_itype_ins:32:36 ps
+P:n_itype_ins:n_itype:n_itype:32:36 ps

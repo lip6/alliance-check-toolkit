@@ -1,0 +1,582 @@
+entity inc16 is
+   port (
+      p_reset : in      bit;
+      m_clock : in      bit;
+      n_do    : in      bit;
+      n_out   : out     bit_vector(15 downto 0);
+      n_in    : in      bit_vector(15 downto 0);
+      vdd     : in      bit;
+      vss     : in      bit
+ );
+end inc16;
+
+architecture structural of inc16 is
+Component iv1_x2
+   port (
+      a   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component nd2_x2
+   port (
+      a   : in      bit;
+      b   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component nd3_x2
+   port (
+      a   : in      bit;
+      b   : in      bit;
+      c   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component an2_x2
+   port (
+      b   : in      bit;
+      a   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component xnr2_x1
+   port (
+      b   : in      bit;
+      a   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component xaoi21_x05
+   port (
+      b   : in      bit;
+      a1  : in      bit;
+      a2  : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component nr2_x1
+   port (
+      a   : in      bit;
+      b   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component vddtie
+   port (
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component vsstie
+   port (
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+signal not_n_in       : bit_vector( 0 downto 0);
+signal rtlcarry_0     : bit_vector( 14 downto 1);
+signal zero_sig       : bit;
+signal xnr2_x1_sig    : bit;
+signal xnr2_x1_9_sig  : bit;
+signal xnr2_x1_8_sig  : bit;
+signal xnr2_x1_7_sig  : bit;
+signal xnr2_x1_6_sig  : bit;
+signal xnr2_x1_5_sig  : bit;
+signal xnr2_x1_4_sig  : bit;
+signal xnr2_x1_3_sig  : bit;
+signal xnr2_x1_2_sig  : bit;
+signal xnr2_x1_15_sig : bit;
+signal xnr2_x1_14_sig : bit;
+signal xnr2_x1_13_sig : bit;
+signal xnr2_x1_12_sig : bit;
+signal xnr2_x1_11_sig : bit;
+signal xnr2_x1_10_sig : bit;
+signal xaoi21_x05_sig : bit;
+signal one_sig        : bit;
+signal not_n_do       : bit;
+signal nd2_x2_sig     : bit;
+
+begin
+
+not_n_do_ins : iv1_x2
+   port map (
+      a   => n_do,
+      z   => not_n_do,
+      vdd => vdd,
+      vss => vss
+   );
+
+not_n_in_0_ins : iv1_x2
+   port map (
+      a   => n_in(0),
+      z   => not_n_in(0),
+      vdd => vdd,
+      vss => vss
+   );
+
+nd2_x2_ins : nd2_x2
+   port map (
+      a   => zero_sig,
+      b   => n_in(0),
+      z   => nd2_x2_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_1_ins : nd3_x2
+   port map (
+      a   => one_sig,
+      b   => not_n_in(0),
+      c   => nd2_x2_sig,
+      z   => rtlcarry_0(1),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_2_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(1),
+      a   => n_in(1),
+      z   => rtlcarry_0(2),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_3_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(2),
+      a   => n_in(2),
+      z   => rtlcarry_0(3),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_4_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(3),
+      a   => n_in(3),
+      z   => rtlcarry_0(4),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_5_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(4),
+      a   => n_in(4),
+      z   => rtlcarry_0(5),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_6_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(5),
+      a   => n_in(5),
+      z   => rtlcarry_0(6),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_7_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(6),
+      a   => n_in(6),
+      z   => rtlcarry_0(7),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_8_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(7),
+      a   => n_in(7),
+      z   => rtlcarry_0(8),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_9_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(8),
+      a   => n_in(8),
+      z   => rtlcarry_0(9),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_10_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(9),
+      a   => n_in(9),
+      z   => rtlcarry_0(10),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_11_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(10),
+      a   => n_in(10),
+      z   => rtlcarry_0(11),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_12_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(11),
+      a   => n_in(11),
+      z   => rtlcarry_0(12),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_13_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(12),
+      a   => n_in(12),
+      z   => rtlcarry_0(13),
+      vdd => vdd,
+      vss => vss
+   );
+
+rtlcarry_0_14_ins : an2_x2
+   port map (
+      b   => rtlcarry_0(13),
+      a   => n_in(13),
+      z   => rtlcarry_0(14),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_ins : xnr2_x1
+   port map (
+      b   => not_n_in(0),
+      a   => zero_sig,
+      z   => xnr2_x1_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_0_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_sig,
+      z   => n_out(0),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_2_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(1),
+      a   => n_in(1),
+      z   => xnr2_x1_2_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_1_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_2_sig,
+      z   => n_out(1),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_3_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(2),
+      a   => n_in(2),
+      z   => xnr2_x1_3_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_2_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_3_sig,
+      z   => n_out(2),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_4_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(3),
+      a   => n_in(3),
+      z   => xnr2_x1_4_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_3_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_4_sig,
+      z   => n_out(3),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_5_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(4),
+      a   => n_in(4),
+      z   => xnr2_x1_5_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_4_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_5_sig,
+      z   => n_out(4),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_6_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(5),
+      a   => n_in(5),
+      z   => xnr2_x1_6_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_5_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_6_sig,
+      z   => n_out(5),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_7_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(6),
+      a   => n_in(6),
+      z   => xnr2_x1_7_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_6_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_7_sig,
+      z   => n_out(6),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_8_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(7),
+      a   => n_in(7),
+      z   => xnr2_x1_8_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_7_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_8_sig,
+      z   => n_out(7),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_9_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(8),
+      a   => n_in(8),
+      z   => xnr2_x1_9_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_8_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_9_sig,
+      z   => n_out(8),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_10_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(9),
+      a   => n_in(9),
+      z   => xnr2_x1_10_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_9_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_10_sig,
+      z   => n_out(9),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_11_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(10),
+      a   => n_in(10),
+      z   => xnr2_x1_11_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_10_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_11_sig,
+      z   => n_out(10),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_12_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(11),
+      a   => n_in(11),
+      z   => xnr2_x1_12_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_11_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_12_sig,
+      z   => n_out(11),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_13_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(12),
+      a   => n_in(12),
+      z   => xnr2_x1_13_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_12_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_13_sig,
+      z   => n_out(12),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_14_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(13),
+      a   => n_in(13),
+      z   => xnr2_x1_14_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_13_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_14_sig,
+      z   => n_out(13),
+      vdd => vdd,
+      vss => vss
+   );
+
+xnr2_x1_15_ins : xnr2_x1
+   port map (
+      b   => rtlcarry_0(14),
+      a   => n_in(14),
+      z   => xnr2_x1_15_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_14_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xnr2_x1_15_sig,
+      z   => n_out(14),
+      vdd => vdd,
+      vss => vss
+   );
+
+xaoi21_x05_ins : xaoi21_x05
+   port map (
+      b   => n_in(15),
+      a1  => n_in(14),
+      a2  => rtlcarry_0(14),
+      z   => xaoi21_x05_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+n_out_15_ins : nr2_x1
+   port map (
+      a   => not_n_do,
+      b   => xaoi21_x05_sig,
+      z   => n_out(15),
+      vdd => vdd,
+      vss => vss
+   );
+
+one_sig_ins : vddtie
+   port map (
+      z   => one_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+zero_sig_ins : vsstie
+   port map (
+      z   => zero_sig,
+      vdd => vdd,
+      vss => vss
+   );
+
+
+end structural;
