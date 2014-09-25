@@ -46,13 +46,19 @@
  ifeq ($(UNAME_S),Linux)
    ifneq ($(findstring .el6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = "Yes"
+     DEVTOOLSET_TOP   = "/opt/rh/devtoolset-2/root/usr"
+     export PATH            = $(ALLIANCE_BIN):$(DEVTOOLSET_TOP)/bin:$(STANDART_BIN)
+     export LD_LIBRARY_PATH = $(ALLIANCE_TOP)/lib:$(CORIOLIS_TOP):$(DEVTOOLSET_TOP)/lib
    endif
    ifneq ($(findstring .slsoc6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = "Yes"
+     export PATH            = $(ALLIANCE_BIN):$(STANDART_BIN)
+     export LD_LIBRARY_PATH = $(ALLIANCE_TOP)/lib:$(CORIOLIS_TOP)/lib
    endif
  endif
 
- export PATH=$(ALLIANCE_BIN):$(STANDART_BIN)
+ export ALLIANCE_TOP
+ export CORIOLIS_TOP
  export GRAAL_TECHNO_NAME = ${SYSCONF_TOP}/cmos.graal
 
  ifeq ($(USE_MOSIS),Yes)

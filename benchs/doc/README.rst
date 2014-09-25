@@ -22,6 +22,7 @@
 .. Acronyms & Names
 .. |Alliance|          replace:: :sc:`Alliance`
 .. |Coriolis|          replace:: :sc:`Coriolis`
+.. |Python|            replace:: :sc:`Python`
 .. |RHEL6|             replace:: :sc:`rhel6`
 .. |MOSIS|             replace:: :sc:`mosis`
 .. |RDS|               replace:: :sc:`rds`
@@ -29,6 +30,7 @@
 .. |LVS|               replace:: :sc:`lvs`
 .. |adder|             replace:: ``adder``
 .. |AM2901|            replace:: :sc:`am2901`
+.. |alliance-run|      replace:: ``alliance-run``
 .. |SNX|               replace:: :sc:`snx`
 		       
 .. |devtoolset-2|      replace:: ``devtoolset-2``
@@ -37,6 +39,8 @@
 .. |gds|               replace:: ``gds``
 .. |ring|              replace:: ``ring``
 .. |sxlib|             replace:: ``sxlib``
+.. |dp_sxlib|          replace:: ``dp_sxlib``
+.. |padlib|            replace:: ``padlib``
 .. |pxlib|             replace:: ``pxlib``
 .. |msxlib|            replace:: ``msxlib``
 .. |mpxlib|            replace:: ``mpxlib``
@@ -90,13 +94,14 @@ The toolkit provides:
 
 * Three benchmark designs:
 
-  =================  ===================  =====================================
-  Design             Technology           Cell Libraries
-  =================  ===================  =====================================
-  |adder|            |MOSIS|              |msxlib|, |mpxlib|, |msplib|
-  |AM2901|           |Alliance| dummy     |sxlib|, |pxlib|
-  |SNX|              |MOSIS|              |msxlib|, |mpxlib|, |msplib|
-  =================  ===================  =====================================
+=============================  ==========================  =====================================
+Design                         Technology                  Cell Libraries
+=============================  ==========================  =====================================
+|adder|                        |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
+|AM2901|                       |Alliance| dummy            |sxlib|, |pxlib|
+|alliance-run| (|AM2901|)      |Alliance| dummy            |sxlib|, |dp_sxlib|, |padlib|
+|SNX|                          |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
+=============================  ==========================  =====================================
 
 * Three cell libraries.
 
@@ -214,3 +219,24 @@ netlist. The new netlist, with a clock tree, has a postfix of ``_clocked``.
 
 Under |RHEL6| the developpement version of |Coriolis| needs the |devtoolset-2|.
 |rules_mk| tries, based on ``uname`` to switch it on or off.
+
+
+Benchmarks Special Notes
+========================
+
+|alliance-run|
+~~~~~~~~~~~~~~
+
+This benchmark comes mostly with it's own rules and do not uses the ones supplieds
+by |rules_mk|. It uses only the top-level configuration variables.
+
+It a sligtly modified copy of the |alliance-run| found in the |Alliance| package
+(modification are all in the |Makefile|). It build an |AM2901|, but it is
+splitted in a control and an operative part (data-path). This is to also check
+the data-path features of |Alliance|.
+
+And lastly, it provides a check for the |Coriolis| encapsulation of |Alliance|
+through |Python| wrappers. The support is still incomplete and should be used
+only by very experienced users. See the ``demo*`` rules.
+
+

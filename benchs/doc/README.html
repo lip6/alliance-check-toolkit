@@ -783,6 +783,10 @@ div#htmlerrorcontents hr.lang_separator {
 <li><a class="reference internal" href="#rhel6-and-clones" id="id7"><span class="sc">rhel6</span> and Clones</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#benchmarks-special-notes" id="id8">Benchmarks Special Notes</a><ul>
+<li><a class="reference internal" href="#alliance-run" id="id9"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -800,48 +804,41 @@ not well documenteds as they will be quick corrections made by the developpers.<
 <div class="section" id="toolkit-contents">
 <h2><a class="toc-backref" href="#id3">Toolkit Contents</a></h2>
 <p>The toolkit provides:</p>
-<ul>
-<li><p class="first">Three benchmark designs:</p>
+<ul class="simple">
+<li>Three benchmark designs:</li>
+</ul>
 <table border="1" class="docutils">
 <colgroup>
-<col width="23%" />
-<col width="26%" />
-<col width="51%" />
+<col width="32%" />
+<col width="28%" />
+<col width="40%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head"><p class="first last">Design</p>
-</th>
-<th class="head"><p class="first last">Technology</p>
-</th>
-<th class="head"><p class="first last">Cell Libraries</p>
-</th>
+<tr><th class="head">Design</th>
+<th class="head">Technology</th>
+<th class="head">Cell Libraries</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td><p class="first last"><tt class="docutils literal">adder</tt></p>
-</td>
-<td><p class="first last"><span class="sc">mosis</span></p>
-</td>
-<td><p class="first last"><tt class="docutils literal">msxlib</tt>, <tt class="docutils literal">mpxlib</tt>, <tt class="docutils literal">msplib</tt></p>
-</td>
+<tr><td><tt class="docutils literal">adder</tt></td>
+<td><span class="sc">mosis</span></td>
+<td><tt class="docutils literal">msxlib</tt>, <tt class="docutils literal">mpxlib</tt>, <tt class="docutils literal">msplib</tt></td>
 </tr>
-<tr><td><p class="first last"><span class="sc">am2901</span></p>
-</td>
-<td><p class="first last"><span class="sc">Alliance</span> dummy</p>
-</td>
-<td><p class="first last"><tt class="docutils literal">sxlib</tt>, <tt class="docutils literal">pxlib</tt></p>
-</td>
+<tr><td><span class="sc">am2901</span></td>
+<td><span class="sc">Alliance</span> dummy</td>
+<td><tt class="docutils literal">sxlib</tt>, <tt class="docutils literal">pxlib</tt></td>
 </tr>
-<tr><td><p class="first last"><span class="sc">snx</span></p>
-</td>
-<td><p class="first last"><span class="sc">mosis</span></p>
-</td>
-<td><p class="first last"><tt class="docutils literal">msxlib</tt>, <tt class="docutils literal">mpxlib</tt>, <tt class="docutils literal">msplib</tt></p>
-</td>
+<tr><td><tt class="docutils literal"><span class="pre">alliance-run</span></tt> (<span class="sc">am2901</span>)</td>
+<td><span class="sc">Alliance</span> dummy</td>
+<td><tt class="docutils literal">sxlib</tt>, <tt class="docutils literal">dp_sxlib</tt>, <tt class="docutils literal">padlib</tt></td>
+</tr>
+<tr><td><span class="sc">snx</span></td>
+<td><span class="sc">mosis</span></td>
+<td><tt class="docutils literal">msxlib</tt>, <tt class="docutils literal">mpxlib</tt>, <tt class="docutils literal">msplib</tt></td>
 </tr>
 </tbody>
 </table>
-</li>
+<ul>
 <li><p class="first">Three cell libraries.</p>
 <p>All thoses libraries are for use with the <span class="sc">mosis</span> technology. We provides them
 as part of the toolkit as we are still in the process of validating that
@@ -986,6 +983,21 @@ relevant part of the clock-tree included.</p>
 <h3><a class="toc-backref" href="#id7"><span class="sc">rhel6</span> and Clones</a></h3>
 <p>Under <span class="sc">rhel6</span> the developpement version of <span class="sc">Coriolis</span> needs the <tt class="docutils literal"><span class="pre">devtoolset-2</span></tt>.
 <tt class="docutils literal">rules.mk</tt> tries, based on <tt class="docutils literal">uname</tt> to switch it on or off.</p>
+</div>
+</div>
+<div class="section" id="benchmarks-special-notes">
+<h2><a class="toc-backref" href="#id8">Benchmarks Special Notes</a></h2>
+<div class="section" id="alliance-run">
+<h3><a class="toc-backref" href="#id9"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></h3>
+<p>This benchmark comes mostly with it's own rules and do not uses the ones supplieds
+by <tt class="docutils literal">rules.mk</tt>. It uses only the top-level configuration variables.</p>
+<p>It a sligtly modified copy of the <tt class="docutils literal"><span class="pre">alliance-run</span></tt> found in the <span class="sc">Alliance</span> package
+(modification are all in the <tt class="docutils literal">Makefile</tt>). It build an <span class="sc">am2901</span>, but it is
+splitted in a control and an operative part (data-path). This is to also check
+the data-path features of <span class="sc">Alliance</span>.</p>
+<p>And lastly, it provides a check for the <span class="sc">Coriolis</span> encapsulation of <span class="sc">Alliance</span>
+through <span class="sc">Python</span> wrappers. The support is still incomplete and should be used
+only by very experienced users. See the <tt class="docutils literal">demo*</tt> rules.</p>
 </div>
 </div>
 </div>
