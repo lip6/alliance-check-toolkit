@@ -17,7 +17,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family:                 "Open Sans", verdana, sans-serif;
 }
 
-h1                 { text-align:  left; }
+h1                 { text-align:     center;
+                     border-top:     2px solid #09550b; 
+                     border-bottom:  2px solid #09550b; 
+                     padding-top:    7pt;
+                     padding-bottom: 7pt;
+                   }
 h2, h3, h4, h5, h6 { text-align:  left; }
 h1, h2, h3         { font-family: "Open Sans";
                    }
@@ -39,11 +44,15 @@ body {
   background-attachment:       fixed;
   background-repeat:           no-repeat;
   margin:                      0 0 0 0;
-  padding:                     0 0 0 0;
+  padding:                     20pt;
   width:                       550pt;
   margin-right:                auto;
   margin-left:                 auto;
+  margin-top:                  20pt;
   margin-bottom:               20pt;
+  -moz-box-shadow:             4px 4px 5px 3px #ccc;
+  -webkit-box-shadow:          4px 4px 5px 3px #ccc;
+  box-shadow:                  4px 4px 5px 3px #ccc;
 }
 
 hr {
@@ -126,6 +135,10 @@ a:hover, a:focus, a:visited {
   */
   color:                       #09550b;
   border-bottom:               1px dotted #09550b; 
+}
+
+h1 a:link {
+  border-bottom:               0px; 
 }
 
 p.credit {

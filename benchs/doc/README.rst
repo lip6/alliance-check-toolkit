@@ -61,11 +61,11 @@
 
 :raw-html:`<br/>`
 
-
 ========================================
 |Alliance| & |Coriolis| Checker Toolkit
 ========================================
 
+:raw-html:`<br/>`
 
 .. contents::
 

@@ -12,8 +12,8 @@
   # Hello Naohiko, you have to customize this according to where you installed
   # things on your system.
 
-   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Linux.slsoc6x/Release.Shared/install
-   ALLIANCE_TOP      = $(HOME)/alliance/Linux.slsoc6x/install
+   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Cygwin.W8/Release.Shared/install
+   ALLIANCE_TOP      = /opt/alliance/
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
 
