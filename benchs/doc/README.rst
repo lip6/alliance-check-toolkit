@@ -47,6 +47,7 @@
 .. |msplib|            replace:: ``msplib``
 .. |scn6m_deep_09|     replace:: ``scn6m_deep_09.rds``
 .. |rules_mk|          replace:: ``rules.mk``
+.. |px2mpx|            replace:: ``px2mpx.py``
 
 .. |core_ap|           replace:: ``core.ap``
 .. |alliance_chip_ap|  replace:: ``$(CHIP)_alc.ap``
@@ -240,3 +241,50 @@ through |Python| wrappers. The support is still incomplete and should be used
 only by very experienced users. See the ``demo*`` rules.
 
 
+Tools & Scripts
+===============
+
+Pad Layout Converter |px2mpx|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The |px2mpx| script convert pad layout from the |pxlib| (|Alliance| dummy
+technology) into |mpxlib| (|MOSIS| compliant symbolic technology).
+
+Basically it multiplies all the coordinate by two as the source technology
+is 1µ type and the target one a 2µ. In addition it performs some adjustement
+on the wire extension and minimal width and the blockage sizes.
+
+As it is a one time script, it is heavily hardwired, so before using it
+do not forget to edit it to suit your needs.
+
+The whole conversion process is quite tricky as we are cheating with the
+normal use of the software. The steps are as follow:
+
+1. Using the |Alliance| dummy technology and in an empty directory, run
+   the script. The layouts of the converted pads (``*_mpx.ap``) will be
+   created.
+
+2. In a second directory, this time configured for the |MOSIS| technology
+   (see ``.coriolis2_techno.conf``) copy the converted layouts. In addition
+   to the layouts, this directory **must also contain** the behavioral
+   description of the pads (``.vbe``). Otherwise, you will not be able to
+   see the proper layout.
+
+3. When you are satisfied with the new layout of the pads, you can copy
+   them back in the official pad cell library.
+
+.. note:: **How Coriolis Load Cells.**
+   Unlike in |Alliance|, |Coriolis| maintain a much tighter relationship
+   between physical and logical (structural or behavioral) views. The
+   loading process of a cell try *first* to load the logical view, and
+   if found, keep tab of the directory it was in. *Second* it tries to
+   load the physical view from the same directory the logical view was
+   in. If no logical view is found, only the physical is loaded.
+
+   Conversely, when saving a cell, the directory it was loaded from
+   is kept, so that the cell will be overwritten, and not duplicated
+   in the working directory as it was in |Alliance|.
+
+   This explains why the behavioral view of the pad is needed in
+   the directory the layouts are put into. Otherwise you would only see
+   the pads of the system library (if any).

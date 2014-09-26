@@ -787,6 +787,10 @@ div#htmlerrorcontents hr.lang_separator {
 <li><a class="reference internal" href="#alliance-run" id="id9"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#tools-scripts" id="id10">Tools &amp; Scripts</a><ul>
+<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id11">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -998,6 +1002,49 @@ the data-path features of <span class="sc">Alliance</span>.</p>
 <p>And lastly, it provides a check for the <span class="sc">Coriolis</span> encapsulation of <span class="sc">Alliance</span>
 through <span class="sc">Python</span> wrappers. The support is still incomplete and should be used
 only by very experienced users. See the <tt class="docutils literal">demo*</tt> rules.</p>
+</div>
+</div>
+<div class="section" id="tools-scripts">
+<h2><a class="toc-backref" href="#id10">Tools &amp; Scripts</a></h2>
+<div class="section" id="pad-layout-converter-px2mpx">
+<h3><a class="toc-backref" href="#id11">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
+<p>The <tt class="docutils literal">px2mpx.py</tt> script convert pad layout from the <tt class="docutils literal">pxlib</tt> (<span class="sc">Alliance</span> dummy
+technology) into <tt class="docutils literal">mpxlib</tt> (<span class="sc">mosis</span> compliant symbolic technology).</p>
+<p>Basically it multiplies all the coordinate by two as the source technology
+is 1µ type and the target one a 2µ. In addition it performs some adjustement
+on the wire extension and minimal width and the blockage sizes.</p>
+<p>As it is a one time script, it is heavily hardwired, so before using it
+do not forget to edit it to suit your needs.</p>
+<p>The whole conversion process is quite tricky as we are cheating with the
+normal use of the software. The steps are as follow:</p>
+<ol class="arabic simple">
+<li>Using the <span class="sc">Alliance</span> dummy technology and in an empty directory, run
+the script. The layouts of the converted pads (<tt class="docutils literal">*_mpx.ap</tt>) will be
+created.</li>
+<li>In a second directory, this time configured for the <span class="sc">mosis</span> technology
+(see <tt class="docutils literal">.coriolis2_techno.conf</tt>) copy the converted layouts. In addition
+to the layouts, this directory <strong>must also contain</strong> the behavioral
+description of the pads (<tt class="docutils literal">.vbe</tt>). Otherwise, you will not be able to
+see the proper layout.</li>
+<li>When you are satisfied with the new layout of the pads, you can copy
+them back in the official pad cell library.</li>
+</ol>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p><strong>How Coriolis Load Cells.</strong>
+Unlike in <span class="sc">Alliance</span>, <span class="sc">Coriolis</span> maintain a much tighter relationship
+between physical and logical (structural or behavioral) views. The
+loading process of a cell try <em>first</em> to load the logical view, and
+if found, keep tab of the directory it was in. <em>Second</em> it tries to
+load the physical view from the same directory the logical view was
+in. If no logical view is found, only the physical is loaded.</p>
+<p>Conversely, when saving a cell, the directory it was loaded from
+is kept, so that the cell will be overwritten, and not duplicated
+in the working directory as it was in <span class="sc">Alliance</span>.</p>
+<p class="last">This explains why the behavioral view of the pad is needed in
+the directory the layouts are put into. Otherwise you would only see
+the pads of the system library (if any).</p>
+</div>
 </div>
 </div>
 </div>
