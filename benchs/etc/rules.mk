@@ -1,19 +1,53 @@
 
+ UNAME_S          = $(shell uname -s)
+ UNAME_R          = $(shell uname -r)
+ UNAME_M          = $(shell uname -m)
+
+ LIB_SUFFIX  = ""
+ LIB_SUFFIX_ = ""
+ ifeq ($(UNAME_M),x86_64)
+   LIB_SUFFIX  = "64"
+   LIB_SUFFIX_ = "_64"
+ endif
+
+# We must use devtoolset-2 only under SL6.
+ USE_DEVTOOLSET_2 = "No"
+ ifeq ($(UNAME_S),Linux)
+   ifneq ($(findstring .el6.,$(UNAME_R)),)
+     USE_DEVTOOLSET_2 = "Yes"
+   endif
+   ifneq ($(findstring .slsoc6.,$(UNAME_R)),)
+     USE_DEVTOOLSET_2 = "Yes"
+   endif
+ endif
+
 
 # -------------------------------------------------------------------
 # User Detection, for Lazy People...
 
+ DEBUG_OPTION   = 
+ BUILD_TYPE_DIR = Release.Shared
+ ifeq ($(USE_DEBUG),Yes)
+   DEBUG_OPTION   = --debug
+   BUILD_TYPE_DIR = Debug.Shared
+ endif
+
  ifeq ($(USER),jpc)
-   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Linux.slsoc6x/Release.Shared/install
-   ALLIANCE_TOP      = $(HOME)/alliance/Linux.slsoc6x/install
+   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Linux.el7$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
+   ALLIANCE_TOP      = $(HOME)/alliance/Linux.el7$(LIB_SUFFIX_)/install
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
  ifeq ($(USER),nshimizu)
   # Hello Naohiko, you have to customize this according to where you installed
   # things on your system.
 
-   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Cygwin.W8/Release.Shared/install
+   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Cygwin.W8/$(BUILD_TYPE_DIR)/install
    ALLIANCE_TOP      = /opt/alliance/
+   ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
+ endif
+ ifeq ($(USER),alnurn)
+   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Linux.slsoc6x$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
+   ALLIANCE_TOP      = /soc/alliance/
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
 
@@ -38,24 +72,6 @@
 
 # -------------------------------------------------------------------
 # Misc. Rules.
-
-# We must use devtoolset-2 only under SL6.
- USE_DEVTOOLSET_2 = "No"
- UNAME_S          = $(shell uname -s)
- UNAME_R          = $(shell uname -r)
- ifeq ($(UNAME_S),Linux)
-   ifneq ($(findstring .el6.,$(UNAME_R)),)
-     USE_DEVTOOLSET_2 = "Yes"
-     DEVTOOLSET_TOP   = "/opt/rh/devtoolset-2/root/usr"
-     export PATH            = $(ALLIANCE_BIN):$(DEVTOOLSET_TOP)/bin:$(STANDART_BIN)
-     export LD_LIBRARY_PATH = $(ALLIANCE_TOP)/lib:$(CORIOLIS_TOP):$(DEVTOOLSET_TOP)/lib
-   endif
-   ifneq ($(findstring .slsoc6.,$(UNAME_R)),)
-     USE_DEVTOOLSET_2 = "Yes"
-     export PATH            = $(ALLIANCE_BIN):$(STANDART_BIN)
-     export LD_LIBRARY_PATH = $(ALLIANCE_TOP)/lib:$(CORIOLIS_TOP)/lib
-   endif
- endif
 
  export ALLIANCE_TOP
  export CORIOLIS_TOP
@@ -163,32 +179,33 @@ lvx-crl: $(CORIOLIS_CHIP)_clocked_kite.ap # druc-crl
 ifeq ($(USE_DEVTOOLSET_2),"Yes")
 
 $(CORIOLIS_CHIP)_clocked.ap: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; \
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          ../bin/doChip.py --place --cell=$(CORIOLIS_CHIP)'
 
 $(CORIOLIS_CHIP)_clocked_kite.ap: $(CORIOLIS_CHIP)_clocked.ap $(CORIOLIS_CHIP)_chip.py
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; \
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          ../bin/doChip.py --route --cell=$(CORIOLIS_CHIP)_clocked'
 
 cgt-interactive: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	-rm -f *clocked*
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; \
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          cgt -V --cell=$(CORIOLIS_CHIP)'
 
 cgt:
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; \
-	                          cgt -V --cell=$(CORIOLIS_CHIP)_clocked'
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                          cgt -V'
 else
 
 $(CORIOLIS_CHIP)_clocked.ap: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
-	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; ../bin/doChip.py --cell=$(CORIOLIS_CHIP)
+	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	 ../bin/doChip.py --cell=$(CORIOLIS_CHIP)
 
 cgt-interactive: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	-rm -f *clocked*
-	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; cgt -V --cell=$(CORIOLIS_CHIP)
+	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -V --cell=$(CORIOLIS_CHIP)
 
 cgt:
-	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py`; cgt -V
+	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -v
 
 endif
 

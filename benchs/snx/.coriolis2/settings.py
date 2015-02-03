@@ -1,16 +1,19 @@
 
 # -*- Mode:Python -*-
 
+import os
+import os.path
+
 
 defaultStyle = 'Alliance.Classic [black]'
  
 parametersTable = \
     ( ('misc.catchCore'           , TypeBool      , False   )
     , ('misc.info'                , TypeBool      , False   )
-    , ('misc.paranoid'            , TypeBool      , False   )
+    , ('misc.paranoid'            , TypeBool      , True    )
     , ('misc.bug'                 , TypeBool      , False   )
     , ('misc.logMode'             , TypeBool      , False   )
-    , ('misc.verboseLevel1'       , TypeBool      , False   )
+    , ('misc.verboseLevel1'       , TypeBool      , True    )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
     , ('misc.traceLevel'          , TypeInt       , 1000    )
     , ('nimbus.spaceMargin'       , TypePercentage, 40.0    )
@@ -19,15 +22,17 @@ parametersTable = \
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
     , ("kite.hTracksReservedLocal", TypeInt       , 4       )
-    , ("kite.vTracksReservedLocal", TypeInt       , 3       )
+    , ("kite.vTracksReservedLocal", TypeInt       , 4       )
     )
 
+cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
 
 allianceConfig = \
-    ( ( 'CLOCK', '^ck.*|m_clock')
+    ( ( 'CLOCK'         , '^ck.*|m_clock')
+    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/msxlib'  , Environment.Append)
+                          , (cellsTop+'/mpxlib'  , Environment.Append)) )
     ,
     )
-    
 
 #import os
 #
