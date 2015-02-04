@@ -11,13 +11,19 @@
  endif
 
 # We must use devtoolset-2 only under SL6.
+ BUILD_VARIANT    = "Linux"
  USE_DEVTOOLSET_2 = "No"
  ifeq ($(UNAME_S),Linux)
    ifneq ($(findstring .el6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = "Yes"
+     BUILD_VARIANT    = "Linux.slsoc6x"
    endif
    ifneq ($(findstring .slsoc6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = "Yes"
+     BUILD_VARIANT    = "Linux.slsoc6x"
+   endif
+   ifneq ($(findstring .el7.,$(UNAME_R)),)
+     BUILD_VARIANT    = "Linux.el7"
    endif
  endif
 
@@ -33,8 +39,8 @@
  endif
 
  ifeq ($(USER),jpc)
-   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Linux.el7$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
-   ALLIANCE_TOP      = $(HOME)/alliance/Linux.el7$(LIB_SUFFIX_)/install
+   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
+   ALLIANCE_TOP      = $(HOME)/alliance/$(BUILD_VARIANT)$(LIB_SUFFIX_)/install
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
  ifeq ($(USER),nshimizu)
@@ -46,7 +52,7 @@
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
  ifeq ($(USER),alnurn)
-   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Linux.slsoc6x$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
+   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
    ALLIANCE_TOP      = /soc/alliance/
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
