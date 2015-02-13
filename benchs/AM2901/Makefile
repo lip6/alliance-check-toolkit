@@ -5,6 +5,7 @@
                    MARGIN = 2
         GENERATE_CORE_VST = No
                 USE_MOSIS = No
+                USE_DEBUG = Yes
 
  include ../etc/rules.mk
 

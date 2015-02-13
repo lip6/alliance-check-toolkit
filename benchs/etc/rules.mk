@@ -38,6 +38,12 @@
    BUILD_TYPE_DIR = Debug.Shared
  endif
 
+ VALGRIND_COMMAND =
+ ifeq ($(USE_DEBUG),Yes)
+  #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes
+   VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes --free-fill=0xff
+ endif
+
  ifeq ($(USER),jpc)
    CORIOLIS_TOP      = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
    ALLIANCE_TOP      = $(HOME)/alliance/$(BUILD_VARIANT)$(LIB_SUFFIX_)/install
@@ -211,7 +217,7 @@ cgt-interactive: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -V --cell=$(CORIOLIS_CHIP)
 
 cgt:
-	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -v
+	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v
 
 endif
 

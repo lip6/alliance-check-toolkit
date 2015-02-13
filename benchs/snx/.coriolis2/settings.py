@@ -16,7 +16,7 @@ parametersTable = \
     , ('misc.verboseLevel1'       , TypeBool      , True    )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
     , ('misc.traceLevel'          , TypeInt       , 1000    )
-    , ('nimbus.spaceMargin'       , TypePercentage, 40.0    )
+    , ('nimbus.spaceMargin'       , TypePercentage, 2.0     )
     , ('nimbus.aspectRatio'       , TypePercentage, 100.0   )
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )

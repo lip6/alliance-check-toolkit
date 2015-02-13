@@ -9,6 +9,7 @@
                 NSL2VHOPT = -vasy
         GENERATE_CORE_VST = Yes
                 USE_MOSIS = Yes
+                USE_DEBUG = Yes
 
  include ../etc/rules.mk
 
