@@ -1,6 +1,8 @@
 
 # -*- Mode:Python -*-
 
+import os
+import os.path
 
 defaultStyle = 'Alliance.Classic [black]'
  
@@ -22,8 +24,15 @@ parametersTable = \
     , ("kite.vTracksReservedLocal", TypeInt       , 3       )
     )
 
-#import os
-#
+cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
+
+allianceConfig = \
+    ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/msxlib'  , Environment.Prepend)
+                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
+    ,
+    )
+
+
 #print '       o  Cleaning up ClockTree previous run.'
 #for fileName in os.listdir('.'):
 #  if fileName.endswith('.ap') or (fileName.find('_clocked.') >= 0):

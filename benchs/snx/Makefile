@@ -8,6 +8,7 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
         GENERATE_CORE_VST = No
+            USE_CLOCKTREE = No
                 USE_MOSIS = Yes
                 USE_DEBUG = No
 

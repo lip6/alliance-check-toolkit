@@ -10,3 +10,6 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( kite.getCell().getNet( 'adrs(7)' ) )
 #DebugSession.addToTrace( kite.getCell().getNet( 'inst(4)' ) )
 #DebugSession.addToTrace( kite.getCell().getNet( 'iadrs(15)' ) )
+#DebugSession.addToTrace( kite.getCell().getNet( 'm_clock' ) )
+#DebugSession.addToTrace( kite.getCell().getNet( 'adrs(10)' ) )
+#DebugSession.addToTrace( kite.getCell().getNet( 'inst(8)' ) )

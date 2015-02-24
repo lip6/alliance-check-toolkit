@@ -6,24 +6,24 @@
  LIB_SUFFIX  = ""
  LIB_SUFFIX_ = ""
  ifeq ($(UNAME_M),x86_64)
-   LIB_SUFFIX  = "64"
-   LIB_SUFFIX_ = "_64"
+   LIB_SUFFIX  = 64
+   LIB_SUFFIX_ = _64
  endif
 
 # We must use devtoolset-2 only under SL6.
- BUILD_VARIANT    = "Linux"
+ BUILD_VARIANT    = Linux
  USE_DEVTOOLSET_2 = "No"
  ifeq ($(UNAME_S),Linux)
    ifneq ($(findstring .el6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = "Yes"
-     BUILD_VARIANT    = "Linux.slsoc6x"
+     BUILD_VARIANT    = Linux.slsoc6x
    endif
    ifneq ($(findstring .slsoc6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = "Yes"
-     BUILD_VARIANT    = "Linux.slsoc6x"
+     BUILD_VARIANT    = Linux.slsoc6x
    endif
    ifneq ($(findstring .el7.,$(UNAME_R)),)
-     BUILD_VARIANT    = "Linux.el7"
+     BUILD_VARIANT    = Linux.el7
    endif
  endif
 
@@ -63,10 +63,17 @@
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
 
+# Whether or not we uses a clock-tree.
+ ifeq ($(USE_CLOCKTREE),Yes)
+   CLOCKED = _clocked
+ else
+   CLOCKED =
+ endif
 
 # Secondary variables.
  ALLIANCE_CHIP     = $(CHIP)_alc
  CORIOLIS_CHIP     = $(CHIP)_crl
+ CORIOLIS_CORE     = $(CORE)_crl
 
 # Standart System binary access paths.
  STANDART_BIN      = /usr/bin:/bin:/usr/sbin:/sbin
@@ -80,6 +87,12 @@
  TOOLKIT_CELLS_TOP = $(ALLIANCE_TOOLKIT)/cells
  RDS_TECHNO_MOSIS  = $(ALLIANCE_TOOLKIT)/etc/scn6m_deep_09.rds
  RDS_TECHNO_SYMB   = $(SYSCONF_TOP)/cmos.rds
+
+
+# -------------------------------------------------------------------
+# Absolute access pathes to binaries
+
+GRAAL = $(ALLIANCE_BIN)/graal
 
 
 # -------------------------------------------------------------------
@@ -100,7 +113,16 @@
  endif
 
 
-path:; echo $(PATH)
+path:; @echo $(PATH)
+
+
+# -------------------------------------------------------------------
+# Keep intermediate files
+
+.PRECIOUS: $(CORIOLIS_CHIP)$(CLOCKED).vst          $(CORIOLIS_CHIP)$(CLOCKED).ap      \
+           $(CORIOLIS_CHIP)$(CLOCKED)_kite.vst     $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap \
+           $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext.vst \
+           $(CORIOLIS_CORE).vst                    $(CORIOLIS_CORE).ap \
 
 
 # -------------------------------------------------------------------
@@ -166,10 +188,10 @@ dreal:$(ALLIANCE_CHIP).gds
 	dreal -l $(ALLIANCE_CHIP)
 
 graal-core: $(CORE).ap
-	graal -l $(CORE)
+	$(GRAAL) -l $(CORE)
 
 graal:
-	graal
+	$(GRAAL)
 
 l2p:
 	l2p -color $(CORE)
@@ -178,27 +200,27 @@ l2p:
 # -------------------------------------------------------------------
 # Coriolis Rules.
 
-$(CORE)_crl.vst: $(CORE).vst
-	sed 's,\<$(CORE)\>,$(CORE)_crl,g' $(CORE).vst > $(CORE)_crl.vst
+$(CORIOLIS_CORE).vst: $(CORE).vst
+	sed 's,\<$(CORE)\>,$(CORIOLIS_CORE),g' $(CORE).vst > $(CORIOLIS_CORE).vst
 
-druc-crl: $(CORIOLIS_CHIP)_clocked_kite.ap
-	druc $(CORIOLIS_CHIP)_clocked_kite
+druc-crl: $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap
+	druc $(CORIOLIS_CHIP)$(CLOCKED)_kite
 
-lvx-crl: $(CORIOLIS_CHIP)_clocked_kite.ap # druc-crl
-	cougar -f $(CORIOLIS_CHIP)_clocked_kite $(CORIOLIS_CHIP)_clocked_kite_ext
-	MBK_SEPAR='_' lvx vst vst $(CORIOLIS_CHIP)_clocked $(CORIOLIS_CHIP)_clocked_kite_ext -f
+lvx-crl: $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap
+	cougar -f $(CORIOLIS_CHIP)$(CLOCKED)_kite $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext
+	MBK_SEPAR='_' lvx vst vst $(CORIOLIS_CHIP)$(CLOCKED) $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext -f
 
 ifeq ($(USE_DEVTOOLSET_2),"Yes")
 
-$(CORIOLIS_CHIP)_clocked.ap: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
+$(CORIOLIS_CHIP)$(CLOCKED).ap: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          ../bin/doChip.py --place --cell=$(CORIOLIS_CHIP)'
 
-$(CORIOLIS_CHIP)_clocked_kite.ap: $(CORIOLIS_CHIP)_clocked.ap $(CORIOLIS_CHIP)_chip.py
+$(CORIOLIS_CHIP)$(CLOCKED)_kite.ap: $(CORIOLIS_CHIP)$(CLOCKED).ap $(CORIOLIS_CHIP)_chip.py
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          ../bin/doChip.py --route --cell=$(CORIOLIS_CHIP)_clocked'
+	                          ../bin/doChip.py --route --cell=$(CORIOLIS_CHIP)$(CLOCKED)'
 
-cgt-interactive: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
+cgt-interactive: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	-rm -f *clocked*
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          cgt -V --cell=$(CORIOLIS_CHIP)'
@@ -208,11 +230,11 @@ cgt:
 	                          cgt -V'
 else
 
-$(CORIOLIS_CHIP)_clocked.ap: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
+$(CORIOLIS_CHIP)$(CLOCKED)_kite.ap: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	 ../bin/doChip.py --cell=$(CORIOLIS_CHIP)
 
-cgt-interactive: $(CORE)_crl.vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
+cgt-interactive: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	-rm -f *clocked*
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -V --cell=$(CORIOLIS_CHIP)
 
@@ -241,10 +263,10 @@ endif
                 $(CORE).xsc           \
                 $(CORE).sp            \
                 $(CORE).vbe           \
-                $(CORE)_crl.vst       \
+                $(CORIOLIS_CORE).vst  \
                 $(CORE).ap    
  else	
-   CLEAN_CORE =  $(CORE)_crl.vst
+   CLEAN_CORE =  $(CORIOLIS_CORE).vst
  endif
 
 clean:

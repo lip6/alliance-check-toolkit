@@ -21,16 +21,16 @@ parametersTable = \
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
-    , ("kite.hTracksReservedLocal", TypeInt       , 4       )
-    , ("kite.vTracksReservedLocal", TypeInt       , 4       )
+    , ("kite.hTracksReservedLocal", TypeInt       , 6       )
+    , ("kite.vTracksReservedLocal", TypeInt       , 5       )
     )
 
 cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
 
 allianceConfig = \
     ( ( 'CLOCK'         , '^ck.*|m_clock')
-    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/msxlib'  , Environment.Append)
-                          , (cellsTop+'/mpxlib'  , Environment.Append)) )
+    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/msxlib'  , Environment.Prepend)
+                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
     ,
     )
 

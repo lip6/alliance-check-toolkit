@@ -4,8 +4,9 @@
                      CHIP = amd2901
                    MARGIN = 2
         GENERATE_CORE_VST = No
+            USE_CLOCKTREE = Yes
                 USE_MOSIS = No
-                USE_DEBUG = Yes
+                USE_DEBUG = No
 
  include ../etc/rules.mk
 

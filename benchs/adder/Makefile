@@ -8,8 +8,9 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
         GENERATE_CORE_VST = Yes
+            USE_CLOCKTREE = No
                 USE_MOSIS = Yes
-                USE_DEBUG = Yes
+                USE_DEBUG = No
 
  include ../etc/rules.mk
 

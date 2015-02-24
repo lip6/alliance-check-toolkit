@@ -71,10 +71,9 @@ def ScriptMain ( **kw ):
       kite.finalizeLayout()
       kite.destroy()
       cell.setName( cell.getName()+'_kite' )
-      if success:
-        framework.saveCell( cell, CRL.Catalog.State.Logical )
+      framework.saveCell( cell, CRL.Catalog.State.Logical )
   
-    if success: plugins.RSavePlugin.ScriptMain( **kw )
+    plugins.RSavePlugin.ScriptMain( **kw )
 
   except Exception, e:
     print e
