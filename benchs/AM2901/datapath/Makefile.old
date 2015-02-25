@@ -1,0 +1,61 @@
+
+INTERACTIVE=interactive
+
+default : lvx asimut
+
+amd2901_chip_r_t.al:amd2901_chip_r.ap
+	MBK_OUT_LO=al; export MBK_OUT_LO; cougar -v -t amd2901_chip_r amd2901_chip_r_t
+
+asimut:amd2901_chip_r.al pattern.pat
+	MBK_IN_LO=al; export MBK_IN_LO; asimut -zd -nores amd2901_chip_r pattern
+    
+lvx: amd2901_chip_r.al amd2901_chip.vst
+	@lvx vst al amd2901_chip amd2901_chip_r -f
+
+amd2901_chip_r.al: amd2901_chip_r.ap
+	@MBK_OUT_LO=al; export MBK_OUT_LO; cougar amd2901_chip_r amd2901_chip_r
+
+amd2901_chip_r.ap: amd2901_chip.vst amd2901_chip.vst
+	@nero -V -p amd2901_chip amd2901_chip amd2901_chip_r
+	@cgt -c amd2901_chip_r
+
+amd2901_dpt.vst : amd2901_ctl.vst
+	./inst_dpt.py $(INTERACTIVE)
+
+amd2901_core.vst :amd2901_dpt.vst
+	./inst_core.py $(INTERACTIVE)
+
+amd2901_chip.vst : amd2901_core.vst
+	./inst_chip.py $(INTERACTIVE)
+	#-@druc amd2901_chip
+
+
+amd2901_ctl_boom.vbe: amd2901_ctl.vbe
+	@boom $(basename $<) $(basename $@)
+
+amd2901_ctl.vst: amd2901_ctl_boom.vbe
+	@export MBK_OUT_LO=vst; boog $(basename $<) $(basename $@)
+
+clean :
+	rm -f *.vst \
+          *.ap  \
+          *.al  \
+          *.pyc \
+          *.cif \
+          *.drc \
+          *.xsc \
+          *.ttx \
+          *.dtx \
+          *.loop \
+          *.rcx \
+          *.stm \
+          *.rep \
+          *.gpl \
+          *.gds \
+          *.xpm \
+          amd2901_ctl_boom.vbe \
+          *.drc \
+          *.xsc \
+          binsstats* \
+          core.*
+	cp non-generated/*.vst .

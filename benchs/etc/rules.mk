@@ -71,9 +71,15 @@
  endif
 
 # Secondary variables.
- ALLIANCE_CHIP     = $(CHIP)_alc
- CORIOLIS_CHIP     = $(CHIP)_crl
- CORIOLIS_CORE     = $(CORE)_crl
+ ifeq ($(USE_STRATUS),Yes)
+   ALLIANCE_CHIP = $(CHIP)_alc
+   CORIOLIS_CHIP = $(CHIP)_chip
+   CORIOLIS_CORE = $(CORE)_core
+ else
+   ALLIANCE_CHIP = $(CHIP)_alc
+   CORIOLIS_CHIP = $(CHIP)_crl
+   CORIOLIS_CORE = $(CORE)_crl
+ endif
 
 # Standart System binary access paths.
  STANDART_BIN      = /usr/bin:/bin:/usr/sbin:/sbin
@@ -84,6 +90,7 @@
  CELLS_TOP         = $(ALLIANCE_TOP)/cells
  SPI_MODEL         = $(SYSCONF_TOP)/spimodel.cfg
 
+ TOOLKIT_BIN       = $(ALLIANCE_TOOLKIT)/bin
  TOOLKIT_CELLS_TOP = $(ALLIANCE_TOOLKIT)/cells
  RDS_TECHNO_MOSIS  = $(ALLIANCE_TOOLKIT)/etc/scn6m_deep_09.rds
  RDS_TECHNO_SYMB   = $(SYSCONF_TOP)/cmos.rds
@@ -92,7 +99,8 @@
 # -------------------------------------------------------------------
 # Absolute access pathes to binaries
 
-GRAAL = $(ALLIANCE_BIN)/graal
+GRAAL  = $(ALLIANCE_BIN)/graal
+DoCHIP = $(TOOLKIT_BIN)/doChip.py
 
 
 # -------------------------------------------------------------------
@@ -108,7 +116,8 @@ GRAAL = $(ALLIANCE_BIN)/graal
    export   RDS_TECHNO_NAME = ${RDS_TECHNO_MOSIS}
  else
    export    MBK_TARGET_LIB = ${CELLS_TOP}/sxlib
-   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):${CELLS_TOP}/pxlib
+   export             DPLIB = ${CELLS_TOP}/dp_sxlib
+   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):${CELLS_TOP}/pxlib
    export   RDS_TECHNO_NAME = ${RDS_TECHNO_SYMB}
  endif
 
@@ -200,25 +209,50 @@ l2p:
 # -------------------------------------------------------------------
 # Coriolis Rules.
 
+ifeq ($(USE_STRATUS),Yes)
+$(CONTROL).vst: non_generated/$(CONTROL).vst
+	cp non_generated/$(CONTROL).vst .
+endif
+
 $(CORIOLIS_CORE).vst: $(CORE).vst
 	sed 's,\<$(CORE)\>,$(CORIOLIS_CORE),g' $(CORE).vst > $(CORIOLIS_CORE).vst
 
 druc-crl: $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap
 	druc $(CORIOLIS_CHIP)$(CLOCKED)_kite
 
-lvx-crl: $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap
-	cougar -f $(CORIOLIS_CHIP)$(CLOCKED)_kite $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext
+lvx-crl: $(CORIOLIS_CHIP)$(CLOCKED).vst $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext.vst
 	MBK_SEPAR='_' lvx vst vst $(CORIOLIS_CHIP)$(CLOCKED) $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext -f
+
+asimut-crl: $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext.vst patterns.pat
+	asimut -zd -nores $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext patterns
+
+
+$(CORIOLIS_CHIP)$(CLOCKED)_kite_ext.vst: $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap
+	cougar -f $(CORIOLIS_CHIP)$(CLOCKED)_kite $(CORIOLIS_CHIP)$(CLOCKED)_kite_ext
 
 ifeq ($(USE_DEVTOOLSET_2),"Yes")
 
-$(CORIOLIS_CHIP)$(CLOCKED).ap: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
+ifeq ($(USE_STRATUS),Yes)
+
+$(CORIOLIS_CHIP)$(CLOCKED)_kite.ap $(CORIOLIS_CHIP)$(CLOCKED).vst: $(STRATUS_SCRIPT).py     \
+                                                                   $(CORIOLIS_CHIP)_chip.py \
+                                                                   $(CONTROL).vst
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          ../bin/doChip.py --place --cell=$(CORIOLIS_CHIP)'
+	                          $(DoCHIP) --script=$(STRATUS_SCRIPT)'
+
+else
+
+$(CORIOLIS_CHIP)$(CLOCKED).ap $(CORIOLIS_CHIP)$(CLOCKED).vst: $(CORIOLIS_CORE).vst \
+                                                              $(CORIOLIS_CHIP).vst \
+                                                              $(CORIOLIS_CHIP)_chip.py
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                          $(DoCHIP) --place --cell=$(CORIOLIS_CHIP)'
 
 $(CORIOLIS_CHIP)$(CLOCKED)_kite.ap: $(CORIOLIS_CHIP)$(CLOCKED).ap $(CORIOLIS_CHIP)_chip.py
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          ../bin/doChip.py --route --cell=$(CORIOLIS_CHIP)$(CLOCKED)'
+	                          $(DoCHIP) --route --cell=$(CORIOLIS_CHIP)$(CLOCKED)'
+
+endif
 
 cgt-interactive: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	-rm -f *clocked*
@@ -230,9 +264,23 @@ cgt:
 	                          cgt -V'
 else
 
-$(CORIOLIS_CHIP)$(CLOCKED)_kite.ap: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
+ifeq ($(USE_STRATUS),Yes)
+
+$(CORIOLIS_CHIP)$(CLOCKED)_kite.ap $(CORIOLIS_CHIP)$(CLOCKED).vst: $(STRATUS_SCRIPT).py     \
+                                                                   $(CORIOLIS_CHIP)_chip.py \
+                                                                   $(CONTROL).vst
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	 $(DoCHIP) --script=$(STRATUS_SCRIPT)
+
+else
+
+$(CORIOLIS_CHIP)$(CLOCKED)_kite.ap $(CORIOLIS_CHIP)$(CLOCKED).vst: $(CORIOLIS_CORE).vst \
+                                                                   $(CORIOLIS_CHIP).vst \
+                                                                   $(CORIOLIS_CHIP)_chip.py
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	 ../bin/doChip.py --cell=$(CORIOLIS_CHIP)
+	 $(DoCHIP) --cell=$(CORIOLIS_CHIP)
+
+endif
 
 cgt-interactive: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip.py
 	-rm -f *clocked*
@@ -240,6 +288,22 @@ cgt-interactive: $(CORIOLIS_CORE).vst $(CORIOLIS_CHIP).vst $(CORIOLIS_CHIP)_chip
 
 cgt:
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v
+
+endif
+
+
+# -------------------------------------------------------------------
+# ISPD05 Rules.
+
+ifeq ($(USE_DEVTOOLSET_2),"Yes")
+
+ispd05: $(CHIP).aux $(CHIP).nets $(CHIP).nodes $(CHIP).pl $(CHIP).scl $(CHIP).wts
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                          cgt -V --ispd-05=$(CHIP)'
+else
+
+ispd05: $(CHIP).aux $(CHIP).nets $(CHIP).nodes $(CHIP).pl $(CHIP).scl $(CHIP).wts
+	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -V --ispd-05=$(CHIP)
 
 endif
 
@@ -268,6 +332,11 @@ endif
  else	
    CLEAN_CORE =  $(CORIOLIS_CORE).vst
  endif
+ ifeq ($(USE_STRATUS),Yes)
+   CLEAN_STRATUS = *.vst
+ else	
+   CLEAN_STRATUS = 
+ endif
 
 clean:
-	-rm -f $(CLEAN_CHIP) $(CLEAN_CORE) *.ap
+	-rm -f $(CLEAN_CHIP) $(CLEAN_CORE) $(CLEAN_STRATUS) *.ap

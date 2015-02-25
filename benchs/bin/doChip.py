@@ -83,11 +83,12 @@ def ScriptMain ( **kw ):
 
 if __name__ == '__main__':
   parser = optparse.OptionParser()
-  parser.add_option( '-c', '--cell', type='string',                      dest='cell'       , help='The name of the chip to build, whithout extension.')
-  parser.add_option( '-v', '--verbose'            , action='store_true', dest='verbose'    , help='First level of verbosity.')
-  parser.add_option( '-V', '--very-verbose'       , action='store_true', dest='veryVerbose', help='Second level of verbosity.')
-  parser.add_option( '-p', '--place'              , action='store_true', dest='doPlacement', help='Perform chip placement step only.')
-  parser.add_option( '-r', '--route'              , action='store_true', dest='doRouting'  , help='Perform routing step only.')
+  parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'       , help='The name of the chip to build, whithout extension.')
+  parser.add_option( '-s', '--script', type='string',                      dest='script'     , help='The name of a Python script, without extension.')
+  parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'    , help='First level of verbosity.')
+  parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose', help='Second level of verbosity.')
+  parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement', help='Perform chip placement step only.')
+  parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'  , help='Perform routing step only.')
   (options, args) = parser.parse_args()
 
   framework = CRL.AllianceFramework.get()
@@ -100,7 +101,29 @@ if __name__ == '__main__':
   if not doStages:        doStages  = AllStages
 
   kw = { 'doStages':doStages }
-  if options.cell:
+  if options.script:
+    try:
+      module = __import__( options.script, globals(), locals() )
+      if not module.__dict__.has_key('ScriptMain'):
+          print '[ERROR] Script module <%s> do not contains a ScripMain() function.' % options.script
+          sys.exit(1)
+
+      cell = module.__dict__['ScriptMain']( **kw )
+      kw['cell'] = cell
+
+    except ImportError, e:
+      module = str(e).split()[-1]
+
+      print '[ERROR] The <%s> script cannot be loaded.' % module
+      print '        Please check your design hierarchy.'
+      sys.exit(1)
+    except Exception, e:
+      print '[ERROR] A strange exception occurred while loading the Python'
+      print '        script <%s>. Please check that module for error:\n' % options.script
+      traceback.print_tb(sys.exc_info()[2])
+      print '        %s' % e
+      sys.exit(2)
+  elif options.cell:
     kw['cell'] = framework.getCell( options.cell, CRL.Catalog.State.Views )
 
   success = ScriptMain( **kw )
