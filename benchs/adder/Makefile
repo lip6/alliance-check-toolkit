@@ -20,10 +20,12 @@
  export           RDS_OUT = gds
 
 
-check:  lvx
+check:    lvx
 
-lvx:    lvx-chip_crl_kite
-druc:   druc-chip_crl_kite
-gds:    chip_crl_kite.gds
-view:   cgt-view-chip_crl_kite
+lvx:      lvx-chip_crl_kite
+lvx-alc:  lvx-chip_alc
+druc:     druc-chip_crl_kite
+druc-alc: druc-chip_alc
+gds:      chip_crl_kite.gds
+view:     cgt-view-chip_crl_kite
 

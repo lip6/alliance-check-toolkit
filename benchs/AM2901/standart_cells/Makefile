@@ -19,9 +19,7 @@
 
 check:  lvx
 
-lvx:    lvx-amd2901_crl_clocked_kite
-druc:   druc-amd2901_crl_clocked_kite
-gds:    amd2901_crl_clocked_kite.gds
-view:   cgt-view-amd2901_crl_clocked_kite
-
-
+lvx:      lvx-amd2901_crl_clocked_kite
+druc:     druc-amd2901_crl_clocked_kite
+gds:      amd2901_crl_clocked_kite.gds
+view:     cgt-view-amd2901_crl_clocked_kite

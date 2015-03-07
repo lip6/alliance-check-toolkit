@@ -48,6 +48,8 @@
 .. |scn6m_deep_09|     replace:: ``scn6m_deep_09.rds``
 .. |rules_mk|          replace:: ``rules.mk``
 .. |px2mpx|            replace:: ``px2mpx.py``
+.. |doChip|            replace:: ``doChip.py``
+.. |go|                replace:: ``go.sh``
 
 .. |core_ap|           replace:: ``core.ap``
 .. |alliance_chip_ap|  replace:: ``$(CHIP)_alc.ap``
@@ -55,11 +57,12 @@
 .. |chip_clk|          replace:: ``$(CHIP)_crl_clocked``
 .. |chip_clk_kite|     replace:: ``$(CHIP)_crl_clocked_kite``
 .. |druc|              replace:: ``druc``
-.. |druc_crl|          replace:: ``druc-crl``
+.. |druc-alc|          replace:: ``druc-alc``
 .. |lvx|               replace:: ``lvx``
-.. |lvx_crl|           replace:: ``lvx-crl``
+.. |lvx-alc|           replace:: ``lvx-alc``
 .. |graal|             replace:: ``graal``
 .. |dreal|             replace:: ``dreal``
+.. |view|              replace:: ``view``
 .. |cgt_interactive|   replace:: ``cgt-interactive``
 .. |cgt|               replace:: ``cgt``
 
@@ -99,6 +102,8 @@ The toolkit provides:
 Design                         Technology                  Cell Libraries
 =============================  ==========================  =====================================
 |adder|                        |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
+|AM2901| (standard cells)      |Alliance| dummy            |sxlib|, |pxlib|
+|AM2901| (datapath)            |Alliance| dummy            |sxlib|, |dp_sxlib|, |pxlib|
 |AM2901|                       |Alliance| dummy            |sxlib|, |pxlib|
 |alliance-run| (|AM2901|)      |Alliance| dummy            |sxlib|, |dp_sxlib|, |padlib|
 |SNX|                          |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
@@ -135,9 +140,9 @@ It provides the following targets:
 |              +----------------------+---------------------------------------------------------------+
 |              |  |alliance_chip_ap|  |  The complete layout of the design (P&R).                     |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |druc|              |  Symbolic layout checking                                     |
+|              |  |druc-alc|          |  Symbolic layout checking                                     |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |lvx|               |  Perform |LVS|.                                               |
+|              |  |lvx-alc|           |  Perform |LVS|.                                               |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |graal|             |  Launch |graal| in the |Makefile| 's environement             |
 |              +----------------------+---------------------------------------------------------------+
@@ -146,11 +151,11 @@ It provides the following targets:
 +--------------+----------------------+---------------------------------------------------------------+
 |  |Coriolis|  |  |coriolis_chip_ap|  |  The complete layout of the design (P&R).                     |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |druc_crl|          |  Symbolic layout checking                                     |
+|              |  |druc|              |  Symbolic layout checking                                     |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |lvx_crl|           |  Perform |LVS|.                                               |
+|              |  |lvx|               |  Perform |LVS|.                                               |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |cgt_interactive|   |  Launch |cgt| and prep it to perform P&R                      |
+|              |  |view|              |  Launch |cgt| and load the design (chip)                      |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |cgt|               |  Launch |cgt|  in the |Makefile| 's environement              |
 +--------------+----------------------+---------------------------------------------------------------+
@@ -163,7 +168,9 @@ variables: ::
                         CHIP = chip
                       MARGIN = 2
            GENERATE_CORE_VST = Yes
+               USE_CLOCKTREE = No
                    USE_MOSIS = Yes
+                   USE_DEBUG = No
    
     include ../etc/rules.mk
    
@@ -171,6 +178,15 @@ variables: ::
     export        MBK_OUT_LO = vst
     export            RDS_IN = gds
     export           RDS_OUT = gds
+
+    check:    lvx
+    
+    lvx:      lvx-chip_crl_kite
+    lvx-alc:  lvx-chip_alc
+    druc:     druc-chip_crl_kite
+    druc-alc: druc-chip_alc
+    gds:      chip_crl_kite.gds
+    view:     cgt-view-chip_crl_kite
 
 
 Where variables have the following meaning:
@@ -186,7 +202,9 @@ Variable                 Usage
 ``GENERATE_CORE_VST``    Tells if the rules to generate the core has to be
                          included. If set to ``No``, then the core *must* be
                          present and will be considered as a primary file.
+``USE_CLOCKTREE``        Adds a clock-tree to the design (|Coriolis|).
 ``USE_MOSIS``            Tells whether or not use the |MOSIS| technology.
+``USE_DEBUG``            Activate debug support on |cgt|.
 =======================  ==========================================================
 
 
@@ -243,6 +261,13 @@ only by very experienced users. See the ``demo*`` rules.
 
 Tools & Scripts
 ===============
+
+Command Line |cgt|: |doChip|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As a alternative to |cgt|, the small helper script |doChip| allows to
+perform all the P&R tasks, on an stand-alone block or a whole chip.
+
 
 Pad Layout Converter |px2mpx|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
