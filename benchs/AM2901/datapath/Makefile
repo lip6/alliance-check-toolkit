@@ -2,7 +2,6 @@
 
                      CHIP = amd2901
                   CONTROL = amd2901_ctl
-           STRATUS_SCRIPT = design
                    MARGIN = 2
         GENERATE_CORE_VST = No
               USE_STRATUS = Yes
@@ -16,4 +15,12 @@
  export        MBK_OUT_LO = vst
  export            RDS_IN = gds
  export           RDS_OUT = gds
+
+
+check:  lvx
+
+lvx:    lvx-amd2901_chip_kite
+druc:   druc-amd2901_chip_kite
+gds:    amd2901_chip_kite.gds
+view:   cgt-view-amd2901_chip_kite
 

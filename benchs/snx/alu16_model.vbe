@@ -8,17 +8,13 @@ PORT(
   v_cla_in2	: OUT BIT_VECTOR(15 DOWNTO 0);
   v_cla_out	: IN BIT_VECTOR(15 DOWNTO 0);
   v_cla_do	: OUT BIT;
-  v_cla_p_reset	: OUT BIT;
-  v_cla_m_clock	: OUT BIT;
   vss	: IN BIT;
   vdd	: IN BIT;
   n_a	: IN BIT_VECTOR(15 DOWNTO 0);
   n_b	: IN BIT_VECTOR(15 DOWNTO 0);
   n_f	: IN BIT_VECTOR(5 DOWNTO 0);
   n_q	: OUT BIT_VECTOR(15 DOWNTO 0);
-  n_exe	: IN BIT;
-  m_clock	: IN BIT;
-  p_reset	: IN BIT
+  n_exe	: IN BIT
 );
 END alu16_model;
 
@@ -53,8 +49,6 @@ BEGIN
      '0';
   v_net_68 <= n_exe WHEN (n_f = "000110") ELSE
      '0';
-  v_cla_m_clock <= m_clock;
-  v_cla_p_reset <= p_reset;
   v_cla_do <= '1' WHEN ((n_exe AND v_net_73) = '1') ELSE
      '1' WHEN ((n_exe AND v_net_70) = '1') ELSE
      '0';

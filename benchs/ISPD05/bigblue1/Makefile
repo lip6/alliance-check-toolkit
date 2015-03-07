@@ -3,7 +3,8 @@
                      CHIP = bigblue1
                 USE_DEBUG = No
 
- all: ispd05
 
  include ../../etc/rules.mk
 
+all:  ispd
+ispd: ispd-bigblue1 

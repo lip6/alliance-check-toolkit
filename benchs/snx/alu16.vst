@@ -22,12 +22,8 @@ ARCHITECTURE VST OF alu16 IS
   SIGNAL v_cla_in2	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_cla_out	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_cla_do	: BIT;
-  SIGNAL v_cla_p_reset	: BIT;
-  SIGNAL v_cla_m_clock	: BIT;
   COMPONENT alu16_model
   PORT(
-  p_reset	: IN BIT;
-  m_clock	: IN BIT;
   n_exe	: IN BIT;
   n_q	: OUT BIT_VECTOR(15 DOWNTO 0);
   n_f	: IN BIT_VECTOR(5 DOWNTO 0);
@@ -35,8 +31,6 @@ ARCHITECTURE VST OF alu16 IS
   n_a	: IN BIT_VECTOR(15 DOWNTO 0);
   vdd	: IN BIT;
   vss	: IN BIT;
-  v_cla_m_clock	: OUT BIT;
-  v_cla_p_reset	: OUT BIT;
   v_cla_do	: OUT BIT;
   v_cla_out	: IN BIT_VECTOR(15 DOWNTO 0);
   v_cla_in2	: OUT BIT_VECTOR(15 DOWNTO 0);
@@ -63,8 +57,6 @@ BEGIN
 
   alu16_inst : alu16_model
   PORT MAP (
-    p_reset => p_reset,
-    m_clock => m_clock,
     n_exe => n_exe,
     n_q => n_q,
     n_f => n_f,
@@ -72,8 +64,6 @@ BEGIN
     n_a => n_a,
     vdd => vdd,
     vss => vss,
-    v_cla_m_clock => v_cla_m_clock,
-    v_cla_p_reset => v_cla_p_reset,
     v_cla_do => v_cla_do,
     v_cla_out => v_cla_out,
     v_cla_in2 => v_cla_in2,
@@ -87,8 +77,8 @@ BEGIN
     n_in1(15 downto 0) => v_cla_in1,
     n_cin => v_cla_cin,
     n_do => v_cla_do,
-    m_clock => v_cla_m_clock,
-    p_reset => v_cla_p_reset,
+    m_clock => m_clock,
+    p_reset => p_reset,
     vdd => vdd,
     vss => vss
   );

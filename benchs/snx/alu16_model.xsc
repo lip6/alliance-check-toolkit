@@ -35,7 +35,6 @@ N:iv1_x2_7_sig:-1:36 ps
 N:iv1_x2_8_sig:-1:36 ps
 N:iv1_x2_9_sig:-1:36 ps
 N:iv1_x2_sig:-1:36 ps
-N:m_clock:-1:0 ps
 N:n_a 0:-1:0 ps
 N:n_a 1:-1:0 ps
 N:n_a 2:-1:0 ps
@@ -371,7 +370,6 @@ N:or4_x1_7_sig:-1:214 ps
 N:or4_x1_8_sig:-1:214 ps
 N:or4_x1_9_sig:-1:214 ps
 N:or4_x1_sig:-1:214 ps
-N:p_reset:-1:0 ps
 N:v_cla_cin:-1:166 ps
 N:v_cla_do:-1:256 ps
 N:v_cla_in1 0:-1:264 ps
@@ -406,7 +404,6 @@ N:v_cla_in2 12:-1:264 ps
 N:v_cla_in2 13:-1:264 ps
 N:v_cla_in2 14:-1:264 ps
 N:v_cla_in2 15:-1:264 ps
-N:v_cla_m_clock:-1:0 ps
 N:v_cla_out 0:-1:0 ps
 N:v_cla_out 1:-1:0 ps
 N:v_cla_out 2:-1:0 ps
@@ -423,7 +420,6 @@ N:v_cla_out 12:-1:0 ps
 N:v_cla_out 13:-1:0 ps
 N:v_cla_out 14:-1:0 ps
 N:v_cla_out 15:-1:0 ps
-N:v_cla_p_reset:-1:0 ps
 B:v_cla_cin_ins:-1:166 ps
 B:nr2_x1_51_ins:-1:87 ps
 B:v_cla_in1_15:-1:221 ps
@@ -557,8 +553,6 @@ B:nr2_x1_19_ins:-1:87 ps
 B:v_cla_do_ins:-1:256 ps
 B:or3_x1_18_ins:-1:202 ps
 B:nr2_x1_18_ins:-1:87 ps
-B:v_cla_p_reset_ins:-1:67 ps
-B:v_cla_m_clock_ins:-1:67 ps
 B:n_q_15:-1:398 ps
 B:or2_x1_20_ins:-1:133 ps
 B:oai21_x1_ins:-1:273 ps
@@ -793,8 +787,6 @@ B:not_v_net_73_ins:-1:235 ps
 B:an3_x2_ins:-1:189 ps
 B:nr2_x1_ins:-1:51 ps
 B:nr3_x05_ins:-1:75 ps
-C:p_reset:-1:0 ps
-C:m_clock:-1:0 ps
 C:n_exe:-1:0 ps
 C:n_q 0:32:668 ps
 C:n_q 1:-1:506 ps
@@ -850,8 +842,6 @@ C:n_a 12:-1:0 ps
 C:n_a 13:-1:0 ps
 C:n_a 14:-1:0 ps
 C:n_a 15:-1:0 ps
-C:v_cla_m_clock:-1:0 ps
-C:v_cla_p_reset:-1:0 ps
 C:v_cla_do:-1:256 ps
 C:v_cla_out 0:-1:0 ps
 C:v_cla_out 1:-1:0 ps

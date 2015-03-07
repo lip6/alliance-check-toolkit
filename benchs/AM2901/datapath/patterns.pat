@@ -28,8 +28,8 @@ out      ovr B;;
 out      np B;;
 out      ng B;;
 out      cout B;;
-in       vdd B;;
-in       vss B;;
+in       vddi B;;
+in       vssi B;;
 in       vdde B;;
 in       vsse B;;
 
@@ -40,7 +40,7 @@ begin
 --                        a b d i   n c c  r  r  q  q  y  z  s  o  n  n  c v v v v  
 --                                  o k i  0  3  0  3     e  i  v  p  g  o d s d s  
 --                                  e   n                 r  g  r        u d s d s  
---                                                        o  n           t     e e  
+--                                                        o  n           t i i e e  
 --                                                           e                      
 
 

@@ -1,21 +1,17 @@
 entity alu16_model is
    port (
-      v_cla_cin     : out     bit;
-      v_cla_in1     : out     bit_vector(15 downto 0);
-      v_cla_in2     : out     bit_vector(15 downto 0);
-      v_cla_out     : in      bit_vector(15 downto 0);
-      v_cla_do      : out     bit;
-      v_cla_p_reset : out     bit;
-      v_cla_m_clock : out     bit;
-      vss           : in      bit;
-      vdd           : in      bit;
-      n_a           : in      bit_vector(15 downto 0);
-      n_b           : in      bit_vector(15 downto 0);
-      n_f           : in      bit_vector(5 downto 0);
-      n_q           : out     bit_vector(15 downto 0);
-      n_exe         : in      bit;
-      m_clock       : in      bit;
-      p_reset       : in      bit
+      v_cla_cin : out     bit;
+      v_cla_in1 : out     bit_vector(15 downto 0);
+      v_cla_in2 : out     bit_vector(15 downto 0);
+      v_cla_out : in      bit_vector(15 downto 0);
+      v_cla_do  : out     bit;
+      vss       : in      bit;
+      vdd       : in      bit;
+      n_a       : in      bit_vector(15 downto 0);
+      n_b       : in      bit_vector(15 downto 0);
+      n_f       : in      bit_vector(5 downto 0);
+      n_q       : out     bit_vector(15 downto 0);
+      n_exe     : in      bit
  );
 end alu16_model;
 
@@ -155,15 +151,6 @@ Component aon21_x2
       a1  : in      bit;
       a2  : in      bit;
       b   : in      bit;
-      z   : out     bit;
-      vdd : in      bit;
-      vss : in      bit
- );
-end component;
-
-Component bf1_x1
-   port (
-      a   : in      bit;
       z   : out     bit;
       vdd : in      bit;
       vss : in      bit
@@ -2745,22 +2732,6 @@ n_q_15_ins : aon21_x2
       a2  => oai21_x1_sig,
       b   => nr3_x05_21_sig,
       z   => n_q(15),
-      vdd => vdd,
-      vss => vss
-   );
-
-v_cla_m_clock_ins : bf1_x1
-   port map (
-      a   => m_clock,
-      z   => v_cla_m_clock,
-      vdd => vdd,
-      vss => vss
-   );
-
-v_cla_p_reset_ins : bf1_x1
-   port map (
-      a   => p_reset,
-      z   => v_cla_p_reset,
       vdd => vdd,
       vss => vss
    );

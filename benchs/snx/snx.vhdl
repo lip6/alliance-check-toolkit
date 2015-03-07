@@ -1,4 +1,4 @@
--- Produced by NSL Core(version=20140312), IP ARCH, Inc. Thu Aug 14 16:10:25 2014
+-- Produced by NSL Core(version=20141105), IP ARCH, Inc. Thu Mar 05 14:16:41 2015
 -- Licensed to :EVALUATION USER
 --- DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. ---
 library ieee;
@@ -116,8 +116,6 @@ end component;
   signal v_alu_f: std_logic_vector(5 downto 0);
   signal v_alu_q: std_logic_vector(15 downto 0);
   signal v_alu_exe: std_logic;
-  signal v_alu_p_reset: std_logic;
-  signal v_alu_m_clock: std_logic;
   signal v_gr_regin: std_logic_vector(15 downto 0);
   signal v_gr_regouta: std_logic_vector(15 downto 0);
   signal v_gr_regoutb: std_logic_vector(15 downto 0);
@@ -127,13 +125,9 @@ end component;
   signal v_gr_write: std_logic;
   signal v_gr_reada: std_logic;
   signal v_gr_readb: std_logic;
-  signal v_gr_p_reset: std_logic;
-  signal v_gr_m_clock: std_logic;
   signal v_inc_in: std_logic_vector(15 downto 0);
   signal v_inc_out: std_logic_vector(15 downto 0);
   signal v_inc_do: std_logic;
-  signal v_inc_p_reset: std_logic;
-  signal v_inc_m_clock: std_logic;
   signal v_proc_ifetch_set: std_logic;
   signal v_proc_ifetch_reset: std_logic;
   signal v_proc_exec_set: std_logic;
@@ -161,8 +155,6 @@ end component;
   signal v_tdec_rtype: std_logic;
   signal v_tdec_ctype: std_logic;
   signal v_tdec_dec: std_logic;
-  signal v_tdec_p_reset: std_logic;
-  signal v_tdec_m_clock: std_logic;
   signal v_net_17: std_logic_vector(15 downto 0);
   signal v_net_18: std_logic_vector(15 downto 0);
   signal v_net_19: std_logic;
@@ -227,13 +219,13 @@ end component;
 
 begin
 inc: inc16 
-     port map (p_reset => v_inc_p_reset, m_clock => v_inc_m_clock, n_do => v_inc_do, n_out => v_inc_out, n_in => v_inc_in);
+     port map (p_reset => p_reset, m_clock => m_clock, n_do => v_inc_do, n_out => v_inc_out, n_in => v_inc_in);
 gr: reg4 
-     port map (p_reset => v_gr_p_reset, m_clock => v_gr_m_clock, n_readb => v_gr_readb, n_reada => v_gr_reada, n_write => v_gr_write, n_n_regoutb => v_gr_n_regoutb, n_n_regouta => v_gr_n_regouta, n_n_regin => v_gr_n_regin, n_regoutb => v_gr_regoutb, n_regouta => v_gr_regouta, n_regin => v_gr_regin);
+     port map (p_reset => p_reset, m_clock => m_clock, n_readb => v_gr_readb, n_reada => v_gr_reada, n_write => v_gr_write, n_n_regoutb => v_gr_n_regoutb, n_n_regouta => v_gr_n_regouta, n_n_regin => v_gr_n_regin, n_regoutb => v_gr_regoutb, n_regouta => v_gr_regouta, n_regin => v_gr_regin);
 alu: alu16 
-     port map (p_reset => v_alu_p_reset, m_clock => v_alu_m_clock, n_exe => v_alu_exe, n_q => v_alu_q, n_f => v_alu_f, n_b => v_alu_b, n_a => v_alu_a);
+     port map (p_reset => p_reset, m_clock => m_clock, n_exe => v_alu_exe, n_q => v_alu_q, n_f => v_alu_f, n_b => v_alu_b, n_a => v_alu_a);
 tdec: type_dec 
-     port map (p_reset => v_tdec_p_reset, m_clock => v_tdec_m_clock, n_dec => v_tdec_dec, n_ctype => v_tdec_ctype, n_rtype => v_tdec_rtype, n_itype => v_tdec_itype, n_op => v_tdec_op);
+     port map (p_reset => p_reset, m_clock => m_clock, n_dec => v_tdec_dec, n_ctype => v_tdec_ctype, n_rtype => v_tdec_rtype, n_itype => v_tdec_itype, n_op => v_tdec_op);
   n_npc <= n_pc when (((n_mload and ( not v_net_40)) and n_mem_ok))='1'
   else n_pc when ((n_mload and v_net_40))='1'
   else n_pc when (n_mstore2)='1'
@@ -308,8 +300,6 @@ tdec: type_dec
   else '1' when (((n_exec and v_tdec_itype) and v_net_23))='1'
   else '1' when ((n_exec and v_tdec_rtype))='1'
   else '0' ;
-  v_alu_p_reset <= p_reset;
-  v_alu_m_clock <= m_clock;
   v_gr_regin <= n_datai when (((n_mload and ( not v_net_40)) and n_mem_ok))='1'
   else n_crrdat when ((n_mload and v_net_40))='1'
   else n_aluq when ((n_exec and v_tdec_rtype))='1'
@@ -339,8 +329,6 @@ tdec: type_dec
   else n_exec;
   v_gr_readb <= '1' when ((n_exec and ( not v_net_22)))='1'
   else '0' ;
-  v_gr_p_reset <= p_reset;
-  v_gr_m_clock <= m_clock;
   v_inc_in <= n_pc when ((n_exec and v_net_33))='1'
   else n_pc when (((((n_exec and ( not v_net_24)) and ( not v_net_25)) and ( not v_tdec_ctype)) and ( not v_net_32)))='1'
   else n_pc when ((n_exec and v_net_25))='1'
@@ -351,8 +339,6 @@ tdec: type_dec
   else '1' when ((n_exec and v_net_25))='1'
   else '1' when ((n_exec and v_net_24))='1'
   else '0' ;
-  v_inc_p_reset <= p_reset;
-  v_inc_m_clock <= m_clock;
   v_proc_ifetch_set <= '1' when ((n_iset and ( not v_net_4)))='1'
   else '0' ;
   v_proc_ifetch_reset <= '1' when ((n_ifetch and n_inst_ok))='1'
@@ -398,8 +384,6 @@ tdec: type_dec
   v_tdec_op <= v_opreg_op when (n_exec)='1'
   else "0000" ;
   v_tdec_dec <= n_exec;
-  v_tdec_p_reset <= p_reset;
-  v_tdec_m_clock <= m_clock;
   v_net_17 <= ((v_opreg_op & v_opreg_r2 & v_opreg_r3 & v_opreg_r1 & v_opreg_fn));
   v_net_18 <= (v_opreg_op & v_opreg_r2 & v_opreg_r3 & v_opreg_r1 & v_opreg_fn) when (n_exec)='1'
   else "0000000000000000" ;
@@ -494,8 +478,8 @@ if ((n_exec and v_net_25))='1' then
   elsif ((n_iset and ( not v_net_4)))='1' then
     n_pc <= n_npc;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_1: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -506,8 +490,8 @@ if m_clock'event and m_clock='1' then
   elsif (((n_iset and v_net_4) or v_reg_6))='1' then
     n_isr <= '1';
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_2: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -515,8 +499,8 @@ if m_clock'event and m_clock='1' then
 if ((n_ifetch and n_inst_ok))='1' then
     v_opreg_fn <= (v_net_15(5 downto 0));
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_3: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -524,8 +508,8 @@ if m_clock'event and m_clock='1' then
 if ((n_ifetch and n_inst_ok))='1' then
     v_opreg_r1 <= (v_net_15(7 downto 6));
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_4: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -533,8 +517,8 @@ if m_clock'event and m_clock='1' then
 if ((n_ifetch and n_inst_ok))='1' then
     v_opreg_r3 <= (v_net_15(9 downto 8));
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_5: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -542,8 +526,8 @@ if m_clock'event and m_clock='1' then
 if ((n_ifetch and n_inst_ok))='1' then
     v_opreg_r2 <= (v_net_15(11 downto 10));
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_6: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -551,8 +535,8 @@ if m_clock'event and m_clock='1' then
 if ((n_ifetch and n_inst_ok))='1' then
     v_opreg_op <= (v_net_15(15 downto 12));
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_7: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -562,8 +546,8 @@ if ((n_exec and v_net_24))='1' then
   elsif (n_msetld)='1' then
     n_mar <= n_nmar;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_8: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -573,8 +557,8 @@ if ((n_exec and v_net_24))='1' then
   elsif (n_msetld)='1' then
     n_regnum <= n_nregnum;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_9: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -583,8 +567,8 @@ if m_clock'event and m_clock='1' then
   elsif ((n_crwrite and v_net_10))='1' then
     n_cr0 <= n_crwdat;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_10: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -593,8 +577,8 @@ if m_clock'event and m_clock='1' then
   elsif ((n_crwrite and v_net_9))='1' then
     n_cr1 <= n_crwdat;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_11: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -603,8 +587,8 @@ if m_clock'event and m_clock='1' then
   elsif ((n_crwrite and v_net_8))='1' then
     n_cr2 <= n_crwdat;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_12: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -615,8 +599,8 @@ if m_clock'event and m_clock='1' then
   elsif (((n_iset and v_net_4) or v_reg_6))='1' then
     n_cr3 <= n_npc;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_13: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -624,8 +608,8 @@ if m_clock'event and m_clock='1' then
     n_int0 <= '0';
   else     n_int0 <= n_IntReq;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_14: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -633,8 +617,8 @@ if m_clock'event and m_clock='1' then
     n_int1 <= '0';
   else     n_int1 <= n_int0;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_15: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -643,8 +627,8 @@ if m_clock'event and m_clock='1' then
   elsif ((v_proc_ifetch_set or v_proc_ifetch_reset))='1' then
     n_ifetch <= v_proc_ifetch_set;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_16: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -653,8 +637,8 @@ if m_clock'event and m_clock='1' then
   elsif ((v_proc_exec_set or v_proc_exec_reset))='1' then
     n_exec <= v_proc_exec_set;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_17: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -663,8 +647,8 @@ if m_clock'event and m_clock='1' then
   elsif ((v_proc_mstore_set or v_proc_mstore_reset))='1' then
     n_mstore <= v_proc_mstore_set;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_18: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -673,8 +657,8 @@ if m_clock'event and m_clock='1' then
   elsif ((v_proc_mstore2_set or v_proc_mstore2_reset))='1' then
     n_mstore2 <= v_proc_mstore2_set;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_19: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -683,8 +667,8 @@ if m_clock'event and m_clock='1' then
   elsif ((v_proc_mload_set or v_proc_mload_reset))='1' then
     n_mload <= v_proc_mload_set;
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_20: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -693,8 +677,8 @@ if m_clock'event and m_clock='1' then
   elsif (((n_iset and v_net_4) or (v_reg_5 or v_reg_6)))='1' then
     v_reg_5 <= (v_reg_6 or (n_iset and v_net_4));
   end if;
-end if;
-end process;
+ end if;
+ end process;
 p_21: process(m_clock)
 begin
 if m_clock'event and m_clock='1' then
@@ -703,10 +687,10 @@ if m_clock'event and m_clock='1' then
   elsif (v_reg_6)='1' then
     v_reg_6 <= '0';
   end if;
-end if;
-end process;
+ end if;
+ end process;
 end RTL;
 
 
--- Produced by NSL Core(version=20140312), IP ARCH, Inc. Thu Aug 14 16:10:25 2014
+-- Produced by NSL Core(version=20141105), IP ARCH, Inc. Thu Mar 05 14:16:41 2015
 -- Licensed to :EVALUATION USER

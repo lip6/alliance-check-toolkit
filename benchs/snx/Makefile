@@ -8,7 +8,7 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
         GENERATE_CORE_VST = No
-            USE_CLOCKTREE = No
+            USE_CLOCKTREE = Yes
                 USE_MOSIS = Yes
                 USE_DEBUG = No
 
@@ -19,6 +19,9 @@
  export            RDS_IN = gds
  export           RDS_OUT = gds
 
+check:    lvx
 
-all: $(ALLIANCE_CHIP).gds
-
+lvx:      lvx-chip_crl_clocked_kite
+druc:     druc-chip_crl_clocked_kite
+gds:      chip_crl_clocked_kite.gds
+view:     cgt-view-chip_crl_clocked_kite

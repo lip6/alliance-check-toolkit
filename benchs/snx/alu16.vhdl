@@ -1,4 +1,4 @@
--- Produced by NSL Core(version=20140312), IP ARCH, Inc. Thu Aug 14 16:10:25 2014
+-- Produced by NSL Core(version=20141105), IP ARCH, Inc. Thu Mar 05 14:16:41 2015
 -- Licensed to :EVALUATION USER
 --- DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. ---
 library ieee;
@@ -34,8 +34,6 @@ end component;
   signal v_cla_in2: std_logic_vector(15 downto 0);
   signal v_cla_out: std_logic_vector(15 downto 0);
   signal v_cla_do: std_logic;
-  signal v_cla_p_reset: std_logic;
-  signal v_cla_m_clock: std_logic;
   signal v_net_68: std_logic;
   signal v_net_69: std_logic;
   signal v_net_70: std_logic;
@@ -52,7 +50,7 @@ end component;
 
 begin
 cla: cla16 
-     port map (p_reset => v_cla_p_reset, m_clock => v_cla_m_clock, n_do => v_cla_do, n_out => v_cla_out, n_in2 => v_cla_in2, n_in1 => v_cla_in1, n_cin => v_cla_cin);
+     port map (p_reset => p_reset, m_clock => m_clock, n_do => v_cla_do, n_out => v_cla_out, n_in2 => v_cla_in2, n_in1 => v_cla_in1, n_cin => v_cla_cin);
   v_cla_cin <= '0' when ((n_exe and v_net_73))='1'
   else '1' when ((n_exe and v_net_70))='1'
   else '0' ;
@@ -65,8 +63,6 @@ cla: cla16
   v_cla_do <= '1' when ((n_exe and v_net_73))='1'
   else '1' when ((n_exe and v_net_70))='1'
   else '0' ;
-  v_cla_p_reset <= p_reset;
-  v_cla_m_clock <= m_clock;
   v_net_68 <= n_exe when ((n_f = v_net_74))
   else '0' ;
   v_net_69 <= n_exe when ((n_f = v_net_75))
@@ -88,5 +84,5 @@ cla: cla16
 end RTL;
 
 
--- Produced by NSL Core(version=20140312), IP ARCH, Inc. Thu Aug 14 16:10:25 2014
+-- Produced by NSL Core(version=20141105), IP ARCH, Inc. Thu Mar 05 14:16:41 2015
 -- Licensed to :EVALUATION USER

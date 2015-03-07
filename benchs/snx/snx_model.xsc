@@ -3043,8 +3043,6 @@ N:v_alu_f 2:-1:3384 ps
 N:v_alu_f 3:-1:3384 ps
 N:v_alu_f 4:-1:3384 ps
 N:v_alu_f 5:-1:3384 ps
-N:v_alu_m_clock:-1:0 ps
-N:v_alu_p_reset:-1:0 ps
 N:v_alu_q 0:-1:0 ps
 N:v_alu_q 1:-1:0 ps
 N:v_alu_q 2:-1:0 ps
@@ -3061,14 +3059,12 @@ N:v_alu_q 12:-1:0 ps
 N:v_alu_q 13:-1:0 ps
 N:v_alu_q 14:-1:0 ps
 N:v_alu_q 15:-1:0 ps
-N:v_gr_m_clock:-1:0 ps
 N:v_gr_n_regin 0:-1:3791 ps
 N:v_gr_n_regin 1:-1:3791 ps
 N:v_gr_n_regouta 0:-1:3431 ps
 N:v_gr_n_regouta 1:-1:3431 ps
 N:v_gr_n_regoutb 0:-1:3304 ps
 N:v_gr_n_regoutb 1:-1:3304 ps
-N:v_gr_p_reset:-1:0 ps
 N:v_gr_reada:-1:3427 ps
 N:v_gr_readb:-1:3304 ps
 N:v_gr_regin 0:-1:3791 ps
@@ -3137,7 +3133,6 @@ N:v_inc_in 12:-1:3682 ps
 N:v_inc_in 13:-1:3682 ps
 N:v_inc_in 14:-1:3682 ps
 N:v_inc_in 15:-1:3682 ps
-N:v_inc_m_clock:-1:0 ps
 N:v_inc_out 0:-1:0 ps
 N:v_inc_out 1:-1:0 ps
 N:v_inc_out 2:-1:0 ps
@@ -3154,7 +3149,6 @@ N:v_inc_out 12:-1:0 ps
 N:v_inc_out 13:-1:0 ps
 N:v_inc_out 14:-1:0 ps
 N:v_inc_out 15:-1:0 ps
-N:v_inc_p_reset:-1:0 ps
 N:v_net_4:-1:2772 ps
 N:v_opitype_op_0:-1:3372 ps
 N:v_opitype_op_1:-1:3385 ps
@@ -3182,12 +3176,10 @@ N:v_reg_6:-1:748 ps
 N:v_tdec_ctype:-1:0 ps
 N:v_tdec_dec:-1:3226 ps
 N:v_tdec_itype:-1:0 ps
-N:v_tdec_m_clock:-1:0 ps
 N:v_tdec_op 0:-1:3304 ps
 N:v_tdec_op 1:-1:3304 ps
 N:v_tdec_op 2:-1:3304 ps
 N:v_tdec_op 3:-1:3304 ps
-N:v_tdec_p_reset:-1:0 ps
 N:v_tdec_rtype:-1:0 ps
 N:zero_sig:-1:0 ps
 B:zero_sig_ins:-1:0 ps
@@ -3572,8 +3564,6 @@ B:an3_x2_117_ins:-1:3365 ps
 B:nd2_x2_203_ins:-1:3265 ps
 B:nr2_x1_293_ins:-1:632 ps
 B:an2_x2_325_ins:-1:666 ps
-B:v_alu_p_reset_ins:-1:67 ps
-B:v_alu_m_clock_ins:-1:67 ps
 B:v_gr_regin_15:-1:3791 ps
 B:nd2_x2_202_ins:-1:1065 ps
 B:an2_x2_324_ins:-1:577 ps
@@ -4035,8 +4025,6 @@ B:nd2_x2_162_ins:-1:985 ps
 B:oai22_x1_45_ins:-1:3318 ps
 B:nr2_x1_233_ins:-1:1030 ps
 B:v_gr_readb_ins:-1:3304 ps
-B:v_gr_p_reset_ins:-1:67 ps
-B:v_gr_m_clock_ins:-1:67 ps
 B:v_inc_in_15:-1:3682 ps
 B:or2_x1_125_ins:-1:3354 ps
 B:aon22_x1_162_ins:-1:3573 ps
@@ -4254,15 +4242,11 @@ B:oai21_x05_2_ins:-1:3479 ps
 B:or3_x1_81_ins:-1:3425 ps
 B:nr2_x1_183_ins:-1:3311 ps
 B:an4_x2_67_ins:-1:161 ps
-B:v_inc_p_reset_ins:-1:67 ps
-B:v_inc_m_clock_ins:-1:67 ps
 B:v_tdec_op_3:-1:3304 ps
 B:v_tdec_op_2:-1:3304 ps
 B:v_tdec_op_1:-1:3304 ps
 B:v_tdec_op_0:-1:3304 ps
 B:v_tdec_dec_ins:-1:3293 ps
-B:v_tdec_p_reset_ins:-1:67 ps
-B:v_tdec_m_clock_ins:-1:67 ps
 B:n_datao_15:-1:1023 ps
 B:an2_x2_248_ins:-1:338 ps
 B:n_datao_14:-1:1023 ps
@@ -6367,8 +6351,6 @@ C:n_inst 12:-1:0 ps
 C:n_inst 13:-1:0 ps
 C:n_inst 14:-1:0 ps
 C:n_inst 15:-1:0 ps
-C:v_tdec_m_clock:-1:0 ps
-C:v_tdec_p_reset:-1:0 ps
 C:v_tdec_dec:-1:3226 ps
 C:v_tdec_ctype:-1:0 ps
 C:v_tdec_rtype:-1:0 ps
@@ -6377,8 +6359,6 @@ C:v_tdec_op 0:-1:3304 ps
 C:v_tdec_op 1:-1:3304 ps
 C:v_tdec_op 2:-1:3304 ps
 C:v_tdec_op 3:-1:3304 ps
-C:v_inc_m_clock:-1:0 ps
-C:v_inc_p_reset:-1:0 ps
 C:v_inc_do:-1:3619 ps
 C:v_inc_out 0:-1:0 ps
 C:v_inc_out 1:-1:0 ps
@@ -6412,8 +6392,6 @@ C:v_inc_in 12:-1:3682 ps
 C:v_inc_in 13:-1:3682 ps
 C:v_inc_in 14:-1:3682 ps
 C:v_inc_in 15:-1:3682 ps
-C:v_gr_m_clock:-1:0 ps
-C:v_gr_p_reset:-1:0 ps
 C:v_gr_readb:-1:3304 ps
 C:v_gr_reada:-1:3427 ps
 C:v_gr_write:-1:3727 ps
@@ -6471,8 +6449,6 @@ C:v_gr_regin 12:-1:3791 ps
 C:v_gr_regin 13:-1:3791 ps
 C:v_gr_regin 14:-1:3791 ps
 C:v_gr_regin 15:-1:3791 ps
-C:v_alu_m_clock:-1:0 ps
-C:v_alu_p_reset:-1:0 ps
 C:v_alu_exe:-1:3565 ps
 C:v_alu_q 0:-1:0 ps
 C:v_alu_q 1:-1:0 ps

@@ -20,5 +20,10 @@
  export           RDS_OUT = gds
 
 
-all: $(ALLIANCE_CHIP).gds
+check:  lvx
+
+lvx:    lvx-chip_crl_kite
+druc:   druc-chip_crl_kite
+gds:    chip_crl_kite.gds
+view:   cgt-view-chip_crl_kite
 

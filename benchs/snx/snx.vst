@@ -34,8 +34,6 @@ ARCHITECTURE VST OF snx IS
   SIGNAL v_alu_f	: BIT_VECTOR(5 DOWNTO 0);
   SIGNAL v_alu_q	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_alu_exe	: BIT;
-  SIGNAL v_alu_p_reset	: BIT;
-  SIGNAL v_alu_m_clock	: BIT;
   SIGNAL v_gr_regin	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_gr_regouta	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_gr_regoutb	: BIT_VECTOR(15 DOWNTO 0);
@@ -45,20 +43,14 @@ ARCHITECTURE VST OF snx IS
   SIGNAL v_gr_write	: BIT;
   SIGNAL v_gr_reada	: BIT;
   SIGNAL v_gr_readb	: BIT;
-  SIGNAL v_gr_p_reset	: BIT;
-  SIGNAL v_gr_m_clock	: BIT;
   SIGNAL v_inc_in	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_inc_out	: BIT_VECTOR(15 DOWNTO 0);
   SIGNAL v_inc_do	: BIT;
-  SIGNAL v_inc_p_reset	: BIT;
-  SIGNAL v_inc_m_clock	: BIT;
   SIGNAL v_tdec_op	: BIT_VECTOR(3 DOWNTO 0);
   SIGNAL v_tdec_itype	: BIT;
   SIGNAL v_tdec_rtype	: BIT;
   SIGNAL v_tdec_ctype	: BIT;
   SIGNAL v_tdec_dec	: BIT;
-  SIGNAL v_tdec_p_reset	: BIT;
-  SIGNAL v_tdec_m_clock	: BIT;
   COMPONENT snx_model
   PORT(
   p_reset	: IN BIT;
@@ -82,20 +74,14 @@ ARCHITECTURE VST OF snx IS
   n_inst	: IN BIT_VECTOR(15 DOWNTO 0);
   vdd	: IN BIT;
   vss	: IN BIT;
-  v_tdec_m_clock	: OUT BIT;
-  v_tdec_p_reset	: OUT BIT;
   v_tdec_dec	: OUT BIT;
   v_tdec_ctype	: IN BIT;
   v_tdec_rtype	: IN BIT;
   v_tdec_itype	: IN BIT;
   v_tdec_op	: OUT BIT_VECTOR(3 DOWNTO 0);
-  v_inc_m_clock	: OUT BIT;
-  v_inc_p_reset	: OUT BIT;
   v_inc_do	: OUT BIT;
   v_inc_out	: IN BIT_VECTOR(15 DOWNTO 0);
   v_inc_in	: OUT BIT_VECTOR(15 DOWNTO 0);
-  v_gr_m_clock	: OUT BIT;
-  v_gr_p_reset	: OUT BIT;
   v_gr_readb	: OUT BIT;
   v_gr_reada	: OUT BIT;
   v_gr_write	: OUT BIT;
@@ -105,8 +91,6 @@ ARCHITECTURE VST OF snx IS
   v_gr_regoutb	: IN BIT_VECTOR(15 DOWNTO 0);
   v_gr_regouta	: IN BIT_VECTOR(15 DOWNTO 0);
   v_gr_regin	: OUT BIT_VECTOR(15 DOWNTO 0);
-  v_alu_m_clock	: OUT BIT;
-  v_alu_p_reset	: OUT BIT;
   v_alu_exe	: OUT BIT;
   v_alu_q	: IN BIT_VECTOR(15 DOWNTO 0);
   v_alu_f	: OUT BIT_VECTOR(5 DOWNTO 0);
@@ -198,20 +182,14 @@ BEGIN
     n_inst => n_inst,
     vdd => vdd,
     vss => vss,
-    v_tdec_m_clock => v_tdec_m_clock,
-    v_tdec_p_reset => v_tdec_p_reset,
     v_tdec_dec => v_tdec_dec,
     v_tdec_ctype => v_tdec_ctype,
     v_tdec_rtype => v_tdec_rtype,
     v_tdec_itype => v_tdec_itype,
     v_tdec_op => v_tdec_op,
-    v_inc_m_clock => v_inc_m_clock,
-    v_inc_p_reset => v_inc_p_reset,
     v_inc_do => v_inc_do,
     v_inc_out => v_inc_out,
     v_inc_in => v_inc_in,
-    v_gr_m_clock => v_gr_m_clock,
-    v_gr_p_reset => v_gr_p_reset,
     v_gr_readb => v_gr_readb,
     v_gr_reada => v_gr_reada,
     v_gr_write => v_gr_write,
@@ -221,8 +199,6 @@ BEGIN
     v_gr_regoutb => v_gr_regoutb,
     v_gr_regouta => v_gr_regouta,
     v_gr_regin => v_gr_regin,
-    v_alu_m_clock => v_alu_m_clock,
-    v_alu_p_reset => v_alu_p_reset,
     v_alu_exe => v_alu_exe,
     v_alu_q => v_alu_q,
     v_alu_f => v_alu_f,
@@ -236,8 +212,8 @@ BEGIN
     n_rtype => v_tdec_rtype,
     n_ctype => v_tdec_ctype,
     n_dec => v_tdec_dec,
-    m_clock => v_tdec_m_clock,
-    p_reset => v_tdec_p_reset,
+    m_clock => m_clock,
+    p_reset => p_reset,
     vdd => vdd,
     vss => vss
   );
@@ -248,8 +224,8 @@ BEGIN
     n_b(15 downto 0) => v_alu_b,
     n_a(15 downto 0) => v_alu_a,
     n_exe => v_alu_exe,
-    m_clock => v_alu_m_clock,
-    p_reset => v_alu_p_reset,
+    m_clock => m_clock,
+    p_reset => p_reset,
     vdd => vdd,
     vss => vss
   );
@@ -264,8 +240,8 @@ BEGIN
     n_write => v_gr_write,
     n_reada => v_gr_reada,
     n_readb => v_gr_readb,
-    m_clock => v_gr_m_clock,
-    p_reset => v_gr_p_reset,
+    m_clock => m_clock,
+    p_reset => p_reset,
     vdd => vdd,
     vss => vss
   );
@@ -274,8 +250,8 @@ BEGIN
     n_out(15 downto 0) => v_inc_out,
     n_in(15 downto 0) => v_inc_in,
     n_do => v_inc_do,
-    m_clock => v_inc_m_clock,
-    p_reset => v_inc_p_reset,
+    m_clock => m_clock,
+    p_reset => p_reset,
     vdd => vdd,
     vss => vss
   );

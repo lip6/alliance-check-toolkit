@@ -5,8 +5,6 @@ entity snx_model is
       v_alu_f        : out     bit_vector(5 downto 0);
       v_alu_q        : in      bit_vector(15 downto 0);
       v_alu_exe      : out     bit;
-      v_alu_p_reset  : out     bit;
-      v_alu_m_clock  : out     bit;
       v_gr_regin     : out     bit_vector(15 downto 0);
       v_gr_regouta   : in      bit_vector(15 downto 0);
       v_gr_regoutb   : in      bit_vector(15 downto 0);
@@ -16,20 +14,14 @@ entity snx_model is
       v_gr_write     : out     bit;
       v_gr_reada     : out     bit;
       v_gr_readb     : out     bit;
-      v_gr_p_reset   : out     bit;
-      v_gr_m_clock   : out     bit;
       v_inc_in       : out     bit_vector(15 downto 0);
       v_inc_out      : in      bit_vector(15 downto 0);
       v_inc_do       : out     bit;
-      v_inc_p_reset  : out     bit;
-      v_inc_m_clock  : out     bit;
       v_tdec_op      : out     bit_vector(3 downto 0);
       v_tdec_itype   : in      bit;
       v_tdec_rtype   : in      bit;
       v_tdec_ctype   : in      bit;
       v_tdec_dec     : out     bit;
-      v_tdec_p_reset : out     bit;
-      v_tdec_m_clock : out     bit;
       vss            : in      bit;
       vdd            : in      bit;
       n_inst         : in      bit_vector(15 downto 0);
@@ -200,6 +192,15 @@ Component aoi21_x05
  );
 end component;
 
+Component bf1_x1
+   port (
+      a   : in      bit;
+      z   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
 Component oai21_x05
    port (
       a1  : in      bit;
@@ -315,15 +316,6 @@ Component or2_x1
    port (
       a   : in      bit;
       b   : in      bit;
-      z   : out     bit;
-      vdd : in      bit;
-      vss : in      bit
- );
-end component;
-
-Component bf1_x1
-   port (
-      a   : in      bit;
       z   : out     bit;
       vdd : in      bit;
       vss : in      bit
@@ -22476,22 +22468,6 @@ n_datao_15_ins : an2_x2
       vss => vss
    );
 
-v_tdec_m_clock_ins : bf1_x1
-   port map (
-      a   => m_clock,
-      z   => v_tdec_m_clock,
-      vdd => vdd,
-      vss => vss
-   );
-
-v_tdec_p_reset_ins : bf1_x1
-   port map (
-      a   => p_reset,
-      z   => v_tdec_p_reset,
-      vdd => vdd,
-      vss => vss
-   );
-
 v_tdec_dec_ins : bf1_x1
    port map (
       a   => n_exec,
@@ -22532,22 +22508,6 @@ v_tdec_op_3_ins : an2_x2
       b   => n_exec,
       a   => v_opreg_op(3),
       z   => v_tdec_op(3),
-      vdd => vdd,
-      vss => vss
-   );
-
-v_inc_m_clock_ins : bf1_x1
-   port map (
-      a   => m_clock,
-      z   => v_inc_m_clock,
-      vdd => vdd,
-      vss => vss
-   );
-
-v_inc_p_reset_ins : bf1_x1
-   port map (
-      a   => p_reset,
-      z   => v_inc_p_reset,
       vdd => vdd,
       vss => vss
    );
@@ -24671,22 +24631,6 @@ v_inc_in_15_ins : aon22_x1
       a2  => n_exec,
       a1  => nr2_x1_230_sig,
       z   => v_inc_in(15),
-      vdd => vdd,
-      vss => vss
-   );
-
-v_gr_m_clock_ins : bf1_x1
-   port map (
-      a   => m_clock,
-      z   => v_gr_m_clock,
-      vdd => vdd,
-      vss => vss
-   );
-
-v_gr_p_reset_ins : bf1_x1
-   port map (
-      a   => p_reset,
-      z   => v_gr_p_reset,
       vdd => vdd,
       vss => vss
    );
@@ -29133,22 +29077,6 @@ v_gr_regin_15_ins : aon22_x1
       a2  => n_mload,
       a1  => an3_x2_116_sig,
       z   => v_gr_regin(15),
-      vdd => vdd,
-      vss => vss
-   );
-
-v_alu_m_clock_ins : bf1_x1
-   port map (
-      a   => m_clock,
-      z   => v_alu_m_clock,
-      vdd => vdd,
-      vss => vss
-   );
-
-v_alu_p_reset_ins : bf1_x1
-   port map (
-      a   => p_reset,
-      z   => v_alu_p_reset,
       vdd => vdd,
       vss => vss
    );
