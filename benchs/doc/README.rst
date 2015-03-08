@@ -51,9 +51,8 @@
 .. |doChip|            replace:: ``doChip.py``
 .. |go|                replace:: ``go.sh``
 
-.. |core_ap|           replace:: ``core.ap``
-.. |alliance_chip_ap|  replace:: ``$(CHIP)_alc.ap``
-.. |coriolis_chip_ap|  replace:: ``$(CHIP)_crl.ap``
+.. |layout-alc|        replace:: ``layout-alc``
+.. |layout|            replace:: ``layout``
 .. |chip_clk|          replace:: ``$(CHIP)_crl_clocked``
 .. |chip_clk_kite|     replace:: ``$(CHIP)_crl_clocked_kite``
 .. |druc|              replace:: ``druc``
@@ -96,7 +95,7 @@ Toolkit Contents
 
 The toolkit provides:
 
-* Three benchmark designs:
+* Six benchmark designs:
 
 =============================  ==========================  =====================================
 Design                         Technology                  Cell Libraries
@@ -133,12 +132,12 @@ Benchmark Makefiles
 
 The main body of the |Makefile| has been put into ``benchs/etc/rules.mk``.
 
-It provides the following targets:
+The ``Makefile`` in the various bench directories provides some or all this
+targets, according to the fact they can be run with |Coriolis|, |Alliance|
+or both.
 
 +--------------+----------------------+---------------------------------------------------------------+
-|  |Alliance|  |  |core_ap|           |  The placement of the design's core                           |
-|              +----------------------+---------------------------------------------------------------+
-|              |  |alliance_chip_ap|  |  The complete layout of the design (P&R).                     |
+|  |Alliance|  |  |layout-alc|        |  The complete layout of the design (P&R).                     |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |druc-alc|          |  Symbolic layout checking                                     |
 |              +----------------------+---------------------------------------------------------------+
@@ -149,7 +148,7 @@ It provides the following targets:
 |              |  |dreal|             |  Launch |dreal| in the |Makefile| 's environement, and load   |
 |              |                      |  the |gds| file of the design.                                |
 +--------------+----------------------+---------------------------------------------------------------+
-|  |Coriolis|  |  |coriolis_chip_ap|  |  The complete layout of the design (P&R).                     |
+|  |Coriolis|  |  |layout|            |  The complete layout of the design (P&R).                     |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |druc|              |  Symbolic layout checking                                     |
 |              +----------------------+---------------------------------------------------------------+
@@ -161,8 +160,7 @@ It provides the following targets:
 +--------------+----------------------+---------------------------------------------------------------+
 
 
-A top |Makefile| in a bench directory must define at least the following
-variables: ::
+A top |Makefile| in a bench directory must looks like: ::
 
                         CORE = adder
                         CHIP = chip
@@ -179,15 +177,19 @@ variables: ::
     export            RDS_IN = gds
     export           RDS_OUT = gds
 
-    check:    lvx
-    
-    lvx:      lvx-chip_crl_kite
-    lvx-alc:  lvx-chip_alc
-    druc:     druc-chip_crl_kite
-    druc-alc: druc-chip_alc
-    gds:      chip_crl_kite.gds
-    view:     cgt-view-chip_crl_kite
+    check:     lvx
+	       
+    layout:    chip_crl_kite.ap
+    lvx:       lvx-chip_crl_kite
+    druc:      druc-chip_crl_kite
+    gds:       chip_crl_kite.gds
+    view:      cgt-view-chip_crl_kite
+	       
+    lvx-alc:   lvx-chip_alc
+    druc-alc:  druc-chip_alc
 
+
+|newpage|
 
 Where variables have the following meaning:
 
@@ -215,10 +217,10 @@ Unlike |Alliance| which is entirely configured through environement variables
 or system-wide configuration file, |Coriolis| uses configuration files in
 the current directory. They are present for each bench:
 
-* ``<cwd>/.coriolis_techno.conf`` : Select which symbolic and real technology
+* ``<cwd>/.coriolis2/techno.py`` : Select which symbolic and real technology
   to use.
-* ``<cwd>/.coriolis.conf`` : Override for any system configuration, except for
-  the technology.
+* ``<cwd>/.coriolis2/settings.py`` : Override for any system configuration,
+  except for the technology.
 
 
 |Coriolis| and Clock Tree Generation
@@ -261,6 +263,16 @@ only by very experienced users. See the ``demo*`` rules.
 
 Tools & Scripts
 ===============
+
+One script to run them all: |go|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To call all the bench's ``Makefile`` sequentially and execute one or more rules on
+each, the small script utility |go| is available. Here are some examples: ::
+
+    dummy@lepka:bench$ ./bin/go.sh clean
+    dummy@lepka:bench$ ./bin/go.sh lvx
+
 
 Command Line |cgt|: |doChip|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

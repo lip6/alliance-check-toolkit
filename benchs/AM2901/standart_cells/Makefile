@@ -17,9 +17,10 @@
  export           RDS_OUT = gds
 
 
-check:  lvx
+check:   lvx
 
-lvx:      lvx-amd2901_crl_clocked_kite
-druc:     druc-amd2901_crl_clocked_kite
-gds:      amd2901_crl_clocked_kite.gds
-view:     cgt-view-amd2901_crl_clocked_kite
+layout:  amd2901_crl_clocked_kite.ap
+lvx:     lvx-amd2901_crl_clocked_kite
+druc:    druc-amd2901_crl_clocked_kite
+gds:     amd2901_crl_clocked_kite.gds
+view:    cgt-view-amd2901_crl_clocked_kite

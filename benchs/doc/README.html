@@ -788,8 +788,9 @@ div#htmlerrorcontents hr.lang_separator {
 </ul>
 </li>
 <li><a class="reference internal" href="#tools-scripts" id="id10">Tools &amp; Scripts</a><ul>
-<li><a class="reference internal" href="#command-line-cgt-dochip" id="id11">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></li>
-<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id12">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
+<li><a class="reference internal" href="#one-script-to-run-them-all-go" id="id11">One script to run them all: <tt class="docutils literal">go.sh</tt></a></li>
+<li><a class="reference internal" href="#command-line-cgt-dochip" id="id12">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></li>
+<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id13">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
 </ul>
 </li>
 </ul>
@@ -810,7 +811,7 @@ not well documenteds as they will be quick corrections made by the developpers.<
 <h2><a class="toc-backref" href="#id3">Toolkit Contents</a></h2>
 <p>The toolkit provides:</p>
 <ul class="simple">
-<li>Three benchmark designs:</li>
+<li>Six benchmark designs:</li>
 </ul>
 <table border="1" class="docutils">
 <colgroup>
@@ -875,7 +876,9 @@ reason as the cell libraries.</p>
 <div class="section" id="benchmark-makefiles">
 <h2><a class="toc-backref" href="#id4">Benchmark Makefiles</a></h2>
 <p>The main body of the <tt class="docutils literal">Makefile</tt> has been put into <tt class="docutils literal">benchs/etc/rules.mk</tt>.</p>
-<p>It provides the following targets:</p>
+<p>The <tt class="docutils literal">Makefile</tt> in the various bench directories provides some or all this
+targets, according to the fact they can be run with <span class="sc">Coriolis</span>, <span class="sc">Alliance</span>
+or both.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -883,11 +886,8 @@ reason as the cell libraries.</p>
 <col width="64%" />
 </colgroup>
 <tbody valign="top">
-<tr><td rowspan="6"><span class="sc">Alliance</span></td>
-<td><tt class="docutils literal">core.ap</tt></td>
-<td>The placement of the design's core</td>
-</tr>
-<tr><td><tt class="docutils literal">$(CHIP)_alc.ap</tt></td>
+<tr><td rowspan="5"><span class="sc">Alliance</span></td>
+<td><tt class="docutils literal"><span class="pre">layout-alc</span></tt></td>
 <td>The complete layout of the design (P&amp;R).</td>
 </tr>
 <tr><td><tt class="docutils literal"><span class="pre">druc-alc</span></tt></td>
@@ -904,7 +904,7 @@ reason as the cell libraries.</p>
 the <tt class="docutils literal">gds</tt> file of the design.</td>
 </tr>
 <tr><td rowspan="5"><span class="sc">Coriolis</span></td>
-<td><tt class="docutils literal">$(CHIP)_crl.ap</tt></td>
+<td><tt class="docutils literal">layout</tt></td>
 <td>The complete layout of the design (P&amp;R).</td>
 </tr>
 <tr><td><tt class="docutils literal">druc</tt></td>
@@ -921,8 +921,7 @@ the <tt class="docutils literal">gds</tt> file of the design.</td>
 </tr>
 </tbody>
 </table>
-<p>A top <tt class="docutils literal">Makefile</tt> in a bench directory must define at least the following
-variables:</p>
+<p>A top <tt class="docutils literal">Makefile</tt> in a bench directory must looks like:</p>
 <pre class="literal-block">
                     CORE = adder
                     CHIP = chip
@@ -939,15 +938,18 @@ export        MBK_OUT_LO = vst
 export            RDS_IN = gds
 export           RDS_OUT = gds
 
-check:    lvx
+check:     lvx
 
-lvx:      lvx-chip_crl_kite
-lvx-alc:  lvx-chip_alc
-druc:     druc-chip_crl_kite
-druc-alc: druc-chip_alc
-gds:      chip_crl_kite.gds
-view:     cgt-view-chip_crl_kite
+layout:    chip_crl_kite.ap
+lvx:       lvx-chip_crl_kite
+druc:      druc-chip_crl_kite
+gds:       chip_crl_kite.gds
+view:      cgt-view-chip_crl_kite
+
+lvx-alc:   lvx-chip_alc
+druc-alc:  druc-chip_alc
 </pre>
+<p></p>
 <p>Where variables have the following meaning:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -991,10 +993,10 @@ present and will be considered as a primary file.</td>
 or system-wide configuration file, <span class="sc">Coriolis</span> uses configuration files in
 the current directory. They are present for each bench:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/.coriolis_techno.conf</span></tt> : Select which symbolic and real technology
+<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/.coriolis2/techno.py</span></tt> : Select which symbolic and real technology
 to use.</li>
-<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/.coriolis.conf</span></tt> : Override for any system configuration, except for
-the technology.</li>
+<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/.coriolis2/settings.py</span></tt> : Override for any system configuration,
+except for the technology.</li>
 </ul>
 </div>
 <div class="section" id="coriolis-and-clock-tree-generation">
@@ -1032,13 +1034,22 @@ only by very experienced users. See the <tt class="docutils literal">demo*</tt> 
 </div>
 <div class="section" id="tools-scripts">
 <h2><a class="toc-backref" href="#id10">Tools &amp; Scripts</a></h2>
+<div class="section" id="one-script-to-run-them-all-go">
+<h3><a class="toc-backref" href="#id11">One script to run them all: <tt class="docutils literal">go.sh</tt></a></h3>
+<p>To call all the bench's <tt class="docutils literal">Makefile</tt> sequentially and execute one or more rules on
+each, the small script utility <tt class="docutils literal">go.sh</tt> is available. Here are some examples:</p>
+<pre class="literal-block">
+dummy&#64;lepka:bench$ ./bin/go.sh clean
+dummy&#64;lepka:bench$ ./bin/go.sh lvx
+</pre>
+</div>
 <div class="section" id="command-line-cgt-dochip">
-<h3><a class="toc-backref" href="#id11">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></h3>
+<h3><a class="toc-backref" href="#id12">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></h3>
 <p>As a alternative to <tt class="docutils literal">cgt</tt>, the small helper script <tt class="docutils literal">doChip.py</tt> allows to
 perform all the P&amp;R tasks, on an stand-alone block or a whole chip.</p>
 </div>
 <div class="section" id="pad-layout-converter-px2mpx">
-<h3><a class="toc-backref" href="#id12">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
+<h3><a class="toc-backref" href="#id13">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
 <p>The <tt class="docutils literal">px2mpx.py</tt> script convert pad layout from the <tt class="docutils literal">pxlib</tt> (<span class="sc">Alliance</span> dummy
 technology) into <tt class="docutils literal">mpxlib</tt> (<span class="sc">mosis</span> compliant symbolic technology).</p>
 <p>Basically it multiplies all the coordinate by two as the source technology

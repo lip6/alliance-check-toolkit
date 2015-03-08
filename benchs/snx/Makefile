@@ -19,9 +19,10 @@
  export            RDS_IN = gds
  export           RDS_OUT = gds
 
-check:    lvx
+check:   lvx
 
-lvx:      lvx-chip_crl_clocked_kite
-druc:     druc-chip_crl_clocked_kite
-gds:      chip_crl_clocked_kite.gds
-view:     cgt-view-chip_crl_clocked_kite
+layout:  chip_crl_clocked_kite.ap
+lvx:     lvx-chip_crl_clocked_kite
+druc:    druc-chip_crl_clocked_kite
+gds:     chip_crl_clocked_kite.gds
+view:    cgt-view-chip_crl_clocked_kite
