@@ -15,9 +15,6 @@ try:
   import Viewer
   import CRL
   from   helpers   import ErrorMessage
-  import Nimbus
-  import Metis
-  import Mauka
   import Etesian
   import Katabatic
   import Kite
@@ -77,14 +74,9 @@ def ScriptMain ( **kw ):
           success = plugins.ClockTreePlugin.ScriptMain( **kw )
          #if not success: return False
         else:
-          if Cfg.getParamString('clockTree.placerEngine').asString() != 'Etesian':
-            mauka = Mauka.MaukaEngine.create( cell )
-            mauka.run()
-            mauka.destroy()
-          else:
-            etesian = Etesian.EtesianEngine.create( cell )
-            etesian.place()
-            etesian.destroy()
+          etesian = Etesian.EtesianEngine.create( cell )
+          etesian.place()
+          etesian.destroy()
       if editor: editor.refresh()
 
     if doStages & DoRouting:

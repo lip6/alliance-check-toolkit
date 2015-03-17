@@ -1,2 +1,2 @@
-symbolicTechno  = 'scmos_deep_018'
-realTechno	= 'scn6m_deep_09'
+symbolicTechnology = 'scmos_deep_018'
+realTechnology     = 'scn6m_deep_09'

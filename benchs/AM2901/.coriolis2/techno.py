@@ -1,2 +1,2 @@
-symbolicTechno  = 'cmos'
-realTechno	= 'hcmos9'
+symbolicTechnology = 'cmos'
+realTechnology     = 'hcmos9gp'

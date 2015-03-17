@@ -4,7 +4,7 @@
  benchs="${benchs} adder"
  benchs="${benchs} AM2901/standart_cells"
  benchs="${benchs} AM2901/datapath"
- benchs="${benchs} snx_flat_clock"
+ benchs="${benchs} snx"
 
  echo "Calling make with rules: $*"
 
