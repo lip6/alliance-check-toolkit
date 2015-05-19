@@ -12,14 +12,14 @@
 
 # We must use devtoolset-2 only under SL6.
  BUILD_VARIANT    = Linux
- USE_DEVTOOLSET_2 = "No"
+ USE_DEVTOOLSET_2 = No
  ifeq ($(UNAME_S),Linux)
    ifneq ($(findstring .el6.,$(UNAME_R)),)
-     USE_DEVTOOLSET_2 = "Yes"
+     USE_DEVTOOLSET_2 = Yes
      BUILD_VARIANT    = Linux.slsoc6x
    endif
    ifneq ($(findstring .slsoc6.,$(UNAME_R)),)
-     USE_DEVTOOLSET_2 = "Yes"
+     USE_DEVTOOLSET_2 = Yes
      BUILD_VARIANT    = Linux.slsoc6x
    endif
    ifneq ($(findstring .el7.,$(UNAME_R)),)
