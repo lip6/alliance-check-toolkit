@@ -41,7 +41,7 @@
  VALGRIND_COMMAND =
  ifeq ($(USE_DEBUG),Yes)
   #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes
-   VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes --free-fill=0xff
+  #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes --free-fill=0xff
  endif
 
  ifeq ($(USER),jpc)
@@ -64,6 +64,16 @@
    CORIOLIS_TOP      = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
    ALLIANCE_TOP      = /soc/alliance/
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
+ endif
+ ifeq ($(USER),coriolis)
+  # Assume this is the nightly build.
+
+   DEBUG_OPTION      =
+   BUILD_TYPE_DIR    = Release.Shared
+
+   CORIOLIS_TOP      = $(HOME)/nightly/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
+   ALLIANCE_TOP      = /soc/alliance/
+   ALLIANCE_TOOLKIT  = $(HOME)/nightly/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
 
 # Secondary variables.

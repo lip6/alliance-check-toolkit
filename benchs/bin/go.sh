@@ -19,6 +19,7 @@
      echo ""
      echo ""
      echo "[ERROR] go.sh: bench <${bench}> has failed."
+     break
    fi
    popd
  done
