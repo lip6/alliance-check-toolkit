@@ -12,7 +12,7 @@ parametersTable = \
     , ('misc.info'                , TypeBool      , False   )
     , ('misc.paranoid'            , TypeBool      , True    )
     , ('misc.bug'                 , TypeBool      , False   )
-    , ('misc.logMode'             , TypeBool      , False   )
+    , ('misc.logMode'             , TypeBool      , True    )
     , ('misc.verboseLevel1'       , TypeBool      , True    )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
     , ('misc.traceLevel'          , TypeInt       , 1000    )

@@ -33,6 +33,8 @@ chip = { 'pads.south'     : [ 'p_adrs0' , 'p_adrs1' , 'p_adrs2' , 'p_adrs3'
                             , 'p_datai12', 'p_datai13', 'p_datai14', 'p_datai15'
                             ]
        , 'core.size'      : (  5600,  5600 )
+      #, 'core.size'      : ( 15000, 15000 )
        , 'chip.size'      : ( 11800, 11800 )
+      #, 'chip.size'      : ( 5124095576030431, 11800 )
        , 'chip.clockTree' : True
        }

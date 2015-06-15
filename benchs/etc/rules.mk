@@ -220,7 +220,7 @@ ifeq ($(USE_CLOCKTREE),Yes)
 
 %_clocked_kite.ap  %_clocked.vst:  $(CORIOLIS_CORE).vst  %.vst  %_chip.py
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          $(DoCHIP) --place --route --cell=$*'
+	                          $(DoCHIP) --cell=$*'
 
 else
 
@@ -230,7 +230,7 @@ else
 
 %_kite.ap  %_kite.vst:  $(CORIOLIS_CORE).vst  %.vst  %_chip.py
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          $(DoCHIP) --place --route --cell=$*'
+	                          $(DoCHIP) --cell=$*'
 
 endif
 
