@@ -66,14 +66,18 @@
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
  ifeq ($(USER),coriolis)
-  # Assume this is the nightly build.
+   NIGHTLY = 
+   ifneq ($(findstring nightly,$(shell pwd)),)
+    # Assume this is the nightly build.
+     NIGHTLY = /nightly
+   endif
 
    DEBUG_OPTION      =
    BUILD_TYPE_DIR    = Release.Shared
 
-   CORIOLIS_TOP      = $(HOME)/nightly/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
+   CORIOLIS_TOP      = $(HOME)$(NIGHTLY)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
    ALLIANCE_TOP      = /soc/alliance/
-   ALLIANCE_TOOLKIT  = $(HOME)/nightly/coriolis-2.x/src/alliance-check-toolkit/benchs
+   ALLIANCE_TOOLKIT  = $(HOME)$(NIGHTLY)/coriolis-2.x/src/alliance-check-toolkit/benchs
  endif
 
 # Secondary variables.
