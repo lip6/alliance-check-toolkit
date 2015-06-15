@@ -125,6 +125,9 @@ if __name__ == '__main__':
   kw = { 'doStages':doStages }
   if options.script:
     try:
+      sys.path.append(os.path.dirname(options.script))
+      print sys.path
+
       module = __import__( options.script, globals(), locals() )
       if not module.__dict__.has_key('ScriptMain'):
           print '[ERROR] Script module <%s> do not contains a ScripMain() function.' % options.script
@@ -135,7 +138,6 @@ if __name__ == '__main__':
 
     except ImportError, e:
       module = str(e).split()[-1]
-
       print '[ERROR] The <%s> script cannot be loaded.' % module
       print '        Please check your design hierarchy.'
       sys.exit(1)

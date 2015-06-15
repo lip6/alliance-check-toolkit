@@ -215,22 +215,22 @@ ifeq ($(USE_DEVTOOLSET_2),Yes)
 ifeq ($(USE_CLOCKTREE),Yes)
 
 %_clocked_kite.ap  %_clocked.vst:  $(DESIGN).py  %_chip.py  $(CONTROL).vst
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          $(DoCHIP) --script=$(DESIGN)'
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) --script=$(DESIGN)'
 
 %_clocked_kite.ap  %_clocked.vst:  $(CORIOLIS_CORE).vst  %.vst  %_chip.py
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          $(DoCHIP) --cell=$*'
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) --cell=$*'
 
 else
 
 %_kite.ap  %_kite.vst:  $(DESIGN).py  %_chip.py  $(CONTROL).vst
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          $(DoCHIP) --script=$(DESIGN)'
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) --script=$(DESIGN)'
 
 %_kite.ap  %_kite.vst:  $(CORIOLIS_CORE).vst  %.vst  %_chip.py
-	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                          $(DoCHIP) --cell=$*'
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) --cell=$*'
 
 endif
 
