@@ -19,7 +19,8 @@
      echo ""
      echo ""
      echo "[ERROR] go.sh: bench <${bench}> has failed."
-     break
+     exit 1
    fi
    popd
  done
+ exit 0
