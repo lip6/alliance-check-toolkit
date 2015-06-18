@@ -20,6 +20,11 @@
 .. |noindent|          replace:: :raw-latex:`\noindent`
 
 .. Acronyms & Names
+.. |Si2|               replace:: :sc:`Si2`
+.. |Cadence|           replace:: :sc:`Cadence`
+.. |EDI|               replace:: :sc:`edi`
+.. |NanoRoute|         replace:: :sc:`NanoRoute`
+.. |TCL|               replace:: :sc:`tcl`
 .. |Alliance|          replace:: :sc:`Alliance`
 .. |Coriolis|          replace:: :sc:`Coriolis`
 .. |Python|            replace:: :sc:`Python`
@@ -33,6 +38,7 @@
 .. |alliance-run|      replace:: ``alliance-run``
 .. |SNX|               replace:: :sc:`snx`
 		       
+.. |encounter|         replace:: ``encounter``
 .. |devtoolset-2|      replace:: ``devtoolset-2``
 .. |git|               replace:: ``git``
 .. |Makefile|          replace:: ``Makefile``
@@ -325,3 +331,66 @@ normal use of the software. The steps are as follow:
    This explains why the behavioral view of the pad is needed in
    the directory the layouts are put into. Otherwise you would only see
    the pads of the system library (if any).
+
+
+|Cadence| Support
+=================
+
+To perform comparisons with |Cadence| |EDI| tools (i.e. |encounter|
+|NanoRoute|), some benchmarks have a sub-directory ``encounter``
+holding all the necessary files. Here is an example for the design
+named ``<fpga>``.
+
+===========================  =================================================
+                     ``encounter`` directory
+------------------------------------------------------------------------------
+File Name                    Contents
+===========================  =================================================
+``fpga_export.lef``          Technology & standard cells for the design
+``fpga_export.def``          The design itself, flattened to the standard
+                             cells.
+``fpga_nano.def``            The placed and routed result.
+``fpga.tcl``                 The |TCL| script to be run by |encounter|
+===========================  =================================================
+
+The LEF/DEF file exported or imported by Coriolis are *not* true physical
+files. They are pseudo-real, in the sense that all the dimensions are
+directly taken from the symbolic with the simple rule ``1 lambda = 1 micron``.
+
+.. note:: **LEF/DEF files:** Coriolis is able to import/export in those
+   formats only if it has compiled against the |Si2| relevant libraries
+   that are subjects to specific license agreements. So in case we don't
+   have access to thoses we supplies the generated LEF/DEF files.
+
+The ``encounter`` directory contains the LEF/DEF files and the |TCL|
+script to be run by |encounter|: ::
+
+    ego@home:encounter> . ../../etc/EDI1324.sh
+    ego@home:encounter> encounter -init ./fpga.tcl
+
+Example of |TCL| script for |encounter|: ::
+    
+    set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
+    suppressMessage ENCEXT-2799
+    win
+    loadLefFile fpga_export.lef
+    loadDefFile fpga_export.def
+    floorPlan -site core -r 0.998676319592 0.95 0.0 0.0 0.0 0.0
+    getIoFlowFlag
+    fit
+    setDrawView place
+    setPlaceMode -fp false
+    placeDesign
+    generateTracks
+    generateVias
+    setNanoRouteMode -quiet -drouteFixAntenna 0
+    setNanoRouteMode -quiet -drouteStartIteration 0
+    setNanoRouteMode -quiet -routeTopRoutingLayer 5
+    setNanoRouteMode -quiet -routeBottomRoutingLayer 2
+    setNanoRouteMode -quiet -drouteEndIteration 0
+    setNanoRouteMode -quiet -routeWithTimingDriven false
+    setNanoRouteMode -quiet -routeWithSiDriven false
+    routeDesign -globalDetail
+    global dbgLefDefOutVersion
+    set dbgLefDefOutVersion 5.7
+    defOut -floorplan -netlist -routing fpga_nano.def
