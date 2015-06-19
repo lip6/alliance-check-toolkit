@@ -358,7 +358,7 @@ files. They are pseudo-real, in the sense that all the dimensions are
 directly taken from the symbolic with the simple rule ``1 lambda = 1 micron``.
 
 .. note:: **LEF/DEF files:** Coriolis is able to import/export in those
-   formats only if it has compiled against the |Si2| relevant libraries
+   formats only if it has been compiled against the |Si2| relevant libraries
    that are subjects to specific license agreements. So in case we don't
    have access to thoses we supplies the generated LEF/DEF files.
 
