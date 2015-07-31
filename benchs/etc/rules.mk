@@ -120,7 +120,9 @@ RING         = $(ALLIANCE_BIN)/ring
 S2R          = $(ALLIANCE_BIN)/s2r
 GRAAL        = $(ALLIANCE_BIN)/graal
 DREAL        = $(ALLIANCE_BIN)/dreal
-COUGAR       = $(ALLIANCE_BIN)/cougar
+COUGAR       = MBK_OUT_LO=al; export MBK_OUT_LO; \
+               MBK_SEPAR='_'; export MBK_SEPAR;  \
+               $(ALLIANCE_BIN)/cougar
 DRUC         = $(ALLIANCE_BIN)/druc
 L2P          = $(ALLIANCE_BIN)/l2p
 DoCHIP       = $(TOOLKIT_BIN)/doChip.py
@@ -186,9 +188,9 @@ asimut-%  : %.vst $(PATTERNS).pat;  $(ASIMUT)       -zd -nores $* patterns
 %.spi     : %.ap                 ;  $(COUGAR_SPICE) -ar -ac -t $(CORE)
 %.ps      : %.ap                 ;  $(L2P)          -color $*
 druc-%    : %.ap                 ;  $(DRUC)         $*
-%_ext.vst : %.ap                 ;  $(COUGAR)       -f $* $*_ext
-lvx-%     : %.vst %_ext.vst      ;  $(LVX)          vst vst $* $*_ext -f
-lvx-%_kite: %.vst %_kite_ext.vst ;  $(LVX)          vst vst $* $*_kite_ext -f
+%_ext.al  : %.ap                 ;  $(COUGAR)       -f $* $*_ext
+lvx-%     : %.vst %_ext.al       ;  $(LVX)          vst al $* $*_ext -f
+lvx-%_kite: %.vst %_kite_ext.al  ;  $(LVX)          vst al $* $*_kite_ext -f
 dreal-%   : %.gds                ;  $(DREAL)        -l $*
 graal-%   : %.ap                 ;  $(GRAAL)        -l $*
 graal     :                      ;  $(GRAAL)
@@ -284,7 +286,7 @@ endif
 # Cleaning Rules.
 
  CLEAN_CHIP = *.ps                      \
-              $(ALLIANCE_CHIP)_ext.ap   \
+              $(ALLIANCE_CHIP)_ext.al   \
               *.al                      \
               *.drc                     \
               *.gds                     \
