@@ -1,0 +1,2202 @@
+
+-- ### -------------------------------------------------------------- ###
+-- # file	: mips_r3000_1m_ct.vbe					#
+-- # date	: Oct 26 2006						#
+-- # version	: v1.2							#
+-- #									#
+-- # origin	: this description has been developed at LIP6		#
+-- #		  University Paris 6 - Pierre et Marie Curie		#
+-- #		  4 Place Jussieu 75252 Paris Cedex 05 - France		#
+-- #									#
+-- # descr.	: data flow description of a five stage pipelined Mips	#
+-- #		  R3000 processor					#
+-- #									#
+-- # authors	: Pirouz Bazargan Sabet					#
+-- ### -------------------------------------------------------------- ###
+
+entity MIPS_R3000_1M_CT is
+
+port (
+  signal CK          : in    bit                          ;-- external clock
+
+  signal RESET_N     : in    bit                          ;-- external reset
+  signal IT_N        : in    bit_vector (  5 downto 0)    ;-- hw interrupts
+
+  signal I_FTCH      : out   bit                          ;-- inst fetch
+  signal I_ACK       : out   bit                          ;-- inst fetch ack
+  signal I_BERR_N    : in    bit                          ;-- inst bus error
+  signal I_FRZ       : in    bit                          ;-- inst cache busy
+  signal I           : in    bit_vector ( 31 downto 0)    ;-- instruction
+
+  signal D_RQ        : out   bit                          ;-- data request
+  signal D_LOCK      : out   bit                          ;-- locked access
+  signal D_ATYPE     : out   bit_vector (  1 downto 0)    ;-- access type
+  signal D_ACK       : out   bit                          ;-- data fetch ack
+  signal D_BERR_N    : in    bit                          ;-- data bus error
+  signal D_FRZ       : in    bit                          ;-- data cache busy
+
+  signal DOUT_E      : out   bit_vector (  3 downto 0)    ;-- data enable
+
+  signal D_IN_7      : in    bit                          ;
+  signal D_IN_15     : in    bit                          ;
+  signal D_IN_23     : in    bit                          ;
+
+  signal CARITH_32_SE: in    bit                          ;
+  signal CARITH_31_SE: in    bit                          ;
+  signal RARITH_31_SE: in    bit                          ;
+  signal NEXTPC_1_SE : in    bit                          ;
+  signal NEXTPC_0_SE : in    bit                          ;
+  signal NEXTPC_31_SE: in    bit                          ;
+
+  signal RES_SM      : in    bit_vector (31 downto  0)    ;
+
+  signal S_31_SD     : in    bit                          ;-- s (31)
+  signal S_EQ_T_SD   : in    bit                          ;-- s =  t
+  signal S_EQ_Z_SD   : in    bit                          ;-- s = 0
+
+  signal S_4_0_SE    : in    bit_vector ( 4 downto  0)    ;-- s (4 downto 0)
+
+  signal RSDNBR_SD   : out   bit_vector (31 downto  0)    ;-- source reg nbr
+  signal RTDNBR_SD   : out   bit_vector (31 downto  0)    ;-- source reg nbr
+
+  signal HZ_SDM_SD   : inout bit                          ;-- s = d(i-2)
+  signal HZ_SDMW_SD  : out   bit                          ;-- s = d(i-3,i-2)
+  signal HZ_TDM_SD   : inout bit                          ;-- t = d(i-2)
+  signal HZ_TDMW_SD  : out   bit                          ;-- t = d(i-3,i-2)
+
+  signal HZ_SDM_SE   : inout bit                          ;-- s = d(i-1)
+  signal HZ_SDMW_SE  : out   bit                          ;-- s = d(i-2)
+  signal HZ_TDM_SE   : inout bit                          ;-- t = d(i-1)
+  signal HZ_TDMW_SE  : out   bit                          ;-- t = d(i-2)
+
+  signal I_JR_SD     : out   bit                          ;-- jump register
+  signal BTAKEN_SD   : out   bit                          ;-- branch taken
+  signal I_ALLJ_SD   : out   bit                          ;-- all jumps
+  signal I_LINK_SD   : out   bit                          ;-- link inst
+
+  signal IOPSEL_SD   : out   bit_vector ( 3 downto 0)     ;-- i oper select
+
+  signal IMDSGN_SD   : out   bit                          ;-- imd sign
+  signal I_RSGND_SE  : out   bit                          ;-- signed result
+
+  signal I_IFMT_SE   : out   bit                          ;-- i format
+  signal I_OPER_SE   : out   bit_vector ( 6 downto 0)     ;-- alu operation
+  signal I_LOGIC_SE  : out   bit_vector ( 1 downto 0)     ;-- logic operation
+  signal I_SUB_SE    : out   bit                          ;-- subtract
+  signal I_RIGHT_SE  : out   bit                          ;-- shift right
+
+  signal SETBIT_SE   : out   bit                          ;-- result for set
+
+  signal DATEXT_SM   : out   bit                          ;-- data extension
+  signal BYTSUB_SM   : out   bit_vector ( 3 downto 1)     ;-- byte substitute
+  signal DACCESS_SM  : inout bit                          ;-- data access
+  signal READ_SM     : inout bit                          ;-- data read
+
+  signal BUBBLE_SI   : inout bit                          ;-- introduce  bubble
+  signal HOLD_SI     : inout bit                          ;-- hold   the inst
+  signal NOTHOLD_SI  : out   bit                          ;-- don't hold inst
+  signal SHIFT_SI    : inout bit                          ;-- shift  new inst
+  signal KEEP_SI     : inout bit                          ;-- keep   the data
+  signal LOAD_SI     : inout bit                          ;-- load a new data
+
+  signal NOTSTALL_SD : out   bit                          ;-- don't stall inst
+  signal BUBBLE_SD   : inout bit                          ;-- introduce bubble
+  signal HOLD_SD     : inout bit                          ;-- hold   the inst
+  signal NOTHOLD_SD  : out   bit                          ;-- don't hold inst
+  signal SHIFT_SD    : inout bit                          ;-- shift  new inst
+  signal KEEP_SD     : inout bit                          ;-- keep   the data
+  signal LOAD_SD     : inout bit                          ;-- load a new data
+
+  signal BUBBLE_SE   : inout bit                          ;-- introduce bubble
+  signal HOLD_SE     : inout bit                          ;-- hold   the inst
+  signal NOTHOLD_SE  : out   bit                          ;-- don't hold inst
+  signal SHIFT_SE    : inout bit                          ;-- shift  new inst
+  signal KEEP_SE     : inout bit                          ;-- keep   the data
+  signal LOAD_SE     : inout bit                          ;-- load a new data
+
+  signal BUBBLE_SM   : inout bit                          ;-- introduce bubble
+  signal HOLD_SM     : inout bit                          ;-- hold   the inst
+  signal NOTHOLD_SM  : out   bit                          ;-- don't hold inst
+  signal SHIFT_SM    : inout bit                          ;-- shift  new inst
+  signal KEEP_SM     : inout bit                          ;-- keep   the data
+  signal LOAD_SM     : inout bit                          ;-- load a new data
+
+  signal WREG_SW     : out   bit_vector (31 downto 0)     ;-- integer reg wen
+  signal WREDOPC_SE  : out   bit                          ;-- redopc write en
+
+  signal WLO_SW      : out   bit                          ;-- low reg write en
+  signal WHI_SW      : out   bit                          ;-- high reg write en
+
+  signal WEPC_XX     : out   bit                          ;-- epc write en
+  signal WEPC_XM     : out   bit                          ;-- epc write en
+
+  signal BOOTEV_XX   : out   bit                          ;-- bootstrap exc
+
+  signal BADIA_XM    : out   bit                          ;-- bad inst adr
+  signal BADDA_XM    : out   bit                          ;-- bad data adr
+
+  signal LUI_SD      : out   bit                          ;-- lui inst
+
+  signal SHAMT_SE    : out   bit_vector ( 4 downto 0)     ;-- shift amount
+
+  signal RESET_XX    : inout bit                          ;-- synchro reset
+  signal WNXTPC_XX   : out   bit                          ;-- nxt inst ad wen
+
+  signal SR_CR_SD    : out   bit_vector (31 downto  0)    ;-- status/cause
+  signal BE_SD       : out   bit                          ;-- bad ad reg/epc
+  signal SCBE_SD     : out   bit                          ;-- c0 reg selection
+
+  signal BDSLOT_SE   : out   bit                          ;
+  signal BDSLOT_SM   : out   bit                          ;
+
+  signal TEST        : in    bit                          ;-- test mode
+  signal SCIN        : in    bit                          ;-- scan in
+  signal SCOUT       : out   bit                          ;-- scan out
+
+  signal VDD         : in    bit                          ;--
+  signal VSS         : in    bit
+  );
+
+end MIPS_R3000_1M_CT;
+
+--
+
+-- ### -------------------------------------------------------------- ###
+-- #   internal description - contains the following sections:		#
+-- #									#
+-- #      - internal signal and register declarations			#
+-- #      - constant declarations					#
+-- #      - instructions' table						#
+-- #      - signals and registers expression				#
+-- #									#
+-- #   Note : Each signal or register is suffixed by two letters. The	#
+-- #          second letter identifies the pipe stage in which the	#
+-- #          signal or the register is assigned:			#
+-- #            - I : Instruction Fetch					#
+-- #            - D : Instruction Decode				#
+-- #            - E : Execute						#
+-- #            - M : Memory Access					#
+-- #            - W : Write Back					#
+-- #            - X : Unknown - signal not related to the execution of	#
+-- #                  an instruction					#
+-- #									#
+-- #         The first letter identifies the type of the signal:	#
+-- #            - R : a register					#
+-- #            - S : signal related to the normal execution		#
+-- #            - X : signal related to the interrupt or exception	#
+-- #                  mechanisms					#
+-- ### -------------------------------------------------------------- ###
+
+architecture BEHAVIOURAL of MIPS_R3000_1M_CT is
+
+signal CK_SX       : bit                              ;-- internal clock
+
+signal I_TYPE_SD   : bit_vector (28 downto 0)         ;-- instruction type
+signal I_TYPE_RD   : reg_vector (28 downto 0) register;-- instruction type
+signal I_TYPE_RE   : reg_vector (28 downto 0) register;-- instruction type
+signal I_TYPE_RM   : reg_vector (28 downto 0) register;-- instruction type
+
+signal I_RFMT_SD   : bit                              ;-- r format
+signal I_IFMT_SD   : bit                              ;-- i format
+signal I_JFMT_SD   : bit                              ;-- j format
+signal I_ILLG_SD   : bit                              ;-- illegal instruction
+
+signal I_READS_SD  : bit                              ;-- inst uses s oper
+signal I_READT_SD  : bit                              ;-- inst uses t oper
+signal I_READS_SE  : bit                              ;-- inst uses s oper
+signal I_READT_SE  : bit                              ;-- inst uses t oper
+
+signal I_DUSE_SD   : bit                              ;-- dec uses operands
+signal I_EUSE_SE   : bit                              ;-- exe uses operands
+signal I_EPDC_SE   : bit                              ;-- exe produces res
+signal I_MPDC_SE   : bit                              ;-- mem produces res
+signal I_MPDC_SM   : bit                              ;-- mem produces res
+
+signal I_OVRF_SE   : bit                              ;-- detect overflow
+
+signal I_OSGND_SD  : bit                              ;-- signed operands
+
+signal I_RSGND_SM  : bit                              ;-- signed data
+signal I_LOAD_SM   : bit                              ;-- read  from memory
+signal I_STOR_SM   : bit                              ;-- write into memory
+signal I_BYTE_SM   : bit                              ;-- access type (byte)
+signal I_HALF_SM   : bit                              ;-- access type (half)
+signal I_WORD_SM   : bit                              ;-- access type (word)
+
+signal I_BRNCH_SD  : bit                              ;-- branch instruction
+signal I_BRNCH_SE  : bit                              ;-- branch instruction
+
+signal I_SHIFT_SE  : bit                              ;-- shift inst
+signal I_SHAMT_SE  : bit                              ;-- use shift amount reg
+
+signal I_WRT31_SD  : bit                              ;-- write into r31
+signal I_WRITE_SD  : bit                              ;-- write into reg
+signal I_WRITE_SE  : bit                              ;-- write into reg
+signal I_WRITE_SM  : bit                              ;-- write into reg
+signal I_WRITE_SW  : bit                              ;-- write into reg
+
+signal COP0_SD     : bit_vector ( 7 downto 0)         ;-- cop0 extension
+signal OPCOD_SD    : bit_vector ( 7 downto 0)         ;-- operation code
+signal OPCOD_RD    : reg_vector ( 7 downto 0) register;-- operation code
+signal OPCOD_RE    : reg_vector ( 7 downto 0) register;-- operation code
+signal OPCOD_RM    : reg_vector ( 7 downto 0) register;-- operation code
+
+signal SWAP_SD     : bit                              ;-- swap instruction
+signal SWAP_RD     : reg_bit                  register;-- swap instruction
+signal SWAP_RE     : reg_bit                  register;-- swap instruction
+signal COPYCAP_SE  : bit                              ;-- copying capability
+signal COPYCAP_RE  : reg_bit                  register;-- copying capability
+signal FSTSWAP_SM  : bit                              ;-- first swap access
+
+signal RS_SD       : bit_vector ( 4 downto 0)         ;-- source reg nbr
+signal RT_SD       : bit_vector ( 4 downto 0)         ;-- source reg nbr
+signal RT_RD       : reg_vector ( 4 downto 0) register;-- source reg nbr reg
+signal RS_RD       : reg_vector ( 4 downto 0) register;-- source reg nbr reg
+
+signal I_RI        : reg_vector (31 downto 0) register;-- instruction reg
+signal IREAD_RI    : reg_bit                  register;-- new inst fetched
+
+signal S_LT_Z_SD   : bit                              ;-- s <  0
+signal S_LE_Z_SD   : bit                              ;-- s <= 0
+
+signal HZ_SDE_SD   : bit                              ;-- s = d(i-1)
+signal HZ_SDW_SD   : bit                              ;-- s = d(i-3)
+signal HZ_TDE_SD   : bit                              ;-- t = d(i-1)
+signal HZ_TDW_SD   : bit                              ;-- t = d(i-3)
+
+signal HZ_SDW_SE   : bit                              ;-- s = d(i-2)
+signal HZ_TDW_SE   : bit                              ;-- s = d(i-2)
+
+signal COPERR_XM   : bit_vector ( 1 downto 0)         ;-- coprocessor's #
+signal EXCCODE_XM  : bit_vector ( 3 downto 0)         ;-- exception code
+
+signal CAUSE_XM    : bit_vector (31 downto 0)         ;-- except cause (exp)
+signal CAUSE_XX    : bit_vector (31 downto 0)         ;-- except cause (int)
+signal CAUSE_SM    : bit_vector (31 downto 0)         ;-- except cause (sw)
+signal CAUSE_SX    : bit_vector (31 downto 0)         ;-- except cause (hw)
+signal CAUSE_RX    : reg_vector (31 downto 0) register;-- cause register
+signal WCAUSE_SM   : bit                              ;-- cause wen (sw)
+
+signal RSTORSR_SM  : bit_vector (31 downto 0)         ;-- next ins sts (rfe)
+signal NEXTSR_SM   : bit_vector (31 downto 0)         ;-- next ins sts (sw)
+signal NEXTSR_XX   : bit_vector (31 downto 0)         ;-- next ins sts (hw it)
+signal NEXTSR_RX   : reg_vector (31 downto 0) register;-- next ins sts reg
+
+signal SR_1_SI     : bit                              ;-- status register
+signal SR_28_SI    : bit                              ;-- status register
+signal SR_1_RI     : reg_bit                  register;-- status register
+signal SR_28_RI    : reg_bit                  register;-- status register
+signal SR_1_RD     : reg_bit                  register;-- status register
+signal SR_1_RE     : reg_bit                  register;-- status register
+
+signal WSR_SM      : bit                              ;-- nextsr's write en
+signal WSR_XX      : bit                              ;-- nextsr's write en
+
+signal COP0D_SD    : bit_vector ( 4 downto 0)         ;-- cop 0 dest reg nbr
+signal COP0D_RD    : reg_vector ( 4 downto 0) register;-- cop 0 dest reg nbr
+signal COP0D_RE    : reg_vector ( 4 downto 0) register;-- cop 0 dest reg nbr
+
+signal CP_SDE_SD   : bit_vector ( 4 downto 0)         ;-- compare s d(i-1)
+signal CP_SDM_SD   : bit_vector ( 4 downto 0)         ;-- compare s d(i-2)
+signal CP_SDW_SD   : bit_vector ( 4 downto 0)         ;-- compare s d(i-3)
+signal CP_TDE_SD   : bit_vector ( 4 downto 0)         ;-- compare t d(i-1)
+signal CP_TDM_SD   : bit_vector ( 4 downto 0)         ;-- compare t d(i-2)
+signal CP_TDW_SD   : bit_vector ( 4 downto 0)         ;-- compare t d(i-3)
+
+signal CP_SDM_SE   : bit_vector ( 4 downto 0)         ;-- compare s d(i-1)
+signal CP_SDW_SE   : bit_vector ( 4 downto 0)         ;-- compare s d(i-2)
+signal CP_TDM_SE   : bit_vector ( 4 downto 0)         ;-- compare t d(i-1)
+signal CP_TDW_SE   : bit_vector ( 4 downto 0)         ;-- compare t d(i-2)
+
+signal SREADR0_SD  : bit                              ;-- reading r0 on s
+signal SREADR0_SE  : bit                              ;-- reading r0 on s
+signal TREADR0_SD  : bit                              ;-- reading r0 on t
+signal TREADR0_SE  : bit                              ;-- reading r0 on t
+
+signal SHAM_SD     : bit_vector ( 4 downto 0)         ;
+signal SHAM_RD     : reg_vector ( 4 downto 0) register;
+
+signal S_LT_T_SE   : bit                              ;-- s <  t
+signal S_LTU_T_SE  : bit                              ;-- s <  t unsigned
+
+signal SLEEP_SD    : bit                              ;-- sleep inst stall
+
+signal HAZARDS_SD  : bit                              ;-- hazards
+signal HAZARDS_SE  : bit                              ;-- hazards
+
+signal KILL_SI     : bit                              ;-- kill      the inst
+signal STALL_SI    : bit                              ;-- stall     the inst
+signal COPY_SI     : bit                              ;-- duplicate the inst
+signal EXEC_SI     : bit                              ;-- execute   the inst
+
+signal KILL_SD     : bit                              ;-- kill      the inst
+signal STALL_SD    : bit                              ;-- stall     the inst
+signal COPY_SD     : bit                              ;-- duplicate the inst
+signal EXEC_SD     : bit                              ;-- execute   the inst
+
+signal KILL_SE     : bit                              ;-- kill      the inst
+signal STALL_SE    : bit                              ;-- stall     the inst
+signal COPY_SE     : bit                              ;-- duplicate the inst
+signal EXEC_SE     : bit                              ;-- execute   the inst
+
+signal KILL_SM     : bit                              ;-- kill      the inst
+signal STALL_SM    : bit                              ;-- stall     the inst
+signal COPY_SM     : bit                              ;-- duplicate the inst
+signal EXEC_SM     : bit                              ;-- execute   the inst
+
+signal KILL_SW     : bit                              ;-- kill      the inst
+signal STALL_SW    : bit                              ;-- stall     the inst
+signal COPY_SW     : bit                              ;-- duplicate the inst
+signal EXEC_SW     : bit                              ;-- execute   the inst
+
+signal RD_SD       : bit_vector ( 4 downto 0)         ;-- destination reg #
+signal RD_RD       : reg_vector ( 4 downto 0) register;-- destination reg #
+signal RD_RE       : reg_vector ( 4 downto 0) register;-- destination reg #
+signal RD_SM       : bit_vector ( 4 downto 0)         ;-- destination reg #
+signal RD_RM       : reg_vector ( 4 downto 0) register;-- destination reg #
+
+signal OVERFLW_SE  : bit                              ;-- overflow out of alu
+
+signal DREAD_RM    : reg_bit                  register;-- data read
+signal WRITE_SM    : bit                              ;-- write into storage
+signal DLOCK_SM    : bit                              ;-- lock data access
+
+signal GLBMSK_XX   : bit                              ;-- global     it mask
+signal ITMASK_XX   : bit_vector ( 7 downto 0)         ;-- individual it mask
+
+signal SWINT_XM    : bit_vector ( 1 downto 0)         ;-- sw interrupt (mtc0)
+signal SWINTRQ_XM  : bit_vector ( 1 downto 0)         ;-- sw interrupt rqst
+
+signal IT_XX       : bit_vector ( 5 downto 0)         ;-- external interrupts
+signal HWINTRQ_XX  : bit_vector ( 5 downto 0)         ;-- hw interrupt rqst
+signal INTRQ_XX    : bit                              ;-- interrupt rqst
+
+signal BDSLOT_XI   : bit                              ;-- branch delayed slot
+signal BDSLOT_RI   : reg_bit                  register;-- branch delayed slot
+signal BDSLOT_RD   : reg_bit                  register;-- branch delayed slot
+signal BDSLOT_RE   : reg_bit                  register;-- branch delayed slot
+
+signal ILLGINS_XD  : bit                              ;-- unknown instruction
+signal ILLGINS_RD  : reg_bit                  register;-- unknown instruction
+signal ILLGINS_RE  : reg_bit                  register;-- unknown instruction
+
+signal C0UNUSE_XD  : bit                              ;-- copro 0 unusable
+signal C0UNUSE_RD  : reg_bit                  register;-- copro 0 unusable
+signal C0UNUSE_RE  : reg_bit                  register;-- copro 0 unusable
+
+signal IAMALGN_XE  : bit                              ;-- inst adr miss algn
+signal IAMALGN_RE  : reg_bit                  register;-- inst adr miss algn
+signal IASVIOL_XE  : bit                              ;-- inst adr segm viol
+signal IASVIOL_RE  : reg_bit                  register;-- inst adr segm viol
+signal IABUSER_XE  : bit                              ;-- inst adr bus error
+signal IABUSER_RE  : reg_bit                  register;-- inst adr bus error
+
+signal OVR_XE      : bit                              ;-- arithmetic overflow
+signal OVR_RE      : reg_bit                  register;-- arithmetic overflow
+
+signal SYSCALL_XE  : bit                              ;-- sw exc (syscall)
+signal SYSCALL_RE  : reg_bit                  register;-- sw exc (syscall)
+
+signal BREAK_XE    : bit                              ;-- sw exc (break  )
+signal BREAK_RE    : reg_bit                  register;-- sw exc (break  )
+
+signal LAMALGN_XM  : bit                              ;-- load  adr miss algn
+signal LASVIOL_XM  : bit                              ;-- load  adr segm viol
+signal SAMALGN_XM  : bit                              ;-- store adr miss algn
+signal SASVIOL_XM  : bit                              ;-- store adr segm viol
+signal DABUSER_XM  : bit                              ;-- data adr bus error
+
+signal EARLYEX_XM  : bit                              ;-- early exceptions
+signal LATEEX_XM   : bit                              ;-- late  exceptions
+signal EXCRQ_XM    : bit                              ;-- exception request
+
+signal RESET_RX    : reg_bit                  register;-- synchronized reset
+
+-- 
+
+constant R0_RW      : bit_vector (31 downto 0) := X"00000000" ;
+
+constant nop_i      : bit_vector (31 downto 0) := X"00000021" ;-- addu 0,0,0
+signal   nop_type   : bit_vector (28 downto 0)                ;
+
+constant m_writ_w   : bit_vector ( 1 downto 0) := "00"        ;-- write word
+constant m_writ_h   : bit_vector ( 1 downto 0) := "10"        ;-- write half
+constant m_writ_b   : bit_vector ( 1 downto 0) := "11"        ;-- write byte
+constant m_read_w   : bit_vector ( 1 downto 0) := "01"        ;-- read  byte
+
+constant excphnd_a  : bit_vector (31 downto 0) := X"80000080" ;-- handler adr
+constant boothnd_a  : bit_vector (31 downto 0) := X"bfc00180" ;-- handler adr
+constant reset_a    : bit_vector (31 downto 0) := X"bfc00000" ;-- reset   adr
+
+constant badvaddr_s : bit_vector ( 4 downto 0) := B"01000"    ;-- badvaddr
+constant status_s   : bit_vector ( 4 downto 0) := B"01100"    ;-- status
+constant cause_s    : bit_vector ( 4 downto 0) := B"01101"    ;-- cause
+constant epc_s      : bit_vector ( 4 downto 0) := B"01110"    ;-- epc
+
+constant r_fmt_o    : bit_vector ( 3 downto 0) := B"0001"     ;-- r format
+constant i_fmt_o    : bit_vector ( 3 downto 0) := B"0010"     ;-- i format
+constant j_fmt_o    : bit_vector ( 3 downto 0) := B"0100"     ;-- j format
+constant illgl_o    : bit_vector ( 3 downto 0) := B"1000"     ;-- illegal ins
+
+constant d_use_st_o : bit_vector ( 3 downto 0) := "1011"      ;-- dec use st
+constant d_use_s_o  : bit_vector ( 3 downto 0) := "1010"      ;-- dec use s
+constant d_use_t_o  : bit_vector ( 3 downto 0) := "1001"      ;-- dec use  t
+constant e_use_st_o : bit_vector ( 3 downto 0) := "0111"      ;-- exe use st
+constant e_use_s_o  : bit_vector ( 3 downto 0) := "0110"      ;-- exe use s
+constant e_use_t_o  : bit_vector ( 3 downto 0) := "0101"      ;-- exe use  t
+constant no_use_o   : bit_vector ( 3 downto 0) := "0000"      ;-- no  oper
+
+constant o_signd_o  : bit                      := '1'         ;-- signed
+constant o_usign_o  : bit                      := '0'         ;-- unsigned
+
+constant arith_o    : bit_vector ( 6 downto 0) := B"001_0001" ;-- arith  oper
+constant test_o     : bit_vector ( 6 downto 0) := B"000_0001" ;-- test   oper
+constant logic_o    : bit_vector ( 6 downto 0) := B"000_0010" ;-- logic  oper
+constant shift_o    : bit_vector ( 6 downto 0) := B"000_0100" ;-- shift  oper
+constant soper_o    : bit_vector ( 6 downto 0) := B"010_1000" ;-- take s oper
+constant toper_o    : bit_vector ( 6 downto 0) := B"000_1000" ;-- take t oper
+constant ioper_o    : bit_vector ( 6 downto 0) := B"100_1000" ;-- take i oper
+
+constant add_o      : bit_vector ( 1 downto 0) := B"00"       ;-- add oper
+constant sub_o      : bit_vector ( 1 downto 0) := B"01"       ;-- sub oper
+
+constant sleft_o    : bit_vector ( 1 downto 0) := B"00"       ;-- shift left
+constant sright_o   : bit_vector ( 1 downto 0) := B"01"       ;-- shift right
+
+constant or_o       : bit_vector ( 1 downto 0) := B"00"       ;-- or  oper
+constant and_o      : bit_vector ( 1 downto 0) := B"01"       ;-- and oper
+constant xor_o      : bit_vector ( 1 downto 0) := B"11"       ;-- xor oper
+constant nor_o      : bit_vector ( 1 downto 0) := B"10"       ;-- nor oper
+
+constant r_signd_o  : bit                      := '1'         ;-- sign   res
+constant r_usign_o  : bit                      := '0'         ;-- unsign res
+
+constant ovr_o      : bit                      := '1'         ;--    overflow
+constant nov_o      : bit                      := '0'         ;-- no overflow
+
+constant e_pdc_rd_o : bit_vector ( 2 downto 0) := B"010"      ;-- res out exe
+constant e_pdc_31_o : bit_vector ( 2 downto 0) := B"011"      ;-- res out exe
+constant m_pdc_rd_o : bit_vector ( 2 downto 0) := B"100"      ;-- res out mem
+constant no_pdc_o   : bit_vector ( 2 downto 0) := B"000"      ;-- no result
+
+constant nobra_o    : bit                      := '0'         ;-- no branch
+constant brnch_o    : bit                      := '1'         ;-- branch
+
+constant loadw_o    : bit_vector ( 4 downto 0) := B"10001"    ;-- load word
+constant loadh_o    : bit_vector ( 4 downto 0) := B"10010"    ;-- load half
+constant loadb_o    : bit_vector ( 4 downto 0) := B"10100"    ;-- load byte
+constant storw_o    : bit_vector ( 4 downto 0) := B"01001"    ;-- store word
+constant storh_o    : bit_vector ( 4 downto 0) := B"01010"    ;-- store half
+constant storb_o    : bit_vector ( 4 downto 0) := B"01100"    ;-- store byte
+constant swapw_o    : bit_vector ( 4 downto 0) := B"11001"    ;-- swap word
+constant nomem_o    : bit_vector ( 4 downto 0) := B"00000"    ;-- no access
+
+-- 
+
+	-- ### ------------------------------------------------------ ###
+	-- #   instruction set table:					#
+	-- #     Opcods in lower case are MIPS R3000 instructions	#
+	-- #     Opcods in upper case are application specific		#
+	-- #								#
+	-- #								#
+	-- #   primary opcod (31 downto 26):				#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 |speci|bcond|  j  | jal | beq | bne |blez |bgtz |	#
+	-- #  1 |addi |addui|slti |sltui|andi | ori |xori | lui |	#
+	-- #  2 |cop0 |  +  |  +  |  +  |     |  +  |     |     |	#
+	-- #  3 |  +  |  +  |     |     |     |     |     |     |	#
+	-- #  4 | lb  | lh  |  +  | lw  | lbu | lhu |  +  |SWAP |	#
+	-- #  5 | sb  | sh  |  +  | sw  |     |     |  +  |     |	#
+	-- #  6 |  +  |  +  |  +  |  +  |  +  |  +  |  +  |  +  |	#
+	-- #  7 |  +  |  +  |  +  |  +  |  +  |  +  |  +  |  +  |	#
+	-- #								#
+	-- #								#
+	-- # special opcod extension (5 downto 0):			#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 | sll |     | srl | sra |sllv |     |srlv |srav |	#
+	-- #  1 | jr  |jalr |     |     |sysca|break|     |SLEEP|	#
+	-- #  2 |mfhi |mthi |mflo |mtlo |     |     |     |     |	#
+	-- #  3 |  +  |  +  |  +  |  +  |     |     |     |     |	#
+	-- #  4 | add |addu | sub |subu | and | or  | xor | nor |	#
+	-- #  5 |     |     | slt |sltu |     |     |     |     |	#
+	-- #  6 |     |     |     |     |  +  |  +  |  +  |  +  |	#
+	-- #  7 |     |     |     |     |  +  |  +  |  +  |  +  |	#
+	-- #								#
+	-- #								#
+	-- # bcond opcod extension (20 downto 16):			#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 |bltz |bgez |     |     |     |     |     |     |	#
+	-- #  1 |     |     |     |     |     |     |     |     |	#
+	-- #  2 |bltza|bgeza|     |     |     |     |     |     |	#
+	-- #  3 |     |     |     |     |     |     |     |     |	#
+	-- #								#
+	-- #								#
+	-- # cop0 opcod extension (22, 21, 16 / 25, 24, 23):		#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 | mf  | mt  |  +  |  +  | c0  | c0  | c0  | c0  |	#
+	-- #  1 | mf  | mt  |  +  |  +  | c0  | c0  | c0  | c0  |	#
+	-- #  2 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  3 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  4 |  +  |  +  |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  5 |  +  |  +  |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  6 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  7 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #								#
+	-- #								#
+	-- # c0 cop0 extension extension (4 downto 0):			#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 |  +  |  +  |  +  |     |     |     |  +  |     |	#
+	-- #  1 |  +  |     |     |     |     |     |     |     |	#
+	-- #  2 | rfe |     |     |     |     |     |     |     |	#
+	-- #  3 |  +  |     |     |     |     |     |     |     |	#
+	-- #								#
+	-- ### ------------------------------------------------------ ###
+
+constant special_g  : bit_vector ( 1 downto 0) := B"00"       ;-- special ins.
+constant bcond_g    : bit_vector ( 2 downto 0) := B"010"      ;-- bcond ins.
+constant cop0_g     : bit_vector ( 1 downto 0) := B"10"       ;-- copro. 0
+constant others_g   : bit_vector ( 1 downto 0) := B"11"       ;-- other ins.
+
+constant special_i  : bit_vector ( 5 downto 0) := B"000_000"  ;-- special
+constant bcond_i    : bit_vector ( 5 downto 0) := B"000_001"  ;-- bcond
+constant cop0_i     : bit_vector ( 5 downto 0) := B"010_000"  ;-- copro 0
+
+constant add_i      : bit_vector ( 7 downto 0) := B"00_100000";-- md add
+constant addi_i     : bit_vector ( 7 downto 0) := B"11_001000";-- md addi
+constant addu_i     : bit_vector ( 7 downto 0) := B"00_100001";-- md addu
+constant addui_i    : bit_vector ( 7 downto 0) := B"11_001001";-- md addui
+constant and_i      : bit_vector ( 7 downto 0) := B"00_100100";-- md and
+constant andi_i     : bit_vector ( 7 downto 0) := B"11_001100";-- md andi
+constant beq_i      : bit_vector ( 7 downto 0) := B"11_000100";-- md beq
+constant bgez_i     : bit_vector ( 7 downto 0) := B"010_00001";-- m  bgez
+constant bgezal_i   : bit_vector ( 7 downto 0) := B"010_10001";-- m  bgezal
+constant bgtz_i     : bit_vector ( 7 downto 0) := B"11_000111";-- m  bgtz
+constant blez_i     : bit_vector ( 7 downto 0) := B"11_000110";-- m  blez
+constant bltz_i     : bit_vector ( 7 downto 0) := B"010_00000";-- m  bltz
+constant bltzal_i   : bit_vector ( 7 downto 0) := B"010_10000";-- m  bltzal
+constant bne_i      : bit_vector ( 7 downto 0) := B"11_000101";-- md bne
+constant break_i    : bit_vector ( 7 downto 0) := B"00_001101";-- m  break
+constant j_i        : bit_vector ( 7 downto 0) := B"11_000010";-- md j
+constant jal_i      : bit_vector ( 7 downto 0) := B"11_000011";-- md jal
+constant jalr_i     : bit_vector ( 7 downto 0) := B"00_001001";-- md jalr
+constant jr_i       : bit_vector ( 7 downto 0) := B"00_001000";-- md jr
+constant lb_i       : bit_vector ( 7 downto 0) := B"11_100000";-- md lb
+constant lbu_i      : bit_vector ( 7 downto 0) := B"11_100100";-- md lbu
+constant lh_i       : bit_vector ( 7 downto 0) := B"11_100001";-- md lh
+constant lhu_i      : bit_vector ( 7 downto 0) := B"11_100101";-- md lhu
+constant lui_i      : bit_vector ( 7 downto 0) := B"11_001111";-- md lui
+constant lw_i       : bit_vector ( 7 downto 0) := B"11_100011";-- md lw
+constant mfc0_i     : bit_vector ( 7 downto 0) := B"10_000000";-- m  mfc0
+constant mtc0_i     : bit_vector ( 7 downto 0) := B"10_000001";-- m  mtc0
+constant nor_i      : bit_vector ( 7 downto 0) := B"00_100111";-- m  nor
+constant or_i       : bit_vector ( 7 downto 0) := B"00_100101";-- md or
+constant ori_i      : bit_vector ( 7 downto 0) := B"11_001101";-- md ori
+constant rfe_i      : bit_vector ( 7 downto 0) := B"10_110000";-- m  rfe
+constant sb_i       : bit_vector ( 7 downto 0) := B"11_101000";-- md sb
+constant sh_i       : bit_vector ( 7 downto 0) := B"11_101001";-- md sh
+constant sleep_i    : bit_vector ( 7 downto 0) := B"00_001111";--    sleep
+constant sll_i      : bit_vector ( 7 downto 0) := B"00_000000";-- md sll
+constant sllv_i     : bit_vector ( 7 downto 0) := B"00_000100";-- md sllv
+constant slt_i      : bit_vector ( 7 downto 0) := B"00_101010";-- md slt
+constant slti_i     : bit_vector ( 7 downto 0) := B"11_001010";-- md slti
+constant sltu_i     : bit_vector ( 7 downto 0) := B"00_101011";-- md sltu
+constant sltui_i    : bit_vector ( 7 downto 0) := B"11_001011";-- md sltui
+constant srl_i      : bit_vector ( 7 downto 0) := B"00_000010";-- md srl
+constant srlv_i     : bit_vector ( 7 downto 0) := B"00_000110";-- md srlv
+constant sra_i      : bit_vector ( 7 downto 0) := B"00_000011";-- md sra
+constant srav_i     : bit_vector ( 7 downto 0) := B"00_000111";-- md srav
+constant sub_i      : bit_vector ( 7 downto 0) := B"00_100010";-- md sub
+constant subu_i     : bit_vector ( 7 downto 0) := B"00_100011";-- md subu
+constant sw_i       : bit_vector ( 7 downto 0) := B"11_101011";-- md sw
+constant swap_i     : bit_vector ( 7 downto 0) := B"11_100111";--    swap
+constant syscall_i  : bit_vector ( 7 downto 0) := B"00_001100";-- m  syscall
+constant xor_i      : bit_vector ( 7 downto 0) := B"00_100110";-- md xor
+constant xori_i     : bit_vector ( 7 downto 0) := B"11_001110";-- md xori
+
+constant mfhi_i     : bit_vector ( 7 downto 0) := B"00_010000";-- m  mfhi
+constant mthi_i     : bit_vector ( 7 downto 0) := B"00_010001";-- m  mthi
+constant mflo_i     : bit_vector ( 7 downto 0) := B"00_010010";-- m  mflo
+constant mtlo_i     : bit_vector ( 7 downto 0) := B"00_010011";-- m  mtlo
+
+--
+begin
+
+-- ### -------------------------------------------------------------- ###
+-- #   internal description:						#
+-- #									#
+-- #   The following lines describes in details an implementation of	#
+-- # the Mips R3000 Risc architecture.					#
+-- #									#
+-- #   The description does NOT include cache memories, nor virtual to	#
+-- # real address translation mechanism (virtual memory not supported).	#
+-- # Also, the description contains only integer instructions excluding	#
+-- # the multiply and divide instructions.				#
+-- #									#
+-- #   The implementation includes 32 integer registers organized as a	#
+-- # register file (2 read access and 1 write access), the HI and LO	#
+-- # registers (although multiply and divide are not implemented) and	#
+-- # the coprocessor zero's registers: the Exception Program Counter	#
+-- # (EPC), the Status Register (SR), the Cause Register (CAUSE), the	#
+-- # Bad Virtual Address Register (BADVADR) and the Processor Revision	#
+-- # Identifier (PRID). The other registers of the coprocessor zero are	#
+-- # not implemented.							#
+-- #									#
+-- #   Instructions are executed in a 5 stage pipeline:			#
+-- #        IFC : Instruction Fetch					#
+-- #        DEC : Instruction Decode					#
+-- #        EXE : Execute						#
+-- #        MEM : Memory Access						#
+-- #        WBK : Write Back						#
+-- #									#
+-- #   All instructions follows the same execution scheme: in IFC, the	#
+-- # instruction is fetched from the memory; in DEC, operands are	#
+-- # prepared and the next instruction address is computed; in EXE, the	#
+-- # operation is performed; in MEM, the data memory is accessed; and	#
+-- # in WBK, the content of the register file is modified.		#
+-- #									#
+-- #   A global pipeline control mechanism guaranties the correct	#
+-- # execution of dependent instructions. Most of data hazards on	#
+-- # integer registers are resolved by bypasses. Data hazards on	#
+-- # integer registers that cannot be resolved by bypass produce	#
+-- # pipeline bubbles (one or two cycles).				#
+-- #									#
+-- #   There is no dependency control mechanism on coprocessor zero's	#
+-- # registers.								#
+-- #									#
+-- #   There is no dependency control mechanism on LO and HI registers	#
+-- #									#
+-- #   Registers are synchronized on the rising edge of the clock.	#
+-- #									#
+-- #   Notes:								#
+-- #     Move to Coprocessor Zero (mtc0):				#
+-- #       Registers of coprocessor zero are written in MEM.		#
+-- #									#
+-- #     Move from Coprocessor Zero (mfc0):				#
+-- #       Registers of coprocessor zero are read in DEC.		#
+-- #									#
+-- #     Move from LO or HI (mflo, mfhi):				#
+-- #       Registers are read in DEC.					#
+-- ### -------------------------------------------------------------- ###
+
+	-- ### ------------------------------------------------------ ###
+	-- #   check power supplies					#
+	-- ### ------------------------------------------------------ ###
+
+CHECK_POWER : assert  ((VDD = '1') and (VSS = '0'))
+              report  "missing power supply on processor"
+              severity WARNING;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   internal clocks						#
+	-- ### ------------------------------------------------------ ###
+
+CK_SX <= CK;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   synchronized reset					#
+	-- ### ------------------------------------------------------ ###
+
+RESET_XX <= RESET_RX;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   external (hardware) interrupts:				#
+	-- #     convert to positive logic				#
+	-- ### ------------------------------------------------------ ###
+
+IT_XX <= not IT_N;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   define the value of the status register for the incoming	#
+	-- # instruction (bypass the status register when an rfe is	#
+	-- # being executed in the pipe)				#
+	-- ### ------------------------------------------------------ ###
+
+SR_28_SI <= NEXTSR_RX (28);
+
+SR_1_SI  <= NEXTSR_RX ( 3) when ((OPCOD_SD = rfe_i) or
+                                 (OPCOD_RD = rfe_i) or
+                                 (OPCOD_RE = rfe_i)   ) else
+            NEXTSR_RX ( 1) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   extract the opcode from instruction register		#
+	-- ### ------------------------------------------------------ ###
+
+with I_RI (25) select
+COP0_SD  <= cop0_g & '0' & I_RI (22 downto 21) &
+                     '0' & I_RI (24 downto 23)   when '0'   ,
+            cop0_g & '1' & I_RI ( 4 downto  0)   when others;
+
+with I_RI (31 downto 26) select
+OPCOD_SD <= special_g & I_RI ( 5 downto  0) when special_i,
+            bcond_g   & I_RI (20 downto 16) when bcond_i  ,
+            COP0_SD                         when cop0_i   ,
+            others_g  & I_RI (31 downto 26) when others   ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   decode the instruction's opcode				#
+	-- #								#
+	-- #     - instruction format              4 bits (28 - 25)	#
+	-- #     - source operands usage           4 bits (24 - 21)	#
+	-- #     - signed/unsigned source operands 1 bit  (     20)	#
+	-- #     - operation type                  7 bits (19 - 13)	#
+	-- #     - operation                       2 bits (12 - 11)	#
+	-- #     - signed/unsigned result          1 bit  (     10)	#
+	-- #     - overflow detection              1 bit  (      9)	#
+	-- #     - which stage produces the result 3 bits ( 8 -  6)	#
+	-- #     - type of instruction (branch)    1 bit  (      5)	#
+	-- #     - type of memory access           5 bits ( 4 -  0)	#
+	-- ### ------------------------------------------------------ ###
+
+nop_type <= r_fmt_o   & e_use_st_o & o_usign_o  & arith_o & add_o   &
+            r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o ;
+
+with OPCOD_SD select
+I_TYPE_SD <=
+  r_fmt_o   & e_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_signd_o & ovr_o      & e_pdc_rd_o & nobra_o & nomem_o     when add_i    ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_signd_o & ovr_o      & e_pdc_rd_o & nobra_o & nomem_o     when addi_i   ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when addu_i   ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when addui_i  ,
+
+  r_fmt_o   & e_use_st_o & o_usign_o  & logic_o & and_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when and_i    ,
+
+  i_fmt_o   & e_use_s_o  & o_usign_o  & logic_o & and_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when andi_i   ,
+
+  i_fmt_o   & d_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when beq_i    ,
+
+  i_fmt_o   & d_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when blez_i   ,
+
+  i_fmt_o   & d_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when bgez_i   ,
+
+  i_fmt_o   & d_use_s_o  & o_signd_o  & ioper_o & add_o    &
+  r_usign_o & nov_o      & e_pdc_31_o & brnch_o & nomem_o     when bgezal_i ,
+
+  i_fmt_o   & d_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when bgtz_i   ,
+
+  i_fmt_o   & d_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when bltz_i   ,
+
+  i_fmt_o   & d_use_s_o  & o_signd_o  & ioper_o & add_o    &
+  r_usign_o & nov_o      & e_pdc_31_o & brnch_o & nomem_o     when bltzal_i ,
+
+  i_fmt_o   & d_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when bne_i    ,
+
+  r_fmt_o   & no_use_o   & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when break_i  ,
+
+  j_fmt_o   & no_use_o   & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when j_i      ,
+
+  j_fmt_o   & no_use_o   & o_signd_o  & ioper_o & add_o    &
+  r_signd_o & nov_o      & e_pdc_31_o & brnch_o & nomem_o     when jal_i    ,
+
+  r_fmt_o   & d_use_s_o  & o_signd_o  & ioper_o & add_o    &
+  r_signd_o & nov_o      & e_pdc_rd_o & brnch_o & nomem_o     when jalr_i   ,
+
+  r_fmt_o   & d_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & brnch_o & nomem_o     when jr_i     ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & m_pdc_rd_o & nobra_o & loadb_o     when lb_i     ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & m_pdc_rd_o & nobra_o & loadb_o     when lbu_i    ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & m_pdc_rd_o & nobra_o & loadh_o     when lh_i     ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_usign_o & nov_o      & m_pdc_rd_o & nobra_o & loadh_o     when lhu_i    ,
+
+  i_fmt_o   & no_use_o   & o_signd_o  & shift_o & sleft_o  &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when lui_i    ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & m_pdc_rd_o & nobra_o & loadw_o     when lw_i     ,
+
+  i_fmt_o   & no_use_o   & o_signd_o  & ioper_o & add_o    &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when mfc0_i   ,
+
+  r_fmt_o   & no_use_o   & o_signd_o  & ioper_o & add_o    &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when mflo_i   ,
+
+  r_fmt_o   & no_use_o   & o_signd_o  & ioper_o & add_o    &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when mfhi_i   ,
+
+  r_fmt_o   & e_use_t_o  & o_signd_o  & toper_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when mtc0_i   ,
+
+  r_fmt_o   & d_use_s_o  & o_signd_o  & soper_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when mthi_i   ,
+
+  r_fmt_o   & d_use_s_o  & o_signd_o  & soper_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when mtlo_i   ,
+
+  r_fmt_o   & e_use_st_o & o_usign_o  & logic_o & nor_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when nor_i    ,
+
+  r_fmt_o   & e_use_st_o & o_usign_o  & logic_o & or_o     &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when or_i     ,
+
+  i_fmt_o   & e_use_s_o  & o_usign_o  & logic_o & or_o     &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when ori_i    ,
+
+  r_fmt_o   & no_use_o   & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when rfe_i    ,
+
+  i_fmt_o   & e_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & storb_o     when sb_i     ,
+
+  i_fmt_o   & e_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & storh_o     when sh_i     ,
+
+  r_fmt_o   & no_use_o   & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when sleep_i  ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & shift_o & sleft_o  &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when sllv_i   ,
+
+  r_fmt_o   & e_use_t_o  & o_signd_o  & shift_o & sleft_o  &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when sll_i    ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & test_o  & sub_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when slt_i    ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & test_o  & sub_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when sltu_i   ,
+
+  r_fmt_o   & e_use_t_o  & o_signd_o  & shift_o & sright_o &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when sra_i    ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & shift_o & sright_o &
+  r_signd_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when srav_i   ,
+
+  r_fmt_o   & e_use_t_o  & o_signd_o  & shift_o & sright_o &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when srl_i    ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & shift_o & sright_o &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when srlv_i   ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & test_o  & sub_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when sltui_i  ,
+
+  i_fmt_o   & e_use_s_o  & o_signd_o  & test_o  & sub_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when slti_i   ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & arith_o & sub_o    &
+  r_signd_o & ovr_o      & e_pdc_rd_o & nobra_o & nomem_o     when sub_i    ,
+
+  r_fmt_o   & e_use_st_o & o_signd_o  & arith_o & sub_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when subu_i   ,
+
+  i_fmt_o   & e_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & storw_o     when sw_i     ,
+
+  i_fmt_o   & e_use_st_o & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & m_pdc_rd_o & nobra_o & swapw_o     when swap_i   ,
+
+  r_fmt_o   & no_use_o   & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when syscall_i,
+
+  r_fmt_o   & e_use_st_o & o_usign_o  & logic_o & xor_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when xor_i    ,
+
+  i_fmt_o   & e_use_s_o  & o_usign_o  & logic_o & xor_o    &
+  r_usign_o & nov_o      & e_pdc_rd_o & nobra_o & nomem_o     when xori_i   ,
+
+  illgl_o   & no_use_o   & o_signd_o  & arith_o & add_o    &
+  r_signd_o & nov_o      & no_pdc_o   & nobra_o & nomem_o     when others   ;
+
+I_ILLG_SD  <= I_TYPE_SD (28)                  ;
+I_JFMT_SD  <= I_TYPE_SD (27)                  ;
+I_IFMT_SD  <= I_TYPE_SD (26)                  ;
+I_RFMT_SD  <= I_TYPE_SD (25)                  ;
+I_DUSE_SD  <= I_TYPE_SD (24)                  ;
+I_READS_SD <= I_TYPE_SD (22)                  ;
+I_READT_SD <= I_TYPE_SD (21)                  ;
+I_OSGND_SD <= I_TYPE_SD (20)                  ;
+I_WRITE_SD <= I_TYPE_SD ( 8) or I_TYPE_SD ( 7);
+I_WRT31_SD <= I_TYPE_SD ( 6)                  ;
+I_BRNCH_SD <= I_TYPE_SD ( 5)                  ;
+
+I_EUSE_SE  <= I_TYPE_RD (23)                  ;
+I_IFMT_SE  <= I_TYPE_RD (26)                  ;
+I_READS_SE <= I_TYPE_RD (22)                  ;
+I_READT_SE <= I_TYPE_RD (21)                  ;
+I_OPER_SE  <= I_TYPE_RD (19 downto 13)        ;
+I_SHIFT_SE <= I_TYPE_RD (15)                  ;
+I_LOGIC_SE <= I_TYPE_RD (12 downto 11)        ;
+I_SUB_SE   <= I_TYPE_RD (11)                  ;
+I_RIGHT_SE <= I_TYPE_RD (11)                  ;
+I_RSGND_SE <= I_TYPE_RD (10)                  ;
+I_OVRF_SE  <= I_TYPE_RD ( 9)                  ;
+I_MPDC_SE  <= I_TYPE_RD ( 8)                  ;
+I_EPDC_SE  <= I_TYPE_RD ( 7)                  ;
+I_WRITE_SE <= I_TYPE_RD ( 8) or I_TYPE_RD ( 7);
+I_BRNCH_SE <= I_TYPE_RD ( 5)                  ;
+
+I_RSGND_SM <= I_TYPE_RE (10)                  ;
+I_MPDC_SM  <= I_TYPE_RE ( 8)                  ;
+I_WRITE_SM <= I_TYPE_RE ( 8) or I_TYPE_RE ( 7);
+I_LOAD_SM  <= I_TYPE_RE ( 4)                  ;
+I_STOR_SM  <= I_TYPE_RE ( 3)                  ;
+I_BYTE_SM  <= I_TYPE_RE ( 2)                  ;
+I_HALF_SM  <= I_TYPE_RE ( 1)                  ;
+I_WORD_SM  <= I_TYPE_RE ( 0)                  ;
+
+I_WRITE_SW <= I_TYPE_RM ( 8) or I_TYPE_RM ( 7);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   immediate operand sign					#
+	-- ### ------------------------------------------------------ ###
+
+IMDSGN_SD <= I_OSGND_SD and I_RI (15);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   the incoming instruction is a branch delayed slot	#
+	-- ### ------------------------------------------------------ ###
+
+BDSLOT_XI <= I_BRNCH_SD;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   swap instruction						#
+	-- ### ------------------------------------------------------ ###
+
+SWAP_SD <= '1' when (OPCOD_SD = swap_i) else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   load upper immediate (lui) instruction			#
+	-- ### ------------------------------------------------------ ###
+
+LUI_SD  <= '1' when (OPCOD_SD = lui_i ) else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   extract special destination registers number from the	#
+	-- # instruction.						#
+	-- #								#
+	-- #   extract source and destination registers number from the	#
+	-- # instruction. Destination register number is set to r0 when	#
+	-- # not used.							#
+	-- ### ------------------------------------------------------ ###
+
+COP0D_SD <= I_RI (15 downto 11);
+RS_SD    <= I_RI (25 downto 21);
+RT_SD    <= I_RI (20 downto 16);
+RD_SD    <= B"11111"            when ((I_WRITE_SD and I_WRT31_SD) = '1') else
+            I_RI (15 downto 11) when ((I_WRITE_SD and I_RFMT_SD ) = '1') else
+            I_RI (20 downto 16) when ((I_WRITE_SD and I_IFMT_SD ) = '1') else
+            B"00000"             ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   select the coprocessor 0 register to be read		#
+	-- #     - bad virtual address       register : "01000"		#
+	-- #     - status                    register : "01100"		#
+	-- #     - cause                     register : "01101"		#
+	-- #     - exception program counter register : "01110"		#
+	-- ### ------------------------------------------------------ ###
+
+SR_CR_SD <= NEXTSR_RX when (COP0D_SD (         0) = '0' ) else CAUSE_RX ;
+BE_SD    <= '1'       when (COP0D_SD (         1) = '0' ) else '0'      ;
+SCBE_SD  <= '1'       when (COP0D_SD (2 downto 1) = "10") else '0'      ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   shift amount						#
+	-- ### ------------------------------------------------------ ###
+
+SHAM_SD  <= "10000"            when (OPCOD_SD = lui_i) else
+            I_RI (10 downto 6) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   decoded source register number				#
+	-- ### ------------------------------------------------------ ###
+
+with RS_SD select
+RSDNBR_SD <= X"0000_0001" when B"0_0000",
+             X"0000_0002" when B"0_0001",
+             X"0000_0004" when B"0_0010",
+             X"0000_0008" when B"0_0011",
+             X"0000_0010" when B"0_0100",
+             X"0000_0020" when B"0_0101",
+             X"0000_0040" when B"0_0110",
+             X"0000_0080" when B"0_0111",
+             X"0000_0100" when B"0_1000",
+             X"0000_0200" when B"0_1001",
+             X"0000_0400" when B"0_1010",
+             X"0000_0800" when B"0_1011",
+             X"0000_1000" when B"0_1100",
+             X"0000_2000" when B"0_1101",
+             X"0000_4000" when B"0_1110",
+             X"0000_8000" when B"0_1111",
+             X"0001_0000" when B"1_0000",
+             X"0002_0000" when B"1_0001",
+             X"0004_0000" when B"1_0010",
+             X"0008_0000" when B"1_0011",
+             X"0010_0000" when B"1_0100",
+             X"0020_0000" when B"1_0101",
+             X"0040_0000" when B"1_0110",
+             X"0080_0000" when B"1_0111",
+             X"0100_0000" when B"1_1000",
+             X"0200_0000" when B"1_1001",
+             X"0400_0000" when B"1_1010",
+             X"0800_0000" when B"1_1011",
+             X"1000_0000" when B"1_1100",
+             X"2000_0000" when B"1_1101",
+             X"4000_0000" when B"1_1110",
+             X"8000_0000" when B"1_1111";
+
+	-- ### ------------------------------------------------------ ###
+	-- #   decoded source register number				#
+	-- ### ------------------------------------------------------ ###
+
+with RT_SD select
+RTDNBR_SD <= X"0000_0001" when B"0_0000",
+             X"0000_0002" when B"0_0001",
+             X"0000_0004" when B"0_0010",
+             X"0000_0008" when B"0_0011",
+             X"0000_0010" when B"0_0100",
+             X"0000_0020" when B"0_0101",
+             X"0000_0040" when B"0_0110",
+             X"0000_0080" when B"0_0111",
+             X"0000_0100" when B"0_1000",
+             X"0000_0200" when B"0_1001",
+             X"0000_0400" when B"0_1010",
+             X"0000_0800" when B"0_1011",
+             X"0000_1000" when B"0_1100",
+             X"0000_2000" when B"0_1101",
+             X"0000_4000" when B"0_1110",
+             X"0000_8000" when B"0_1111",
+             X"0001_0000" when B"1_0000",
+             X"0002_0000" when B"1_0001",
+             X"0004_0000" when B"1_0010",
+             X"0008_0000" when B"1_0011",
+             X"0010_0000" when B"1_0100",
+             X"0020_0000" when B"1_0101",
+             X"0040_0000" when B"1_0110",
+             X"0080_0000" when B"1_0111",
+             X"0100_0000" when B"1_1000",
+             X"0200_0000" when B"1_1001",
+             X"0400_0000" when B"1_1010",
+             X"0800_0000" when B"1_1011",
+             X"1000_0000" when B"1_1100",
+             X"2000_0000" when B"1_1101",
+             X"4000_0000" when B"1_1110",
+             X"8000_0000" when B"1_1111";
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compare source registers of the current instruction with	#
+	-- # the destination register of previous instructions (data	#
+	-- # hazards in Instruction Decode cycle)			#
+	-- ### ------------------------------------------------------ ###
+
+CP_SDE_SD  <= RS_SD xor RD_RD;
+CP_SDM_SD  <= RS_SD xor RD_RE;
+CP_SDW_SD  <= RS_SD xor RD_RM;
+
+CP_TDE_SD  <= RT_SD xor RD_RD;
+CP_TDM_SD  <= RT_SD xor RD_RE;
+CP_TDW_SD  <= RT_SD xor RD_RM;
+
+SREADR0_SD <= '1' when (RS_SD = "00000") else '0' ;
+TREADR0_SD <= '1' when (RT_SD = "00000") else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   effective comparisons (data hazards in Instruction	#
+	-- # Decode cycle):						#
+	-- #     fields matches and are effectively used (comparisons	#
+	-- #     fail when r0 is used)					#
+	-- ### ------------------------------------------------------ ###
+
+HZ_SDE_SD <= '1' when (CP_SDE_SD  = "00000" and SREADR0_SD = '0' and
+                       I_READS_SD = '1'     and I_WRITE_SE = '1'    ) else
+             '0' ;
+HZ_SDM_SD <= '1' when (CP_SDM_SD  = "00000" and SREADR0_SD = '0' and
+                       I_READS_SD = '1'     and I_WRITE_SM = '1'    ) else
+             '0' ;
+HZ_SDW_SD <= '1' when (CP_SDW_SD  = "00000" and SREADR0_SD = '0' and
+                       I_READS_SD = '1'     and I_WRITE_SW = '1'    ) else
+             '0' ;
+HZ_TDE_SD <= '1' when (CP_TDE_SD  = "00000" and TREADR0_SD = '0' and
+                       I_READT_SD = '1'     and I_WRITE_SE = '1'    ) else
+             '0' ;
+HZ_TDM_SD <= '1' when (CP_TDM_SD  = "00000" and TREADR0_SD = '0' and
+                       I_READT_SD = '1'     and I_WRITE_SM = '1'    ) else
+             '0' ;
+HZ_TDW_SD <= '1' when (CP_TDW_SD  = "00000" and TREADR0_SD = '0' and
+                       I_READT_SD = '1'     and I_WRITE_SW = '1'    ) else
+             '0' ;
+
+HZ_SDMW_SD <= HZ_SDM_SD or HZ_SDW_SD;
+HZ_TDMW_SD <= HZ_TDM_SD or HZ_TDW_SD;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   stall due to data hazards in Instruction Decode stage:	#
+	-- #								#
+	-- #      ADD  Ri, --, --          LW   Ri, --, --		#
+	-- #      BEQ  Ri, --              --   --, --, --		#
+	-- #                               BEQ  Ri, --			#
+	-- #      LW   Ri, --, --					#
+	-- #      BEQ  Ri, --						#
+	-- #								#
+	-- #   (use of s or t operand in Instruction Decode stage when	#
+	-- # the result is produced by the previous instruction in	#
+	-- # Execute or in Memory Access stage or when the result is	#
+	-- # produced by the second previous instruction in Memory	#
+	-- # Access stage).						#
+	-- ### ------------------------------------------------------ ###
+
+HAZARDS_SD <=    I_DUSE_SD and
+              (((HZ_SDE_SD or  HZ_TDE_SD)               ) or
+               ((HZ_SDM_SD or  HZ_TDM_SD) and I_MPDC_SM )   );
+
+	-- ### ------------------------------------------------------ ###
+	-- #   decoding the sleep instruction. This signal is used to	#
+	-- # stall the pipeline.					#
+	-- ### ------------------------------------------------------ ###
+
+SLEEP_SD <= '1' when (OPCOD_SD = sleep_i) else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   jump register instructions				#
+	-- #     (decoding is simplified - make the distinction between	#
+	-- #      jump and jump register)				#
+	-- ### ------------------------------------------------------ ###
+
+I_JR_SD   <= '1' when (I_RI (27) = '0') else '0';
+
+	-- ### ------------------------------------------------------ ###
+	-- #   all jump instructions					#
+	-- ### ------------------------------------------------------ ###
+
+I_ALLJ_SD <= '1' when (OPCOD_SD = jr_i or OPCOD_SD = jalr_i) else
+             '1' when (OPCOD_SD = j_i  or OPCOD_SD = jal_i ) else
+             '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   link instructions					#
+	-- ### ------------------------------------------------------ ###
+
+I_LINK_SD <= '1' when (OPCOD_SD = jal_i    or OPCOD_SD = jalr_i  ) else
+             '1' when (OPCOD_SD = bltzal_i or OPCOD_SD = bgezal_i) else
+             '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   conditional branches' condition				#
+	-- ### ------------------------------------------------------ ###
+
+S_LT_Z_SD  <= '1' when ( S_31_SD   = '1')     else '0' ;
+S_LE_Z_SD  <= '1' when ((S_31_SD   = '1') or
+                        (S_EQ_Z_SD = '1')   ) else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   conditional branches' taken				#
+	-- ### ------------------------------------------------------ ###
+
+BTAKEN_SD  <= '1' when ((OPCOD_SD = beq_i    and S_EQ_T_SD = '1') or
+                        (OPCOD_SD = bne_i    and S_EQ_T_SD = '0') or
+                        (OPCOD_SD = bltz_i   and S_LT_Z_SD = '1') or
+                        (OPCOD_SD = bltzal_i and S_LT_Z_SD = '1') or
+                        (OPCOD_SD = blez_i   and S_LE_Z_SD = '1') or
+                        (OPCOD_SD = bgtz_i   and S_LE_Z_SD = '0') or
+                        (OPCOD_SD = bgez_i   and S_LT_Z_SD = '0') or
+                        (OPCOD_SD = bgezal_i and S_LT_Z_SD = '0')   ) else
+              '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   immediate operand selection :				#
+	-- #     - mfc0          : 0001					#
+	-- #     - mflo          : 0010					#
+	-- #     - mfhi          : 0100					#
+	-- #     - i format inst : 1000					#
+	-- ### ------------------------------------------------------ ###
+
+IOPSEL_SD (3) <= '1' when (I_RI (28) = '1'                    ) else
+                 '1' when (I_RI (26) = '1'                    ) else
+                 '1' when (I_RI (31) = '1' and I_RI (30) = '0') else
+                 '1' when (I_RI (30) = '0' and I_RI (29) = '1') else
+                 '0' ;
+
+IOPSEL_SD (2) <= '1' when (I_RI (31 downto 28) = "0000" and
+                           I_RI (          26) = '0'    and
+                           I_RI (           1) = '1'       ) else
+                 '0' ;
+
+IOPSEL_SD (1) <= '1' when (I_RI (31 downto 28) = "0000" and
+                           I_RI (          26) = '0'    and
+                           I_RI (           1) = '0'       ) else
+                 '0' ;
+
+IOPSEL_SD (0) <= '1' when (I_RI (          30) = '1'    and
+                           I_RI (          28) = '0'    and
+                           I_RI (          26) = '0'       ) else
+                 '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   exception detected during the Instruction Decode cycle:	#
+	-- #								#
+	-- #     - illegal instruction					#
+	-- #     - coprocessor zero unusable				#
+	-- ### ------------------------------------------------------ ###
+
+ILLGINS_XD <= I_ILLG_SD;
+
+with OPCOD_SD select
+C0UNUSE_XD <= SR_1_RI and not SR_28_RI when rfe_i | mfc0_i | mtc0_i ,
+              '0'                      when others;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compare source registers of the current instruction with	#
+	-- # the destination register of previous instructions		#
+	-- ### ------------------------------------------------------ ###
+
+CP_SDM_SE  <= RS_RD xor RD_RE;
+CP_SDW_SE  <= RS_RD xor RD_RM;
+
+CP_TDM_SE  <= RT_RD xor RD_RE;
+CP_TDW_SE  <= RT_RD xor RD_RM;
+
+SREADR0_SE <= '1' when (RS_RD = "00000") else '0' ;
+TREADR0_SE <= '1' when (RT_RD = "00000") else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   effective comparisons (data hazards in Execute cycle):	#
+	-- #     fields matches and are effectively used (comparisons	#
+	-- #     fail when r0 is used)					#
+	-- ### ------------------------------------------------------ ###
+
+HZ_SDM_SE <= '1' when (CP_SDM_SE  = "00000" and SREADR0_SE = '0' and
+                       I_READS_SE = '1'     and I_WRITE_SM = '1'    ) else
+             '0' ;
+HZ_SDW_SE <= '1' when (CP_SDW_SE  = "00000" and SREADR0_SE = '0' and
+                       I_READS_SE = '1'     and I_WRITE_SW = '1'    ) else
+             '0' ;
+HZ_TDM_SE <= '1' when (CP_TDM_SE  = "00000" and TREADR0_SE = '0' and
+                       I_READT_SE = '1'     and I_WRITE_SM = '1'    ) else
+             '0' ;
+HZ_TDW_SE <= '1' when (CP_TDW_SE  = "00000" and TREADR0_SE = '0' and
+                       I_READT_SE = '1'     and I_WRITE_SW = '1'    ) else
+             '0' ;
+
+HZ_SDMW_SE <= HZ_SDM_SE or HZ_SDW_SE;
+HZ_TDMW_SE <= HZ_TDM_SE or HZ_TDW_SE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   stall due to data hazards in Execute stage:		#
+	-- #								#
+	-- #      LW   Ri, --, --					#
+	-- #      ADD  --, Ri, --					#
+	-- #								#
+	-- #   (use of s or t operand in Execute stage when the result	#
+	-- #    is produced in Memory Access stage by the previous	#
+	-- #    instruction).						#
+	-- ### ------------------------------------------------------ ###
+
+HAZARDS_SE <= I_EUSE_SE and (HZ_SDM_SE or HZ_TDM_SE) and I_MPDC_SM;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   arithmetic overflow					#
+	-- ### ------------------------------------------------------ ###
+
+OVERFLW_SE <= CARITH_32_SE xor CARITH_31_SE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   shift instruction (using shift amount)			#
+	-- #     - sll							#
+	-- #     - srl							#
+	-- #     - sra							#
+	-- #     - lui							#
+	-- ### ------------------------------------------------------ ###
+
+I_SHAMT_SE  <= '1' when (I_READS_SE = '0' and I_SHIFT_SE = '1') else
+               '0' ;
+
+SHAMT_SE    <= SHAM_RD  (4 downto 0) when (I_SHAMT_SE = '1') else
+               S_4_0_SE (4 downto 0) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   test and set unit's result				#
+	-- ### ------------------------------------------------------ ###
+
+S_LT_T_SE  <= '1' when ((RARITH_31_SE xor OVERFLW_SE) = '1') else '0' ;
+S_LTU_T_SE <= '1' when ( CARITH_32_SE                 = '0') else '0' ;
+
+with OPCOD_RD select
+SETBIT_SE <= S_LT_T_SE  when slt_i  | slti_i ,
+             S_LTU_T_SE when sltu_i | sltui_i,
+             '0'        when others ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   save the address of the branch instruction		#
+	-- ### ------------------------------------------------------ ###
+
+WREDOPC_SE <= I_BRNCH_SE and not KEEP_SE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #  exceptions detected during the Execute cycle:		#
+	-- #								#
+	-- #     - instruction address bus error			#
+	-- #     - executing a break or a sysscall instruction		#
+	-- #     - detecting an overflow				#
+	-- #     - instruction address miss aligned (this exception is	#
+	-- #       reported in the Execute cycle since it is relative	#
+	-- #       to the instruction that has computed the address)	#
+	-- #     - instruction address violating system space (this	#
+	-- #       exception is reported in the Execute cycle since it	#
+	-- #       is relative to the instruction that has computed the	#
+	-- #       address). The current mode is extracted from the	#
+	-- #       Status register. In the case of a Restore From	#
+	-- #       Exception instruction modifying the Status register,	#
+	-- #       the old mode s taken into account (anticipating the	#
+	-- #       execution of the rfe).				#
+	-- ### ------------------------------------------------------ ###
+
+IABUSER_XE <= not I_BERR_N;
+
+BREAK_XE   <= '1' when (OPCOD_RD = break_i  ) else '0' ;
+SYSCALL_XE <= '1' when (OPCOD_RD = syscall_i) else '0' ;
+
+OVR_XE     <= OVERFLW_SE     and I_OVRF_SE;
+
+IAMALGN_XE <= NEXTPC_1_SE  or  NEXTPC_0_SE   ;
+IASVIOL_XE <= NEXTPC_31_SE and NEXTSR_RX (3) when (OPCOD_RD = rfe_i) else
+              NEXTPC_31_SE and NEXTSR_RX (1) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   define the copying capability of the instruction for the	#
+	-- # next stage (Memory Access):				#
+	-- #     - the swap instruction can make a copy of itself	#
+	-- #       during its first memory access			#
+	-- ### ------------------------------------------------------ ###
+
+COPYCAP_SE <= SWAP_RD;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   data memory access control lines:			#
+	-- #								#
+	-- #       L  : I_LOAD_SM					#
+	-- #       S  : I_STOR_SM					#
+	-- #       F  : first swap access				#
+	-- #								#
+	-- #       W  : WRITE_SM					#
+	-- #       R  : READ_SM						#
+	-- #       A  : DACCESS_SM					#
+	-- #       LK : DLOCK_SM					#
+	-- #								#
+	-- #   L   S   F         operation              W   R   A  LK	#
+	-- # +---+---+---+----------------------------+---+---+---+---+	#
+	-- # | 1 | 0 | 0 | load  instruction          | 0 | 1 | 1 | 0 |	#
+	-- # | 0 | 1 | 0 | store instruction          | 1 | 0 | 1 | 0 |	#
+	-- # | 1 | 1 | 1 | first  swap access (load)  | 0 | 1 | 1 | 1 |	#
+	-- # | 1 | 1 | 0 | second swap access (store) | 1 | 0 | 1 | 0 |	#
+	-- # | 0 | 0 | 0 | no access                  | 0 | 0 | 0 | 0 |	#
+	-- #								#
+	-- ### ------------------------------------------------------ ###
+
+FSTSWAP_SM <= SWAP_RE and COPYCAP_RE;
+
+DACCESS_SM <= I_STOR_SM  or       I_LOAD_SM  ;
+WRITE_SM   <= I_STOR_SM  and not  FSTSWAP_SM ;
+READ_SM    <= I_LOAD_SM  and not (FSTSWAP_SM xor I_STOR_SM);
+DLOCK_SM   <=                     FSTSWAP_SM ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   define the destination register number in the register	#
+	-- # file							#
+	-- ### ------------------------------------------------------ ###
+
+RD_SM <= "00000" when ((SWAP_RE and not COPYCAP_RE) = '1') else
+          RD_RE  ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   select bytes read from external storage that are to be	#
+	-- # replaced by the extension (zero or sign)			#
+	-- ### ------------------------------------------------------ ###
+
+BYTSUB_SM (1) <=
+  '1' when (I_BYTE_SM = '1' and I_RSGND_SM              = '0' ) else
+  '1' when (I_BYTE_SM = '1' and RES_SM     (         0) = '0' ) else
+  '0'                    ;
+
+BYTSUB_SM (2) <=
+  '1' when (I_BYTE_SM = '1' and I_RSGND_SM              = '0' ) else
+  '1' when (I_HALF_SM = '1' and I_RSGND_SM              = '0' ) else
+  '1' when (I_BYTE_SM = '1' and RES_SM     (         0) = '0' ) else
+  '1' when (I_HALF_SM = '1' and RES_SM     (1 downto 0) = "00") else
+  '0'                    ;
+
+BYTSUB_SM (3) <=
+  '1' when (I_BYTE_SM = '1' and I_RSGND_SM              = '0' ) else
+  '1' when (I_HALF_SM = '1' and I_RSGND_SM              = '0' ) else
+  '1' when (I_BYTE_SM = '1' and RES_SM     (         0) = '0' ) else
+  '1' when (I_HALF_SM = '1' and RES_SM     (1 downto 0) = "00") else
+  '0'                    ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   define the extension					#
+	-- ### ------------------------------------------------------ ###
+
+DATEXT_SM <=
+  '0'      when (I_RSGND_SM = '0'                               ) else
+  D_IN_7   when (I_RSGND_SM = '1' and
+                 I_BYTE_SM  = '1' and RES_SM (1 downto 0) = "00") else
+  D_IN_23  when (I_RSGND_SM = '1' and
+                 I_BYTE_SM  = '1' and RES_SM (1 downto 0) = "10") else
+  D_IN_15  ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   exceptions detected during the Memory Access cycle:	#
+	-- #								#
+	-- #     - data  address bus error				#
+	-- #     - load  address miss aligned				#
+	-- #     - store address miss aligned				#
+	-- #     - load  address violating system space			#
+	-- #     - store address violating system space			#
+	-- ### ------------------------------------------------------ ###
+
+DABUSER_XM <= not D_BERR_N;
+
+LAMALGN_XM <= RES_SM (1) or RES_SM (0) when (I_WORD_SM = '1' and
+                                             I_LOAD_SM = '1'    ) else
+              RES_SM (0)               when (I_HALF_SM = '1' and
+                                             I_LOAD_SM = '1'    ) else
+              '0'                      ;
+SAMALGN_XM <= RES_SM (1) or RES_SM (0) when (I_WORD_SM = '1' and
+                                             I_STOR_SM = '1'    ) else
+              RES_SM (0)               when (I_HALF_SM = '1' and
+                                             I_STOR_SM = '1'    ) else
+              '0'                      ;
+
+LASVIOL_XM <= RES_SM (31) and SR_1_RE when (I_LOAD_SM = '1') else '0' ;
+SASVIOL_XM <= RES_SM (31) and SR_1_RE when (I_STOR_SM = '1') else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   exceptions relative to data address (in such a case the	#
+	-- # data address is saved into the Bad Virtual Address		#
+	-- # register)							#
+	-- ### ------------------------------------------------------ ###
+
+BADDA_XM <= SASVIOL_XM or LASVIOL_XM or LAMALGN_XM or SAMALGN_XM;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   exceptions relative to instruction address (in such a	#
+	-- # case the instruction address is saved into the Bad Virtual	#
+	-- # Address register)						#
+	-- ### ------------------------------------------------------ ###
+
+BADIA_XM <= IASVIOL_RE or IAMALGN_RE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the cause register:	#
+	-- #								#
+	-- #     the cause register is written in the following cases	#
+	-- #   (decreasing order of priority):				#
+	-- #								#
+	-- #     BD   : Branch Delay					#
+	-- #     CE   : Coprocessor Error				#
+	-- #     HWIP : Hardware Interrupt Pending			#
+	-- #     SWIP : Software Interrupt Pending			#
+	-- #     EXC  : Exception Code					#
+	-- #								#
+	-- #                       BD    CE   HWIP   SWIP   EXC		#
+	-- #   -----------------+-----+-----+------+------+-----+	#
+	-- #   exception        | New | New | New  | Old  | New |	#
+	-- #   interrupt        | New | New | New  | New  | New |	#
+	-- #   mtc0 instruction | Old | Old | New  | New  | Old |	#
+	-- #   at each cycle    | Old | Old | New  | Old  | Old |	#
+	-- #								#
+	-- ### ------------------------------------------------------ ###
+
+COPERR_XM  <= "00";
+
+EXCCODE_XM <=
+              X"4" when ((LAMALGN_XM or LASVIOL_XM or
+                          IAMALGN_RE or IASVIOL_RE   ) = '1') else
+              X"5" when ((SAMALGN_XM or SASVIOL_XM   ) = '1') else
+              X"6" when ( IABUSER_RE                   = '1') else
+              X"7" when ( DABUSER_XM                   = '1') else
+              X"8" when ( SYSCALL_RE                   = '1') else
+              X"9" when ( BREAK_RE                     = '1') else
+              X"a" when ( ILLGINS_RE                   = '1') else
+              X"b" when ( C0UNUSE_RE                   = '1') else
+              X"c" when ( OVR_RE                       = '1') else
+              X"0" ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the cause register:	#
+	-- #								#
+	-- #     - in case of exception almost all the fileds are	#
+	-- #       updated. The Branch Delayed Slot, the Coprocessor	#
+	-- #       Error and the Exception Code are modified to report	#
+	-- #       the processor's state. The Software Interrupt	#
+	-- #       Pending remains unchanged (the Hardware Interrupts	#
+	-- #       Pending is updated at each cycle).			#
+	-- ### ------------------------------------------------------ ###
+
+CAUSE_XM <= BDSLOT_RE             & '0'  & COPERR_XM  & X"000" & IT_XX &
+            CAUSE_RX (9 downto 8) & "00" & EXCCODE_XM &  "00"  ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the cause register:	#
+	-- #								#
+	-- #     - in case of interrupt all the fileds are updated.	#
+	-- #       The Branch Delayed Slot, the Coprocessor Error and	#
+	-- #       the Exception Code are modified to report the	#
+	-- #       processor's state. The Software Interrupt Pending	#
+	-- #       are modified if the instruction in Memory Access	#
+	-- #       stage is a mtc0 (ststus). (the Hardware Interrupts	#
+	-- #       Pending is updated at each cycle).			#
+	-- #								#
+	-- #       NB: writing the Software Interrupt Pending bits is	#
+	-- #           conditioned by the executability of the mtc0	#
+	-- #           instruction (KEEP_SM = '0'). In fact, testing	#
+	-- #           the executability is unnecessary because there	#
+	-- #           is no case where this particular instruction is	#
+	-- #           unexecutable.					#
+	-- ### ------------------------------------------------------ ###
+
+SWINT_XM <= RES_SM   (9 downto 8) when (WCAUSE_SM = '1' and KEEP_SM = '0') else
+            CAUSE_RX (9 downto 8) ;
+
+CAUSE_XX <= BDSLOT_RD & '0'  & COPERR_XM  & X"000" & IT_XX &
+            SWINT_XM  & "00" & EXCCODE_XM &  "00"  ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the cause register:	#
+	-- #								#
+	-- #     - the execution of a mtc0 instruction updates the	#
+	-- #       Software Interrupt Pending bits (this case hapens	#
+	-- #       when software interrupts are masked) (the Hardware	#
+	-- #       Interrupt Pending is updated at each cycle).		#
+	-- ### ------------------------------------------------------ ###
+
+WCAUSE_SM <= '1' when (OPCOD_RE = mtc0_i and COP0D_RE = cause_s) else '0';
+
+CAUSE_SM  <= CAUSE_RX (31 downto 16) & IT_XX & RES_SM (9 downto 8) &
+             CAUSE_RX ( 7 downto  0) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the cause register:	#
+	-- #								#
+	-- #     - at each cycle, the Hardware Interrupt Pending is	#
+	-- #       saved						#
+	-- ### ------------------------------------------------------ ###
+
+CAUSE_SX  <= CAUSE_RX (31 downto 16) & IT_XX & CAUSE_RX (9 downto 0);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the status register:	#
+	-- #								#
+	-- #     - rfe instruction:					#
+	-- #         the old status restored into the register		#
+	-- #     - mtc0 instruction:					#
+	-- #         the status register is loaded by the value of an	#
+	-- #         integer register					#
+	-- #								#
+	-- #   write enable into the status register:			#
+	-- #     - the status register is modified when executing an	#
+	-- #       rfe or an mtc0 (move into status register).		#
+	-- ### ------------------------------------------------------ ###
+
+RSTORSR_SM <= NEXTSR_RX (31 downto 4) & NEXTSR_RX (5 downto 2);
+
+with OPCOD_RE select
+NEXTSR_SM  <= RSTORSR_SM when rfe_i ,
+              RES_SM     when others;
+
+WSR_SM     <= '1' when ((OPCOD_RE = rfe_i                         ) or
+                        (OPCOD_RE = mtc0_i and COP0D_RE = status_s)   ) else
+              '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   low and high registers' write enable:			#
+	-- #     - theses registers are modified when a Move into LO or	#
+	-- #       a Move into HI instruction is executed		#
+	-- ### ------------------------------------------------------ ###
+
+WLO_SW  <= '1' when (OPCOD_RM = mtlo_i) else '0' ;
+WHI_SW  <= '1' when (OPCOD_RM = mthi_i) else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compute the next instruction address:			#
+	-- #								#
+	-- #    - in case of reset					#
+	-- #    - in case of interrupt or exception during the bootstrap#
+	-- #    - in case of interrupt or exception			#
+	-- ### ------------------------------------------------------ ###
+
+BOOTEV_XX <= NEXTSR_RX (22);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the status register:	#
+	-- #								#
+	-- #     - reset:						#
+	-- #         initialize the status register (set the Bootstrap	#
+	-- #         Exception Vector, reset the global Interrupt Mask	#
+	-- #         and put the processor in kernel mode		#
+	-- #     - exception and interrupt:				#
+	-- #         the status register is saved.			#
+	-- ### ------------------------------------------------------ ###
+
+NEXTSR_XX  <= X"00400000"                    when (RESET_XX = '1') else
+              NEXTSR_RX (31 downto 6) &
+              NEXTSR_RX ( 3 downto 0) & "00" ;
+
+WSR_XX     <= EXCRQ_XM or INTRQ_XX or RESET_XX;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   Exception Program Counter register is modified in case	#
+	-- # of reset, interrupts or exceptions				#
+	-- ### ------------------------------------------------------ ###
+
+WEPC_XX <= INTRQ_XX or RESET_XX;
+WEPC_XM <= EXCRQ_XM            ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   exception request					#
+	-- #     - check early exceptions (those who unvalidate the	#
+	-- #       memory access during the Memory Access cycle)	#
+	-- #     - check late exceptions (these one has no effect on	#
+	-- #       the current memory access)				#
+	-- ### ------------------------------------------------------ ###
+
+LATEEX_XM  <= DABUSER_XM ;
+
+EARLYEX_XM <= ILLGINS_RE or C0UNUSE_RE               or
+              IAMALGN_RE or IASVIOL_RE or IABUSER_RE or
+              OVR_RE     or BREAK_RE   or SYSCALL_RE or
+              LAMALGN_XM or LASVIOL_XM               or
+              SAMALGN_XM or SASVIOL_XM               ;
+
+EXCRQ_XM   <= EARLYEX_XM or LATEEX_XM;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   interrupt request					#
+	-- #     - check hadrware and software requests and interrupt	#
+	-- #       mask							#
+	-- ### ------------------------------------------------------ ###
+
+SWINTRQ_XM <= CAUSE_RX ( 9 downto  8);
+HWINTRQ_XX <= CAUSE_RX (15 downto 10);
+
+GLBMSK_XX  <= NEXTSR_RX (0)          ;
+ITMASK_XX  <= NEXTSR_RX (15 downto 8);
+
+INTRQ_XX   <= GLBMSK_XX and ((ITMASK_XX (7) and HWINTRQ_XX (5)) or
+                             (ITMASK_XX (6) and HWINTRQ_XX (4)) or
+                             (ITMASK_XX (5) and HWINTRQ_XX (3)) or
+                             (ITMASK_XX (4) and HWINTRQ_XX (2)) or
+                             (ITMASK_XX (3) and HWINTRQ_XX (1)) or
+                             (ITMASK_XX (2) and HWINTRQ_XX (0)) or
+                             (ITMASK_XX (1) and SWINTRQ_XM (1)) or
+                             (ITMASK_XX (0) and SWINTRQ_XM (0))   );
+
+	-- ### ------------------------------------------------------ ###
+	-- #   instruction flow control :				#
+	-- #								#
+	-- #   three cases can happen :					#
+	-- # (1) Kill : the instruction in the corresponding stage is	#
+	-- #            killed						#
+	-- # (2) Stall: the instruction is not allowed to pass to the	#
+	-- #            next pipe stage					#
+	-- # (3) Copy : the instruction is duplicated. A copy remains	#
+	-- #            in the current stage and the other goes down	#
+	-- #            the pipe					#
+	-- # (4) Exec : the instruction can be executed			#
+	-- #								#
+	-- #   Here follows a summary of different situations.		#
+	-- #								#
+	-- #                          | I | D | E | M | W |		#
+	-- #     ---------------------+---+---+---+---+---|		#
+	-- #     reset                | K | K | K | K | E |		#
+	-- #     exception            | K | K | K | K | E |		#
+	-- #     interrupt            | K | K | K | E | E |		#
+	-- #     I_FRZ                | S | S | E | E | E |		#
+	-- #     D_FRZ                | S | S | S | S | E |		#
+	-- #     hazard in DEC        | S | S | E | E | E |		#
+	-- #     hazard in EXE        | S | S | S | E | E |		#
+	-- #     SLEEP                | K | C | E | E | E |		#
+	-- #     SWAP - first access  | S | S | S | C | E |		#
+	-- #								#
+	-- # Note that if more than one situation occur in the same	#
+	-- # time Kill is prior than Stall which is prior than Exec	#
+	-- #								#
+	-- ### ------------------------------------------------------ ###
+
+	-- ### ------------------------------------------------------ ###
+	-- #   The instruction in Instruction Fetch is never copied.	#
+	-- #								#
+	-- #   It is stalled (the fetch must be retried) if:		#
+	-- #     - the next stage (Instruction Decode) is occupied	#
+	-- #     - the instruction memory is not able to answer the	#
+	-- #       instruction fetch request				#
+	-- #								#
+	-- #   It is killed if :					#
+	-- #     - the third previous instruction causes an exception	#
+	-- #     - a hardware or software interrupt occurs		#
+	-- #     - a hardware reset is detected				#
+	-- #     - the previous instruction is a sleep			#
+	-- ### ------------------------------------------------------ ###
+
+KILL_SI    <= EXCRQ_XM or INTRQ_XX or RESET_XX or SLEEP_SD;
+STALL_SI   <= (not KILL_SI) and (COPY_SD or STALL_SD or I_FRZ or DACCESS_SM);
+COPY_SI    <= '0';
+EXEC_SI    <= not (KILL_SI or STALL_SI or COPY_SI);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   The instruction in Instruction Decode is copied if :	#
+	-- #     - the current instruction is a sleep			#
+	-- #								#
+	-- #   It is stalled if :					#
+	-- #     - the next stage (Execute) is occupied			#
+	-- #     - there is a data hazard that cannot be resolved by	#
+	-- #       bypasses						#
+	-- #     - the instruction memory cannot answer the instruction	#
+	-- #       fetch (the instruction cannot be executed because it	#
+	-- #       may change the instruction stream)			#
+	-- #								#
+	-- #   It is killed if :					#
+	-- #     - the second previous instruction causes an exception	#
+	-- #     - a hardware reset is detected				#
+	-- #     - a hardware or a software interrupt occurs		#
+	-- ### ------------------------------------------------------ ###
+
+KILL_SD    <= EXCRQ_XM or INTRQ_XX or RESET_XX;
+STALL_SD   <= not (KILL_SD) and (COPY_SE    or STALL_SE or
+                                 HAZARDS_SD or I_FRZ    or DACCESS_SM);
+NOTSTALL_SD<= not  STALL_SD;
+COPY_SD    <= not (KILL_SD  or STALL_SD           ) and SLEEP_SD;
+EXEC_SD    <= not (KILL_SD  or STALL_SD or COPY_SD);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   The instruction in Execute is never copied.		#
+	-- #								#
+	-- #   It is stalled if :					#
+	-- #     - the next stage (Memory Access) is occupied		#
+	-- #     - there is a data hazard that cannot be resolved by	#
+	-- #       bypasses						#
+	-- #								#
+	-- #   It is killed if :					#
+	-- #     - the previous instruction causes an exception		#
+	-- #     - a hardware reset is detected				#
+	-- #     - a hardware or a software interrupt occurs		#
+	-- ### ------------------------------------------------------ ###
+
+KILL_SE    <= EXCRQ_XM or INTRQ_XX or RESET_XX;
+STALL_SE   <= not (KILL_SE) and (COPY_SM or STALL_SM or HAZARDS_SE);
+COPY_SE    <= '0';
+EXEC_SE    <= not (KILL_SE or STALL_SE or COPY_SE);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   The instruction in Memory Access is copied if:		#
+	-- #     - the current instruction has a copying capability	#
+	-- #       (that is, it is a swap instruction and is making	#
+	-- #       its first access).					#
+	-- #								#
+	-- #   It is stalled if :					#
+	-- #     - the data memory is not able to answer the request	#
+	-- #								#
+	-- #   It is killed if :					#
+	-- #     - it causes an exception				#
+	-- #     - a hardware reset is detected				#
+	-- ### ------------------------------------------------------ ###
+
+KILL_SM    <= EXCRQ_XM or RESET_XX;
+STALL_SM   <= not (KILL_SM                       ) and D_FRZ     ;
+COPY_SM    <= not (KILL_SM or STALL_SM           ) and COPYCAP_RE;
+EXEC_SM    <= not (KILL_SM or STALL_SM or COPY_SM);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   The instruction in Write Back is always executed		#
+	-- ### ------------------------------------------------------ ###
+
+KILL_SW    <= '0' ;
+STALL_SW   <= '0' ;
+COPY_SW    <= '0' ;
+EXEC_SW    <= not (KILL_SW or STALL_SW or COPY_SW);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   actions on registers :					#
+	-- #								#
+	-- #   Three actions may be made on control registers:		#
+	-- #      (1) shift : shift a new instruction into the stage	#
+	-- #      (2) bubble: introduce a bubble (nop) into the pipe	#
+	-- #      (3) hold  : hold the instruction			#
+	-- #								#
+	-- #   In each stage the action can be defined by the following	#
+	-- # table (note that Write Back is always shifting):		#
+	-- #								#
+	-- #   stage   next stage   action in stage			#
+	-- #   ------+------------+----------------			#
+	-- #     K   |     K      |    bubble				#
+	-- #     K   |     S      |     hold				#
+	-- #     K   |     C      |     hold				#
+	-- #     K   |     E      |    bubble				#
+	-- #    -----+------------+----------------			#
+	-- #     S   |     S      |     hold				#
+	-- #     S   |     C      |     hold				#
+	-- #     S   |     E      |    bubble				#
+	-- #    -----+------------+----------------			#
+	-- #     C   |     E      |    shift				#
+	-- #    -----+------------+----------------			#
+	-- #     E   |     E      |    shift				#
+	-- ### ------------------------------------------------------ ###
+
+BUBBLE_SI <=      (STALL_SI and EXEC_SD) or (KILL_SI and (EXEC_SD or KILL_SD));
+HOLD_SI   <=       STALL_SD or  COPY_SD;
+NOTHOLD_SI<=  not (STALL_SD or  COPY_SD);
+SHIFT_SI  <=       EXEC_SI  or  COPY_SI;
+
+BUBBLE_SD <=      (STALL_SD and EXEC_SE) or (KILL_SD and (EXEC_SE or KILL_SE));
+HOLD_SD   <=       STALL_SE or  COPY_SE;
+NOTHOLD_SD<=  not (STALL_SE or  COPY_SE);
+SHIFT_SD  <=       EXEC_SD  or  COPY_SD;
+
+BUBBLE_SE <=      (STALL_SE and EXEC_SM) or (KILL_SE and (EXEC_SM or KILL_SM));
+HOLD_SE   <=       STALL_SM or  COPY_SM;
+NOTHOLD_SE<=  not (STALL_SM or  COPY_SM);
+SHIFT_SE  <=       EXEC_SE  or  COPY_SE;
+
+BUBBLE_SM <=      (STALL_SM and EXEC_SW) or (KILL_SM and (EXEC_SW or KILL_SW));
+HOLD_SM   <=       STALL_SW or  COPY_SW;
+NOTHOLD_SM<=  not (STALL_SW or  COPY_SW);
+SHIFT_SM  <=       EXEC_SM  or  COPY_SM;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   actions on registers :					#
+	-- #								#
+	-- #   Two actions may be made on data registers (note that	#
+	-- # Write Back is always loading) :				#
+	-- #								#
+	-- #      (1) load : load a new data into  the reg. (C or E)	#
+	-- #      (2) keep : hold the same data in the reg. (K or S)	#
+	-- ### ------------------------------------------------------ ###
+
+LOAD_SI <= COPY_SI or EXEC_SI ;
+KEEP_SI <= KILL_SI or STALL_SI;
+
+LOAD_SD <= COPY_SD or EXEC_SD ;
+KEEP_SD <= KILL_SD or STALL_SD;
+
+LOAD_SE <= COPY_SE or EXEC_SE ;
+KEEP_SE <= KILL_SE or STALL_SE;
+
+LOAD_SM <= COPY_SM or EXEC_SM ;
+KEEP_SM <= KILL_SM or STALL_SM;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Instruction Fetch cycle					#
+	-- ### ------------------------------------------------------ ###
+
+IFC_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_RI      <= guarded nop_i      when (BUBBLE_SI = '1') else
+                       I_RI       when (HOLD_SI   = '1') else
+                       I          ;
+  IREAD_RI  <= guarded '0'        when (BUBBLE_SI = '1') else
+                       '0'        when (HOLD_SI   = '1') else
+                       '1'        ;
+  BDSLOT_RI <= guarded BDSLOT_XI  when (BUBBLE_SI = '1') else
+                       BDSLOT_RI  when (HOLD_SI   = '1') else
+                       BDSLOT_XI  ;
+  SR_1_RI   <= guarded SR_1_RI    when (KEEP_SI   = '1') else
+                       SR_1_SI    ;
+  SR_28_RI  <= guarded SR_28_RI   when (KEEP_SI   = '1') else
+                       SR_28_SI   ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Instruction Decode cycle					#
+	-- #								#
+	-- #  nextpc :							#
+	-- #     - in case of hardware events (reset, exception or	#
+	-- #       interrupt) set the next address to a known value	#
+	-- #       (reset or interrupt handler address). In other cases	#
+	-- #       nextpc is considered as a data register.		#
+	-- ### ------------------------------------------------------ ###
+
+DEC_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_TYPE_RD  <= guarded nop_type   when (BUBBLE_SD = '1') else
+                        I_TYPE_RD  when (HOLD_SD   = '1') else
+                        I_TYPE_SD  ;
+  OPCOD_RD   <= guarded addu_i     when (BUBBLE_SD = '1') else
+                        OPCOD_RD   when (HOLD_SD   = '1') else
+                        OPCOD_SD   ;
+  BDSLOT_RD  <= guarded BDSLOT_RI  when (BUBBLE_SD = '1') else
+                        BDSLOT_RD  when (HOLD_SD   = '1') else
+                        BDSLOT_RI  ;
+  SWAP_RD    <= guarded '0'        when (BUBBLE_SD = '1') else
+                        SWAP_RD    when (HOLD_SD   = '1') else
+                        SWAP_SD    ;
+  RS_RD      <= guarded "00000"    when (BUBBLE_SD = '1') else
+                        RS_RD      when (HOLD_SD   = '1') else
+                        RS_SD      ;
+  RT_RD      <= guarded "00000"    when (BUBBLE_SD = '1') else
+                        RT_RD      when (HOLD_SD   = '1') else
+                        RT_SD      ;
+  RD_RD      <= guarded "00000"    when (BUBBLE_SD = '1') else
+                        RD_RD      when (HOLD_SD   = '1') else
+                        RD_SD      ;
+  COP0D_RD   <= guarded "00000"    when (BUBBLE_SD = '1') else
+                        COP0D_RD   when (HOLD_SD   = '1') else
+                        COP0D_SD   ;
+  ILLGINS_RD <= guarded '0'        when (BUBBLE_SD = '1') else
+                        ILLGINS_RD when (HOLD_SD   = '1') else
+                        ILLGINS_XD ;
+  C0UNUSE_RD <= guarded '0'        when (BUBBLE_SD = '1') else
+                        C0UNUSE_RD when (HOLD_SD   = '1') else
+                        C0UNUSE_XD ;
+  SHAM_RD    <= guarded SHAM_RD    when (HOLD_SD   = '1') else
+                        SHAM_SD    ;
+  SR_1_RD    <= guarded SR_1_RD    when (HOLD_SD   = '1') else
+                        SR_1_RI    ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Execute cycle						#
+	-- #								#
+	-- #   copycap:							#
+	-- #     when the instruction has been duplicated, the copying	#
+	-- #     capability falls to zero				#
+	-- ### ------------------------------------------------------ ###
+
+EXE_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_TYPE_RE  <= guarded nop_type   when (BUBBLE_SE = '1') else
+                        I_TYPE_RE  when (HOLD_SE   = '1') else
+                        I_TYPE_RD  ;
+  OPCOD_RE   <= guarded addu_i     when (BUBBLE_SE = '1') else
+                        OPCOD_RE   when (HOLD_SE   = '1') else
+                        OPCOD_RD   ;
+  BDSLOT_RE  <= guarded BDSLOT_RD  when (BUBBLE_SE = '1') else
+                        BDSLOT_RE  when (HOLD_SE   = '1') else
+                        BDSLOT_RD  ;
+  RD_RE      <= guarded "00000"    when (BUBBLE_SE = '1') else
+                        RD_RE      when (HOLD_SE   = '1') else
+                        RD_RD      ;
+  COP0D_RE   <= guarded "00000"    when (BUBBLE_SE = '1') else
+                        COP0D_RE   when (HOLD_SE   = '1') else
+                        COP0D_RD   ;
+  OVR_RE     <= guarded '0'        when (BUBBLE_SE = '1') else
+                        OVR_RE     when (HOLD_SE   = '1') else
+                        OVR_XE     ;
+  IAMALGN_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        IAMALGN_RE when (HOLD_SE   = '1') else
+                        IAMALGN_XE ;
+  IASVIOL_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        IASVIOL_RE when (HOLD_SE   = '1') else
+                        IASVIOL_XE ;
+  IABUSER_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        IABUSER_RE when (HOLD_SE   = '1') else
+                        IABUSER_XE ;
+  BREAK_RE   <= guarded '0'        when (BUBBLE_SE = '1') else
+                        BREAK_RE   when (HOLD_SE   = '1') else
+                        BREAK_XE   ;
+  SYSCALL_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        SYSCALL_RE when (HOLD_SE   = '1') else
+                        SYSCALL_XE ;
+  ILLGINS_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        ILLGINS_RE when (HOLD_SE   = '1') else
+                        ILLGINS_RD ;
+  C0UNUSE_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        C0UNUSE_RE when (HOLD_SE   = '1') else
+                        C0UNUSE_RD ;
+  SWAP_RE    <= guarded '0'        when (BUBBLE_SE = '1') else
+                        SWAP_RE    when (HOLD_SE   = '1') else
+                        SWAP_RD    ;
+  SR_1_RE    <= guarded SR_1_RE    when (HOLD_SE   = '1') else
+                        SR_1_RD    ;
+  COPYCAP_RE <= guarded '0'        when (BUBBLE_SE = '1') else
+                        COPYCAP_RE when (STALL_SM  = '1') else
+                        '0'        when (COPY_SM   = '1') else
+                        COPYCAP_SE ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Memory Access cycle					#
+	-- ### ------------------------------------------------------ ###
+
+MEM_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  DREAD_RM   <= guarded '0'        when (BUBBLE_SM = '1') else
+                        '0'        when (HOLD_SM   = '1') else
+                        READ_SM    ;
+  I_TYPE_RM  <= guarded nop_type   when (BUBBLE_SM = '1') else
+                        I_TYPE_RM  when (HOLD_SM   = '1') else
+                        I_TYPE_RE  ;
+  RD_RM      <= guarded "00000"    when (BUBBLE_SM = '1') else
+                        RD_RM      when (HOLD_SM   = '1') else
+                        RD_SM      ;
+  OPCOD_RM   <= guarded addu_i     when (BUBBLE_SM = '1') else
+                        OPCOD_RM   when (HOLD_SM   = '1') else
+                        OPCOD_RE   ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Write Back cycle						#
+	-- #								#
+	-- #     - low and high registers				#
+	-- #     - integer registers					#
+	-- ### ------------------------------------------------------ ###
+
+with RD_RM select
+WREG_SW <= X"0000_0000" when B"0_0000",
+           X"0000_0002" when B"0_0001",
+           X"0000_0004" when B"0_0010",
+           X"0000_0008" when B"0_0011",
+           X"0000_0010" when B"0_0100",
+           X"0000_0020" when B"0_0101",
+           X"0000_0040" when B"0_0110",
+           X"0000_0080" when B"0_0111",
+           X"0000_0100" when B"0_1000",
+           X"0000_0200" when B"0_1001",
+           X"0000_0400" when B"0_1010",
+           X"0000_0800" when B"0_1011",
+           X"0000_1000" when B"0_1100",
+           X"0000_2000" when B"0_1101",
+           X"0000_4000" when B"0_1110",
+           X"0000_8000" when B"0_1111",
+           X"0001_0000" when B"1_0000",
+           X"0002_0000" when B"1_0001",
+           X"0004_0000" when B"1_0010",
+           X"0008_0000" when B"1_0011",
+           X"0010_0000" when B"1_0100",
+           X"0020_0000" when B"1_0101",
+           X"0040_0000" when B"1_0110",
+           X"0080_0000" when B"1_0111",
+           X"0100_0000" when B"1_1000",
+           X"0200_0000" when B"1_1001",
+           X"0400_0000" when B"1_1010",
+           X"0800_0000" when B"1_1011",
+           X"1000_0000" when B"1_1100",
+           X"2000_0000" when B"1_1101",
+           X"4000_0000" when B"1_1110",
+           X"8000_0000" when B"1_1111";
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign the the coprocessor zero's registers :		#
+	-- #     the Cause register					#
+	-- ### ------------------------------------------------------ ###
+
+CAUSE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  CAUSE_RX <= guarded CAUSE_XM when (EXCRQ_XM  = '1'                  ) else
+                      CAUSE_XX when (INTRQ_XX  = '1'                  ) else
+                      CAUSE_SM when (WCAUSE_SM = '1' and KEEP_SM = '0') else
+                      CAUSE_SX ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign the the coprocessor zero's registers :		#
+	-- #     the Status register					#
+	-- ### ------------------------------------------------------ ###
+
+NEXTSR : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  NEXTSR_RX <= guarded NEXTSR_XX when (WSR_XX = '1'                  ) else
+                       NEXTSR_SM when (WSR_SM = '1' and KEEP_SM = '0') else
+                       NEXTSR_RX;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those directly controled by hardware)	#
+	-- ### ------------------------------------------------------ ###
+
+MISC : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  RESET_RX <= guarded not RESET_N;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs						#
+	-- ### ------------------------------------------------------ ###
+
+BDSLOT_SE <= BDSLOT_RD;
+BDSLOT_SM <= BDSLOT_RE;
+
+WNXTPC_XX <= EXCRQ_XM or INTRQ_XX or RESET_XX;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (data read acknowledge)			#
+	-- #								#
+	-- #     - the acknowledge signals to the cache that a data	#
+	-- #       has been read from the memory has been saved into	#
+	-- #       the data register					#
+	-- ### ------------------------------------------------------ ###
+
+D_ACK <= DREAD_RM;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (instruction memory access):		#
+	-- #								#
+	-- #     - disable the memory access for the instruction fetch	#
+	-- #       when the instruction in Execute stage is a Sleep.	#
+	-- #       This is to avoid the discharge of the memory lines	#
+	-- #       in the instruction cache. Since I_FTCH is a critical	#
+	-- #       signal, it does not depend on the instruction in	#
+	-- #       Instruction Decode stage. The decode phase is used	#
+	-- #       to detect the Sleep instruction and will disable the	#
+	-- #       memory access in the next cycle.			#
+	-- ### ------------------------------------------------------ ###
+
+I_FTCH  <= '0' when (DACCESS_SM = '1' or OPCOD_RE = sleep_i) else '1' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (instruction fetch acknowledge):		#
+	-- #								#
+	-- #     - the acknowledge signals to the cache that the new	#
+	-- #       instruction fetched from the memory has been saved	#
+	-- #       into the instruction register			#
+	-- ### ------------------------------------------------------ ###
+
+I_ACK <= IREAD_RI;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (data memory access):			#
+	-- ### ------------------------------------------------------ ###
+
+D_ATYPE <= m_writ_w when ((I_WORD_SM and WRITE_SM) = '1') else
+           m_writ_h when ((I_HALF_SM and WRITE_SM) = '1') else
+           m_writ_b when ((I_BYTE_SM and WRITE_SM) = '1') else
+           m_read_w ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (data memory access):			#
+	-- #     - disable the data memory access in case of early	#
+	-- #       execption or when a reset has occured.		#
+	-- ### ------------------------------------------------------ ###
+
+D_RQ    <= DACCESS_SM  when ((EARLYEX_XM or RESET_XX) = '0') else '0'   ;
+D_LOCK  <= DLOCK_SM    ;
+DOUT_E  <= "1111"      when ( WRITE_SM                = '1') else "0000";
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (miscellaneous):				#
+	-- ### ------------------------------------------------------ ###
+
+SCOUT   <= '0';
+
+end;

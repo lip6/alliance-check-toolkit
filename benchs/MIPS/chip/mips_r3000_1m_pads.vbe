@@ -1,0 +1,159 @@
+
+-- ### -------------------------------------------------------------- ###
+-- # file	: mips_r3000_1m_pads.vbe				#
+-- # date	: Oct 27 2006						#
+-- # version	: v1.2							#
+-- #									#
+-- # origin	: this description has been developed at LIP6		#
+-- #		  University Paris 6 - Pierre et Marie Curie		#
+-- #		  4 Place Jussieu 75252 Paris Cedex 05 - France		#
+-- #									#
+-- # descr.	: data flow description of a five stage pipelined Mips	#
+-- #		  R3000 processor					#
+-- #									#
+-- # authors	: Pirouz Bazargan Sabet					#
+-- ### -------------------------------------------------------------- ###
+
+entity MIPS_R3000_1M_PADS is
+
+  port (
+       signal P_CK       : in    bit                          ;
+       signal P_RESET_N  : in    bit                          ;
+       signal P_IT_N     : in    bit_vector (  5 downto 0)    ;
+
+       signal C_CK       : out   bit                          ;
+       signal C_RESET_N  : out   bit                          ;
+       signal C_IT_N     : out   bit_vector (  5 downto 0)    ;
+
+       signal P_I_FTCH   : out   bit                          ;
+       signal P_I_ACK    : out   bit                          ;
+       signal P_I_BERR_N : in    bit                          ;
+       signal P_I_FRZ    : in    bit                          ;
+
+       signal C_I_FTCH   : in    bit                          ;
+       signal C_I_ACK    : in    bit                          ;
+       signal C_I_BERR_N : out   bit                          ;
+       signal C_I_FRZ    : out   bit                          ;
+
+       signal P_D_RQ     : out   bit                          ;
+       signal P_D_LOCK   : out   bit                          ;
+       signal P_D_ATYPE  : out   bit_vector (  1 downto 0)    ;
+       signal P_D_ACK    : out   bit                          ;
+       signal P_D_BERR_N : in    bit                          ;
+       signal P_D_FRZ    : in    bit                          ;
+
+       signal C_D_RQ     : in    bit                          ;
+       signal C_D_LOCK   : in    bit                          ;
+       signal C_D_ATYPE  : in    bit_vector (  1 downto 0)    ;
+       signal C_D_ACK    : in    bit                          ;
+       signal C_D_BERR_N : out   bit                          ;
+       signal C_D_FRZ    : out   bit                          ;
+
+       signal P_DATA     : inout mux_vector ( 31 downto 0) bus;
+
+       signal C_DFRCORE  : in    bit_vector ( 31 downto 0)    ;
+       signal C_DTOCORE  : out   bit_vector ( 31 downto 0)    ;
+       signal C_DOUT_E   : in    bit_vector (  3 downto 0)    ;
+
+       signal P_ADDR     : out   bit_vector ( 31 downto 0)    ;
+
+       signal C_ADDR     : in    bit_vector ( 31 downto 0)    ;
+
+       signal P_TEST     : in    bit                          ;
+       signal P_SCIN     : in    bit                          ;
+       signal P_SCOUT    : out   bit                          ;
+
+       signal C_TEST     : out   bit                          ;
+       signal C_SCIN     : out   bit                          ;
+       signal C_SCOUT    : in    bit                          ;
+
+       signal P_VDD      : in    bit                          ;
+       signal P_VSS      : in    bit                          ;
+       signal P_VDDP     : in    bit                          ;
+       signal P_VSSP     : in    bit                          ;
+
+       signal C_VDD      : out   bit                          ;
+       signal C_VSS      : out   bit                           
+       );
+end MIPS_R3000_1M_PADS;
+
+architecture BEHAVIOURAL of MIPS_R3000_1M_PADS is
+
+begin
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+CHECK_POWER : assert (P_VDDP = '1' and P_VSSP = '0')
+              report  "missing power supply on pads"
+              severity WARNING;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+C_CK        <= P_CK       ;
+C_RESET_N   <= P_RESET_N  ;
+C_IT_N      <= P_IT_N     ;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+P_I_FTCH    <= C_I_FTCH   ;
+P_I_ACK     <= C_I_ACK    ;
+C_I_BERR_N  <= P_I_BERR_N ;
+C_I_FRZ     <= P_I_FRZ    ;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+P_D_RQ      <= C_D_RQ     ;
+P_D_LOCK    <= C_D_LOCK   ;
+P_D_ATYPE   <= C_D_ATYPE  ;
+P_D_ACK     <= C_D_ACK    ;
+C_D_BERR_N  <= P_D_BERR_N ;
+C_D_FRZ     <= P_D_FRZ    ;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+C_DTOCORE   <= P_DATA     ;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+P_ADDR      <= C_ADDR     ;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+C_TEST      <= P_TEST     ;
+C_SCIN      <= P_SCIN     ;
+P_SCOUT     <= C_SCOUT    ;
+
+C_VDD       <= P_VDD      ;
+C_VSS       <= P_VSS      ;
+
+	-- ### ------------------------------------------------------ ###
+	-- ### ------------------------------------------------------ ###
+
+D_OUT_3 : block (C_DOUT_E (3) = '1')
+begin
+  P_DATA (31 downto 24) <= guarded C_DFRCORE (31 downto 24);
+end block;
+
+D_OUT_2 : block (C_DOUT_E (2) = '1')
+begin
+  P_DATA (23 downto 16) <= guarded C_DFRCORE (23 downto 16);
+end block;
+
+D_OUT_1 : block (C_DOUT_E (1) = '1')
+begin
+  P_DATA (15 downto  8) <= guarded C_DFRCORE (15 downto  8);
+end block;
+
+D_OUT_0 : block (C_DOUT_E (0) = '1')
+begin
+  P_DATA ( 7 downto  0) <= guarded C_DFRCORE ( 7 downto  0);
+end block;
+
+end;

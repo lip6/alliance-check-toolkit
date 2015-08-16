@@ -1,0 +1,20 @@
+
+# read design 
+read_verilog mips_32_1p_mul_div.v
+
+# elaborate design hierarchy
+hierarchy -check -top mips_32_1p_mul_div
+
+# the high-level stuff
+proc; opt; fsm; opt; memory; opt
+
+# mapping to internal cell library
+techmap; opt
+
+# mapping flip-flops to mycells.lib
+dfflibmap -liberty ../../cells/vsclib/vsclib013.lib
+
+# mapping logic to mycells.lib
+abc -liberty ../../cells/vsclib/vsclib013.lib
+
+write_blif -top mips_32_1p_mul_div mips_32_1p_mul_div.blif

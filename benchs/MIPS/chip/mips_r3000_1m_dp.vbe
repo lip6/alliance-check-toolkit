@@ -1,0 +1,1355 @@
+
+-- ### -------------------------------------------------------------- ###
+-- # file	: mips_r3000_dp.vbe					#
+-- # date	: Oct 10 2005						#
+-- # version	: v1.2							#
+-- #									#
+-- # origin	: this description has been developed at LIP6		#
+-- #		  University Paris 6 - Pierre et Marie Curie		#
+-- #		  4 Place Jussieu 75252 Paris Cedex 05 - France		#
+-- #									#
+-- # descr.	: data flow description of a five stage pipelined Mips	#
+-- #		  R3000 processor					#
+-- #									#
+-- # authors	: Pirouz Bazargan Sabet					#
+-- ### -------------------------------------------------------------- ###
+
+entity MIPS_R3000_1M_DP is
+
+port (
+  signal CK          : in    bit                          ;-- external clock
+
+  signal I           : in    bit_vector ( 31 downto 0)    ;-- instruction
+
+  signal D_IN        : in    bit_vector ( 31 downto 0)    ;-- data (input )
+  signal D_OUT       : out   bit_vector ( 31 downto 0)    ;-- data (output)
+
+  signal ADDR        : out   bit_vector ( 31 downto 0)    ;-- address
+
+  signal RSDNBR_SD   : in    bit_vector (31 downto 0)     ;-- source reg nbr
+  signal RTDNBR_SD   : in    bit_vector (31 downto 0)     ;-- source reg nbr
+
+  signal HZ_SDM_SD   : in    bit                          ;-- s = d(i-2)
+  signal HZ_SDMW_SD  : in    bit                          ;-- s = d(i-3,i-2)
+  signal HZ_TDM_SD   : in    bit                          ;-- t = d(i-2)
+  signal HZ_TDMW_SD  : in    bit                          ;-- t = d(i-3,i-2)
+
+  signal HZ_SDM_SE   : in    bit                          ;-- s = d(i-1)
+  signal HZ_SDMW_SE  : in    bit                          ;-- s = d(i-2,i-1)
+  signal HZ_TDM_SE   : in    bit                          ;-- t = d(i-1)
+  signal HZ_TDMW_SE  : in    bit                          ;-- t = d(i-2,i-1)
+
+  signal I_JR_SD     : in    bit                          ;-- jump register
+  signal BTAKEN_SD   : in    bit                          ;-- branch taken
+  signal I_ALLJ_SD   : in    bit                          ;-- all jumps
+  signal I_LINK_SD   : in    bit                          ;-- link inst
+
+  signal IOPSEL_SD   : in    bit_vector ( 3 downto 0)     ;-- i oper select
+
+  signal IMDSGN_SD   : in    bit                          ;-- imd sign
+  signal I_RSGND_SE  : in    bit                          ;-- signed result
+
+  signal I_IFMT_SE   : in    bit                          ;-- i format
+  signal I_OPER_SE   : in    bit_vector ( 6 downto 0)     ;-- alu operation
+  signal I_LOGIC_SE  : in    bit_vector ( 1 downto 0)     ;-- logic operation
+  signal I_SUB_SE    : in    bit                          ;-- subtract
+  signal I_RIGHT_SE  : in    bit                          ;-- shift right
+
+  signal SETBIT_SE   : in    bit                          ;-- result for set
+
+  signal DATEXT_SM   : in    bit                          ;-- data extension
+  signal BYTSUB_SM   : in    bit_vector ( 3 downto 1)     ;-- byte substitute
+  signal DACCESS_SM  : in    bit                          ;-- data access
+  signal READ_SM     : in    bit                          ;-- read operation
+
+  signal BUBBLE_SI   : in    bit                          ;-- introduce  bubble
+  signal HOLD_SI     : in    bit                          ;-- hold   the inst
+  signal NOTHOLD_SI  : in    bit                          ;-- don't hold inst
+  signal SHIFT_SI    : in    bit                          ;-- shift  new inst
+  signal KEEP_SI     : in    bit                          ;-- keep   the data
+  signal LOAD_SI     : in    bit                          ;-- load a new data
+
+  signal NOTSTALL_SD : in    bit                          ;-- don't hold inst
+  signal BUBBLE_SD   : in    bit                          ;-- introduce bubble
+  signal HOLD_SD     : in    bit                          ;-- hold   the inst
+  signal NOTHOLD_SD  : in    bit                          ;-- don't hold inst
+  signal SHIFT_SD    : in    bit                          ;-- shift  new inst
+  signal KEEP_SD     : in    bit                          ;-- keep   the data
+  signal LOAD_SD     : in    bit                          ;-- load a new data
+
+  signal BUBBLE_SE   : in    bit                          ;-- introduce bubble
+  signal HOLD_SE     : in    bit                          ;-- hold   the inst
+  signal NOTHOLD_SE  : in    bit                          ;-- don't hold inst
+  signal SHIFT_SE    : in    bit                          ;-- shift  new inst
+  signal KEEP_SE     : in    bit                          ;-- keep   the data
+  signal LOAD_SE     : in    bit                          ;-- load a new data
+
+  signal BUBBLE_SM   : in    bit                          ;-- introduce bubble
+  signal HOLD_SM     : in    bit                          ;-- hold   the inst
+  signal NOTHOLD_SM  : in    bit                          ;-- don't hold inst
+  signal SHIFT_SM    : in    bit                          ;-- shift  new inst
+  signal KEEP_SM     : in    bit                          ;-- keep   the data
+  signal LOAD_SM     : in    bit                          ;-- load a new data
+
+  signal WREG_SW     : in    bit_vector (31 downto 0)     ;-- integer reg wen
+  signal WREDOPC_SE  : in    bit                          ;-- redopc write en
+
+  signal WLO_SW      : in    bit                          ;-- low reg write en
+  signal WHI_SW      : in    bit                          ;-- high reg write en
+
+  signal WEPC_XX     : in    bit                          ;-- epc write en
+  signal WEPC_XM     : in    bit                          ;-- epc write en
+
+  signal BOOTEV_XX   : in    bit                          ;-- bootstrap exc
+
+  signal BADIA_XM    : in    bit                          ;-- bad inst adr
+  signal BADDA_XM    : in    bit                          ;-- bad data adr
+
+  signal LUI_SD      : in    bit                          ;-- lui inst
+
+  signal SHAMT_SE    : in    bit_vector ( 4 downto 0)     ;-- shift amount
+
+  signal RESET_XX    : in    bit                          ;-- synchro reset
+  signal WNXTPC_XX   : in    bit                          ;-- nxt inst ad wen
+
+  signal SR_CR_SD    : in    bit_vector (31 downto  0)    ;-- status/cause
+  signal BE_SD       : in    bit                          ;-- bad ad reg/epc
+  signal SCBE_SD     : in    bit                          ;-- c0 reg selection
+
+  signal BDSLOT_SE   : in    bit                          ;
+  signal BDSLOT_SM   : in    bit                          ;
+
+  signal CARITH_32_SE: out   bit                          ;
+  signal CARITH_31_SE: out   bit                          ;
+  signal RARITH_31_SE: out   bit                          ;
+  signal NEXTPC_1_SE : out   bit                          ;
+  signal NEXTPC_0_SE : out   bit                          ;
+  signal NEXTPC_31_SE: out   bit                          ;
+
+  signal RES_SM      : out   bit_vector (31 downto  0)    ;
+
+  signal S_31_SD     : out   bit                          ;-- s (31)
+  signal S_EQ_T_SD   : out   bit                          ;-- s =  t
+  signal S_EQ_Z_SD   : out   bit                          ;-- s = 0
+
+  signal S_4_0_SE    : out   bit_vector ( 4 downto  0)    ;-- s (4 downto 0)
+
+  signal TEST        : in    bit                          ;-- test mode
+  signal SCIN        : in    bit                          ;-- scan in
+  signal SCOUT       : out   bit                          ;-- scan out
+
+  signal VDD         : in    bit                          ;--
+  signal VSS         : in    bit
+  );
+
+end MIPS_R3000_1M_DP;
+
+--
+
+-- ### -------------------------------------------------------------- ###
+-- #   internal description - contains the following sections:		#
+-- #									#
+-- #      - internal signal and register declarations			#
+-- #      - constant declarations					#
+-- #      - instructions' table						#
+-- #      - signals and registers expression				#
+-- #									#
+-- #   Note : Each signal or register is suffixed by two letters. The	#
+-- #          second letter identifies the pipe stage in which the	#
+-- #          signal or the register is assigned:			#
+-- #            - I : Instruction Fetch					#
+-- #            - D : Instruction Decode				#
+-- #            - E : Execute						#
+-- #            - M : Memory Access					#
+-- #            - W : Write Back					#
+-- #            - X : Unknown - signal not related to the execution of	#
+-- #                  an instruction					#
+-- #									#
+-- #         The first letter identifies the type of the signal:	#
+-- #            - R : a register					#
+-- #            - S : signal related to the normal execution		#
+-- #            - X : signal related to the interrupt or exception	#
+-- #                  mechanisms					#
+-- ### -------------------------------------------------------------- ###
+
+architecture BEHAVIOURAL of MIPS_R3000_1M_DP is
+
+signal CK_SX       : bit                              ;-- internal clock
+
+signal I_RI        : reg_vector (31 downto 0) register;-- instruction reg
+signal I_RD        : reg_vector (31 downto 0) register;-- instruction reg
+signal I_RE        : reg_vector (31 downto 0) register;-- instruction reg
+signal I_RM        : reg_vector (31 downto 0) register;-- instruction reg
+
+signal JADR_SD     : bit_vector (31 downto 0)         ;-- next inst address
+signal BADR_SD     : bit_vector (31 downto 0)         ;-- next inst address
+signal NEXTPC_SD   : bit_vector (31 downto 0)         ;-- next inst address
+signal NEXTPC_XX   : bit_vector (31 downto 0)         ;-- next inst adr (hw)
+signal NEXTPC_RD   : reg_vector (31 downto 0) register;-- next inst address
+signal NEXTPC_RE   : reg_vector (31 downto 0) register;-- next inst address
+
+signal PC_RI       : reg_vector (31 downto 0) register;-- instruction address
+signal PC_RD       : reg_vector (31 downto 0) register;-- instruction address
+signal PC_RE       : reg_vector (31 downto 0) register;-- instruction address
+signal REDOPC_RE   : reg_vector (31 downto 0) register;-- old inst address
+
+signal S_SD        : bit_vector (31 downto 0)         ;-- s from reg bank
+signal S_MW_SD     : bit_vector (31 downto 0)         ;-- effective s oper
+signal SOPER_SD    : bit_vector (31 downto 0)         ;-- effective s oper
+signal SOPER_RD    : reg_vector (31 downto 0) register;-- effective s oper
+
+signal T_SD        : bit_vector (31 downto 0)         ;-- t from reg bank
+signal T_MW_SD     : bit_vector (31 downto 0)         ;-- effective t oper
+signal TOPER_SD    : bit_vector (31 downto 0)         ;-- effective t oper
+signal EFFTO_SD    : bit_vector (31 downto 0)         ;-- effective t oper
+signal TOPER_RD    : reg_vector (31 downto 0) register;-- effective t oper
+
+signal S_MW_SE     : bit_vector (31 downto 0)         ;-- s operand
+signal SOPER_SE    : bit_vector (31 downto 0)         ;-- s operand
+signal XARITH_SE   : bit_vector (31 downto 0)         ;-- x oper for arithm
+
+signal T_MW_SE     : bit_vector (31 downto 0)         ;-- t operand
+signal TOPER_SE    : bit_vector (31 downto 0)         ;-- t operand
+signal YARITH_SE   : bit_vector (31 downto 0)         ;-- y oper for arithm
+
+signal COP0OP_SD   : bit_vector (31 downto 0)         ;-- cop 0 source opr
+signal BR_EPC_SD   : bit_vector (31 downto 0)         ;-- bad ad reg/epc
+
+signal OTHERI_SD   : bit_vector (31 downto 0)         ;-- immediate oper
+signal IOPER_SD    : bit_vector (31 downto 0)         ;-- eff immediate oper
+signal IOPER_RD    : reg_vector (31 downto 0) register;-- eff immediate oper
+
+signal S_CP_T_SD   : bit_vector (31 downto 0)         ;-- compare s & t
+
+signal IMDSEX_SD   : bit_vector (15 downto 0)         ;-- offset extension
+signal OFFSET_SD   : bit_vector (31 downto 0)         ;-- address offset
+
+signal SEQADR_SD   : bit_vector (31 downto 0)         ;-- sequential inst adr
+signal SEQCRY_SD   : bit_vector (32 downto 0)         ;-- carry (+ 4)
+
+signal JMPADR_SD   : bit_vector (31 downto 0)         ;-- jump address
+signal BRAADR_SD   : bit_vector (31 downto 0)         ;-- branch address
+signal BRACRY_SD   : bit_vector (32 downto 0)         ;-- carry (+ offset)
+
+signal R1_RW       : reg_vector (31 downto 0) register;-- integer reg # 1
+signal R2_RW       : reg_vector (31 downto 0) register;-- integer reg # 2
+signal R3_RW       : reg_vector (31 downto 0) register;-- integer reg # 3
+signal R4_RW       : reg_vector (31 downto 0) register;-- integer reg # 4
+signal R5_RW       : reg_vector (31 downto 0) register;-- integer reg # 5
+signal R6_RW       : reg_vector (31 downto 0) register;-- integer reg # 6
+signal R7_RW       : reg_vector (31 downto 0) register;-- integer reg # 7
+signal R8_RW       : reg_vector (31 downto 0) register;-- integer reg # 8
+signal R9_RW       : reg_vector (31 downto 0) register;-- integer reg # 9
+signal R10_RW      : reg_vector (31 downto 0) register;-- integer reg #10
+signal R11_RW      : reg_vector (31 downto 0) register;-- integer reg #11
+signal R12_RW      : reg_vector (31 downto 0) register;-- integer reg #12
+signal R13_RW      : reg_vector (31 downto 0) register;-- integer reg #13
+signal R14_RW      : reg_vector (31 downto 0) register;-- integer reg #14
+signal R15_RW      : reg_vector (31 downto 0) register;-- integer reg #15
+signal R16_RW      : reg_vector (31 downto 0) register;-- integer reg #16
+signal R17_RW      : reg_vector (31 downto 0) register;-- integer reg #17
+signal R18_RW      : reg_vector (31 downto 0) register;-- integer reg #18
+signal R19_RW      : reg_vector (31 downto 0) register;-- integer reg #19
+signal R20_RW      : reg_vector (31 downto 0) register;-- integer reg #20
+signal R21_RW      : reg_vector (31 downto 0) register;-- integer reg #21
+signal R22_RW      : reg_vector (31 downto 0) register;-- integer reg #22
+signal R23_RW      : reg_vector (31 downto 0) register;-- integer reg #23
+signal R24_RW      : reg_vector (31 downto 0) register;-- integer reg #24
+signal R25_RW      : reg_vector (31 downto 0) register;-- integer reg #25
+signal R26_RW      : reg_vector (31 downto 0) register;-- integer reg #26
+signal R27_RW      : reg_vector (31 downto 0) register;-- integer reg #27
+signal R28_RW      : reg_vector (31 downto 0) register;-- integer reg #28
+signal R29_RW      : reg_vector (31 downto 0) register;-- integer reg #29
+signal R30_RW      : reg_vector (31 downto 0) register;-- integer reg #30
+signal R31_RW      : reg_vector (31 downto 0) register;-- integer reg #31
+signal LO_RW       : reg_vector (31 downto 0) register;-- low register
+signal HI_RW       : reg_vector (31 downto 0) register;-- high register
+signal CARITH_SE   : bit_vector (32 downto 0)         ;-- carry  in arithm
+signal RARITH_SE   : bit_vector (31 downto 0)         ;-- result of arithm
+
+signal XOPER_SE    : bit_vector (31 downto 0)         ;-- effective x operand
+signal YOPER_SE    : bit_vector (31 downto 0)         ;-- effective y operand
+
+signal SHIFTIN_SE  : bit_vector (31 downto 0)         ;-- shift in
+signal SHRIGHT_SE  : bit_vector (31 downto 0)         ;-- right shift result
+signal SHLEFT_SE   : bit_vector (31 downto 0)         ;-- left  shift result
+signal RSHIFT_SE   : bit_vector (31 downto 0)         ;-- shifter's result
+
+signal AND_SE      : bit_vector (31 downto 0)         ;-- logic oper. result
+signal OR_SE       : bit_vector (31 downto 0)         ;-- logic oper. result
+signal XOR_SE      : bit_vector (31 downto 0)         ;-- logic oper. result
+signal ORNOR_SE    : bit_vector (31 downto 0)         ;-- logic oper. result
+signal ANDXOR_SE   : bit_vector (31 downto 0)         ;-- logic oper. result
+signal RLOGIC_SE   : bit_vector (31 downto 0)         ;-- logic oper. result
+
+signal RTEST_SE    : bit_vector (31 downto 0)         ;-- test oper. result
+
+signal RA_RT_SE    : bit_vector (31 downto 0)         ;-- arith/test result
+signal SO_TO_SE    : bit_vector (31 downto 0)         ;-- soper/toper
+signal I_S_T_SE    : bit_vector (31 downto 0)         ;-- ioper/soper/toper
+
+signal RES_SE      : bit_vector (31 downto 0)         ;-- result out of alu
+signal RES_RE      : reg_vector (31 downto 0) register;-- result out of alu
+
+signal WDATA_RE    : reg_vector (31 downto 0) register;-- data bus output reg
+
+signal D_15X_SM    : bit_vector (31 downto 8)         ;-- read data
+signal D_31X_SM    : bit_vector (31 downto 8)         ;-- read data
+signal D_EXT_SM    : bit_vector (31 downto 8)         ;-- read data
+signal DATA_E_SM   : bit_vector (31 downto 0)         ;-- read data
+signal DATA_O_SM   : bit_vector (31 downto 0)         ;-- read data
+signal DATA_X_SM   : bit_vector (31 downto 0)         ;-- read data
+
+signal REDDAT_SM   : bit_vector (31 downto 0)         ;-- aligned data
+
+signal DATA_SM     : bit_vector (31 downto 0)         ;-- data bus / res
+signal DATA_RM     : reg_vector (31 downto 0) register;-- data bus input reg
+
+signal BADVADR_RM  : reg_vector (31 downto 0) register;-- bad virtual adr reg
+
+signal EPC_XX      : bit_vector (31 downto 0)         ;-- exc pg counter
+signal EPC_XM      : bit_vector (31 downto 0)         ;-- exc pg counter
+signal EPC_RX      : reg_vector (31 downto 0) register;-- exc pg counter reg
+
+-- 
+
+constant R0_RW      : bit_vector (31 downto 0) := X"00000000" ;
+
+constant nop_i      : bit_vector (31 downto 0) := X"00000021" ;-- addu 0,0,0
+
+constant m_writ_w   : bit_vector ( 1 downto 0) := "00"        ;-- write word
+constant m_writ_h   : bit_vector ( 1 downto 0) := "10"        ;-- write half
+constant m_writ_b   : bit_vector ( 1 downto 0) := "11"        ;-- write byte
+constant m_read_w   : bit_vector ( 1 downto 0) := "01"        ;-- read  byte
+
+constant excphnd_a  : bit_vector (31 downto 0) := X"80000080" ;-- handler adr
+constant boothnd_a  : bit_vector (31 downto 0) := X"bfc00180" ;-- handler adr
+constant reset_a    : bit_vector (31 downto 0) := X"bfc00000" ;-- reset   adr
+
+constant badvaddr_s : bit_vector ( 4 downto 0) := B"01000"    ;-- badvaddr
+constant status_s   : bit_vector ( 4 downto 0) := B"01100"    ;-- status
+constant cause_s    : bit_vector ( 4 downto 0) := B"01101"    ;-- cause
+constant epc_s      : bit_vector ( 4 downto 0) := B"01110"    ;-- epc
+constant prid_s     : bit_vector ( 4 downto 0) := B"01111"    ;-- prid
+
+constant r_fmt_o    : bit_vector ( 3 downto 0) := B"0001"     ;-- r format
+constant i_fmt_o    : bit_vector ( 3 downto 0) := B"0010"     ;-- i format
+constant j_fmt_o    : bit_vector ( 3 downto 0) := B"0100"     ;-- j format
+constant illgl_o    : bit_vector ( 3 downto 0) := B"1000"     ;-- illegal ins
+
+constant d_use_st_o : bit_vector ( 3 downto 0) := "1011"      ;-- dec use st
+constant d_use_s_o  : bit_vector ( 3 downto 0) := "1010"      ;-- dec use s
+constant d_use_t_o  : bit_vector ( 3 downto 0) := "1001"      ;-- dec use  t
+constant e_use_st_o : bit_vector ( 3 downto 0) := "0111"      ;-- exe use st
+constant e_use_s_o  : bit_vector ( 3 downto 0) := "0110"      ;-- exe use s
+constant e_use_t_o  : bit_vector ( 3 downto 0) := "0101"      ;-- exe use  t
+constant no_use_o   : bit_vector ( 3 downto 0) := "0000"      ;-- no  oper
+
+constant o_signd_o  : bit                      := '1'         ;-- signed
+constant o_usign_o  : bit                      := '0'         ;-- unsigned
+
+constant arith_o    : bit_vector ( 6 downto 0) := B"001_0001" ;-- arith  oper
+constant test_o     : bit_vector ( 6 downto 0) := B"000_0001" ;-- test   oper
+constant logic_o    : bit_vector ( 6 downto 0) := B"000_0010" ;-- logic  oper
+constant shift_o    : bit_vector ( 6 downto 0) := B"000_0100" ;-- shift  oper
+constant soper_o    : bit_vector ( 6 downto 0) := B"010_1000" ;-- take s oper
+constant toper_o    : bit_vector ( 6 downto 0) := B"000_1000" ;-- take t oper
+constant ioper_o    : bit_vector ( 6 downto 0) := B"100_1000" ;-- take i oper
+
+constant add_o      : bit_vector ( 1 downto 0) := B"00"       ;-- add oper
+constant sub_o      : bit_vector ( 1 downto 0) := B"01"       ;-- sub oper
+
+constant sleft_o    : bit_vector ( 1 downto 0) := B"00"       ;-- shift left
+constant sright_o   : bit_vector ( 1 downto 0) := B"01"       ;-- shift right
+
+constant or_o       : bit_vector ( 1 downto 0) := B"00"       ;-- or  oper
+constant and_o      : bit_vector ( 1 downto 0) := B"01"       ;-- and oper
+constant xor_o      : bit_vector ( 1 downto 0) := B"11"       ;-- xor oper
+constant nor_o      : bit_vector ( 1 downto 0) := B"10"       ;-- nor oper
+
+constant r_signd_o  : bit                      := '1'         ;-- sign   res
+constant r_usign_o  : bit                      := '0'         ;-- unsign res
+
+constant ovr_o      : bit                      := '1'         ;--    overflow
+constant nov_o      : bit                      := '0'         ;-- no overflow
+
+constant e_pdc_rd_o : bit_vector ( 2 downto 0) := B"010"      ;-- res out exe
+constant e_pdc_31_o : bit_vector ( 2 downto 0) := B"011"      ;-- res out exe
+constant m_pdc_rd_o : bit_vector ( 2 downto 0) := B"100"      ;-- res out mem
+constant no_pdc_o   : bit_vector ( 2 downto 0) := B"000"      ;-- no result
+
+constant nobra_o    : bit                      := '0'         ;-- no branch
+constant brnch_o    : bit                      := '1'         ;-- branch
+
+constant loadw_o    : bit_vector ( 4 downto 0) := B"10001"    ;-- load word
+constant loadh_o    : bit_vector ( 4 downto 0) := B"10010"    ;-- load half
+constant loadb_o    : bit_vector ( 4 downto 0) := B"10100"    ;-- load byte
+constant storw_o    : bit_vector ( 4 downto 0) := B"01001"    ;-- store word
+constant storh_o    : bit_vector ( 4 downto 0) := B"01010"    ;-- store half
+constant storb_o    : bit_vector ( 4 downto 0) := B"01100"    ;-- store byte
+constant swapw_o    : bit_vector ( 4 downto 0) := B"11001"    ;-- swap word
+constant nomem_o    : bit_vector ( 4 downto 0) := B"00000"    ;-- no access
+
+-- 
+
+	-- ### ------------------------------------------------------ ###
+	-- #   instruction set table:					#
+	-- #     Opcods in lower case are MIPS R3000 instructions	#
+	-- #     Opcods in upper case are application specific		#
+	-- #								#
+	-- #								#
+	-- #   primary opcod (31 downto 26):				#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 |speci|bcond|  j  | jal | beq | bne |blez |bgtz |	#
+	-- #  1 |addi |addui|slti |sltui|andi | ori |xori | lui |	#
+	-- #  2 |cop0 |  +  |  +  |  +  |     |  +  |     |     |	#
+	-- #  3 |  +  |  +  |     |     |     |     |     |     |	#
+	-- #  4 | lb  | lh  |  +  | lw  | lbu | lhu |  +  |SWAP |	#
+	-- #  5 | sb  | sh  |  +  | sw  |     |     |  +  |     |	#
+	-- #  6 |  +  |  +  |  +  |  +  |  +  |  +  |  +  |  +  |	#
+	-- #  7 |  +  |  +  |  +  |  +  |  +  |  +  |  +  |  +  |	#
+	-- #								#
+	-- #								#
+	-- # special opcod extension (5 downto 0):			#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 | sll |     | srl | sra |sllv |     |srlv |srav |	#
+	-- #  1 | jr  |jalr |     |     |sysca|break|     |SLEEP|	#
+	-- #  2 |mfhi |mthi |mflo |mtlo |     |     |     |     |	#
+	-- #  3 |  +  |  +  |  +  |  +  |     |     |     |     |	#
+	-- #  4 | add |addu | sub |subu | and | or  | xor | nor |	#
+	-- #  5 |     |     | slt |sltu |     |     |     |     |	#
+	-- #  6 |     |     |     |     |  +  |  +  |  +  |  +  |	#
+	-- #  7 |     |     |     |     |  +  |  +  |  +  |  +  |	#
+	-- #								#
+	-- #								#
+	-- # bcond opcod extension (20 downto 16):			#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 |bltz |bgez |     |     |     |     |     |     |	#
+	-- #  1 |     |     |     |     |     |     |     |     |	#
+	-- #  2 |bltza|bgeza|     |     |     |     |     |     |	#
+	-- #  3 |     |     |     |     |     |     |     |     |	#
+	-- #								#
+	-- #								#
+	-- # cop0 opcod extension (22, 21, 16 / 25, 24, 23):		#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 | mf  | mt  |  +  |  +  | c0  | c0  | c0  | c0  |	#
+	-- #  1 | mf  | mt  |  +  |  +  | c0  | c0  | c0  | c0  |	#
+	-- #  2 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  3 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  4 |  +  |  +  |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  5 |  +  |  +  |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  6 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #  7 |     |     |     |     | c0  | c0  | c0  | c0  |	#
+	-- #								#
+	-- #								#
+	-- # c0 cop0 extension extension (4 downto 0):			#
+	-- #    |  0     1     2     3     4     5     6     7		#
+	-- #  --+-----+-----+-----+-----+-----+-----+-----+-----+	#
+	-- #  0 |  +  |  +  |  +  |     |     |     |  +  |     |	#
+	-- #  1 |  +  |     |     |     |     |     |     |     |	#
+	-- #  2 | rfe |     |     |     |     |     |     |     |	#
+	-- #  3 |  +  |     |     |     |     |     |     |     |	#
+	-- #								#
+	-- ### ------------------------------------------------------ ###
+
+constant special_g  : bit_vector ( 1 downto 0) := B"00"       ;	-- special ins.
+constant bcond_g    : bit_vector ( 2 downto 0) := B"010"      ;	-- bcond ins.
+constant cop0_g     : bit_vector ( 1 downto 0) := B"10"       ;	-- copro. 0
+constant others_g   : bit_vector ( 1 downto 0) := B"11"       ;	-- other ins.
+
+constant special_i  : bit_vector ( 5 downto 0) := B"000_000"  ;	-- special
+constant bcond_i    : bit_vector ( 5 downto 0) := B"000_001"  ;	-- bcond
+constant cop0_i     : bit_vector ( 5 downto 0) := B"010_000"  ;	-- copro 0
+
+constant add_i      : bit_vector ( 7 downto 0) := B"00_100000";	-- md add
+constant addi_i     : bit_vector ( 7 downto 0) := B"11_001000";	-- md addi
+constant addu_i     : bit_vector ( 7 downto 0) := B"00_100001";	-- md addu
+constant addui_i    : bit_vector ( 7 downto 0) := B"11_001001";	-- md addui
+constant and_i      : bit_vector ( 7 downto 0) := B"00_100100";	-- md and
+constant andi_i     : bit_vector ( 7 downto 0) := B"11_001100";	-- md andi
+constant beq_i      : bit_vector ( 7 downto 0) := B"11_000100";	-- md beq
+constant bgez_i     : bit_vector ( 7 downto 0) := B"010_00001";	-- m  bgez
+constant bgezal_i   : bit_vector ( 7 downto 0) := B"010_10001";	-- m  bgezal
+constant bgtz_i     : bit_vector ( 7 downto 0) := B"11_000111";	-- m  bgtz
+constant blez_i     : bit_vector ( 7 downto 0) := B"11_000110";	-- m  blez
+constant bltz_i     : bit_vector ( 7 downto 0) := B"010_00000";	-- m  bltz
+constant bltzal_i   : bit_vector ( 7 downto 0) := B"010_10000";	-- m  bltzal
+constant bne_i      : bit_vector ( 7 downto 0) := B"11_000101";	-- md bne
+constant break_i    : bit_vector ( 7 downto 0) := B"00_001101";	-- m  break
+constant j_i        : bit_vector ( 7 downto 0) := B"11_000010";	-- md j
+constant jal_i      : bit_vector ( 7 downto 0) := B"11_000011";	-- md jal
+constant jalr_i     : bit_vector ( 7 downto 0) := B"00_001001";	-- md jalr
+constant jr_i       : bit_vector ( 7 downto 0) := B"00_001000";	-- md jr
+constant lb_i       : bit_vector ( 7 downto 0) := B"11_100000";	-- md lb
+constant lbu_i      : bit_vector ( 7 downto 0) := B"11_100100";	-- md lbu
+constant lh_i       : bit_vector ( 7 downto 0) := B"11_100001";	-- md lh
+constant lhu_i      : bit_vector ( 7 downto 0) := B"11_100101";	-- md lhu
+constant lui_i      : bit_vector ( 7 downto 0) := B"11_001111";	-- md lui
+constant lw_i       : bit_vector ( 7 downto 0) := B"11_100011";	-- md lw
+constant mfc0_i     : bit_vector ( 7 downto 0) := B"10_000000";	-- m  mfc0
+constant mtc0_i     : bit_vector ( 7 downto 0) := B"10_000001";	-- m  mtc0
+constant nor_i      : bit_vector ( 7 downto 0) := B"00_100111";	-- m  nor
+constant or_i       : bit_vector ( 7 downto 0) := B"00_100101";	-- md or
+constant ori_i      : bit_vector ( 7 downto 0) := B"11_001101";	-- md ori
+constant rfe_i      : bit_vector ( 7 downto 0) := B"10_110000";	-- m  rfe
+constant sb_i       : bit_vector ( 7 downto 0) := B"11_101000";	-- md sb
+constant sh_i       : bit_vector ( 7 downto 0) := B"11_101001";	-- md sh
+constant sleep_i    : bit_vector ( 7 downto 0) := B"00_001111";	--    sleep
+constant sll_i      : bit_vector ( 7 downto 0) := B"00_000000";	-- md sll
+constant sllv_i     : bit_vector ( 7 downto 0) := B"00_000100";	-- md sllv
+constant slt_i      : bit_vector ( 7 downto 0) := B"00_101010";	-- md slt
+constant slti_i     : bit_vector ( 7 downto 0) := B"11_001010";	-- md slti
+constant sltu_i     : bit_vector ( 7 downto 0) := B"00_101011";	-- md sltu
+constant sltui_i    : bit_vector ( 7 downto 0) := B"11_001011";	-- md sltui
+constant srl_i      : bit_vector ( 7 downto 0) := B"00_000010";	-- md srl
+constant srlv_i     : bit_vector ( 7 downto 0) := B"00_000110";	-- md srlv
+constant sra_i      : bit_vector ( 7 downto 0) := B"00_000011";	-- md sra
+constant srav_i     : bit_vector ( 7 downto 0) := B"00_000111";	-- md srav
+constant sub_i      : bit_vector ( 7 downto 0) := B"00_100010";	-- md sub
+constant subu_i     : bit_vector ( 7 downto 0) := B"00_100011";	-- md subu
+constant sw_i       : bit_vector ( 7 downto 0) := B"11_101011";	-- md sw
+constant swap_i     : bit_vector ( 7 downto 0) := B"11_100111";	--    swap
+constant syscall_i  : bit_vector ( 7 downto 0) := B"00_001100";	-- m  syscall
+constant xor_i      : bit_vector ( 7 downto 0) := B"00_100110";	-- md xor
+constant xori_i     : bit_vector ( 7 downto 0) := B"11_001110";	-- md xori
+
+constant mfhi_i     : bit_vector ( 7 downto 0) := B"00_010000";	-- m  mfhi
+constant mthi_i     : bit_vector ( 7 downto 0) := B"00_010001";	-- m  mthi
+constant mflo_i     : bit_vector ( 7 downto 0) := B"00_010010";	-- m  mflo
+constant mtlo_i     : bit_vector ( 7 downto 0) := B"00_010011";	-- m  mtlo
+
+-- 
+begin
+
+-- ### -------------------------------------------------------------- ###
+-- #   internal description:						#
+-- #									#
+-- #   The following lines describes in details an implementation of	#
+-- # the Mips R3000 Risc architecture.					#
+-- #									#
+-- #   The description does NOT include cache memories, nor virtual to	#
+-- # real address translation mechanism (virtual memory not supported).	#
+-- # Also, the description contains only integer instructions excluding	#
+-- # the multiply and divide instructions.				#
+-- #									#
+-- #   The implementation includes 32 integer registers organized as a	#
+-- # register file (2 read access and 1 write access), the HI and LO	#
+-- # registers (although multiply and divide are not implemented) and	#
+-- # the coprocessor zero's registers: the Exception Program Counter	#
+-- # (EPC), the Status Register (SR), the Cause Register (CAUSE), the	#
+-- # Bad Virtual Address Register (BADVADR) and the Processor Revision	#
+-- # Identifier (PRID). The other registers of the coprocessor zero are	#
+-- # not implemented.							#
+-- #									#
+-- #   Instructions are executed in a 5 stage pipeline:			#
+-- #        IFC : Instruction Fetch					#
+-- #        DEC : Instruction Decode					#
+-- #        EXE : Execute						#
+-- #        MEM : Memory Access						#
+-- #        WBK : Write Back						#
+-- #									#
+-- #   All instructions follows the same execution scheme: in IFC, the	#
+-- # instruction is fetched from the memory; in DEC, operands are	#
+-- # prepared and the next instruction address is computed; in EXE, the	#
+-- # operation is performed; in MEM, the data memory is accessed; and	#
+-- # in WBK, the content of the register file is modified.		#
+-- #									#
+-- #   A global pipeline control mechanism guaranties the correct	#
+-- # execution of dependent instructions. Most of data hazards on	#
+-- # integer registers are resolved by bypasses. Data hazards on	#
+-- # integer registers that cannot be resolved by bypass produce	#
+-- # pipeline bubbles (one or two cycles).				#
+-- #									#
+-- #   There is no dependency control mechanism on coprocessor zero's	#
+-- # registers.								#
+-- #									#
+-- #   There is no dependency control mechanism on LO and HI registers	#
+-- #									#
+-- #   Registers are synchronized on the rising edge of the clock.	#
+-- #									#
+-- #   Notes:								#
+-- #     Move to Coprocessor Zero (mtc0):				#
+-- #       Registers of coprocessor zero are written in MEM.		#
+-- #									#
+-- #     Move from Coprocessor Zero (mfc0):				#
+-- #       Registers of coprocessor zero are read in DEC.		#
+-- #									#
+-- #     Move from LO or HI (mflo, mfhi):				#
+-- #       Registers are read in DEC.					#
+-- ### -------------------------------------------------------------- ###
+
+	-- ### ------------------------------------------------------ ###
+	-- #   check power supplies					#
+	-- ### ------------------------------------------------------ ###
+
+CHECK_POWER : assert  ((VDD = '1') and (VSS = '0'))
+              report  "missing power supply on data path"
+              severity WARNING;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   internal clocks						#
+	-- ### ------------------------------------------------------ ###
+
+CK_SX <= CK;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   Read source registers from the register bank		#
+	-- ### ------------------------------------------------------ ###
+
+with RSDNBR_SD select
+S_SD (31 downto 0) <= R0_RW       when X"0000_0001",
+                      R1_RW       when X"0000_0002",
+                      R2_RW       when X"0000_0004",
+                      R3_RW       when X"0000_0008",
+                      R4_RW       when X"0000_0010",
+                      R5_RW       when X"0000_0020",
+                      R6_RW       when X"0000_0040",
+                      R7_RW       when X"0000_0080",
+                      R8_RW       when X"0000_0100",
+                      R9_RW       when X"0000_0200",
+                      R10_RW      when X"0000_0400",
+                      R11_RW      when X"0000_0800",
+                      R12_RW      when X"0000_1000",
+                      R13_RW      when X"0000_2000",
+                      R14_RW      when X"0000_4000",
+                      R15_RW      when X"0000_8000",
+                      R16_RW      when X"0001_0000",
+                      R17_RW      when X"0002_0000",
+                      R18_RW      when X"0004_0000",
+                      R19_RW      when X"0008_0000",
+                      R20_RW      when X"0010_0000",
+                      R21_RW      when X"0020_0000",
+                      R22_RW      when X"0040_0000",
+                      R23_RW      when X"0080_0000",
+                      R24_RW      when X"0100_0000",
+                      R25_RW      when X"0200_0000",
+                      R26_RW      when X"0400_0000",
+                      R27_RW      when X"0800_0000",
+                      R28_RW      when X"1000_0000",
+                      R29_RW      when X"2000_0000",
+                      R30_RW      when X"4000_0000",
+                      R31_RW      when X"8000_0000",
+                      X"00000000" when others      ;
+
+with RTDNBR_SD select
+T_SD (31 downto 0) <= R0_RW       when X"0000_0001",
+                      R1_RW       when X"0000_0002",
+                      R2_RW       when X"0000_0004",
+                      R3_RW       when X"0000_0008",
+                      R4_RW       when X"0000_0010",
+                      R5_RW       when X"0000_0020",
+                      R6_RW       when X"0000_0040",
+                      R7_RW       when X"0000_0080",
+                      R8_RW       when X"0000_0100",
+                      R9_RW       when X"0000_0200",
+                      R10_RW      when X"0000_0400",
+                      R11_RW      when X"0000_0800",
+                      R12_RW      when X"0000_1000",
+                      R13_RW      when X"0000_2000",
+                      R14_RW      when X"0000_4000",
+                      R15_RW      when X"0000_8000",
+                      R16_RW      when X"0001_0000",
+                      R17_RW      when X"0002_0000",
+                      R18_RW      when X"0004_0000",
+                      R19_RW      when X"0008_0000",
+                      R20_RW      when X"0010_0000",
+                      R21_RW      when X"0020_0000",
+                      R22_RW      when X"0040_0000",
+                      R23_RW      when X"0080_0000",
+                      R24_RW      when X"0100_0000",
+                      R25_RW      when X"0200_0000",
+                      R26_RW      when X"0400_0000",
+                      R27_RW      when X"0800_0000",
+                      R28_RW      when X"1000_0000",
+                      R29_RW      when X"2000_0000",
+                      R30_RW      when X"4000_0000",
+                      R31_RW      when X"8000_0000",
+                      X"00000000" when others      ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compute effective operands (bypass)			#
+	-- ### ------------------------------------------------------ ###
+
+S_MW_SD  <= RES_RE   when (HZ_SDM_SD  = '1') else
+            DATA_RM  ;
+
+SOPER_SD <= S_MW_SD  when (HZ_SDMW_SD = '1') else
+            S_SD     ;
+
+T_MW_SD  <= RES_RE   when (HZ_TDM_SD  = '1') else
+            DATA_RM  ;
+
+TOPER_SD <= T_MW_SD  when (HZ_TDMW_SD = '1') else
+            T_SD     ;
+
+EFFTO_SD <= I_RI     when (LUI_SD     = '1') else
+            TOPER_SD ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   read the special register to be transfered into an	#
+	-- # integer register (mfc0 instruction)			#
+	-- ### ------------------------------------------------------ ###
+
+BR_EPC_SD <= BADVADR_RM  when (BE_SD   = '1') else
+             EPC_RX      ;
+
+COP0OP_SD <= SR_CR_SD    when (SCBE_SD = '1') else
+             BR_EPC_SD   ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compute immediate operand				#
+	-- #								#
+	-- #   immediate operand selection :				#
+	-- #     - mfc0          : 0001					#
+	-- #     - mflo          : 0010					#
+	-- #     - mfhi          : 0100					#
+	-- #     - i format inst : 1000					#
+	-- ### ------------------------------------------------------ ###
+
+IMDSEX_SD <= X"FFFF" when (IMDSGN_SD = '1') else
+             X"0000" ;
+
+with IOPSEL_SD select
+OTHERI_SD <= COP0OP_SD                      when "0001" ,
+             LO_RW                          when "0010" ,
+             HI_RW                          when "0100" ,
+             IMDSEX_SD & I_RI (15 downto 0) when "1000" ,
+             X"00000000"                    when others ;
+
+IOPER_SD  <= SEQADR_SD when (I_LINK_SD = '1') else
+             OTHERI_SD ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compute the offset to be added to the current		#
+	-- # instruction address :					#
+	-- #   - short offset for conditional branches			#
+	-- ### ------------------------------------------------------ ###
+
+OFFSET_SD (31 downto 18) <= X"FFF" & "11" when (I_RI (15) = '1') else
+                            X"000" & "00" ;
+
+OFFSET_SD (17 downto  0) <= I_RI (15 downto 0) & B"00";
+
+	-- ### ------------------------------------------------------ ###
+	-- #   next instruction address adders :			#
+	-- #     - replace low order bits for jumps			#
+	-- #     - add the offset         for branches			#
+	-- #     - add 4                  for branches and other inst.	#
+	-- ### ------------------------------------------------------ ###
+
+JMPADR_SD               <= NEXTPC_RD (31 downto 28) &
+                           I_RI      (25 downto  0) & "00";
+
+BRAADR_SD               <= NEXTPC_RD    xor BRACRY_SD (31 downto 0)  xor
+                           OFFSET_SD    ;
+
+BRACRY_SD (0)           <= '0';
+
+BRACRY_SD (32 downto 1) <= (NEXTPC_RD   and OFFSET_SD              ) or
+                           (NEXTPC_RD   and BRACRY_SD (31 downto 0)) or
+                           (OFFSET_SD   and BRACRY_SD (31 downto 0)) ;
+
+SEQADR_SD               <= NEXTPC_RD    xor SEQCRY_SD (31 downto 0)  xor
+                           X"00000004"  ;
+
+SEQCRY_SD (0)           <= '0';
+
+SEQCRY_SD (32 downto 1) <= (NEXTPC_RD   and X"00000004"             ) or
+                           (NEXTPC_RD   and SEQCRY_SD  (31 downto 0)) or
+                           (X"00000004" and SEQCRY_SD  (31 downto 0)) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   conditional branches' condition				#
+	-- ### ------------------------------------------------------ ###
+
+S_CP_T_SD  <= SOPER_SD xor TOPER_SD;
+S_EQ_T_SD  <= '1' when (S_CP_T_SD = X"00000000") else '0' ;
+S_EQ_Z_SD  <= '1' when (SOPER_SD  = X"00000000") else '0' ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   next instruction's address				#
+	-- ### ------------------------------------------------------ ###
+
+JADR_SD   <= SOPER_SD  when (I_JR_SD   = '1') else JMPADR_SD ;
+BADR_SD   <= BRAADR_SD when (BTAKEN_SD = '1') else SEQADR_SD ;
+NEXTPC_SD <= JADR_SD   when (I_ALLJ_SD = '1') else BADR_SD   ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   effective operands (bypasses)				#
+	-- ### ------------------------------------------------------ ###
+
+S_MW_SE  <= RES_RE   when (HZ_SDM_SE  = '1') else
+            DATA_RM  ;
+
+SOPER_SE <= S_MW_SE  when (HZ_SDMW_SE = '1') else
+            SOPER_RD ;
+
+T_MW_SE  <= RES_RE   when (HZ_TDM_SE  = '1') else
+            DATA_RM  ;
+
+TOPER_SE <= T_MW_SE  when (HZ_TDMW_SE = '1') else
+            TOPER_RD ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   operands							#
+	-- ### ------------------------------------------------------ ###
+
+XOPER_SE <= SOPER_SE ;
+YOPER_SE <= IOPER_RD when (I_IFMT_SE = '1') else TOPER_SE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   operands for arithmetic operations			#
+	-- ### ------------------------------------------------------ ###
+
+XARITH_SE <=     XOPER_SE ;
+
+YARITH_SE <=     YOPER_SE when (I_SUB_SE = '0') else
+             not YOPER_SE ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   arithmetic result					#
+	-- ### ------------------------------------------------------ ###
+
+RARITH_SE               <=  XARITH_SE xor CARITH_SE (31 downto 0) xor
+                            YARITH_SE ;
+
+CARITH_SE (0)           <= I_SUB_SE;
+
+CARITH_SE (32 downto 1) <= (XARITH_SE and YARITH_SE (31 downto 0)) or
+                           (XARITH_SE and CARITH_SE (31 downto 0)) or
+                           (YARITH_SE and CARITH_SE (31 downto 0)) ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   test and set unit's result				#
+	-- ### ------------------------------------------------------ ###
+
+RTEST_SE <= X"0000000" & B"000" & SETBIT_SE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   shifter's result						#
+	-- ### ------------------------------------------------------ ###
+
+with (I_RIGHT_SE and I_RSGND_SE and YOPER_SE (31)) select
+SHIFTIN_SE <= X"FFFFFFFF" when '1',
+              X"00000000" when '0';
+
+with SHAMT_SE (4 downto 0) select
+SHLEFT_SE <=
+  YOPER_SE (31 downto 0)                                when B"00000",
+  YOPER_SE (30 downto 0) & SHIFTIN_SE (31)              when B"00001",
+  YOPER_SE (29 downto 0) & SHIFTIN_SE (31 downto 30)    when B"00010",
+  YOPER_SE (28 downto 0) & SHIFTIN_SE (31 downto 29)    when B"00011",
+  YOPER_SE (27 downto 0) & SHIFTIN_SE (31 downto 28)    when B"00100",
+  YOPER_SE (26 downto 0) & SHIFTIN_SE (31 downto 27)    when B"00101",
+  YOPER_SE (25 downto 0) & SHIFTIN_SE (31 downto 26)    when B"00110",
+  YOPER_SE (24 downto 0) & SHIFTIN_SE (31 downto 25)    when B"00111",
+  YOPER_SE (23 downto 0) & SHIFTIN_SE (31 downto 24)    when B"01000",
+  YOPER_SE (22 downto 0) & SHIFTIN_SE (31 downto 23)    when B"01001",
+  YOPER_SE (21 downto 0) & SHIFTIN_SE (31 downto 22)    when B"01010",
+  YOPER_SE (20 downto 0) & SHIFTIN_SE (31 downto 21)    when B"01011",
+  YOPER_SE (19 downto 0) & SHIFTIN_SE (31 downto 20)    when B"01100",
+  YOPER_SE (18 downto 0) & SHIFTIN_SE (31 downto 19)    when B"01101",
+  YOPER_SE (17 downto 0) & SHIFTIN_SE (31 downto 18)    when B"01110",
+  YOPER_SE (16 downto 0) & SHIFTIN_SE (31 downto 17)    when B"01111",
+  YOPER_SE (15 downto 0) & SHIFTIN_SE (31 downto 16)    when B"10000",
+  YOPER_SE (14 downto 0) & SHIFTIN_SE (31 downto 15)    when B"10001",
+  YOPER_SE (13 downto 0) & SHIFTIN_SE (31 downto 14)    when B"10010",
+  YOPER_SE (12 downto 0) & SHIFTIN_SE (31 downto 13)    when B"10011",
+  YOPER_SE (11 downto 0) & SHIFTIN_SE (31 downto 12)    when B"10100",
+  YOPER_SE (10 downto 0) & SHIFTIN_SE (31 downto 11)    when B"10101",
+  YOPER_SE (9  downto 0) & SHIFTIN_SE (31 downto 10)    when B"10110",
+  YOPER_SE (8  downto 0) & SHIFTIN_SE (31 downto  9)    when B"10111",
+  YOPER_SE (7  downto 0) & SHIFTIN_SE (31 downto  8)    when B"11000",
+  YOPER_SE (6  downto 0) & SHIFTIN_SE (31 downto  7)    when B"11001",
+  YOPER_SE (5  downto 0) & SHIFTIN_SE (31 downto  6)    when B"11010",
+  YOPER_SE (4  downto 0) & SHIFTIN_SE (31 downto  5)    when B"11011",
+  YOPER_SE (3  downto 0) & SHIFTIN_SE (31 downto  4)    when B"11100",
+  YOPER_SE (2  downto 0) & SHIFTIN_SE (31 downto  3)    when B"11101",
+  YOPER_SE (1  downto 0) & SHIFTIN_SE (31 downto  2)    when B"11110",
+  YOPER_SE (0)           & SHIFTIN_SE (31 downto  1)    when B"11111";
+
+with SHAMT_SE (4 downto 0) select
+SHRIGHT_SE <=
+                              YOPER_SE (31 downto  0)   when B"00000",
+  SHIFTIN_SE (31)           & YOPER_SE (31 downto  1)   when B"00001",
+  SHIFTIN_SE (31 downto 30) & YOPER_SE (31 downto  2)   when B"00010",
+  SHIFTIN_SE (31 downto 29) & YOPER_SE (31 downto  3)   when B"00011",
+  SHIFTIN_SE (31 downto 28) & YOPER_SE (31 downto  4)   when B"00100",
+  SHIFTIN_SE (31 downto 27) & YOPER_SE (31 downto  5)   when B"00101",
+  SHIFTIN_SE (31 downto 26) & YOPER_SE (31 downto  6)   when B"00110",
+  SHIFTIN_SE (31 downto 25) & YOPER_SE (31 downto  7)   when B"00111",
+  SHIFTIN_SE (31 downto 24) & YOPER_SE (31 downto  8)   when B"01000",
+  SHIFTIN_SE (31 downto 23) & YOPER_SE (31 downto  9)   when B"01001",
+  SHIFTIN_SE (31 downto 22) & YOPER_SE (31 downto 10)   when B"01010",
+  SHIFTIN_SE (31 downto 21) & YOPER_SE (31 downto 11)   when B"01011",
+  SHIFTIN_SE (31 downto 20) & YOPER_SE (31 downto 12)   when B"01100",
+  SHIFTIN_SE (31 downto 19) & YOPER_SE (31 downto 13)   when B"01101",
+  SHIFTIN_SE (31 downto 18) & YOPER_SE (31 downto 14)   when B"01110",
+  SHIFTIN_SE (31 downto 17) & YOPER_SE (31 downto 15)   when B"01111",
+  SHIFTIN_SE (31 downto 16) & YOPER_SE (31 downto 16)   when B"10000",
+  SHIFTIN_SE (31 downto 15) & YOPER_SE (31 downto 17)   when B"10001",
+  SHIFTIN_SE (31 downto 14) & YOPER_SE (31 downto 18)   when B"10010",
+  SHIFTIN_SE (31 downto 13) & YOPER_SE (31 downto 19)   when B"10011",
+  SHIFTIN_SE (31 downto 12) & YOPER_SE (31 downto 20)   when B"10100",
+  SHIFTIN_SE (31 downto 11) & YOPER_SE (31 downto 21)   when B"10101",
+  SHIFTIN_SE (31 downto 10) & YOPER_SE (31 downto 22)   when B"10110",
+  SHIFTIN_SE (31 downto  9) & YOPER_SE (31 downto 23)   when B"10111",
+  SHIFTIN_SE (31 downto  8) & YOPER_SE (31 downto 24)   when B"11000",
+  SHIFTIN_SE (31 downto  7) & YOPER_SE (31 downto 25)   when B"11001",
+  SHIFTIN_SE (31 downto  6) & YOPER_SE (31 downto 26)   when B"11010",
+  SHIFTIN_SE (31 downto  5) & YOPER_SE (31 downto 27)   when B"11011",
+  SHIFTIN_SE (31 downto  4) & YOPER_SE (31 downto 28)   when B"11100",
+  SHIFTIN_SE (31 downto  3) & YOPER_SE (31 downto 29)   when B"11101",
+  SHIFTIN_SE (31 downto  2) & YOPER_SE (31 downto 30)   when B"11110",
+  SHIFTIN_SE (31 downto  1) & YOPER_SE (31)             when B"11111";
+
+RSHIFT_SE <= SHRIGHT_SE when (I_RIGHT_SE = '1') else
+             SHLEFT_SE  ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   logic unit's result					#
+	-- #     - or_o   := B"00"					#
+	-- #     - nor_o  := B"10"					#
+	-- #     - and_o  := B"01"					#
+	-- #     - xor_o  := B"11"					#
+	-- ### ------------------------------------------------------ ###
+
+AND_SE    <= XOPER_SE and YOPER_SE;
+OR_SE     <= XOPER_SE or  YOPER_SE;
+XOR_SE    <= AND_SE   xor OR_SE   ;
+
+ORNOR_SE  <= not OR_SE     when (I_LOGIC_SE (1) = '1') else OR_SE   ;
+ANDXOR_SE <=     XOR_SE    when (I_LOGIC_SE (1) = '1') else AND_SE  ;
+RLOGIC_SE <=     ANDXOR_SE when (I_LOGIC_SE (0) = '1') else ORNOR_SE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   result out of alu					#
+	-- #     - arith_o  := B"001_0001"				#
+	-- #     - test_o   := B"000_0001"				#
+	-- #     - logic_o  := B"000_0010"				#
+	-- #     - shift_o  := B"000_0100"				#
+	-- #     - soper_o  := B"010_1000"				#
+	-- #     - toper_o  := B"000_1000"				#
+	-- #     - ioper_o  := B"100_1000"				#
+	-- ### ------------------------------------------------------ ###
+
+RA_RT_SE <= RARITH_SE when (I_OPER_SE (4) = '1') else RTEST_SE;
+SO_TO_SE <= SOPER_SE  when (I_OPER_SE (5) = '1') else TOPER_sE;
+I_S_T_SE <= IOPER_RD  when (I_OPER_SE (6) = '1') else SO_TO_SE;
+
+with I_OPER_SE (3 downto 0) select
+RES_SE  <= RA_RT_SE     when B"0001",
+           RLOGIC_SE    when B"0010",
+           RSHIFT_SE    when B"0100",
+           I_S_T_SE     when B"1000",
+           X"0000_0000" when others ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   data alignment and zero or sign extension		#
+	-- ### ------------------------------------------------------ ###
+
+D_15X_SM  <= X"FFFFFF" when (D_IN (15) = '1') else X"000000";
+D_31X_SM  <= X"FFFFFF" when (D_IN (31) = '1') else X"000000";
+D_EXT_SM  <= X"FFFFFF" when (DATEXT_SM = '1') else X"000000";
+
+DATA_E_SM (31 downto  0) <=
+                             D_IN (31 downto  0) when (RES_RE (1) = '0') else
+  D_31X_SM  (31 downto 16) & D_IN (31 downto 16) ;
+
+DATA_O_SM (31 downto  0) <=
+  D_15X_SM  (31 downto  8) & D_IN (15 downto  8) when (RES_RE (1) = '0') else
+  D_31X_SM  (31 downto  8) & D_IN (31 downto 24) ;
+
+DATA_X_SM (31 downto  0) <=
+  DATA_E_SM (31 downto  0)                       when (RES_RE (0) = '0') else
+  DATA_O_SM (31 downto  0)                       ;
+
+REDDAT_SM ( 7 downto  0) <=
+  DATA_X_SM ( 7 downto  0) ;
+
+REDDAT_SM (15 downto  8) <=
+  DATA_X_SM (15 downto  8) when (BYTSUB_SM (1) = '0') else
+  D_EXT_SM  (15 downto  8) ;
+
+REDDAT_SM (23 downto 16) <=
+  DATA_X_SM (23 downto 16) when (BYTSUB_SM (2) = '0') else
+  D_EXT_SM  (23 downto 16) ;
+
+REDDAT_SM (31 downto 24) <=
+  DATA_X_SM (31 downto 24) when (BYTSUB_SM (3) = '0') else
+  D_EXT_SM  (31 downto 24) ;
+
+DATA_SM <= REDDAT_SM when (READ_SM = '1') else
+           RES_RE    ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   compute the next instruction address:			#
+	-- #								#
+	-- #    - in case of reset					#
+	-- #    - in case of interrupt or exception during the bootstrap#
+	-- #    - in case of interrupt or exception			#
+	-- ### ------------------------------------------------------ ###
+
+NEXTPC_XX <= reset_a   when (RESET_XX  = '1') else
+             boothnd_a when (BOOTEV_XX = '1') else
+             excphnd_a ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   prepare the data to be written into the Exception	#
+	-- # Program Counter register:					#
+	-- #								#
+	-- #     - interrupt:						#
+	-- #         the address of the first unexecuted instruction is	#
+	-- #         saved unless the first unexecuted instruction is	#
+	-- #         in the delayed slot of a branch instruction in	#
+	-- #         which case the address of the branch instruction	#
+	-- #         is saved.						#
+	-- #     - exception:						#
+	-- #         the address of the faulty instruction is saved	#
+	-- #         unless the faulty instruction is in the delayed	#
+	-- #         slot of a branch instruction in which case the	#
+	-- #         address of the branch instruction is saved.	#
+	-- ### ------------------------------------------------------ ###
+
+EPC_XX  <= PC_RD     when (BDSLOT_SE = '0') else REDOPC_RE ;
+EPC_XM  <= PC_RE     when (BDSLOT_SM = '0') else REDOPC_RE ;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Instruction Fetch cycle					#
+	-- ### ------------------------------------------------------ ###
+
+IFC_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_RI      <= guarded nop_i      when (BUBBLE_SI = '1') else
+                       I_RI       when (HOLD_SI   = '1') else
+                       I          ;
+  PC_RI     <= guarded PC_RI      when (KEEP_SI   = '1') else
+                       NEXTPC_RD  ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Instruction Decode cycle					#
+	-- #								#
+	-- #  nextpc :							#
+	-- #     - in case of hardware events (reset, exception or	#
+	-- #       interrupt) set the next address to a known value	#
+	-- #       (reset or interrupt handler address). In other cases	#
+	-- #       nextpc is considered as a data register.		#
+	-- ### ------------------------------------------------------ ###
+
+DEC_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_RD       <= guarded nop_i      when (BUBBLE_SD = '1') else
+                        I_RD       when (HOLD_SD   = '1') else
+                        I_RI       ;
+
+  NEXTPC_RD  <= guarded NEXTPC_XX  when (WNXTPC_XX = '1') else
+                        NEXTPC_RD  when (KEEP_SD   = '1') else
+                        NEXTPC_SD  ;
+
+  PC_RD      <= guarded PC_RD      when (HOLD_SD   = '1') else
+                        PC_RI      ;
+
+  SOPER_RD   <= guarded SOPER_SE   when (KEEP_SD   = '1') else
+                        SOPER_SD   ;
+  TOPER_RD   <= guarded TOPER_SE   when (KEEP_SD   = '1') else
+                        EFFTO_SD   ;
+  IOPER_RD   <= guarded IOPER_RD   when (KEEP_SD   = '1') else
+                        IOPER_SD   ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Execute cycle						#
+	-- #								#
+	-- #   copycap:							#
+	-- #     when the instruction has been duplicated, the copying	#
+	-- #     capability falls to zero				#
+	-- ### ------------------------------------------------------ ###
+
+EXE_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_RE       <= guarded nop_i      when (BUBBLE_SE = '1') else
+                        I_RE       when (HOLD_SE   = '1') else
+                        I_RD       ;
+
+  PC_RE      <= guarded PC_RE      when (HOLD_SE   = '1') else
+                        PC_RD      ;
+
+  NEXTPC_RE  <= guarded NEXTPC_RE  when (KEEP_SE   = '1') else
+                        NEXTPC_RD  ;
+  RES_RE     <= guarded RES_RE     when (KEEP_SE   = '1') else
+                        RES_SE     ;
+  WDATA_RE   <= guarded WDATA_RE   when (KEEP_SE   = '1') else
+                        TOPER_SE   ;
+end block;
+
+REDOPC : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  REDOPC_RE <= guarded REDOPC_RE   when (WREDOPC_SE  = '0') else
+                       PC_RD       ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Memory Access cycle					#
+	-- ### ------------------------------------------------------ ###
+
+MEM_CYCLE : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  I_RM       <= guarded nop_i      when (BUBBLE_SM = '1') else
+                        I_RM       when (HOLD_SM   = '1') else
+                        I_RE       ;
+  DATA_RM    <= guarded DATA_RM    when (KEEP_SM   = '1') else
+                        DATA_SM    ;
+end block;
+
+BADVADR : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  BADVADR_RM <= guarded RES_RE     when (BADDA_XM = '1') else
+                        NEXTPC_RE  when (BADIA_XM = '1') else
+                        BADVADR_RM ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign registers (those related to a pipeline cycle)	#
+	-- # Write Back cycle						#
+	-- #								#
+	-- #     - low and high registers				#
+	-- #     - integer registers					#
+	-- ### ------------------------------------------------------ ###
+
+LO : block (CK_SX = '1' and not CK_SX'STABLE and WLO_SW = '1')
+begin
+  LO_RW <= guarded DATA_RM;
+end block;
+
+HI : block (CK_SX = '1' and not CK_SX'STABLE and WHI_SW = '1')
+begin
+  HI_RW <= guarded DATA_RM;
+end block;
+
+R1  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 1) = '1')
+begin
+  R1_RW  <= guarded DATA_RM;
+end block;
+
+R2  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 2) = '1')
+begin
+  R2_RW  <= guarded DATA_RM;
+end block;
+
+R3  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 3) = '1')
+begin
+  R3_RW  <= guarded DATA_RM;
+end block;
+
+R4  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 4) = '1')
+begin
+  R4_RW  <= guarded DATA_RM;
+end block;
+
+R5  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 5) = '1')
+begin
+  R5_RW  <= guarded DATA_RM;
+end block;
+
+R6  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 6) = '1')
+begin
+  R6_RW  <= guarded DATA_RM;
+end block;
+
+R7  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 7) = '1')
+begin
+  R7_RW  <= guarded DATA_RM;
+end block;
+
+R8  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 8) = '1')
+begin
+  R8_RW  <= guarded DATA_RM;
+end block;
+
+R9  : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW ( 9) = '1')
+begin
+  R9_RW  <= guarded DATA_RM;
+end block;
+
+R10 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (10) = '1')
+begin
+  R10_RW <= guarded DATA_RM;
+end block;
+
+R11 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (11) = '1')
+begin
+  R11_RW <= guarded DATA_RM;
+end block;
+
+R12 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (12) = '1')
+begin
+  R12_RW <= guarded DATA_RM;
+end block;
+
+R13 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (13) = '1')
+begin
+  R13_RW <= guarded DATA_RM;
+end block;
+
+R14 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (14) = '1')
+begin
+  R14_RW <= guarded DATA_RM;
+end block;
+
+R15 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (15) = '1')
+begin
+  R15_RW <= guarded DATA_RM;
+end block;
+
+R16 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (16) = '1')
+begin
+  R16_RW <= guarded DATA_RM;
+end block;
+
+R17 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (17) = '1')
+begin
+  R17_RW <= guarded DATA_RM;
+end block;
+
+R18 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (18) = '1')
+begin
+  R18_RW <= guarded DATA_RM;
+end block;
+
+R19 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (19) = '1')
+begin
+  R19_RW <= guarded DATA_RM;
+end block;
+
+R20 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (20) = '1')
+begin
+  R20_RW <= guarded DATA_RM;
+end block;
+
+R21 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (21) = '1')
+begin
+  R21_RW <= guarded DATA_RM;
+end block;
+
+R22 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (22) = '1')
+begin
+  R22_RW <= guarded DATA_RM;
+end block;
+
+R23 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (23) = '1')
+begin
+  R23_RW <= guarded DATA_RM;
+end block;
+
+R24 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (24) = '1')
+begin
+  R24_RW <= guarded DATA_RM;
+end block;
+
+R25 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (25) = '1')
+begin
+  R25_RW <= guarded DATA_RM;
+end block;
+
+R26 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (26) = '1')
+begin
+  R26_RW <= guarded DATA_RM;
+end block;
+
+R27 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (27) = '1')
+begin
+  R27_RW <= guarded DATA_RM;
+end block;
+
+R28 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (28) = '1')
+begin
+  R28_RW <= guarded DATA_RM;
+end block;
+
+R29 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (29) = '1')
+begin
+  R29_RW <= guarded DATA_RM;
+end block;
+
+R30 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (30) = '1')
+begin
+  R30_RW <= guarded DATA_RM;
+end block;
+
+R31 : block (CK_SX = '1' and not CK_SX'STABLE and WREG_SW (31) = '1')
+begin
+  R31_RW <= guarded DATA_RM;
+end block;
+
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign the the coprocessor zero's registers :		#
+	-- #     the Exception Program Counter register			#
+	-- ### ------------------------------------------------------ ###
+
+EPC : block (CK_SX = '1' and not CK_SX'STABLE)
+begin
+  EPC_RX <= guarded EPC_XM when (WEPC_XM = '1') else
+                    EPC_XX when (WEPC_XX = '1') else
+                    EPC_RX ;
+end block;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs						#
+	-- ### ------------------------------------------------------ ###
+
+S_31_SD  <= SOPER_SD (31         );
+S_4_0_SE <= SOPER_SE ( 4 downto 0);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs						#
+	-- ### ------------------------------------------------------ ###
+
+CARITH_32_SE <= CARITH_SE (32);
+CARITH_31_SE <= CARITH_SE (31);
+RARITH_31_SE <= RARITH_SE (31);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs						#
+	-- #     - next instruction address				#
+	-- ### ------------------------------------------------------ ###
+
+NEXTPC_1_SE  <= NEXTPC_RD ( 1);
+NEXTPC_0_SE  <= NEXTPC_RD ( 0);
+NEXTPC_31_SE <= NEXTPC_RD (31);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs						#
+	-- #    - result out of Execute					#
+	-- ### ------------------------------------------------------ ###
+
+RES_SM <= RES_RE;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (data and instruction address):		#
+	-- ### ------------------------------------------------------ ###
+
+ADDR  <= RES_RE when (DACCESS_SM = '1') else NEXTPC_RD;
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (data output buffers)			#
+	-- ### ------------------------------------------------------ ###
+
+D_OUT <= WDATA_RE (31 downto 0);
+
+	-- ### ------------------------------------------------------ ###
+	-- #   assign outputs (miscellaneous):				#
+	-- ### ------------------------------------------------------ ###
+
+SCOUT   <= '0';
+
+end;

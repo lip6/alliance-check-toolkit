@@ -126,7 +126,7 @@ if __name__ == '__main__':
   if options.script:
     try:
       sys.path.append(os.path.dirname(options.script))
-      print sys.path
+     #print sys.path
 
       module = __import__( options.script, globals(), locals() )
       if not module.__dict__.has_key('ScriptMain'):

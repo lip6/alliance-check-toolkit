@@ -147,7 +147,9 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
  else
    export    MBK_TARGET_LIB = ${CELLS_TOP}/sxlib
    export             DPLIB = ${CELLS_TOP}/dp_sxlib
-   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):${CELLS_TOP}/pxlib
+   export            RF2LIB = ${CELLS_TOP}/rf2lib
+   export            RAMLIB = ${CELLS_TOP}/ramlib
+   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):$(RF2LIB):$(RAMLIB):${CELLS_TOP}/pxlib
    export   RDS_TECHNO_NAME = ${RDS_TECHNO_SYMB}
  endif
 
