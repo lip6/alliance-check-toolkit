@@ -1,3 +1,4 @@
+# -*- explicit-buffer-name: "rules.mk<alliance-check-toolkit>" -*-
 
  UNAME_S          = $(shell uname -s)
  UNAME_R          = $(shell uname -r)
@@ -81,8 +82,9 @@
  endif
 
 # Secondary variables.
- PATTERNS = patterns
- DESIGN   = design
+ PATTERNS  = patterns
+ DESIGN    = design
+
  ifeq ($(USE_STRATUS),Yes)
    ALLIANCE_CHIP = $(CHIP)_alc
    CORIOLIS_CORE = $(CORE)_core
@@ -117,7 +119,10 @@ ASIMUT       = $(ALLIANCE_BIN)/asimut
 OCP          = $(ALLIANCE_BIN)/ocp
 NERO         = $(ALLIANCE_BIN)/nero
 RING         = $(ALLIANCE_BIN)/ring
+FLATPH       = $(ALLIANCE_BIN)/flatph
 S2R          = $(ALLIANCE_BIN)/s2r
+S2R_cif      = export RDS_OUT=cif; \
+               $(ALLIANCE_BIN)/s2r
 GRAAL        = $(ALLIANCE_BIN)/graal
 DREAL        = $(ALLIANCE_BIN)/dreal
 COUGAR       = MBK_OUT_LO=al; export MBK_OUT_LO; \
@@ -139,6 +144,8 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
  export ALLIANCE_TOP
  export CORIOLIS_TOP
  export GRAAL_TECHNO_NAME = ${SYSCONF_TOP}/cmos.graal
+ export RSD_IN            = gds
+ export RSD_OUT           = gds
 
  ifeq ($(USE_MOSIS),Yes)
    export    MBK_TARGET_LIB = ${TOOLKIT_CELLS_TOP}/msxlib
@@ -147,9 +154,10 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
  else
    export    MBK_TARGET_LIB = ${CELLS_TOP}/sxlib
    export             DPLIB = ${CELLS_TOP}/dp_sxlib
+   export             RFLIB = ${CELLS_TOP}/rflib
    export            RF2LIB = ${CELLS_TOP}/rf2lib
    export            RAMLIB = ${CELLS_TOP}/ramlib
-   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):$(RF2LIB):$(RAMLIB):${CELLS_TOP}/pxlib
+   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):$(RFLIB):$(RF2LIB):$(RAMLIB):${CELLS_TOP}/pxlib
    export   RDS_TECHNO_NAME = ${RDS_TECHNO_SYMB}
  endif
 
@@ -186,7 +194,9 @@ endif
 asimut-%  : %.vst $(PATTERNS).pat;  $(ASIMUT)       -zd -nores $* patterns
 %_ocp.ap  : %.vst                ;  $(OCP)          -margin $(MARGIN) -ring $* $*_ocp
 %.ap      : %.vst %_ocp.ap       ;  $(NERO)         -p $*_ocp $* $*
+%_flat.ap : %.ap                 ;  $(FLATPH)       -t $* $*_flat
 %.gds     : %.ap                 ;  $(S2R)          -v -r $*
+%.cif     : %.ap                 ;  $(S2R_cif)      -v -r $*
 %.spi     : %.ap                 ;  $(COUGAR_SPICE) -ar -ac -t $(CORE)
 %.ps      : %.ap                 ;  $(L2P)          -color $*
 druc-%    : %.ap                 ;  $(DRUC)         $*
@@ -240,6 +250,10 @@ else
 	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                           $(DoCHIP) --cell=$*'
 
+%_kite.ap  %_kite.vst:  %.vst  %.ap
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) --route --cell=$*'
+
 endif
 
 %: %.aux %.nets %.nodes %.pl %.scl %.wts
@@ -268,6 +282,9 @@ else
 
 %_kite.ap  %_kite.vst: $(CORIOLIS_CORE).vst  %.vst  %_chip.py
 	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --cell=$*
+
+%_kite.ap  %_kite.vst: %.vst  %.ap
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --route --cell=$*
 
 endif
 
@@ -300,6 +317,7 @@ endif
               *_boog*                   \
               *_loon*                   \
               *_kite*                   \
+              *_u[0-9][0-9]*            \
               *.pyc
 
  ifeq ($(GENERATE_CORE_VST),Yes)
@@ -308,9 +326,13 @@ endif
                 $(CORE).sp            \
                 $(CORE).vbe           \
                 $(CORIOLIS_CORE).vst  \
-                $(CORE).ap    
+                *.ap    
  else	
-   CLEAN_CORE = $(CORIOLIS_CORE).vst
+   CLEAN_CORE = $(CORIOLIS_CORE).vst \
+                $(CORE)_kite.*
+ endif
+ ifneq ($(CORE_ONLY),Yes)
+   CLEAN_CORE += *.ap
  endif
  ifeq ($(USE_STRATUS),Yes)
    CLEAN_STRATUS = *.vst
@@ -319,4 +341,4 @@ endif
  endif
 
 clean:
-	-rm -f $(CLEAN_CHIP) $(CLEAN_CORE) $(CLEAN_STRATUS) *.ap
+	-rm -f $(CLEAN_CHIP) $(CLEAN_CORE) $(CLEAN_STRATUS)

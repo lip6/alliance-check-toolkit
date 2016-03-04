@@ -78,6 +78,7 @@ def ScriptMain ( **kw ):
           etesian.place()
           etesian.destroy()
       if editor: editor.refresh()
+      plugins.RSavePlugin.ScriptMain( **kw )
 
     if doStages & DoRouting:
       routingNets = []
