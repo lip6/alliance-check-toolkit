@@ -146,10 +146,10 @@ DEFINE  LAMBDA         0.09
 
 TABLE MBK_TO_RDS_SEGMENT
 
-  PWELL    RDS_PWELL  VW  0.36  0.0  0.0  ALL \
-           RDS_USER6  VW  0.36  0.0  0.0  DRC
-  NWELL    RDS_NWELL  VW  0.36  0.0  0.0  ALL \
-           RDS_USER3  VW  0.36  0.0  0.0  DRC
+  PWELL    RDS_PWELL  VW  0.00  0.0  0.0  ALL \
+           RDS_USER6  VW  0.00  0.0  0.0  DRC
+  NWELL    RDS_NWELL  VW  0.00  0.0  0.0  ALL \
+           RDS_USER3  VW  0.00  0.0  0.0  DRC
 
 # The NIMP/PIMP layers are not visualised in
 # Graal. If you want to see the layers, change
@@ -218,20 +218,20 @@ TABLE MBK_TO_RDS_SEGMENT
            RDS_NDIF  RCW  0.0   0.27  0.0  EXT \
            RDS_NDIF   VW  0.0   0.72  0.0  DRC \
            RDS_ACTIV  VW  0.0   0.72  0.0  ALL \
-           RDS_NIMP   VW  0.18  1.26  0.0  DRC \
-           RDS_NIMP   VW  0.18  1.26  0.0  DRC \
-           RDS_TVIA4  VW  0.18  1.26  0.0  DRC \
-           RDS_TVIA4  VW  0.18  1.26  0.0  DRC
+           RDS_NIMP   VW  0.0   1.26  0.0  DRC \
+           RDS_NIMP   VW  0.0   1.26  0.0  DRC \
+           RDS_TVIA4  VW  0.0   1.26  0.0  DRC \
+           RDS_TVIA4  VW  0.0   1.26  0.0  DRC
   PTRANS   RDS_POLY   VW  0.27  0.00  0.0  ALL \
            RDS_GATE   VW  0.27  0.00  0.0  DRC \
            RDS_PDIF  LCW  0.0   0.27  0.0  EXT \
            RDS_PDIF  RCW  0.0   0.27  0.0  EXT \
            RDS_PDIF   VW  0.0   0.72  0.0  DRC \
            RDS_ACTIV  VW  0.0   0.72  0.0  ALL \
-           RDS_PIMP   VW  0.18  1.26  0.0  ALL \
-           RDS_PIMP   VW  0.18  1.26  0.0  DRC \
-           RDS_TVIA3  VW  0.18  1.26  0.0  DRC \
-           RDS_TVIA3  VW  0.18  1.26  0.0  DRC
+           RDS_PIMP   VW  0.0   1.26  0.0  ALL \
+           RDS_PIMP   VW  0.0   1.26  0.0  DRC \
+           RDS_TVIA3  VW  0.0   1.26  0.0  DRC \
+           RDS_TVIA3  VW  0.0   1.26  0.0  DRC
   POLY     RDS_POLY   VW  0.09  0.00  0.0  ALL
 
 # POLY2 layer used to define metal-1 which
@@ -1983,8 +1983,8 @@ DRC_COMMENT
 441 4.4  PIMP in PWELL  Width < 0.36um (4 lambda)
 442 4.4  NIMP in NWELL  Width < 0.36um (4 lambda)
 443 4.4  NIMP in NWELL  Width < 0.36um (4 lambda)
-444 4.4  NIMP in PWELL  Width < 0.36um (4 lambda)
-445 4.4  PIMP in NWELL  Width < 0.36um (4 lambda)
+444 4.4  PIMP in PWELL  Space < 0.36um (4 lambda)
+445 4.4  NIMP in NWELL  Space < 0.36um (4 lambda)
 510 5.1  POLY CONTACT  Width > 0.18um (2 lambda)
 511 5.1  POLY CONTACT  Width < 0.18um (2 lambda)
 520 5.2  POLY Overlap of CONTACT < 0.135um (1.5 lambda)

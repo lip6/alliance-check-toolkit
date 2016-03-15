@@ -144,21 +144,27 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
  export ALLIANCE_TOP
  export CORIOLIS_TOP
  export GRAAL_TECHNO_NAME = ${SYSCONF_TOP}/cmos.graal
- export RSD_IN            = gds
- export RSD_OUT           = gds
+ export RDS_IN            = gds
+ export RDS_OUT           = gds
 
- ifeq ($(USE_MOSIS),Yes)
-   export    MBK_TARGET_LIB = ${TOOLKIT_CELLS_TOP}/msxlib
+ ifeq ($(LIBRARY_FAMILY),nsxlib)
+   export    MBK_TARGET_LIB = ${TOOLKIT_CELLS_TOP}/nsxlib
    export      MBK_CATA_LIB = $(MBK_TARGET_LIB):${TOOLKIT_CELLS_TOP}/mpxlib:$(TOOLKIT_CELLS_TOP)/msplib
    export   RDS_TECHNO_NAME = ${RDS_TECHNO_MOSIS}
  else
-   export    MBK_TARGET_LIB = ${CELLS_TOP}/sxlib
-   export             DPLIB = ${CELLS_TOP}/dp_sxlib
-   export             RFLIB = ${CELLS_TOP}/rflib
-   export            RF2LIB = ${CELLS_TOP}/rf2lib
-   export            RAMLIB = ${CELLS_TOP}/ramlib
-   export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):$(RFLIB):$(RF2LIB):$(RAMLIB):${CELLS_TOP}/pxlib
-   export   RDS_TECHNO_NAME = ${RDS_TECHNO_SYMB}
+   ifeq ($(LIBRARY_FAMILY),msxlib)
+     export    MBK_TARGET_LIB = ${TOOLKIT_CELLS_TOP}/msxlib
+     export      MBK_CATA_LIB = $(MBK_TARGET_LIB):${TOOLKIT_CELLS_TOP}/mpxlib:$(TOOLKIT_CELLS_TOP)/msplib
+     export   RDS_TECHNO_NAME = ${RDS_TECHNO_MOSIS}
+   else
+     export    MBK_TARGET_LIB = ${CELLS_TOP}/sxlib
+     export             DPLIB = ${CELLS_TOP}/dp_sxlib
+     export             RFLIB = ${CELLS_TOP}/rflib
+     export            RF2LIB = ${CELLS_TOP}/rf2lib
+     export            RAMLIB = ${CELLS_TOP}/ramlib
+     export      MBK_CATA_LIB = $(MBK_TARGET_LIB):$(DPLIB):$(RFLIB):$(RF2LIB):$(RAMLIB):${CELLS_TOP}/pxlib
+     export   RDS_TECHNO_NAME = ${RDS_TECHNO_SYMB}
+   endif
  endif
 
 
@@ -199,11 +205,11 @@ asimut-%  : %.vst $(PATTERNS).pat;  $(ASIMUT)       -zd -nores $* patterns
 %.cif     : %.ap                 ;  $(S2R_cif)      -v -r $*
 %.spi     : %.ap                 ;  $(COUGAR_SPICE) -ar -ac -t $(CORE)
 %.ps      : %.ap                 ;  $(L2P)          -color $*
-druc-%    : %.ap                 ;  $(DRUC)         $*
+druc-%    : %.ap                 ;  $(DRUC)         $(DRUC_FLAGS) $*
 %_ext.al  : %.ap                 ;  $(COUGAR)       -f $* $*_ext
 lvx-%     : %.vst %_ext.al       ;  $(LVX)          vst al $* $*_ext -f
 lvx-%_kite: %.vst %_kite_ext.al  ;  $(LVX)          vst al $* $*_kite_ext -f
-dreal-%   : %.gds                ;  $(DREAL)        -l $*
+dreal-%   : %.gds                ;  $(DREAL)        --debug -l $*
 graal-%   : %.ap                 ;  $(GRAAL)        -l $*
 graal     :                      ;  $(GRAAL)
 
@@ -263,6 +269,10 @@ cgt:
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          cgt -V'
 
+cgt-%:
+	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                          cgt -V -c $*'
+
 
 else
 
@@ -293,6 +303,9 @@ cgt-view-%: %.ap
 
 cgt:
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v
+
+cgt-%:
+	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v -c $*
 
 ispd-%: %.aux %.nets %.nodes %.pl %.scl %.wts
 	@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt -V --ispd-05=$*

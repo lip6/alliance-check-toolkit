@@ -14,3 +14,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( kite.getCell().getNet( 'adrs(10)' ) )
 #DebugSession.addToTrace( kite.getCell().getNet( 'inst(8)' ) )
 #DebugSession.addToTrace( kite.getCell().getNet( 'datai(0)' ) )
+#DebugSession.addToTrace( kite.getCell().getNet( 'v_alu_b(15)' ) )

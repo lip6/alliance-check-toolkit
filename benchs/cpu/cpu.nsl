@@ -1,0 +1,99 @@
+#define LAI 0x81
+#define LII 0x82
+#define JMP 0x84
+#define JZ  0x85
+#define LA  0x88
+#define LI  0x89
+#define LX  0x8A
+#define SA  0x98
+#define SI  0x99
+#define SX  0x9A
+#define ADI 0xA8
+#define ANI 0xA9
+#define EXI 0xAA
+
+#define INC 0x01
+#define INX 0x02
+#define DEC 0x03
+#define DEX 0x04
+#define SRL 0x05
+#define SLL 0x06
+#define SRA 0x07
+#define ADD 0x08
+#define AND 0x09
+#define EXR 0x0A
+
+
+declare cpu {
+input dbusi[8];
+output dbuso[8];
+output adder[8];
+func_out mread(adder):dbusi;
+func_out mwrite(adder,dbuso);
+}
+
+module cpu {
+reg pc[8]=0, ins[8]=0, op[8], count[8]=0xff;
+reg a[8]=0, i[8]=0;
+proc_name ifetch(pc), ofetch(ins), exop(op), exec();
+wire op1[8], op2[8], res[8], pco[8];
+func_self pcinc():pco; 
+func_self add(op1,op2):res;
+
+func pcinc return(pc++);
+func add { return op1+op2; }
+
+if(count!=0x00) count--;
+if(count==0x01) ifetch(0);
+
+proc ifetch {
+  ofetch(mread(pcinc()));
+}
+
+proc ofetch {
+  any {
+  ins[7]: exop(mread(pcinc()));
+  else:    exec();
+  }
+}
+
+
+proc exop {
+  func_self br_taken();
+  any {
+  ins==LAI: {a:=op; }
+  ins==LII: {i:=op; }
+  ins==JMP: br_taken();
+  ins==JZ:  {if( a==0x00 ) br_taken(); }
+  ins==LA:  {a:=mread(op); }
+  ins==LI:  {i:=mread(op); }
+  ins==LX:  {a:=mread(op+i); }
+  ins==SA:  {mwrite(op,a); }
+  ins==SI:  {mwrite(op,i); }
+  ins==SX:  {mwrite(add(op,i),a); }
+  ins==ADI: {a:=add(a,op); }
+  ins==ANI: {a:=a&op; }
+  ins==EXI: {a:=a^op; }
+  }
+  if(br_taken) ifetch(op);
+  else ifetch(pc);
+}
+
+
+proc exec {
+  any {
+  ins==INC: {a:=add(a,0x01); }
+  ins==INX: {i:=add(i,0x01); }
+  ins==DEC: {a:=add(a,0xff); }
+  ins==DEX: {i:=add(i,0xff); }
+  ins==SRL: {a:={0b0, a[7:1]}; }
+  ins==SLL: {a:={a[6:0], 0b0}; }
+  ins==SRA: {a:={a[7], a[7:1]}; }
+  ins==ADD: {a:=add(a,i); }
+  ins==AND: {a:=a&i; }
+  ins==EXR: {a:=a^i; }
+  }
+  ifetch(pc);
+}
+
+}

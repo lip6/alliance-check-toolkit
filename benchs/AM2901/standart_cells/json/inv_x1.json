@@ -1,0 +1,631 @@
+{
+  "@typename": "Cell",
+  "_id": 0,
+  "_library": "RootLibrary.AllianceFramework.sxlib",
+  "_name": "inv_x1",
+  "_abutmentBox": {
+    "@typename": "Box",
+    "_xMin": 0,
+    "_yMin": 0,
+    "_xMax": 36000,
+    "_yMax": 120000
+  },
+  "+instanceMap": [],
+  "+netMap": [
+    {
+      "@typename": "Net",
+      "_id": 59,
+      "_name": "18onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 60,
+          "_bodyHook": 60,
+          "_anchorHook": 60,
+          "_layer": "CONT_BODY_N",
+          "_dx": 24000,
+          "_dy": 112800,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 57,
+      "_name": "17onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 58,
+          "_bodyHook": 58,
+          "_anchorHook": 58,
+          "_layer": "CONT_POLY",
+          "_dx": 12000,
+          "_dy": 48000,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 33,
+      "_name": "6nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Horizontal",
+          "_id": 34,
+          "_bodyHook": 34,
+          "_sourceHook": 34,
+          "_targetHook": 34,
+          "_layer": "POLY",
+          "_width": 7200,
+          "_y": 48000,
+          "_dxSource": 9600,
+          "_dxTarget": 16800,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 29,
+      "_name": "5nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 30,
+          "_bodyHook": 30,
+          "_sourceHook": 30,
+          "_targetHook": 30,
+          "_layer": "NTRANS",
+          "_width": 2400,
+          "_x": 16800,
+          "_dySource": 14400,
+          "_dyTarget": 33600,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 27,
+      "_name": "4nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 28,
+          "_bodyHook": 28,
+          "_sourceHook": 28,
+          "_targetHook": 28,
+          "_layer": "NDIF",
+          "_width": 7200,
+          "_x": 24000,
+          "_dySource": 19200,
+          "_dyTarget": 28800,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 25,
+      "_name": "3nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 26,
+          "_bodyHook": 26,
+          "_sourceHook": 26,
+          "_targetHook": 26,
+          "_layer": "PTRANS",
+          "_width": 2400,
+          "_x": 16800,
+          "_dySource": 62400,
+          "_dyTarget": 93600,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 23,
+      "_name": "2nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 24,
+          "_bodyHook": 24,
+          "_sourceHook": 24,
+          "_targetHook": 24,
+          "_layer": "PDIF",
+          "_width": 7200,
+          "_x": 24000,
+          "_dySource": 67200,
+          "_dyTarget": 88800,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 21,
+      "_name": "1nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 22,
+          "_bodyHook": 22,
+          "_sourceHook": 22,
+          "_targetHook": 22,
+          "_layer": "METAL1",
+          "_width": 4800,
+          "_x": 24000,
+          "_dySource": 24000,
+          "_dyTarget": 96000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 19,
+      "_name": "0nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 20,
+          "_bodyHook": 20,
+          "_sourceHook": 20,
+          "_targetHook": 20,
+          "_layer": "NTIE",
+          "_width": 7200,
+          "_x": 24000,
+          "_dySource": 103200,
+          "_dyTarget": 115200,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 35,
+      "_name": "7nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 36,
+          "_bodyHook": 36,
+          "_sourceHook": 36,
+          "_targetHook": 36,
+          "_layer": "POLY",
+          "_width": 2400,
+          "_x": 16800,
+          "_dySource": 33600,
+          "_dyTarget": 62400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 37,
+      "_name": "8nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 38,
+          "_bodyHook": 38,
+          "_sourceHook": 38,
+          "_targetHook": 38,
+          "_layer": "METAL1",
+          "_width": 2400,
+          "_x": 12000,
+          "_dySource": 24000,
+          "_dyTarget": 96000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 39,
+      "_name": "9nonymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Horizontal",
+          "_id": 40,
+          "_bodyHook": 40,
+          "_sourceHook": 40,
+          "_targetHook": 40,
+          "_layer": "NWELL",
+          "_width": 57600,
+          "_y": 93600,
+          "_dxSource": 0,
+          "_dxTarget": 36000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 41,
+      "_name": "10onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 42,
+          "_bodyHook": 42,
+          "_sourceHook": 42,
+          "_targetHook": 42,
+          "_layer": "NDIF",
+          "_width": 9600,
+          "_x": 8400,
+          "_dySource": 9600,
+          "_dyTarget": 28800,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 43,
+      "_name": "11onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 44,
+          "_bodyHook": 44,
+          "_sourceHook": 44,
+          "_targetHook": 44,
+          "_layer": "PDIF",
+          "_width": 9600,
+          "_x": 8400,
+          "_dySource": 67200,
+          "_dyTarget": 110400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 47,
+      "_name": "12onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 48,
+          "_bodyHook": 48,
+          "_anchorHook": 48,
+          "_layer": "CONT_DIF_P",
+          "_dx": 24000,
+          "_dy": 72000,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 49,
+      "_name": "13onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 50,
+          "_bodyHook": 50,
+          "_anchorHook": 50,
+          "_layer": "CONT_DIF_P",
+          "_dx": 9600,
+          "_dy": 108000,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 51,
+      "_name": "14onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 52,
+          "_bodyHook": 52,
+          "_anchorHook": 52,
+          "_layer": "CONT_DIF_P",
+          "_dx": 24000,
+          "_dy": 84000,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 53,
+      "_name": "15onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 54,
+          "_bodyHook": 54,
+          "_anchorHook": 54,
+          "_layer": "CONT_DIF_N",
+          "_dx": 9600,
+          "_dy": 12000,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 55,
+      "_name": "16onymous_",
+      "_isGlobal": false,
+      "_isExternal": false,
+      "_isAutomatic": true,
+      "_type": "LOGICAL",
+      "_direction": "---- (UNDEFINED)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Contact",
+          "_id": 56,
+          "_bodyHook": 56,
+          "_anchorHook": 56,
+          "_layer": "CONT_DIF_N",
+          "_dx": 24000,
+          "_dy": 24000,
+          "_width": 2400,
+          "_height": 2400,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 4,
+      "_name": "vss",
+      "_isGlobal": true,
+      "_isExternal": true,
+      "_isAutomatic": false,
+      "_type": "GROUND",
+      "_direction": "i--- (IN)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Horizontal",
+          "_id": 31,
+          "_bodyHook": 31,
+          "_sourceHook": 31,
+          "_targetHook": 31,
+          "_layer": "METAL1",
+          "_width": 14400,
+          "_y": 7200,
+          "_dxSource": 0,
+          "_dxTarget": 36000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 3,
+      "_name": "vdd",
+      "_isGlobal": true,
+      "_isExternal": true,
+      "_isAutomatic": false,
+      "_type": "POWER",
+      "_direction": "i--- (IN)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Horizontal",
+          "_id": 32,
+          "_bodyHook": 32,
+          "_sourceHook": 32,
+          "_targetHook": 32,
+          "_layer": "METAL1",
+          "_width": 14400,
+          "_y": 112800,
+          "_dxSource": 0,
+          "_dxTarget": 36000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 2,
+      "_name": "nq",
+      "_isGlobal": false,
+      "_isExternal": true,
+      "_isAutomatic": false,
+      "_type": "LOGICAL",
+      "_direction": "-o-- (OUT)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 45,
+          "_bodyHook": 45,
+          "_sourceHook": 45,
+          "_targetHook": 45,
+          "_layer": "METAL1",
+          "_width": 4800,
+          "_x": 24000,
+          "_dySource": 24000,
+          "_dyTarget": 96000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    },
+    {
+      "@typename": "Net",
+      "_id": 1,
+      "_name": "i",
+      "_isGlobal": false,
+      "_isExternal": true,
+      "_isAutomatic": false,
+      "_type": "LOGICAL",
+      "_direction": "i--- (IN)",
+      "+aliases": [],
+      "+componentSet": [
+        {
+          "@typename": "Vertical",
+          "_id": 46,
+          "_bodyHook": 46,
+          "_sourceHook": 46,
+          "_targetHook": 46,
+          "_layer": "METAL1",
+          "_width": 4800,
+          "_x": 12000,
+          "_dySource": 24000,
+          "_dyTarget": 96000,
+          "+propertySet": []
+        }
+      ],
+      "+propertySet": []
+    }
+  ],
+  "+propertySet": []
+}

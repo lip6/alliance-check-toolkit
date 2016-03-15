@@ -13,172 +13,104 @@ entity type_dec is
 end type_dec;
 
 architecture structural of type_dec is
-Component an4_x2
+Component o3_x2
    port (
-      a   : in      bit;
-      b   : in      bit;
-      c   : in      bit;
-      d   : in      bit;
-      z   : out     bit;
+      i0  : in      bit;
+      i1  : in      bit;
+      i2  : in      bit;
+      q   : out     bit;
       vdd : in      bit;
       vss : in      bit
  );
 end component;
 
-Component nd2a_x1
+Component a2_x2
    port (
-      b   : in      bit;
-      a   : in      bit;
-      z   : out     bit;
+      i0  : in      bit;
+      i1  : in      bit;
+      q   : out     bit;
       vdd : in      bit;
       vss : in      bit
  );
 end component;
 
-Component iv1_x2
+Component inv_x2
    port (
-      a   : in      bit;
-      z   : out     bit;
+      i   : in      bit;
+      nq  : out     bit;
       vdd : in      bit;
       vss : in      bit
  );
 end component;
 
-Component an3_x2
+Component no3_x1
    port (
-      a   : in      bit;
-      b   : in      bit;
-      c   : in      bit;
-      z   : out     bit;
+      i0  : in      bit;
+      i1  : in      bit;
+      i2  : in      bit;
+      nq  : out     bit;
       vdd : in      bit;
       vss : in      bit
  );
 end component;
 
-Component nr2_x1
-   port (
-      a   : in      bit;
-      b   : in      bit;
-      z   : out     bit;
-      vdd : in      bit;
-      vss : in      bit
- );
-end component;
-
-signal not_n_op     : bit_vector( 3 downto 1);
-signal not_v_net_1  : bit;
-signal not_v_net_0  : bit;
-signal not_n_dec    : bit;
-signal iv1_x2_sig   : bit;
-signal an4_x2_sig   : bit;
-signal an4_x2_2_sig : bit;
+signal not_n_dec  : bit;
+signal not_aux1   : bit;
+signal inv_x2_sig : bit;
 
 begin
 
-iv1_x2_ins : iv1_x2
+not_aux1_ins : o3_x2
    port map (
-      a   => n_op(0),
-      z   => iv1_x2_sig,
+      i0  => n_op(1),
+      i1  => n_op(3),
+      i2  => n_op(2),
+      q   => not_aux1,
       vdd => vdd,
       vss => vss
    );
 
-an4_x2_ins : an4_x2
+not_n_dec_ins : inv_x2
    port map (
-      a   => not_n_op(2),
-      b   => not_n_op(3),
-      c   => not_n_op(1),
-      d   => iv1_x2_sig,
-      z   => an4_x2_sig,
+      i   => n_dec,
+      nq  => not_n_dec,
       vdd => vdd,
       vss => vss
    );
 
-not_v_net_1_ins : nd2a_x1
+n_itype_ins : a2_x2
    port map (
-      b   => an4_x2_sig,
-      a   => not_n_dec,
-      z   => not_v_net_1,
+      i0  => n_dec,
+      i1  => not_aux1,
+      q   => n_itype,
       vdd => vdd,
       vss => vss
    );
 
-an4_x2_2_ins : an4_x2
+n_rtype_ins : no3_x1
    port map (
-      a   => n_op(0),
-      b   => not_n_op(3),
-      c   => not_n_op(2),
-      d   => not_n_op(1),
-      z   => an4_x2_2_sig,
+      i0  => not_n_dec,
+      i1  => not_aux1,
+      i2  => n_op(0),
+      nq  => n_rtype,
       vdd => vdd,
       vss => vss
    );
 
-not_v_net_0_ins : nd2a_x1
+inv_x2_ins : inv_x2
    port map (
-      b   => an4_x2_2_sig,
-      a   => not_n_dec,
-      z   => not_v_net_0,
+      i   => n_op(0),
+      nq  => inv_x2_sig,
       vdd => vdd,
       vss => vss
    );
 
-not_n_dec_ins : iv1_x2
+n_ctype_ins : no3_x1
    port map (
-      a   => n_dec,
-      z   => not_n_dec,
-      vdd => vdd,
-      vss => vss
-   );
-
-not_n_op_3_ins : iv1_x2
-   port map (
-      a   => n_op(3),
-      z   => not_n_op(3),
-      vdd => vdd,
-      vss => vss
-   );
-
-not_n_op_2_ins : iv1_x2
-   port map (
-      a   => n_op(2),
-      z   => not_n_op(2),
-      vdd => vdd,
-      vss => vss
-   );
-
-not_n_op_1_ins : iv1_x2
-   port map (
-      a   => n_op(1),
-      z   => not_n_op(1),
-      vdd => vdd,
-      vss => vss
-   );
-
-n_itype_ins : an3_x2
-   port map (
-      a   => n_dec,
-      b   => not_v_net_0,
-      c   => not_v_net_1,
-      z   => n_itype,
-      vdd => vdd,
-      vss => vss
-   );
-
-n_rtype_ins : nr2_x1
-   port map (
-      a   => not_v_net_1,
-      b   => not_n_dec,
-      z   => n_rtype,
-      vdd => vdd,
-      vss => vss
-   );
-
-n_ctype_ins : nr2_x1
-   port map (
-      a   => not_v_net_0,
-      b   => not_n_dec,
-      z   => n_ctype,
+      i0  => inv_x2_sig,
+      i1  => not_aux1,
+      i2  => not_n_dec,
+      nq  => n_ctype,
       vdd => vdd,
       vss => vss
    );

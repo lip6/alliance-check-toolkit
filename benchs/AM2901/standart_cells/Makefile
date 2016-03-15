@@ -6,15 +6,12 @@
         GENERATE_CORE_VST = No
               USE_STRATUS = No
             USE_CLOCKTREE = Yes
-                USE_MOSIS = No
                 USE_DEBUG = No
 
  include ../../etc/rules.mk
 
  export         MBK_IN_LO = vst
  export        MBK_OUT_LO = vst
- export            RDS_IN = gds
- export           RDS_OUT = gds
 
 
 check:   lvx

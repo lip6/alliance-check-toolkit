@@ -37,6 +37,9 @@
 .. |AM2901|            replace:: :sc:`am2901`
 .. |alliance-run|      replace:: ``alliance-run``
 .. |SNX|               replace:: :sc:`snx`
+.. |MIPS|              replace:: :sc:`mips`
+.. |FPGA|              replace:: :sc:`fpga`
+.. |ISPD05|            replace:: :sc:`ispd05`
 		       
 .. |encounter|         replace:: ``encounter``
 .. |devtoolset-2|      replace:: ``devtoolset-2``
@@ -46,6 +49,9 @@
 .. |ring|              replace:: ``ring``
 .. |sxlib|             replace:: ``sxlib``
 .. |dp_sxlib|          replace:: ``dp_sxlib``
+.. |ramlib|            replace:: ``ramlib``
+.. |rflib|             replace:: ``rflib``
+.. |rf2lib|            replace:: ``rf2lib``
 .. |padlib|            replace:: ``padlib``
 .. |pxlib|             replace:: ``pxlib``
 .. |msxlib|            replace:: ``msxlib``
@@ -103,16 +109,20 @@ The toolkit provides:
 
 * Six benchmark designs:
 
-=============================  ==========================  =====================================
+=============================  ==========================  =======================================
 Design                         Technology                  Cell Libraries
-=============================  ==========================  =====================================
+=============================  ==========================  =======================================
 |adder|                        |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
 |AM2901| (standard cells)      |Alliance| dummy            |sxlib|, |pxlib|
 |AM2901| (datapath)            |Alliance| dummy            |sxlib|, |dp_sxlib|, |pxlib|
-|AM2901|                       |Alliance| dummy            |sxlib|, |pxlib|
 |alliance-run| (|AM2901|)      |Alliance| dummy            |sxlib|, |dp_sxlib|, |padlib|
 |SNX|                          |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
-=============================  ==========================  =====================================
+|MIPS| (microprogrammed)       |Alliance| dummy            |sxlib|, |dp_sxlib|, |rf2lib|
+|MIPS| (pipeline)              |Alliance| dummy            |sxlib|, |dp_sxlib|, |rf2lib|
+|MIPS| (pipeline+chip)         |Alliance| dummy            |sxlib|, |dp_sxlib|, |rf2lib|, |pxlib|
+|FPGA| (``Moc4x4_L4C12``)      |Alliance| dummy            |sxlib|
+|ISPD05| (``bigblue1``)        Aucune                      Genérée à la volée.
+=============================  ==========================  =======================================
 
 * Three cell libraries.
 
@@ -166,6 +176,8 @@ or both.
 +--------------+----------------------+---------------------------------------------------------------+
 
 
+|newpage|
+
 A top |Makefile| in a bench directory must looks like: ::
 
                         CORE = adder
@@ -193,9 +205,6 @@ A top |Makefile| in a bench directory must looks like: ::
 	       
     lvx-alc:   lvx-chip_alc
     druc-alc:  druc-chip_alc
-
-
-|newpage|
 
 Where variables have the following meaning:
 

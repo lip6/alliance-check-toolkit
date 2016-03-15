@@ -24,7 +24,7 @@ parametersTable = \
     , ("kite.vTracksReservedLocal", TypeInt       , 3       )
     )
 
-cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
+cellsTop = os.path.abspath( os.getcwd()+'/../../cells' )
 
 allianceConfig = \
     ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/vsclib'  , Environment.Prepend)

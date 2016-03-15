@@ -16,7 +16,7 @@ parametersTable = \
     , ('misc.paranoid'            , TypeBool      , False )
     , ('misc.logMode'             , TypeBool      , False )
     , ('misc.verboseLevel2'       , TypeBool      , False )
-    , ('misc.verboseLevel1'       , TypeBool      , False )
+    , ('misc.verboseLevel1'       , TypeBool      , True  )
     , ('misc.traceLevel'          , TypeInt       , 5000  )
     # Kite parameters.
 #   , ("kite.eventsLimit"         , TypeInt       , 1     )

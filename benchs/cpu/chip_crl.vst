@@ -1,0 +1,429 @@
+-- Entity Declaration
+
+ENTITY chip_crl IS
+  PORT (
+  ck : in BIT ;
+  rs : in BIT ;
+  a : out BIT_VECTOR (7 downto 0) ;
+  d : inout BIT_VECTOR (7 downto 0) ;
+  w : out BIT ;
+  vdde : in BIT ;	-- vdd
+  vsse : in BIT ;	-- vdd
+  vddi: in BIT ;	-- vdd
+  vssi: in BIT 	-- vss
+  );
+END chip_crl;
+
+-- Architecture Declaration
+
+ARCHITECTURE VST OF chip_crl IS
+
+Component cpu_crl
+PORT(
+  p_reset       : IN BIT;
+  m_clock       : IN BIT;
+  mwrite        : OUT BIT;
+  mread : OUT BIT;
+  adder : OUT BIT_VECTOR(7 DOWNTO 0);
+  dbuso : OUT BIT_VECTOR(7 DOWNTO 0);
+  dbusi : IN BIT_VECTOR(7 DOWNTO 0);
+  vdd   : IN BIT;
+  vss   : IN BIT
+);
+END component;
+
+
+Component pck_mpx
+  port (
+  pad : in BIT;	-- pad
+  ck : out BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pi_mpx
+  port (
+  pad : in BIT;	-- pad
+  t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvddeck_mpx
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvsseck_mpx
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvddick_mpx
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component pvssick_mpx
+  port (
+--   pad : in BIT;	-- pad
+--   t : out BIT;	-- t
+  ck : in BIT;	-- ck
+  cko : out mux_bit bus;	-- cko
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component po_mpx
+  port (
+  i : in BIT;	-- t
+  pad : out BIT;	-- pad
+  ck : in BIT;	-- ck
+  vdde : in BIT;	-- vdde
+  vddi : in BIT;	-- vddi
+  vsse : in BIT;	-- vsse
+  vssi : in BIT	-- vssi
+ );
+end component;
+
+Component piot_mpx
+  PORT (
+  i : in BIT;   
+  b : in BIT;   
+  t : out BIT;  
+  pad : inout MUX_BIT BUS;      
+  ck : in BIT;  
+  vdde : in BIT;        
+  vddi : in BIT;        
+  vsse : in BIT;        
+  vssi : in BIT 
+  );
+END component;
+
+
+signal a_i : bit_vector ( 7 downto 0);
+signal i_i : bit_vector ( 7 downto 0);
+signal o_i : bit_vector ( 7 downto 0);
+signal rs_i : bit;
+signal w_i : bit;
+signal r_i : bit;
+signal cki : bit;
+signal ckc : bit;
+
+
+BEGIN
+
+core : cpu_crl
+  port map (
+  adder => a_i,
+  dbusi => i_i,
+  dbuso => o_i,
+  mwrite  => w_i,
+  mread  => r_i,
+  m_clock => ckc,
+  p_reset => rs_i,
+  vdd => vddi,
+  vss => vssi
+  );
+
+p_ck: pck_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      pad  => ck,
+      ck=>cki
+   );
+
+p_vdde: pvddeck_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+p_vsse: pvsseck_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+
+p_vddi: pvddick_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+p_vssi: pvssick_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      cko  => ckc,
+      ck=>cki
+   );
+
+p_rs : pi_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => rs,
+      t    => rs_i
+   );
+
+
+p_a0 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(0),
+      i    => a_i(0)
+   );
+
+p_a1 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(1),
+      i    => a_i(1)
+   );
+
+p_a2 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(2),
+      i    => a_i(2)
+   );
+
+p_a3 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(3),
+      i    => a_i(3)
+   );
+
+p_a4 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(4),
+      i    => a_i(4)
+   );
+
+p_a5 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(5),
+      i    => a_i(5)
+   );
+
+p_a6 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(6),
+      i    => a_i(6)
+   );
+
+p_a7 : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => a(7),
+      i    => a_i(7)
+   );
+
+p_w : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => w,
+      i    => w_i
+   );
+
+p_d0 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(0),
+      t    => i_i(0),
+      i    => o_i(0)
+   );
+
+p_d1 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(1),
+      t    => i_i(1),
+      i    => o_i(1)
+   );
+
+p_d2 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(2),
+      t    => i_i(2),
+      i    => o_i(2)
+   );
+
+p_d3 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(3),
+      t    => i_i(3),
+      i    => o_i(3)
+   );
+
+p_d4 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(4),
+      t    => i_i(4),
+      i    => o_i(4)
+   );
+
+p_d5 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(5),
+      t    => i_i(5),
+      i    => o_i(5)
+   );
+
+p_d6 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(6),
+      t    => i_i(6),
+      i    => o_i(6)
+   );
+
+p_d7 : piot_mpx
+  port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      b  => w_i,
+      pad  => d(7),
+      t    => i_i(7),
+      i    => o_i(7)
+   );
+
+end VST;

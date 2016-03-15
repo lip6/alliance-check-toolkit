@@ -7,11 +7,26 @@ html: $(DOCUMENT).html
 
 
 $(DOCUMENT).pdf: $(DOCUMENT).tex
-	pdflatex $(DOCUMENT)
-	pdflatex $(DOCUMENT)
+	export TEXINPUTS=./images:${TEXINPUTS}; \
+	latex $(DOCUMENT); \
+	latex $(DOCUMENT); \
+	latex $(DOCUMENT); \
+	dvipdfm $(DOCUMENT)
 
 $(DOCUMENT).tex: $(DOCUMENT).rst socstyle.tex
-	rst2latex --stylesheet=socstyle.tex $(DOCUMENT).rst > $(DOCUMENT).tex
+	rst2latex --stylesheet=socstyle.tex \
+	          --graphicx-option=pdftex  \
+	          $(DOCUMENT).rst > $(DOCUMENT).tex
 
 $(DOCUMENT).html: $(DOCUMENT).rst SoC.css
 	rst2html --stylesheet=./SoC.css $(DOCUMENT).rst > $(DOCUMENT).html
+
+clean:
+	rm -f $(DOCUMENT).html \
+	      $(DOCUMENT).tex  \
+	      $(DOCUMENT).pdf  \
+	      *.log            \
+	      *.out            \
+	      *.aux            \
+	      *.toc            \
+	      *.dvi

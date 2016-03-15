@@ -1,4 +1,4 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/AM2901>" -*-
+# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/MIPS/chip>" -*-
 
                      CHIP = mips_r3000_1m
                   CONTROL = mips_r3000_1m_ct
@@ -6,15 +6,12 @@
         GENERATE_CORE_VST = No
               USE_STRATUS = Yes
             USE_CLOCKTREE = No
-                USE_MOSIS = No
                 USE_DEBUG = No
 
  include ../../etc/rules.mk
 
  export         MBK_IN_LO = vst
  export        MBK_OUT_LO = vst
- export            RDS_IN = gds
- export           RDS_OUT = gds
 
 
 check:   lvx

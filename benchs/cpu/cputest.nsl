@@ -1,0 +1,61 @@
+#define LAI 0x81
+#define LII 0x82
+#define JMP 0x84
+#define JZ  0x85
+#define LA  0x88
+#define LI  0x89
+#define LX  0x8A
+#define SA  0x98
+#define SI  0x99
+#define SX  0x9A
+#define ADI 0xA8
+#define ANI 0xA9
+#define EXI 0xAA
+
+#define INC 0x01
+#define INX 0x02
+#define DEC 0x03
+#define DEX 0x04
+#define SRL 0x05
+#define SLL 0x06
+#define SRA 0x07
+#define ADD 0x08
+#define AND 0x09
+#define EXR 0x0A
+
+
+declare cpu {
+input dbusi[8];
+output dbuso[8];
+output adder[8];
+func_out mread(adder):dbusi;
+func_out mwrite(adder,dbuso);
+}
+
+
+declare cputest simulation {
+}
+
+module cputest {
+func_self res();
+cpu p;
+mem m[256][8] = {LAI, 0x03, JZ, 0x07  , DEC, JMP, 0x02, JMP, 0x07};
+
+func p.mread {
+  p.dbusi = m[p.adder];
+}
+
+func p.mwrite {
+  m[p.adder] := p.dbuso;
+}
+
+if(res) p.p_reset=1;
+else p.p_reset=0;
+
+ _init {
+  res();
+  _delay(350);
+  _stop();
+}
+
+}
