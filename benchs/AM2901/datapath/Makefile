@@ -1,24 +1,19 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/AM2901>" -*-
+# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/AM2901/datapath>" -*-
 
-                     CHIP = amd2901
-                  CONTROL = amd2901_ctl
-                   MARGIN = 2
-        GENERATE_CORE_VST = No
+            USE_SYNTHESIS = No
               USE_STRATUS = Yes
             USE_CLOCKTREE = No
                 USE_DEBUG = No
 
+                 NETLISTS = amd2901_ctl
+
  include ../../etc/rules.mk
 
- export         MBK_IN_LO = vst
- export        MBK_OUT_LO = vst
 
+lvx:     lvx-amd2901_kite
+druc:    druc-amd2901_kite
+view:    cgt-amd2901_kite
 
-check:   lvx
-
-layout:  amd2901_chip_kite.ap
-lvx:     lvx-amd2901_chip_kite
-druc:    druc-amd2901_chip_kite
-gds:     amd2901_chip_kite.gds
-view:    cgt-view-amd2901_chip_kite
+layout:  amd2901_kite.ap
+gds:     amd2901_kite.gds
 

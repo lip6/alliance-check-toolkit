@@ -30,12 +30,14 @@
 .. |Python|            replace:: :sc:`Python`
 .. |RHEL6|             replace:: :sc:`rhel6`
 .. |MOSIS|             replace:: :sc:`mosis`
+.. |GDSII|             replace:: :sc:`gdsii`
 .. |RDS|               replace:: :sc:`rds`
 .. |API|               replace:: :sc:`api`
 .. |LVS|               replace:: :sc:`lvs`
 .. |adder|             replace:: ``adder``
 .. |AM2901|            replace:: :sc:`am2901`
 .. |alliance-run|      replace:: ``alliance-run``
+.. |cpu|               replace:: :sc:`cpu`
 .. |SNX|               replace:: :sc:`snx`
 .. |MIPS|              replace:: :sc:`mips`
 .. |FPGA|              replace:: :sc:`fpga`
@@ -54,7 +56,7 @@
 .. |rf2lib|            replace:: ``rf2lib``
 .. |padlib|            replace:: ``padlib``
 .. |pxlib|             replace:: ``pxlib``
-.. |msxlib|            replace:: ``msxlib``
+.. |nsxlib|            replace:: ``nsxlib``
 .. |mpxlib|            replace:: ``mpxlib``
 .. |msplib|            replace:: ``msplib``
 .. |scn6m_deep_09|     replace:: ``scn6m_deep_09.rds``
@@ -107,16 +109,17 @@ Toolkit Contents
 
 The toolkit provides:
 
-* Six benchmark designs:
+* Eleven benchmark designs:
 
 =============================  ==========================  =======================================
 Design                         Technology                  Cell Libraries
 =============================  ==========================  =======================================
-|adder|                        |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
+|adder|                        |MOSIS|                     |nsxlib|, |mpxlib|, |msplib|
 |AM2901| (standard cells)      |Alliance| dummy            |sxlib|, |pxlib|
 |AM2901| (datapath)            |Alliance| dummy            |sxlib|, |dp_sxlib|, |pxlib|
 |alliance-run| (|AM2901|)      |Alliance| dummy            |sxlib|, |dp_sxlib|, |padlib|
-|SNX|                          |MOSIS|                     |msxlib|, |mpxlib|, |msplib|
+|cpu|                          |MOSIS|                     |nsxlib|, |mpxlib|, |msplib|
+|SNX|                          |MOSIS|                     |nsxlib|, |mpxlib|, |msplib|
 |MIPS| (microprogrammed)       |Alliance| dummy            |sxlib|, |dp_sxlib|, |rf2lib|
 |MIPS| (pipeline)              |Alliance| dummy            |sxlib|, |dp_sxlib|, |rf2lib|
 |MIPS| (pipeline+chip)         |Alliance| dummy            |sxlib|, |dp_sxlib|, |rf2lib|, |pxlib|
@@ -131,7 +134,7 @@ Design                         Technology                  Cell Libraries
   technology, and we may have to perform quick fixes on them. The design are
   configured to use them instead of those supplied by the |Alliance| installation.
 
-  * |msxlib| : Standard Cell library.
+  * |nsxlib| : Standard Cell library.
   * |mpxlib| : Pad library, compliant with |Coriolis|.
   * |msplib| : Pad library, compliant with |Alliance| / |ring|. Cells in this
     library are *wrappers* around their counterpart in |mpxlib|, they provides
@@ -148,27 +151,24 @@ Benchmark Makefiles
 
 The main body of the |Makefile| has been put into ``benchs/etc/rules.mk``.
 
-The ``Makefile`` in the various bench directories provides some or all this
-targets, according to the fact they can be run with |Coriolis|, |Alliance|
-or both.
+The |Makefile| provides some or all of the following targets. If the place
+and route stage of a bench can be done by both |Coriolis| and |Alliance|
+an ``alliance/`` subdirectory will be present.
+
 
 +--------------+----------------------+---------------------------------------------------------------+
-|  |Alliance|  |  |layout-alc|        |  The complete layout of the design (P&R).                     |
+|  |Coriolis|  |  |layout|            |  The complete symbolic layout of the design (P&R).            |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |druc-alc|          |  Symbolic layout checking                                     |
+|              |  |gds|               |  Generate the real layout (|GDSII|)                           |
 |              +----------------------+---------------------------------------------------------------+
-|              |  |lvx-alc|           |  Perform |LVS|.                                               |
+|              |  |druc|              |  Symbolic layout checking                                     |
+|              +----------------------+---------------------------------------------------------------+
+|              |  |lvx|               |  Perform |LVS|.                                               |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |graal|             |  Launch |graal| in the |Makefile| 's environement             |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |dreal|             |  Launch |dreal| in the |Makefile| 's environement, and load   |
 |              |                      |  the |gds| file of the design.                                |
-+--------------+----------------------+---------------------------------------------------------------+
-|  |Coriolis|  |  |layout|            |  The complete layout of the design (P&R).                     |
-|              +----------------------+---------------------------------------------------------------+
-|              |  |druc|              |  Symbolic layout checking                                     |
-|              +----------------------+---------------------------------------------------------------+
-|              |  |lvx|               |  Perform |LVS|.                                               |
 |              +----------------------+---------------------------------------------------------------+
 |              |  |view|              |  Launch |cgt| and load the design (chip)                      |
 |              +----------------------+---------------------------------------------------------------+
@@ -180,49 +180,51 @@ or both.
 
 A top |Makefile| in a bench directory must looks like: ::
 
-                        CORE = adder
-                        CHIP = chip
-                      MARGIN = 2
-           GENERATE_CORE_VST = Yes
+                     BOOMOPT = -A
+                     BOOGOPT =
+                     LOONOPT =
+                   NSL2VHOPT = -vasy
+              LIBRARY_FAMILY = nsxlib
+               USE_SYNTHESIS = Yes
                USE_CLOCKTREE = No
-                   USE_MOSIS = Yes
                    USE_DEBUG = No
+
+                    NETLISTS = cla16       \
+                               inc16       \
+                               reg4        \
+                               type_dec    \
+                               alu16_model \
+                               snx_model
    
     include ../etc/rules.mk
-   
-    export         MBK_IN_LO = vst
-    export        MBK_OUT_LO = vst
-    export            RDS_IN = gds
-    export           RDS_OUT = gds
 
-    check:     lvx
-	       
-    layout:    chip_crl_kite.ap
-    lvx:       lvx-chip_crl_kite
-    druc:      druc-chip_crl_kite
-    gds:       chip_crl_kite.gds
-    view:      cgt-view-chip_crl_kite
-	       
-    lvx-alc:   lvx-chip_alc
-    druc-alc:  druc-chip_alc
+    lvx:       lvx-chip_kite
+    druc:      druc-chip_kite
+    view:      cgt-chip_kite
+
+    layout:    chip_kite.ap
+    gds:       chip_kite.gds
 
 Where variables have the following meaning:
 
-=======================  ==========================================================
+=======================  ===========================================================
 Variable                 Usage
-=======================  ==========================================================
-``CORE``                 The name of the *core* model
-``CHIP``                 The stem of the *chip* model. It is declined in two
-                         versions, one for |Alliance| (suffix ``_alc``) and one
-                         for |Coriolis| (suffix ``_crl``). This is needed
-                         because the two core uses different sets of pads.
-``GENERATE_CORE_VST``    Tells if the rules to generate the core has to be
-                         included. If set to ``No``, then the core *must* be
-                         present and will be considered as a primary file.
+=======================  ===========================================================
+``NETLISTS``             The list of *netlists* that are requireds to perform the
+                         place and route stage. The files must we given *without*
+                         extension. According to the value of ``USE_SYNTHESIS`` they
+                         are user supplied or generated. In the later case, be aware
+                         that calling the ``clean`` target will remove the generated
+                         files.
+``LIBRARY_FAMILY``       Tells which library set to use. Legal values are ``sxlib``
+                         (default) and ``nsxlib`` (|MOSIS| technology).
+``USE_SYNTHESIS``        If set to ``Yes``, then the files given in the ``NETLISTS``
+                         variables will be synthetised from the reference ``vhdl``
+                         or ``nsl`` description, if this tool is available.
+                         Note that the clean will remove all generated files.
 ``USE_CLOCKTREE``        Adds a clock-tree to the design (|Coriolis|).
-``USE_MOSIS``            Tells whether or not use the |MOSIS| technology.
 ``USE_DEBUG``            Activate debug support on |cgt|.
-=======================  ==========================================================
+=======================  ===========================================================
 
 
 |Coriolis| Configuration Files

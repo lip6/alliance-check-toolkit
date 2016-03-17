@@ -32,7 +32,7 @@ def ScriptMain ( **kw ):
 
   cell = stratus.buildModel( 'amd2901_dpt' , stratus.DoNetlist|stratus.DoLayout )
   cell = stratus.buildModel( 'amd2901_core', stratus.DoNetlist|stratus.DoLayout )
-  cell = stratus.buildModel( 'amd2901_chip', stratus.DoNetlist )
+  cell = stratus.buildModel( 'amd2901'     , stratus.DoNetlist )
   return cell
 
 

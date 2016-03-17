@@ -6,6 +6,7 @@
  benchs="${benchs} AM2901/datapath"
  benchs="${benchs} MIPS/microprogrammed"
  benchs="${benchs} MIPS/pipeline"
+ benchs="${benchs} cpu"
  benchs="${benchs} snx"
 
  echo "Calling make with rules: $*"

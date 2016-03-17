@@ -4,28 +4,27 @@ ENTITY chip IS
 PORT(
   pp_reset	: IN BIT;
   pm_clock	: IN BIT;
-  pIntReq	: IN BIT;
-  pstart	: IN BIT;
-  pmem_ok	: IN BIT;
-  pinst_ok	: IN BIT;
   phlt	: OUT BIT;
   pwb	: OUT BIT;
+  pintack	: OUT BIT;
+  pintreq	: IN BIT;
+  pstart	: IN BIT;
+  pinst_ok	: IN BIT;
+  pmem_ok	: IN BIT;
+  pinst_adr	: OUT BIT;
+  pmem_adr	: OUT BIT;
   pmemory_write	: OUT BIT;
   pmemory_read	: OUT BIT;
-  pmemory_adr	: OUT BIT;
-  pinst_write	: OUT BIT;
   pinst_read	: OUT BIT;
-  pinst_adr	: OUT BIT;
-  pIntAck	: OUT BIT;
-  padrs	: OUT BIT_VECTOR(15 DOWNTO 0);
+  padrs		: OUT BIT_VECTOR(15 DOWNTO 0);
   piadrs	: OUT BIT_VECTOR(15 DOWNTO 0);
-  pdatao	: OUT BIT_VECTOR(15 DOWNTO 0);
   pdatai	: IN BIT_VECTOR(15 DOWNTO 0);
-  pinst	: IN BIT_VECTOR(15 DOWNTO 0);
-  vdde : in BIT ;	-- vdd
-  vsse : in BIT ;	-- vdd
-  vdd : in BIT ;	-- vdd
-  vss : in BIT 	-- vss
+  pdatao	: OUT BIT_VECTOR(15 DOWNTO 0);
+  pinst		: IN BIT_VECTOR(15 DOWNTO 0);
+  vdde : in BIT ;	-- vddi
+  vsse : in BIT ;	-- vddi
+  vddi : in BIT ;	-- vddi
+  vssi : in BIT 	-- vssi
 );
 END chip;
 
@@ -35,32 +34,31 @@ ARCHITECTURE VST OF chip IS
 
 Component snx
 PORT(
-  p_reset	: IN BIT;
-  m_clock	: IN BIT;
-  n_IntReq	: IN BIT;
-  n_start	: IN BIT;
-  n_mem_ok	: IN BIT;
-  n_inst_ok	: IN BIT;
-  n_hlt	: OUT BIT;
-  n_IntAck	: OUT BIT;
-  n_wb	: OUT BIT;
-  n_memory_write	: OUT BIT;
-  n_memory_read	: OUT BIT;
-  n_memory_adr	: OUT BIT;
-  n_inst_write	: OUT BIT;
-  n_inst_read	: OUT BIT;
-  n_inst_adr	: OUT BIT;
-  n_adrs	: OUT BIT_VECTOR(15 DOWNTO 0);
-  n_iadrs	: OUT BIT_VECTOR(15 DOWNTO 0);
-  n_datao	: OUT BIT_VECTOR(15 DOWNTO 0);
-  n_datai	: IN BIT_VECTOR(15 DOWNTO 0);
-  n_inst	: IN BIT_VECTOR(15 DOWNTO 0);
-  vdd	: IN BIT;
-  vss	: IN BIT
+  p_reset       : IN BIT;
+  m_clock       : IN BIT;
+  n_hlt : OUT BIT;
+  n_wb  : OUT BIT;
+  n_intack      : OUT BIT;
+  n_memory_write        : OUT BIT;
+  n_memory_read : OUT BIT;
+  n_memory_adr  : OUT BIT;
+  n_inst_read   : OUT BIT;
+  n_inst_adr    : OUT BIT;
+  n_mem_ok      : IN BIT;
+  n_inst_ok     : IN BIT;
+  n_intreq      : IN BIT;
+  n_start       : IN BIT;
+  n_adrs        : OUT BIT_VECTOR(15 DOWNTO 0);
+  n_iadrs       : OUT BIT_VECTOR(15 DOWNTO 0);
+  n_datao       : OUT BIT_VECTOR(15 DOWNTO 0);
+  n_datai       : IN BIT_VECTOR(15 DOWNTO 0);
+  n_inst        : IN BIT_VECTOR(15 DOWNTO 0);
+  vdd   : IN BIT;
+  vss   : IN BIT
 );
 END component;
 
-Component pck_sp
+Component pck_mpx
   port (
   pad : in BIT;	-- pad
   ck : out BIT;	-- ck
@@ -71,7 +69,7 @@ Component pck_sp
  );
 end component;
 
-Component pi_sp
+Component pi_mpx
   port (
   pad : in BIT;	-- pad
   t : out BIT;	-- t
@@ -83,7 +81,7 @@ Component pi_sp
  );
 end component;
 
-Component pvddeck_sp
+Component pvddeck_mpx
   port (
 --   pad : in BIT;	-- pad
 --   t : out BIT;	-- t
@@ -96,7 +94,7 @@ Component pvddeck_sp
  );
 end component;
 
-Component pvsseck_sp
+Component pvsseck_mpx
   port (
 --   pad : in BIT;	-- pad
 --   t : out BIT;	-- t
@@ -109,7 +107,7 @@ Component pvsseck_sp
  );
 end component;
 
-Component pvddick_sp
+Component pvddick_mpx
   port (
 --   pad : in BIT;	-- pad
 --   t : out BIT;	-- t
@@ -122,7 +120,7 @@ Component pvddick_sp
  );
 end component;
 
-Component pvssick_sp
+Component pvssick_mpx
   port (
 --   pad : in BIT;	-- pad
 --   t : out BIT;	-- t
@@ -135,7 +133,7 @@ Component pvssick_sp
  );
 end component;
 
-Component po_sp
+Component po_mpx
   port (
   i : in BIT;	-- t
   pad : out BIT;	-- pad
@@ -151,28 +149,25 @@ SIGNAL m_clock	: BIT;
 SIGNAL p_reset : BIT;
 SIGNAL  hlt	: BIT;
 SIGNAL  wb	: BIT;
-SIGNAL  IntReq	: BIT;
-SIGNAL  start	: BIT;
-SIGNAL  mem_ok	: BIT;
-SIGNAL  inst_ok	: BIT;
-SIGNAL  IntAck	: BIT;
 SIGNAL  memory_write	: BIT;
 SIGNAL  memory_read	: BIT;
-SIGNAL  memory_adr	: BIT;
-SIGNAL  inst_write	: BIT;
 SIGNAL  inst_read	: BIT;
-SIGNAL  inst_adr	: BIT;
 SIGNAL  adrs	: BIT_VECTOR(15 DOWNTO 0);
 SIGNAL  iadrs	: BIT_VECTOR(15 DOWNTO 0);
 SIGNAL  datao	: BIT_VECTOR(15 DOWNTO 0);
 SIGNAL  datai	: BIT_VECTOR(15 DOWNTO 0);
 SIGNAL  inst	: BIT_VECTOR(15 DOWNTO 0);
 
+SIGNAL mem_adr : BIT;
+SIGNAL mem_ok : BIT;
+SIGNAL inst_adr : BIT;
+SIGNAL inst_ok : BIT;
+SIGNAL intreq : BIT;
+SIGNAL intack : BIT;
+SIGNAL start : BIT;
+
 signal cki : bit;
 signal ckc : bit;
-
-signal vddi : bit;
-signal vssi : bit;
 
 BEGIN
 
@@ -180,676 +175,698 @@ core : snx
 PORT MAP(
   p_reset	=> p_reset,
   m_clock	=> m_clock,
-  n_IntReq	=> IntReq,
   n_start	=> start,
   n_mem_ok	=> mem_ok,
   n_inst_ok	=> inst_ok,
-  n_IntAck	=> IntAck,
-  n_hlt	=> hlt,
-  n_wb	=> wb,
-  n_memory_write	=> memory_write,
+  n_IntReq	=> intreq,
+  n_IntAck	=> intack,
+  n_hlt		=> hlt,
+  n_wb		=> wb,
+  n_memory_adr	=> mem_adr,
+  n_memory_write=> memory_write,
   n_memory_read	=> memory_read,
-  n_memory_adr	=> memory_adr,
-  n_inst_write	=> inst_write,
-  n_inst_read	=> inst_read,
   n_inst_adr	=> inst_adr,
+  n_inst_read	=> inst_read,
   n_adrs	=> adrs,
   n_iadrs	=> iadrs,
   n_datao	=> datao,
   n_datai	=> datai,
   n_inst	=> inst,
-  vdd => vdd,
-  vss => vss
+  vdd 		=> vddi,
+  vss 		=> vssi
 );
 
-p_ck: pck_sp
+
+p_intreq : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => pintreq,
+      t    => intreq
+   );
+
+p_start : pi_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => pstart,
+      t    => start
+   );
+
+p_inst_ok : pi_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => pinst_ok,
+      t    => inst_ok
+   );
+
+p_mem_ok : pi_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad  => pmem_ok,
+      t    => mem_ok
+   );
+
+
+p_intack : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad   => pintack,
+      i     => intack
+   );
+
+
+p_inst_adr : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad   => pinst_adr,
+      i     => inst_adr
+   );
+
+
+p_mem_adr : po_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
+      ck    => cki,
+      pad   => pmem_adr,
+      i     => mem_adr
+   );
+
+p_ck: pck_mpx
+   port map (
+      vdde  => vdde,
+      vddi  => vddi,
+      vsse  => vsse,
+      vssi  => vssi,
       pad  => pm_clock,
       ck=>cki
    );
 
-p_vdde: pvddeck_sp
+p_vdde: pvddeck_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       cko  => m_clock,
       ck=>cki
    );
 
-p_vsse: pvsseck_sp
+p_vsse: pvsseck_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       cko  => m_clock,
       ck=>cki
    );
 
 
-p_vddi: pvddick_sp
+p_vddi: pvddick_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       cko  => m_clock,
       ck=>cki
    );
 
-p_vssi: pvssick_sp
+p_vssi: pvssick_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       cko  => m_clock,
       ck=>cki
    );
 
-p_preset : pi_sp
+p_preset : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pp_reset,
       t    => p_reset
    );
 
 
-pmem_ok : pi_sp
+p_inst0 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pmem_ok,
-      t    => mem_ok
-   );
-
-pinst_ok : pi_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pinst_ok,
-      t    => inst_ok
-   );
-
-
-pIntReq : pi_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pIntReq,
-      t    => IntReq
-   );
-
-pstart : pi_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pstart,
-      t    => start
-   );
-
-
-p_inst0 : pi_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(0),
       t    => inst(0)
    );
 
-p_inst1 : pi_sp
+p_inst1 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(1),
       t    => inst(1)
    );
 
-p_inst2 : pi_sp
+p_inst2 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(2),
       t    => inst(2)
    );
 
-p_inst3 : pi_sp
+p_inst3 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(3),
       t    => inst(3)
    );
 
-p_inst4 : pi_sp
+p_inst4 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(4),
       t    => inst(4)
    );
 
-p_inst5 : pi_sp
+p_inst5 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(5),
       t    => inst(5)
    );
 
-p_inst6 : pi_sp
+p_inst6 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(6),
       t    => inst(6)
    );
 
-p_inst7 : pi_sp
+p_inst7 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(7),
       t    => inst(7)
    );
 
-p_inst8 : pi_sp
+p_inst8 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(8),
       t    => inst(8)
    );
 
-p_inst9 : pi_sp
+p_inst9 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(9),
       t    => inst(9)
    );
 
-p_inst10 : pi_sp
+p_inst10 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(10),
       t    => inst(10)
    );
 
-p_inst11 : pi_sp
+p_inst11 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(11),
       t    => inst(11)
    );
 
-p_inst12 : pi_sp
+p_inst12 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(12),
       t    => inst(12)
    );
 
-p_inst13 : pi_sp
+p_inst13 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(13),
       t    => inst(13)
    );
 
-p_inst14 : pi_sp
+p_inst14 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(14),
       t    => inst(14)
    );
 
 
-p_inst15 : pi_sp
+p_inst15 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst(15),
       t    => inst(15)
    );
 
-p_datai0 : pi_sp
+p_datai0 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(0),
       t    => datai(0)
    );
 
-p_datai1 : pi_sp
+p_datai1 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(1),
       t    => datai(1)
    );
 
-p_datai2 : pi_sp
+p_datai2 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(2),
       t    => datai(2)
    );
 
-p_datai3 : pi_sp
+p_datai3 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(3),
       t    => datai(3)
    );
 
-p_datai4 : pi_sp
+p_datai4 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(4),
       t    => datai(4)
    );
 
-p_datai5 : pi_sp
+p_datai5 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(5),
       t    => datai(5)
    );
 
-p_datai6 : pi_sp
+p_datai6 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(6),
       t    => datai(6)
    );
 
-p_datai7 : pi_sp
+p_datai7 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(7),
       t    => datai(7)
    );
 
-p_datai8 : pi_sp
+p_datai8 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(8),
       t    => datai(8)
    );
 
-p_datai9 : pi_sp
+p_datai9 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(9),
       t    => datai(9)
    );
 
-p_datai10 : pi_sp
+p_datai10 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(10),
       t    => datai(10)
    );
 
-p_datai11 : pi_sp
+p_datai11 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(11),
       t    => datai(11)
    );
 
-p_datai12 : pi_sp
+p_datai12 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(12),
       t    => datai(12)
    );
 
-p_datai13 : pi_sp
+p_datai13 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(13),
       t    => datai(13)
    );
 
-p_datai14 : pi_sp
+p_datai14 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(14),
       t    => datai(14)
    );
 
 
-p_datai15 : pi_sp
+p_datai15 : pi_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatai(15),
       t    => datai(15)
    );
 
 
-pIntAck : po_sp
+p_datao0 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad   => pIntAck,
-      i     => IntAck
-   );
-
-
-p_datao0 : po_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(0),
       i     => datao(0)
    );
 
-p_datao1 : po_sp
+p_datao1 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(1),
       i    => datao(1)
    );
 
-p_datao2 : po_sp
+p_datao2 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pdatao(2),
       i    => datao(2)
    );
 
-p_datao3 : po_sp
+p_datao3 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(3),
       i    => datao(3)
    );
 
-p_datao4 : po_sp
+p_datao4 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(4),
       i    => datao(4)
    );
 
-p_datao5 : po_sp
+p_datao5 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(5),
       i    => datao(5)
    );
 
-p_datao6 : po_sp
+p_datao6 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(6),
       i    => datao(6)
    );
 
-p_datao7 : po_sp
+p_datao7 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(7),
       i    => datao(7)
    );
 
-p_datao8 : po_sp
+p_datao8 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(8),
       i    => datao(8)
    );
 
-p_datao9 : po_sp
+p_datao9 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(9),
       i    => datao(9)
    );
 
-p_datao10 : po_sp
+p_datao10 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(10),
       i    => datao(10)
    );
 
-p_datao11 : po_sp
+p_datao11 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(11),
       i    => datao(11)
    );
 
-p_datao12 : po_sp
+p_datao12 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(12),
       i    => datao(12)
    );
 
-p_datao13 : po_sp
+p_datao13 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(13),
       i    => datao(13)
    );
 
-p_datao14 : po_sp
+p_datao14 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(14),
       i    => datao(14)
    );
 
 
-p_datao15 : po_sp
+p_datao15 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => pdatao(15),
       i    => datao(15)
@@ -857,178 +874,178 @@ p_datao15 : po_sp
 
 
 
-p_adrs0 : po_sp
+p_adrs0 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(0),
       i     => adrs(0)
    );
 
-p_adrs1 : po_sp
+p_adrs1 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(1),
       i    => adrs(1)
    );
 
-p_adrs2 : po_sp
+p_adrs2 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => padrs(2),
       i    => adrs(2)
    );
 
-p_adrs3 : po_sp
+p_adrs3 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(3),
       i    => adrs(3)
    );
 
-p_adrs4 : po_sp
+p_adrs4 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(4),
       i    => adrs(4)
    );
 
-p_adrs5 : po_sp
+p_adrs5 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(5),
       i    => adrs(5)
    );
 
-p_adrs6 : po_sp
+p_adrs6 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(6),
       i    => adrs(6)
    );
 
-p_adrs7 : po_sp
+p_adrs7 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(7),
       i    => adrs(7)
    );
 
-p_adrs8 : po_sp
+p_adrs8 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(8),
       i    => adrs(8)
    );
 
-p_adrs9 : po_sp
+p_adrs9 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(9),
       i    => adrs(9)
    );
 
-p_adrs10 : po_sp
+p_adrs10 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(10),
       i    => adrs(10)
    );
 
-p_adrs11 : po_sp
+p_adrs11 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(11),
       i    => adrs(11)
    );
 
-p_adrs12 : po_sp
+p_adrs12 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(12),
       i    => adrs(12)
    );
 
-p_adrs13 : po_sp
+p_adrs13 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(13),
       i    => adrs(13)
    );
 
-p_adrs14 : po_sp
+p_adrs14 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(14),
       i    => adrs(14)
    );
 
 
-p_adrs15 : po_sp
+p_adrs15 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => padrs(15),
       i    => adrs(15)
@@ -1036,271 +1053,237 @@ p_adrs15 : po_sp
 
 
 
-p_iadrs0 : po_sp
+p_iadrs0 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(0),
       i     => iadrs(0)
    );
 
-p_iadrs1 : po_sp
+p_iadrs1 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(1),
       i    => iadrs(1)
    );
 
-p_iadrs2 : po_sp
+p_iadrs2 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => piadrs(2),
       i    => iadrs(2)
    );
 
-p_iadrs3 : po_sp
+p_iadrs3 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(3),
       i    => iadrs(3)
    );
 
-p_iadrs4 : po_sp
+p_iadrs4 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(4),
       i    => iadrs(4)
    );
 
-p_iadrs5 : po_sp
+p_iadrs5 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(5),
       i    => iadrs(5)
    );
 
-p_iadrs6 : po_sp
+p_iadrs6 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(6),
       i    => iadrs(6)
    );
 
-p_iadrs7 : po_sp
+p_iadrs7 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(7),
       i    => iadrs(7)
    );
 
-p_iadrs8 : po_sp
+p_iadrs8 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(8),
       i    => iadrs(8)
    );
 
-p_iadrs9 : po_sp
+p_iadrs9 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(9),
       i    => iadrs(9)
    );
 
-p_iadrs10 : po_sp
+p_iadrs10 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(10),
       i    => iadrs(10)
    );
 
-p_iadrs11 : po_sp
+p_iadrs11 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(11),
       i    => iadrs(11)
    );
 
-p_iadrs12 : po_sp
+p_iadrs12 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(12),
       i    => iadrs(12)
    );
 
-p_iadrs13 : po_sp
+p_iadrs13 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(13),
       i    => iadrs(13)
    );
 
-p_iadrs14 : po_sp
+p_iadrs14 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(14),
       i    => iadrs(14)
    );
 
 
-p_iadrs15 : po_sp
+p_iadrs15 : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad   => piadrs(15),
       i    => iadrs(15)
    );
 
 
-p_memory_write : po_sp
+p_memory_write : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pmemory_write,
       i    => memory_write
    );
 
-p_memory_adr : po_sp
+p_memory_read : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pmemory_adr,
-      i    => memory_adr
-   );
-
-p_memory_read : po_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pmemory_read,
       i    => memory_read
    );
 
 
-p_inst_write : po_sp
+p_inst_read : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pinst_write,
-      i    => inst_write
-   );
-
-p_inst_adr : po_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
-      ck    => cki,
-      pad  => pinst_adr,
-      i    => inst_adr
-   );
-
-
-p_inst_read : po_sp
-   port map (
-      vdde  => vdde,
-      vddi  => vdd,
-      vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pinst_read,
       i    => inst_read
    );
 
 
-p_wb : po_sp
+p_wb : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => pwb,
       i    => wb
    );
 
 
-p_hlt : po_sp
+p_hlt : po_mpx
    port map (
       vdde  => vdde,
-      vddi  => vdd,
+      vddi  => vddi,
       vsse  => vsse,
-      vssi  => vss,
+      vssi  => vssi,
       ck    => cki,
       pad  => phlt,
       i    => hlt

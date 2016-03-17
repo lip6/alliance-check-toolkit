@@ -1,26 +1,26 @@
+# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/snx>" -*-
 
-
-                     CORE = snx
-                     CHIP = chip
-                   MARGIN = 2
-                  BOOMOPT =
+                  BOOMOPT = -A
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
-        GENERATE_CORE_VST = No
+            USE_SYNTHESIS = Yes
             USE_CLOCKTREE = Yes
            LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No
 
+                 NETLISTS = cla16       \
+                            inc16       \
+                            reg4        \
+                            type_dec    \
+                            alu16_model \
+                            snx_model
+
  include ../etc/rules.mk
 
- export         MBK_IN_LO = vst
- export        MBK_OUT_LO = vst
+lvx:       lvx-chip_clocked_kite
+druc:      druc-chip_clocked_kite
+view:      cgt-chip_clocked_kite
 
-check:   lvx
-
-layout:  chip_crl_clocked_kite.ap
-lvx:     lvx-chip_crl_clocked_kite
-druc:    druc-chip_crl_clocked_kite
-gds:     chip_crl_clocked_kite.gds
-view:    cgt-view-chip_crl_clocked_kite
+layout:    chip_clocked_kite.ap
+gds:       chip_clocked_kite.gds

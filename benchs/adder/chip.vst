@@ -1,6 +1,6 @@
 -- Entity Declaration
 
-ENTITY chip_crl IS
+ENTITY chip IS
   PORT (
   ck : in BIT ;
   a : in BIT_VECTOR (3 downto 0) ;
@@ -11,13 +11,13 @@ ENTITY chip_crl IS
   vddi: in BIT ;	-- vdd
   vssi: in BIT 	-- vss
   );
-END chip_crl;
+END chip;
 
 -- Architecture Declaration
 
-ARCHITECTURE VST OF chip_crl IS
+ARCHITECTURE VST OF chip IS
 
-Component adder_crl
+Component adder
   PORT (
   m_clock : in BIT ;
   p_reset : in BIT ;
@@ -125,7 +125,7 @@ signal ckc : bit;
 
 BEGIN
 
-core : adder_crl
+core : adder
   port map (
   a => a_i,
   b => b_i,

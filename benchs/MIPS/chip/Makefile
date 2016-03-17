@@ -10,9 +10,6 @@
 
  include ../../etc/rules.mk
 
- export         MBK_IN_LO = vst
- export        MBK_OUT_LO = vst
-
 
 check:   lvx
 
