@@ -17,3 +17,6 @@ view:    cgt-amd2901_kite
 layout:  amd2901_kite.ap
 gds:     amd2901_kite.gds
 
+# gmake 3.81 implicit rule recursion workaround
+amd2901_ctl.vst: non_generated/amd2901_ctl.vst
+	cp non_generated/amd2901_ctl.vst .
