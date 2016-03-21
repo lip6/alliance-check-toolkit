@@ -2,7 +2,8 @@
  \usepackage[default,osfigures,scale=0.95]{opensans}
  \usepackage{xspace}
  \usepackage{fancyhdr}
- \usepackage[dvipdfm]{graphicx}
+%\usepackage[dvipdfm]{graphicx}
+ \usepackage{graphicx}
  \usepackage{bmpsize}
  \usepackage{enumitem}
  \usepackage[sf,bf]{titlesec}
@@ -52,7 +53,7 @@
    \begin{center}
      \sffamily
      \begin{array}[t]{m{1cm}!{\vrule width 1pt}m{.90\textwidth}}
-       \raisebox{0.0cm}{\includegraphics[scale=0.5]{./images/clipboard.pdf}} &
+       \raisebox{0.0cm}{\includegraphics[scale=0.5,natwidth=48,natheight=48]{./images/clipboard.pdf}} &
        \begin{minipage}[t]{.85\textwidth} #1
        \end{minipage} \\
      \end{array}
@@ -65,7 +66,7 @@
    \begin{center}
      \sffamily
      \begin{array}[t]{m{1cm}!{\vrule width 1pt}m{.90\textwidth}}
-       \raisebox{0.0cm}{\includegraphics[scale=0.5]{./images/i-core.pdf}} &
+       \raisebox{0.0cm}{\includegraphics[scale=0.5,natwidth=48,natheight=48]{./images/i-core.pdf}} &
        \begin{minipage}[t]{.85\textwidth} #1
        \end{minipage} \\
      \end{array}

@@ -51,6 +51,8 @@
    CORIOLIS_TOP      = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
    ALLIANCE_TOP      = $(HOME)/alliance/$(BUILD_VARIANT)$(LIB_SUFFIX_)/install
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
+   AVERTEC_TOP       = /dsk/l1/tasyag/Linux.el7_64/install
+   AVERTEC_BIN       = $(AVERTEC_TOP)/bin
  endif
  ifeq ($(USER),nshimizu)
   # Where Naohiko Shimizu gets his tools installeds.
@@ -99,6 +101,7 @@
  TOOLKIT_CELLS_TOP = $(ALLIANCE_TOOLKIT)/cells
  RDS_TECHNO_MOSIS  = $(ALLIANCE_TOOLKIT)/etc/scn6m_deep_09.rds
  RDS_TECHNO_SYMB   = $(SYSCONF_TOP)/cmos.rds
+ SPI_TECHNO_MOSIS  = $(ALLIANCE_TOOLKIT)/etc/scn6m_deep.hsp
 
 
 # -------------------------------------------------------------------
@@ -124,11 +127,13 @@ COUGAR       = MBK_OUT_LO=al; export MBK_OUT_LO; \
 DRUC         = $(ALLIANCE_BIN)/druc
 L2P          = $(ALLIANCE_BIN)/l2p
 DoCHIP       = $(TOOLKIT_BIN)/doChip.py
-COUGAR_SPICE = MBK_SPI_MODEL=$(ALLIANCE_TOP)/spimodel.cfg; export MBK_SPI_MODEL; \
-               MBK_OUT_LO=sp;                              export MBK_OUT_LO   ; \
+COUGAR_SPICE = MBK_SPI_MODEL=$(ALLIANCE_TOP)/etc/spimodel.cfg; export MBK_SPI_MODEL; \
+               MBK_OUT_LO=spi;                                 export MBK_OUT_LO   ; \
                $(ALLIANCE_BIN)/cougar
 LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
                $(ALLIANCE_BIN)/lvx
+PROOF        = $(ALLIANCE_BIN)/proof
+YAGLE_CELL   = $(AVERTEC_BIN)/avt_shell $(TOOLKIT_BIN)/extractCell.tcl
 
 
 # -------------------------------------------------------------------
@@ -136,6 +141,7 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
 
  export ALLIANCE_TOP
  export CORIOLIS_TOP
+ export AVERTEC_TOP
  export GRAAL_TECHNO_NAME = ${SYSCONF_TOP}/cmos.graal
  export MBK_IN_LO         = vst
  export MBK_OUT_LO        = vst
@@ -146,6 +152,7 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
    export    MBK_TARGET_LIB = ${TOOLKIT_CELLS_TOP}/nsxlib
    export      MBK_CATA_LIB = $(MBK_TARGET_LIB):${TOOLKIT_CELLS_TOP}/mpxlib:$(TOOLKIT_CELLS_TOP)/msplib
    export   RDS_TECHNO_NAME = ${RDS_TECHNO_MOSIS}
+            SPI_TECHNO_NAME = ${SPI_TECHNO_MOSIS}
  else
    ifeq ($(LIBRARY_FAMILY),msxlib)
      export    MBK_TARGET_LIB = ${TOOLKIT_CELLS_TOP}/msxlib
@@ -176,7 +183,46 @@ env: ; @echo "NETLISTS_VST = \"$(NETLISTS_VST)\""
 # Keep all intermediate files
 
 .SECONDARY:
+.PRECIOUS:  %.ok
+.PHONY:     cell-check-proof-tie_x0    \
+            cell-check-proof-rowend_x0 \
+            cell-check-proof-powmid_x0
 
+
+# -------------------------------------------------------------------
+# Cell Check Rules.
+
+CELL_CHECK_DIR = if [ ! -d "./check" ]; then mkdir "./check"; fi; cd "./check"
+
+clean-lib-tmp:
+	@$(CELL_CHECK_DIR); rm -f *.drc *.gds *.cns *.stat *.rep *.spi *.vhd *.vbe
+
+clean-lib: clean-lib-tmp
+	@$(CELL_CHECK_DIR); rm *.ok
+
+check-lib: $(foreach cell,$(wildcard *.ap),$(patsubst %.ap,./check/%.ok,$(cell)))
+
+./check/%.ok: cell-check-druc-% cell-check-proof-%
+	@$(CELL_CHECK_DIR); touch $*.ok
+	@echo "Checking of <$*> has been done."
+
+cell-check-druc-%: %.ap
+	 $(CELL_CHECK_DIR); $(DRUC) $*
+
+cell-check-proof-tie_x0:
+cell-check-proof-rowend_x0:
+cell-check-proof-powmid_x0:
+
+cell-check-proof-%: ./%.vbe ./check/%.vhd
+	  $(CELL_CHECK_DIR); sed -i -e '/ck.delayed/d' -e 's/linkage/in/' $*.vhd
+	  $(CELL_CHECK_DIR); $(VASY) -I vhd -o -a $* $*_ext
+	  $(CELL_CHECK_DIR); $(PROOF) $* $*_ext
+
+./check/%.vhd: ./check/%.spi
+	 $(CELL_CHECK_DIR); $(YAGLE_CELL) $(SPI_TECHNO_NAME) $*
+
+./check/%.spi: %.ap
+	 $(CELL_CHECK_DIR); $(COUGAR_SPICE) -ar -ac -t $*
 
 
 # -------------------------------------------------------------------
@@ -221,7 +267,7 @@ endif
 
 %.gds     : %.ap                 ;  $(S2R)          -v -r $*
 %.cif     : %.ap                 ;  $(S2R_cif)      -v -r $*
-%.spi     : %.ap                 ;  $(COUGAR_SPICE) -ar -ac -t $(CORE)
+%.spi     : %.ap                 ;  $(COUGAR_SPICE) -ar -ac -t $*
 %.ps      : %.ap                 ;  $(L2P)          -color $*
 druc-%    : %.ap                 ;  $(DRUC)         $(DRUC_FLAGS) $*
 %_ext.al  : %.ap                 ;  $(COUGAR)       -f $* $*_ext
