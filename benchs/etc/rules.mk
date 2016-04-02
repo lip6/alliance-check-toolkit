@@ -53,6 +53,7 @@
    ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
    AVERTEC_TOP       = /dsk/l1/tasyag/Linux.el7_64/install
    AVERTEC_BIN       = $(AVERTEC_TOP)/bin
+   YOSYS             = /usr/bin/yosys
  endif
  ifeq ($(USER),nshimizu)
   # Where Naohiko Shimizu gets his tools installeds.
@@ -127,6 +128,7 @@ COUGAR       = MBK_OUT_LO=al; export MBK_OUT_LO; \
 DRUC         = $(ALLIANCE_BIN)/druc
 L2P          = $(ALLIANCE_BIN)/l2p
 DoCHIP       = $(TOOLKIT_BIN)/doChip.py
+BLIF2VST     = $(TOOLKIT_BIN)/blif2vst.py
 COUGAR_SPICE = MBK_SPI_MODEL=$(ALLIANCE_TOP)/etc/spimodel.cfg; export MBK_SPI_MODEL; \
                MBK_OUT_LO=spi;                                 export MBK_OUT_LO   ; \
                $(ALLIANCE_BIN)/cougar
@@ -134,6 +136,7 @@ LVX          = MBK_SEPAR='_'; export MBK_SEPAR; \
                $(ALLIANCE_BIN)/lvx
 PROOF        = $(ALLIANCE_BIN)/proof
 YAGLE_CELL   = $(AVERTEC_BIN)/avt_shell $(TOOLKIT_BIN)/extractCell.tcl
+YAGLE_LIB    = $(AVERTEC_BIN)/avt_shell $(TOOLKIT_BIN)/buildLib.tcl
 
 
 # -------------------------------------------------------------------
@@ -173,7 +176,11 @@ YAGLE_CELL   = $(AVERTEC_BIN)/avt_shell $(TOOLKIT_BIN)/extractCell.tcl
 # -------------------------------------------------------------------
 # Keep all intermediate files
 
- NETLISTS_VST = $(foreach netlist,$(NETLISTS), $(netlist).vst) 
+ifeq ($(USE_SYNTHESIS),Yosys)
+  NETLISTS_VST = $(firstword $(NETLISTS)).vst 
+else
+  NETLISTS_VST = $(foreach netlist,$(NETLISTS), $(netlist).vst) 
+endif
 
 path:; @echo $(PATH)
 env: ; @echo "NETLISTS_VST = \"$(NETLISTS_VST)\""
@@ -195,10 +202,10 @@ env: ; @echo "NETLISTS_VST = \"$(NETLISTS_VST)\""
 CELL_CHECK_DIR = if [ ! -d "./check" ]; then mkdir "./check"; fi; cd "./check"
 
 clean-lib-tmp:
-	@$(CELL_CHECK_DIR); rm -f *.drc *.gds *.cns *.stat *.rep *.spi *.vhd *.vbe
+	@$(CELL_CHECK_DIR); rm -f *.drc *.gds *.cns *.stat *.rep *.spi *.dtx *.rcx *.stm *.vhd *.vbe
 
 clean-lib: clean-lib-tmp
-	@$(CELL_CHECK_DIR); rm *.ok
+	@$(CELL_CHECK_DIR); rm -f *.ok
 
 check-lib: $(foreach cell,$(wildcard *.ap),$(patsubst %.ap,./check/%.ok,$(cell)))
 
@@ -224,11 +231,27 @@ cell-check-proof-%: ./%.vbe ./check/%.vhd
 ./check/%.spi: %.ap
 	 $(CELL_CHECK_DIR); $(COUGAR_SPICE) -ar -ac -t $*
 
+%-dot-lib: $(foreach cell,$(wildcard *.ap),$(patsubst %.ap,./check/%.spi,$(cell)))
+	 $(CELL_CHECK_DIR); $(YAGLE_LIB) $(SPI_TECHNO_NAME) $*
+	 mv -f ./check/$*.lib $*.lib.new
+
+
+# -------------------------------------------------------------------
+# Yosys Rules (pattern matching).
+
+ifeq ($(USE_SYNTHESIS),Yosys)
+%.blif: %.v %.ys
+	$(YOSYS) -s $*.ys
+
+%.vst: %.blif
+	$(BLIF2VST) $*
+endif
+
 
 # -------------------------------------------------------------------
 # Alliance Rules (pattern matching).
 
-ifeq ($(USE_SYNTHESIS),Yes)
+ifeq ($(USE_SYNTHESIS),Alliance)
 
 ifeq ($(USE_NSL),Yes)
 %.vhdl: %.nsl  ; nsl2vh $(NSL2VHOPT) $<
@@ -287,17 +310,21 @@ ifeq ($(USE_DEVTOOLSET_2),Yes)
 
 ifeq ($(USE_CLOCKTREE),Yes)
 
-%_clocked_kite.ap  %_clocked.vst:  $(NETLISTS_VST) $(DESIGN).py %_chip.py
+%_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST) $(DESIGN).py %_chip.py
 	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                           $(DoCHIP) --script=$(DESIGN)'
 
-%_clocked_kite.ap  %_clocked.vst:  $(NETLISTS_VST) %.vst  %_chip.py
+%_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST) %_chip.py 
 	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                           $(DoCHIP) --cell=$*'
+	                           $(DoCHIP) -prCTS --cell=$*'
+
+%_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST)
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) -prTS --cell=$*'
 
 else
 
-%_kite.ap  %_kite.vst:  $(NETLISTS_VST) $(DESIGN).py  %_chip.py
+%_kite.ap  %_kite.vst:  $(NETLISTS_VST) $(DESIGN).py %_chip.py
 	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                           $(DoCHIP) --script=$(DESIGN)'
 
@@ -307,7 +334,11 @@ else
 
 %_kite.ap  %_kite.vst:  $(NETLISTS_VST) %.ap
 	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
-	                           $(DoCHIP) --route --cell=$*'
+	                           $(DoCHIP) -rS --cell=$*'
+
+%_kite.ap  %_kite.vst:  $(NETLISTS_VST)
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(DoCHIP) -prS --cell=$*'
 
 endif
 
@@ -331,19 +362,25 @@ ifeq ($(USE_CLOCKTREE),Yes)
 %_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST) $(DESIGN).py %_chip.py
 	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --script=$(DESIGN)
 
-%_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST) %_chip.py
-	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --cell=$*
+%_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST) %_chip.py 
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prCTS --cell=$*
+
+%_clocked_kite.ap  %_clocked_kite.vst  %_clocked.vst:  $(NETLISTS_VST)
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prTS --cell=$*
 
 else
 
 %_kite.ap  %_kite.vst:  $(NETLISTS_VST) $(DESIGN).py %_chip.py
 	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --script=$(DESIGN)
 
-%_kite.ap  %_kite.vst:  $(NETLISTS_VST) %_chip.py
-	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --cell=$*
+%_kite.ap  %_kite.vst:  $(NETLISTS_VST) %_chip.py 
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prCTS --cell=$*
 
 %_kite.ap  %_kite.vst: $(NETLISTS_VST) %.ap
-	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --route --cell=$*
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -rS --cell=$*
+
+%_kite.ap  %_kite.vst:  $(NETLISTS_VST)
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prTS --cell=$*
 
 endif
 
@@ -380,8 +417,11 @@ endif
               *.pyc                     \
               *.log
 
- ifeq ($(USE_SYNTHESIS),Yes)
-   CLEAN_SYNTHESIS = $(foreach netlist,$(NETLISTS), $(netlist).vst $(netlist).vbe $(subst _model,,$(netlist)).vst $(netlist).sp $(netlist).ap) 
+ ifeq ($(USE_SYNTHESIS),Alliance)
+   CLEAN_SYNTHESIS = $(foreach netlist,$(NETLISTS), $(netlist).vbe $(netlist).vst $(netlist).ap $(netlist).sp $(subst _model,,$(netlist)).vst $(subst _model,,$(netlist)).ap) 
+ endif
+ ifeq ($(USE_SYNTHESIS),Yosys)
+   CLEAN_SYNTHESIS = *.blif $(foreach netlist,$(NETLISTS), $(netlist).vst $(netlist).ap) 
  endif
 
  ifeq ($(USE_STRATUS),Yes)

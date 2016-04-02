@@ -5,7 +5,7 @@
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
-            USE_SYNTHESIS = Yes
+            USE_SYNTHESIS = Alliance
             USE_CLOCKTREE = Yes
            LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No

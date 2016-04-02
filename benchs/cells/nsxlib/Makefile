@@ -5,5 +5,8 @@
  include ../../etc/rules.mk
 
 
+ characterize: nsxlib-dot-lib
+
+
 #check-lib: ./check/inv_x1.ok \
 #           ./check/sff1_x4.ok

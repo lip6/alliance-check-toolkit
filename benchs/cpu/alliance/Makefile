@@ -8,7 +8,7 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
           USE_ALLIANCE_PR = Yes
-            USE_SYNTHESIS = Yes
+            USE_SYNTHESIS = Alliance
            LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No
 

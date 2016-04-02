@@ -787,16 +787,21 @@ div#htmlerrorcontents hr.lang_separator {
 <li><a class="reference internal" href="#alliance-run" id="id9"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#libraries-makefiles" id="id10">Libraries Makefiles</a></li>
-<li><a class="reference internal" href="#tools-scripts" id="id11">Tools &amp; Scripts</a><ul>
-<li><a class="reference internal" href="#one-script-to-run-them-all-go" id="id12">One script to run them all: <tt class="docutils literal">go.sh</tt></a></li>
-<li><a class="reference internal" href="#command-line-cgt-dochip" id="id13">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></li>
-<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id14">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
-<li><a class="reference internal" href="#yagle-cell-extraction-script-extractcell-tcl" id="id15">Yagle Cell Extraction Script <tt class="docutils literal">extractCell.tcl</tt></a></li>
+<li><a class="reference internal" href="#libraries-makefiles" id="id10">Libraries Makefiles</a><ul>
+<li><a class="reference internal" href="#checking-procedure" id="id11">Checking Procedure</a></li>
+<li><a class="reference internal" href="#synopsys-libery-lib-generation" id="id12">Synopsys Libery .lib Generation</a></li>
+<li><a class="reference internal" href="#helpers-scripts" id="id13">Helpers Scripts</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cadence-support" id="id16"><span class="sc">Cadence</span> Support</a></li>
-<li><a class="reference internal" href="#technologies" id="id17">Technologies</a></li>
+<li><a class="reference internal" href="#tools-scripts" id="id14">Tools &amp; Scripts</a><ul>
+<li><a class="reference internal" href="#one-script-to-run-them-all-go" id="id15">One script to run them all: <tt class="docutils literal">go.sh</tt></a></li>
+<li><a class="reference internal" href="#command-line-cgt-dochip" id="id16">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></li>
+<li><a class="reference internal" href="#blif-netlist-converter" id="id17">Blif Netlist Converter</a></li>
+<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id18">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cadence-support" id="id19"><span class="sc">Cadence</span> Support</a></li>
+<li><a class="reference internal" href="#technologies" id="id20">Technologies</a></li>
 </ul>
 </li>
 </ul>
@@ -984,17 +989,25 @@ place and route stage. The files must we given <em>without</em>
 extension. According to the value of <tt class="docutils literal">USE_SYNTHESIS</tt> they
 are user supplied or generated. In the later case, be aware
 that calling the <tt class="docutils literal">clean</tt> target will remove the generated
-files.</td>
+files. In certain contexts, the first item of <tt class="docutils literal">NETLISTS</tt>
+will be considered as the chip's core.</td>
 </tr>
 <tr><td><tt class="docutils literal">LIBRARY_FAMILY</tt></td>
 <td>Tells which library set to use. Legal values are <tt class="docutils literal">sxlib</tt>
 (default) and <tt class="docutils literal">nsxlib</tt> (<span class="sc">mosis</span> technology).</td>
 </tr>
 <tr><td><tt class="docutils literal">USE_SYNTHESIS</tt></td>
-<td>If set to <tt class="docutils literal">Yes</tt>, then the files given in the <tt class="docutils literal">NETLISTS</tt>
-variables will be synthetised from the reference <tt class="docutils literal">vhdl</tt>
-or <tt class="docutils literal">nsl</tt> description, if this tool is available.
-Note that the clean will remove all generated files.</td>
+<td><p class="first">If set to <tt class="docutils literal">Alliance</tt>, the files given in <tt class="docutils literal">NETLISTS</tt>
+will be synthetised using the <span class="sc">Alliance</span> tools from the
+reference <tt class="docutils literal">vhdl</tt> or <tt class="docutils literal">nsl</tt> description (if this tool is
+available).</p>
+<p>If set to <tt class="docutils literal">Yosys</tt>, synthesis will be done using the first
+item <tt class="docutils literal">NETLISTS</tt> as a <span class="sc">Verilog</span> (<tt class="docutils literal">.v</tt>) file. The
+resulting <tt class="docutils literal">blif</tt> file will be subsquently translated into
+<tt class="docutils literal">vst</tt> using <tt class="docutils literal">blif2vst.py</tt>.</p>
+<p>Any other value disable sysnthesis (please use <tt class="docutils literal">No</tt>).</p>
+<p class="last">Note that the clean will remove all generated files.</p>
+</td>
 </tr>
 <tr><td><tt class="docutils literal">USE_CLOCKTREE</tt></td>
 <td>Adds a clock-tree to the design (<span class="sc">Coriolis</span>).</td>
@@ -1051,13 +1064,20 @@ only by very experienced users. See the <tt class="docutils literal">demo*</tt> 
 </div>
 <div class="section" id="libraries-makefiles">
 <h2><a class="toc-backref" href="#id10">Libraries Makefiles</a></h2>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p>For those part to work, you need to get <tt class="docutils literal">hitas</tt> &amp; <tt class="docutils literal">yagle</tt>:</p>
+<blockquote class="last">
+<a class="reference external" href="https://soc-extras.lip6.fr/en/tasyag-abstract-en/">HiTas -- Static Timing Analyser</a></blockquote>
+</div>
 <p>The <tt class="docutils literal">bench/etc/rules.mk</tt> provides rules to perform the check of a library
 as a whole or cell by cell. To avoid too much clutter in the library directory,
 all the intermediate files generated by the verification tools are kept in a
 <tt class="docutils literal">./check/</tt> subdirectory. Once a cell has been validated, a <tt class="docutils literal"><span class="pre">./check/&lt;cell&gt;.ok</span></tt>
 is generated too prevent it to be checked again in subsequent run. If you
 want to force the recheck of the cell, do not forget to remove this file.</p>
-<p>The checking procedure:</p>
+<div class="section" id="checking-procedure">
+<h3><a class="toc-backref" href="#id11">Checking Procedure</a></h3>
 <ul class="simple">
 <li>DRC with <tt class="docutils literal">druc</tt>.</li>
 <li>Formal proof between the layout and the behavioral description. This is a
@@ -1104,10 +1124,82 @@ to be checked again.</td>
 </tbody>
 </table>
 </div>
+<div class="section" id="synopsys-libery-lib-generation">
+<h3><a class="toc-backref" href="#id12">Synopsys Libery .lib Generation</a></h3>
+<p>The generation of the liberty file is only half-automated. <tt class="docutils literal">hitas</tt> / <tt class="docutils literal">yagle</tt>
+build the base file, then we manually perform the two following modifications:</p>
+<ol class="arabic">
+<li><p class="first">For each cell, edit the <tt class="docutils literal">area</tt> field.</p>
+</li>
+<li><p class="first">For the synchronous flip-flop, add the functional description to their
+timing descriptions:</p>
+<pre class="literal-block">
+cell (sff1_x4) {
+  pin (ck) {
+    direction : input ;
+    clock : true ;
+    /* Timing informations ... */
+  }
+  pin (q) {
+    direction : output ;
+    function : &quot;IQ&quot; ;
+    /* Timing informations ... */
+  }
+  ff(IQ,IQN) {
+    next_state : &quot;i&quot; ;
+    clocked_on : &quot;ck&quot; ;
+  }
+}
+
+cell (sff2_x4) {
+  pin (ck) {
+    direction : input ;
+    clock : true ;
+    /* Timing informations ... */
+  }
+  pin (q) {
+    direction : output ;
+    function : &quot;IQ&quot; ;
+    /* Timing informations ... */
+  }
+  ff(IQ,IQN) {
+    next_state : &quot;(cmd * i1) + (cmd' * i0)&quot; ;
+    clocked_on : &quot;ck&quot; ;
+  }
+}
+</pre>
+</li>
+</ol>
+<p></p>
+<p>The rule to call to generate the liberty file is: <tt class="docutils literal"><span class="pre">&lt;libname&gt;-dot-lib</span></tt> where
+<tt class="docutils literal">&lt;libname&gt;</tt> is the name of the library. To avoid erasing the previous one (and
+presumably hand patched), this rule create a <tt class="docutils literal"><span class="pre">&lt;libname&gt;.lib.new</span></tt>.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The tristate cells <strong>ts_</strong> and <strong>nts_</strong> are not included in the <tt class="docutils literal">.lib</tt>.</p>
+</div>
+</div>
+<div class="section" id="helpers-scripts">
+<h3><a class="toc-backref" href="#id13">Helpers Scripts</a></h3>
+<p><span class="sc">tcl</span> scripts for <tt class="docutils literal">avt_shell</tt> related to cell validation and characterization,
+in <tt class="docutils literal">./benchs/bin</tt>, are:</p>
+<ul class="simple">
+<li><tt class="docutils literal">extractCell.tcl</tt>, read a spice file and generate a <span class="sc">vhdl</span> behavioral
+description (using <tt class="docutils literal">yagle</tt>). This file needs to be processed further by
+<tt class="docutils literal">vasy</tt> to become an Alliance behavioral file (<tt class="docutils literal">vbe</tt>). It takes two
+arguments: the technology file and the cell spice file.
+Cell which name starts by <tt class="docutils literal">sff</tt> will be treated as D flip-flop.</li>
+<li><tt class="docutils literal">buildLib.tcl</tt>, process all cells in a directory to buil a liberty
+file. Takes two arguments, the technology file and the name of the
+liberty file to generate. The collection of characterized cells will
+be determined by the <tt class="docutils literal">.spi</tt> files found in the current directory.</li>
+</ul>
+</div>
+</div>
 <div class="section" id="tools-scripts">
-<h2><a class="toc-backref" href="#id11">Tools &amp; Scripts</a></h2>
+<h2><a class="toc-backref" href="#id14">Tools &amp; Scripts</a></h2>
 <div class="section" id="one-script-to-run-them-all-go">
-<h3><a class="toc-backref" href="#id12">One script to run them all: <tt class="docutils literal">go.sh</tt></a></h3>
+<h3><a class="toc-backref" href="#id15">One script to run them all: <tt class="docutils literal">go.sh</tt></a></h3>
 <p>To call all the bench's <tt class="docutils literal">Makefile</tt> sequentially and execute one or more rules on
 each, the small script utility <tt class="docutils literal">go.sh</tt> is available. Here are some examples:</p>
 <pre class="literal-block">
@@ -1116,12 +1208,19 @@ dummy&#64;lepka:bench$ ./bin/go.sh lvx
 </pre>
 </div>
 <div class="section" id="command-line-cgt-dochip">
-<h3><a class="toc-backref" href="#id13">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></h3>
+<h3><a class="toc-backref" href="#id16">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></h3>
 <p>As a alternative to <tt class="docutils literal">cgt</tt>, the small helper script <tt class="docutils literal">doChip.py</tt> allows to
 perform all the P&amp;R tasks, on an stand-alone block or a whole chip.</p>
 </div>
+<div class="section" id="blif-netlist-converter">
+<h3><a class="toc-backref" href="#id17">Blif Netlist Converter</a></h3>
+<p>The <tt class="docutils literal">blif2vst.py</tt> script convert a <tt class="docutils literal">.blif</tt> netlist into an <span class="sc">Alliance</span> one
+(<tt class="docutils literal">vst</tt>). This is a very straightforward encapsulation of <span class="sc">Coriolis</span>.
+It could have been included in <tt class="docutils literal">doChip.py</tt>, but then the <tt class="docutils literal">make</tt> rules
+would have been much more complicateds.</p>
+</div>
 <div class="section" id="pad-layout-converter-px2mpx">
-<h3><a class="toc-backref" href="#id14">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
+<h3><a class="toc-backref" href="#id18">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
 <p>The <tt class="docutils literal">px2mpx.py</tt> script convert pad layout from the <tt class="docutils literal">pxlib</tt> (<span class="sc">Alliance</span> dummy
 technology) into <tt class="docutils literal">mpxlib</tt> (<span class="sc">mosis</span> compliant symbolic technology).</p>
 <p>Basically it multiplies all the coordinate by two as the source technology
@@ -1160,14 +1259,9 @@ the directory the layouts are put into. Otherwise you would only see
 the pads of the system library (if any).</p>
 </div>
 </div>
-<div class="section" id="yagle-cell-extraction-script-extractcell-tcl">
-<h3><a class="toc-backref" href="#id15">Yagle Cell Extraction Script <tt class="docutils literal">extractCell.tcl</tt></a></h3>
-<p>A small <span class="sc">tcl</span> script for <tt class="docutils literal">avt_shell</tt> to perform a cell extraction with
-<tt class="docutils literal">yagle</tt>. Cell which name starts by <tt class="docutils literal">sff</tt> will be treated as D flip-flop.</p>
-</div>
 </div>
 <div class="section" id="cadence-support">
-<h2><a class="toc-backref" href="#id16"><span class="sc">Cadence</span> Support</a></h2>
+<h2><a class="toc-backref" href="#id19"><span class="sc">Cadence</span> Support</a></h2>
 <p>To perform comparisons with <span class="sc">Cadence</span> <span class="sc">edi</span> tools (i.e. <tt class="docutils literal">encounter</tt>
 <span class="sc">NanoRoute</span>), some benchmarks have a sub-directory <tt class="docutils literal">encounter</tt>
 holding all the necessary files. Here is an example for the design
@@ -1246,7 +1340,7 @@ defOut -floorplan -netlist -routing fpga_nano.def
 </pre>
 </div>
 <div class="section" id="technologies">
-<h2><a class="toc-backref" href="#id17">Technologies</a></h2>
+<h2><a class="toc-backref" href="#id20">Technologies</a></h2>
 <p>We provides configuration files for the publicly available <span class="sc">mosis</span>
 technology <tt class="docutils literal">SCN6M_DEEP</tt>.</p>
 <ul class="simple">

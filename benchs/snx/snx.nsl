@@ -1,0 +1,367 @@
+/* SN/X v1.6  by Naohiko Shimizu, IP ARCH, Inc. 
+ * Copyright (c) 2010-2011 IP ARCH, Inc. All rights reserved. 
+ * 2011-08-21: AHI instruction added
+ */
+
+#include "snx.h"
+ 
+/* R Type Instructions */
+#define ADD 0 
+#define AND 1 
+#define SLT 3 
+#define NOT 4 
+#define SR  6 
+
+/* C type Instructions */
+#define IRET 6 
+#define HLT 7 
+  
+/* I type Instructions */
+#define LD  0x8 
+#define ST  0x9 
+#define LDA 0xa 
+/* AHI is add high immediate */
+#define AHI  0xb 
+#define BZ  0xe 
+#define BAL 0xf 
+  
+#define IntEnable	cr0[0]
+#define IntNewPC	cr2
+#define IntOldPC	cr3
+  
+struct SNX_itype { 
+    op[4]; 
+    r1[2]; 
+    r2[2]; 
+    I[8]; 
+    }; 
+  
+struct SNX_rtype { 
+    op[4]; 
+    r2[2]; 
+    r3[2]; 
+    r1[2]; 
+    fn[6]; 
+    }; 
+  
+/* SNX class comment body */ 
+   
+declare    alu16  { 
+    // -- alu16  -- 
+    input    a[16]; 
+    input    b[16]; 
+    input    f[6]; 
+    output    q[16]; 
+    // -- alu16  -- 
+    func_in    exe(f,a,b):q; 
+} 
+  
+   
+declare    cla16  { 
+    // -- cla16  -- 
+    input    cin; 
+    input    in1[16]; 
+    input    in2[16]; 
+    output    out[16]; 
+    // -- cla16  -- 
+    func_in    do(cin,in1,in2):out; 
+} 
+   
+  
+declare    reg4  { 
+    // -- reg4  -- 
+    input    regin[16]; 
+    output    regouta[16]; 
+    output    regoutb[16]; 
+    input    n_regin[2]; 
+    input    n_regouta[2]; 
+    input    n_regoutb[2]; 
+    // -- reg4  -- 
+    func_in    write(n_regin,regin); 
+    func_in    reada(n_regouta):regouta; 
+    func_in    readb(n_regoutb):regoutb; 
+    func_in    ShowReg;
+} 
+   
+  
+declare    inc16  { 
+    // -- inc16  -- 
+    input    in[16]; 
+    output    out[16]; 
+    // -- inc16  -- 
+    func_in    do(in):out; 
+} 
+  
+declare type_dec {
+	input	op[4];
+	func_out	itype, rtype, ctype;
+	func_in	dec(op);
+}
+   
+module type_dec {
+	func dec any {
+		op==4'b0000:	rtype();
+		op==4'b0001:	ctype();
+		else:		itype();
+	}
+}
+
+  
+module    snx { 
+    // -- snx  -- 
+    alu16    alu; 
+    reg4    gr; 
+    inc16    inc; 
+  
+  
+    reg    pc[16]; 
+    reg	   isr=0;
+    SNX_rtype reg opreg; 
+    reg    mar[16]; 
+    reg    regnum[2]; 
+    reg    cr0[16]=0, cr1[16]=0, cr2[16]=0, cr3[16]=0;
+    reg    int0=0, int1=0;
+    wire   npc[16];
+    wire   nmar[16];
+    wire   nregnum[2];
+    wire   crnum[8];
+    wire   crwdat[16];
+    wire   crrdat[16];
+  
+ 
+    func_self    iset(npc); 
+    func_self    msetld(nregnum,nmar); 
+    func_self    crwrite(crnum,crwdat); 
+    func_self    crread(crnum) : crrdat; 
+   
+    proc_name    ifetch (pc); 
+    proc_name    exec (opreg); 
+    proc_name    mstore (regnum,mar); 
+    proc_name    mstore2 (); 
+    proc_name    mload (regnum,mar);
+  
+     
+    /* common operations */ 
+
+    int0 := IntReq; int1 := int0;
+      
+    /* func_in start() operation */ 
+    func    start { 
+        iset(0x0000); 
+    } 
+
+    func    iset any {
+	IntEnable & ~isr & int1: seq {
+		{IntOldPC := npc; isr:=1;}
+		{IntAck(); iset(IntNewPC);}
+	}
+	else: {
+		inst_adr(npc);
+		ifetch(npc);
+	}
+    }
+
+    func    msetld {
+	memory_adr(nmar);
+	mload(nregnum,nmar);
+    }
+
+    func    crwrite any {
+	crnum == 0x00: cr0:=crwdat;
+	crnum == 0x01: cr1:=crwdat;
+	crnum == 0x02: cr2:=crwdat;
+	crnum == 0x03: cr3:=crwdat;
+	}
+
+
+    func    crread any {
+	crnum == 0x00: return cr0;
+	crnum == 0x01: return cr1;
+	crnum == 0x02: return cr2;
+	crnum == 0x03: return cr3;
+	}
+
+    func	ShowCR {
+		_display("C0:%04x C1:%04x C2:%04x C3:%04x", cr0,cr1,cr2,cr3);
+	}
+
+
+    /* proc ifetch(pc) operation */ 
+    proc    ifetch { 
+	inst_read();
+	if(inst_ok) {
+		exec(inst); 
+	}
+    } 
+	
+    /* proc exec(opreg) operation */ 
+    proc    exec { 
+        SNX_itype wire opitype; 
+	type_dec tdec;
+        wire    opr1[16]; 
+        wire    opr2[16]; 
+        wire    aluq[16];
+   
+	_write("PC:%04x IS:%04X ",pc,16'{opreg});
+	gr.ShowReg();
+	tdec.dec(opreg.op);
+	opitype = opreg; 
+        opr1 = gr.reada(opreg.r2); 
+        if(tdec.itype&&(opreg.r3==0b00))    opr2 = 0x0000; 
+        else                opr2 = gr.readb(opreg.r3); 
+  
+	any {
+        tdec.itype: any {
+        	opreg.op==AHI:    aluq=alu.exe(ADD, {opitype.I,0x00}, opr2); 
+		else:    	aluq=alu.exe(ADD, 16#opitype.I, opr2); 
+		}
+	tdec.rtype: aluq=alu.exe(opreg.fn,opr1,opr2); 
+	}
+ 
+        any { 
+             (opitype.op==BAL) | ((opitype.op==BZ) & (opr1==0x0000)): {wb(); iset(aluq);} 
+             tdec.ctype: any {
+		opreg.fn==IRET: {wb(); isr:=0; iset(IntOldPC);}
+		opreg.fn==HLT: {wb(); hlt();
+		} 
+	     }
+             opitype.op==LD: {msetld(opitype.r1,aluq); pc:=inc.do(pc); } 
+             opitype.op==ST: {mstore(opitype.r1,aluq); pc:=inc.do(pc); } 
+             else: {wb(); iset(inc.do(pc)); } 
+         } 
+  
+        any { 
+            tdec.rtype: gr.write(opreg.r1,aluq); 
+            opitype.op == LDA || opitype.op == AHI: gr.write(opitype.r1,aluq); 
+            opitype.op == BAL: gr.write(opitype.r1,inc.do(pc)); 
+        } 
+
+	finish();
+    } 
+           
+    /* proc mstore(regnum,mar) operation */ 
+    proc    mstore { 
+	any {
+	mar[15:8]==0xff:
+		{
+		wire wdata[16];
+			wdata=gr.reada(regnum);
+			crwrite(mar[7:0], wdata);
+			iset(pc);
+			finish();
+			wb(); 
+		}
+	else:
+		{
+		memory_write(mar,gr.reada(regnum)); 
+		if(mem_ok) {
+			mstore2(); 
+			finish();
+			wb(); 
+		}
+	}
+      }
+    } 
+
+   proc	    mstore2 {
+	iset(pc);
+	finish();
+   }
+          
+    /* proc mload(regnum,mar) operation */ 
+    proc    mload { 
+	any {
+	mar[15:8]==0xff:
+		{
+			gr.write(regnum,crread(mar[7:0])); 
+			iset(pc); 
+			finish();
+			wb(); 
+		}
+	else:
+		{
+		memory_read();
+		if(mem_ok) {
+			gr.write(regnum,datai); 
+			iset(pc); 
+			finish();
+			wb(); 
+		}
+	}
+    } 
+  }
+
+} 
+  
+module    alu16 { 
+    cla16    cla; 
+    /* common operations */ 
+    { 
+    } 
+      
+    /* func_in exe(f,a,b) operation */ 
+    func    exe { 
+        any { 
+            f==ADD: return cla.do(0b0,a,b); 
+            f==AND: return a&b; 
+            f==SLT: return 16'((a[15]&~b[15])|(cla.do(0b1,a,~b)[15]&~a[15]&~b[15])|(cla.out[15]&a[15]&b[15])); 
+            f==NOT: return ~a; 
+            f==SR: return {0b0,a[15:1]}; 
+        } 
+    } 
+} 
+  
+module    cla16 { 
+    /* func_in exe(cin,in1,in2) operation */ 
+    func    do { 
+    return in1 + in2 + 16'(cin); 
+    } 
+} 
+   
+module    reg4 { 
+    // -- reg4  -- 
+    reg    r0[16]; 
+    reg    r1[16]; 
+    reg    r2[16]; 
+    reg    r3[16]; 
+          
+    /* func_in write(n_regin,regin) operation */ 
+    func    write { 
+        any { 
+            n_regin == 0: r0 := regin; 
+            n_regin == 1: r1 := regin; 
+            n_regin == 2: r2 := regin; 
+            n_regin == 3: r3 := regin; 
+        } 
+    } 
+         
+    /* func_in reada(n_regouta) operation */ 
+    func    reada { 
+        any { 
+            n_regouta == 0: return r0; 
+            n_regouta == 1: return r1; 
+            n_regouta == 2: return r2; 
+            n_regouta == 3: return r3; 
+        } 
+    } 
+          
+    /* func_in readb(n_regoutb) operation */ 
+    func    readb { 
+        any { 
+            n_regoutb == 0: return r0; 
+            n_regoutb == 1: return r1; 
+            n_regoutb == 2: return r2; 
+            n_regoutb == 3: return r3; 
+        } 
+    } 
+    func ShowReg 
+	  _display("$0:%04X $1:%04X $2:%04X $3:%04X",r0,r1,r2,r3);
+} 
+  
+  
+module    inc16 { 
+        /* func_in exe(a) operation */ 
+    func    do { 
+        return in + 0x0001; 
+    } 
+} 

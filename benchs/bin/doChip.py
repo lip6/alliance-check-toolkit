@@ -104,26 +104,30 @@ def ScriptMain ( **kw ):
 
 if __name__ == '__main__':
   parser = optparse.OptionParser()
-  parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'       , help='The name of the chip to build, whithout extension.')
+  parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'       , help='The name of the chip to build, without extension.')
   parser.add_option( '-s', '--script', type='string',                      dest='script'     , help='The name of a Python script, without extension.')
+  parser.add_option( '-b', '--blif'  , type='string',                      dest='blif'       , help='The name of a BLIF netlist, without extension.')
   parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'    , help='First level of verbosity.')
   parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose', help='Second level of verbosity.')
   parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement', help='Perform chip placement step only.')
   parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'  , help='Perform routing step only.')
   parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'     , help='Run place & route on a complete chip.')
   parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree', help='In block mode, create a clock-tree.')
+  parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'    , help='Save both physical and logical views.')
   (options, args) = parser.parse_args()
 
+  views    = CRL.Catalog.State.Physical
   doStages = 0
   if options.verbose:     Cfg.getParamBool('misc.verboseLevel1').setBool(True)
   if options.veryVerbose: Cfg.getParamBool('misc.verboseLevel2').setBool(True)
+  if options.saveAll:     views    |= CRL.Catalog.State.Logical
   if options.doPlacement: doStages |= DoPlacement
   if options.doRouting:   doStages |= DoRouting
   if options.doChip:      doStages |= DoChip
   if options.doClockTree: doStages |= DoClockTree
   if not doStages:        doStages  = ChipStages
 
-  kw = { 'doStages':doStages }
+  kw = { 'doStages':doStages, 'views':views }
   if options.script:
     try:
       sys.path.append(os.path.dirname(options.script))
@@ -150,6 +154,8 @@ if __name__ == '__main__':
       sys.exit(2)
   elif options.cell:
     kw['cell'] = framework.getCell( options.cell, CRL.Catalog.State.Views )
+  elif options.blif:
+    kw['cell'] = CRL.Blif.load( options.blif )
 
   success = ScriptMain( **kw )
   shellSuccess = 0
