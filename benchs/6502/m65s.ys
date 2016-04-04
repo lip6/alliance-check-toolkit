@@ -1,0 +1,8 @@
+
+read_verilog m65s.v
+hierarchy -check -top m65s
+synth            -top m65s
+dfflibmap -liberty ../cells/nsxlib/nsxlib.lib
+abc       -liberty ../cells/nsxlib/nsxlib.lib
+clean
+write_blif m65s.blif

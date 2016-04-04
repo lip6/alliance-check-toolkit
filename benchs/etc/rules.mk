@@ -240,11 +240,23 @@ cell-check-proof-%: ./%.vbe ./check/%.vhd
 # Yosys Rules (pattern matching).
 
 ifeq ($(USE_SYNTHESIS),Yosys)
+
 %.blif: %.v %.ys
 	$(YOSYS) -s $*.ys
 
+ifeq ($(USE_DEVTOOLSET_2),Yes)
+
 %.vst: %.blif
-	$(BLIF2VST) $*
+	-@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	                           $(BLIF2VST) $*'
+
+else
+
+%.vst: %.blif
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $*
+
+endif
+
 endif
 
 
