@@ -59,9 +59,13 @@
   # Where Naohiko Shimizu gets his tools installeds.
 
    USE_NSL           = Yes
-   CORIOLIS_TOP      = $(HOME)/coriolis-2.x/Cygwin.W8/$(BUILD_TYPE_DIR)/install
+   ifeq ($(UNAME_S), Linux)
+     CORIOLIS_TOP    = $(HOME)/coriolis-2.x/Linux.el7_64/$(BUILD_TYPE_DIR)/install
+   else
+     CORIOLIS_TOP    = $(HOME)/coriolis-2.x/Cygwin.W10/$(BUILD_TYPE_DIR)/install
+   endif
    ALLIANCE_TOP      = /opt/alliance
-   ALLIANCE_TOOLKIT  = $(HOME)/coriolis-2.x/src/alliance-check-toolkit/benchs
+   ALLIANCE_TOOLKIT  = $(HOME)/Documents/Develop/alliance-check-toolkit/benchs
  endif
  ifeq ($(USER),alnurn)
   # Where Gabriel Gouvine gets his tools installeds.

@@ -3,7 +3,7 @@
                   BOOMOPT = -A
                   BOOGOPT =
                   LOONOPT =
-                NSL2VHOPT = -vasy
+                NSL2VHOPT = -vasy -split -p
             USE_SYNTHESIS = Alliance
             USE_CLOCKTREE = Yes
            LIBRARY_FAMILY = nsxlib
