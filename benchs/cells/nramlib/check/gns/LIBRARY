@@ -1,0 +1,24 @@
+// __ sense amplifiers ___________
+
+differential_amplifier differential_amplifier {};
+
+
+// _____ bicells ________________
+mem_cell mem_cell {};
+
+// _____ ram hierarchy __________
+
+column column {};
+column_and_prech column_and_prech {} : keep = yes;
+sense_amplifier sense_amplifier {} : keep = yes;
+
+/*
+column column {};
+column_input column_input {};
+sense_amplifier sense_amplifier {};
+column_and_sel column_and_sel {};
+bit_line bit_line {} : keep = yes;
+*/
+
+//    bank.vhd:keep=yes;
+//    bank.c;

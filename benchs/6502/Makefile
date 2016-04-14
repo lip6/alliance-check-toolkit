@@ -1,14 +1,22 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/snx>" -*-
 
+                  TK_RTOP = ..
+
                 NSL2VHOPT = 
-            USE_SYNTHESIS = Yosys
             USE_CLOCKTREE = Yes
-           LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No
 
-                 NETLISTS = m65s
+                 NETLISTS = m65s   \
+                            alu65  \
+                            cpa8   \
+                            decadj \
+                            inc16
 
- include ../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+
 
 lvx:       lvx-m65s_clocked_kite
 druc:      druc-m65s_clocked_kite

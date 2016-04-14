@@ -1,8 +1,11 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/nsxlib>" -*-
 
-           LIBRARY_FAMILY = nsxlib
+                  TK_RTOP = ../..
+ export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nsxlib
 
- include ../../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/mosis.mk
+ include $(TK_RTOP)/etc/mk/check-library.mk
 
 
  characterize: nsxlib-dot-lib

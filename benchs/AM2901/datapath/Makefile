@@ -1,13 +1,18 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/AM2901/datapath>" -*-
 
-            USE_SYNTHESIS = No
+                  TK_RTOP = ../..
+
               USE_STRATUS = Yes
             USE_CLOCKTREE = No
                 USE_DEBUG = No
 
                  NETLISTS = amd2901_ctl
 
- include ../../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/sxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-disabled.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+
 
 
 lvx:     lvx-amd2901_kite

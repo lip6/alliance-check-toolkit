@@ -1,12 +1,15 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/MIPS/microprogrammed>" -*-
 
-            USE_SYNTHESIS = No
+                  TK_RTOP = ../..
+
             USE_CLOCKTREE = No
                 USE_DEBUG = No
 
-                 NETLISTS = mips_r3000_1m_core_flat
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/sxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-disabled.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 
- include ../../etc/rules.mk
 
 lvx:     lvx-mips_r3000_1m_core_flat_kite
 druc:    druc-mips_r3000_1m_core_flat_kite

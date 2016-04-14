@@ -20,6 +20,7 @@
 .. |noindent|          replace:: :raw-latex:`\noindent`
 
 .. Acronyms & Names
+.. |UNIX|              replace:: :sc:`unix`
 .. |Si2|               replace:: :sc:`Si2`
 .. |Cadence|           replace:: :sc:`Cadence`
 .. |EDI|               replace:: :sc:`edi`
@@ -27,15 +28,19 @@
 .. |TCL|               replace:: :sc:`tcl`
 .. |Alliance|          replace:: :sc:`Alliance`
 .. |Coriolis|          replace:: :sc:`Coriolis`
+.. |Stratus|           replace:: :sc:`Stratus`
 .. |Python|            replace:: :sc:`Python`
 .. |RHEL6|             replace:: :sc:`rhel6`
 .. |MOSIS|             replace:: :sc:`mosis`
 .. |GDSII|             replace:: :sc:`gdsii`
 .. |VHDL|              replace:: :sc:`vhdl`
 .. |Verilog|           replace:: :sc:`Verilog`
+.. |RAM|               replace:: :sc:`ram`
+.. |ROM|               replace:: :sc:`rom`
 .. |RDS|               replace:: :sc:`rds`
 .. |API|               replace:: :sc:`api`
 .. |LVS|               replace:: :sc:`lvs`
+.. |DRC|               replace:: :sc:`drc`
 .. |adder|             replace:: ``adder``
 .. |AM2901|            replace:: :sc:`am2901`
 .. |alliance-run|      replace:: ``alliance-run``
@@ -46,11 +51,11 @@
 .. |ISPD05|            replace:: :sc:`ispd05`
 		       
 .. |encounter|         replace:: ``encounter``
+.. |yosys|             replace:: ``yosys``
 .. |devtoolset-2|      replace:: ``devtoolset-2``
 .. |git|               replace:: ``git``
 .. |Makefile|          replace:: ``Makefile``
 .. |gds|               replace:: ``gds``
-.. |ring|              replace:: ``ring``
 .. |sxlib|             replace:: ``sxlib``
 .. |dp_sxlib|          replace:: ``dp_sxlib``
 .. |ramlib|            replace:: ``ramlib``
@@ -67,7 +72,13 @@
 .. |doChip|            replace:: ``doChip.py``
 .. |blif2vst|          replace:: ``blif2vst.py``
 .. |go|                replace:: ``go.sh``
+.. |boom|              replace:: ``boom``
+.. |boog|              replace:: ``boog``
+.. |loon|              replace:: ``loon``
 .. |cougar|            replace:: ``cougar``
+.. |ocp|               replace:: ``ocp``
+.. |nero|              replace:: ``nero``
+.. |ring|              replace:: ``ring``
 .. |hitas|             replace:: ``hitas``
 .. |yagle|             replace:: ``yagle``
 .. |proof|             replace:: ``proof``
@@ -75,6 +86,7 @@
 .. |avt_shell|         replace:: ``avt_shell``
 .. |extractCell.tcl|   replace:: ``extractCell.tcl``
 .. |buildLib.tcl|      replace:: ``buildLib.tcl``
+.. |nsl|               replace:: ``nsl``
 
 .. |layout-alc|        replace:: ``layout-alc``
 .. |layout|            replace:: ``layout``
@@ -165,12 +177,12 @@ Design                         Technology                  Cell Libraries
 Benchmark Makefiles
 =====================
 
-The main body of the |Makefile| has been put into ``benchs/etc/rules.mk``.
+A benchmark |Makefile| built by assembling sets of rules, which are located
+in ``bench/etc/mk/<RULES>.mk`` and a setting up variables ``USE_<FEATURE>``.
 
 The |Makefile| provides some or all of the following targets. If the place
 and route stage of a bench can be done by both |Coriolis| and |Alliance|
 an ``alliance/`` subdirectory will be present.
-
 
 +--------------+----------------------+---------------------------------------------------------------+
 |  |Coriolis|  |  |layout|            |  The complete symbolic layout of the design (P&R).            |
@@ -191,19 +203,25 @@ an ``alliance/`` subdirectory will be present.
 |              |  |cgt|               |  Launch |cgt|  in the |Makefile| 's environement              |
 +--------------+----------------------+---------------------------------------------------------------+
 
+.. note::
+   The previous monolitic ``bench/etc/rules.mk`` as been kept in the tree,
+   and it's associated |Makefile| renamed into ``Makefile.old``. But they are
+   now unsupported.
+
 
 |newpage|
 
 A top |Makefile| in a bench directory must looks like: ::
 
+                     TK_RTOP = ..
+
                      BOOMOPT = -A
                      BOOGOPT =
                      LOONOPT =
                    NSL2VHOPT = -vasy
-              LIBRARY_FAMILY = nsxlib
-               USE_SYNTHESIS = Yes
-               USE_CLOCKTREE = No
+               USE_CLOCKTREE = Yes
                    USE_DEBUG = No
+                        CORE = snx
 
                     NETLISTS = cla16       \
                                inc16       \
@@ -211,8 +229,12 @@ A top |Makefile| in a bench directory must looks like: ::
                                type_dec    \
                                alu16_model \
                                snx_model
+
+    include $(TK_RTOP)/etc/mk/alliance.mk
+    include $(TK_RTOP)/etc/mk/nsxlib.mk
+    include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
+    include $(TK_RTOP)/etc/mk/pr-coriolis.mk
    
-    include ../etc/rules.mk
 
     lvx:       lvx-chip_kite
     druc:      druc-chip_kite
@@ -223,34 +245,88 @@ A top |Makefile| in a bench directory must looks like: ::
 
 Where variables have the following meaning:
 
-=======================  ===========================================================
-Variable                 Usage
-=======================  ===========================================================
-``NETLISTS``             The list of *netlists* that are requireds to perform the
-                         place and route stage. The files must we given *without*
-                         extension. According to the value of ``USE_SYNTHESIS`` they
-                         are user supplied or generated. In the later case, be aware
-                         that calling the ``clean`` target will remove the generated
-                         files. In certain contexts, the first item of ``NETLISTS``
-                         will be considered as the chip's core.
-``LIBRARY_FAMILY``       Tells which library set to use. Legal values are ``sxlib``
-                         (default) and ``nsxlib`` (|MOSIS| technology).
-``USE_SYNTHESIS``        If set to ``Alliance``, the files given in ``NETLISTS``
-                         will be synthetised using the |Alliance| tools from the
-                         reference ``vhdl`` or ``nsl`` description (if this tool is
-                         available).
+=========================  ===========================================================
+Variable                   Usage
+=========================  ===========================================================
+``TK_RTOP``                Where the root of the benches is located, relative to the
+                           |Makefile| directory (``[T]ool[K]it [R]elative [TOP]``).
+``NETLISTS``               The list of *netlists* that are requireds to perform the
+                           place and route stage. The files must we given *without*
+                           extension. According to the value of ``USE_SYNTHESIS`` they
+                           are user supplied or generated. In the later case, be aware
+                           that calling the ``clean`` target will remove the generated
+                           files. In certain contexts, the first item of ``NETLISTS``
+                           will be considered as the chip's core.
+                           Note that the clean will remove all generated files.
+``USE_CLOCKTREE``          Adds a clock-tree to the design (|Coriolis|).
+``USE_DEBUG``              Activate debug support on |cgt|.
+=========================  ===========================================================
 
-                         If set to ``Yosys``, synthesis will be done using the first
-                         item ``NETLISTS`` as a |Verilog| (``.v``) file. The
-                         resulting |blif| file will be subsquently translated into
-                         |vst| using |blif2vst|.
+|newpage|
 
-                         Any other value disable sysnthesis (please use ``No``).
 
-                         Note that the clean will remove all generated files.
-``USE_CLOCKTREE``        Adds a clock-tree to the design (|Coriolis|).
-``USE_DEBUG``            Activate debug support on |cgt|.
-=======================  ===========================================================
+Availables set of rules:
+
+=========================  ===========================================================
+Ruleset                    Provided Support
+=========================  ===========================================================
+``alliance.mk``            Setup environment and configuration, **mandatory**.
+**Libraries**
+--------------------------------------------------------------------------------------
+``sxlib.mk``               The |Alliance| standard cell libraries (dummy techno)
+``nsxlib.mk``              The |MOSIS| 180nm compatible port of |Alliance| standard
+                           cell libraries.
+**Synthesis Alternatives**
+--------------------------------------------------------------------------------------
+``synthesis-nsl.mk``       Enable synthesis with |NSL|.
+``synthesis-alliance.mk``  Uses the |Alliance| tools for synthesis (|boom|, |boog|,
+                           |loon|). The files given in ``NETLISTS`` will be
+                           synthetised from the reference ``vhdl`` or ``nsl``
+                           description (if this tool is available).
+``synthesis-yosys.mk``     Uses |yosys| for synthesis. Only the first item in
+                           ``NETLISTS``, as a |Verilog| (``.v``) file, will be
+                           synthetised. The resulting |blif| file will be subsquently
+                           translated into |vst| using |blif2vst|.
+``synthesis-disabled.mk``  No support for synthesis. The ``NETLISTS`` variable will
+                           still be used to remove the associated layout files.
+                           If you want to keep the layout (placement), do not setup
+                           this variable.
+**Place & Route**
+--------------------------------------------------------------------------------------
+``pr-alliance.mk``         Uses the old |Alliance| tools (|ocp|, |nero|, |ring|).
+``pr-coriolis.mk``         Uses the Coriolis tools
+=========================  ===========================================================
+
+For **Libraries**, **Synthesis** and **Place & Route**, exactly one of the available
+ruleset must be present. With the execption of |nsl| which may or may not be present
+independantly.
+
+Other set of rules:
+
+=========================  ===========================================================
+Ruleset                    Provided Support
+=========================  ===========================================================
+**Included through alliance.mk**
+--------------------------------------------------------------------------------------
+``os.mk``                  Setup environment according to the running OS. Mostly
+                           looks for 32 / 64 bits and if we need to use the
+                           ``devtoolset 2``.
+``users.mk``               Setup top directories for the tools according the |UNIX|
+                           username.
+``binaries.mk``            Setup the absolute pathes to the various binaries of the
+                           tools.
+**Technology Setup**
+--------------------------------------------------------------------------------------
+``cmos.mk``                The |Alliance| fake technology
+``mosis.mk``               The |MOSIS| 180nm technology.
+**Cells Library Checker**
+--------------------------------------------------------------------------------------
+``check-library.mk``       Rules to check a standart cell library. Perform a |DRC|,
+                           a formal proof and generate the *liberty* file ``.lib``.
+``check-generator.mk``     Rules to check a macro-block generator (|RAM|, |ROM|, ...)
+=========================  ===========================================================
+
+|newpage|
 
 
 |Coriolis| Configuration Files
@@ -282,7 +358,23 @@ netlist. The new netlist, with a clock tree, has a postfix of ``_clocked``.
 ~~~~~~~~~~~~~~~~~~~~
 
 Under |RHEL6| the developpement version of |Coriolis| needs the |devtoolset-2|.
-|rules_mk| tries, based on ``uname`` to switch it on or off.
+``aliance.mk`` tries, based on ``uname`` to switch it on or off.
+
+
+Yosys Auxiliary Script
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+As far as I understand, |yosys| do not allow it's scripts to be parametriseds.
+So, for each |Verilog| file that has to be synthetized, a simple script must be
+provided. Here is a basic example: ``snx.ys``: ::
+
+    read_verilog snx.v
+    hierarchy -check -top snx
+    synth            -top snx
+    dfflibmap -liberty ../../cells/nsxlib/nsxlib.lib
+    abc       -liberty ../../cells/nsxlib/nsxlib.lib
+    clean
+    write_blif snx.blif
 
 
 Benchmarks Special Notes
@@ -303,6 +395,8 @@ And lastly, it provides a check for the |Coriolis| encapsulation of |Alliance|
 through |Python| wrappers. The support is still incomplete and should be used
 only by very experienced users. See the ``demo*`` rules.
 
+|newpage|
+
 
 Libraries Makefiles
 =====================
@@ -313,7 +407,7 @@ Libraries Makefiles
        `HiTas -- Static Timing Analyser <https://soc-extras.lip6.fr/en/tasyag-abstract-en/>`_
 
 
-The ``bench/etc/rules.mk`` provides rules to perform the check of a library
+The ``bench/etc/mk/check-library.mk`` provides rules to perform the check of a library
 as a whole or cell by cell. To avoid too much clutter in the library directory,
 all the intermediate files generated by the verification tools are kept in a
 ``./check/`` subdirectory. Once a cell has been validated, a ``./check/<cell>.ok``
@@ -335,8 +429,6 @@ Checking Procedure
   #. |proof|, perform the formal proof between the refence ``.vbe`` and the
      extracted one.
 
-|newpage|
-
 
 =========================  ===================================================
 Rule or File               Action
@@ -353,13 +445,18 @@ Rule or File               Action
 =========================  ===================================================
 
 
-Synopsys Libery .lib Generation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+Synopsys Liberty .lib Generation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The generation of the liberty file is only half-automated. |hitas| / |yagle|
-build the base file, then we manually perform the two following modifications:
+build the base file, then we manually perform the two modifications (see below).
 
-#. For each cell, edit the ``area`` field.
+The rule to call to generate the liberty file is: ``<libname>-dot-lib`` where
+``<libname>`` is the name of the library. To avoid erasing the previous one (and
+presumably hand patched), this rule create a ``<libname>.lib.new``.
+
+#. Run the ``./bin/cellsArea.py`` script which will setup the areas of the cells
+   (in square um). Work on ``<libname>.lib.new``.
 
 #. For the synchronous flip-flop, add the functional description to their
    timing descriptions: ::
@@ -398,12 +495,6 @@ build the base file, then we manually perform the two following modifications:
       }
     }
 
-|newpage|
-
-
-The rule to call to generate the liberty file is: ``<libname>-dot-lib`` where
-``<libname>`` is the name of the library. To avoid erasing the previous one (and
-presumably hand patched), this rule create a ``<libname>.lib.new``.
 
 .. note::
    The tristate cells **ts_** and **nts_** are not included in the ``.lib``.
@@ -425,6 +516,74 @@ in ``./benchs/bin``, are:
   file. Takes two arguments, the technology file and the name of the
   liberty file to generate. The collection of characterized cells will
   be determined by the ``.spi`` files found in the current directory.
+
+
+Macro-Blocks Makefiles
+========================
+
+The ``bench/etc/mk/check-generator.mk`` provides rules to perform the check of a
+macro block generator. Here is a small example for the |RAM| generator: ::
+
+                      TK_RTOP = ../..
+     export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nramlib
+    
+     include $(TK_RTOP)/etc/mk/alliance.mk
+     include $(TK_RTOP)/etc/mk/mosis.mk
+     include $(TK_RTOP)/etc/mk/check-generator.mk
+    
+    
+    check-gen: ./check/macro_p_b_16_p_w_32.ok \
+               ./check/macro_p_b_32_p_w_32.ok
+    
+
+Macro-block generators are parametrized. We uses a special naming convention
+to pass parameters names and values trough the rule name. To declare a parameter,
+add ``_p_``, then the name of the parameter and it's value separated by a ``_``.
+
+==========================  ===============================
+String in Rule Name         Call to the generator
+==========================  ===============================
+``_p_b_16_p_w_32``          ``-b 16 -w 32``
+==========================  ===============================
+
+
+Calling the Generator
+~~~~~~~~~~~~~~~~~~~~~~~
+
+A script ``./check/generator.py`` must be written in order to call the generator
+in standalone mode. This script is quite straigthforward, what changes between
+generators is the command line options and the ``stratus.buildModel()`` call.
+
+After the generator call, we get a netlist and placement, but it is not finished
+until it is routed with the |Coriolis| router.
+
+.. note::
+   Currently all macro-block generators are part of the |Stratus| netlist capture
+   language tool from |Coriolis|.
+
+
+Scaling the Cell Library
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This operation has to be done once, when the cell library is initially ported.
+The result is put in the |git| repository, so there's no need to run it again
+on a provided library.
+
+The script is ``./check/scaleCell.py``. It is very sensitive on the way
+the library pathes are set in ``.coriolis2/settings.py``. It must have the
+target cell library setup as the ``WORKING_LIBRARY`` and the source cell
+library in the ``SYSTEM_LIBRARY``. The technology must be set to the target
+one.
+
+.. note::
+   There is a failsafe in ``./check/scaleCell.py``, it will not run until the
+   target library has not been emptied of it's cells.
+
+The script contains a ``getDeltas()`` function which provide a table on how
+to resize some layers (width and extension).
+
+As the scaling operations is very specific to each macro-block, this script
+is *not* shared, but customized for each one.
  
 
 Tools & Scripts
@@ -536,8 +695,6 @@ script to be run by |encounter|: ::
 
     ego@home:encounter> . ../../etc/EDI1324.sh
     ego@home:encounter> encounter -init ./fpga.tcl
-
-|newpage|
 
 
 Example of |TCL| script for |encounter|: ::

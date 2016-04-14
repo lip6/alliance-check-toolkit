@@ -1,8 +1,9 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/AM2901>" -*-
 
+                  TK_RTOP = ../..
+
                      CHIP = amd2901
                    MARGIN = 2
-            USE_SYNTHESIS = No
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
 
@@ -14,7 +15,11 @@
                             muxs    \
                             ram
 
- include ../../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/sxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-disabled.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+
 
 lvx:     lvx-amd2901_clocked_kite
 druc:    druc-amd2901_clocked_kite

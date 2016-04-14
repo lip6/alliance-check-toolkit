@@ -1,12 +1,12 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/snx>" -*-
 
+                  TK_RTOP = ..
+
                   BOOMOPT = -A
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy -split -p
-            USE_SYNTHESIS = Alliance
             USE_CLOCKTREE = Yes
-           LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No
                      CORE = snx
 
@@ -17,7 +17,11 @@
                             alu16_model \
                             snx_model
 
- include ../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+
 
 lvx:       lvx-chip_clocked_kite
 druc:      druc-chip_clocked_kite

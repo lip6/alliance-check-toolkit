@@ -27,7 +27,7 @@ parametersTable = \
 cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
 
 allianceConfig = \
-    ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/msxlib'  , Environment.Prepend)
+    ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
                           , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
     ,
     )

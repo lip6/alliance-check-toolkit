@@ -13,8 +13,10 @@ if ([string match sff* $cell]) {
   inf_MarkSignal      sff_s SLAVE
 }
 
-avt_Config   simToolModel  hspice
+avt_config   simToolModel  hspice
 avt_LoadFile $techno       spice
 avt_LoadFile $cell.spi     spice
+avt_config   avtVddName    vdd
+avt_config   avtVssName    vss
 yagle $cell
 

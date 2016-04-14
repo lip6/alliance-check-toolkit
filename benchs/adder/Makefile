@@ -1,19 +1,22 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/adder>" -*-
 
+                  TK_RTOP = ..
+
                      CHIP = chip
                    MARGIN = 2
                   BOOMOPT =
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
-            USE_SYNTHESIS = Alliance
             USE_CLOCKTREE = No
-           LIBRARY_FAMILY = msxlib
                 USE_DEBUG = No
 
                  NETLISTS = adder
 
- include ../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 
 
 lvx:         lvx-chip_kite

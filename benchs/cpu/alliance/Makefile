@@ -1,5 +1,7 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/cpu/alliance>" -*-
 
+                  TK_RTOP = ../..
+
                      CHIP = chip
                      CORE = cpu
                    MARGIN = 2
@@ -7,14 +9,15 @@
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
-          USE_ALLIANCE_PR = Yes
-            USE_SYNTHESIS = Alliance
-           LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No
 
-                 NETLISTS = cpu.vst
+                 NETLISTS = cpu
 
- include ../../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
+ include $(TK_RTOP)/etc/mk/pr-alliance.mk
+
 
 lvx:       lvx-chip
 druc:      druc-chip

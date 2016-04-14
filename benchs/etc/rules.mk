@@ -201,6 +201,16 @@ env: ; @echo "NETLISTS_VST = \"$(NETLISTS_VST)\""
 
 
 # -------------------------------------------------------------------
+# Macro-Generator Check Rules.
+
+./check/generator-%.ok: generator-%_kite.ap
+
+generator-%.ap generator-%.vst: ./check/generate.py
+	eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	     ./check/generate.py $(foreach param,$(subst __, ,$*), -$(subst _, ,$(param)))
+
+
+# -------------------------------------------------------------------
 # Cell Check Rules.
 
 CELL_CHECK_DIR = if [ ! -d "./check" ]; then mkdir "./check"; fi; cd "./check"
@@ -361,6 +371,7 @@ endif
 %: %.aux %.nets %.nodes %.pl %.scl %.wts
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          cgt -V --ispd-05=$*'
+
 cgt:
 	@scl enable devtoolset-2 'eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                          cgt -V'
@@ -390,13 +401,16 @@ else
 	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) --script=$(DESIGN)
 
 %_kite.ap  %_kite.vst:  $(NETLISTS_VST) %_chip.py 
-	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prCTS --cell=$*
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prCS --cell=$*
 
 %_kite.ap  %_kite.vst: $(NETLISTS_VST) %.ap
 	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -rS --cell=$*
 
 %_kite.ap  %_kite.vst:  $(NETLISTS_VST)
-	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prTS --cell=$*
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -prS --cell=$*
+
+%_kite.ap  %_kite.vst:  %.vst %.ap
+	-@eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) -rS --cell=$*
 
 endif
 

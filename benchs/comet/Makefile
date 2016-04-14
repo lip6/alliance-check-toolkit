@@ -1,12 +1,12 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/comet/yosys>" -*-
+# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/comet>" -*-
+
+                  TK_RTOP = ..
 
                   BOOMOPT = -A
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
-            USE_SYNTHESIS = Yosys
             USE_CLOCKTREE = Yes
-           LIBRARY_FAMILY = nsxlib
                 USE_DEBUG = No
 
                  NETLISTS = comet   \
@@ -16,7 +16,11 @@
                             reg16   \
                             shift16
 
- include ../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+
 
 lvx:       lvx-comet_clocked_kite
 druc:      druc-comet_clocked_kite
