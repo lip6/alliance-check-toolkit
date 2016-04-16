@@ -13,6 +13,10 @@
  PATTERNS = patterns
  DESIGN   = design
 
+ export MBK_IN_LO=vst
+ export MBK_PH_LO=vst
+ export MBK_OUT_LO=ap
+ export MBK_OUT_PH=ap
  export RDS_IN=gds
  export RDS_OUT=gds
 
