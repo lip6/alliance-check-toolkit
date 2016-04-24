@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8; explicit-buffer-name: "scaleCell.py<nramlib>" -*-
 
 try:
   import sys
@@ -179,6 +179,23 @@ def scaleCell ( editor, sourceCell ):
               print '[WARNING] Horizontal component too small *or* skipped, not converted.'
 
         elif isinstance(component,Vertical):
+          custom_dX = 0
+          if sourceCell.getName() == 'ram_sense_decad12':
+            if component.getLayer().getName() == 'NDIF':
+              if     component.getSourceY() == DbU.fromLambda(  3.0) \
+                 and component.getTargetY() == DbU.fromLambda( 12.0) \
+                 and component.getX()       == DbU.fromLambda(153.0) \
+                 and component.getWidth()   == DbU.fromLambda(  5.0):
+                print '[INFO] Shifted left NDIF segment %s.' % component
+                custom_dX = DbU.fromLambda(-1.0)
+            if component.getLayer().getName() == 'PDIF':
+              if     component.getSourceY() == DbU.fromLambda( 28.0) \
+                 and component.getTargetY() == DbU.fromLambda( 47.0) \
+                 and component.getX()       == DbU.fromLambda(153.0) \
+                 and component.getWidth()   == DbU.fromLambda(  5.0):
+                print '[INFO] Shifted left PDIF segment %s.' % component
+                custom_dX = DbU.fromLambda(-1.0)
+
           mW, dW, dL = getDeltas( component.getLayer() )
 
           if     component.getLayer().getName() == 'METAL1' \
@@ -197,7 +214,7 @@ def scaleCell ( editor, sourceCell ):
           if width > 0 and ( (dL > 0) or (bb.getHeight()*scale > abs(2*dL)) ):
             dupComponent = Vertical.create( scaledNet
                                           , layer
-                                          , component.getX       ()*scale
+                                          , component.getX       ()*scale + custom_dX
                                           , width
                                           , component.getDySource()*scale - dL
                                           , component.getDyTarget()*scale + dL

@@ -1,0 +1,16 @@
+# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/rf2dr0>" -*-
+
+                  TK_RTOP = ../..
+ export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nrf2lib
+
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/mosis.mk
+ include $(TK_RTOP)/etc/mk/check-generator.mk
+
+
+check-gen: ./check/block_rf2dr0_p_b_4_p_w_6.ok   \
+           ./check/block_rf2dr0_p_b_2_p_w_32.ok  \
+           ./check/block_rf2dr0_p_b_64_p_w_6.ok  \
+           ./check/block_rf2dr0_p_b_16_p_w_32.ok \
+           ./check/block_rf2dr0_p_b_32_p_w_32.ok
+

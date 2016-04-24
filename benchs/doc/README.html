@@ -1328,19 +1328,29 @@ be determined by the <tt class="docutils literal">.spi</tt> files found in the c
 <div class="section" id="macro-blocks-makefiles">
 <h2><a class="toc-backref" href="#id15">Macro-Blocks Makefiles</a></h2>
 <p>The <tt class="docutils literal"><span class="pre">bench/etc/mk/check-generator.mk</span></tt> provides rules to perform the check of a
-macro block generator. Here is a small example for the <span class="sc">ram</span> generator:</p>
+macro block generator. As one library cell may be used to build multiple macro-blocks,
+one <tt class="docutils literal">Makefile</tt> per macro must be provided. The <em>dot</em> extension of a <tt class="docutils literal">Makefile</tt> is
+expected to be the name of the macro-block. Here is a small example for the register
+file generator, <tt class="docutils literal">Makefile.block_rf2</tt>:</p>
 <pre class="literal-block">
                   TK_RTOP = ../..
- export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nramlib
+ export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nrf2lib
 
  include $(TK_RTOP)/etc/mk/alliance.mk
  include $(TK_RTOP)/etc/mk/mosis.mk
  include $(TK_RTOP)/etc/mk/check-generator.mk
 
-
-check-gen: ./check/macro_p_b_16_p_w_32.ok \
-           ./check/macro_p_b_32_p_w_32.ok
+check-gen: ./check/block_rf2_p_b_4_p_w_6.ok   \
+           ./check/block_rf2_p_b_2_p_w_32.ok  \
+           ./check/block_rf2_p_b_64_p_w_6.ok  \
+           ./check/block_rf2_p_b_16_p_w_32.ok \
+           ./check/block_rf2_p_b_32_p_w_32.ok
 </pre>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the <tt class="docutils literal"><span class="pre">check-gen</span></tt> rule, the name of the block <strong>must</strong> match the <em>dot</em>
+extension of the <tt class="docutils literal">Makefile</tt>, here: <tt class="docutils literal">block_rf2</tt>.</p>
+</div>
 <p>Macro-block generators are parametrized. We uses a special naming convention
 to pass parameters names and values trough the rule name. To declare a parameter,
 add <tt class="docutils literal">_p_</tt>, then the name of the parameter and it's value separated by a <tt class="docutils literal">_</tt>.</p>
@@ -1360,6 +1370,20 @@ add <tt class="docutils literal">_p_</tt>, then the name of the parameter and it
 </tr>
 </tbody>
 </table>
+<p>When multiple flavor of a generator could be built upon the same cell library,
+one <tt class="docutils literal">Makefile</tt> per flavor is provided. To run them all at once, a <tt class="docutils literal">makeAll.sh</tt>
+script is also available.</p>
+<p>The <tt class="docutils literal"><span class="pre">check-gen</span></tt> rule only perform a <span class="sc">drc</span> and a <span class="sc">lvs</span> to check that their
+router as correctly connected the cells of a macro-block. It doesn't perform
+any functional verification.</p>
+<p>To perform a functional abstraction with <tt class="docutils literal">yagle</tt> you may use the following
+command:</p>
+<pre class="literal-block">
+ego&#64;home:nrf2lib&gt; make -f Makefile.block_rf2 block_rf2_b_4_p_w_6_kite.vhd
+</pre>
+<p>Even if the resulting <span class="sc">vhdl</span> cannot be used it is always good to look in
+the report file <tt class="docutils literal">block_rf2_b_4_p_w_6_kite.rep</tt> for any error or warning,
+particularly any disconnected transistor.</p>
 <div class="section" id="calling-the-generator">
 <h3><a class="toc-backref" href="#id16">Calling the Generator</a></h3>
 <p>A script <tt class="docutils literal">./check/generator.py</tt> must be written in order to call the generator
@@ -1382,10 +1406,22 @@ on a provided library.</p>
 the library pathes are set in <tt class="docutils literal">.coriolis2/settings.py</tt>. It must have the
 target cell library setup as the <tt class="docutils literal">WORKING_LIBRARY</tt> and the source cell
 library in the <tt class="docutils literal">SYSTEM_LIBRARY</tt>. The technology must be set to the target
-one.</p>
+one. And, of course, the script must be run the directory where <tt class="docutils literal">.coriolis2/</tt>
+is located.</p>
+<p>The heart of the script is the <tt class="docutils literal">scaleCell()</tt> function, which work on the
+original cell in variable <tt class="docutils literal">sourceCell</tt> (argument) and <tt class="docutils literal">scaledCell</tt>, the
+converted one. Although the script is configured to use the <em>scaled</em>
+technology, this do not affect the values of the coordinates of the cells
+we read, whatever their origin. This means that when we read the <tt class="docutils literal">sourceCell</tt>,
+the coordinates of it's components keeps the value they have under <tt class="docutils literal">SxLib</tt>.
+It is <em>when</em> we duplicate them into the <tt class="docutils literal">scaledCell</tt> that we perform the
+scaling (i.e. multiply by two) and do whatever adjustments we need.
+So when we have an adjustment to do on a specific segment, say slihgtly shift
+a <tt class="docutils literal">NDIF</tt>, the coordinates must be expressed as in <tt class="docutils literal">SxLib</tt> (once more: <em>before</em>
+scaling).</p>
 <div class="note">
 <p class="first admonition-title">Note</p>
-<p class="last">There is a failsafe in <tt class="docutils literal">./check/scaleCell.py</tt>, it will not run until the
+<p class="last">There is a safety in <tt class="docutils literal">./check/scaleCell.py</tt>, it will not run until the
 target library has not been emptied of it's cells.</p>
 </div>
 <p>The script contains a <tt class="docutils literal">getDeltas()</tt> function which provide a table on how

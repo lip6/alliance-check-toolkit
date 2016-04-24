@@ -8,6 +8,6 @@
  include $(TK_RTOP)/etc/mk/check-generator.mk
 
 
-check-gen: ./check/macro_p_b_16_p_w_32.ok \
-           ./check/macro_p_b_32_p_w_32.ok
+check-gen: ./check/block_ram_p_b_16_p_w_32.ok \
+           ./check/block_ram_p_b_32_p_w_32.ok
 

@@ -522,19 +522,27 @@ Macro-Blocks Makefiles
 ========================
 
 The ``bench/etc/mk/check-generator.mk`` provides rules to perform the check of a
-macro block generator. Here is a small example for the |RAM| generator: ::
+macro block generator. As one library cell may be used to build multiple macro-blocks,
+one |Makefile| per macro must be provided. The *dot* extension of a |Makefile| is
+expected to be the name of the macro-block. Here is a small example for the register
+file generator, ``Makefile.block_rf2``: ::
 
                       TK_RTOP = ../..
-     export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nramlib
+     export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nrf2lib
     
      include $(TK_RTOP)/etc/mk/alliance.mk
      include $(TK_RTOP)/etc/mk/mosis.mk
      include $(TK_RTOP)/etc/mk/check-generator.mk
     
-    
-    check-gen: ./check/macro_p_b_16_p_w_32.ok \
-               ./check/macro_p_b_32_p_w_32.ok
-    
+    check-gen: ./check/block_rf2_p_b_4_p_w_6.ok   \
+               ./check/block_rf2_p_b_2_p_w_32.ok  \
+               ./check/block_rf2_p_b_64_p_w_6.ok  \
+               ./check/block_rf2_p_b_16_p_w_32.ok \
+               ./check/block_rf2_p_b_32_p_w_32.ok
+
+.. note::
+   In the ``check-gen`` rule, the name of the block **must** match the *dot*
+   extension of the |Makefile|, here: ``block_rf2``.
 
 Macro-block generators are parametrized. We uses a special naming convention
 to pass parameters names and values trough the rule name. To declare a parameter,
@@ -545,6 +553,23 @@ String in Rule Name         Call to the generator
 ==========================  ===============================
 ``_p_b_16_p_w_32``          ``-b 16 -w 32``
 ==========================  ===============================
+
+When multiple flavor of a generator could be built upon the same cell library,
+one |Makefile| per flavor is provided. To run them all at once, a ``makeAll.sh``
+script is also available.
+
+The ``check-gen`` rule only perform a |DRC| and a |LVS| to check that their
+router as correctly connected the cells of a macro-block. It doesn't perform
+any functional verification.
+ 
+To perform a functional abstraction with |Yagle| you may use the following
+command: ::
+
+    ego@home:nrf2lib> make -f Makefile.block_rf2 block_rf2_b_4_p_w_6_kite.vhd
+
+Even if the resulting |VHDL| cannot be used it is always good to look in
+the report file ``block_rf2_b_4_p_w_6_kite.rep`` for any error or warning,
+particularly any disconnected transistor.
 
 
 Calling the Generator
@@ -573,10 +598,23 @@ The script is ``./check/scaleCell.py``. It is very sensitive on the way
 the library pathes are set in ``.coriolis2/settings.py``. It must have the
 target cell library setup as the ``WORKING_LIBRARY`` and the source cell
 library in the ``SYSTEM_LIBRARY``. The technology must be set to the target
-one.
+one. And, of course, the script must be run the directory where ``.coriolis2/``
+is located.
 
+The heart of the script is the ``scaleCell()`` function, which work on the
+original cell in variable ``sourceCell`` (argument) and ``scaledCell``, the
+converted one. Although the script is configured to use the *scaled*
+technology, this do not affect the values of the coordinates of the cells
+we read, whatever their origin. This means that when we read the ``sourceCell``,
+the coordinates of it's components keeps the value they have under ``SxLib``.
+It is *when* we duplicate them into the ``scaledCell`` that we perform the
+scaling (i.e. multiply by two) and do whatever adjustments we need.
+So when we have an adjustment to do on a specific segment, say slihgtly shift
+a ``NDIF``, the coordinates must be expressed as in ``SxLib`` (once more: *before*
+scaling).
+ 
 .. note::
-   There is a failsafe in ``./check/scaleCell.py``, it will not run until the
+   There is a safety in ``./check/scaleCell.py``, it will not run until the
    target library has not been emptied of it's cells.
 
 The script contains a ``getDeltas()`` function which provide a table on how

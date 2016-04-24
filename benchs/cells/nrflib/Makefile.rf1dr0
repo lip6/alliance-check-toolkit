@@ -1,0 +1,13 @@
+# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/rf1dr0>" -*-
+
+                  TK_RTOP = ../..
+ export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nrflib
+
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/mosis.mk
+ include $(TK_RTOP)/etc/mk/check-generator.mk
+
+
+check-gen: ./check/rf1dr0_p_b_16_p_w_32.ok \
+           ./check/rf1dr0_p_b_32_p_w_32.ok
+
