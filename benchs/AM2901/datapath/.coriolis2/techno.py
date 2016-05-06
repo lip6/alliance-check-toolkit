@@ -1,2 +1,2 @@
 symbolicTechnology = 'cmos'
-realTechnology     = 'hcmos9gp'
+realTechnology     = '130/hcmos9gp'
