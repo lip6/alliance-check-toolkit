@@ -12,7 +12,8 @@ parametersTable = \
     , ('misc.logMode'             , TypeBool      , False   )
     , ('misc.verboseLevel1'       , TypeBool      , False   )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
-    , ('misc.traceLevel'          , TypeInt       , 1000    )
+    , ('misc.minTraceLevel'       , TypeInt       , 0       )
+    , ('misc.maxTraceLevel'       , TypeInt       , 0       )
     , ('nimbus.spaceMargin'       , TypePercentage, 20.0    )
     , ('nimbus.aspectRatio'       , TypePercentage, 100.0   )
    # Kite parameters.

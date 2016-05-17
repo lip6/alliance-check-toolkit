@@ -12,7 +12,8 @@ parametersTable = \
     , ('misc.logMode'             , TypeBool      , False   )
     , ('misc.verboseLevel1'       , TypeBool      , False   )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
-    , ('misc.traceLevel'          , TypeInt       , 1000    )
+    , ('misc.minTraceLevel'       , TypeInt       ,  0      )
+    , ('misc.maxTraceLevel'       , TypeInt       , 19      )
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
