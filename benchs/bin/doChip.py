@@ -15,6 +15,8 @@ try:
   import Viewer
   import CRL
   from   helpers   import ErrorMessage
+  import Anabatic
+  import Katana
   import Etesian
   import Katabatic
   import Kite
@@ -47,6 +49,7 @@ DoChip      = 0x0001
 DoClockTree = 0x0002
 DoPlacement = 0x0004
 DoRouting   = 0x0008
+UseKatana   = 0x0010
 ChipStages  = DoChip|DoPlacement|DoRouting
 
 framework   = CRL.AllianceFramework.get()
@@ -82,15 +85,26 @@ def ScriptMain ( **kw ):
 
     if doStages & DoRouting:
       routingNets = []
-      kite = Kite.KiteEngine.create( cell )
-      
-      kite.runGlobalRouter  ( Kite.KtBuildGlobalRouting )
-      kite.loadGlobalRouting( Katabatic.EngineLoadGrByNet, routingNets )
-      kite.layerAssign      ( Katabatic.EngineNoNetLayerAssign )
-      kite.runNegociate     ()
-      success = kite.getToolSuccess()
-      kite.finalizeLayout()
-      kite.destroy()
+      if doStages & UseKatana:
+        katana = Katana.KatanaEngine.create( cell )
+        katana.digitalInit      ()
+        katana.runGlobalRouter  ( 0 )
+        katana.loadGlobalRouting( Anabatic.EngineLoadGrByNet )
+        katana.layerAssign      ( Anabatic.EngineNoNetLayerAssign )
+        katana.runNegociate     ()
+        success = katana.getToolSuccess()
+        katana.finalizeLayout()
+        katana.destroy()
+      else:
+        kite = Kite.KiteEngine.create( cell )
+        
+        kite.runGlobalRouter  ( Kite.KtBuildGlobalRouting )
+        kite.loadGlobalRouting( Katabatic.EngineLoadGrByNet, routingNets )
+        kite.layerAssign      ( Katabatic.EngineNoNetLayerAssign )
+        kite.runNegociate     ()
+        success = kite.getToolSuccess()
+        kite.finalizeLayout()
+        kite.destroy()
       cell.setName( cell.getName()+'_kite' )
       framework.saveCell( cell, CRL.Catalog.State.Logical )
   
@@ -113,6 +127,7 @@ if __name__ == '__main__':
   parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'  , help='Perform routing step only.')
   parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'     , help='Run place & route on a complete chip.')
   parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree', help='In block mode, create a clock-tree.')
+  parser.add_option( '-K', '--katana'               , action='store_true', dest='useKatana'  , help='Use Katana P&R instead of Knik/Kite (experimental).')
   parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'    , help='Save both physical and logical views.')
   (options, args) = parser.parse_args()
 
@@ -125,6 +140,7 @@ if __name__ == '__main__':
   if options.doRouting:   doStages |= DoRouting
   if options.doChip:      doStages |= DoChip
   if options.doClockTree: doStages |= DoClockTree
+  if options.useKatana:   doStages |= UseKatana
   if not doStages:        doStages  = ChipStages
 
   kw = { 'doStages':doStages, 'views':views }

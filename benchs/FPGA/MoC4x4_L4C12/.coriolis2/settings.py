@@ -28,7 +28,7 @@ parametersTable = \
 cellsTop = os.path.abspath( os.getcwd()+'/../../cells' )
 
 allianceConfig = \
-    ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/vsclib'  , Environment.Prepend)
+    ( ( 'SYSTEM_LIBRARY', ( ('/usr/share/pharosc/alliance/cells/vsclib'  , Environment.Prepend)
                           , ) )
     ,
     )

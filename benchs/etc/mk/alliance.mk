@@ -28,14 +28,23 @@ asimut-%  : %.vst $(PATTERNS).pat;  $(ASIMUT)       -zd -nores $* patterns
 %.gds     : %.ap                 ;  $(S2R)          -v -r $*
 %.cif     : %.ap                 ;  $(S2R_cif)      -v -r $*
 %.spi     : %.ap                 ;  $(COUGAR_spice) -ar -ac -t $*
+%_yag.spi : %.ap                 ;  $(COUGAR_spice) -ar -ac -t $* $*_yag
 %.ps      : %.ap                 ;  $(L2P)          -color $*
 druc-%    : %.ap                 ;  $(DRUC)         $(DRUC_FLAGS) $*
 %_ext.al  : %.ap                 ;  $(COUGAR)       -f $* $*_ext
+%_yag.al  : %.ap                 ;  $(COUGAR)       -t $* $*_ext
 lvx-%     : %.vst %_ext.al       ;  $(LVX)          vst al $* $*_ext -f
 lvx-%_kite: %.vst %_kite_ext.al  ;  $(LVX)          vst al $* $*_kite_ext -f
 dreal-%   : %.gds                ;  $(DREAL)        --debug -l $*
 graal-%   : %.ap                 ;  $(GRAAL)        -l $*
+dreal     :                      ;  $(DREAL)
 graal     :                      ;  $(GRAAL)
+%_yag.vhd : %_yag.spi            ;  $(YAGLE_CHIP)   $(SPI_TECHNO_NAME) $*_yag
+
+proof-%: %.vbe %_yag.vhd
+	  sed -i -e '/ck.*delayed/d' -e 's/linkage/in/' $*.vhd
+	  $(VASY) -I vhd -o -a $* $*_yag
+	  $(PROOF) $* $*_yag
 
 
 # -------------------------------------------------------------------
@@ -54,6 +63,7 @@ graal     :                      ;  $(GRAAL)
               *_boog*                   \
               *_loon*                   \
               *_kite*                   \
+              *_yag*                    \
               *_u[0-9][0-9]*            \
               *.pyc                     \
               *.log

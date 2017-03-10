@@ -3,6 +3,7 @@
                   TK_RTOP = ../..
 
             USE_CLOCKTREE = No
+               USE_KATANA = Yes
                 USE_DEBUG = No
 
  include $(TK_RTOP)/etc/mk/alliance.mk

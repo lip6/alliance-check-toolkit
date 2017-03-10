@@ -5,7 +5,10 @@
 .PRECIOUS:  %.ok
 .PHONY:     cell-check-proof-tie_x0    \
             cell-check-proof-rowend_x0 \
-            cell-check-proof-powmid_x0
+            cell-check-proof-powmid_x0 \
+
+#           ./check/ao2o22_x2.ok \
+#           ./check/ao2o22_x4.ok
 
 
 # -------------------------------------------------------------------
