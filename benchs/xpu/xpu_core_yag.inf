@@ -1,0 +1,29 @@
+
+name xpu_core_yag;
+
+rename begin
+  "n_exe_ins_sff_m"      : "n_exe"      ;
+  "n_imm_ins_sff_m"      : "n_imm"      ;
+  "n_ift_ins_sff_m"      : "n_ift"      ;
+  "n_pc_*_ins_sff_m"     : "n_pc_*"     ;
+  "n_op_*_ins_sff_m"     : "n_op_*"     ;
+  "n_im_*_ins_sff_m"     : "n_im_*"     ;
+  "n_acc_*_ins_sff_m"    : "n_acc_*"    ;
+  "n_count_*_ins_sff_m"  : "n_count_*"  ;
+  "n_nextpc_*_ins_sff_m" : "n_nextpc_*" ;
+end;
+
+# A syntax error occurs around the "FLIPFLOP" keyword.
+# A quick glance at the parser did not let me understand what
+# and where it is wrong.
+marksig begin
+  "n_exe"      : "FLIPFLOP+MASTER" ;
+  "n_imm"      : "FLIPFLOP+MASTER" ;
+  "n_ift"      : "FLIPFLOP+MASTER" ;
+  "n_pc_*"     : "FLIPFLOP+MASTER" ;
+  "n_op_*"     : "FLIPFLOP+MASTER" ;
+  "n_im_*"     : "FLIPFLOP+MASTER" ;
+  "n_acc_*"    : "FLIPFLOP+MASTER" ;
+  "n_count_*"  : "FLIPFLOP+MASTER" ;
+  "n_nextpc_*" : "FLIPFLOP+MASTER" ;
+end;

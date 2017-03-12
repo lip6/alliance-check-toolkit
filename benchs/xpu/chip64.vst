@@ -1,0 +1,296 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on May 15, 2016, 13:05
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity chip is
+  port ( ck   : in bit
+       ; reset  : in bit
+       ; mwrite  : out     bit
+       ; mread   : out     bit
+       ; address : out     bit_vector(3 downto 0)
+       ; datao   : out     bit_vector(3 downto 0)
+       ; datai   : in      bit_vector(3 downto 0)
+       ; vdd : in bit
+       ; vss : in bit
+       );
+end chip;
+
+architecture structural of chip is
+
+  component xpu_core
+   port (
+      p_reset   : in      bit;
+      m_clock   : in      bit;
+      n_mwrite  : out     bit;
+      n_mread   : out     bit;
+      n_address : out     bit_vector(3 downto 0);
+      n_datao   : out     bit_vector(3 downto 0);
+      n_datai   : in      bit_vector(3 downto 0);
+      vdd       : in      bit;
+      vss       : in      bit
+   );
+  end component;
+
+
+  component pi_sp
+    port ( ck   : in bit
+         ; pad  : in bit
+         ; t    : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component pvddck2_sp
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component pvssck2_sp
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component pck_sp
+    port ( pad  : in bit
+         ; ck   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component po_sp
+    port ( ck   : in bit
+         ; i    : in bit
+         ; pad  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+
+   signal   n_mwrite  : bit;
+   signal   n_mread   : bit;
+   signal   n_address : bit_vector(3 downto 0);
+   signal   n_datao   : bit_vector(3 downto 0);
+   signal   n_datai   : bit_vector(3 downto 0);
+  signal reset_i     :  bit;
+  signal ckc         :  bit;
+  signal cki         :  bit;
+
+
+
+begin
+
+  core : xpu_core
+  port map ( m_clock => ckc
+           , p_reset => reset_i
+           , n_mwrite  => n_mwrite
+           , n_mread   => n_mread
+           , n_address => n_address
+           , n_datao   => n_datao
+           , n_datai   => n_datai
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_reset : pi_sp
+  port map ( ck   => cki
+           , pad  => reset
+           , t    => reset_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_ck : pck_sp
+  port map ( pad  => ck
+           , ck   => cki
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_mwrite : po_sp
+  port map ( ck   => cki
+           , i    => n_mwrite
+           , pad  => mwrite
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_mread : po_sp
+  port map ( ck   => cki
+           , i    => n_mread
+           , pad  => mread
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_address0 : po_sp
+  port map ( ck   => cki
+           , i    => n_address(0)
+           , pad  => address(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_address1 : po_sp
+  port map ( ck   => cki
+           , i    => n_address(1)
+           , pad  => address(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_address2 : po_sp
+  port map ( ck   => cki
+           , i    => n_address(2)
+           , pad  => address(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_address3 : po_sp
+  port map ( ck   => cki
+           , i    => n_address(3)
+           , pad  => address(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datao0 : po_sp
+  port map ( ck   => cki
+           , i    => n_datao(0)
+           , pad  => datao(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datao1 : po_sp
+  port map ( ck   => cki
+           , i    => n_datao(1)
+           , pad  => datao(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datao2 : po_sp
+  port map ( ck   => cki
+           , i    => n_datao(2)
+           , pad  => datao(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datao3 : po_sp
+  port map ( ck   => cki
+           , i    => n_datao(3)
+           , pad  => datao(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datai0 : pi_sp
+  port map ( ck   => cki
+           , pad  => datai(0)
+           , t    => n_datai(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datai1 : pi_sp
+  port map ( ck   => cki
+           , pad  => datai(1)
+           , t    => n_datai(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datai2 : pi_sp
+  port map ( ck   => cki
+           , pad  => datai(2)
+           , t    => n_datai(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_datai3 : pi_sp
+  port map ( ck   => cki
+           , pad  => datai(3)
+           , t    => n_datai(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vdd0 : pvddck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vss0 : pvssck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vdd1 : pvddck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vss1 : pvssck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+    p_vdd2 : pvddck2_sp
+    port map ( ck   => cki
+             , cko  => ckc
+             , vdd => vdd
+             , vss => vss
+             );
+  
+    p_vss2 : pvssck2_sp
+    port map ( ck   => cki
+             , cko  => ckc
+             , vdd => vdd
+             , vss => vss
+             );
+  
+    p_vdd3 : pvddck2_sp
+    port map ( ck   => cki
+             , cko  => ckc
+             , vdd => vdd
+             , vss => vss
+             );
+  
+    p_vss3 : pvssck2_sp
+    port map ( ck   => cki
+             , cko  => ckc
+             , vdd => vdd
+             , vss => vss
+             );
+
+
+end structural;
+

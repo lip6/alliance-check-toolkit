@@ -42,9 +42,9 @@ graal     :                      ;  $(GRAAL)
 %_yag.vhd : %_yag.spi            ;  $(YAGLE_CHIP)   $(SPI_TECHNO_NAME) $*_yag
 
 proof-%: %.vbe %_yag.vhd
-	  sed -i -e '/ck.*delayed/d' -e 's/linkage/in/' $*.vhd
-	  $(VASY) -I vhd -o -a $* $*_yag
-	  $(PROOF) $* $*_yag
+	  sed -i -e '/ck.*delayed/d' -e 's/linkage/in/' $*_yag.vhd
+	  $(VASY) -I vhd -o -a $*_yag $*_yag
+	  $(PROOF) -d $* $*_yag
 
 
 # -------------------------------------------------------------------
@@ -63,7 +63,12 @@ proof-%: %.vbe %_yag.vhd
               *_boog*                   \
               *_loon*                   \
               *_kite*                   \
-              *_yag*                    \
+              *_yag.cns                 \
+              *_yag.rep                 \
+              *_yag.spi                 \
+              *_yag.stat                \
+              *_yag.vbe                 \
+              *_yag.vhd                 \
               *_u[0-9][0-9]*            \
               *.pyc                     \
               *.log
