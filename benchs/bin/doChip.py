@@ -5,6 +5,9 @@ try:
   import traceback
   import os.path
   import optparse
+  import numpy      as     np
+  from   matplotlib import pyplot
+  from   matplotlib import ticker
   import Cfg
   import Hurricane
   from   Hurricane import DbU
@@ -45,14 +48,89 @@ except Exception, e:
   sys.exit(2)
 
 
-DoChip      = 0x0001
-DoClockTree = 0x0002
-DoPlacement = 0x0004
-DoRouting   = 0x0008
-UseKatana   = 0x0010
-ChipStages  = DoChip|DoPlacement|DoRouting
+DoChip        = 0x0001
+DoClockTree   = 0x0002
+DoPlacement   = 0x0004
+DoRouting     = 0x0008
+UseKatana     = 0x0010
+ProfileRouter = 0x0020
+ChipStages    = DoChip|DoPlacement|DoRouting
 
-framework   = CRL.AllianceFramework.get()
+framework     = CRL.AllianceFramework.create(0)
+print framework.getEnvironment().getPrint()
+
+
+class RouterProfile ( object ):
+
+    @staticmethod
+    def _xticklabel ( x, pos ): return '%dk' % (x/1000)
+
+    def __init__ ( self, flags ):
+      self.flags       = flags
+      self.routerName  = 'kite'
+      if flags & UseKatana: self.routerName = 'katana'
+      self.pathProfile = self.routerName + '.profile.txt'
+      self.priorities  = ( ([],[]), ([],[]), ([],[]), ([],[]), ([],[]), ([],[]) )
+      self.plotted     = False
+      self.eventTicks  = 0
+
+      fdDatas = open( self.pathProfile, 'r' )
+      for line in fdDatas.readlines():
+        self.eventTicks += 1
+
+        datas = line.split()
+        for i in range(5):
+          if float(datas[i+1]) != 0.0:
+            self.priorities[i][0].append( datas[0  ] )
+            self.priorities[i][1].append( float(datas[i+1]) )
+      fdDatas.close()
+
+      return
+
+
+    def _plot ( self ):
+      colors = [ 'b<', 'c<', 'r<', 'g<', 'y<' ]
+
+      xticks = np.arange( 0, self.eventTicks+1, 1000 )
+
+      pyplot.figure( 1, figsize=(100,5), dpi=200 )
+      pyplot.axes  ( [ 0.01, 0.1, 0.98, 0.8 ]  )
+      pyplot.title ( '%s Event Costs' % self.routerName.capitalize() )
+      pyplot.xlabel( 'events(count)' )
+      pyplot.ylabel( 'event priority' )
+      pyplot.yscale( 'log' )
+      pyplot.grid  ( True )
+      axes = pyplot.gca()
+      axes.set_xlim( 0, self.eventTicks+1 )
+      axes.set_xticks( xticks )
+      axes.xaxis.set_major_formatter(ticker.FuncFormatter(RouterProfile._xticklabel))
+      for i in range(6):
+        if not len(self.priorities[i][1]): continue
+
+        pyplot.plot( self.priorities[i][0]
+                   , self.priorities[i][1]
+                   , colors[i]
+                   , linewidth=1.0
+                   , fillstyle="none"
+                   , label='Metal %d' % (i+1) )
+
+      pyplot.legend( loc='upper left', bbox_to_anchor=(0.0,1.12), ncol=6, numpoints=1 )
+        
+      self.plotted = True
+
+    def savefig ( self ):
+      if not self.plotted: self._plot()
+      pyplot.savefig( '%s.profile.png' % self.routerName, format='png' )
+      return
+
+    def show ( self ):
+      if not self.plotted: self._plot()
+      pyplot.show()
+      return
+
+    def close ( self ):
+      pyplot.close()
+      return
 
 
 def ScriptMain ( **kw ):
@@ -87,17 +165,18 @@ def ScriptMain ( **kw ):
       routingNets = []
       if doStages & UseKatana:
         katana = Katana.KatanaEngine.create( cell )
-        katana.digitalInit      ()
-        katana.runGlobalRouter  ( 0 )
-        katana.loadGlobalRouting( Anabatic.EngineLoadGrByNet )
-        katana.layerAssign      ( Anabatic.EngineNoNetLayerAssign )
-        katana.runNegociate     ()
+       #katana.printConfiguration   ()
+        katana.digitalInit          ()
+        katana.runNegociatePreRouted()
+        katana.runGlobalRouter      ()
+        katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
+        katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
+        katana.runNegociate         ()
         success = katana.getToolSuccess()
         katana.finalizeLayout()
         katana.destroy()
       else:
         kite = Kite.KiteEngine.create( cell )
-        
         kite.runGlobalRouter  ( Kite.KtBuildGlobalRouting )
         kite.loadGlobalRouting( Katabatic.EngineLoadGrByNet, routingNets )
         kite.layerAssign      ( Katabatic.EngineNoNetLayerAssign )
@@ -110,6 +189,13 @@ def ScriptMain ( **kw ):
   
     plugins.RSavePlugin.ScriptMain( **kw )
 
+    if doStages & ProfileRouter:
+      profile = RouterProfile ( doStages )
+      profile.savefig()
+      profile.close()
+      return
+      
+
   except Exception, e:
     print e
 
@@ -118,23 +204,27 @@ def ScriptMain ( **kw ):
 
 if __name__ == '__main__':
   parser = optparse.OptionParser()
-  parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'       , help='The name of the chip to build, without extension.')
-  parser.add_option( '-s', '--script', type='string',                      dest='script'     , help='The name of a Python script, without extension.')
-  parser.add_option( '-b', '--blif'  , type='string',                      dest='blif'       , help='The name of a BLIF netlist, without extension.')
-  parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'    , help='First level of verbosity.')
-  parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose', help='Second level of verbosity.')
-  parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement', help='Perform chip placement step only.')
-  parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'  , help='Perform routing step only.')
-  parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'     , help='Run place & route on a complete chip.')
-  parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree', help='In block mode, create a clock-tree.')
-  parser.add_option( '-K', '--katana'               , action='store_true', dest='useKatana'  , help='Use Katana P&R instead of Knik/Kite (experimental).')
-  parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'    , help='Save both physical and logical views.')
+  parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'         , help='The name of the chip to build, without extension.')
+  parser.add_option( '-s', '--script', type='string',                      dest='script'       , help='The name of a Python script, without extension.')
+  parser.add_option( '-b', '--blif'  , type='string',                      dest='blif'         , help='The name of a BLIF netlist, without extension.')
+  parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'      , help='First level of verbosity.')
+  parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose'  , help='Second level of verbosity.')
+  parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement'  , help='Perform chip placement step only.')
+  parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'    , help='Perform routing step only.')
+  parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'       , help='Run place & route on a complete chip.')
+  parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree'  , help='In block mode, create a clock-tree.')
+  parser.add_option( '-K', '--katana'               , action='store_true', dest='useKatana'    , help='Use Katana P&R instead of Knik/Kite (experimental).')
+  parser.add_option(       '--profile'              , action='store_true', dest='profileRouter', help='Activate cost profiling of Kite/Katana.')
+  parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'      , help='Save both physical and logical views.')
   (options, args) = parser.parse_args()
 
   views    = CRL.Catalog.State.Physical
   doStages = 0
-  if options.verbose:     Cfg.getParamBool('misc.verboseLevel1').setBool(True)
-  if options.veryVerbose: Cfg.getParamBool('misc.verboseLevel2').setBool(True)
+  if options.verbose:
+    Cfg.getParamBool('misc.verboseLevel1').setBool(True)
+  if options.veryVerbose:
+    Cfg.getParamBool('misc.verboseLevel1').setBool(True)
+    Cfg.getParamBool('misc.verboseLevel2').setBool(True)
   if options.saveAll:     views    |= CRL.Catalog.State.Logical
   if options.doPlacement: doStages |= DoPlacement
   if options.doRouting:   doStages |= DoRouting
@@ -142,6 +232,10 @@ if __name__ == '__main__':
   if options.doClockTree: doStages |= DoClockTree
   if options.useKatana:   doStages |= UseKatana
   if not doStages:        doStages  = ChipStages
+  if options.profileRouter:
+    Cfg.getParamBool(  'kite.profileEventCosts').setBool(True)
+    Cfg.getParamBool('katana.profileEventCosts').setBool(True)
+    doStages |= ProfileRouter
 
   kw = { 'doStages':doStages, 'views':views }
   if options.script:
