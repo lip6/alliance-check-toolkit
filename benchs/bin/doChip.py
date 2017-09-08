@@ -93,7 +93,10 @@ class RouterProfile ( object ):
 
       xticks = np.arange( 0, self.eventTicks+1, 1000 )
 
-      pyplot.figure( 1, figsize=(100,5), dpi=200 )
+      figwidth = self.eventTicks/2000
+      if figwidth < 5: figwidth = 5
+
+      pyplot.figure( 1, figsize=(figwidth,5), dpi=200 )
       pyplot.axes  ( [ 0.01, 0.1, 0.98, 0.8 ]  )
       pyplot.title ( '%s Event Costs' % self.routerName.capitalize() )
       pyplot.xlabel( 'events(count)' )
@@ -114,13 +117,13 @@ class RouterProfile ( object ):
                    , fillstyle="none"
                    , label='Metal %d' % (i+1) )
 
-      pyplot.legend( loc='upper left', bbox_to_anchor=(0.0,1.12), ncol=6, numpoints=1 )
+      pyplot.legend( frameon=False, loc='upper left', bbox_to_anchor=(0.0,1.12), ncol=6, numpoints=1 )
         
       self.plotted = True
 
     def savefig ( self ):
       if not self.plotted: self._plot()
-      pyplot.savefig( '%s.profile.png' % self.routerName, format='png' )
+      pyplot.savefig( '%s.profile.pdf' % self.routerName, format='pdf' )
       return
 
     def show ( self ):
@@ -171,7 +174,7 @@ def ScriptMain ( **kw ):
         katana.runGlobalRouter      ()
         katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
         katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
-        katana.runNegociate         ()
+        katana.runNegociate         ( Katana.Flags.NoFlags )
         success = katana.getToolSuccess()
         katana.finalizeLayout()
         katana.destroy()
