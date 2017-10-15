@@ -214,8 +214,8 @@ TABLE MBK_TO_RDS_SEGMENT
 # value.
   NTRANS   RDS_POLY   VW  0.27  0.00  0.0  ALL \
            RDS_GATE   VW  0.27  0.00  0.0  DRC \
-           RDS_NDIF  LCW  0.0   0.27  0.0  EXT \
-           RDS_NDIF  RCW  0.0   0.27  0.0  EXT \
+           RDS_NDIF  LCW  0.0   0.36  0.0  EXT \
+           RDS_NDIF  RCW  0.0   0.36  0.0  EXT \
            RDS_NDIF   VW  0.0   0.72  0.0  DRC \
            RDS_ACTIV  VW  0.0   0.72  0.0  ALL \
            RDS_NIMP   VW  0.0   1.26  0.0  DRC \
@@ -224,8 +224,8 @@ TABLE MBK_TO_RDS_SEGMENT
            RDS_TVIA4  VW  0.0   1.26  0.0  DRC
   PTRANS   RDS_POLY   VW  0.27  0.00  0.0  ALL \
            RDS_GATE   VW  0.27  0.00  0.0  DRC \
-           RDS_PDIF  LCW  0.0   0.27  0.0  EXT \
-           RDS_PDIF  RCW  0.0   0.27  0.0  EXT \
+           RDS_PDIF  LCW  0.0   0.36  0.0  EXT \
+           RDS_PDIF  RCW  0.0   0.36  0.0  EXT \
            RDS_PDIF   VW  0.0   0.72  0.0  DRC \
            RDS_ACTIV  VW  0.0   0.72  0.0  ALL \
            RDS_PIMP   VW  0.0   1.26  0.0  ALL \
@@ -374,7 +374,7 @@ TABLE MBK_TO_RDS_VIA
 	RDS_PIMP 0.90 DRC\
 	RDS_TVIA3 0.90 DRC
   CONT_POLY\
-	RDS_POLY 0.54 ALL\
+	RDS_POLY 0.36 ALL\
 	RDS_CONT 0.18 ALL\
 	RDS_ALU1 0.36 ALL
   CONT_VIA\
