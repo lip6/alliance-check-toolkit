@@ -5,7 +5,8 @@
                      CHIP = amd2901
                    MARGIN = 2
             USE_CLOCKTREE = Yes
-                USE_DEBUG = No
+                USE_DEBUG = Yes
+               USE_KATANA = No
 
                  NETLISTS = accu    \
                             alu     \

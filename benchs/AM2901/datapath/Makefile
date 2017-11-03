@@ -5,6 +5,7 @@
               USE_STRATUS = Yes
             USE_CLOCKTREE = No
                 USE_DEBUG = No
+               USE_KATANA = No
 
                  NETLISTS = amd2901_ctl
 

@@ -1,0 +1,36 @@
+TOP ( 
+  (IOPIN p_reset.0);
+  (IOPIN m_clock.0);
+  )
+BOTTOM (
+  (IOPIN n_mwrite.0);
+  (IOPIN n_mread.0);
+  (IOPIN n_address(0).0);
+  (IOPIN n_address(1).0);
+  (IOPIN n_address(2).0);
+  (IOPIN n_address(3).0);
+  (IOPIN n_address(4).0);
+  (IOPIN n_address(5).0);
+  (IOPIN n_address(6).0);
+  (IOPIN n_address(7).0);
+)
+LEFT (
+  (IOPIN n_datai(0).0);
+  (IOPIN n_datai(1).0);
+  (IOPIN n_datai(2).0);
+  (IOPIN n_datai(3).0);
+  (IOPIN n_datai(4).0);
+  (IOPIN n_datai(5).0);
+  (IOPIN n_datai(6).0);
+  (IOPIN n_datai(7).0);
+)
+RIGHT (
+  (IOPIN n_datao(0).0);
+  (IOPIN n_datao(1).0);
+  (IOPIN n_datao(2).0);
+  (IOPIN n_datao(3).0);
+  (IOPIN n_datao(4).0);
+  (IOPIN n_datao(5).0);
+  (IOPIN n_datao(6).0);
+  (IOPIN n_datao(7).0);
+)

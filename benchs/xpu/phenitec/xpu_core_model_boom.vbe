@@ -1,0 +1,444 @@
+-- VHDL data flow description generated from `xpu_core_model_boom`
+--		date : Wed May 24 17:51:07 2017
+
+
+-- Entity Declaration
+
+ENTITY xpu_core_model_boom IS
+  PORT (
+  v_adder_in1 : out bit_vector(7 DOWNTO 0) ;	-- v_adder_in1
+  v_adder_in2 : out bit_vector(7 DOWNTO 0) ;	-- v_adder_in2
+  v_adder_sum : in bit_vector(7 DOWNTO 0) ;	-- v_adder_sum
+  v_adder_exe : out BIT;	-- v_adder_exe
+  vss : in BIT;	-- vss
+  vdd : in BIT;	-- vdd
+  n_datai : in bit_vector(7 DOWNTO 0) ;	-- n_datai
+  n_datao : out bit_vector(7 DOWNTO 0) ;	-- n_datao
+  n_address : out bit_vector(7 DOWNTO 0) ;	-- n_address
+  n_mread : out BIT;	-- n_mread
+  n_mwrite : out BIT;	-- n_mwrite
+  m_clock : in BIT;	-- m_clock
+  p_reset : in BIT	-- p_reset
+  );
+END xpu_core_model_boom;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF xpu_core_model_boom IS
+  SIGNAL n_exe : REG_BIT REGISTER;	-- n_exe
+  SIGNAL n_imm : REG_BIT REGISTER;	-- n_imm
+  SIGNAL n_ift : REG_BIT REGISTER;	-- n_ift
+  SIGNAL n_acc : REG_VECTOR(7 DOWNTO 0) REGISTER;	-- n_acc
+  SIGNAL n_im : REG_VECTOR(7 DOWNTO 0) REGISTER;	-- n_im
+  SIGNAL n_op : REG_VECTOR(7 DOWNTO 0) REGISTER;	-- n_op
+  SIGNAL n_pc : REG_VECTOR(7 DOWNTO 0) REGISTER;	-- n_pc
+  SIGNAL n_count : REG_VECTOR(4 DOWNTO 0) REGISTER;	-- n_count
+  SIGNAL v_net_63 : BIT;		-- v_net_63
+  SIGNAL v_net_60 : BIT;		-- v_net_60
+  SIGNAL v_net_59 : BIT;		-- v_net_59
+  SIGNAL v_net_56 : BIT;		-- v_net_56
+  SIGNAL v_net_55 : BIT;		-- v_net_55
+  SIGNAL v_net_53 : BIT;		-- v_net_53
+  SIGNAL v_net_51 : BIT;		-- v_net_51
+  SIGNAL v_net_45 : BIT;		-- v_net_45
+  SIGNAL v_net_41 : BIT;		-- v_net_41
+  SIGNAL v_net_37 : BIT;		-- v_net_37
+  SIGNAL v_net_31 : BIT;		-- v_net_31
+  SIGNAL v_net_25 : BIT;		-- v_net_25
+  SIGNAL v_net_19 : BIT;		-- v_net_19
+  SIGNAL v_net_9 : BIT;		-- v_net_9
+  SIGNAL v_net_6 : BIT;		-- v_net_6
+  SIGNAL v_net_4 : BIT;		-- v_net_4
+  SIGNAL v_net_3 : BIT;		-- v_net_3
+  SIGNAL v_net_2 : BIT;		-- v_net_2
+  SIGNAL v_proc_ift_set : BIT;		-- v_proc_ift_set
+  SIGNAL v_net_1 : BIT;		-- v_net_1
+  SIGNAL v_net_0 : BIT;		-- v_net_0
+  SIGNAL v_proc_exe_set : BIT;		-- v_proc_exe_set
+  SIGNAL rtlcarry_0 : BIT_VECTOR(3 DOWNTO 1);	-- rtlcarry_0
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux4 : BIT;		-- aux4
+  SIGNAL aux5 : BIT;		-- aux5
+  SIGNAL aux6 : BIT;		-- aux6
+  SIGNAL aux9 : BIT;		-- aux9
+  SIGNAL aux11 : BIT;		-- aux11
+  SIGNAL aux12 : BIT;		-- aux12
+  SIGNAL aux14 : BIT;		-- aux14
+  SIGNAL aux15 : BIT;		-- aux15
+  SIGNAL aux16 : BIT;		-- aux16
+  SIGNAL aux17 : BIT;		-- aux17
+  SIGNAL aux18 : BIT;		-- aux18
+  SIGNAL aux19 : BIT;		-- aux19
+  SIGNAL aux20 : BIT;		-- aux20
+  SIGNAL aux21 : BIT;		-- aux21
+  SIGNAL aux23 : BIT;		-- aux23
+  SIGNAL aux24 : BIT;		-- aux24
+  SIGNAL aux25 : BIT;		-- aux25
+  SIGNAL aux26 : BIT;		-- aux26
+  SIGNAL aux28 : BIT;		-- aux28
+  SIGNAL aux29 : BIT;		-- aux29
+  SIGNAL aux30 : BIT;		-- aux30
+
+BEGIN
+  aux30 <= (NOT(n_op(1)) AND aux28);
+  aux29 <= (n_op(1) AND aux28);
+  aux28 <= (NOT(n_op(3)) AND (NOT(n_op(4)) AND n_exe));
+  aux26 <= NOT(NOT(n_count(0)) AND NOT(n_count(3)));
+  aux25 <= NOT(aux4);
+  aux24 <= ((v_net_9 OR n_ift) AND aux23);
+  aux23 <= NOT((v_net_19 OR v_net_25) OR v_net_31);
+  aux21 <= (v_net_56 OR v_net_60);
+  aux20 <= (aux17 AND NOT(n_op(0)));
+  aux19 <= (aux15 AND n_op(0));
+  aux18 <= (aux17 AND n_op(0));
+  aux17 <= (aux14 AND n_op(2));
+  aux16 <= (aux15 AND NOT(n_op(0)));
+  aux15 <= (aux14 AND NOT(n_op(2)));
+  aux14 <= (NOT(n_op(5)) AND NOT(n_op(6)));
+  aux12 <= NOT(NOT(n_count(4)) AND NOT(n_count(2)));
+  aux11 <= ((v_net_56 OR v_net_63) OR v_net_60);
+  aux9 <= NOT(((NOT(v_net_37) AND NOT(v_net_41)) AND NOT(
+v_net_45)) AND NOT(v_net_31));
+  aux6 <= NOT(NOT(aux5) AND NOT(v_net_6));
+  aux5 <= NOT(NOT(v_net_9) AND NOT(v_net_25));
+  aux4 <= NOT(((NOT(v_net_9) AND NOT(v_net_3)) AND NOT(
+n_ift)) AND NOT(n_exe));
+  aux1 <= ((v_net_9 OR v_net_45) OR n_ift);
+  rtlcarry_0 (1) <= n_count(0);
+  rtlcarry_0 (2) <= (n_count(1) OR rtlcarry_0(1));
+  rtlcarry_0 (3) <= (n_count(2) OR rtlcarry_0(2));
+  v_proc_exe_set <= (v_net_9 OR v_net_6);
+  v_net_0 <= (v_proc_exe_set OR n_exe);
+  v_net_1 <= ((v_net_9 OR v_net_6) OR n_ift);
+  v_proc_ift_set <= (v_net_3 OR n_exe);
+  v_net_2 <= (n_ift OR v_proc_ift_set);
+  v_net_3 <= (NOT(aux12) AND n_count(1) AND NOT(aux26));
+  v_net_4 <= (aux12 OR n_count(1) OR aux26);
+  v_net_6 <= (n_op(7) AND n_imm);
+  v_net_9 <= (NOT(n_op(7)) AND n_imm);
+  v_net_19 <= ((aux16 AND aux29) AND n_exe);
+  v_net_25 <= ((aux18 AND aux29) AND n_exe);
+  v_net_31 <= ((aux19 AND aux30) AND n_exe);
+  v_net_37 <= ((aux20 AND aux29) AND n_exe);
+  v_net_41 <= ((aux18 AND aux30) AND n_exe);
+  v_net_45 <= ((aux16 AND aux30) AND n_exe);
+  v_net_51 <= (aux20 AND aux30);
+  v_net_53 <= (NOT(n_acc(4)) AND NOT(n_acc(6)) AND NOT(n_acc(3)
+) AND NOT(n_acc(7)) AND NOT(n_acc(1)) AND NOT(
+n_acc(2)) AND n_exe AND NOT(n_acc(5)) AND NOT(n_acc(0)));
+  v_net_55 <= (v_net_53 AND v_net_51);
+  v_net_56 <= (v_net_55 AND n_exe);
+  v_net_59 <= (aux19 AND aux29);
+  v_net_60 <= (v_net_59 AND n_exe);
+  v_net_63 <= (NOT(v_net_55) AND NOT(v_net_59) AND n_exe);
+  label0 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_count (0) <= GUARDED ((NOT(v_net_4) AND n_count(0)) OR NOT(p_reset) OR
+ (v_net_4 AND NOT(n_count(0))));
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_count (1) <= GUARDED ((NOT(v_net_4) AND n_count(1)) OR NOT(p_reset) OR
+ (v_net_4 AND NOT(n_count(1) XOR rtlcarry_0(1))));
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_count (2) <= GUARDED ((v_net_4 AND NOT(n_count(2) XOR rtlcarry_0(2))) 
+OR NOT(p_reset) OR (NOT(v_net_4) AND n_count(2)));
+  END BLOCK label2;
+  label3 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_count (3) <= GUARDED ((v_net_4 AND NOT(rtlcarry_0(3) XOR n_count(3))) 
+OR NOT(p_reset) OR (NOT(v_net_4) AND n_count(3)));
+  END BLOCK label3;
+  label4 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_count (4) <= GUARDED ((v_net_4 AND NOT(n_count(4) XOR (rtlcarry_0(3) 
+OR n_count(3)))) OR NOT(p_reset) OR (NOT(v_net_4) 
+AND n_count(4)));
+  END BLOCK label4;
+  label5 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (0) <= GUARDED ((aux4 OR n_pc(0)) AND (((((v_net_63 AND n_pc(0))
+ OR (aux21 AND n_im(0))) AND aux11) AND n_exe) OR 
+(v_adder_sum(0) AND (v_net_9 OR n_ift)) OR aux25));
+  END BLOCK label5;
+  label6 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (1) <= GUARDED ((aux4 OR n_pc(1)) AND ((v_adder_sum(1) AND (
+v_net_9 OR n_ift)) OR ((((aux21 AND n_im(1)) OR (
+v_net_63 AND n_pc(1))) AND aux11) AND n_exe) OR aux25));
+  END BLOCK label6;
+  label7 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (2) <= GUARDED ((aux4 OR n_pc(2)) AND ((v_adder_sum(2) AND (
+v_net_9 OR n_ift)) OR ((((aux21 AND n_im(2)) OR (
+v_net_63 AND n_pc(2))) AND aux11) AND n_exe) OR aux25));
+  END BLOCK label7;
+  label8 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (3) <= GUARDED ((aux4 OR n_pc(3)) AND ((v_adder_sum(3) AND (
+v_net_9 OR n_ift)) OR (n_exe AND (((aux21 AND n_im(3)) 
+OR (v_net_63 AND n_pc(3))) AND aux11)) OR aux25));
+  END BLOCK label8;
+  label9 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (4) <= GUARDED ((aux4 OR n_pc(4)) AND (((((aux21 AND n_im(4)) OR
+ (v_net_63 AND n_pc(4))) AND aux11) AND n_exe) OR 
+(v_adder_sum(4) AND (v_net_9 OR n_ift)) OR aux25));
+  END BLOCK label9;
+  label10 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (5) <= GUARDED ((aux4 OR n_pc(5)) AND ((v_adder_sum(5) AND (
+v_net_9 OR n_ift)) OR ((((aux21 AND n_im(5)) OR (
+v_net_63 AND n_pc(5))) AND aux11) AND n_exe) OR aux25));
+  END BLOCK label10;
+  label11 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (6) <= GUARDED ((aux4 OR n_pc(6)) AND ((v_adder_sum(6) AND (
+v_net_9 OR n_ift)) OR ((((v_net_63 AND n_pc(6)) OR (
+aux21 AND n_im(6))) AND aux11) AND n_exe) OR aux25));
+  END BLOCK label11;
+  label12 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_pc (7) <= GUARDED ((aux4 OR n_pc(7)) AND (((((aux21 AND n_im(7)) OR
+ (v_net_63 AND n_pc(7))) AND aux11) AND n_exe) OR 
+(v_adder_sum(7) AND (v_net_9 OR n_ift)) OR aux25));
+  END BLOCK label12;
+  label13 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (0) <= GUARDED ((n_ift OR n_op(0)) AND (n_datai(0) OR NOT(n_ift)
+));
+  END BLOCK label13;
+  label14 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (1) <= GUARDED ((n_ift OR n_op(1)) AND (n_datai(1) OR NOT(n_ift)
+));
+  END BLOCK label14;
+  label15 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (2) <= GUARDED ((n_ift OR n_op(2)) AND (n_datai(2) OR NOT(n_ift)
+));
+  END BLOCK label15;
+  label16 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (3) <= GUARDED ((n_datai(3) AND n_ift) OR (n_op(3) AND NOT(n_ift
+)));
+  END BLOCK label16;
+  label17 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (4) <= GUARDED ((n_ift OR n_op(4)) AND (n_datai(4) OR NOT(n_ift)
+));
+  END BLOCK label17;
+  label18 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (5) <= GUARDED ((n_ift OR n_op(5)) AND (n_datai(5) OR NOT(n_ift)
+));
+  END BLOCK label18;
+  label19 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (6) <= GUARDED ((n_ift OR n_op(6)) AND (n_datai(6) OR NOT(n_ift)
+));
+  END BLOCK label19;
+  label20 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_op (7) <= GUARDED ((n_ift OR n_op(7)) AND (n_datai(7) OR NOT(n_ift)
+));
+  END BLOCK label20;
+  label21 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (0) <= GUARDED ((aux6 OR n_im(0)) AND ((n_datai(0) AND aux5) OR 
+(v_net_6 AND n_im(0)) OR NOT(aux6)));
+  END BLOCK label21;
+  label22 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (1) <= GUARDED ((aux6 OR n_im(1)) AND ((v_net_6 AND n_im(1)) OR 
+(n_datai(1) AND aux5) OR NOT(aux6)));
+  END BLOCK label22;
+  label23 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (2) <= GUARDED ((aux6 OR n_im(2)) AND ((v_net_6 AND n_im(2)) OR 
+(n_datai(2) AND aux5) OR NOT(aux6)));
+  END BLOCK label23;
+  label24 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (3) <= GUARDED ((aux6 OR n_im(3)) AND ((n_datai(3) AND aux5) OR 
+(v_net_6 AND n_im(3)) OR NOT(aux6)));
+  END BLOCK label24;
+  label25 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (4) <= GUARDED ((aux6 OR n_im(4)) AND ((v_net_6 AND n_im(4)) OR 
+(n_datai(4) AND aux5) OR NOT(aux6)));
+  END BLOCK label25;
+  label26 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (5) <= GUARDED ((aux6 OR n_im(5)) AND ((v_net_6 AND n_im(5)) OR 
+(n_datai(5) AND aux5) OR NOT(aux6)));
+  END BLOCK label26;
+  label27 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (6) <= GUARDED ((aux6 OR n_im(6)) AND ((v_net_6 AND n_im(6)) OR 
+(n_datai(6) AND aux5) OR NOT(aux6)));
+  END BLOCK label27;
+  label28 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_im (7) <= GUARDED ((aux6 OR n_im(7)) AND ((v_net_6 AND n_im(7)) OR 
+(n_datai(7) AND aux5) OR NOT(aux6)));
+  END BLOCK label28;
+  label29 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (0) <= GUARDED ((aux9 OR n_acc(0)) AND p_reset AND ((n_datai(0) 
+AND v_net_31) OR (v_adder_sum(0) AND v_net_45) OR (
+v_net_37 AND (n_im(0) XOR n_acc(0))) OR (v_net_41 AND 
+n_im(0) AND n_acc(0)) OR NOT(aux9)));
+  END BLOCK label29;
+  label30 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (1) <= GUARDED ((aux9 OR n_acc(1)) AND p_reset AND ((v_net_41 
+AND n_acc(1) AND n_im(1)) OR (n_datai(1) AND 
+v_net_31) OR (v_net_37 AND (n_acc(1) XOR n_im(1))) OR (
+v_adder_sum(1) AND v_net_45) OR NOT(aux9)));
+  END BLOCK label30;
+  label31 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (2) <= GUARDED ((aux9 OR n_acc(2)) AND p_reset AND ((
+v_adder_sum(2) AND v_net_45) OR (n_datai(2) AND v_net_31) OR (
+v_net_37 AND (n_acc(2) XOR n_im(2))) OR (v_net_41 AND 
+n_acc(2) AND n_im(2)) OR NOT(aux9)));
+  END BLOCK label31;
+  label32 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (3) <= GUARDED ((aux9 OR n_acc(3)) AND p_reset AND ((v_net_37 
+AND (n_acc(3) XOR n_im(3))) OR (n_datai(3) AND 
+v_net_31) OR (v_adder_sum(3) AND v_net_45) OR (v_net_41 
+AND n_acc(3) AND n_im(3)) OR NOT(aux9)));
+  END BLOCK label32;
+  label33 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (4) <= GUARDED ((aux9 OR n_acc(4)) AND p_reset AND ((n_datai(4) 
+AND v_net_31) OR (v_net_37 AND (n_acc(4) XOR n_im(4)
+)) OR (v_net_41 AND n_acc(4) AND n_im(4)) OR (
+v_adder_sum(4) AND v_net_45) OR NOT(aux9)));
+  END BLOCK label33;
+  label34 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (5) <= GUARDED ((aux9 OR n_acc(5)) AND p_reset AND ((n_datai(5) 
+AND v_net_31) OR (v_net_37 AND (n_acc(5) XOR n_im(5)
+)) OR (v_net_41 AND n_acc(5) AND n_im(5)) OR (
+v_adder_sum(5) AND v_net_45) OR NOT(aux9)));
+  END BLOCK label34;
+  label35 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (6) <= GUARDED ((aux9 OR n_acc(6)) AND p_reset AND ((n_datai(6) 
+AND v_net_31) OR (v_net_37 AND (n_acc(6) XOR n_im(6)
+)) OR (v_net_41 AND n_acc(6) AND n_im(6)) OR (
+v_adder_sum(6) AND v_net_45) OR NOT(aux9)));
+  END BLOCK label35;
+  label36 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_acc (7) <= GUARDED ((aux9 OR n_acc(7)) AND p_reset AND ((n_datai(7) 
+AND v_net_31) OR (v_net_37 AND (n_im(7) XOR n_acc(7)
+)) OR (v_adder_sum(7) AND v_net_45) OR (v_net_41 
+AND n_im(7) AND n_acc(7)) OR NOT(aux9)));
+  END BLOCK label36;
+  label37 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_ift <= GUARDED ((p_reset AND v_proc_ift_set AND v_net_2) OR (
+p_reset AND n_ift AND NOT(v_net_2)));
+  END BLOCK label37;
+  label38 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_imm <= GUARDED ((p_reset AND n_ift AND v_net_1) OR (p_reset AND 
+n_imm AND NOT(v_net_1)));
+  END BLOCK label38;
+  label39 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    n_exe <= GUARDED ((v_net_0 OR n_exe) AND p_reset AND (
+v_proc_exe_set OR NOT(v_net_0)));
+  END BLOCK label39;
+
+n_mwrite <= v_net_19;
+
+n_mread <= (aux5 OR v_net_31 OR n_ift);
+
+n_address (0) <= (((aux23 OR n_im(0)) AND (v_net_9 OR n_ift) AND 
+n_pc(0)) OR (NOT(aux23) AND n_im(0)));
+
+n_address (1) <= (((aux23 OR n_im(1)) AND (v_net_9 OR n_ift) AND 
+n_pc(1)) OR (NOT(aux23) AND n_im(1)));
+
+n_address (2) <= (((aux23 OR n_im(2)) AND (v_net_9 OR n_ift) AND 
+n_pc(2)) OR (NOT(aux23) AND n_im(2)));
+
+n_address (3) <= ((NOT(aux23) AND n_im(3)) OR (aux24 AND n_pc(3)));
+
+n_address (4) <= (((aux23 OR n_im(4)) AND (v_net_9 OR n_ift) AND 
+n_pc(4)) OR (NOT(aux23) AND n_im(4)));
+
+n_address (5) <= ((NOT(aux23) AND n_im(5)) OR (aux24 AND n_pc(5)));
+
+n_address (6) <= ((NOT(aux23) AND n_im(6)) OR (aux24 AND n_pc(6)));
+
+n_address (7) <= (((aux23 OR n_im(7)) AND (v_net_9 OR n_ift) AND 
+n_pc(7)) OR (NOT(aux23) AND n_im(7)));
+
+n_datao (0) <= n_acc(0);
+
+n_datao (1) <= n_acc(1);
+
+n_datao (2) <= n_acc(2);
+
+n_datao (3) <= n_acc(3);
+
+n_datao (4) <= n_acc(4);
+
+n_datao (5) <= n_acc(5);
+
+n_datao (6) <= n_acc(6);
+
+n_datao (7) <= n_acc(7);
+
+v_adder_exe <= aux1;
+
+v_adder_in2 (0) <= (((v_net_45 AND n_im(0)) OR (v_net_9 OR n_ift)) 
+AND aux1);
+
+v_adder_in2 (1) <= ((v_net_45 AND n_im(1)) AND aux1);
+
+v_adder_in2 (2) <= ((v_net_45 AND n_im(2)) AND aux1);
+
+v_adder_in2 (3) <= ((v_net_45 AND n_im(3)) AND aux1);
+
+v_adder_in2 (4) <= ((v_net_45 AND n_im(4)) AND aux1);
+
+v_adder_in2 (5) <= ((v_net_45 AND n_im(5)) AND aux1);
+
+v_adder_in2 (6) <= ((v_net_45 AND n_im(6)) AND aux1);
+
+v_adder_in2 (7) <= ((v_net_45 AND n_im(7)) AND aux1);
+
+v_adder_in1 (0) <= ((((v_net_9 OR n_ift) AND n_pc(0)) OR (v_net_45 
+AND n_acc(0))) AND aux1);
+
+v_adder_in1 (1) <= ((((v_net_9 OR n_ift) AND n_pc(1)) OR (v_net_45 
+AND n_acc(1))) AND aux1);
+
+v_adder_in1 (2) <= (((v_net_45 AND n_acc(2)) OR ((v_net_9 OR n_ift) 
+AND n_pc(2))) AND aux1);
+
+v_adder_in1 (3) <= ((((v_net_9 OR n_ift) AND n_pc(3)) OR (v_net_45 
+AND n_acc(3))) AND aux1);
+
+v_adder_in1 (4) <= ((((v_net_9 OR n_ift) AND n_pc(4)) OR (v_net_45 
+AND n_acc(4))) AND aux1);
+
+v_adder_in1 (5) <= ((((v_net_9 OR n_ift) AND n_pc(5)) OR (v_net_45 
+AND n_acc(5))) AND aux1);
+
+v_adder_in1 (6) <= ((((v_net_9 OR n_ift) AND n_pc(6)) OR (v_net_45 
+AND n_acc(6))) AND aux1);
+
+v_adder_in1 (7) <= (((v_net_45 AND n_acc(7)) OR ((v_net_9 OR n_ift) 
+AND n_pc(7))) AND aux1);
+END;

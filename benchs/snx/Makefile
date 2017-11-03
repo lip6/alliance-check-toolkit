@@ -7,7 +7,7 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy -split -p
             USE_CLOCKTREE = Yes
-                USE_DEBUG = No
+                USE_DEBUG = Yes
                      CORE = snx
 
                  NETLISTS = cla16       \

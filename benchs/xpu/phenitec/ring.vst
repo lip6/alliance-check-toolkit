@@ -1,0 +1,320 @@
+entity ring is
+   port (
+      exe     : in      bit;
+      rou     : out     bit;
+      vdd     : in      bit;
+      vss     : in      bit
+ );
+end ring;
+
+architecture structural of ring is
+Component inv_x1
+   port (
+      i   : in      bit;
+      nq  : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component na2_x1
+   port (
+      i0  : in      bit;
+      i1  : in      bit;
+      nq   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component buf_x2
+   port (
+      i   : in      bit;
+      q   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+signal ringsig : bit_vector( 32 downto 0);
+signal outsig  : bit;
+signal ctlsig  : bit;
+
+begin
+
+ctlgate : na2_x1
+   port map (
+      i0   => exe,
+      i1   => ringsig(32),
+      nq  =>  ringsig(0),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring1 : inv_x1
+   port map (
+      i   => ringsig(0),
+      nq  => ringsig(1),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring2 : inv_x1
+   port map (
+      i   => ringsig(1),
+      nq  => ringsig(2),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring3 : inv_x1
+   port map (
+      i   => ringsig(2),
+      nq  => ringsig(3),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring4 : inv_x1
+   port map (
+      i   => ringsig(3),
+      nq  => ringsig(4),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring5 : inv_x1
+   port map (
+      i   => ringsig(4),
+      nq  => ringsig(5),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring6 : inv_x1
+   port map (
+      i   => ringsig(5),
+      nq  => ringsig(6),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring7 : inv_x1
+   port map (
+      i   => ringsig(6),
+      nq  => ringsig(7),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring8 : inv_x1
+   port map (
+      i   => ringsig(7),
+      nq  => ringsig(8),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring9 : inv_x1
+   port map (
+      i   => ringsig(8),
+      nq  => ringsig(9),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring10 : inv_x1
+   port map (
+      i   => ringsig(9),
+      nq  => ringsig(10),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring11 : inv_x1
+   port map (
+      i   => ringsig(10),
+      nq  => ringsig(11),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring12 : inv_x1
+   port map (
+      i   => ringsig(11),
+      nq  => ringsig(12),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring13 : inv_x1
+   port map (
+      i   => ringsig(12),
+      nq  => ringsig(13),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring14 : inv_x1
+   port map (
+      i   => ringsig(13),
+      nq  => ringsig(14),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring15 : inv_x1
+   port map (
+      i   => ringsig(14),
+      nq  => ringsig(15),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring16 : inv_x1
+   port map (
+      i   => ringsig(15),
+      nq  => ringsig(16),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring17 : inv_x1
+   port map (
+      i   => ringsig(16),
+      nq  => ringsig(17),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring18 : inv_x1
+   port map (
+      i   => ringsig(17),
+      nq  => ringsig(18),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring19 : inv_x1
+   port map (
+      i   => ringsig(18),
+      nq  => ringsig(19),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring20 : inv_x1
+   port map (
+      i   => ringsig(19),
+      nq  => ringsig(20),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring21 : inv_x1
+   port map (
+      i   => ringsig(20),
+      nq  => ringsig(21),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring22 : inv_x1
+   port map (
+      i   => ringsig(21),
+      nq  => ringsig(22),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring23 : inv_x1
+   port map (
+      i   => ringsig(22),
+      nq  => ringsig(23),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring24 : inv_x1
+   port map (
+      i   => ringsig(23),
+      nq  => ringsig(24),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring25 : inv_x1
+   port map (
+      i   => ringsig(24),
+      nq  => ringsig(25),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring26 : inv_x1
+   port map (
+      i   => ringsig(25),
+      nq  => ringsig(26),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring27 : inv_x1
+   port map (
+      i   => ringsig(26),
+      nq  => ringsig(27),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring28 : inv_x1
+   port map (
+      i   => ringsig(27),
+      nq  => ringsig(28),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring29 : inv_x1
+   port map (
+      i   => ringsig(28),
+      nq  => ringsig(29),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring30 : inv_x1
+   port map (
+      i   => ringsig(29),
+      nq  => ringsig(30),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring31 : inv_x1
+   port map (
+      i   => ringsig(30),
+      nq  => ringsig(31),
+      vdd => vdd,
+      vss => vss
+   );
+
+ring32 : inv_x1
+   port map (
+      i   => ringsig(31),
+      nq  => ringsig(32),
+      vdd => vdd,
+      vss => vss
+   );
+
+
+obuf : buf_x2
+   port map (
+      i   => ringsig(32),
+      q   => rou,
+      vdd => vdd,
+      vss => vss
+   );
+
+
+end structural;

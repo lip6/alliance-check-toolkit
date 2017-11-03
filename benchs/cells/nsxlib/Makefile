@@ -3,8 +3,10 @@
                   TK_RTOP = ../..
  export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nsxlib
 
+ include $(TK_RTOP)/etc/mk/binaries.mk
  include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/mosis.mk
+ include $(TK_RTOP)/etc/mk/phenitec.mk
+#  include $(TK_RTOP)/etc/mk/mosis.mk
  include $(TK_RTOP)/etc/mk/check-library.mk
 
 

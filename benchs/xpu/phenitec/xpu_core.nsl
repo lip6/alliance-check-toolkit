@@ -1,0 +1,73 @@
+#define ADD  0 
+#define LD   1 
+#define ST   2 
+#define JMP  3 
+#define JZ   4 
+#define AND  5 
+#define XOR  6 
+#define LDI  7 
+  
+declare xpu_core { 
+    input  datai[8]; 
+    output datao[8]; 
+    output address[8]; 
+    func_out mread(address) : datai; 
+    func_out mwrite(address,datao); 
+} 
+
+declare add8 {
+   input in1[8], in2[8];
+   output sum[8];
+   func_in exe(in1,in2):sum;
+}
+
+module add8 {
+   func exe {
+     sum = in1 + in2;
+   }
+}
+
+module xpu_core { 
+    reg count[5]=31, pc[8], op[8], im[8], acc[8]=0; 
+    proc_name ift(pc), imm(op), exe(im); 
+    add8 adder;
+  
+    any { 
+        count != 0: count--; 
+        count == 2: ift(0); 
+    } 
+  
+    proc ift { 
+        imm(mread(pc)); 
+        pc := adder.exe(pc, 0x01);
+    } 
+  
+    proc imm { 
+        if(op[7]) exe(im);
+        else {
+          exe(mread(pc));
+          pc := adder.exe(pc, 0x01);
+        }
+    } 
+  
+    proc exe { 
+        wire nextpc[8]; 
+        wire wop[8]; 
+	wop=op&0x7f;
+        any { 
+            wop == ADD: {acc:=adder.exe(acc,im);  _display("ADD %d",im);}
+            wop == AND: {acc:=acc&im;  _display("AND %d",im);}
+            wop == XOR: {acc:=acc^im;  _display("XOR %d",im);}
+            wop == LD:  {acc:=mread(im); _display("LD %d",im);}
+            wop == LDI: {im:=mread(im);  _display("LDI %d",im);}
+            wop == ST:  {mwrite(im,acc); _display("ST %d",im);}
+        } 
+        any { 
+            wop == JMP: {nextpc=im; _display("JMP %d",im);}
+            (wop == JZ) && (acc == 0): {nextpc=im; _display("JZ %d",im);}
+            else: nextpc=pc; 
+        } 
+        ift(nextpc); 
+    } 
+} 
+  

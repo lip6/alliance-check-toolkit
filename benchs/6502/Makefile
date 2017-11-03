@@ -4,7 +4,8 @@
 
                 NSL2VHOPT = 
             USE_CLOCKTREE = Yes
-                USE_DEBUG = No
+                USE_DEBUG = Yes
+               USE_KATANA = No
 
                  NETLISTS = m65s   \
                             alu65  \

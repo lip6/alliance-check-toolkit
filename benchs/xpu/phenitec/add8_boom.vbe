@@ -1,0 +1,55 @@
+-- VHDL data flow description generated from `add8_boom`
+--		date : Wed May 24 17:45:49 2017
+
+
+-- Entity Declaration
+
+ENTITY add8_boom IS
+  PORT (
+  p_reset : in BIT;	-- p_reset
+  m_clock : in BIT;	-- m_clock
+  n_exe : in BIT;	-- n_exe
+  n_sum : out bit_vector(7 DOWNTO 0) ;	-- n_sum
+  n_in1 : in bit_vector(7 DOWNTO 0) ;	-- n_in1
+  n_in2 : in bit_vector(7 DOWNTO 0) ;	-- n_in2
+  vdd : in BIT;	-- vdd
+  vss : in BIT	-- vss
+  );
+END add8_boom;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF add8_boom IS
+  SIGNAL rtlcarry_0 : BIT_VECTOR(6 DOWNTO 1);	-- rtlcarry_0
+
+BEGIN
+  rtlcarry_0 (1) <= (n_in2(0) AND n_in1(0));
+  rtlcarry_0 (2) <= ((n_in1(1) AND (rtlcarry_0(1) OR n_in2(1))) OR (
+rtlcarry_0(1) AND n_in2(1)));
+  rtlcarry_0 (3) <= ((n_in1(2) AND (rtlcarry_0(2) OR n_in2(2))) OR (
+rtlcarry_0(2) AND n_in2(2)));
+  rtlcarry_0 (4) <= ((n_in1(3) AND (rtlcarry_0(3) OR n_in2(3))) OR (
+rtlcarry_0(3) AND n_in2(3)));
+  rtlcarry_0 (5) <= ((n_in1(4) AND (rtlcarry_0(4) OR n_in2(4))) OR (
+rtlcarry_0(4) AND n_in2(4)));
+  rtlcarry_0 (6) <= ((n_in1(5) AND (rtlcarry_0(5) OR n_in2(5))) OR (
+rtlcarry_0(5) AND n_in2(5)));
+
+n_sum (0) <= (n_in2(0) XOR n_in1(0));
+
+n_sum (1) <= (n_in1(1) XOR n_in2(1) XOR rtlcarry_0(1));
+
+n_sum (2) <= (n_in1(2) XOR n_in2(2) XOR rtlcarry_0(2));
+
+n_sum (3) <= (n_in1(3) XOR n_in2(3) XOR rtlcarry_0(3));
+
+n_sum (4) <= (n_in1(4) XOR n_in2(4) XOR rtlcarry_0(4));
+
+n_sum (5) <= (n_in1(5) XOR n_in2(5) XOR rtlcarry_0(5));
+
+n_sum (6) <= (n_in1(6) XOR n_in2(6) XOR rtlcarry_0(6));
+
+n_sum (7) <= (n_in1(7) XOR n_in2(7) XOR ((n_in1(6) AND (
+rtlcarry_0(6) OR n_in2(6))) OR (rtlcarry_0(6) AND n_in2(6))));
+END;
