@@ -18,6 +18,7 @@ try:
   import Viewer
   import CRL
   from   helpers   import ErrorMessage
+  from   helpers   import showPythonTrace
   import Anabatic
   import Katana
   import Etesian
@@ -35,7 +36,7 @@ except ImportError, e:
     print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
     print '        Please check the integrity of the <coriolis> package.'
     sys.exit(1)
-  if str(e).find('cannot open shared object file'):
+  if serror.find('cannot open shared object file'):
     library = serror.split(':')[0]
     print '[ERROR] The <%s> shared library cannot be loaded.' % library
     print '        Under RHEL 6, you must be under devtoolset-2.'
@@ -206,72 +207,75 @@ def ScriptMain ( **kw ):
 
 
 if __name__ == '__main__':
-  parser = optparse.OptionParser()
-  parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'         , help='The name of the chip to build, without extension.')
-  parser.add_option( '-s', '--script', type='string',                      dest='script'       , help='The name of a Python script, without extension.')
-  parser.add_option( '-b', '--blif'  , type='string',                      dest='blif'         , help='The name of a BLIF netlist, without extension.')
-  parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'      , help='First level of verbosity.')
-  parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose'  , help='Second level of verbosity.')
-  parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement'  , help='Perform chip placement step only.')
-  parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'    , help='Perform routing step only.')
-  parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'       , help='Run place & route on a complete chip.')
-  parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree'  , help='In block mode, create a clock-tree.')
-  parser.add_option( '-K', '--katana'               , action='store_true', dest='useKatana'    , help='Use Katana P&R instead of Knik/Kite (experimental).')
-  parser.add_option(       '--profile'              , action='store_true', dest='profileRouter', help='Activate cost profiling of Kite/Katana.')
-  parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'      , help='Save both physical and logical views.')
-  (options, args) = parser.parse_args()
+  try:
+    parser = optparse.OptionParser()
+    parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'         , help='The name of the chip to build, without extension.')
+    parser.add_option( '-s', '--script', type='string',                      dest='script'       , help='The name of a Python script, without extension.')
+    parser.add_option( '-b', '--blif'  , type='string',                      dest='blif'         , help='The name of a BLIF netlist, without extension.')
+    parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'      , help='First level of verbosity.')
+    parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose'  , help='Second level of verbosity.')
+    parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement'  , help='Perform chip placement step only.')
+    parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'    , help='Perform routing step only.')
+    parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'       , help='Run place & route on a complete chip.')
+    parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree'  , help='In block mode, create a clock-tree.')
+    parser.add_option( '-K', '--katana'               , action='store_true', dest='useKatana'    , help='Use Katana P&R instead of Knik/Kite (experimental).')
+    parser.add_option(       '--profile'              , action='store_true', dest='profileRouter', help='Activate cost profiling of Kite/Katana.')
+    parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'      , help='Save both physical and logical views.')
+    (options, args) = parser.parse_args()
+    
+    views    = CRL.Catalog.State.Physical
+    doStages = 0
+    if options.verbose:
+      Cfg.getParamBool('misc.verboseLevel1').setBool(True)
+    if options.veryVerbose:
+      Cfg.getParamBool('misc.verboseLevel1').setBool(True)
+      Cfg.getParamBool('misc.verboseLevel2').setBool(True)
+    if options.saveAll:     views    |= CRL.Catalog.State.Logical
+    if options.doPlacement: doStages |= DoPlacement
+    if options.doRouting:   doStages |= DoRouting
+    if options.doChip:      doStages |= DoChip
+    if options.doClockTree: doStages |= DoClockTree
+    if options.useKatana:   doStages |= UseKatana
+    if not doStages:        doStages  = ChipStages
+    if options.profileRouter:
+      Cfg.getParamBool(  'kite.profileEventCosts').setBool(True)
+      Cfg.getParamBool('katana.profileEventCosts').setBool(True)
+      doStages |= ProfileRouter
+    
+    kw = { 'doStages':doStages, 'views':views }
+    if options.script:
+      try:
+        sys.path.append(os.path.dirname(options.script))
+       #print sys.path
+    
+        module = __import__( options.script, globals(), locals() )
+        if not module.__dict__.has_key('ScriptMain'):
+            print '[ERROR] Script module <%s> do not contains a ScripMain() function.' % options.script
+            sys.exit(1)
+    
+        cell = module.__dict__['ScriptMain']( **kw )
+        kw['cell'] = cell
+    
+      except ImportError, e:
+        module = str(e).split()[-1]
+        print '[ERROR] The <%s> script cannot be loaded.' % module
+        print '        Please check your design hierarchy.'
+        sys.exit(1)
+      except Exception, e:
+        print '[ERROR] A strange exception occurred while loading the Python'
+        print '        script <%s>. Please check that module for error:\n' % options.script
+        showPythonTrace( options.script, e )
+        sys.exit(2)
+    elif options.cell:
+      kw['cell'] = framework.getCell( options.cell, CRL.Catalog.State.Views )
+    elif options.blif:
+      kw['cell'] = CRL.Blif.load( options.blif )
+    
+    success = ScriptMain( **kw )
+    shellSuccess = 0
+    if not success: shellSuccess = 1
 
-  views    = CRL.Catalog.State.Physical
-  doStages = 0
-  if options.verbose:
-    Cfg.getParamBool('misc.verboseLevel1').setBool(True)
-  if options.veryVerbose:
-    Cfg.getParamBool('misc.verboseLevel1').setBool(True)
-    Cfg.getParamBool('misc.verboseLevel2').setBool(True)
-  if options.saveAll:     views    |= CRL.Catalog.State.Logical
-  if options.doPlacement: doStages |= DoPlacement
-  if options.doRouting:   doStages |= DoRouting
-  if options.doChip:      doStages |= DoChip
-  if options.doClockTree: doStages |= DoClockTree
-  if options.useKatana:   doStages |= UseKatana
-  if not doStages:        doStages  = ChipStages
-  if options.profileRouter:
-    Cfg.getParamBool(  'kite.profileEventCosts').setBool(True)
-    Cfg.getParamBool('katana.profileEventCosts').setBool(True)
-    doStages |= ProfileRouter
-
-  kw = { 'doStages':doStages, 'views':views }
-  if options.script:
-    try:
-      sys.path.append(os.path.dirname(options.script))
-     #print sys.path
-
-      module = __import__( options.script, globals(), locals() )
-      if not module.__dict__.has_key('ScriptMain'):
-          print '[ERROR] Script module <%s> do not contains a ScripMain() function.' % options.script
-          sys.exit(1)
-
-      cell = module.__dict__['ScriptMain']( **kw )
-      kw['cell'] = cell
-
-    except ImportError, e:
-      module = str(e).split()[-1]
-      print '[ERROR] The <%s> script cannot be loaded.' % module
-      print '        Please check your design hierarchy.'
-      sys.exit(1)
-    except Exception, e:
-      print '[ERROR] A strange exception occurred while loading the Python'
-      print '        script <%s>. Please check that module for error:\n' % options.script
-      traceback.print_tb(sys.exc_info()[2])
-      print '        %s' % e
-      sys.exit(2)
-  elif options.cell:
-    kw['cell'] = framework.getCell( options.cell, CRL.Catalog.State.Views )
-  elif options.blif:
-    kw['cell'] = CRL.Blif.load( options.blif )
-
-  success = ScriptMain( **kw )
-  shellSuccess = 0
-  if not success: shellSuccess = 1
+  except Exception, e:
+    showPythonTrace( sys.argv[0], e )
 
   sys.exit( shellSuccess )

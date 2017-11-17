@@ -1,0 +1,47 @@
+#define ADD 0 
+#define LD  1 
+#define ST  2 
+#define JMP 3 
+#define JZ  4 
+  
+declare xpu_core { 
+    input  datai[4]; 
+    output datao[4]; 
+    output address[4]; 
+    func_out mread(address) : datai; 
+    func_out mwrite(address,datao); 
+} 
+  
+module xpu_core { 
+    reg count[5]=30, pc[4], op[4], im[4], acc[4]=0; 
+    proc_name ift(pc), imm(op), exe(im); 
+  
+    any { 
+        count != 0: count--; 
+        count == 2: ift(0); 
+    } 
+  
+    proc ift { 
+        imm(mread(pc++)); 
+    } 
+  
+    proc imm { 
+        exe(mread(pc++)); 
+    } 
+  
+    proc exe { 
+        wire nextpc[4]; 
+        any { 
+            op == ADD: {acc:=acc+im;  _display("ADD %d",im);}
+            op == LD:  {acc:=mread(im); _display("LD %d",im);}
+            op == ST:  {mwrite(im,acc); _display("ST %d",im);}
+        } 
+        any { 
+            op == JMP: {nextpc=im; _display("JMP %d",im);}
+            (op == JZ) && (acc == 0): {nextpc=im; _display("JZ %d",im);}
+            else: nextpc=pc; 
+        } 
+        ift(nextpc); 
+    } 
+} 
+  

@@ -23,6 +23,8 @@
    avt_config   avtPowerCalculation  yes
    avt_config   simPowerSupply       1.8
    avt_config   simSlope             50
+   avt_config   avtVddName           "vdd"
+   avt_config   avtVssName           "vss"
 
    if ([string match sff* $cell]) {
      puts "Cell is a D flip-flop."

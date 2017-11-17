@@ -5,13 +5,13 @@
 
  include $(TK_RTOP)/etc/mk/binaries.mk
  include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/phenitec.mk
-#  include $(TK_RTOP)/etc/mk/mosis.mk
+#include $(TK_RTOP)/etc/mk/phenitec.mk
+ include $(TK_RTOP)/etc/mk/mosis.mk
  include $(TK_RTOP)/etc/mk/check-library.mk
 
 
  characterize: nsxlib-dot-lib
 
 
-#check-lib: ./check/inv_x1.ok \
-#           ./check/sff1_x4.ok
+ check-lib: ./check/inv_x1.ok \
+            ./check/sff1_x4.ok

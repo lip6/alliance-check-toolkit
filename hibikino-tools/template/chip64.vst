@@ -1,0 +1,272 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on May 15, 2016, 13:05
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity chip is
+  port ( ck   : in bit
+       ; reset  : in bit
+	   ; in1  : in bit
+	   ; in2  : in bit
+	   ; ci  : in bit
+       ; s    : out bit
+       ; co    : out bit
+       ; cellcheck_i0    : in bit
+       ; cellcheck_i1    : in bit
+       ; cellcheck_o0    : out bit
+       ; cellcheck_o1    : out bit
+       ; vdd : in bit
+       ; vss : in bit
+       );
+end chip;
+
+architecture structural of chip is
+
+  component core_top
+    port ( m_clock : in bit
+         ; p_reset : in bit
+         ; in1    : in bit
+         ; in2    : in bit
+         ; ci    : in bit
+         ; s    : out bit
+         ; co    : out bit
+         ; cellcheck_i0    : in bit
+         ; cellcheck_i1    : in bit
+         ; cellcheck_o0    : out bit
+         ; cellcheck_o1    : out bit
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  component pi_sp
+    port ( ck   : in bit
+         ; pad  : in bit
+         ; t    : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component pvddck2_sp
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component pvssck2_sp
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component pck_sp
+    port ( pad  : in bit
+         ; ck   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component po_sp
+    port ( ck   : in bit
+         ; i    : in bit
+         ; pad  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+
+  signal reset_i     :  bit;
+  signal ckc         :  bit;
+  signal cki         :  bit;
+  signal in1_i      :  bit;
+  signal in2_i      :  bit;
+  signal ci_i      :  bit;
+  signal s_i      :  bit;
+  signal co_i      :  bit;
+  signal cellcheck_i0_i       :  bit;
+  signal cellcheck_i1_i       :  bit;
+  signal cellcheck_o0_i       :  bit;
+  signal cellcheck_o1_i       :  bit;
+
+
+
+begin
+
+  core : core_top
+  port map ( m_clock => ckc
+           , p_reset => reset_i
+           , s   => s_i
+           , co   => co_i
+           , ci   => ci_i
+           , in1   => in1_i
+           , in2   => in2_i
+		   , cellcheck_i0 => cellcheck_i0_i
+		   , cellcheck_i1 => cellcheck_i1_i
+		   , cellcheck_o0 => cellcheck_o0_i
+		   , cellcheck_o1 => cellcheck_o1_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_reset : pi_sp
+  port map ( ck   => cki
+           , pad  => reset
+           , t    => reset_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_ck : pck_sp
+  port map ( pad  => ck
+           , ck   => cki
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_s : po_sp
+  port map ( ck   => cki
+           , i    => s_i
+           , pad  => s
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_co : po_sp
+  port map ( ck   => cki
+           , i    => co_i
+           , pad  => co
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_in1 : pi_sp
+  port map ( ck   => cki
+           , pad  => in1
+           , t    => in1_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_in2 : pi_sp
+  port map ( ck   => cki
+           , pad  => in2
+           , t    => in2_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_ci : pi_sp
+  port map ( ck   => cki
+           , pad  => ci
+           , t    => ci_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_cell_i0 : pi_sp
+  port map ( ck   => cki
+           , pad  => cellcheck_i0
+           , t    => cellcheck_i0_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_cell_i1 : pi_sp
+  port map ( ck   => cki
+           , pad  => cellcheck_i1
+           , t    => cellcheck_i1_i
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_cell_o0 : po_sp
+  port map ( ck   => cki
+           , i    => cellcheck_o0_i
+           , pad  => cellcheck_o0
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_cell_o1 : po_sp
+  port map ( ck   => cki
+           , i    => cellcheck_o1_i
+           , pad  => cellcheck_o1
+           , vdd => vdd
+           , vss => vss
+           );
+
+
+  p_vdd0 : pvddck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vss0 : pvssck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vdd1 : pvddck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+  p_vss1 : pvssck2_sp
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdd => vdd
+           , vss => vss
+           );
+
+--  p_vdd2 : pvddck2_sp
+--  port map ( ck   => cki
+--           , cko  => ckc
+--           , vdd => vdd
+--           , vss => vss
+--           );
+--
+--  p_vss2 : pvssck2_sp
+--  port map ( ck   => cki
+--           , cko  => ckc
+--           , vdd => vdd
+--           , vss => vss
+--           );
+--
+--  p_vdd3 : pvddck2_sp
+--  port map ( ck   => cki
+--           , cko  => ckc
+--           , vdd => vdd
+--           , vss => vss
+--           );
+--
+--  p_vss3 : pvssck2_sp
+--  port map ( ck   => cki
+--           , cko  => ckc
+--           , vdd => vdd
+--           , vss => vss
+--           );
+
+
+end structural;
+

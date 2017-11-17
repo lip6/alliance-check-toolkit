@@ -1,2 +1,1 @@
-symbolicTechnology = 'cmos'
-realTechnology     = '130/hcmos9gp'
+technology = 'symbolic/cmos'

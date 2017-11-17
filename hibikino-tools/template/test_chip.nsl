@@ -1,0 +1,8 @@
+#include "test_chip.inc"
+
+module test_chip{
+	//full-adder
+
+	s=(in1^in2)^ci;
+	co=(in1&in2)|((in1^in2)&ci);
+}

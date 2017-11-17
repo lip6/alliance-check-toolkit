@@ -5,6 +5,7 @@ import os
 import os.path
 
 defaultStyle = 'Alliance.Classic [black]'
+#defaultStyle = 'Printer.Coriolis'
  
 parametersTable = \
     ( ('misc.catchCore'           , TypeBool      , False   )
@@ -14,24 +15,25 @@ parametersTable = \
     , ('misc.logMode'             , TypeBool      , False   )
     , ('misc.verboseLevel1'       , TypeBool      , False   )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
-    , ('misc.minTraceLevel'       , TypeInt       , 0       )
-    , ('misc.maxTraceLevel'       , TypeInt       , 0       )
+    , ('misc.minTraceLevel'       , TypeInt       , 1000    )
+    , ('misc.maxTraceLevel'       , TypeInt       , 1000    )
     , ('nimbus.spaceMargin'       , TypePercentage, 40.0    )
-    , ('nimbus.aspectRatio'       , TypePercentage, 100.0   )
+    , ('etesian.spaceMargin'      , TypePercentage, 15.0    )
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
+    , ('anabatic.routingGauge'    , TypeString    , 'msxlib')
+   #, ('anabatic.routingGauge'    , TypeString    , 'sxlib-2M')
     , ("kite.hTracksReservedLocal", TypeInt       , 4       )
     , ("kite.vTracksReservedLocal", TypeInt       , 3       )
     )
 
 cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-
 allianceConfig = \
-    ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
-                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
-    ,
-    )
+     ( ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
+                           , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
+     ,
+     )
 
 
 #print '       o  Cleaning up ClockTree previous run.'

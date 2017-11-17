@@ -15,10 +15,10 @@ parametersTable = \
     , ('misc.bug'                 , TypeBool      , False )
     , ('misc.paranoid'            , TypeBool      , False )
     , ('misc.logMode'             , TypeBool      , False )
-    , ('misc.verboseLevel2'       , TypeBool      , False )
+    , ('misc.verboseLevel2'       , TypeBool      , True  )
     , ('misc.verboseLevel1'       , TypeBool      , True  )
-    , ('misc.minTraceLevel'       , TypeInt       , 1130  )
-    , ('misc.maxTraceLevel'       , TypeInt       , 1200  )
+    , ('misc.minTraceLevel'       , TypeInt       , 1590  )
+    , ('misc.maxTraceLevel'       , TypeInt       , 1600  )
     , ('anabatic.edgeLength'      , TypeInt       , 24    )
     , ('anabatic.edgeWidth'       , TypeInt       , 16    )
     # Kite parameters.
@@ -28,6 +28,7 @@ parametersTable = \
     , ("katabatic.saturateRp"     , TypeInt       , 10    )
     , ("kite.hTracksReservedLocal", TypeInt       , 4     )
     , ("kite.vTracksReservedLocal", TypeInt       , 5     )
+    , ("katana.profileEventCosts" , TypeBool      , True  )
     #
     )
 

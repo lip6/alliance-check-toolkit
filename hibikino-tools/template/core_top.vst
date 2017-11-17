@@ -1,0 +1,122 @@
+
+ENTITY core_top IS
+PORT(
+  p_reset	: IN BIT;
+  m_clock	: IN BIT;
+  in1	: IN BIT;
+  in2	: IN BIT;
+  ci	: IN BIT;
+  s		: OUT BIT;
+  co	: OUT BIT;
+  cellcheck_i0 : IN BIT;
+  cellcheck_i1 : IN BIT;
+  cellcheck_o0 : OUT BIT;
+  cellcheck_o1 : OUT BIT;
+  vdd	: IN BIT;
+  vss	: IN BIT
+);
+END core_top;
+
+ARCHITECTURE VST OF core_top IS
+
+  SIGNAL buf_s	: BIT;
+  SIGNAL buf_co	: BIT;
+
+  COMPONENT test_chip
+  PORT(
+  p_reset	: IN BIT;
+  m_clock	: IN BIT;
+  co	: OUT BIT;
+  s	: OUT BIT;
+  in1	: IN BIT;
+  in2	: IN BIT;
+  ci	: IN BIT;
+  vdd	: IN BIT;
+  vss	: IN BIT
+  );
+  END COMPONENT;
+
+
+  COMPONENT buf_x8
+  PORT(
+  vss	: IN BIT;
+  vdd	: IN BIT;
+  q	: OUT BIT;
+  i	: IN BIT
+  );
+  END COMPONENT;
+
+  COMPONENT inv_x2
+  PORT(
+  vss   : IN BIT;
+  vdd   : IN BIT;
+  nq    : OUT BIT;
+  i : IN BIT
+  );
+  END COMPONENT;
+
+Component a2_x2
+   port (
+      i0  : in      bit;
+      i1  : in      bit;
+      q   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+
+
+BEGIN
+
+  core : test_chip
+  PORT MAP (
+    p_reset => p_reset,
+    m_clock => m_clock,
+    s => buf_s,
+    co => buf_co,
+    in1 => in1,
+    in2 => in2,
+    ci => ci,
+    vdd => vdd,
+    vss => vss
+  );
+
+
+  buf_out_s : buf_x8
+  PORT MAP (
+    i => buf_s,
+    q => s,
+    vdd => vdd,
+    vss => vss
+  );
+  buf_out_co : buf_x8
+  PORT MAP (
+    i => buf_co,
+    q => co,
+    vdd => vdd,
+    vss => vss
+  );
+
+
+
+  check_inv_x2 : inv_x2
+  PORT MAP (
+	i => cellcheck_i0,
+	nq => cellcheck_o0,
+	vdd => vdd,
+	vss => vss
+  );
+
+  check_a2_x2 : a2_x2
+  PORT MAP (
+	i0 => cellcheck_i0,
+	i1 => cellcheck_i1,
+	q => cellcheck_o1,
+	vdd => vdd,
+	vss => vss
+  );
+
+
+
+END VST;

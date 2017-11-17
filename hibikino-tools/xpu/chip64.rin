@@ -1,0 +1,38 @@
+west (
+p_ck
+p_reset
+p_vdd0
+p_vss0
+p_mwrite
+p_mread
+ )
+south( 
+p_datai0
+p_datai1
+p_vss2
+p_vdd2
+p_datai2
+p_datai3
+)
+north(
+p_address0
+p_address1
+p_vdd1
+p_vss1
+p_address2
+p_address3
+)
+east ( 
+p_datao0
+p_datao1
+p_vdd3
+p_vss3
+p_datao2
+p_datao3
+)
+
+width(
+vss 50
+vdd 50
+)
+

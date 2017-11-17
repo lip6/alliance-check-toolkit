@@ -10,13 +10,13 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = No
                 USE_DEBUG = Yes
-               USE_KATANA = Yes
+               USE_KATANA = No
 
                  NETLISTS = adder
 
  include $(TK_RTOP)/etc/mk/alliance.mk
-#include $(TK_RTOP)/etc/mk/nsxlib.mk
- include $(TK_RTOP)/etc/mk/sxlib.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+#include $(TK_RTOP)/etc/mk/sxlib.mk
  include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
  include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 
