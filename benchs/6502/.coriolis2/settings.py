@@ -2,6 +2,7 @@
 
 import os
 import os.path
+import helpers
 
 
 defaultStyle = 'Alliance.Classic [black]'
@@ -24,19 +25,27 @@ parametersTable = \
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
-   #, ('anabatic.routingGauge'    , TypeString    , 'msxlib')
+    , ('anabatic.routingGauge'    , TypeString    ,  'sxlib')
    #, ("kite.hTracksReservedLocal", TypeInt       , 4       )
    #, ("kite.vTracksReservedLocal", TypeInt       , 4       )
     )
 
-#cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-#
-#allianceConfig = \
-#    ( ( 'CLOCK'         , 'ck.*|m_clock')
-#    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
-#                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
-#    ,
-#    )
+if helpers.techno == '180/scn6m_deep_09':
+  parametersTable = helpers.overload \
+                    ( parametersTable
+                    , ( ('anabatic.routingGauge', TypeString, 'msxlib')
+                      ,
+                      )
+                    )
+
+  cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
+  
+  allianceConfig = \
+      ( ( 'CLOCK'         , 'ck.*|m_clock')
+      , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
+                            , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
+      ,
+      )
 
 #import os
 #

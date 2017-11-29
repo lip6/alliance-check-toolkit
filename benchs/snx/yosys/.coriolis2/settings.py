@@ -2,6 +2,7 @@
 
 import os
 import os.path
+import helpers
 
 
 defaultStyle = 'Alliance.Classic [black]'
@@ -21,23 +22,31 @@ parametersTable = \
     , ('etesian.spaceMargin'      , TypePercentage, 15.0    )
     , ('etesian.aspectRatio'      , TypePercentage, 100.0   )
    # Kite parameters.
+    , ('anabatic.routingGauge'    , TypeString    , 'sxlib' )
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
     , ("kite.hTracksReservedLocal", TypeInt       , 3       )
     , ("kite.vTracksReservedLocal", TypeInt       , 3       )
     )
 
-#cellsTop = os.path.abspath( os.getcwd()+'/../../cells' )
-#
-#allianceConfig = \
-#    ( ( 'CLOCK'         , '^ck.*|m_clock')
-#    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
-#                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
-#    ,
-#    )
+if helpers.techno == '180/scn6m_deep_09':
+  parametersTable = helpers.overload \
+                    ( parametersTable
+                    , ( ('anabatic.routingGauge', TypeString, 'msxlib')
+                      ,
+                      )
+                    )
 
-#import os
-#
+  cellsTop = os.path.abspath( os.getcwd()+'/../../cells' )
+ 
+  allianceConfig = \
+      ( ( 'CLOCK'         , '^ck.*|m_clock')
+      , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
+                            , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
+      ,
+      )
+
+
 #print '       o  Cleaning up ClockTree previous run.'
 #for fileName in os.listdir('.'):
 #  if fileName.endswith('.ap') or (fileName.find('_clocked.') >= 0):

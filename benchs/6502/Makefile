@@ -14,7 +14,8 @@
                             inc16
 
  include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/sxlib.mk
+#include $(TK_RTOP)/etc/mk/sxlib.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
  include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
  include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 
