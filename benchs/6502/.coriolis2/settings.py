@@ -29,14 +29,14 @@ parametersTable = \
    #, ("kite.vTracksReservedLocal", TypeInt       , 4       )
     )
 
-cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-
-allianceConfig = \
-    ( ( 'CLOCK'         , 'ck.*|m_clock')
-    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
-                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
-    ,
-    )
+#cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
+#
+#allianceConfig = \
+#    ( ( 'CLOCK'         , 'ck.*|m_clock')
+#    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
+#                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
+#    ,
+#    )
 
 #import os
 #

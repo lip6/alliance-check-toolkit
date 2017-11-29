@@ -1,0 +1,8 @@
+
+read_verilog snx.v
+hierarchy -check -top snx
+synth            -top snx
+dfflibmap -liberty  /dsk/l1/jpc/crypted/soc/techno/liberty/c35b4/3.3V/c35_CORELIB_TYP.lib
+abc       -liberty  /dsk/l1/jpc/crypted/soc/techno/liberty/c35b4/3.3V/c35_CORELIB_TYP.lib
+clean
+write_blif snx.blif

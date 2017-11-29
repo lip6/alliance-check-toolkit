@@ -18,23 +18,24 @@ parametersTable = \
     , ('misc.maxTraceLevel'       , TypeInt       , 0       )
     , ("etesian.effort"           , TypeEnumerate , 2       )
     , ('etesian.uniformDensity'   , TypeBool      , True    )
-    , ('etesian.spaceMargin'      , TypePercentage, 15.0    )
+    , ('etesian.spaceMargin'      , TypePercentage, 10.0    )
     , ('etesian.aspectRatio'      , TypePercentage, 100.0   )
    # Kite parameters.
+   #, ('anabatic.routingGauge'    , TypeString    , 'msxlib')
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
-    , ("kite.hTracksReservedLocal", TypeInt       , 3       )
-    , ("kite.vTracksReservedLocal", TypeInt       , 3       )
+    , ("kite.hTracksReservedLocal", TypeInt       , 4       )
+    , ("kite.vTracksReservedLocal", TypeInt       , 4       )
     )
 
-cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-
-allianceConfig = \
-    ( ( 'CLOCK'         , '^ck.*|m_clock')
-    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
-                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
-    ,
-    )
+#cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
+#
+#allianceConfig = \
+#    ( ( 'CLOCK'         , '^ck.*|m_clock')
+#    , ( 'SYSTEM_LIBRARY', ( (cellsTop+'/nsxlib'  , Environment.Prepend)
+#                          , (cellsTop+'/mpxlib'  , Environment.Prepend)) )
+#    ,
+#    )
 
 #import os
 #

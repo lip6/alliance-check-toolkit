@@ -2,13 +2,8 @@
 
                   TK_RTOP = ../..
 
-                  BOOMOPT = -A
-                  BOOGOPT =
-                  LOONOPT =
-                NSL2VHOPT = -vasy
-            USE_CLOCKTREE = Yes
-               USE_KATANA = No
-                USE_DEBUG = No
+            USE_CLOCKTREE = No
+                USE_DEBUG = Yes
 
                  NETLISTS = snx      \
                             alu16    \
@@ -18,9 +13,10 @@
                             type_dec
 
  include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/sxlib.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
  include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
  include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+
 
 lvx:       lvx-snx_clocked_kite
 druc:      druc-snx_clocked_kite

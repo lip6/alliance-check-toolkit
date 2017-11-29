@@ -1,17 +1,21 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/cpu/yosys>" -*-
 
+                  TK_RTOP = ../..
+
                   BOOMOPT = -A
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
-            USE_SYNTHESIS = Yosys
             USE_CLOCKTREE = Yes
-           LIBRARY_FAMILY = nsxlib
+               USE_KATANA = Yes
                 USE_DEBUG = No
 
                  NETLISTS = cpu
 
- include ../../etc/rules.mk
+ include $(TK_RTOP)/etc/mk/alliance.mk
+ include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
+ include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 
 lvx:       lvx-cpu_clocked_kite
 druc:      druc-cpu_clocked_kite

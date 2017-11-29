@@ -4,7 +4,7 @@
 
                 NSL2VHOPT = 
             USE_CLOCKTREE = Yes
-                USE_DEBUG = Yes
+                USE_DEBUG = No
                USE_KATANA = No
 
                  NETLISTS = m65s   \
@@ -14,7 +14,7 @@
                             inc16
 
  include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/nsxlib.mk
+ include $(TK_RTOP)/etc/mk/sxlib.mk
  include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
  include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 

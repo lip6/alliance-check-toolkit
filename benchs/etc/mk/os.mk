@@ -35,6 +35,11 @@
    ifneq ($(findstring .el7.,$(UNAME_R)),)
      BUILD_VARIANT    = Linux.el7
    endif
+  # Debian seems not to put a tag in the kernel revision,
+  # so if no tag is found, assume Debian. 
+   ifneq ($(findstring -amd64,$(UNAME_R)),)
+     BUILD_VARIANT    = Linux.x86
+   endif
  endif
 
 

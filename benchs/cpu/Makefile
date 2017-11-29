@@ -16,6 +16,8 @@
  include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
  include $(TK_RTOP)/etc/mk/pr-coriolis.mk
 
+lvx-cpu:   lvx-cpu_clocked_kite
+druc-cpu:  druc-cpu_clocked_kite
 
 lvx:       lvx-chip_clocked_kite
 druc:      druc-chip_clocked_kite
