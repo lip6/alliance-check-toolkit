@@ -18,7 +18,7 @@ parametersTable = \
    #, ('misc.maxTraceLevel'       , TypeInt       , 0       )
     , ("etesian.effort"           , TypeEnumerate , 2       )
     , ('etesian.uniformDensity'   , TypeBool      , True    )
-    , ('etesian.spaceMargin'      , TypePercentage, 40.0    )
+    , ('etesian.spaceMargin'      , TypePercentage, 3.0     )
     , ('etesian.aspectRatio'      , TypePercentage, 100.0   )
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
