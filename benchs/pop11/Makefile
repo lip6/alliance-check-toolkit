@@ -7,6 +7,7 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
+               USE_KATANA = Yes
                 USE_DEBUG = No
 
                  NETLISTS = pop11     \
