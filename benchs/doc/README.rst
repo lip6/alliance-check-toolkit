@@ -118,7 +118,8 @@
 
 .. contents::
 
-Commit test #1
+.. Commit test #1
+.. Commit test #2
 
 
 Toolkit Purpose
