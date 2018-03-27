@@ -3,8 +3,8 @@
                   TK_RTOP = ../..
 
             USE_CLOCKTREE = No
-                USE_DEBUG = Yes
-               USE_KATANA = No
+                USE_DEBUG = No
+               USE_KATANA = Yes
 
  include $(TK_RTOP)/etc/mk/alliance.mk
  include $(TK_RTOP)/etc/mk/sxlib.mk

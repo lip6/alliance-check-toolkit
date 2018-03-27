@@ -31,8 +31,8 @@ asimut-%  : %.vst $(PATTERNS).pat;  $(ASIMUT)       -zd -nores $* patterns
 %_yag.spi : %.ap                 ;  $(COUGAR_spice) -ar -ac -t $* $*_yag
 %.ps      : %.ap                 ;  $(L2P)          -color $*
 druc-%    : %.ap                 ;  $(DRUC)         $(DRUC_FLAGS) $*
-%_ext.al  : %.ap                 ;  $(COUGAR)       -f $* $*_ext
-%_yag.al  : %.ap                 ;  $(COUGAR)       -t $* $*_ext
+%_ext.al  : %.ap                 ;  $(COUGAR)       -c -f $* $*_ext
+%_yag.al  : %.ap                 ;  $(COUGAR)       -c -t $* $*_ext
 lvx-%     : %.vst %_ext.al       ;  $(LVX)          vst al $* $*_ext -f
 lvx-%_kite: %.vst %_kite_ext.al  ;  $(LVX)          vst al $* $*_kite_ext -f
 dreal-%   : %.gds                ;  $(DREAL)        --debug -l $*

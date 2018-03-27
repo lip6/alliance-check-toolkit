@@ -169,7 +169,7 @@ def ScriptMain ( **kw ):
       routingNets = []
       if doStages & UseKatana:
         katana = Katana.KatanaEngine.create( cell )
-       #katana.printConfiguration   ()
+        katana.printConfiguration   ()
         katana.digitalInit          ()
         katana.runNegociatePreRouted()
         katana.runGlobalRouter      ()
