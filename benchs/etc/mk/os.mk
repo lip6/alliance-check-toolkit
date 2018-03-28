@@ -12,6 +12,7 @@
  UNAME_S          = $(shell uname -s)
  UNAME_R          = $(shell uname -r)
  UNAME_M          = $(shell uname -m)
+ UNAME_N          = $(shell uname -n)
 
  LIB_SUFFIX  = ""
  LIB_SUFFIX_ = ""

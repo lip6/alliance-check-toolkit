@@ -33,7 +33,11 @@
 
    USE_NSL           = Yes
    ifeq ($(UNAME_S), Linux)
+     ifeq ($(UNAME_N), EagleSatellite)
+     CORIOLIS_TOP    = $(HOME)/coriolis-2.x/Linux.x86_64/$(BUILD_TYPE_DIR)/install
+     else
      CORIOLIS_TOP    = $(HOME)/coriolis-2.x/Linux.el7_64/$(BUILD_TYPE_DIR)/install
+     endif
    else
      CORIOLIS_TOP    = $(HOME)/coriolis-2.x/Cygwin.W10/$(BUILD_TYPE_DIR)/install
    endif
