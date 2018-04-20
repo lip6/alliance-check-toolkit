@@ -5,8 +5,8 @@
 
  include $(TK_RTOP)/etc/mk/binaries.mk
  include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/phenitec.mk
-#  include $(TK_RTOP)/etc/mk/mosis.mk
+# include $(TK_RTOP)/etc/mk/phenitec.mk
+  include $(TK_RTOP)/etc/mk/mosis.mk
  include $(TK_RTOP)/etc/mk/check-library.mk
 
 
