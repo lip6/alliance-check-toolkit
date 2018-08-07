@@ -11,21 +11,8 @@ try:
   import Hurricane
   from   Hurricane import DbU
   from   Hurricane import DataBase
-  from   Hurricane import UpdateSession
-  from   Hurricane import Breakpoint
-  from   Hurricane import Transformation
-  from   Hurricane import Instance
-  import Viewer
   import CRL
   from   helpers   import ErrorMessage
-  import Etesian
-  import Katabatic
-  import Kite
-  import Unicorn
-  import clocktree.ClockTree
-  import plugins.ClockTreePlugin
-  import plugins.ChipPlugin
-  import plugins.RSavePlugin
 except ImportError, e:
   serror = str(e)
   if serror.startswith('No module named'):
@@ -48,17 +35,21 @@ except Exception, e:
 
 class CellsArea ( object ):
 
-    def __init__ ( self, libName ):
-      self.libName     = libName
+    def __init__ ( self, pitch ):
+      self.libDir      = os.getcwd()
+      self.libName     = os.path.basename( self.libDir )
       self.framework   = CRL.AllianceFramework.get()
       self.lambdaValue = DbU.toPhysical( DbU.fromLambda(1.0), DbU.UnitPowerMicro )
-      self.pitch       = DbU.fromLambda( 10.0 )
-      self.library     = self.framework.getLibrary( libName )
+      self.pitch       = DbU.fromLambda( pitch )
 
-      self.framework.loadLibraryCells( libName )
-      self.areas     = { }
+      env = self.framework.getEnvironment() 
+      env.addSYSTEM_LIBRARY( library=self.libDir, mode=CRL.Environment.Prepend )
+
+      self.library     = self.framework.getLibrary( 0 )
+      self.framework.loadLibraryCells( self.library )
+      self.areas       = { }
     
-      print self.framework.getEnvironment().getPrint()
+      print env.getPrint()
       self._computeAreas()
       return
     
@@ -75,6 +66,8 @@ class CellsArea ( object ):
     
 
     def printTable ( self ):
+      print 'Annotating areas for library <%s>' % self.libName
+      print 'Path: %s' % self.libDir
       print ''
       print 'Lambda: %.2f µm'      % self.lambdaValue 
       print 'Pitch:  %.2f lambdas' % DbU.toLambda(self.pitch)
@@ -136,15 +129,12 @@ class CellsArea ( object ):
 
 if __name__ == '__main__':
   parser = optparse.OptionParser()
-  parser.add_option( '-l', '--library', type='string', dest='library', help='The name of the Alliance library to process.')
+  parser.add_option( '-p', '--pitch', type='int', dest='pitch', default=5
+                   , help='The routing pitch value (default: 5l).')
   (options, args) = parser.parse_args()
 
-  if not options.library:
-    print '[ERROR] Missing mandatory argument <library>.'
-    sys.exit( 1 )
-
   try:
-    cellsArea = CellsArea( options.library )
+    cellsArea = CellsArea( options.pitch )
     cellsArea.printTable()
     cellsArea.annotateLib()
 
