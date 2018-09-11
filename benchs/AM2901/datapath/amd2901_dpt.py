@@ -2,6 +2,7 @@
 
 try:
   import sys
+  from   helpers import l
   from   stratus import *
 except ImportError, e:
   serror = str(e)
@@ -435,13 +436,13 @@ class amd2901_dpt ( Model ) :
   def Layout (self):
    
     for i in range ( 8 ) :
-      if i == 0 : Place ( self.ram_reg[i], NOSYM, XY ( 0, 0 ) )
+      if i == 0 : Place ( self.ram_reg[i], NOSYM, XY ( l(0), l(0) ) )
       else      : PlaceRight ( self.ram_reg[i], NOSYM )
       PlaceRight ( self.ram_ntsa[i], NOSYM )
       PlaceRight ( self.ram_ntsb[i], NOSYM )
     
     for i in range ( 8, 16 ) :
-      if i == 8 : Place ( self.ram_reg[i], NOSYM, XY ( 0, 300 ) )
+      if i == 8 : Place ( self.ram_reg[i], NOSYM, XY ( l(0), l(300) ) )
       else      : PlaceRight ( self.ram_reg[i], NOSYM )
       PlaceRight ( self.ram_ntsa[i], NOSYM )
       PlaceRight ( self.ram_ntsb[i], NOSYM )
