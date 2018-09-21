@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from helpers import l
 from stratus import *
 
 
@@ -138,7 +139,7 @@ class amd2901_core ( Model ) :
 
 
   def Layout ( self ) :
-    Place   ( self.dpt, NOSYM, XY(0, 0) )
-    ResizeAb( 0, 0, 0, 200 )
+    Place   ( self.dpt, NOSYM, XY(l(0), l(0)) )
+    ResizeAb( l(0), l(0), l(0), l(200) )
     return
 
