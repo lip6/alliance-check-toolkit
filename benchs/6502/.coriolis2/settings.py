@@ -19,7 +19,7 @@ parametersTable = \
    #, ('misc.maxTraceLevel'         , TypeInt       , 0       )
     , ("etesian.effort"             , TypeEnumerate , 2       )
     , ('etesian.uniformDensity'     , TypeBool      , True    )
-    , ('etesian.spaceMargin'        , TypePercentage, 5.0     )
+    , ('etesian.spaceMargin'        , TypePercentage, 10.0    )
    #, ('etesian.spaceMargin'        , TypePercentage, 35.0    )
     , ('etesian.aspectRatio'        , TypePercentage, 100.0   )
    # Kite parameters.
@@ -27,8 +27,8 @@ parametersTable = \
     , ('katabatic.topRoutingLayer'  , TypeString    , 'METAL5')
     , ("kite.hTracksReservedLocal"  , TypeInt       , 4       )
     , ("kite.vTracksReservedLocal"  , TypeInt       , 4       )
-    , ("katana.hTracksReservedLocal", TypeInt       , 5       )
-    , ("katana.vTracksReservedLocal", TypeInt       , 5       )
+    , ("katana.hTracksReservedLocal", TypeInt       , 6       )
+    , ("katana.vTracksReservedLocal", TypeInt       , 7       )
     )
 
 cellsTop = os.path.abspath( os.getcwd()+'/../cells' )

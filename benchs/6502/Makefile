@@ -13,6 +13,7 @@
                             decadj \
                             inc16
 
+ include $(TK_RTOP)/etc/mk/freepdk45.mk
  include $(TK_RTOP)/etc/mk/alliance.mk
 #include $(TK_RTOP)/etc/mk/sxlib.mk
  include $(TK_RTOP)/etc/mk/nsxlib.mk
@@ -24,5 +25,5 @@ lvx:       lvx-m65s_clocked_kite
 druc:      druc-m65s_clocked_kite
 view:      cgt-m65s_clocked_kite
 
-layout:    m65s_clocked_kite.ap
-gds:       m65s_clocked_kite.gds
+layout:    m65_clocked_kite.ap
+gds:       m65_clocked_kite.gds
