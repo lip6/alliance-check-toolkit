@@ -1,1 +1,1 @@
-../cpu.vhdl
+../rtl/cpu.vhdl

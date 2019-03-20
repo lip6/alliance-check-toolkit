@@ -1,8 +1,0 @@
-
-read_verilog pop11.v
-hierarchy -check -top pop11
-synth            -top pop11
-dfflibmap -liberty ../cells/nsxlib/nsxlib.lib
-abc       -liberty ../cells/nsxlib/nsxlib.lib
-clean
-write_blif pop11.blif

@@ -1,0 +1,2318 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Mar 20, 2019, 16:04
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity exec_model is
+  port ( alu_cy        : in bit
+       ; dec2exe_empty : in bit
+       ; dec_alu_add   : in bit
+       ; dec_comp_op1  : in bit
+       ; dec_comp_op2  : in bit
+       ; dec_exe_wb    : in bit
+       ; dec_flag_wb   : in bit
+       ; dec_mem_lb    : in bit
+       ; dec_mem_lw    : in bit
+       ; dec_mem_sb    : in bit
+       ; dec_mem_sw    : in bit
+       ; dec_pre_index : in bit
+       ; exe_full      : in bit
+       ; shifter_cy    : in bit
+       ; dec_exe_dest  : in bit_vector(3 downto 0)
+       ; dec_mem_dest  : in bit_vector(3 downto 0)
+       ; alu_res       : in bit_vector(31 downto 0)
+       ; dec_mem_data  : in bit_vector(31 downto 0)
+       ; dec_op1       : in bit_vector(31 downto 0)
+       ; shifter_op2   : in bit_vector(31 downto 0)
+       ; fifo_dout     : in bit_vector(71 downto 0)
+       ; exe_c         : out bit
+       ; exe_flag_wb   : out bit
+       ; exe_mem_lb    : out bit
+       ; exe_mem_lw    : out bit
+       ; exe_mem_sb    : out bit
+       ; exe_mem_sw    : out bit
+       ; exe_pop       : out bit
+       ; exe_push      : out bit
+       ; exe_wb        : out bit
+       ; exe_dest      : out bit_vector(3 downto 0)
+       ; exe_mem_dest  : out bit_vector(3 downto 0)
+       ; comp_op1      : out bit_vector(31 downto 0)
+       ; comp_op2      : out bit_vector(31 downto 0)
+       ; exe_mem_adr   : out bit_vector(31 downto 0)
+       ; exe_mem_data  : out bit_vector(31 downto 0)
+       ; exe_res       : out bit_vector(31 downto 0)
+       ; fifo_din      : out bit_vector(71 downto 0)
+       ; vdd           : in bit
+       ; vss           : in bit
+       );
+end exec_model;
+
+architecture structural of exec_model is
+
+  component buf_x2
+    port ( i   : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no4_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component inv_x2
+    port ( i   : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component xr2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component ao2o22_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component o2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  signal inv_x2_10_sig :  bit;
+  signal inv_x2_11_sig :  bit;
+  signal inv_x2_12_sig :  bit;
+  signal inv_x2_13_sig :  bit;
+  signal inv_x2_14_sig :  bit;
+  signal inv_x2_15_sig :  bit;
+  signal inv_x2_16_sig :  bit;
+  signal inv_x2_17_sig :  bit;
+  signal inv_x2_18_sig :  bit;
+  signal inv_x2_19_sig :  bit;
+  signal inv_x2_20_sig :  bit;
+  signal inv_x2_21_sig :  bit;
+  signal inv_x2_22_sig :  bit;
+  signal inv_x2_23_sig :  bit;
+  signal inv_x2_24_sig :  bit;
+  signal inv_x2_25_sig :  bit;
+  signal inv_x2_26_sig :  bit;
+  signal inv_x2_27_sig :  bit;
+  signal inv_x2_28_sig :  bit;
+  signal inv_x2_29_sig :  bit;
+  signal inv_x2_2_sig  :  bit;
+  signal inv_x2_30_sig :  bit;
+  signal inv_x2_31_sig :  bit;
+  signal inv_x2_32_sig :  bit;
+  signal inv_x2_33_sig :  bit;
+  signal inv_x2_3_sig  :  bit;
+  signal inv_x2_4_sig  :  bit;
+  signal inv_x2_5_sig  :  bit;
+  signal inv_x2_6_sig  :  bit;
+  signal inv_x2_7_sig  :  bit;
+  signal inv_x2_8_sig  :  bit;
+  signal inv_x2_9_sig  :  bit;
+  signal inv_x2_sig    :  bit;
+  signal no4_x1_sig    :  bit;
+  signal o2_x2_sig     :  bit;
+
+
+begin
+
+  exe_res_19_ins : buf_x2
+  port map ( i   => alu_res(19)
+           , q   => exe_res(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_0_ins : buf_x2
+  port map ( i   => alu_res(0)
+           , q   => exe_res(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_1_ins : buf_x2
+  port map ( i   => alu_res(1)
+           , q   => exe_res(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_2_ins : buf_x2
+  port map ( i   => alu_res(2)
+           , q   => exe_res(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_3_ins : buf_x2
+  port map ( i   => alu_res(3)
+           , q   => exe_res(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_4_ins : buf_x2
+  port map ( i   => alu_res(4)
+           , q   => exe_res(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_5_ins : buf_x2
+  port map ( i   => alu_res(5)
+           , q   => exe_res(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_6_ins : buf_x2
+  port map ( i   => alu_res(6)
+           , q   => exe_res(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_7_ins : buf_x2
+  port map ( i   => alu_res(7)
+           , q   => exe_res(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_8_ins : buf_x2
+  port map ( i   => alu_res(8)
+           , q   => exe_res(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_pop_ins : no2_x1
+  port map ( i0  => dec2exe_empty
+           , i1  => exe_full
+           , nq  => exe_pop
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_10_ins : buf_x2
+  port map ( i   => alu_res(10)
+           , q   => exe_res(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_11_ins : buf_x2
+  port map ( i   => alu_res(11)
+           , q   => exe_res(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_12_ins : buf_x2
+  port map ( i   => alu_res(12)
+           , q   => exe_res(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_13_ins : buf_x2
+  port map ( i   => alu_res(13)
+           , q   => exe_res(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_14_ins : buf_x2
+  port map ( i   => alu_res(14)
+           , q   => exe_res(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_15_ins : buf_x2
+  port map ( i   => alu_res(15)
+           , q   => exe_res(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_16_ins : buf_x2
+  port map ( i   => alu_res(16)
+           , q   => exe_res(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_17_ins : buf_x2
+  port map ( i   => alu_res(17)
+           , q   => exe_res(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_18_ins : buf_x2
+  port map ( i   => alu_res(18)
+           , q   => exe_res(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_9_ins : buf_x2
+  port map ( i   => alu_res(9)
+           , q   => exe_res(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_20_ins : buf_x2
+  port map ( i   => alu_res(20)
+           , q   => exe_res(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_21_ins : buf_x2
+  port map ( i   => alu_res(21)
+           , q   => exe_res(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_22_ins : buf_x2
+  port map ( i   => alu_res(22)
+           , q   => exe_res(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_23_ins : buf_x2
+  port map ( i   => alu_res(23)
+           , q   => exe_res(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_24_ins : buf_x2
+  port map ( i   => alu_res(24)
+           , q   => exe_res(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_25_ins : buf_x2
+  port map ( i   => alu_res(25)
+           , q   => exe_res(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_26_ins : buf_x2
+  port map ( i   => alu_res(26)
+           , q   => exe_res(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_27_ins : buf_x2
+  port map ( i   => alu_res(27)
+           , q   => exe_res(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_28_ins : buf_x2
+  port map ( i   => alu_res(28)
+           , q   => exe_res(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_29_ins : buf_x2
+  port map ( i   => alu_res(29)
+           , q   => exe_res(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_30_ins : buf_x2
+  port map ( i   => alu_res(30)
+           , q   => exe_res(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_res_31_ins : buf_x2
+  port map ( i   => alu_res(31)
+           , q   => exe_res(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_c_ins : ao2o22_x2
+  port map ( i0  => alu_cy
+           , i1  => inv_x2_sig
+           , i2  => dec_alu_add
+           , i3  => shifter_cy
+           , q   => exe_c
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_dest_0_ins : buf_x2
+  port map ( i   => dec_exe_dest(0)
+           , q   => exe_dest(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_dest_1_ins : buf_x2
+  port map ( i   => dec_exe_dest(1)
+           , q   => exe_dest(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_dest_2_ins : buf_x2
+  port map ( i   => dec_exe_dest(2)
+           , q   => exe_dest(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_dest_3_ins : buf_x2
+  port map ( i   => dec_exe_dest(3)
+           , q   => exe_dest(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_wb_ins : buf_x2
+  port map ( i   => dec_exe_wb
+           , q   => exe_wb
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_flag_wb_ins : buf_x2
+  port map ( i   => dec_flag_wb
+           , q   => exe_flag_wb
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_8_ins : buf_x2
+  port map ( i   => fifo_dout(40)
+           , q   => exe_mem_data(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_0_ins : buf_x2
+  port map ( i   => fifo_dout(0)
+           , q   => exe_mem_adr(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_1_ins : buf_x2
+  port map ( i   => fifo_dout(1)
+           , q   => exe_mem_adr(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_2_ins : buf_x2
+  port map ( i   => fifo_dout(2)
+           , q   => exe_mem_adr(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_3_ins : buf_x2
+  port map ( i   => fifo_dout(3)
+           , q   => exe_mem_adr(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_4_ins : buf_x2
+  port map ( i   => fifo_dout(4)
+           , q   => exe_mem_adr(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_5_ins : buf_x2
+  port map ( i   => fifo_dout(5)
+           , q   => exe_mem_adr(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_6_ins : buf_x2
+  port map ( i   => fifo_dout(6)
+           , q   => exe_mem_adr(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_7_ins : buf_x2
+  port map ( i   => fifo_dout(7)
+           , q   => exe_mem_adr(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_8_ins : buf_x2
+  port map ( i   => fifo_dout(8)
+           , q   => exe_mem_adr(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_9_ins : buf_x2
+  port map ( i   => fifo_dout(9)
+           , q   => exe_mem_adr(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_10_ins : buf_x2
+  port map ( i   => fifo_dout(10)
+           , q   => exe_mem_adr(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_11_ins : buf_x2
+  port map ( i   => fifo_dout(11)
+           , q   => exe_mem_adr(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_12_ins : buf_x2
+  port map ( i   => fifo_dout(12)
+           , q   => exe_mem_adr(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_13_ins : buf_x2
+  port map ( i   => fifo_dout(13)
+           , q   => exe_mem_adr(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_14_ins : buf_x2
+  port map ( i   => fifo_dout(14)
+           , q   => exe_mem_adr(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_15_ins : buf_x2
+  port map ( i   => fifo_dout(15)
+           , q   => exe_mem_adr(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_16_ins : buf_x2
+  port map ( i   => fifo_dout(16)
+           , q   => exe_mem_adr(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_17_ins : buf_x2
+  port map ( i   => fifo_dout(17)
+           , q   => exe_mem_adr(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_18_ins : buf_x2
+  port map ( i   => fifo_dout(18)
+           , q   => exe_mem_adr(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_19_ins : buf_x2
+  port map ( i   => fifo_dout(19)
+           , q   => exe_mem_adr(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_20_ins : buf_x2
+  port map ( i   => fifo_dout(20)
+           , q   => exe_mem_adr(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_21_ins : buf_x2
+  port map ( i   => fifo_dout(21)
+           , q   => exe_mem_adr(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_22_ins : buf_x2
+  port map ( i   => fifo_dout(22)
+           , q   => exe_mem_adr(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_23_ins : buf_x2
+  port map ( i   => fifo_dout(23)
+           , q   => exe_mem_adr(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_24_ins : buf_x2
+  port map ( i   => fifo_dout(24)
+           , q   => exe_mem_adr(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_25_ins : buf_x2
+  port map ( i   => fifo_dout(25)
+           , q   => exe_mem_adr(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_26_ins : buf_x2
+  port map ( i   => fifo_dout(26)
+           , q   => exe_mem_adr(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_27_ins : buf_x2
+  port map ( i   => fifo_dout(27)
+           , q   => exe_mem_adr(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_28_ins : buf_x2
+  port map ( i   => fifo_dout(28)
+           , q   => exe_mem_adr(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_29_ins : buf_x2
+  port map ( i   => fifo_dout(29)
+           , q   => exe_mem_adr(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_30_ins : buf_x2
+  port map ( i   => fifo_dout(30)
+           , q   => exe_mem_adr(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_adr_31_ins : buf_x2
+  port map ( i   => fifo_dout(31)
+           , q   => exe_mem_adr(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_0_ins : buf_x2
+  port map ( i   => fifo_dout(32)
+           , q   => exe_mem_data(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_1_ins : buf_x2
+  port map ( i   => fifo_dout(33)
+           , q   => exe_mem_data(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_2_ins : buf_x2
+  port map ( i   => fifo_dout(34)
+           , q   => exe_mem_data(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_3_ins : buf_x2
+  port map ( i   => fifo_dout(35)
+           , q   => exe_mem_data(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_4_ins : buf_x2
+  port map ( i   => fifo_dout(36)
+           , q   => exe_mem_data(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_5_ins : buf_x2
+  port map ( i   => fifo_dout(37)
+           , q   => exe_mem_data(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_6_ins : buf_x2
+  port map ( i   => fifo_dout(38)
+           , q   => exe_mem_data(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_7_ins : buf_x2
+  port map ( i   => fifo_dout(39)
+           , q   => exe_mem_data(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_9_ins : buf_x2
+  port map ( i   => fifo_dout(41)
+           , q   => exe_mem_data(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_10_ins : buf_x2
+  port map ( i   => fifo_dout(42)
+           , q   => exe_mem_data(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_11_ins : buf_x2
+  port map ( i   => fifo_dout(43)
+           , q   => exe_mem_data(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_12_ins : buf_x2
+  port map ( i   => fifo_dout(44)
+           , q   => exe_mem_data(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_13_ins : buf_x2
+  port map ( i   => fifo_dout(45)
+           , q   => exe_mem_data(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_14_ins : buf_x2
+  port map ( i   => fifo_dout(46)
+           , q   => exe_mem_data(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_15_ins : buf_x2
+  port map ( i   => fifo_dout(47)
+           , q   => exe_mem_data(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_16_ins : buf_x2
+  port map ( i   => fifo_dout(48)
+           , q   => exe_mem_data(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_17_ins : buf_x2
+  port map ( i   => fifo_dout(49)
+           , q   => exe_mem_data(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_18_ins : buf_x2
+  port map ( i   => fifo_dout(50)
+           , q   => exe_mem_data(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_19_ins : buf_x2
+  port map ( i   => fifo_dout(51)
+           , q   => exe_mem_data(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_20_ins : buf_x2
+  port map ( i   => fifo_dout(52)
+           , q   => exe_mem_data(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_21_ins : buf_x2
+  port map ( i   => fifo_dout(53)
+           , q   => exe_mem_data(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_22_ins : buf_x2
+  port map ( i   => fifo_dout(54)
+           , q   => exe_mem_data(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_23_ins : buf_x2
+  port map ( i   => fifo_dout(55)
+           , q   => exe_mem_data(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_24_ins : buf_x2
+  port map ( i   => fifo_dout(56)
+           , q   => exe_mem_data(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_25_ins : buf_x2
+  port map ( i   => fifo_dout(57)
+           , q   => exe_mem_data(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_26_ins : buf_x2
+  port map ( i   => fifo_dout(58)
+           , q   => exe_mem_data(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_27_ins : buf_x2
+  port map ( i   => fifo_dout(59)
+           , q   => exe_mem_data(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_28_ins : buf_x2
+  port map ( i   => fifo_dout(60)
+           , q   => exe_mem_data(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_29_ins : buf_x2
+  port map ( i   => fifo_dout(61)
+           , q   => exe_mem_data(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_30_ins : buf_x2
+  port map ( i   => fifo_dout(62)
+           , q   => exe_mem_data(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_data_31_ins : buf_x2
+  port map ( i   => fifo_dout(63)
+           , q   => exe_mem_data(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_dest_0_ins : buf_x2
+  port map ( i   => fifo_dout(64)
+           , q   => exe_mem_dest(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_dest_1_ins : buf_x2
+  port map ( i   => fifo_dout(65)
+           , q   => exe_mem_dest(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_dest_2_ins : buf_x2
+  port map ( i   => fifo_dout(66)
+           , q   => exe_mem_dest(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_dest_3_ins : buf_x2
+  port map ( i   => fifo_dout(67)
+           , q   => exe_mem_dest(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_lw_ins : buf_x2
+  port map ( i   => fifo_dout(68)
+           , q   => exe_mem_lw
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_lb_ins : buf_x2
+  port map ( i   => fifo_dout(69)
+           , q   => exe_mem_lb
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_sw_ins : buf_x2
+  port map ( i   => fifo_dout(70)
+           , q   => exe_mem_sw
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_mem_sb_ins : buf_x2
+  port map ( i   => fifo_dout(71)
+           , q   => exe_mem_sb
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_0_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(0)
+           , q   => comp_op2(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_1_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(1)
+           , q   => comp_op2(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_2_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(2)
+           , q   => comp_op2(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_3_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(3)
+           , q   => comp_op2(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_4_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(4)
+           , q   => comp_op2(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_5_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(5)
+           , q   => comp_op2(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_6_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(6)
+           , q   => comp_op2(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_7_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(7)
+           , q   => comp_op2(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_8_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(8)
+           , q   => comp_op2(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_9_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(9)
+           , q   => comp_op2(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_10_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(10)
+           , q   => comp_op2(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_11_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(11)
+           , q   => comp_op2(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_12_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(12)
+           , q   => comp_op2(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_13_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(13)
+           , q   => comp_op2(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_14_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(14)
+           , q   => comp_op2(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_15_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(15)
+           , q   => comp_op2(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_16_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(16)
+           , q   => comp_op2(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_17_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(17)
+           , q   => comp_op2(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_18_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(18)
+           , q   => comp_op2(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_19_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(19)
+           , q   => comp_op2(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_20_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(20)
+           , q   => comp_op2(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_21_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(21)
+           , q   => comp_op2(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_22_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(22)
+           , q   => comp_op2(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_23_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(23)
+           , q   => comp_op2(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_24_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(24)
+           , q   => comp_op2(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_25_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(25)
+           , q   => comp_op2(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_26_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(26)
+           , q   => comp_op2(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_27_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(27)
+           , q   => comp_op2(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_28_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(28)
+           , q   => comp_op2(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_29_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(29)
+           , q   => comp_op2(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_30_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(30)
+           , q   => comp_op2(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op2_31_ins : xr2_x1
+  port map ( i0  => dec_comp_op2
+           , i1  => shifter_op2(31)
+           , q   => comp_op2(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_0_ins : xr2_x1
+  port map ( i0  => dec_op1(0)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_1_ins : xr2_x1
+  port map ( i0  => dec_op1(1)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_2_ins : xr2_x1
+  port map ( i0  => dec_op1(2)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_3_ins : xr2_x1
+  port map ( i0  => dec_op1(3)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_4_ins : xr2_x1
+  port map ( i0  => dec_op1(4)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_5_ins : xr2_x1
+  port map ( i0  => dec_op1(5)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_6_ins : xr2_x1
+  port map ( i0  => dec_op1(6)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_7_ins : xr2_x1
+  port map ( i0  => dec_op1(7)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_8_ins : xr2_x1
+  port map ( i0  => dec_op1(8)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_9_ins : xr2_x1
+  port map ( i0  => dec_op1(9)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_16_ins : xr2_x1
+  port map ( i0  => dec_op1(16)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_10_ins : xr2_x1
+  port map ( i0  => dec_op1(10)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_11_ins : xr2_x1
+  port map ( i0  => dec_op1(11)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_12_ins : xr2_x1
+  port map ( i0  => dec_op1(12)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_13_ins : xr2_x1
+  port map ( i0  => dec_op1(13)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_14_ins : xr2_x1
+  port map ( i0  => dec_op1(14)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_15_ins : xr2_x1
+  port map ( i0  => dec_op1(15)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_17_ins : xr2_x1
+  port map ( i0  => dec_op1(17)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_18_ins : xr2_x1
+  port map ( i0  => dec_op1(18)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_19_ins : xr2_x1
+  port map ( i0  => dec_op1(19)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_20_ins : xr2_x1
+  port map ( i0  => dec_op1(20)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_21_ins : xr2_x1
+  port map ( i0  => dec_op1(21)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_22_ins : xr2_x1
+  port map ( i0  => dec_op1(22)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_23_ins : xr2_x1
+  port map ( i0  => dec_op1(23)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_24_ins : xr2_x1
+  port map ( i0  => dec_op1(24)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_25_ins : xr2_x1
+  port map ( i0  => dec_op1(25)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_26_ins : xr2_x1
+  port map ( i0  => dec_op1(26)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_27_ins : xr2_x1
+  port map ( i0  => dec_op1(27)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_28_ins : xr2_x1
+  port map ( i0  => dec_op1(28)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_29_ins : xr2_x1
+  port map ( i0  => dec_op1(29)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_30_ins : xr2_x1
+  port map ( i0  => dec_op1(30)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  comp_op1_31_ins : xr2_x1
+  port map ( i0  => dec_op1(31)
+           , i1  => dec_comp_op1
+           , q   => comp_op1(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_0_ins : ao2o22_x2
+  port map ( i0  => alu_res(0)
+           , i1  => inv_x2_2_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(0)
+           , q   => fifo_din(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_1_ins : ao2o22_x2
+  port map ( i0  => alu_res(1)
+           , i1  => inv_x2_3_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(1)
+           , q   => fifo_din(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_2_ins : ao2o22_x2
+  port map ( i0  => alu_res(2)
+           , i1  => inv_x2_4_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(2)
+           , q   => fifo_din(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_3_ins : ao2o22_x2
+  port map ( i0  => alu_res(3)
+           , i1  => inv_x2_5_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(3)
+           , q   => fifo_din(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_4_ins : ao2o22_x2
+  port map ( i0  => alu_res(4)
+           , i1  => inv_x2_6_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(4)
+           , q   => fifo_din(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_5_ins : ao2o22_x2
+  port map ( i0  => alu_res(5)
+           , i1  => inv_x2_7_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(5)
+           , q   => fifo_din(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_8_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_8_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_6_ins : ao2o22_x2
+  port map ( i0  => alu_res(6)
+           , i1  => inv_x2_8_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(6)
+           , q   => fifo_din(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_9_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_9_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_7_ins : ao2o22_x2
+  port map ( i0  => alu_res(7)
+           , i1  => inv_x2_9_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(7)
+           , q   => fifo_din(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_10_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_10_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_8_ins : ao2o22_x2
+  port map ( i0  => alu_res(8)
+           , i1  => inv_x2_10_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(8)
+           , q   => fifo_din(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_11_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_11_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_9_ins : ao2o22_x2
+  port map ( i0  => alu_res(9)
+           , i1  => inv_x2_11_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(9)
+           , q   => fifo_din(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_12_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_12_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_10_ins : ao2o22_x2
+  port map ( i0  => alu_res(10)
+           , i1  => inv_x2_12_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(10)
+           , q   => fifo_din(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_13_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_13_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_11_ins : ao2o22_x2
+  port map ( i0  => alu_res(11)
+           , i1  => inv_x2_13_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(11)
+           , q   => fifo_din(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_14_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_14_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_12_ins : ao2o22_x2
+  port map ( i0  => alu_res(12)
+           , i1  => inv_x2_14_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(12)
+           , q   => fifo_din(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_15_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_15_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_13_ins : ao2o22_x2
+  port map ( i0  => alu_res(13)
+           , i1  => inv_x2_15_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(13)
+           , q   => fifo_din(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_16_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_16_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_14_ins : ao2o22_x2
+  port map ( i0  => alu_res(14)
+           , i1  => inv_x2_16_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(14)
+           , q   => fifo_din(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_17_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_17_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_15_ins : ao2o22_x2
+  port map ( i0  => alu_res(15)
+           , i1  => inv_x2_17_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(15)
+           , q   => fifo_din(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_18_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_18_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_16_ins : ao2o22_x2
+  port map ( i0  => alu_res(16)
+           , i1  => inv_x2_18_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(16)
+           , q   => fifo_din(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_19_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_19_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_17_ins : ao2o22_x2
+  port map ( i0  => alu_res(17)
+           , i1  => inv_x2_19_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(17)
+           , q   => fifo_din(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_20_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_20_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_18_ins : ao2o22_x2
+  port map ( i0  => alu_res(18)
+           , i1  => inv_x2_20_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(18)
+           , q   => fifo_din(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_21_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_21_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_19_ins : ao2o22_x2
+  port map ( i0  => alu_res(19)
+           , i1  => inv_x2_21_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(19)
+           , q   => fifo_din(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_22_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_22_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_20_ins : ao2o22_x2
+  port map ( i0  => alu_res(20)
+           , i1  => inv_x2_22_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(20)
+           , q   => fifo_din(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_23_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_23_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_21_ins : ao2o22_x2
+  port map ( i0  => alu_res(21)
+           , i1  => inv_x2_23_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(21)
+           , q   => fifo_din(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_24_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_24_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_22_ins : ao2o22_x2
+  port map ( i0  => alu_res(22)
+           , i1  => inv_x2_24_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(22)
+           , q   => fifo_din(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_25_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_25_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_23_ins : ao2o22_x2
+  port map ( i0  => alu_res(23)
+           , i1  => inv_x2_25_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(23)
+           , q   => fifo_din(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_26_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_26_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_24_ins : ao2o22_x2
+  port map ( i0  => alu_res(24)
+           , i1  => inv_x2_26_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(24)
+           , q   => fifo_din(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_27_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_27_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_25_ins : ao2o22_x2
+  port map ( i0  => alu_res(25)
+           , i1  => inv_x2_27_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(25)
+           , q   => fifo_din(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_28_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_28_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_26_ins : ao2o22_x2
+  port map ( i0  => alu_res(26)
+           , i1  => inv_x2_28_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(26)
+           , q   => fifo_din(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_29_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_29_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_27_ins : ao2o22_x2
+  port map ( i0  => alu_res(27)
+           , i1  => inv_x2_29_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(27)
+           , q   => fifo_din(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_30_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_30_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_28_ins : ao2o22_x2
+  port map ( i0  => alu_res(28)
+           , i1  => inv_x2_30_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(28)
+           , q   => fifo_din(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_31_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_31_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_29_ins : ao2o22_x2
+  port map ( i0  => alu_res(29)
+           , i1  => inv_x2_31_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(29)
+           , q   => fifo_din(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_32_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_32_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_30_ins : ao2o22_x2
+  port map ( i0  => alu_res(30)
+           , i1  => inv_x2_32_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(30)
+           , q   => fifo_din(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_33_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_33_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_31_ins : ao2o22_x2
+  port map ( i0  => alu_res(31)
+           , i1  => inv_x2_33_sig
+           , i2  => dec_pre_index
+           , i3  => dec_op1(31)
+           , q   => fifo_din(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_32_ins : buf_x2
+  port map ( i   => dec_mem_data(0)
+           , q   => fifo_din(32)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_33_ins : buf_x2
+  port map ( i   => dec_mem_data(1)
+           , q   => fifo_din(33)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_34_ins : buf_x2
+  port map ( i   => dec_mem_data(2)
+           , q   => fifo_din(34)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_35_ins : buf_x2
+  port map ( i   => dec_mem_data(3)
+           , q   => fifo_din(35)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_36_ins : buf_x2
+  port map ( i   => dec_mem_data(4)
+           , q   => fifo_din(36)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_37_ins : buf_x2
+  port map ( i   => dec_mem_data(5)
+           , q   => fifo_din(37)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_38_ins : buf_x2
+  port map ( i   => dec_mem_data(6)
+           , q   => fifo_din(38)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_39_ins : buf_x2
+  port map ( i   => dec_mem_data(7)
+           , q   => fifo_din(39)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_40_ins : buf_x2
+  port map ( i   => dec_mem_data(8)
+           , q   => fifo_din(40)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_41_ins : buf_x2
+  port map ( i   => dec_mem_data(9)
+           , q   => fifo_din(41)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_42_ins : buf_x2
+  port map ( i   => dec_mem_data(10)
+           , q   => fifo_din(42)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_43_ins : buf_x2
+  port map ( i   => dec_mem_data(11)
+           , q   => fifo_din(43)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_44_ins : buf_x2
+  port map ( i   => dec_mem_data(12)
+           , q   => fifo_din(44)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_45_ins : buf_x2
+  port map ( i   => dec_mem_data(13)
+           , q   => fifo_din(45)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_46_ins : buf_x2
+  port map ( i   => dec_mem_data(14)
+           , q   => fifo_din(46)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_47_ins : buf_x2
+  port map ( i   => dec_mem_data(15)
+           , q   => fifo_din(47)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_48_ins : buf_x2
+  port map ( i   => dec_mem_data(16)
+           , q   => fifo_din(48)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_49_ins : buf_x2
+  port map ( i   => dec_mem_data(17)
+           , q   => fifo_din(49)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_50_ins : buf_x2
+  port map ( i   => dec_mem_data(18)
+           , q   => fifo_din(50)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_51_ins : buf_x2
+  port map ( i   => dec_mem_data(19)
+           , q   => fifo_din(51)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_52_ins : buf_x2
+  port map ( i   => dec_mem_data(20)
+           , q   => fifo_din(52)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_53_ins : buf_x2
+  port map ( i   => dec_mem_data(21)
+           , q   => fifo_din(53)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_54_ins : buf_x2
+  port map ( i   => dec_mem_data(22)
+           , q   => fifo_din(54)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_55_ins : buf_x2
+  port map ( i   => dec_mem_data(23)
+           , q   => fifo_din(55)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_56_ins : buf_x2
+  port map ( i   => dec_mem_data(24)
+           , q   => fifo_din(56)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_57_ins : buf_x2
+  port map ( i   => dec_mem_data(25)
+           , q   => fifo_din(57)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_58_ins : buf_x2
+  port map ( i   => dec_mem_data(26)
+           , q   => fifo_din(58)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_59_ins : buf_x2
+  port map ( i   => dec_mem_data(27)
+           , q   => fifo_din(59)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_60_ins : buf_x2
+  port map ( i   => dec_mem_data(28)
+           , q   => fifo_din(60)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_61_ins : buf_x2
+  port map ( i   => dec_mem_data(29)
+           , q   => fifo_din(61)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_62_ins : buf_x2
+  port map ( i   => dec_mem_data(30)
+           , q   => fifo_din(62)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_63_ins : buf_x2
+  port map ( i   => dec_mem_data(31)
+           , q   => fifo_din(63)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_64_ins : buf_x2
+  port map ( i   => dec_mem_dest(0)
+           , q   => fifo_din(64)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_65_ins : buf_x2
+  port map ( i   => dec_mem_dest(1)
+           , q   => fifo_din(65)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_66_ins : buf_x2
+  port map ( i   => dec_mem_dest(2)
+           , q   => fifo_din(66)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_67_ins : buf_x2
+  port map ( i   => dec_mem_dest(3)
+           , q   => fifo_din(67)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_68_ins : buf_x2
+  port map ( i   => dec_mem_lw
+           , q   => fifo_din(68)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_69_ins : buf_x2
+  port map ( i   => dec_mem_lb
+           , q   => fifo_din(69)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_70_ins : buf_x2
+  port map ( i   => dec_mem_sw
+           , q   => fifo_din(70)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  fifo_din_71_ins : buf_x2
+  port map ( i   => dec_mem_sb
+           , q   => fifo_din(71)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  o2_x2_ins : o2_x2
+  port map ( i0  => dec2exe_empty
+           , i1  => exe_full
+           , q   => o2_x2_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  exe_push_ins : no2_x1
+  port map ( i0  => o2_x2_sig
+           , i1  => no4_x1_sig
+           , nq  => exe_push
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_ins : inv_x2
+  port map ( i   => dec_alu_add
+           , nq  => inv_x2_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_2_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_2_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_3_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_3_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_4_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_4_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_5_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_5_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_6_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_6_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  inv_x2_7_ins : inv_x2
+  port map ( i   => dec_pre_index
+           , nq  => inv_x2_7_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  no4_x1_ins : no4_x1
+  port map ( i0  => dec_mem_sb
+           , i1  => dec_mem_lb
+           , i2  => dec_mem_lw
+           , i3  => dec_mem_sw
+           , nq  => no4_x1_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+end structural;
+

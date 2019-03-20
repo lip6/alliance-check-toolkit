@@ -3,7 +3,7 @@ import os.path
 import socket
 
 hostname = socket.gethostname()
-if hostname.startswith('lepka'):
+if hostname.startswith('lepka') or hostname.startswith('backup'):
   NdaDirectory = '/dsk/l1/jpc/crypted/soc/techno'
  #print '          - Using NDA on <lepka>:"%s".' % NdaDirectory
   if not os.path.isdir(NdaDirectory):

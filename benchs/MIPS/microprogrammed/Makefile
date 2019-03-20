@@ -1,21 +1,19 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/MIPS/microprogrammed>" -*-
+# -*- explicit-buffer-name: "Makefile<MIPS/microprogrammed>" -*-
 
-                  TK_RTOP = ../..
+
+       PHYSICAL_SYNTHESIS = Coriolis
+               DESIGN_KIT = sxlib
 
             USE_CLOCKTREE = No
                 USE_DEBUG = No
                USE_KATANA = Yes
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/sxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-disabled.mk
- include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+ include ./mk/design-flow.mk
 
 
-lvx:     lvx-mips_core_flat_kite
-druc:    druc-mips_core_flat_kite
-view:    cgt-mips_core_flat_kite
+layout:  mips_core_flat_r.ap
+gds:     mips_core_flat_r.gds
 
-layout:  mips_core_flat_kite.ap
-gds:     mips_core_flat_kite.gds
-
+lvx:     lvx-mips_core_flat_r
+druc:    druc-mips_core_flat_r
+view:    cgt-mips_core_flat_r

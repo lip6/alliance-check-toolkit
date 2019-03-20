@@ -13,9 +13,9 @@ parametersTable = \
     ( ('misc.catchCore'             , TypeBool      , False   )
     , ('misc.info'                  , TypeBool      , False   )
     , ('misc.bug'                   , TypeBool      , False   )
-    , ('misc.logMode'               , TypeBool      , True    )
-    , ('misc.verboseLevel2'         , TypeBool      , False   )
-    , ('misc.verboseLevel1'         , TypeBool      , False   )
+    , ('misc.logMode'               , TypeBool      , False   )
+    , ('misc.verboseLevel2'         , TypeBool      , True    )
+    , ('misc.verboseLevel1'         , TypeBool      , True    )
    #, ('misc.minTraceLevel'         , TypeInt       , 110     )
    #, ('misc.maxTraceLevel'         , TypeInt       , 120     )
     # Kite parameters.

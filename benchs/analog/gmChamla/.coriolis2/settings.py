@@ -19,7 +19,7 @@ parametersTable = \
    #, ('misc.maxTraceLevel', TypeInt   , 540     )
    #, ('misc.minTraceLevel', TypeInt   , 144     )
    #, ('misc.maxTraceLevel', TypeInt   , 150     )
-   #, ('misc.minTraceLevel', TypeInt   , 536     )
-   #, ('misc.maxTraceLevel', TypeInt   , 541     )
+    , ('misc.minTraceLevel', TypeInt   , 5360    )
+    , ('misc.maxTraceLevel', TypeInt   , 5410    )
     )
 

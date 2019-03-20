@@ -1,7 +1,7 @@
 
 -- =======================================================================
 -- Coriolis Structural VHDL Driver
--- Generated on May 15, 2016, 13:09
+-- Generated on Mar 20, 2019, 15:44
 -- 
 -- To be interoperable with Alliance, it uses it's special VHDL subset.
 -- ("man vhdl" under Alliance for more informations)
@@ -31,19 +31,19 @@ architecture structural of muxs is
          );
   end component;
 
-  component o3_x2
+  component an12_x1
     port ( i0  : in bit
          ; i1  : in bit
-         ; i2  : in bit
          ; q   : out bit
          ; vdd : in bit
          ; vss : in bit
          );
   end component;
 
-  component an12_x1
+  component o3_x2
     port ( i0  : in bit
          ; i1  : in bit
+         ; i2  : in bit
          ; q   : out bit
          ; vdd : in bit
          ; vss : in bit
@@ -97,6 +97,55 @@ architecture structural of muxs is
 
 begin
 
+  y_3_ins : nts_x1
+  port map ( cmd => not_noe
+           , i   => nmx2_x1_4_sig
+           , nq  => y(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  nmx2_x1_4_ins : nmx2_x1
+  port map ( cmd => not_aux1
+           , i0  => ra(3)
+           , i1  => alu_out(3)
+           , nq  => nmx2_x1_4_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  y_2_ins : nts_x1
+  port map ( cmd => not_noe
+           , i   => nmx2_x1_3_sig
+           , nq  => y(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  nmx2_x1_ins : nmx2_x1
+  port map ( cmd => not_aux1
+           , i0  => ra(0)
+           , i1  => alu_out(0)
+           , nq  => nmx2_x1_sig
+           , vdd => vdd
+           , vss => vss
+           );
+
+  y_0_ins : nts_x1
+  port map ( cmd => not_noe
+           , i   => nmx2_x1_sig
+           , nq  => y(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  not_noe_ins : inv_x2
+  port map ( i   => noe
+           , nq  => not_noe
+           , vdd => vdd
+           , vss => vss
+           );
+
   not_aux1_ins : o3_x2
   port map ( i0  => i(0)
            , i1  => i(2)
@@ -145,27 +194,10 @@ begin
            , vss => vss
            );
 
-  y_0_ins : nts_x1
+  y_1_ins : nts_x1
   port map ( cmd => not_noe
-           , i   => nmx2_x1_sig
-           , nq  => y(0)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  nmx2_x1_ins : nmx2_x1
-  port map ( cmd => not_aux1
-           , i0  => ra(0)
-           , i1  => alu_out(0)
-           , nq  => nmx2_x1_sig
-           , vdd => vdd
-           , vss => vss
-           );
-
-  y_2_ins : nts_x1
-  port map ( cmd => not_noe
-           , i   => nmx2_x1_3_sig
-           , nq  => y(2)
+           , i   => nmx2_x1_2_sig
+           , nq  => y(1)
            , vdd => vdd
            , vss => vss
            );
@@ -175,38 +207,6 @@ begin
            , i0  => ra(2)
            , i1  => alu_out(2)
            , nq  => nmx2_x1_3_sig
-           , vdd => vdd
-           , vss => vss
-           );
-
-  y_1_ins : nts_x1
-  port map ( cmd => not_noe
-           , i   => nmx2_x1_2_sig
-           , nq  => y(1)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  not_noe_ins : inv_x2
-  port map ( i   => noe
-           , nq  => not_noe
-           , vdd => vdd
-           , vss => vss
-           );
-
-  y_3_ins : nts_x1
-  port map ( cmd => not_noe
-           , i   => nmx2_x1_4_sig
-           , nq  => y(3)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  nmx2_x1_4_ins : nmx2_x1
-  port map ( cmd => not_aux1
-           , i0  => ra(3)
-           , i1  => alu_out(3)
-           , nq  => nmx2_x1_4_sig
            , vdd => vdd
            , vss => vss
            );

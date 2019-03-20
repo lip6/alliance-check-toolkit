@@ -1,21 +1,20 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/MIPS/microprogrammed>" -*-
+# -*- explicit-buffer-name: "Makefile<MIPS/pipeline>" -*-
 
-                  TK_RTOP = ../..
+       PHYSICAL_SYNTHESIS = Coriolis
+               DESIGN_KIT = sxlib
 
             USE_CLOCKTREE = No
-               USE_KATANA = Yes
                 USE_DEBUG = No
-
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/sxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-disabled.mk
- include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+               USE_KATANA = Yes
 
 
-lvx:     lvx-mips_r3000_1m_core_flat_kite
-druc:    druc-mips_r3000_1m_core_flat_kite
-view:    cgt-mips_r3000_1m_core_flat_kite
+ include ./mk/design-flow.mk
 
-layout:  mips_r3000_1m_core_flat_kite.ap
-gds:     mips_r3000_1m_core_flat_kite.gds
+
+layout:  mips_r3000_1m_core_flat_r.ap
+gds:     mips_r3000_1m_core_flat_r.gds
+
+lvx:     lvx-mips_r3000_1m_core_flat_r
+druc:    druc-mips_r3000_1m_core_flat_r
+view:    cgt-mips_r3000_1m_core_flat_r
 

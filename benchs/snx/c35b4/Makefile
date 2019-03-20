@@ -1,9 +1,13 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/snx/yosys>" -*-
+# -*- explicit-buffer-name: "Makefile<snx/c35b4>" -*-
 
-                  TK_RTOP = ../..
 
-            USE_CLOCKTREE = No
-                USE_DEBUG = Yes
+        LOGICAL_SYNTHESIS = Yosys
+       PHYSICAL_SYNTHESIS = Coriolis
+               DESIGN_KIT = c35b4
+
+            USE_CLOCKTREE = Yes
+                USE_DEBUG = No
+               USE_KATANA = Yes
 
                  NETLISTS = snx      \
                             alu16    \
@@ -12,15 +16,13 @@
                             reg4     \
                             type_dec
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/nsxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
- include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+ include ./mk/design-flow.mk
 
 
-lvx:       lvx-snx_clocked_kite
-druc:      druc-snx_clocked_kite
-view:      cgt-snx_clocked_kite
+blif:      snx.blif
+layout:    snx_clocked_r.ap
+gds:       snx_clocked_r.gds
 
-layout:    snx_clocked_kite.ap
-gds:       snx_clocked_kite.gds
+lvx:       lvx-snx_clocked_r
+druc:      druc-snx_clocked_r
+view:      cgt-snx_clocked_r

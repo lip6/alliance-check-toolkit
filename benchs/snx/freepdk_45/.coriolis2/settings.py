@@ -11,7 +11,7 @@ parametersTable = \
     , ('misc.info'                , TypeBool      , False   )
     , ('misc.paranoid'            , TypeBool      , False   )
     , ('misc.bug'                 , TypeBool      , False   )
-    , ('misc.logMode'             , TypeBool      , True    )
+    , ('misc.logMode'             , TypeBool      , False   )
     , ('misc.verboseLevel1'       , TypeBool      , True    )
     , ('misc.verboseLevel2'       , TypeBool      , True    )
    #, ('misc.minTraceLevel'       , TypeInt       , 0       )

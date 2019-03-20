@@ -1,27 +1,27 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/cpu/alliance>" -*-
+# -*- explicit-buffer-name: "Makefile<cpu/alliance>" -*-
 
-                  TK_RTOP = ../..
+        LOGICAL_SYNTHESIS = Alliance
+       PHYSICAL_SYNTHESIS = Alliance
+               DESIGN_KIT = nsxlib
 
                      CHIP = chip
-                     CORE = cpu
-                   MARGIN = 2
-                  BOOMOPT = -A
+                   MARGIN = 5
+                  BOOMOPT =
                   BOOGOPT =
                   LOONOPT =
                 NSL2VHOPT = -vasy
+            USE_CLOCKTREE = No
                 USE_DEBUG = No
+               USE_KATANA = No
 
                  NETLISTS = cpu
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/nsxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
- include $(TK_RTOP)/etc/mk/pr-alliance.mk
+ include ./mk/design-flow.mk
 
+
+layout:    chip.ap
+gds:       chip.gds
 
 lvx:       lvx-chip
 druc:      druc-chip
 view:      cgt-chip
-
-layout:    chip.ap
-gds:       chip.gds

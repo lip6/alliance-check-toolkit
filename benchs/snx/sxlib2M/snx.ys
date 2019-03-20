@@ -1,8 +1,0 @@
-
-read_verilog snx.v
-hierarchy -check -top snx
-synth            -top snx
-dfflibmap -liberty  ../../cells/nsxlib/nsxlib.lib
-abc       -liberty  ../../cells/nsxlib/nsxlib.lib
-clean
-write_blif snx.blif

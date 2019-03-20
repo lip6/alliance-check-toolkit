@@ -27,7 +27,7 @@ parametersTable = \
     , ("kite.vTracksReservedLocal", TypeInt       , 3       )
     )
 
-cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
+cellsTop = os.environ['CELLS_TOP']
 
 allianceConfig = \
     ( ( 'CLOCK'         , '^ck.*|m_clock')

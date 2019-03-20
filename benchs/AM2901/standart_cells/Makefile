@@ -1,11 +1,16 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/AM2901>" -*-
+# -*- explicit-buffer-name: "Makefile<AM2901>" -*-
 
-                  TK_RTOP = ../..
+       PHYSICAL_SYNTHESIS = Coriolis
+               DESIGN_KIT = sxlib
 
                      CHIP = amd2901
-                   MARGIN = 2
+                   MARGIN = 5
+                  BOOMOPT =
+                  BOOGOPT =
+                  LOONOPT =
+                NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
-                USE_DEBUG = Yes
+                USE_DEBUG = No
                USE_KATANA = No
 
                  NETLISTS = accu    \
@@ -16,15 +21,12 @@
                             muxs    \
                             ram
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/sxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-disabled.mk
- include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+ include ./mk/design-flow.mk
 
 
-lvx:     lvx-amd2901_clocked_kite
-druc:    druc-amd2901_clocked_kite
-view:    cgt-amd2901_clocked_kite
+lvx:     lvx-amd2901_clocked_r
+druc:    druc-amd2901_clocked_r
+view:    cgt-amd2901_clocked_r
 
-layout:  amd2901_clocked_kite.ap
-gds:     amd2901_clocked_kite.gds
+layout:  amd2901_clocked_r.ap
+gds:     amd2901_clocked_r.gds

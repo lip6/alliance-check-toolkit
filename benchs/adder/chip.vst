@@ -1,7 +1,7 @@
 
 -- =======================================================================
 -- Coriolis Structural VHDL Driver
--- Generated on Nov 16, 2017, 18:37
+-- Generated on Mar 19, 2019, 18:37
 -- 
 -- To be interoperable with Alliance, it uses it's special VHDL subset.
 -- ("man vhdl" under Alliance for more informations)
@@ -32,7 +32,7 @@ architecture structural of chip is
          );
   end component;
 
-  component pvsseck_mpx
+  component pvsseck_px
     port ( ck   : in bit
          ; cko  : out wor_bit bus
          ; vdde : in bit
@@ -42,7 +42,7 @@ architecture structural of chip is
          );
   end component;
 
-  component pvddeck_mpx
+  component pvddeck_px
     port ( ck   : in bit
          ; cko  : out wor_bit bus
          ; vdde : in bit
@@ -52,7 +52,7 @@ architecture structural of chip is
          );
   end component;
 
-  component pvddick_mpx
+  component pvddick_px
     port ( ck   : in bit
          ; cko  : out wor_bit bus
          ; vdde : in bit
@@ -62,7 +62,7 @@ architecture structural of chip is
          );
   end component;
 
-  component pck_mpx
+  component pck_px
     port ( pad  : in bit
          ; ck   : out bit
          ; vdde : in bit
@@ -72,7 +72,7 @@ architecture structural of chip is
          );
   end component;
 
-  component po_mpx
+  component po_px
     port ( ck   : in bit
          ; i    : in bit
          ; pad  : out bit
@@ -83,7 +83,7 @@ architecture structural of chip is
          );
   end component;
 
-  component pi_mpx
+  component pi_px
     port ( ck   : in bit
          ; pad  : in bit
          ; t    : out bit
@@ -94,7 +94,7 @@ architecture structural of chip is
          );
   end component;
 
-  component pvssick_mpx
+  component pvssick_px
     port ( ck   : in bit
          ; cko  : out wor_bit bus
          ; vdde : in bit
@@ -114,10 +114,20 @@ architecture structural of chip is
 
 begin
 
-  p_a0 : pi_mpx
+  p_a3 : pi_px
   port map ( ck   => cki
-           , pad  => a(0)
-           , t    => a_i(0)
+           , pad  => a(3)
+           , t    => a_i(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b0 : pi_px
+  port map ( ck   => cki
+           , pad  => b(0)
+           , t    => b_i(0)
            , vdde => vdde
            , vddi => vddi
            , vsse => vsse
@@ -134,94 +144,17 @@ begin
            , vss     => vssi
            );
 
-  p_b0 : pi_mpx
+  p_a0 : pi_px
   port map ( ck   => cki
-           , pad  => b(0)
-           , t    => b_i(0)
+           , pad  => a(0)
+           , t    => a_i(0)
            , vdde => vdde
            , vddi => vddi
            , vsse => vsse
            , vssi => vssi
            );
 
-  p_a3 : pi_mpx
-  port map ( ck   => cki
-           , pad  => a(3)
-           , t    => a_i(3)
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_b2 : pi_mpx
-  port map ( ck   => cki
-           , pad  => b(2)
-           , t    => b_i(2)
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_b1 : pi_mpx
-  port map ( ck   => cki
-           , pad  => b(1)
-           , t    => b_i(1)
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_vsse : pvsseck_mpx
-  port map ( ck   => cki
-           , cko  => ckc
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_vddi : pvddick_mpx
-  port map ( ck   => cki
-           , cko  => ckc
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_f0 : po_mpx
-  port map ( ck   => cki
-           , i    => f_i(0)
-           , pad  => f(0)
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_vssi : pvssick_mpx
-  port map ( ck   => cki
-           , cko  => ckc
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_b3 : pi_mpx
-  port map ( ck   => cki
-           , pad  => b(3)
-           , t    => b_i(3)
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_f3 : po_mpx
+  p_f3 : po_px
   port map ( ck   => cki
            , i    => f_i(3)
            , pad  => f(3)
@@ -231,7 +164,7 @@ begin
            , vssi => vssi
            );
 
-  p_f2 : po_mpx
+  p_f2 : po_px
   port map ( ck   => cki
            , i    => f_i(2)
            , pad  => f(2)
@@ -241,7 +174,7 @@ begin
            , vssi => vssi
            );
 
-  p_f1 : po_mpx
+  p_f1 : po_px
   port map ( ck   => cki
            , i    => f_i(1)
            , pad  => f(1)
@@ -251,26 +184,83 @@ begin
            , vssi => vssi
            );
 
-  p_ck : pck_mpx
-  port map ( pad  => ck
-           , ck   => cki
-           , vdde => vdde
-           , vddi => vddi
-           , vsse => vsse
-           , vssi => vssi
-           );
-
-  p_a2 : pi_mpx
+  p_b3 : pi_px
   port map ( ck   => cki
-           , pad  => a(2)
-           , t    => a_i(2)
+           , pad  => b(3)
+           , t    => b_i(3)
            , vdde => vdde
            , vddi => vddi
            , vsse => vsse
            , vssi => vssi
            );
 
-  p_a1 : pi_mpx
+  p_vssi : pvssick_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_f0 : po_px
+  port map ( ck   => cki
+           , i    => f_i(0)
+           , pad  => f(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vddi : pvddick_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vsse : pvsseck_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b1 : pi_px
+  port map ( ck   => cki
+           , pad  => b(1)
+           , t    => b_i(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b2 : pi_px
+  port map ( ck   => cki
+           , pad  => b(2)
+           , t    => b_i(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vdde : pvddeck_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_a1 : pi_px
   port map ( ck   => cki
            , pad  => a(1)
            , t    => a_i(1)
@@ -280,9 +270,19 @@ begin
            , vssi => vssi
            );
 
-  p_vdde : pvddeck_mpx
+  p_a2 : pi_px
   port map ( ck   => cki
-           , cko  => ckc
+           , pad  => a(2)
+           , t    => a_i(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_ck : pck_px
+  port map ( pad  => ck
+           , ck   => cki
            , vdde => vdde
            , vddi => vddi
            , vsse => vsse

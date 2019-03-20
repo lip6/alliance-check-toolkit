@@ -28,9 +28,12 @@ parametersTable = \
     , ("katabatic.saturateRp"       , TypeInt       , 10    )
     , ("kite.hTracksReservedLocal"  , TypeInt       , 4     )
     , ("kite.vTracksReservedLocal"  , TypeInt       , 5     )
+    , ("anabatic.saturateRatio"     , TypePercentage, 85    )
+    , ("anabatic.saturateRp"        , TypeInt       , 10    )
     , ("katana.hTracksReservedLocal", TypeInt       , 3     )
     , ("katana.vTracksReservedLocal", TypeInt       , 3     )
     , ("katana.profileEventCosts"   , TypeBool      , True  )
+   #, ("katana.eventsLimit"         , TypeInt       , 500   )
     #
     )
 

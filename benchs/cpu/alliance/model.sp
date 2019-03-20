@@ -1,1 +1,1 @@
-../model.sp
+../rtl/model.sp

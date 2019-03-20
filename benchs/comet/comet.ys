@@ -1,8 +1,0 @@
-
-read_verilog comet.v
-hierarchy -check -top comet
-synth            -top comet
-dfflibmap -liberty ../cells/nsxlib/nsxlib.lib
-abc       -liberty ../cells/nsxlib/nsxlib.lib
-clean
-write_blif comet.blif

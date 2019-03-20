@@ -1,14 +1,13 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/pop11/yosys>" -*-
+# -*- explicit-buffer-name: "Makefile<pop11>" -*-
 
-                  TK_RTOP = ..
+        LOGICAL_SYNTHESIS = Yosys
+       PHYSICAL_SYNTHESIS = Coriolis
+               DESIGN_KIT = nsxlib45
 
-                  BOOMOPT = -A
-                  BOOGOPT =
-                  LOONOPT =
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
-               USE_KATANA = Yes
                 USE_DEBUG = No
+               USE_KATANA = Yes
 
                  NETLISTS = pop11     \
                             alu11     \
@@ -20,15 +19,12 @@
                             data11    \
                             idc
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/nsxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-yosys.mk
- include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+ include ./mk/design-flow.mk
 
+blif:      pop11.blif
+layout:    pop11_clocked_r.ap
+gds:       pop11_clocked_r.gds
 
-lvx:       lvx-pop11_clocked_kite
-druc:      druc-pop11_clocked_kite
-view:      cgt-pop11_clocked_kite
-
-layout:    pop11_clocked_kite.ap
-gds:       pop11_clocked_kite.gds
+lvx:       lvx-pop11_clocked_r
+druc:      druc-pop11_clocked_r
+view:      cgt-pop11_clocked_r

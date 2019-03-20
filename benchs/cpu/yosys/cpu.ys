@@ -1,8 +1,0 @@
-
-read_verilog cpu.v
-hierarchy -check -top cpu
-synth            -top cpu
-dfflibmap -liberty ../../cells/nsxlib/nsxlib.lib
-abc       -liberty ../../cells/nsxlib/nsxlib.lib
-clean
-write_blif cpu.blif

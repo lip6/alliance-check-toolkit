@@ -1,6 +1,8 @@
-# -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/adder>" -*-
+# -*- explicit-buffer-name: "Makefile<adder>" -*-
 
-                  TK_RTOP = ..
+        LOGICAL_SYNTHESIS = Alliance
+       PHYSICAL_SYNTHESIS = Coriolis
+               DESIGN_KIT = sxlib
 
                      CHIP = chip
                    MARGIN = 2
@@ -9,25 +11,21 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = No
-                USE_DEBUG = Yes
+                USE_DEBUG = No
                USE_KATANA = No
 
                  NETLISTS = adder
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/nsxlib.mk
-#include $(TK_RTOP)/etc/mk/sxlib.mk
- include $(TK_RTOP)/etc/mk/synthesis-alliance.mk
- include $(TK_RTOP)/etc/mk/pr-coriolis.mk
+ include ./mk/design-flow.mk
 
 
-lvx:         lvx-chip_kite
-druc:        druc-chip_kite
-dreal:       dreal-chip_kite
-flatph:      flatph-chip_kite
-view:        cgt-chip_kite
+lvx:         lvx-chip_r
+druc:        druc-chip_r
+dreal:       dreal-chip_r
+flatph:      flatph-chip_r
+view:        cgt-chip_r
 
-layout:      chip_kite.ap
-gds:         chip_kite.gds
-gds_flat:    chip_kite_flat.gds
-cif:         chip_kite.cif
+layout:      chip_r.ap
+gds:         chip_r.gds
+gds_flat:    chip_r_flat.gds
+cif:         chip_r.cif
