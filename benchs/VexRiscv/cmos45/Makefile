@@ -4,7 +4,7 @@
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = cmos45
 
-            USE_CLOCKTREE = No
+            USE_CLOCKTREE = Yes
                 USE_DEBUG = No
                USE_KATANA = Yes
 
@@ -13,8 +13,9 @@
  include ./mk/design-flow.mk
 
 blif:   VexRiscv.blif
-layout: vexriscv_r.ap
-gds:    vexriscv_r.gds
+vst:    vexriscv.vst
+layout: vexriscv_clocked_r.ap
+gds:    vexriscv_clocked_r.gds
 
-lvx:    lvx-vst-vexriscv
-drc:    druc-vexriscv_r
+lvx:    lvx-vst-vexriscv_clocked
+drc:    druc-vexriscv_clocked_r
