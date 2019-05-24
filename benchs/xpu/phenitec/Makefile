@@ -25,9 +25,9 @@ $(CORE).vhdl:   $(CORE).nsl
 	nsl2vh $(NSL2VHOPT) $(CORE).nsl
 
 
-lvx:       lvx-chip_clocked_kite
-druc:      druc-chip_clocked_kite
-view:      cgt-chip_clocked_kite
+lvx:       lvx-chip_htck_kite
+druc:      druc-chip_htck_kite
+view:      cgt-chip_htck_kite
 
-layout:    chip_clocked_kite.ap
-gds:       chip_clocked_kite.gds
+layout:    chip_htck_kite.ap
+gds:       chip_htck_kite.gds

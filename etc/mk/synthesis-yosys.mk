@@ -16,6 +16,12 @@
                    $(VLOG_MODULE).blif $(VLOG_MODULE).tcl
 
 
+# Any file put in "./non_generated/" will take precedence over the
+# generation.
+
+%.blif: ./non_generated/%.blif ;  cp $< .
+
+
 %.blif: %.v
 	 rm -f $*.tcl; \
 	 echo "set verilog_file $*.v"                       >> $*.tcl; \

@@ -1,9 +1,9 @@
-# -*- explicit-buffer-name: "Makefile<AM2901>" -*-
+# -*- explicit-buffer-name: "Makefile<AM2901/standard_cells>" -*-
 
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = sxlib
 
-                     CHIP = amd2901
+                     CHIP = am2901
                    MARGIN = 5
                   BOOMOPT =
                   BOOGOPT =
@@ -11,12 +11,13 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = No
+                 USE_KITE = No
 
-                 NETLISTS = accu    \
-                            alu     \
-                            amd2901 \
+                 NETLISTS = am2901  \
+                            corona  \
                             coeur   \
+                            accu    \
+                            alu     \
                             muxe    \
                             muxs    \
                             ram
@@ -24,9 +25,9 @@
  include ./mk/design-flow.mk
 
 
-lvx:     lvx-amd2901_clocked_r
-druc:    druc-amd2901_clocked_r
-view:    cgt-amd2901_clocked_r
+lvx:     lvx-am2901_cts_r
+druc:    druc-am2901_cts_r
+view:    cgt-am2901_cts_r
 
-layout:  amd2901_clocked_r.ap
-gds:     amd2901_clocked_r.gds
+layout:  am2901_cts_r.ap
+gds:     am2901_cts_r.gds

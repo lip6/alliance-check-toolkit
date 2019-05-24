@@ -7,14 +7,14 @@ try:
   import optparse
   import Cfg
   import Hurricane
-  from   Hurricane import DbU
-  from   Hurricane import UpdateSession
-  from   Hurricane import Breakpoint
-  from   Hurricane import Transformation
-  from   Hurricane import Instance
+  from   Hurricane  import DbU
+  from   Hurricane  import UpdateSession
+  from   Hurricane  import Breakpoint
+  from   Hurricane  import Transformation
+  from   Hurricane  import Instance
   import Viewer
   import CRL
-  from   helpers   import ErrorMessage
+  from   helpers.io import ErrorMessage
   import plugins.RSavePlugin
 except ImportError, e:
   serror = str(e)

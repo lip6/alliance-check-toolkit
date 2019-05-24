@@ -1,0 +1,291 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Mar 19, 2019, 18:37
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity chip is
+  port ( ck   : in bit
+       ; a    : in bit_vector(3 downto 0)
+       ; b    : in bit_vector(3 downto 0)
+       ; f    : out bit_vector(3 downto 0)
+       ; vdde : in bit
+       ; vddi : in bit
+       ; vsse : in bit
+       ; vssi : in bit
+       );
+end chip;
+
+architecture structural of chip is
+
+  component corona
+    port ( m_clock : in bit
+         ; a       : in bit_vector(3 downto 0)
+         ; b       : in bit_vector(3 downto 0)
+         ; f       : out bit_vector(3 downto 0)
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  component pvsseck_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pvddeck_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pvddick_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pck_px
+    port ( pad  : in bit
+         ; ck   : out bit
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component po_px
+    port ( ck   : in bit
+         ; i    : in bit
+         ; pad  : out bit
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pi_px
+    port ( ck   : in bit
+         ; pad  : in bit
+         ; t    : out bit
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pvssick_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  signal blockagenet :  bit;
+  signal ckc         :  bit;
+  signal cki         :  bit;
+  signal a_i         :  bit_vector(3 downto 0);
+  signal b_i         :  bit_vector(3 downto 0);
+  signal f_i         :  bit_vector(3 downto 0);
+
+
+begin
+
+  p_a3 : pi_px
+  port map ( ck   => cki
+           , pad  => a(3)
+           , t    => a_i(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b0 : pi_px
+  port map ( ck   => cki
+           , pad  => b(0)
+           , t    => b_i(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  core : corona
+  port map ( m_clock => ckc
+           , a       => a_i(3 downto 0)
+           , b       => b_i(3 downto 0)
+           , f       => f_i(3 downto 0)
+           , vdd     => vddi
+           , vss     => vssi
+           );
+
+  p_a0 : pi_px
+  port map ( ck   => cki
+           , pad  => a(0)
+           , t    => a_i(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_f3 : po_px
+  port map ( ck   => cki
+           , i    => f_i(3)
+           , pad  => f(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_f2 : po_px
+  port map ( ck   => cki
+           , i    => f_i(2)
+           , pad  => f(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_f1 : po_px
+  port map ( ck   => cki
+           , i    => f_i(1)
+           , pad  => f(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b3 : pi_px
+  port map ( ck   => cki
+           , pad  => b(3)
+           , t    => b_i(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vssi : pvssick_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_f0 : po_px
+  port map ( ck   => cki
+           , i    => f_i(0)
+           , pad  => f(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vddi : pvddick_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vsse : pvsseck_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b1 : pi_px
+  port map ( ck   => cki
+           , pad  => b(1)
+           , t    => b_i(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_b2 : pi_px
+  port map ( ck   => cki
+           , pad  => b(2)
+           , t    => b_i(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_vdde : pvddeck_px
+  port map ( ck   => cki
+           , cko  => ckc
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_a1 : pi_px
+  port map ( ck   => cki
+           , pad  => a(1)
+           , t    => a_i(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_a2 : pi_px
+  port map ( ck   => cki
+           , pad  => a(2)
+           , t    => a_i(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  p_ck : pck_px
+  port map ( pad  => ck
+           , ck   => cki
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+end structural;
+

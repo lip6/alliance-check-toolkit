@@ -19,12 +19,12 @@ parametersTable = \
    #, ('misc.maxTraceLevel'         , TypeInt       , 0       )
     , ("etesian.effort"             , TypeEnumerate , 2       )
     , ('etesian.uniformDensity'     , TypeBool      , True    )
-    , ('etesian.spaceMargin'        , TypePercentage, 15.0    )
+    , ('etesian.spaceMargin'        , TypePercentage, 25.0    )
    #, ('etesian.spaceMargin'        , TypePercentage, 35.0    )
     , ('etesian.aspectRatio'        , TypePercentage, 100.0   )
    # Kite parameters.
     , ("kite.eventsLimit"           , TypeInt       , 1000000 )
-    , ('katabatic.topRoutingLayer'  , TypeString    , 'METAL5')
+    , ('anabatic.topRoutingLayer'   , TypeString    , 'METAL5')
     , ("kite.hTracksReservedLocal"  , TypeInt       , 4       )
     , ("kite.vTracksReservedLocal"  , TypeInt       , 4       )
     , ("katana.hTracksReservedLocal", TypeInt       , 6       )
@@ -32,7 +32,10 @@ parametersTable = \
     )
 
 
-cellsTop = os.environ['CELLS_TOP']
+if not os.environ.has_key('CELLS_TOP'):
+  cellsTop = '../../../cells'
+else:
+  cellsTop = os.environ['CELLS_TOP']
   
 allianceConfig = \
     ( ( 'CLOCK'         , 'ck.*|m_clock')

@@ -5,7 +5,7 @@
 
             USE_CLOCKTREE = No
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
 
  include ./mk/design-flow.mk

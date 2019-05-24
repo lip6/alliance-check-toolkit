@@ -23,7 +23,7 @@ parametersTable = \
     , ('etesian.aspectRatio'        , TypePercentage, 100.0   )
    # Kite parameters.
     , ("kite.eventsLimit"           , TypeInt       , 1000000 )
-    , ('katabatic.topRoutingLayer'  , TypeString    , 'METAL5')
+    , ('anabatic.topRoutingLayer'   , TypeString    , 'METAL5')
     , ("kite.hTracksReservedLocal"  , TypeInt       , 4       )
     , ("kite.vTracksReservedLocal"  , TypeInt       , 4       )
     , ("katana.hTracksReservedLocal", TypeInt       , 4       )

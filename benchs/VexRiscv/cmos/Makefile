@@ -4,16 +4,16 @@
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = sxlib
 
-            USE_CLOCKTREE = No
+            USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = VexRiscv
 
  include ./mk/design-flow.mk
 
 blif:   VexRiscv.blif
-layout: vexriscv_r.ap
+layout: vexriscv_cts_r.ap
 
-lvx:    lvx-vst-vexriscv
-drc:    druc-vexriscv_r
+lvx:    lvx-vst-vexriscv_cts
+druc:   druc-vexriscv_cts_r

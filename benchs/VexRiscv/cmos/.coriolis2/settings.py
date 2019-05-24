@@ -21,8 +21,16 @@ parametersTable = \
     , ('etesian.spaceMargin'        , TypePercentage, 5.0     )
     , ('etesian.aspectRatio'        , TypePercentage, 100.0   )
    # Kite parameters.
-    , ("anabatic.gcell.displayMode" ,TypeEnumerate  , 1       )
+    , ("anabatic.gcell.displayMode" , TypeEnumerate , 1       )
+    , ("anabatic.topRoutingLayer"   , TypeString    , 'METAL4')
     , ("katana.eventsLimit"         , TypeInt       , 1000000 )
    #, ("katana.hTracksReservedLocal", TypeInt       , 4       )
    #, ("katana.vTracksReservedLocal", TypeInt       , 9       )
     )
+
+
+allianceConfig = \
+    ( ( 'CLOCK'         , '^clk$|^ck$')
+    ,
+    )
+

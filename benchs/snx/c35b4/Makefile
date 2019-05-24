@@ -7,7 +7,7 @@
 
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = snx      \
                             alu16    \
@@ -20,9 +20,9 @@
 
 
 blif:      snx.blif
-layout:    snx_clocked_r.ap
-gds:       snx_clocked_r.gds
+layout:    snx_htck_r.ap
+gds:       snx_htck_r.gds
 
-lvx:       lvx-snx_clocked_r
-druc:      druc-snx_clocked_r
-view:      cgt-snx_clocked_r
+lvx:       lvx-snx_htck_r
+druc:      druc-snx_htck_r
+view:      cgt-snx_htck_r

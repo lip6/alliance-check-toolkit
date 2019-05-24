@@ -50,7 +50,7 @@ You can then perform various checks:
 .. code-bclock:: sh
 
    ego@home:cmos> make lvx   # Run the LVS
-   ego@home:cmos> make drc   # Run the DRC (symbolic)
+   ego@home:cmos> make druc  # Run the DRC (symbolic)
    ego@home:cmos> make sim   # Perform a simulation
 
 Thoses checks ensure that the layout is DRC correct and that the layout is

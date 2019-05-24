@@ -1,5 +1,12 @@
 
 # -------------------------------------------------------------------
+# Any file put in "./non_generated/" will take precedence over the
+# generation.
+
+%.vst: ./non_generated/%.vst ;  cp $< .
+
+
+# -------------------------------------------------------------------
 # Keep all intermediate files
 
 .SECONDARY:
@@ -19,6 +26,7 @@
  export RDS_IN=gds
  export RDS_OUT=gds
  export MBK_TRACE_MODE=Y
+
 
 
 # -------------------------------------------------------------------
@@ -65,7 +73,8 @@ proof-%: %.vbe %_yag.vhd
               *.gds                     \
               *.cif                     \
               alldata.dat               \
-              *_clocked*                \
+              *_cts*                    \
+              *_cts*                    \
               *_ext*                    \
               *_boom*                   \
               *_boog*                   \
@@ -83,7 +92,7 @@ proof-%: %.vbe %_yag.vhd
               *.log
 
  ifneq ($(CHIP),)
-   CLEAN_CHIP += $(CHIP).ap
+   CLEAN_CHIP += $(CHIP).ap corona.vst corona.ap
  endif
 
 clean:

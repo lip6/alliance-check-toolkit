@@ -12,7 +12,7 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = No
                 USE_DEBUG = No
-               USE_KATANA = No
+                 USE_KITE = No
 
                  NETLISTS = amd2901_ctl
          STRATUS_NETLISTS = amd2901                 \

@@ -11,7 +11,7 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = comet   \
                             alu16   \
@@ -23,9 +23,9 @@
  include ./mk/design-flow.mk
 
 
-layout:    comet_clocked_r.ap
-gds:       comet_clocked_r.gds
+layout:    comet_htck_r.ap
+gds:       comet_htck_r.gds
 
-lvx:       lvx-comet_clocked_r
-druc:      druc-comet_clocked_r
-view:      cgt-comet_clocked_r
+lvx:       lvx-comet_htck_r
+druc:      druc-comet_htck_r
+view:      cgt-comet_htck_r

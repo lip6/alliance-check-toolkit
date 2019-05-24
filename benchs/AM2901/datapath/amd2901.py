@@ -61,36 +61,36 @@ class amd2901 ( Model ) :
     self.ckc   = SignalCk ( "ckc" )
 
     
-    self.core = Inst ( "amd2901_core"
-                     , "core"
-                     , map = { 'cin'        : cin_i
-                             , 'cout'       : cout_i
-                             , 'np'         : np_i
-                             , 'ng'         : ng_i
-                             , 'over'       : ovr_i
-                             , 'zero'       : zero_i
-                             , 'sh_right'   : sh_right
-                             , 'sh_left'    : sh_left
-                             , 'ram_o_down' : ram_o_down
-                             , 'ram_o_up'   : ram_o_up
-                             , 'ram_i_down' : ram_i_down
-                             , 'ram_i_up'   : ram_i_up
-                             , 'acc_o_down' : acc_o_down
-                             , 'acc_o_up'   : acc_o_up
-                             , 'acc_i_down' : acc_i_down
-                             , 'acc_i_up'   : acc_i_up
-                             , 'ck'         : self.ckc
-                             , 'a'          : a_i
-                             , 'b'          : b_i
-                             , 'd'          : d_i
-                             , 'i'          : i_i
-                             , 'y'          : y_i
-                             , 'noe'        : noe_i
-                             , 'oe'         : oe
-                             , 'vdd'        : self.vdd
-                             , 'vss'        : self.vss
-                             }
-                     )
+    self.corona = Inst ( "corona"
+                       , "corona"
+                       , map = { 'cin'        : cin_i
+                               , 'cout'       : cout_i
+                               , 'np'         : np_i
+                               , 'ng'         : ng_i
+                               , 'over'       : ovr_i
+                               , 'zero'       : zero_i
+                               , 'sh_right'   : sh_right
+                               , 'sh_left'    : sh_left
+                               , 'ram_o_down' : ram_o_down
+                               , 'ram_o_up'   : ram_o_up
+                               , 'ram_i_down' : ram_i_down
+                               , 'ram_i_up'   : ram_i_up
+                               , 'acc_o_down' : acc_o_down
+                               , 'acc_o_up'   : acc_o_up
+                               , 'acc_i_down' : acc_i_down
+                               , 'acc_i_up'   : acc_i_up
+                               , 'ck'         : self.ckc
+                               , 'a'          : a_i
+                               , 'b'          : b_i
+                               , 'd'          : d_i
+                               , 'i'          : i_i
+                               , 'y'          : y_i
+                               , 'noe'        : noe_i
+                               , 'oe'         : oe
+                               , 'vdd'        : self.vdd
+                               , 'vss'        : self.vss
+                               }
+                       )
     
     self.p_ck = Inst ( "pck_px", "p_ck"
                      , map = { 'pad'  : self.ck

@@ -5,6 +5,7 @@
                DESIGN_KIT = sxlib
 
                      CHIP = chip
+	                 CORE = snx
                    MARGIN = 5
                   BOOMOPT = -A
                   BOOGOPT =
@@ -12,22 +13,22 @@
                 NSL2VHOPT = -vasy -split -p
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = No
-                     CORE = snx
+                 USE_KITE = No
 
-                 NETLISTS = cla16       \
+                 NETLISTS = snx_model   \
+                            cla16       \
                             inc16       \
                             reg4        \
                             type_dec    \
-                            alu16_model \
-                            snx_model
+                            alu16_model
 
  include ./mk/design-flow.mk
 
+synth:     $(NETLISTS_VST)
 
-layout:    chip_clocked_r.ap
-gds:       chip_clocked_r.gds
+layout:    chip_cts_r.ap
+gds:       chip_cts_r.gds
 
-lvx:       lvx-chip_clocked_r
-druc:      druc-chip_clocked_r
-view:      cgt-chip_clocked_r
+lvx:       lvx-chip_cts_r
+druc:      druc-chip_cts_r
+view:      cgt-chip_cts_r

@@ -3,6 +3,7 @@
 try:
   import sys
   import CRL
+  import helpers
   import stratus
 except ImportError, e:
   serror = str(e)
@@ -29,17 +30,22 @@ def ScriptMain ( **kw ):
   if kw.has_key('editor') and kw['editor']:
     editor = kw['editor']
     stratus.setEditor( editor )
-
-  cell = stratus.buildModel( 'amd2901_dpt' , stratus.DoNetlist|stratus.DoLayout )
-  cell = stratus.buildModel( 'amd2901_core', stratus.DoNetlist|stratus.DoLayout )
-  cell = stratus.buildModel( 'amd2901'     , stratus.DoNetlist )
+  
+  cell = stratus.buildModel( 'amd2901_dpt'   , stratus.DoNetlist|stratus.DoLayout )
+  cell = stratus.buildModel( 'amd2901_core'  , stratus.DoNetlist|stratus.DoLayout )
+  cell = stratus.buildModel( 'corona'        , stratus.DoNetlist )
+  cell = stratus.buildModel( 'amd2901'       , stratus.DoNetlist )
   return cell
 
 
 if __name__ == "__main__" :
-  kw           = {}
-  success      = ScriptMain( **kw )
-  shellSuccess = 0
-  if not success: shellSuccess = 1
+  try:
+    kw           = {}
+    success      = ScriptMain( **kw )
+    shellSuccess = 0
+    if not success: shellSuccess = 1
+
+  except Exception, e:
+    helpers.io.catch( e )
 
   sys.exit( shellSuccess )

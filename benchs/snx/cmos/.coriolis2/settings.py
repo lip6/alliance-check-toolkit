@@ -22,7 +22,14 @@ parametersTable = \
     , ('etesian.spaceMargin'        , TypePercentage, 20.0    )
     , ('etesian.aspectRatio'        , TypePercentage, 100.0   )
    # Kite parameters.
-   #, ("katana.hTracksReservedLocal", TypeInt       , 6       )
-   #, ("katana.vTracksReservedLocal", TypeInt       , 6       )
+    , ("katana.hTracksReservedLocal", TypeInt       , 5       )
+    , ("katana.vTracksReservedLocal", TypeInt       , 4       )
+    , ('anabatic.topRoutingLayer'   , TypeString    , 'METAL4')
+    )
+
+
+allianceConfig = \
+    ( ( 'CLOCK'         , '^ck$|m_clock')
+    ,
     )
 

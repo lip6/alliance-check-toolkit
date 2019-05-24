@@ -6,7 +6,7 @@
 
             USE_CLOCKTREE = No
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = snx         \
                             alu16       \

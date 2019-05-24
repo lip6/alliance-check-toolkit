@@ -11,7 +11,7 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = No
+                 USE_KITE = No
 
                  NETLISTS = alu          \
                             arm_chip     \
@@ -32,9 +32,9 @@
  include ./mk/design-flow.mk
 
 
-lvx:     lvx-arm_chip_clocked_r
-druc:    druc-arm_chip_clocked_r
-view:    cgt-arm_chip_clocked_r
+lvx:     lvx-arm_chip_htck_r
+druc:    druc-arm_chip_htck_r
+view:    cgt-arm_chip_htck_r
 
-layout:  arm_chip_clocked_r.ap
-gds:     arm_chip_clocked_r.gds
+layout:  arm_chip_htck_r.ap
+gds:     arm_chip_htck_r.gds

@@ -8,17 +8,18 @@ try:
   import numpy      as     np
   from   matplotlib import pyplot
   from   matplotlib import ticker
-  import Cfg
-  import Hurricane
-  from   Hurricane import DbU
-  from   Hurricane import UpdateSession
-  from   Hurricane import Breakpoint
-  from   Hurricane import Transformation
-  from   Hurricane import Instance
+  import Cfg        
+  import Hurricane  
+  from   Hurricane  import DbU
+  from   Hurricane  import UpdateSession
+  from   Hurricane  import Breakpoint
+  from   Hurricane  import Transformation
+  from   Hurricane  import Instance
   import Viewer
   import CRL
-  from   helpers   import ErrorMessage
-  from   helpers   import showPythonTrace
+  import helpers
+  from   helpers.io import ErrorMessage
+  from   helpers    import showPythonTrace
   import Anabatic
   import Katana
   import Etesian
@@ -27,34 +28,24 @@ try:
   import Unicorn
   import clocktree.ClockTree
   import plugins.ClockTreePlugin
-  import plugins.ChipPlugin
+  import plugins.CoreToChip_cmos
+  import plugins.ChipPlace
   import plugins.RSavePlugin
 except ImportError, e:
-  serror = str(e)
-  if serror.startswith('No module named'):
-    module = serror.split()[-1]
-    print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
-    print '        Please check the integrity of the <coriolis> package.'
-    sys.exit(1)
-  if serror.find('cannot open shared object file'):
-    library = serror.split(':')[0]
-    print '[ERROR] The <%s> shared library cannot be loaded.' % library
-    print '        Under RHEL 6, you must be under devtoolset-2.'
-    print '        (scl enable devtoolset-2 bash)'
+  showPythonTrace( __file__, e, False )
   sys.exit(1)
 except Exception, e:
-  print '[ERROR] A strange exception occurred while loading the basic Coriolis/Python'
-  print '        modules. Something may be wrong at Python/C API level.\n'
-  print '        %s' % e
+  showPythonTrace( __file__, e )
   sys.exit(2)
 
 
-DoChip        = 0x0001
-DoClockTree   = 0x0002
-DoPlacement   = 0x0004
-DoRouting     = 0x0008
-UseKatana     = 0x0010
-ProfileRouter = 0x0020
+GenerateChip  = 0x0001
+DoChip        = 0x0002
+DoClockTree   = 0x0004
+DoPlacement   = 0x0008
+DoRouting     = 0x0010
+UseKite       = 0x0020
+ProfileRouter = 0x0040
 ChipStages    = DoChip|DoPlacement|DoRouting
 
 framework     = CRL.AllianceFramework.create(0)
@@ -68,8 +59,8 @@ class RouterProfile ( object ):
 
     def __init__ ( self, flags ):
       self.flags       = flags
-      self.routerName  = 'kite'
-      if flags & UseKatana: self.routerName = 'katana'
+      self.routerName  = 'katana'
+      if flags & UseKite: self.routerName = 'kite'
       self.pathProfile = self.routerName + '.profile.txt'
       self.priorities  = ( ([],[]), ([],[]), ([],[]), ([],[]), ([],[]), ([],[]) )
       self.plotted     = False
@@ -142,11 +133,32 @@ def ScriptMain ( **kw ):
   doStages = kw['doStages']
   try:
     cell, editor = plugins.kwParseMain( **kw )
-  
+    corona       = None
+    chip         = None 
+
+    if doStages & GenerateChip:
+      success = plugins.CoreToChip_cmos.ScriptMain( **kw )
+      if not success: return False
+
+      for instance in cell.getSlaveInstances():
+        corona = instance.getCell()
+        break
+
+      for instance in corona.getSlaveInstances():
+        chip = instance.getCell()
+        break
+
+      cell         = chip
+      kw[ 'cell' ] = cell
+
     if doStages & DoPlacement:
       if doStages & DoChip:
-        success = plugins.ChipPlugin.ScriptMain( **kw )
+        chip    = cell
+        success = plugins.ChipPlace.ScriptMain( **kw )
         if not success: return False
+
+        cell   = cell.getInstance( 'corona' ).getMasterCell()
+        corona = cell
       else:
        #if cell.getAbutmentBox().isEmpty():
        #  cellGauge   = framework.getCellGauge()
@@ -168,9 +180,18 @@ def ScriptMain ( **kw ):
 
     if doStages & DoRouting:
       routingNets = []
-      if doStages & UseKatana:
+      if doStages & UseKite:
+        kite = Kite.KiteEngine.create( cell )
+        kite.runGlobalRouter  ( Kite.KtBuildGlobalRouting )
+        kite.loadGlobalRouting( Katabatic.EngineLoadGrByNet, routingNets )
+        kite.layerAssign      ( Katabatic.EngineNoNetLayerAssign )
+        kite.runNegociate     ()
+        success = kite.getToolSuccess()
+        kite.finalizeLayout()
+        kite.destroy()
+      else:
         katana = Katana.KatanaEngine.create( cell )
-        katana.printConfiguration   ()
+       #katana.printConfiguration   ()
         katana.digitalInit          ()
        #katana.runNegociatePreRouted()
         katana.runGlobalRouter      ()
@@ -180,22 +201,17 @@ def ScriptMain ( **kw ):
         success = katana.getToolSuccess()
         katana.finalizeLayout()
         katana.destroy()
-      else:
-        kite = Kite.KiteEngine.create( cell )
-        kite.runGlobalRouter  ( Kite.KtBuildGlobalRouting )
-        kite.loadGlobalRouting( Katabatic.EngineLoadGrByNet, routingNets )
-        kite.layerAssign      ( Katabatic.EngineNoNetLayerAssign )
-        kite.runNegociate     ()
-        success = kite.getToolSuccess()
-        kite.finalizeLayout()
-        kite.destroy()
 
+    if doStages & DoPlacement:
+      plugins.RSavePlugin.ScriptMain( **kw )
+
+    if doStages & DoRouting:
+      if doStages & DoChip: cell = chip
+      
       saveCellName  = cell.getName()
       saveCellName += '_r'
       cell.setName( saveCellName )
-      framework.saveCell( cell, CRL.Catalog.State.Logical )
-  
-    plugins.RSavePlugin.ScriptMain( **kw )
+      framework.saveCell( cell, CRL.Catalog.State.Views )
 
     if doStages & ProfileRouter:
       profile = RouterProfile ( doStages )
@@ -220,9 +236,10 @@ if __name__ == '__main__':
     parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose'  , help='Second level of verbosity.')
     parser.add_option( '-p', '--place'                , action='store_true', dest='doPlacement'  , help='Perform chip placement step only.')
     parser.add_option( '-r', '--route'                , action='store_true', dest='doRouting'    , help='Perform routing step only.')
+    parser.add_option( '-G', '--generate-chip'        , action='store_true', dest='generateChip' , help='Generate a chip netlist from a core.')
     parser.add_option( '-C', '--chip'                 , action='store_true', dest='doChip'       , help='Run place & route on a complete chip.')
     parser.add_option( '-T', '--clock-tree'           , action='store_true', dest='doClockTree'  , help='In block mode, create a clock-tree.')
-    parser.add_option( '-K', '--katana'               , action='store_true', dest='useKatana'    , help='Use Katana P&R instead of Knik/Kite (experimental).')
+    parser.add_option( '-K', '--kite'                 , action='store_true', dest='useKite'      , help='Use old Knik/Kite digital only router.')
     parser.add_option(       '--profile'              , action='store_true', dest='profileRouter', help='Activate cost profiling of Kite/Katana.')
     parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'      , help='Save both physical and logical views.')
     (options, args) = parser.parse_args()
@@ -234,13 +251,14 @@ if __name__ == '__main__':
     if options.veryVerbose:
       Cfg.getParamBool('misc.verboseLevel1').setBool(True)
       Cfg.getParamBool('misc.verboseLevel2').setBool(True)
-    if options.saveAll:     views    |= CRL.Catalog.State.Logical
-    if options.doPlacement: doStages |= DoPlacement
-    if options.doRouting:   doStages |= DoRouting
-    if options.doChip:      doStages |= DoChip
-    if options.doClockTree: doStages |= DoClockTree
-    if options.useKatana:   doStages |= UseKatana
-    if not doStages:        doStages  = ChipStages
+    if options.saveAll:      views    |= CRL.Catalog.State.Logical
+    if options.doPlacement:  doStages |= DoPlacement
+    if options.doRouting:    doStages |= DoRouting
+    if options.doChip:       doStages |= DoChip
+    if options.generateChip: doStages |= GenerateChip
+    if options.doClockTree:  doStages |= DoClockTree
+    if options.useKite  :    doStages |= UseKite  
+    if not doStages:         doStages  = ChipStages
     if options.profileRouter:
       Cfg.getParamBool(  'kite.profileEventCosts').setBool(True)
       Cfg.getParamBool('katana.profileEventCosts').setBool(True)
@@ -279,11 +297,11 @@ if __name__ == '__main__':
       if not kw['cell']:
         print '[ERROR] Unable to load cell "%s" (option "--blif=...")' % options.blif
     
-    success = ScriptMain( **kw )
+    success      = ScriptMain( **kw )
     shellSuccess = 0
     if not success: shellSuccess = 1
 
   except Exception, e:
-    showPythonTrace( sys.argv[0], e )
+    helpers.io.catch( e )
 
   sys.exit( shellSuccess )

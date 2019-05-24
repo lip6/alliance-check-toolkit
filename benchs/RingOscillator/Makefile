@@ -7,7 +7,7 @@
 
             USE_CLOCKTREE  = No
                 USE_DEBUG  = No
-               USE_KATANA  = Yes
+                 USE_KITE  = No
 
                  NETLISTS  = ringoscillator
                  PATTERNS  = ringoscillator
@@ -18,9 +18,9 @@
           CLEAN_SYNTHESIS += ringoscillator.vst
 
 ringoscillator.ap  ringoscillator.vst: ringoscillator.py
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt --script=ringoscillator)
+	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt --text --script=ringoscillator)
 
 layout: ringoscillator.ap
 lvx:    lvx-1-ringoscillator
-drc:    druc-ringoscillator
+druc:   druc-ringoscillator
 sim:    asimut-ringoscillator

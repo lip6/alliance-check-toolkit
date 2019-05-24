@@ -11,16 +11,16 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = cpu
 
  include ./mk/design-flow.mk
 
 
-layout:  cpu_clocked_r.ap
-gds:     cpu_clocked_r.gds
+layout:  cpu_htck_r.ap
+gds:     cpu_htck_r.gds
 
-lvx:     lvx-cpu_clocked_r
-druc:    druc-cpu_clocked_r
-view:    cgt-cpu_clocked_r
+lvx:     lvx-cpu_htck_r
+druc:    druc-cpu_htck_r
+view:    cgt-cpu_htck_r

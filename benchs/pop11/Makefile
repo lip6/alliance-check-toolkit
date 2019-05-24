@@ -7,7 +7,7 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = pop11     \
                             alu11     \
@@ -22,9 +22,9 @@
  include ./mk/design-flow.mk
 
 blif:      pop11.blif
-layout:    pop11_clocked_r.ap
-gds:       pop11_clocked_r.gds
+layout:    pop11_htck_r.ap
+gds:       pop11_htck_r.gds
 
-lvx:       lvx-pop11_clocked_r
-druc:      druc-pop11_clocked_r
-view:      cgt-pop11_clocked_r
+lvx:       lvx-pop11_htck_r
+druc:      druc-pop11_htck_r
+view:      cgt-pop11_htck_r

@@ -6,7 +6,7 @@
 
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-               USE_KATANA = Yes
+                 USE_KITE = No
 
                  NETLISTS = VexRiscv
 
@@ -14,8 +14,8 @@
 
 blif:   VexRiscv.blif
 vst:    vexriscv.vst
-layout: vexriscv_clocked_r.ap
-gds:    vexriscv_clocked_r.gds
+layout: vexriscv_htck_r.ap
+gds:    vexriscv_htck_r.gds
 
-lvx:    lvx-vst-vexriscv_clocked
-drc:    druc-vexriscv_clocked_r
+lvx:    lvx-vst-vexriscv_htck
+drc:    druc-vexriscv_htck_r
