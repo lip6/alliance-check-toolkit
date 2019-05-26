@@ -1,0 +1,108 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Feb 19, 2019, 11:14
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity corona is
+  port ( cin_from_pads : in bit
+       ; ck            : in bit
+       ; noe_from_pads : in bit
+       ; q0_from_pads  : in bit
+       ; q3_from_pads  : in bit
+       ; r0_from_pads  : in bit
+       ; r3_from_pads  : in bit
+       ; a_from_pads   : in bit_vector(3 downto 0)
+       ; b_from_pads   : in bit_vector(3 downto 0)
+       ; d_from_pads   : in bit_vector(3 downto 0)
+       ; i_from_pads   : in bit_vector(8 downto 0)
+       ; cout_to_pads  : out bit
+       ; f3_to_pads    : out bit
+       ; ng_to_pads    : out bit
+       ; np_to_pads    : out bit
+       ; ovr_to_pads   : out bit
+       ; q0_to_pads    : out bit
+       ; q3_to_pads    : out bit
+       ; r0_to_pads    : out bit
+       ; r3_to_pads    : out bit
+       ; shift_l       : out bit
+       ; shift_r       : out bit
+       ; y_oe          : out bit
+       ; zero_to_pads  : out bit
+       ; y_to_pads     : out bit_vector(3 downto 0)
+       ; vdd           : in bit
+       ; vss           : in bit
+       );
+end corona;
+
+architecture structural of corona is
+
+  component coeur
+  port ( cin_from_pads : in bit
+       ; ck            : in bit
+       ; noe_from_pads : in bit
+       ; q0_from_pads  : in bit
+       ; q3_from_pads  : in bit
+       ; r0_from_pads  : in bit
+       ; r3_from_pads  : in bit
+       ; a_from_pads   : in bit_vector(3 downto 0)
+       ; b_from_pads   : in bit_vector(3 downto 0)
+       ; d_from_pads   : in bit_vector(3 downto 0)
+       ; i_from_pads   : in bit_vector(8 downto 0)
+       ; cout_to_pads  : out bit
+       ; f3_to_pads    : out bit
+       ; ng_to_pads    : out bit
+       ; np_to_pads    : out bit
+       ; ovr_to_pads   : out bit
+       ; q0_to_pads    : out bit
+       ; q3_to_pads    : out bit
+       ; r0_to_pads    : out bit
+       ; r3_to_pads    : out bit
+       ; shift_l       : out bit
+       ; shift_r       : out bit
+       ; y_oe          : out bit
+       ; zero_to_pads  : out bit
+       ; y_to_pads     : out bit_vector(3 downto 0)
+       ; vdd           : in bit
+       ; vss           : in bit
+       );
+  end component;
+
+
+begin
+
+  core : coeur
+  port map ( cin_from_pads => cin_from_pads
+           , ck            => ck
+           , noe_from_pads => noe_from_pads
+           , q0_from_pads  => q0_from_pads
+           , q3_from_pads  => q3_from_pads
+           , r0_from_pads  => r0_from_pads
+           , r3_from_pads  => r3_from_pads
+           , a_from_pads   => a_from_pads
+           , b_from_pads   => b_from_pads
+           , d_from_pads   => d_from_pads
+           , i_from_pads   => i_from_pads
+           , cout_to_pads  => cout_to_pads
+           , f3_to_pads    => f3_to_pads
+           , ng_to_pads    => ng_to_pads
+           , np_to_pads    => np_to_pads
+           , ovr_to_pads   => ovr_to_pads
+           , q0_to_pads    => q0_to_pads
+           , q3_to_pads    => q3_to_pads
+           , r0_to_pads    => r0_to_pads
+           , r3_to_pads    => r3_to_pads
+           , shift_l       => shift_l
+           , shift_r       => shift_r
+           , y_oe          => y_oe
+           , zero_to_pads  => zero_to_pads
+           , y_to_pads     => y_to_pads
+           , vdd           => vdd
+           , vss           => vss
+           );
+
+end structural;
+

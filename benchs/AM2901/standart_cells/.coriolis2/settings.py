@@ -22,8 +22,8 @@ parametersTable = \
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL5')
-    , ("kite.hTracksReservedLocal", TypeInt       , 3       )
-    , ("kite.vTracksReservedLocal", TypeInt       , 3       )
+    , ("kite.hTracksReservedLocal", TypeInt       , 4       )
+    , ("kite.vTracksReservedLocal", TypeInt       , 4       )
     , ('clockTree.minimumSide'    , TypeInt       , l(1000) )
     )
 

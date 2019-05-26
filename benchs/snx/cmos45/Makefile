@@ -18,9 +18,9 @@
  include ./mk/design-flow.mk
 
 
-layout:    snx_htck_r.ap
-gds:       snx_htck_r.gds
+layout:    snx_cts_r.ap
+gds:       snx_cts_r.gds
 
-lvx:       lvx-snx_htck_r
-druc:      druc-snx_htck_r
-view:      cgt-snx_htck_r
+lvx:       lvx-snx_cts_r
+druc:      druc-snx_cts_r
+view:      cgt-snx_cts_r

@@ -14,8 +14,8 @@
 
 blif:   VexRiscv.blif
 vst:    vexriscv.vst
-layout: vexriscv_htck_r.ap
-gds:    vexriscv_htck_r.gds
+layout: vexriscv_cts_r.ap
+gds:    vexriscv_cts_r.gds
 
-lvx:    lvx-vst-vexriscv_htck
-drc:    druc-vexriscv_htck_r
+lvx:    lvx-vst-vexriscv_cts
+drc:    druc-vexriscv_cts_r
