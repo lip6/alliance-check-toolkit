@@ -5,6 +5,10 @@
    $(error YOSYS_TOP has not been set)
  endif
 
+ ifeq ($(YOSYS_FLATTEN),)
+   YOSYS_FLATTEN = No
+ endif
+
 
 # -------------------------------------------------------------------
 # Yosys Rules (pattern matching).
@@ -29,6 +33,10 @@
 	 echo "set liberty_file $(LIBERTY_FILE)"            >> $*.tcl; \
 	 echo "yosys read_verilog          \$$verilog_file" >> $*.tcl; \
 	 echo "yosys hierarchy -check -top \$$verilog_top"  >> $*.tcl; \
+	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then                       \
+     echo "yosys flatten               \$$verilog_top"  >> $*.tcl; \
+     echo "yosys hierarchy        -top \$$verilog_top"  >> $*.tcl; \
+	 fi;                                                           \
 	 echo "yosys synth            -top \$$verilog_top"  >> $*.tcl; \
 	 echo "yosys dfflibmap -liberty    \$$liberty_file" >> $*.tcl; \
 	 echo "yosys abc       -liberty    \$$liberty_file" >> $*.tcl; \
