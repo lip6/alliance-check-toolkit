@@ -22,8 +22,8 @@ parametersTable = \
     , ('etesian.spaceMargin'        , TypePercentage, 20.0    )
     , ('etesian.aspectRatio'        , TypePercentage, 100.0   )
    # Kite parameters.
-    , ("katana.hTracksReservedLocal", TypeInt       , 5       )
-    , ("katana.vTracksReservedLocal", TypeInt       , 4       )
+    , ("katana.hTracksReservedLocal", TypeInt       , 6       )
+    , ("katana.vTracksReservedLocal", TypeInt       , 5       )
     , ('anabatic.topRoutingLayer'   , TypeString    , 'METAL4')
     )
 
