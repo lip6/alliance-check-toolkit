@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
+enableProfiling = False
+
 try:
   import sys
   import traceback
   import os.path
   import optparse
-  import numpy      as     np
-  from   matplotlib import pyplot
-  from   matplotlib import ticker
   import Cfg        
   import Hurricane  
   from   Hurricane  import DbU
@@ -31,6 +30,10 @@ try:
   import plugins.CoreToChip_cmos
   import plugins.ChipPlace
   import plugins.RSavePlugin
+  if enableProfiling:
+    import numpy      as     np
+    from   matplotlib import pyplot
+    from   matplotlib import ticker
 except ImportError, e:
   showPythonTrace( __file__, e, False )
   sys.exit(1)
