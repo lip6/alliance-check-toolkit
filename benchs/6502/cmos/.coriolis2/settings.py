@@ -12,7 +12,7 @@ parametersTable = \
     , ('misc.info'                  , TypeBool      , False   )
     , ('misc.paranoid'              , TypeBool      , False   )
     , ('misc.bug'                   , TypeBool      , False   )
-    , ('misc.logMode'               , TypeBool      , False   )
+    , ('misc.logMode'               , TypeBool      , True    )
     , ('misc.verboseLevel1'         , TypeBool      , True    )
     , ('misc.verboseLevel2'         , TypeBool      , True    )
    #, ('misc.minTraceLevel'         , TypeInt       , 0       )
@@ -27,8 +27,8 @@ parametersTable = \
     , ('anabatic.topRoutingLayer'   , TypeString    , 'METAL5')
     , ("kite.hTracksReservedLocal"  , TypeInt       , 4       )
     , ("kite.vTracksReservedLocal"  , TypeInt       , 4       )
-    , ("katana.hTracksReservedLocal", TypeInt       , 4       )
-    , ("katana.vTracksReservedLocal", TypeInt       , 4       )
+    , ("katana.hTracksReservedLocal", TypeInt       , 7       )
+    , ("katana.vTracksReservedLocal", TypeInt       , 6       )
     )
 
 

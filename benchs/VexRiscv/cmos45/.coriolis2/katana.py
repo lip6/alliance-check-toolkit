@@ -9,3 +9,5 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12509_n1386' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n763' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n800' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_16351_n7954' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_16351_n4927_1' ) )

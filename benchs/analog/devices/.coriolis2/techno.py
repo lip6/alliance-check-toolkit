@@ -1,5 +1,5 @@
 
-useNda = False
+useNda = True
 
 if useNda:
   import os.path
