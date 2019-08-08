@@ -48,11 +48,13 @@
 .. |cpu|               replace:: :sc:`cpu`
 .. |SNX|               replace:: :sc:`snx`
 .. |6502|              replace:: :sc:`6502`
+.. |Arlet6502|         replace:: :sc:`Arlet6502`
 .. |MIPS|              replace:: :sc:`mips`
 .. |ARMv2a|            replace:: :sc:`ARMv2a`
 .. |VexRiscV|          replace:: :sc:`VexRiscV`
 .. |FPGA|              replace:: :sc:`fpga`
 .. |ISPD05|            replace:: :sc:`ispd05`
+.. |ALU|               replace:: :sc:`alu`
 		       
 .. |encounter|         replace:: ``encounter``
 .. |yosys|             replace:: ``yosys``
@@ -116,6 +118,10 @@
 .. |vhdl|              replace:: ``vhdl``
 .. |blif|              replace:: ``blif``
 
+				 
+.. _`Arlet's MOS 6502 core`: https://github.com/Arlet/verilog-6502
+
+
 
 :raw-html:`<br/>`
 
@@ -143,6 +149,22 @@ As a consequence, this repository is likely to be *very* unstable and the commit
 not well documenteds as they will be quick corrections made by the developpers.
 
 
+Release Notes
+=============
+
+August 30, 2019
+~~~~~~~~~~~~~~~
+
+|Katana| is now used as the default router. It can now manage a complete chip design
+with I/O pads. As a consequence, the |Makefile| are all modificated, the variable
+``USE_KATANA=Yes`` is changed to ``USE_KITE=No`` (see `Benchmark Makefiles`_).
+
+Designs with I/O pads are also modificated to be processed by |Katana| as it uses
+a different approach.
+
+|newpage|
+
+
 Toolkit Contents
 ================
 
@@ -155,33 +177,46 @@ The toolkit provides:
 Design                         Technology                  Cell Libraries                           Status
 =============================  ==========================  =======================================  ===========
 |adder|                        |MOSIS|                     |nsxlib|, |mpxlib|, |msplib|             Unchecked
-|AM2901| (standard cells)      |Alliance| symb. cmos       |sxlib|, |pxlib|                         OK
-|AM2901| (datapath)            |Alliance| symb. cmos       |sxlib|, |dp_sxlib|, |pxlib|             OK
-|alliance-run| (|AM2901|)      |Alliance| symb. cmos       |sxlib|, |dp_sxlib|, |padlib|            Unchecked
-``RingOscillator``             |Alliance| symb. cmos       |sxlib|                                  OK
+|AM2901| (standard cells)      Symbolic cmos               |sxlib|, |pxlib|                         OK
+|AM2901| (datapath)            Symbolic cmos               |sxlib|, |dp_sxlib|, |pxlib|             OK
+|alliance-run| (|AM2901|)      Symbolic cmos               |sxlib|, |dp_sxlib|, |padlib|            Unchecked
+``RingOscillator``             Symbolic cmos               |sxlib|                                  OK
 |cpu|                          |MOSIS|                     |nsxlib|, |mpxlib|, |msplib|             OK
 **SNX**
 ---------------------------------------------------------------------------------------------------------------
-|SNX| / Alliance               |Alliance| symb. cmos       |sclib|                                  Unchecked
-|SNX| / sxlib2M                |Alliance| symb. cmos 2M    |sxlib|                                  OK
-|SNX| / cmos                   |Alliance| symb. cmos       |sxlib|, |pxlib|                         OK
-|SNX| / cmos45                 |Alliance| symb. cmos 45    |nsxlib|, |mpxlib|                       OK
+|SNX| / Alliance               Symbolic cmos               |sclib|                                  Unchecked
+|SNX| / sxlib2M                Symbolic cmos 2M            |sxlib|                                  OK
+|SNX| / cmos                   Symbolic cmos               |sxlib|, |pxlib|                         OK
+|SNX| / cmos45                 Symbolic cmos 45            |nsxlib|, |mpxlib|                       OK
 |SNX| / FreePDK_45             FreePDK 45                  |gscl45|                                 OK
 |SNX| / c35b4                  AMS 350nm c35b4             |CORELIB|                                KO
-|6502|                         |Alliance| symb. cmos 45    |nsxlib|                                 OK
-|MIPS| (microprogrammed)       |Alliance| symb. cmos       |sxlib|, |dp_sxlib|, |rf2lib|            OK
-|MIPS| (pipeline)              |Alliance| symb. cmos       |sxlib|, |dp_sxlib|, |rf2lib|            OK
-|MIPS| (pipeline+chip)         |Alliance| symb. cmos       |sxlib|, |dp_sxlib|, |rf2lib|, |pxlib|   Unchecked
-|FPGA| (``Moc4x4_L4C12``)      |Alliance| symb. cmos       |sxlib|                                  KO
+**6502**
+---------------------------------------------------------------------------------------------------------------
+|6502| / cmos45                Symbolic cmos 45            |nsxlib|                                 OK
+|Arlet6502| / cmos350          Symbolic cmos 45            |nsxlib|                                 OK
+**MIPS**
+---------------------------------------------------------------------------------------------------------------
+|MIPS| (microprogrammed)       Symbolic cmos               |sxlib|, |dp_sxlib|, |rf2lib|            OK
+|MIPS| (pipeline)              Symbolic cmos               |sxlib|, |dp_sxlib|, |rf2lib|            OK
+|MIPS| (pipeline+chip)         Symbolic cmos               |sxlib|, |dp_sxlib|, |rf2lib|, |pxlib|   Unchecked
+**Miscellaneous**
+---------------------------------------------------------------------------------------------------------------
+|FPGA| (``Moc4x4_L4C12``)      Symbolic cmos               |sxlib|                                  KO
 |ISPD05| (``bigblue1``)        None                        Generated on the fly                     Unchecked
-|ARMv2a|                       |Alliance| symb. cmos       |sxlib|, |pxlib|                         OK
+|ARMv2a|                       Symbolic cmos               |sxlib|, |pxlib|                         OK
 **Vex RISC-V**
 ---------------------------------------------------------------------------------------------------------------
-|VexRiscV| / cmos              |Alliance| symb. cmos       |sxlib|, |pxlib|                         OK
-|VexRiscV| / cmos45            |Alliance| symb. cmos 45    |nsxlib|, |mpxlib|                       OK
+|VexRiscV| / cmos              Symbolic cmos               |sxlib|, |pxlib|                         OK
+|VexRiscV| / cmos45            Symbolic cmos 45            |nsxlib|, |mpxlib|                       OK
 |VexRiscV| / FreePDK_45        FreePDK 45                  |gscl45|                                 KO
 |VexRiscV| / c35b4             AMS 350nm c35b4             |CORELIB|                                KO
 =============================  ==========================  =======================================  ===========
+
+|newpage|
+
+
+* The |Arlet6502| is taken from `Arlet's MOS 6502 core`_ and is routed using the
+  four metal symbolic technology (so the router has three availables).
 
 * Three cell libraries.
 
@@ -190,11 +225,11 @@ Design                         Technology                  Cell Libraries       
   that technology, and we may have to perform quick fixes on them. The design are
   configured to use them instead of those supplied by the |Alliance| installation.
 
-  * |nsxlib| : Standard Cell library.
-  * |mpxlib| : Pad library, compliant with |Coriolis|.
-  * |msplib| : Pad library, compliant with |Alliance| / |ring|. Cells in this
-    library are *wrappers* around their counterpart in |mpxlib|, they provides
-    an outer layout shell that is usable by |ring|.
+  #. |nsxlib| : Standard Cell library.
+  #. |mpxlib| : Pad library, compliant with |Coriolis|.
+  #. |msplib| : Pad library, compliant with |Alliance| / |ring|. Cells in this
+     library are *wrappers* around their counterpart in |mpxlib|, they provides
+     an outer layout shell that is usable by |ring|.
 
 * The |RDS| files for |MOSIS| (|scn6m_deep_09|) and |FreePDK45| technologies,
   for the same reason as the cell libraries.
@@ -219,6 +254,8 @@ Directory                                    Contents
 ``./benchs/<BENCH>/<techno>/``               Benchmark directories
 ``./doc/``                                   This documentation directory
 ===========================================  =======================================================
+
+|newpage|
 
 
 Benchmark Makefiles
@@ -255,8 +292,6 @@ is created for each.
 +--------------+----------------------+---------------------------------------------------------------+
 
 
-|newpage|
-
 A top |Makefile| in a bench directory must looks like: ::
 
             LOGICAL_SYNTHESIS = Yosys
@@ -265,7 +300,7 @@ A top |Makefile| in a bench directory must looks like: ::
     
                 USE_CLOCKTREE = No
                     USE_DEBUG = No
-                   USE_KATANA = Yes
+                     USE_KITE = No
     
                      NETLISTS = VexRiscv
     
@@ -278,6 +313,8 @@ A top |Makefile| in a bench directory must looks like: ::
     lvx:    lvx-vst-vexriscv
     drc:    druc-vexriscv_r
 
+
+|newpage|
 
 
 Where variables have the following meaning:
@@ -302,8 +339,7 @@ Variable                   Usage
                            Note that the clean will remove all generated files.
 ``USE_CLOCKTREE``          Adds a clock-tree to the design (|Coriolis|).
 ``USE_DEBUG``              Use the debugger enabled version of |cgt|.
-``USE_KATANA``             Use the new router |Katana| (mixed signal) instead of
-                           |Kite| (digital only). |Katana| do not manage I/O pads yet.
+``USE_KITE``               Use the old |Kite| (digital only) router.
 =========================  ===========================================================
 
 
@@ -423,6 +459,25 @@ the data-path features of |Alliance|.
 And lastly, it provides a check for the |Coriolis| encapsulation of |Alliance|
 through |Python| wrappers. The support is still incomplete and should be used
 only by very experienced users. See the ``demo*`` rules.
+
+
+|AM2901| standard cells
+~~~~~~~~~~~~~~~~~~~~~~~
+
+This benchmark can be run in loop to check slight variations. The clock tree generator
+modify the netlist trans-hierarchically then saves the new netlist. But, when there's
+a block *without* a clock (say an |ALU| for instance) it is not modificated yet saved.
+So the ``vst`` file got rewritten. And while the netlist is rewritten
+in a deterministic way (from how it was parsed), it is *not* done the same way due
+to instance and terminal re-ordering. So, from run to run, we get identical netlists
+but different files inducing slight variations in how the design is placed and routed.
+We use this *defect* to generate deterministic series of random variation that helps
+check the router. All runs are saved in a ``./runs`` sub-directory.
+
+The script to perform a serie of run is ``./doRun.sh``.
+
+To reset the serie to a specific run (for debug), you may use ``./setRun.sh``.
+
 
 |newpage|
 
