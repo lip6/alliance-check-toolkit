@@ -12,6 +12,7 @@
  benchRules["snx/cmos45"]="layout clean"
  benchRules["VexRiscv/cmos"]="druc clean"
  benchRules["VexRiscv/cmos45"]="layout clean"
+ benchRules["ARM/cmos"]="druc lvx clean"
  benchRules["RingOscillator"]="druc lvx clean"
 
  benchs=""
@@ -26,6 +27,7 @@
  benchs="${benchs} snx/cmos45"
  benchs="${benchs} VexRiscv/cmos"
  benchs="${benchs} VexRiscv/cmos45"
+ benchs="${benchs} ARM/cmos"
  benchs="${benchs} RingOscillator"
 
  for bench in ${benchs}; do

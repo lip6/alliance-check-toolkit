@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
+from helpers import l, u, n
+
 # 118 pads
 # 46 pads / faces
-chip = { 'pads.south'     : [ 'if_adr_0',  'if_adr_1',  'if_adr_2',  'if_adr_3',  'if_adr_4',  'if_adr_5',  'if_adr_6',  'if_adr_7',
+chip = { 'pads.ioPadGauge' : 'pxlib'
+       , 'pads.south'     : [ 'if_adr_0',  'if_adr_1',  'if_adr_2',  'if_adr_3',  'if_adr_4',  'if_adr_5',  'if_adr_6',  'if_adr_7',
                               'if_adr_8',  'if_adr_9',  'if_adr_10', 'if_adr_11', 'if_adr_12', 'if_adr_13', 'if_adr_14', 'if_adr_15',
                               'pvsse_0' ,  'pvdde_0' ,  'pvddi_0'  , 'pvssi_0'  ,
                               'if_adr_16', 'if_adr_17', 'if_adr_18', 'if_adr_19', 'if_adr_20', 'if_adr_21', 'if_adr_22', 'if_adr_23',
@@ -30,7 +33,7 @@ chip = { 'pads.south'     : [ 'if_adr_0',  'if_adr_1',  'if_adr_2',  'if_adr_3',
                               'mem_adr_24', 'mem_adr_25', 'mem_adr_26', 'mem_adr_27', 'mem_adr_28', 'mem_adr_29', 'mem_adr_30', 'mem_adr_31',
                               'mem_data_0', 'mem_data_1', 'mem_data_2', 'mem_data_3', 'mem_data_4', 'mem_data_5', 'mem_data_6', 'mem_data_7',
                               'mem_data_8', 'mem_data_9' ]
-       , 'core.size'      : ( 6000, 6000 )
-       , 'chip.size'      : ( 10000, 10000 )
+       , 'core.size'      : ( l( 6300), l( 6300) )
+       , 'chip.size'      : ( l(10000), l(10000) )
        , 'chip.clockTree' : True
        }

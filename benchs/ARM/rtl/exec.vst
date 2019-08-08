@@ -1,0 +1,260 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Jul 30, 2019, 18:10
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity exec is
+  port ( ck            : in bit
+       ; dec2exe_empty : in bit
+       ; dec_alu_add   : in bit
+       ; dec_alu_and   : in bit
+       ; dec_alu_cy    : in bit
+       ; dec_alu_or    : in bit
+       ; dec_alu_xor   : in bit
+       ; dec_comp_op1  : in bit
+       ; dec_comp_op2  : in bit
+       ; dec_cy        : in bit
+       ; dec_exe_wb    : in bit
+       ; dec_flag_wb   : in bit
+       ; dec_mem_lb    : in bit
+       ; dec_mem_lw    : in bit
+       ; dec_mem_sb    : in bit
+       ; dec_mem_sw    : in bit
+       ; dec_pre_index : in bit
+       ; dec_shift_asr : in bit
+       ; dec_shift_lsl : in bit
+       ; dec_shift_lsr : in bit
+       ; dec_shift_ror : in bit
+       ; dec_shift_rrx : in bit
+       ; mem_pop       : in bit
+       ; reset_n       : in bit
+       ; dec_exe_dest  : in bit_vector(3 downto 0)
+       ; dec_mem_dest  : in bit_vector(3 downto 0)
+       ; dec_shift_val : in bit_vector(4 downto 0)
+       ; dec_mem_data  : in bit_vector(31 downto 0)
+       ; dec_op1       : in bit_vector(31 downto 0)
+       ; dec_op2       : in bit_vector(31 downto 0)
+       ; exe2mem_empty : out bit
+       ; exe_c         : out bit
+       ; exe_flag_wb   : out bit
+       ; exe_mem_lb    : out bit
+       ; exe_mem_lw    : out bit
+       ; exe_mem_sb    : out bit
+       ; exe_mem_sw    : out bit
+       ; exe_n         : out bit
+       ; exe_pop       : out bit
+       ; exe_v         : out bit
+       ; exe_wb        : out bit
+       ; exe_z         : out bit
+       ; exe_dest      : out bit_vector(3 downto 0)
+       ; exe_mem_dest  : out bit_vector(3 downto 0)
+       ; exe_mem_adr   : out bit_vector(31 downto 0)
+       ; exe_mem_data  : out bit_vector(31 downto 0)
+       ; exe_res       : out bit_vector(31 downto 0)
+       ; vdd           : in bit
+       ; vss           : in bit
+       );
+end exec;
+
+architecture structural of exec is
+
+  component exec_model
+    port ( alu_cy        : in bit
+         ; dec2exe_empty : in bit
+         ; dec_alu_add   : in bit
+         ; dec_comp_op1  : in bit
+         ; dec_comp_op2  : in bit
+         ; dec_exe_wb    : in bit
+         ; dec_flag_wb   : in bit
+         ; dec_mem_lb    : in bit
+         ; dec_mem_lw    : in bit
+         ; dec_mem_sb    : in bit
+         ; dec_mem_sw    : in bit
+         ; dec_pre_index : in bit
+         ; exe_full      : in bit
+         ; shifter_cy    : in bit
+         ; dec_exe_dest  : in bit_vector(3 downto 0)
+         ; dec_mem_dest  : in bit_vector(3 downto 0)
+         ; alu_res       : in bit_vector(31 downto 0)
+         ; dec_mem_data  : in bit_vector(31 downto 0)
+         ; dec_op1       : in bit_vector(31 downto 0)
+         ; shifter_op2   : in bit_vector(31 downto 0)
+         ; fifo_dout     : in bit_vector(71 downto 0)
+         ; exe_c         : out bit
+         ; exe_flag_wb   : out bit
+         ; exe_mem_lb    : out bit
+         ; exe_mem_lw    : out bit
+         ; exe_mem_sb    : out bit
+         ; exe_mem_sw    : out bit
+         ; exe_pop       : out bit
+         ; exe_push      : out bit
+         ; exe_wb        : out bit
+         ; exe_dest      : out bit_vector(3 downto 0)
+         ; exe_mem_dest  : out bit_vector(3 downto 0)
+         ; comp_op1      : out bit_vector(31 downto 0)
+         ; comp_op2      : out bit_vector(31 downto 0)
+         ; exe_mem_adr   : out bit_vector(31 downto 0)
+         ; exe_mem_data  : out bit_vector(31 downto 0)
+         ; exe_res       : out bit_vector(31 downto 0)
+         ; fifo_din      : out bit_vector(71 downto 0)
+         ; vdd           : in bit
+         ; vss           : in bit
+         );
+  end component;
+
+  component fifo72
+    port ( ck      : in bit
+         ; pop     : in bit
+         ; push    : in bit
+         ; reset_n : in bit
+         ; din     : in bit_vector(71 downto 0)
+         ; empty   : out bit
+         ; full    : out bit
+         ; dout    : out bit_vector(71 downto 0)
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  component shifter
+    port ( cin     : in bit
+         ; cmd_asr : in bit
+         ; cmd_lsl : in bit
+         ; cmd_lsr : in bit
+         ; cmd_ror : in bit
+         ; cmd_rrx : in bit
+         ; shift   : in bit_vector(4 downto 0)
+         ; op2     : in bit_vector(31 downto 0)
+         ; cout    : out bit
+         ; res     : out bit_vector(31 downto 0)
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  component alu
+    port ( cin     : in bit
+         ; cmd_add : in bit
+         ; cmd_and : in bit
+         ; cmd_or  : in bit
+         ; cmd_xor : in bit
+         ; op1     : in bit_vector(31 downto 0)
+         ; op2     : in bit_vector(31 downto 0)
+         ; cout    : out bit
+         ; n       : out bit
+         ; v       : out bit
+         ; z       : out bit
+         ; res     : out bit_vector(31 downto 0)
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  signal alu_cy      :  bit;
+  signal exe_full    :  bit;
+  signal exe_push    :  bit;
+  signal shifter_cy  :  bit;
+  signal alu_res     :  bit_vector(31 downto 0);
+  signal comp_op1    :  bit_vector(31 downto 0);
+  signal comp_op2    :  bit_vector(31 downto 0);
+  signal shifter_op2 :  bit_vector(31 downto 0);
+  signal fifo_din    :  bit_vector(71 downto 0);
+  signal fifo_dout   :  bit_vector(71 downto 0);
+
+
+begin
+
+  exec_inst : exec_model
+  port map ( alu_cy        => alu_cy
+           , dec2exe_empty => dec2exe_empty
+           , dec_alu_add   => dec_alu_add
+           , dec_comp_op1  => dec_comp_op1
+           , dec_comp_op2  => dec_comp_op2
+           , dec_exe_wb    => dec_exe_wb
+           , dec_flag_wb   => dec_flag_wb
+           , dec_mem_lb    => dec_mem_lb
+           , dec_mem_lw    => dec_mem_lw
+           , dec_mem_sb    => dec_mem_sb
+           , dec_mem_sw    => dec_mem_sw
+           , dec_pre_index => dec_pre_index
+           , exe_full      => exe_full
+           , shifter_cy    => shifter_cy
+           , dec_exe_dest  => dec_exe_dest(3 downto 0)
+           , dec_mem_dest  => dec_mem_dest(3 downto 0)
+           , alu_res       => alu_res(31 downto 0)
+           , dec_mem_data  => dec_mem_data(31 downto 0)
+           , dec_op1       => dec_op1(31 downto 0)
+           , shifter_op2   => shifter_op2(31 downto 0)
+           , fifo_dout     => fifo_dout(71 downto 0)
+           , exe_c         => exe_c
+           , exe_flag_wb   => exe_flag_wb
+           , exe_mem_lb    => exe_mem_lb
+           , exe_mem_lw    => exe_mem_lw
+           , exe_mem_sb    => exe_mem_sb
+           , exe_mem_sw    => exe_mem_sw
+           , exe_pop       => exe_pop
+           , exe_push      => exe_push
+           , exe_wb        => exe_wb
+           , exe_dest      => exe_dest(3 downto 0)
+           , exe_mem_dest  => exe_mem_dest(3 downto 0)
+           , comp_op1      => comp_op1(31 downto 0)
+           , comp_op2      => comp_op2(31 downto 0)
+           , exe_mem_adr   => exe_mem_adr(31 downto 0)
+           , exe_mem_data  => exe_mem_data(31 downto 0)
+           , exe_res       => exe_res(31 downto 0)
+           , fifo_din      => fifo_din(71 downto 0)
+           , vdd           => vdd
+           , vss           => vss
+           );
+
+  fifo_0 : fifo72
+  port map ( ck      => ck
+           , pop     => mem_pop
+           , push    => exe_push
+           , reset_n => reset_n
+           , din     => fifo_din(71 downto 0)
+           , empty   => exe2mem_empty
+           , full    => exe_full
+           , dout    => fifo_dout(71 downto 0)
+           , vdd     => vdd
+           , vss     => vss
+           );
+
+  shifter_0 : shifter
+  port map ( cin     => dec_cy
+           , cmd_asr => dec_shift_asr
+           , cmd_lsl => dec_shift_lsl
+           , cmd_lsr => dec_shift_lsr
+           , cmd_ror => dec_shift_ror
+           , cmd_rrx => dec_shift_rrx
+           , shift   => dec_shift_val(4 downto 0)
+           , op2     => dec_op2(31 downto 0)
+           , cout    => shifter_cy
+           , res     => shifter_op2(31 downto 0)
+           , vdd     => vdd
+           , vss     => vss
+           );
+
+  alu_0 : alu
+  port map ( cin     => dec_alu_cy
+           , cmd_add => dec_alu_add
+           , cmd_and => dec_alu_and
+           , cmd_or  => dec_alu_or
+           , cmd_xor => dec_alu_xor
+           , op1     => comp_op1(31 downto 0)
+           , op2     => comp_op2(31 downto 0)
+           , cout    => alu_cy
+           , n       => exe_n
+           , v       => exe_v
+           , z       => exe_z
+           , res     => alu_res(31 downto 0)
+           , vdd     => vdd
+           , vss     => vss
+           );
+
+end structural;
+

@@ -1,7 +1,7 @@
 
 -- =======================================================================
 -- Coriolis Structural VHDL Driver
--- Generated on Mar 20, 2019, 16:04
+-- Generated on Aug 08, 2019, 19:59
 -- 
 -- To be interoperable with Alliance, it uses it's special VHDL subset.
 -- ("man vhdl" under Alliance for more informations)
@@ -54,200 +54,9 @@ architecture structural of ifetch_model is
 
 begin
 
-  aux1_ins : no3_x1
-  port map ( i0  => dec2if_empty
-           , i1  => ic_stall
-           , i2  => if2dec_full
-           , nq  => aux1
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_0_ins : buf_x2
-  port map ( i   => dec_pc(0)
-           , q   => if_adr(0)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_29_ins : buf_x2
-  port map ( i   => dec_pc(29)
-           , q   => if_adr(29)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_28_ins : buf_x2
-  port map ( i   => dec_pc(28)
-           , q   => if_adr(28)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_27_ins : buf_x2
-  port map ( i   => dec_pc(27)
-           , q   => if_adr(27)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_26_ins : buf_x2
-  port map ( i   => dec_pc(26)
-           , q   => if_adr(26)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_5_ins : buf_x2
-  port map ( i   => dec_pc(5)
-           , q   => if_adr(5)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_4_ins : buf_x2
-  port map ( i   => dec_pc(4)
-           , q   => if_adr(4)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_3_ins : buf_x2
-  port map ( i   => dec_pc(3)
-           , q   => if_adr(3)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_2_ins : buf_x2
-  port map ( i   => dec_pc(2)
-           , q   => if_adr(2)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_1_ins : buf_x2
-  port map ( i   => dec_pc(1)
-           , q   => if_adr(1)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_10_ins : buf_x2
-  port map ( i   => dec_pc(10)
-           , q   => if_adr(10)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_19_ins : buf_x2
-  port map ( i   => dec_pc(19)
-           , q   => if_adr(19)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_18_ins : buf_x2
-  port map ( i   => dec_pc(18)
-           , q   => if_adr(18)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_17_ins : buf_x2
-  port map ( i   => dec_pc(17)
-           , q   => if_adr(17)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_16_ins : buf_x2
-  port map ( i   => dec_pc(16)
-           , q   => if_adr(16)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_15_ins : buf_x2
-  port map ( i   => dec_pc(15)
-           , q   => if_adr(15)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_24_ins : buf_x2
-  port map ( i   => dec_pc(24)
-           , q   => if_adr(24)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_23_ins : buf_x2
-  port map ( i   => dec_pc(23)
-           , q   => if_adr(23)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_22_ins : buf_x2
-  port map ( i   => dec_pc(22)
-           , q   => if_adr(22)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_21_ins : buf_x2
-  port map ( i   => dec_pc(21)
-           , q   => if_adr(21)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_20_ins : buf_x2
-  port map ( i   => dec_pc(20)
-           , q   => if_adr(20)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_9_ins : buf_x2
-  port map ( i   => dec_pc(9)
-           , q   => if_adr(9)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_8_ins : buf_x2
-  port map ( i   => dec_pc(8)
-           , q   => if_adr(8)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_7_ins : buf_x2
-  port map ( i   => dec_pc(7)
-           , q   => if_adr(7)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_6_ins : buf_x2
-  port map ( i   => dec_pc(6)
-           , q   => if_adr(6)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if_adr_25_ins : buf_x2
-  port map ( i   => dec_pc(25)
-           , q   => if_adr(25)
-           , vdd => vdd
-           , vss => vss
-           );
-
-  if2dec_push_ins : buf_x2
-  port map ( i   => aux1
-           , q   => if2dec_push
+  if_adr_12_ins : buf_x2
+  port map ( i   => dec_pc(12)
+           , q   => if_adr(12)
            , vdd => vdd
            , vss => vss
            );
@@ -259,37 +68,51 @@ begin
            , vss => vss
            );
 
-  if_adr_valid_ins : inv_x2
-  port map ( i   => dec2if_empty
-           , nq  => if_adr_valid
+  if2dec_push_ins : buf_x2
+  port map ( i   => aux1
+           , q   => if2dec_push
            , vdd => vdd
            , vss => vss
            );
 
-  if_adr_31_ins : buf_x2
-  port map ( i   => dec_pc(31)
-           , q   => if_adr(31)
+  if_adr_6_ins : buf_x2
+  port map ( i   => dec_pc(6)
+           , q   => if_adr(6)
            , vdd => vdd
            , vss => vss
            );
 
-  if_adr_30_ins : buf_x2
-  port map ( i   => dec_pc(30)
-           , q   => if_adr(30)
+  if_adr_9_ins : buf_x2
+  port map ( i   => dec_pc(9)
+           , q   => if_adr(9)
            , vdd => vdd
            , vss => vss
            );
 
-  if_adr_11_ins : buf_x2
-  port map ( i   => dec_pc(11)
-           , q   => if_adr(11)
+  if_adr_3_ins : buf_x2
+  port map ( i   => dec_pc(3)
+           , q   => if_adr(3)
            , vdd => vdd
            , vss => vss
            );
 
-  if_adr_12_ins : buf_x2
-  port map ( i   => dec_pc(12)
-           , q   => if_adr(12)
+  if_adr_27_ins : buf_x2
+  port map ( i   => dec_pc(27)
+           , q   => if_adr(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_18_ins : buf_x2
+  port map ( i   => dec_pc(18)
+           , q   => if_adr(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_15_ins : buf_x2
+  port map ( i   => dec_pc(15)
+           , q   => if_adr(15)
            , vdd => vdd
            , vss => vss
            );
@@ -301,9 +124,186 @@ begin
            , vss => vss
            );
 
+  if_adr_30_ins : buf_x2
+  port map ( i   => dec_pc(30)
+           , q   => if_adr(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_valid_ins : inv_x2
+  port map ( i   => dec2if_empty
+           , nq  => if_adr_valid
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_7_ins : buf_x2
+  port map ( i   => dec_pc(7)
+           , q   => if_adr(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_0_ins : buf_x2
+  port map ( i   => dec_pc(0)
+           , q   => if_adr(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_19_ins : buf_x2
+  port map ( i   => dec_pc(19)
+           , q   => if_adr(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_16_ins : buf_x2
+  port map ( i   => dec_pc(16)
+           , q   => if_adr(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_24_ins : buf_x2
+  port map ( i   => dec_pc(24)
+           , q   => if_adr(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_21_ins : buf_x2
+  port map ( i   => dec_pc(21)
+           , q   => if_adr(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_25_ins : buf_x2
+  port map ( i   => dec_pc(25)
+           , q   => if_adr(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_1_ins : buf_x2
+  port map ( i   => dec_pc(1)
+           , q   => if_adr(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_4_ins : buf_x2
+  port map ( i   => dec_pc(4)
+           , q   => if_adr(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_28_ins : buf_x2
+  port map ( i   => dec_pc(28)
+           , q   => if_adr(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  aux1_ins : no3_x1
+  port map ( i0  => dec2if_empty
+           , i1  => ic_stall
+           , i2  => if2dec_full
+           , nq  => aux1
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_10_ins : buf_x2
+  port map ( i   => dec_pc(10)
+           , q   => if_adr(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_22_ins : buf_x2
+  port map ( i   => dec_pc(22)
+           , q   => if_adr(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
   if_adr_14_ins : buf_x2
   port map ( i   => dec_pc(14)
            , q   => if_adr(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_11_ins : buf_x2
+  port map ( i   => dec_pc(11)
+           , q   => if_adr(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_31_ins : buf_x2
+  port map ( i   => dec_pc(31)
+           , q   => if_adr(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_8_ins : buf_x2
+  port map ( i   => dec_pc(8)
+           , q   => if_adr(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_20_ins : buf_x2
+  port map ( i   => dec_pc(20)
+           , q   => if_adr(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_2_ins : buf_x2
+  port map ( i   => dec_pc(2)
+           , q   => if_adr(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_5_ins : buf_x2
+  port map ( i   => dec_pc(5)
+           , q   => if_adr(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_26_ins : buf_x2
+  port map ( i   => dec_pc(26)
+           , q   => if_adr(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_29_ins : buf_x2
+  port map ( i   => dec_pc(29)
+           , q   => if_adr(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_17_ins : buf_x2
+  port map ( i   => dec_pc(17)
+           , q   => if_adr(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  if_adr_23_ins : buf_x2
+  port map ( i   => dec_pc(23)
+           , q   => if_adr(23)
            , vdd => vdd
            , vss => vss
            );

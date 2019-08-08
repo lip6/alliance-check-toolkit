@@ -13,8 +13,8 @@
                 USE_DEBUG = No
                  USE_KITE = No
 
-                 NETLISTS = alu          \
-                            arm_chip     \
+                 NETLISTS = arm_chip     \
+                            arm_corona   \
                             arm_core     \
                             decod_model  \
                             decod        \
@@ -25,6 +25,7 @@
                             fifo72       \
                             ifetch_model \
                             ifetch       \
+                            alu          \
                             mem          \
                             reg          \
                             shifter
@@ -32,9 +33,9 @@
  include ./mk/design-flow.mk
 
 
-lvx:     lvx-arm_chip_htck_r
-druc:    druc-arm_chip_htck_r
-view:    cgt-arm_chip_htck_r
+lvx:     lvx-arm_chip_cts_r
+druc:    druc-arm_chip_cts_r
+view:    cgt-arm_chip_cts_r
 
-layout:  arm_chip_htck_r.ap
-gds:     arm_chip_htck_r.gds
+layout:  arm_chip_cts_r.ap
+gds:     arm_chip_cts_r.gds

@@ -1,0 +1,430 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Jul 30, 2019, 18:10
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity decod is
+  port ( ck            : in bit
+       ; exe_c         : in bit
+       ; exe_flag_wb   : in bit
+       ; exe_n         : in bit
+       ; exe_pop       : in bit
+       ; exe_v         : in bit
+       ; exe_wb        : in bit
+       ; exe_z         : in bit
+       ; if2dec_empty  : in bit
+       ; if_pop        : in bit
+       ; mem_wb        : in bit
+       ; reset_n       : in bit
+       ; exe_dest      : in bit_vector(3 downto 0)
+       ; mem_dest      : in bit_vector(3 downto 0)
+       ; exe_res       : in bit_vector(31 downto 0)
+       ; if_ir         : in bit_vector(31 downto 0)
+       ; mem_res       : in bit_vector(31 downto 0)
+       ; dec2exe_empty : out bit
+       ; dec2if_empty  : out bit
+       ; dec_alu_add   : out bit
+       ; dec_alu_and   : out bit
+       ; dec_alu_cy    : out bit
+       ; dec_alu_or    : out bit
+       ; dec_alu_xor   : out bit
+       ; dec_comp_op1  : out bit
+       ; dec_comp_op2  : out bit
+       ; dec_cy        : out bit
+       ; dec_exe_wb    : out bit
+       ; dec_flag_wb   : out bit
+       ; dec_mem_lb    : out bit
+       ; dec_mem_lw    : out bit
+       ; dec_mem_sb    : out bit
+       ; dec_mem_sw    : out bit
+       ; dec_pop       : out bit
+       ; dec_pre_index : out bit
+       ; dec_shift_asr : out bit
+       ; dec_shift_lsl : out bit
+       ; dec_shift_lsr : out bit
+       ; dec_shift_ror : out bit
+       ; dec_shift_rrx : out bit
+       ; dec_exe_dest  : out bit_vector(3 downto 0)
+       ; dec_mem_dest  : out bit_vector(3 downto 0)
+       ; dec_shift_val : out bit_vector(4 downto 0)
+       ; dec_mem_data  : out bit_vector(31 downto 0)
+       ; dec_op1       : out bit_vector(31 downto 0)
+       ; dec_op2       : out bit_vector(31 downto 0)
+       ; dec_pc        : out bit_vector(31 downto 0)
+       ; vdd           : in bit
+       ; vss           : in bit
+       );
+end decod;
+
+architecture structural of decod is
+
+  component decod_model
+    port ( ck            : in bit
+         ; cry           : in bit
+         ; dec2exe_full  : in bit
+         ; dec2if_full   : in bit
+         ; exe_c         : in bit
+         ; exe_flag_wb   : in bit
+         ; exe_n         : in bit
+         ; exe_v         : in bit
+         ; exe_wb        : in bit
+         ; exe_z         : in bit
+         ; if2dec_empty  : in bit
+         ; mem_wb        : in bit
+         ; neg           : in bit
+         ; ovr           : in bit
+         ; reg_cznv      : in bit
+         ; reg_pcv       : in bit
+         ; reg_vv        : in bit
+         ; reset_n       : in bit
+         ; rvalid1       : in bit
+         ; rvalid2       : in bit
+         ; zero          : in bit
+         ; exe_dest      : in bit_vector(3 downto 0)
+         ; mem_dest      : in bit_vector(3 downto 0)
+         ; exe_res       : in bit_vector(31 downto 0)
+         ; if_ir         : in bit_vector(31 downto 0)
+         ; mem_res       : in bit_vector(31 downto 0)
+         ; rdata1        : in bit_vector(31 downto 0)
+         ; rdata2        : in bit_vector(31 downto 0)
+         ; rdata3        : in bit_vector(31 downto 0)
+         ; reg_pc        : in bit_vector(31 downto 0)
+         ; fifo_dout     : in bit_vector(128 downto 0)
+         ; bl_i          : out bit
+         ; cspr_wb       : out bit
+         ; dec_alu_add   : out bit
+         ; dec_alu_and   : out bit
+         ; dec_alu_cy    : out bit
+         ; dec_alu_or    : out bit
+         ; dec_alu_xor   : out bit
+         ; dec_comp_op1  : out bit
+         ; dec_comp_op2  : out bit
+         ; dec_cy        : out bit
+         ; dec_exe_wb    : out bit
+         ; dec_flag_wb   : out bit
+         ; dec_mem_lb    : out bit
+         ; dec_mem_lw    : out bit
+         ; dec_mem_sb    : out bit
+         ; dec_mem_sw    : out bit
+         ; dec_pop       : out bit
+         ; dec_pre_index : out bit
+         ; dec_shift_asr : out bit
+         ; dec_shift_lsl : out bit
+         ; dec_shift_lsr : out bit
+         ; dec_shift_ror : out bit
+         ; dec_shift_rrx : out bit
+         ; inc_pc        : out bit
+         ; inval1        : out bit
+         ; inval2        : out bit
+         ; inval_czn     : out bit
+         ; inval_ovr     : out bit
+         ; wcry          : out bit
+         ; wen1          : out bit
+         ; wen2          : out bit
+         ; wneg          : out bit
+         ; wovr          : out bit
+         ; wzero         : out bit
+         ; dec_exe_dest  : out bit_vector(3 downto 0)
+         ; dec_mem_dest  : out bit_vector(3 downto 0)
+         ; inval_adr1    : out bit_vector(3 downto 0)
+         ; inval_adr2    : out bit_vector(3 downto 0)
+         ; radr1         : out bit_vector(3 downto 0)
+         ; radr2         : out bit_vector(3 downto 0)
+         ; radr3         : out bit_vector(3 downto 0)
+         ; wadr1         : out bit_vector(3 downto 0)
+         ; wadr2         : out bit_vector(3 downto 0)
+         ; dec_shift_val : out bit_vector(4 downto 0)
+         ; dec_mem_data  : out bit_vector(31 downto 0)
+         ; dec_op1       : out bit_vector(31 downto 0)
+         ; dec_op2       : out bit_vector(31 downto 0)
+         ; wdata1        : out bit_vector(31 downto 0)
+         ; wdata2        : out bit_vector(31 downto 0)
+         ; fifo_din      : out bit_vector(128 downto 0)
+         ; dec2exe_push  : inout bit
+         ; dec2if_push   : inout bit
+         ; vdd           : in bit
+         ; vss           : in bit
+         );
+  end component;
+
+  component fifo129
+    port ( ck      : in bit
+         ; pop     : in bit
+         ; push    : in bit
+         ; reset_n : in bit
+         ; din     : in bit_vector(128 downto 0)
+         ; empty   : out bit
+         ; full    : out bit
+         ; dout    : out bit_vector(128 downto 0)
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  component fifo32
+    port ( ck      : in bit
+         ; pop     : in bit
+         ; push    : in bit
+         ; reset_n : in bit
+         ; din     : in bit_vector(31 downto 0)
+         ; empty   : out bit
+         ; full    : out bit
+         ; dout    : out bit_vector(31 downto 0)
+         ; vdd     : in bit
+         ; vss     : in bit
+         );
+  end component;
+
+  component reg
+    port ( blink      : in bit
+         ; ck         : in bit
+         ; cspr_wb    : in bit
+         ; inc_pc     : in bit
+         ; inval1     : in bit
+         ; inval2     : in bit
+         ; inval_czn  : in bit
+         ; inval_ovr  : in bit
+         ; reset_n    : in bit
+         ; wcry       : in bit
+         ; wen1       : in bit
+         ; wen2       : in bit
+         ; wneg       : in bit
+         ; wovr       : in bit
+         ; wzero      : in bit
+         ; inval_adr1 : in bit_vector(3 downto 0)
+         ; inval_adr2 : in bit_vector(3 downto 0)
+         ; radr1      : in bit_vector(3 downto 0)
+         ; radr2      : in bit_vector(3 downto 0)
+         ; radr3      : in bit_vector(3 downto 0)
+         ; wadr1      : in bit_vector(3 downto 0)
+         ; wadr2      : in bit_vector(3 downto 0)
+         ; wdata1     : in bit_vector(31 downto 0)
+         ; wdata2     : in bit_vector(31 downto 0)
+         ; cry        : out bit
+         ; cznv       : out bit
+         ; neg        : out bit
+         ; ovr        : out bit
+         ; reg_pcv    : out bit
+         ; rvalid1    : out bit
+         ; rvalid2    : out bit
+         ; rvalid3    : out bit
+         ; vv         : out bit
+         ; zero       : out bit
+         ; rdata1     : out bit_vector(31 downto 0)
+         ; rdata2     : out bit_vector(31 downto 0)
+         ; rdata3     : out bit_vector(31 downto 0)
+         ; reg_pc     : out bit_vector(31 downto 0)
+         ; vdd        : in bit
+         ; vss        : in bit
+         );
+  end component;
+
+  signal bl_i         :  bit;
+  signal cry          :  bit;
+  signal cspr_wb      :  bit;
+  signal dec2exe_full :  bit;
+  signal dec2exe_push :  bit;
+  signal dec2if_full  :  bit;
+  signal dec2if_push  :  bit;
+  signal inc_pc       :  bit;
+  signal inval1       :  bit;
+  signal inval2       :  bit;
+  signal inval_czn    :  bit;
+  signal inval_ovr    :  bit;
+  signal neg          :  bit;
+  signal ovr          :  bit;
+  signal reg_cznv     :  bit;
+  signal reg_pcv      :  bit;
+  signal reg_vv       :  bit;
+  signal rvalid1      :  bit;
+  signal rvalid2      :  bit;
+  signal rvalid3      :  bit;
+  signal wcry         :  bit;
+  signal wen1         :  bit;
+  signal wen2         :  bit;
+  signal wneg         :  bit;
+  signal wovr         :  bit;
+  signal wzero        :  bit;
+  signal zero         :  bit;
+  signal inval_adr1   :  bit_vector(3 downto 0);
+  signal inval_adr2   :  bit_vector(3 downto 0);
+  signal radr1        :  bit_vector(3 downto 0);
+  signal radr2        :  bit_vector(3 downto 0);
+  signal radr3        :  bit_vector(3 downto 0);
+  signal wadr1        :  bit_vector(3 downto 0);
+  signal wadr2        :  bit_vector(3 downto 0);
+  signal rdata1       :  bit_vector(31 downto 0);
+  signal rdata2       :  bit_vector(31 downto 0);
+  signal rdata3       :  bit_vector(31 downto 0);
+  signal reg_pc       :  bit_vector(31 downto 0);
+  signal wdata1       :  bit_vector(31 downto 0);
+  signal wdata2       :  bit_vector(31 downto 0);
+  signal fifo_din     :  bit_vector(128 downto 0);
+  signal fifo_dout    :  bit_vector(128 downto 0);
+
+
+begin
+
+  decod_inst : decod_model
+  port map ( ck            => ck
+           , cry           => cry
+           , dec2exe_full  => dec2exe_full
+           , dec2if_full   => dec2if_full
+           , exe_c         => exe_c
+           , exe_flag_wb   => exe_flag_wb
+           , exe_n         => exe_n
+           , exe_v         => exe_v
+           , exe_wb        => exe_wb
+           , exe_z         => exe_z
+           , if2dec_empty  => if2dec_empty
+           , mem_wb        => mem_wb
+           , neg           => neg
+           , ovr           => ovr
+           , reg_cznv      => reg_cznv
+           , reg_pcv       => reg_pcv
+           , reg_vv        => reg_vv
+           , reset_n       => reset_n
+           , rvalid1       => rvalid1
+           , rvalid2       => rvalid2
+           , zero          => zero
+           , exe_dest      => exe_dest(3 downto 0)
+           , mem_dest      => mem_dest(3 downto 0)
+           , exe_res       => exe_res(31 downto 0)
+           , if_ir         => if_ir(31 downto 0)
+           , mem_res       => mem_res(31 downto 0)
+           , rdata1        => rdata1(31 downto 0)
+           , rdata2        => rdata2(31 downto 0)
+           , rdata3        => rdata3(31 downto 0)
+           , reg_pc        => reg_pc(31 downto 0)
+           , fifo_dout     => fifo_dout(128 downto 0)
+           , bl_i          => bl_i
+           , cspr_wb       => cspr_wb
+           , dec_alu_add   => dec_alu_add
+           , dec_alu_and   => dec_alu_and
+           , dec_alu_cy    => dec_alu_cy
+           , dec_alu_or    => dec_alu_or
+           , dec_alu_xor   => dec_alu_xor
+           , dec_comp_op1  => dec_comp_op1
+           , dec_comp_op2  => dec_comp_op2
+           , dec_cy        => dec_cy
+           , dec_exe_wb    => dec_exe_wb
+           , dec_flag_wb   => dec_flag_wb
+           , dec_mem_lb    => dec_mem_lb
+           , dec_mem_lw    => dec_mem_lw
+           , dec_mem_sb    => dec_mem_sb
+           , dec_mem_sw    => dec_mem_sw
+           , dec_pop       => dec_pop
+           , dec_pre_index => dec_pre_index
+           , dec_shift_asr => dec_shift_asr
+           , dec_shift_lsl => dec_shift_lsl
+           , dec_shift_lsr => dec_shift_lsr
+           , dec_shift_ror => dec_shift_ror
+           , dec_shift_rrx => dec_shift_rrx
+           , inc_pc        => inc_pc
+           , inval1        => inval1
+           , inval2        => inval2
+           , inval_czn     => inval_czn
+           , inval_ovr     => inval_ovr
+           , wcry          => wcry
+           , wen1          => wen1
+           , wen2          => wen2
+           , wneg          => wneg
+           , wovr          => wovr
+           , wzero         => wzero
+           , dec_exe_dest  => dec_exe_dest(3 downto 0)
+           , dec_mem_dest  => dec_mem_dest(3 downto 0)
+           , inval_adr1    => inval_adr1(3 downto 0)
+           , inval_adr2    => inval_adr2(3 downto 0)
+           , radr1         => radr1(3 downto 0)
+           , radr2         => radr2(3 downto 0)
+           , radr3         => radr3(3 downto 0)
+           , wadr1         => wadr1(3 downto 0)
+           , wadr2         => wadr2(3 downto 0)
+           , dec_shift_val => dec_shift_val(4 downto 0)
+           , dec_mem_data  => dec_mem_data(31 downto 0)
+           , dec_op1       => dec_op1(31 downto 0)
+           , dec_op2       => dec_op2(31 downto 0)
+           , wdata1        => wdata1(31 downto 0)
+           , wdata2        => wdata2(31 downto 0)
+           , fifo_din      => fifo_din(128 downto 0)
+           , dec2exe_push  => dec2exe_push
+           , dec2if_push   => dec2if_push
+           , vdd           => vdd
+           , vss           => vss
+           );
+
+  dec2if : fifo32
+  port map ( ck      => ck
+           , pop     => if_pop
+           , push    => dec2if_push
+           , reset_n => reset_n
+           , din     => reg_pc(31 downto 0)
+           , empty   => dec2if_empty
+           , full    => dec2if_full
+           , dout    => dec_pc(31 downto 0)
+           , vdd     => vdd
+           , vss     => vss
+           );
+
+  dec2exec : fifo129
+  port map ( ck      => ck
+           , pop     => exe_pop
+           , push    => dec2exe_push
+           , reset_n => reset_n
+           , din     => fifo_din(128 downto 0)
+           , empty   => dec2exe_empty
+           , full    => dec2exe_full
+           , dout    => fifo_dout(128 downto 0)
+           , vdd     => vdd
+           , vss     => vss
+           );
+
+  reg_bank : reg
+  port map ( blink      => bl_i
+           , ck         => ck
+           , cspr_wb    => cspr_wb
+           , inc_pc     => inc_pc
+           , inval1     => inval1
+           , inval2     => inval2
+           , inval_czn  => inval_czn
+           , inval_ovr  => inval_ovr
+           , reset_n    => reset_n
+           , wcry       => wcry
+           , wen1       => wen1
+           , wen2       => wen2
+           , wneg       => wneg
+           , wovr       => wovr
+           , wzero      => wzero
+           , inval_adr1 => inval_adr1(3 downto 0)
+           , inval_adr2 => inval_adr2(3 downto 0)
+           , radr1      => radr1(3 downto 0)
+           , radr2      => radr2(3 downto 0)
+           , radr3      => radr3(3 downto 0)
+           , wadr1      => wadr1(3 downto 0)
+           , wadr2      => wadr2(3 downto 0)
+           , wdata1     => wdata1(31 downto 0)
+           , wdata2     => wdata2(31 downto 0)
+           , cry        => cry
+           , cznv       => reg_cznv
+           , neg        => neg
+           , ovr        => ovr
+           , reg_pcv    => reg_pcv
+           , rvalid1    => rvalid1
+           , rvalid2    => rvalid2
+           , rvalid3    => rvalid3
+           , vv         => reg_vv
+           , zero       => zero
+           , rdata1     => rdata1(31 downto 0)
+           , rdata2     => rdata2(31 downto 0)
+           , rdata3     => rdata3(31 downto 0)
+           , reg_pc     => reg_pc(31 downto 0)
+           , vdd        => vdd
+           , vss        => vss
+           );
+
+end structural;
+
