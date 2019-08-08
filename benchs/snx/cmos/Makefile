@@ -5,7 +5,7 @@
                DESIGN_KIT = sxlib
 
                      CHIP = chip
-	                 CORE = snx
+                     CORE = snx
                    MARGIN = 5
                   BOOMOPT = -A
                   BOOGOPT =
@@ -14,6 +14,7 @@
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
                  USE_KITE = No
+                  RM_CHIP = Yes
 
                  NETLISTS = snx_model   \
                             cla16       \

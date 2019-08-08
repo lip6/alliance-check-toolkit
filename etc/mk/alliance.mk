@@ -93,6 +93,9 @@ proof-%: %.vbe %_yag.vhd
 
  ifneq ($(CHIP),)
    CLEAN_CHIP += $(CHIP).ap corona.vst corona.ap
+   ifeq ($(RM_CHIP),Yes)
+     CLEAN_CHIP += $(CHIP).vst
+   endif
  endif
 
 clean:

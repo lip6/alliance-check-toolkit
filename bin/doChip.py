@@ -4,6 +4,7 @@ enableProfiling = False
 
 try:
   import sys
+  import re
   import traceback
   import os.path
   import optparse
@@ -160,8 +161,15 @@ def ScriptMain ( **kw ):
         success = plugins.ChipPlace.ScriptMain( **kw )
         if not success: return False
 
-        cell   = cell.getInstance( 'corona' ).getMasterCell()
-        corona = cell
+        coronaPattern = re.compile(r'.*corona.*')
+        for instance in cell.getInstances():
+          if coronaPattern.match( instance.getName() ):
+            cell   = instance.getMasterCell()
+            corona = cell
+            
+        if not corona:          
+          print '[ERROR] Cannot guess the corona instance/model, must contains the word "corona"...'
+          sys.exit(1)
       else:
        #if cell.getAbutmentBox().isEmpty():
        #  cellGauge   = framework.getCellGauge()

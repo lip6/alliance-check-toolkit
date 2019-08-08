@@ -3,6 +3,7 @@
 
 import os
 import os.path
+from helpers import l, u, n
 
 defaultStyle = 'Alliance.Classic [black]'
 #defaultStyle = 'Printer.Coriolis'
@@ -19,6 +20,7 @@ parametersTable = \
    #, ('misc.maxTraceLevel'       , TypeInt       , 1000    )
     , ('etesian.spaceMargin'      , TypePercentage, 20.0    )
     , ('etesian.aspectRatio'      , TypePercentage, 100.0   )
+    , ('clockTree.minimumSide'    , TypeInt       , l(1000) )
    # Kite parameters.
     , ("kite.eventsLimit"         , TypeInt       , 1000000 )
     , ('katabatic.topRoutingLayer', TypeString    , 'METAL3')

@@ -21,6 +21,15 @@
  else
    CORE_NETLIST = $(CORE)
  endif
+ ifeq ($(CORONA),)
+   CORONA_NETLIST = $(firstword $(filter %corona,$(NETLISTS)) )
+   ifneq ($(CORONA_NETLIST),)
+     CORONA_VST = $(CORONA_NETLIST).vst
+     $(info Guessed corona $(CORONA_VST))
+   endif
+ else
+   CORONA_VST = $(CORONA).vst
+ endif
 
 
  ifeq ($(REAL_MODE),Yes)
@@ -39,7 +48,7 @@ cgt-run: $(CORE_NETLIST).blif
 
    ifeq ($(USE_CLOCKTREE),Yes)
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst ioring.py corona.vst $(NETLISTS_VST)
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst ioring.py $(CORONA_VST) $(NETLISTS_VST)
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CHIP))
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py $(NETLISTS_VST)
