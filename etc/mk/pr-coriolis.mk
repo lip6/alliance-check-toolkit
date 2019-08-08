@@ -39,16 +39,16 @@ cgt-run: $(CORE_NETLIST).blif
 
    ifeq ($(USE_CLOCKTREE),Yes)
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst $(CHIP)_ioring.py corona.vst $(NETLISTS_VST)
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst ioring.py corona.vst $(NETLISTS_VST)
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CHIP))
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP)_ioring.py $(NETLISTS_VST)
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py $(NETLISTS_VST)
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prGCTS --cell=$(CORE_NETLIST))
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(NETLISTS_VST) $(DESIGN).py %_ioring.py
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(NETLISTS_VST) $(DESIGN).py ioring.py
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --script=$(DESIGN))
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(NETLISTS_VST) %_ioring.py 
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(NETLISTS_VST) ioring.py 
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CORE_NETLIST))
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(NETLISTS_VST)
@@ -58,10 +58,10 @@ cgt-run: $(CORE_NETLIST).blif
 
  CLEAN_PR = $(NETLISTS_VST:.vst=_r.vst) $(NETLISTS_VST:.vst=_r.ap)
 
-%_r.ap  %_r.vst:  $(NETLISTS_VST) $(DESIGN).py %_ioring.py
+%_r.ap  %_r.vst:  $(NETLISTS_VST) $(DESIGN).py ioring.py
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) --script=$(DESIGN))
 
-%_r.ap  %_r.vst:  $(NETLISTS_VST) %_ioring.py 
+%_r.ap  %_r.vst:  $(NETLISTS_VST) ioring.py 
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCS --cell=$*)
 
 %_r.ap  %_r.vst: $(NETLISTS_VST) %.ap
