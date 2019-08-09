@@ -4,6 +4,7 @@
                DESIGN_KIT = sxlib
 
                      CHIP = am2901
+                  RM_CHIP = Yes
                    MARGIN = 5
                   BOOMOPT =
                   BOOGOPT =
@@ -13,9 +14,7 @@
                 USE_DEBUG = No
                  USE_KITE = No
 
-                 NETLISTS = am2901  \
-                            corona  \
-                            coeur   \
+                 NETLISTS = coeur   \
                             accu    \
                             alu     \
                             muxe    \
