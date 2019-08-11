@@ -17,7 +17,7 @@
 
  benchs=""
  benchs="${benchs} adder/cmos"
- benchs="${benchs} AM2901/standart_cells"
+ benchs="${benchs} AM2901/standart_cells/cmos"
  benchs="${benchs} 6502/cmos"
  benchs="${benchs} 6502/cmos45"
  benchs="${benchs} arlet6502/cmos350"
@@ -27,7 +27,7 @@
  benchs="${benchs} snx/cmos45"
  benchs="${benchs} VexRiscv/cmos"
  benchs="${benchs} VexRiscv/cmos45"
- benchs="${benchs} ARM/cmos"
+#benchs="${benchs} ARM/cmos"
  benchs="${benchs} RingOscillator"
 
  for bench in ${benchs}; do
