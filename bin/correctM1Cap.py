@@ -92,8 +92,11 @@ def patch ( editor, cell ):
         else:
           modulo = yMin % hPitch
           if (modulo <= oneLambda):
-            component.setDySource( yMin - modulo )
-          print '     | Source cap adjusted:', component
+            component.setDySource( yMin - modulo - oneLambda )
+            print '     | Source cap adjusted (was above):', component
+          if (modulo >= hPitch - oneLambda):
+            component.setDySource( yMin + modulo - oneLambda )
+            print '     | Source cap adjusted (was below):', component
 
         yMax = component.getTargetY()
         if yMax < 0:
@@ -101,8 +104,11 @@ def patch ( editor, cell ):
         else:
           modulo = hPitch - yMax % hPitch
           if (modulo <= oneLambda):
-            component.setDyTarget( yMax + modulo )
-          print '     | Target cap adjusted:', component
+            component.setDyTarget( yMax + modulo + oneLambda )
+            print '     | Target cap adjusted (was above):', component
+          if (modulo >= hPitch - oneLambda):
+            component.setDyTarget( yMax - modulo + hPitch + oneLambda )
+            print '     | Target cap adjusted (was below):', component
 
   except ErrorMessage, e:
       print e; errorCode = e.code
