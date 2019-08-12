@@ -35,6 +35,9 @@
    ifneq ($(findstring .el7.,$(UNAME_R)),)
      BUILD_VARIANT    = Linux.el7
    endif
+   ifneq ($(findstring -Microsoft,$(UNAME_R)),)
+     BUILD_VARIANT    = Linux.x86
+   endif
    ifneq ($(findstring -generic,$(UNAME_R)),)
      BUILD_VARIANT    = Linux.x86
    endif
