@@ -40,18 +40,25 @@ framework = CRL.AllianceFramework.get()
 
 
 if __name__ == '__main__':
-  if len(sys.argv) != 2:
-    print ''
-    print 'Usage: blif2vst.py <blifName>'
-    print ''
-    print '  <blifName> is the sole and mandatory argument. It must be given'
-    print '  without the ".blif" extension.'
-    sys.exit( 1 )
 
-  cellName    = sys.argv[1]
+  parser = optparse.OptionParser()
+  parser.add_option( '-c', '--cell'  , type='string',                      dest='cellName'     , help='The name of the BLIF to convert, without extension.')
+  parser.add_option( '-v', '--verbose'              , action='store_true', dest='verbose'      , help='First level of verbosity.')
+  parser.add_option( '-V', '--very-verbose'         , action='store_true', dest='veryVerbose'  , help='Second level of verbosity.')
+  parser.add_option(       '--vst-use-concat'       , action='store_true', dest='vstUseConcat' , help='The VST driver will use "&" (concat) in PORT MAP.')
+  (options, args) = parser.parse_args()
+  
+  views    = CRL.Catalog.State.Logical
+  if options.verbose:
+    Cfg.getParamBool('misc.verboseLevel1').setBool(True)
+  if options.veryVerbose:
+    Cfg.getParamBool('misc.verboseLevel1').setBool(True)
+    Cfg.getParamBool('misc.verboseLevel2').setBool(True)
+  if options.vstUseConcat: views    |= CRL.Catalog.State.VstUseConcat
+    
   kw          = {}
-  kw['views'] = CRL.Catalog.State.Logical
-  kw['cell' ] = CRL.Blif.load( cellName )
+  kw['views'] = views
+  kw['cell' ] = CRL.Blif.load( options.cellName )
 
   plugins.RSavePlugin.ScriptMain( **kw )
 

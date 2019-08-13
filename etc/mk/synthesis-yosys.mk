@@ -45,4 +45,4 @@
 	 yosys -c $*.tcl
 
 $(NETLISTS_VST): $(VLOG_MODULE).blif
-	-@$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VLOG_MODULE))
+	-@$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE))

@@ -135,6 +135,8 @@ class RouterProfile ( object ):
 def ScriptMain ( **kw ):
   success  = False
   doStages = kw['doStages']
+  views    = kw['views']
+
   try:
     cell, editor = plugins.kwParseMain( **kw )
     corona       = None
@@ -222,7 +224,7 @@ def ScriptMain ( **kw ):
       saveCellName  = cell.getName()
       saveCellName += '_r'
       cell.setName( saveCellName )
-      framework.saveCell( cell, CRL.Catalog.State.Views )
+      framework.saveCell( cell, CRL.Catalog.State.Views|views )
 
     if doStages & ProfileRouter:
       profile = RouterProfile ( doStages )
@@ -253,6 +255,7 @@ if __name__ == '__main__':
     parser.add_option( '-K', '--kite'                 , action='store_true', dest='useKite'      , help='Use old Knik/Kite digital only router.')
     parser.add_option(       '--profile'              , action='store_true', dest='profileRouter', help='Activate cost profiling of Kite/Katana.')
     parser.add_option( '-S', '--save-all'             , action='store_true', dest='saveAll'      , help='Save both physical and logical views.')
+    parser.add_option(       '--vst-use-concat'       , action='store_true', dest='vstUseConcat' , help='The VST driver will use "&" (concat) in PORT MAP.')
     (options, args) = parser.parse_args()
     
     views    = CRL.Catalog.State.Physical
@@ -263,6 +266,7 @@ if __name__ == '__main__':
       Cfg.getParamBool('misc.verboseLevel1').setBool(True)
       Cfg.getParamBool('misc.verboseLevel2').setBool(True)
     if options.saveAll:      views    |= CRL.Catalog.State.Logical
+    if options.vstUseConcat: views    |= CRL.Catalog.State.VstUseConcat
     if options.doPlacement:  doStages |= DoPlacement
     if options.doRouting:    doStages |= DoRouting
     if options.doChip:       doStages |= DoChip

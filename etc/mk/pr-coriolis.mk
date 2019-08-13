@@ -15,6 +15,7 @@
  ifeq ($(USE_KITE),Yes)
    DoCHIP_FLAGS += --kite
  endif
+ DoCHIP_FLAGS += $(VST_FLAGS)
 
  ifeq ($(CORE),)
    CORE_NETLIST = $(firstword $(NETLISTS))
