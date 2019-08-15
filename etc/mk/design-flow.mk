@@ -42,3 +42,5 @@
  else
    $(error PHYSICAL_SYNTHESIS variable has not been set or has an unsupported value)
  endif
+
+ $(info Using RDS_TECHNO_NAME = "${RDS_TECHNO_NAME}")

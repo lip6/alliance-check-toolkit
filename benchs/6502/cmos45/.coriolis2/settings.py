@@ -30,7 +30,7 @@ parametersTable = \
     , ("kite.hTracksReservedLocal"  , TypeInt       , 4        )
     , ("kite.vTracksReservedLocal"  , TypeInt       , 4        )
     , ("katana.hTracksReservedLocal", TypeInt       , 7        )
-    , ("katana.vTracksReservedLocal", TypeInt       , 6        )
+    , ("katana.vTracksReservedLocal", TypeInt       , 7        )
     , ("anabatic.edgeHScaling"      , TypeDouble    , 1.0      )
     )
 
