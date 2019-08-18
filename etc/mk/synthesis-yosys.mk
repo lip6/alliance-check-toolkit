@@ -13,11 +13,16 @@
 # -------------------------------------------------------------------
 # Yosys Rules (pattern matching).
 
- VLOG_MODULE     = $(firstword $(NETLISTS))
- NETLISTS_VST    = $(shell echo $(VLOG_MODULE) | tr '[:upper:]' '[:lower:]').vst 
- NETLISTS_LOWER  = $(foreach netlist,$(NETLISTS), $(shell echo $(netlist) | tr '[:upper:]' '[:lower:]'))
- CLEAN_SYNTHESIS = $(foreach netlist,$(NETLISTS_LOWER), $(netlist).vst $(netlist).ap) \
-                   $(VLOG_MODULE).blif $(VLOG_MODULE).tcl
+ NETLISTS_NOCORONA = $(foreach netlist,$(NETLISTS)         ,$(shell echo $(netlist) | sed 's:.*_model::'))
+ NETLISTS_NOMODELS = $(foreach netlist,$(NETLISTS_NOCORONA),$(shell echo $(netlist) | sed 's:.*corona::'))
+ VLOG_MODULE       = $(firstword $(NETLISTS_NOMODELS))
+ NETLISTS_VST      = $(shell echo $(VLOG_MODULE) | tr '[:upper:]' '[:lower:]').vst 
+ NETLISTS_SYNTH    = $(foreach netlist,$(NETLISTS_NOMODELS), $(shell echo $(netlist) | tr '[:upper:]' '[:lower:]'))
+ CLEAN_SYNTHESIS   = $(addsuffix .vst,$(NETLISTS_SYNTH)) $(VLOG_MODULE).blif $(VLOG_MODULE).tcl
+
+ $(info | Verilog file & top model: "$(VLOG_MODULE)")
+ $(info | Generated secondary VHDL structural files (vst):)
+ $(foreach netlist,$(NETLISTS_SYNTH),$(info |  - "$(netlist)"))
 
 
 # Any file put in "./non_generated/" will take precedence over the
@@ -44,5 +49,5 @@
 	 echo "yosys write_blif $*.blif"                    >> $*.tcl;
 	 yosys -c $*.tcl
 
-$(NETLISTS_VST): $(VLOG_MODULE).blif
-	-@$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE))
+$(addsuffix .vst,$(NETLISTS_SYNTH)): $(VLOG_MODULE).blif
+	-@$(call run_if_older,$@,$(VLOG_MODULE).blif,$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE)) )

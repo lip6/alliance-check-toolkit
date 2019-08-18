@@ -4,6 +4,7 @@
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = sxlib
 
+                   PLACED = Yes
             USE_CLOCKTREE = No
                 USE_DEBUG = No
                  USE_KITE = No

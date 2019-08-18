@@ -27,8 +27,9 @@ try:
   import Kite
   import Unicorn
   import clocktree.ClockTree
+  import plugins
   import plugins.ClockTreePlugin
-  import plugins.CoreToChip_cmos
+ #import plugins.CoreToChip_cmos
   import plugins.ChipPlace
   import plugins.RSavePlugin
   if enableProfiling:
@@ -54,6 +55,11 @@ ChipStages    = DoChip|DoPlacement|DoRouting
 
 framework     = CRL.AllianceFramework.create(0)
 print framework.getEnvironment().getPrint()
+
+technoName = Hurricane.DataBase.getDB().getTechnology().getName()
+coreToChip = None
+if technoName == 'cmos':  import plugins.CoreToChip_cmos
+if technoName == 'c35b4': import plugins.CoreToChip_c35b4
 
 
 class RouterProfile ( object ):
@@ -143,7 +149,9 @@ def ScriptMain ( **kw ):
     chip         = None 
 
     if doStages & GenerateChip:
-      success = plugins.CoreToChip_cmos.ScriptMain( **kw )
+      print '  o  Technology selected for I/O pad ring: %s.' % technoName
+      if technoName == 'cmos':  success = plugins.CoreToChip_cmos .ScriptMain( **kw )
+      if technoName == 'c35b4': success = plugins.CoreToChip_c35b4.ScriptMain( **kw )
       if not success: return False
 
       for instance in cell.getSlaveInstances():
