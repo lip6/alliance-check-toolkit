@@ -67,7 +67,7 @@ cgt-run: $(CORE_NETLIST).blif
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for automatic CHIP/CORONA generation (clock tree enabled)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prGCTS --cell=$(CORE_NETLIST))
+	-$(call run_if_older,$@,$(CORE_NETLIST),$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prGCTS --cell=$(CORE_NETLIST)))
 	-touch *_cts.*
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py $(NETLISTS_PNR_VST) $(DESIGN).py
