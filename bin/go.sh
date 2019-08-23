@@ -27,7 +27,7 @@
  benchs="${benchs} snx/cmos45"
  benchs="${benchs} VexRiscv/cmos"
  benchs="${benchs} VexRiscv/cmos45"
-#benchs="${benchs} ARM/cmos"
+ benchs="${benchs} ARM/cmos"
  benchs="${benchs} RingOscillator"
 
  for bench in ${benchs}; do
