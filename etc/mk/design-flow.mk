@@ -4,6 +4,9 @@
  include ./mk/binaries.mk
  include ./mk/alliance.mk
 
+# Some useful functions.
+ run_if_older = if [ "$(1)" -ot "$(2)" ]; then $(3); else echo "\$(1)\" newer than \"$(2)\" (skip rule)."; fi 
+
 # Select the Design Kit.
  ifeq ($(DESIGN_KIT),sxlib)
    include ./mk/dks.d/sxlib.mk
