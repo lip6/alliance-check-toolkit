@@ -18,6 +18,8 @@
    include ./mk/dks.d/sxlib-hibikino.mk
  else ifeq ($(DESIGN_KIT),FreePDK_45)
    include ./mk/dks.d/FreePDK_45.mk
+ else ifeq ($(DESIGN_KIT),phenitec06)
+   include ./mk/dks.d/phenitec06.mk
  else ifeq ($(DESIGN_KIT),cmos45)
    include ./mk/dks.d/nsxlib45.mk
  else ifeq ($(DESIGN_KIT),c35b4)
