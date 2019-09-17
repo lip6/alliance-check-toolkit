@@ -58,8 +58,9 @@ print framework.getEnvironment().getPrint()
 
 technoName = Hurricane.DataBase.getDB().getTechnology().getName()
 coreToChip = None
-if technoName == 'cmos':  import plugins.CoreToChip_cmos
-if technoName == 'c35b4': import plugins.CoreToChip_c35b4
+if technoName == 'cmos':       import plugins.CoreToChip_cmos
+if technoName == 'c35b4':      import plugins.CoreToChip_c35b4
+if technoName == 'phenitec06': import plugins.CoreToChip_phlib80
 
 
 class RouterProfile ( object ):
@@ -150,8 +151,9 @@ def ScriptMain ( **kw ):
 
     if doStages & GenerateChip:
       print '  o  Technology selected for I/O pad ring: %s.' % technoName
-      if technoName == 'cmos':  success = plugins.CoreToChip_cmos .ScriptMain( **kw )
-      if technoName == 'c35b4': success = plugins.CoreToChip_c35b4.ScriptMain( **kw )
+      if technoName == 'cmos':       success = plugins.CoreToChip_cmos   .ScriptMain( **kw )
+      if technoName == 'c35b4':      success = plugins.CoreToChip_c35b4  .ScriptMain( **kw )
+      if technoName == 'phenitec06': success = plugins.CoreToChip_phlib80.ScriptMain( **kw )
       if not success: return False
 
       for instance in cell.getSlaveInstances():

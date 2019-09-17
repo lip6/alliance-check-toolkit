@@ -47,3 +47,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.axys_0_3' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_10753_n338' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_10753_n360' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.ai(5)' ) )

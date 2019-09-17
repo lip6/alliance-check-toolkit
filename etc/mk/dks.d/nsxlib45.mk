@@ -4,5 +4,5 @@
 
  export      CELLS_TOP = $(CHECK_TOOLKIT)/cells
  export MBK_TARGET_LIB = ${CELLS_TOP}/nsxlib
- export   MBK_CATA_LIB = $(MBK_TARGET_LIB):${CELLS_TOP}/mpxlib:$(CELLS_TOP)/msplib
+ export   MBK_CATA_LIB = $(MBK_TARGET_LIB):${CELLS_TOP}/mpxlib:$(CELLS_TOP)/phlib80
  export   LIBERTY_FILE = $(CELLS_TOP)/nsxlib/nsxlib.lib

@@ -26,8 +26,10 @@ parametersTable = \
    # Katana parameters.
     , ("katana.eventsLimit"         , TypeInt       , 1000000 )
    #, ('anabatic.topRoutingLayer'   , TypeString    , 'METAL5')
-    , ("katana.hTracksReservedLocal", TypeInt       , 7       )
-    , ("katana.vTracksReservedLocal", TypeInt       , 7       )
+    , ("katana.hTracksReservedLocal", TypeInt       , 8       )
+    , ("katana.vTracksReservedLocal", TypeInt       , 8       )
+    , ("katana.termSatReservedLocal", TypeInt       , 8       )
+    , ("katana.termSatThreshold"    , TypeInt       , 9       )
    # Clock-Tree parameters.
    #, ('clockTree.minimumSide'    , TypeInt       , 600     )
     )

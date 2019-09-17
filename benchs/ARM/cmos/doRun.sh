@@ -8,7 +8,7 @@
  done
  cp non_generated/*.vst .
 
-    maxRuns=20
+    maxRuns=40
         run=0
   successes=0
    failures=0

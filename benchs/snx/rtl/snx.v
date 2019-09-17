@@ -46,7 +46,7 @@ endmodule
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
 */
 
-module snx ( p_reset , m_clock , inst , datai , datao , iadrs , adrs , start , IntReq , inst_ok , mem_ok , inst_adr , inst_read , memory_adr , memory_read , memory_write , IntAck , wb , hlt , ShowCR );
+module snx ( p_reset , m_clock , inst , datai , datao , iadrs , adrs , start , IntReq , inst_ok , mem_ok , inst_adr , inst_read , memory_adr , memory_read , memory_write , IntAck , wb , hlt  );
   input p_reset, m_clock;
   wire p_reset, m_clock;
   input [15:0] inst;
@@ -83,8 +83,6 @@ module snx ( p_reset , m_clock , inst , datai , datao , iadrs , adrs , start , I
   wire wb;
   output hlt;
   wire hlt;
-  input ShowCR;
-  wire ShowCR;
   reg [15:0] pc;
   reg isr;
   reg [5:0] _opreg_fn;
@@ -410,15 +408,6 @@ type_dec tdec (.m_clock(m_clock), .p_reset(p_reset), .dec(_tdec_dec), .ctype(_td
    assign  _net_34 = (crnum==8'b00000000);
    assign  _net_35 = (crread&_net_34);
 
-// synthesis translate_off
-// synopsys translate_off
-always @(posedge m_clock)
-  begin
-    if(ShowCR)
-    begin
-    $display("C0:%04x C1:%04x C2:%04x C3:%04x",cr0,cr1,cr2,cr3);
-    end
-  end
 
 // synthesis translate_on
 // synopsys translate_on

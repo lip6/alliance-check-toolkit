@@ -17,3 +17,7 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'v_alu_b(15)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.snx_inst.n_exec' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_5119_n791' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_5119_n1034' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'datao(3)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'iadrs(15)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'adrs(5)' ) )
