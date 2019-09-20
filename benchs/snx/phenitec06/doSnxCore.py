@@ -37,7 +37,10 @@ def ScriptMain ( **kw ):
   metal2 = DataBase.getDB().getTechnology().getLayer( 'metal2' )
   metal3 = DataBase.getDB().getTechnology().getLayer( 'metal3' )
 
-  cell = af.getCell( 'snx', CRL.Catalog.State.Logical )
+  cell = af.getCell( 'snx_scan', CRL.Catalog.State.Logical )
+  if not cell:
+    print '[ERROR] Unable to load cell "snx.vst", aborting .'
+    return False
   kw[ 'cell' ] = cell
 
   ab = Box( l(    0.0 )
