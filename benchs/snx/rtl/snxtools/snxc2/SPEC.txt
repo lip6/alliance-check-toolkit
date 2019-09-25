@@ -1,0 +1,68 @@
+----------------------------------------------------------------
+  Simple 16bit Non-Pipeline Processor (SN/X) V1.3 Compiler
+
+  (C)Copyright by Naohiko Shimizu, 2001-2011
+  All rights are reserved.
+
+  Contact information: Dr. Naohiko Shimizu
+    IP Architecture Laboratory
+    Email: nshimizu@ip-arch.jp
+    URL: http://www.ip-arch.jp/
+  
+  Update informations:
+    27-Mar-2013: Interrupt support, SHMZ
+    11-Sep-2011: hexdecimal/logical operators, SHMZ
+    12-Sep-2005: local variable added, SHMZ
+    10-Sep-2005: Language specification extended, SHMZ
+    04-Aug-2002: modified for PARTHENON lecture
+----------------------------------------------------------------
+
+Every variables and value of functions are 16bit integer.
+
+Variables:
+
+ special: [a-z] are located at memory address of 1 to 26.
+          mem[adder] is supported as absolute address array.
+
+ global: [_a-zA-Z][_0-9a-zA-Z]* will be located on 27 or higher.
+         newly available identifiers are treated as global.
+ array:
+	int any_var_name [ num_of_elements ]; defines an array in global area.
+
+ special and global variables can be base of an array.
+ ex. z[0] is located on 26, z[1] is on 27, ...
+
+Function declaration:
+
+  void fname(a1,a2,...) def_local statement
+  int  fname(a1,a2,...) def_local statement
+  interrupt  fname() def_local statement
+
+The number of arguments is arbitrary.
+
+Arguments of functions:
+
+ [_a-zA-Z][_0-9a-zA-Z]* will be located on stack and treated as local.
+
+control statement syntax:
+
+ if(conditon) taken_statement
+ if(conditon) taken_statement else not_taken_statement
+ while(conditon) statement
+ for(setup; condition; continue) statement
+ return expression ;
+ break;
+ 
+def_local:
+ int vname, vname, .... ;
+
+operators:
+ +,-,*,&,|,~,<,>,<=,>=,++,--,>>,<<, (&&, || not debugged)
+pointers:
+ &VARIABLE, *VARIABLE can be used.
+ ,foo  "," is a function pointer operator for interrupt call back
+
+directives:
+
+#include "filename"
+	it cannot execute nesting includes

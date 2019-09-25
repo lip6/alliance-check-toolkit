@@ -1,0 +1,124 @@
+#include "snx2.h"
+
+#ifndef MEMADRSZ
+#define MEMADRSZ	9
+#endif
+#define MEMWORD		(1<<MEMADRSZ)
+#ifndef DATAOFF
+#define DATAOFF		0x200
+#endif
+#ifndef RAMEND
+#define RAMEND		0x400
+#endif
+
+#define MAXSIM		100000
+
+declare system simulation {}
+
+declare ram {
+	input adrs[16];
+	input datai[16];
+	output datao[16];
+	func_in seta(adrs);
+	func_in read() : datao;
+	func_in write(adrs, datai);
+	func_in dump();
+	func_in init();
+}
+
+module ram {
+	mem mcell[MEMWORD][16];
+	reg radrs[16];
+	reg i[4];
+	func seta radrs := adrs;
+	func read datao = mcell[radrs[(MEMADRSZ-1):0]];
+	func write mcell[adrs[(MEMADRSZ-1):0]] := datai;
+	func dump seq {
+		for(i:=0,15) {
+			_display("%04X: %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X %04X",
+			(16'i)<<4,
+			mcell[(16'i<<4) + 0],
+			mcell[(16'i<<4) + 1],
+			mcell[(16'i<<4) + 2],
+			mcell[(16'i<<4) + 3],
+			mcell[(16'i<<4) + 4],
+			mcell[(16'i<<4) + 5],
+			mcell[(16'i<<4) + 6],
+			mcell[(16'i<<4) + 7],
+			mcell[(16'i<<4) + 8],
+			mcell[(16'i<<4) + 9],
+			mcell[(16'i<<4) + 10],
+			mcell[(16'i<<4) + 11],
+			mcell[(16'i<<4) + 12],
+			mcell[(16'i<<4) + 13],
+			mcell[(16'i<<4) + 14],
+			mcell[(16'i<<4) + 15]);
+		}
+	}
+			
+	func init	_readmemh("snx.mem",mcell);
+}
+
+module system {
+	ram mem1,mem2;
+	reg lastadr[16], lastiadr[16];
+	reg clocks[20]=0;
+	snx2 cpu;
+	proc_name upclock();
+
+	func cpu.memory_adr {
+		lastadr := cpu.adrs;
+		alt {
+			(cpu.adrs < DATAOFF) : mem1.seta(MEMADRSZ'cpu.adrs);
+			(cpu.adrs < RAMEND)  : mem2.seta(MEMADRSZ'cpu.adrs);
+		}
+	}
+
+	alt {
+		cpu.memory_read: {
+			alt {
+				(lastadr < DATAOFF) : cpu.datai = mem1.read();
+				(lastadr < RAMEND)  : cpu.datai = mem2.read();
+			}
+			cpu.mem_ok();
+		}
+		cpu.memory_write: {
+			_display("MW: [%x] <- [%x]", cpu.adrs, cpu.datao);
+			alt {
+				(cpu.adrs < DATAOFF) : mem1.write(MEMADRSZ'cpu.adrs,cpu.datao);
+				(cpu.adrs < RAMEND)  : mem2.write(MEMADRSZ'cpu.adrs,cpu.datao);
+			}
+			cpu.mem_ok();
+		}
+	}
+
+	func cpu.hlt seq {
+		_display("CPU HALT at %d", clocks);
+		_display("mem1");
+		mem1.dump();
+		_delay(32);
+		_display("mem2");
+		mem2.dump();
+		_delay(32);
+		;
+		;
+		_delay(100);
+		_finish();
+	}
+
+	proc upclock {
+		clocks++;
+		if(clocks>MAXSIM) {finish(); _finish();}
+	}
+	_init {
+		mem1.init();
+		;
+		;
+		clocks := 0;
+		{upclock(); cpu.start();}
+		_delay(10);
+	}
+	
+}
+
+
