@@ -21,13 +21,14 @@ parametersTable = \
     , ('etesian.uniformDensity'     , TypeBool      , True      )
     , ('etesian.spaceMargin'        , TypePercentage, 10.0      )
     , ('etesian.aspectRatio'        , TypePercentage, 100.0     )
+    , ('etesian.graphics'           , TypeEnumerate , 3         )
     , ('etesian.bloat'              , TypeString    , "90%"     )
    # Kite parameters.
     , ("kite.eventsLimit"           , TypeInt       , 1000000   )
     , ("anabatic.routingGauge"      , TypeString    , 'msxlib4' )
     , ('anabatic.topRoutingLayer'   , TypeString    , 'METAL4'  )
     , ("katana.hTracksReservedLocal", TypeInt       , 7         )
-    , ("katana.vTracksReservedLocal", TypeInt       , 5         )
+    , ("katana.vTracksReservedLocal", TypeInt       , 4         )
     , ("anabatic.edgeHScaling"      , TypeDouble    , 1.0       )
     )
 
