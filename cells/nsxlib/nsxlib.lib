@@ -19229,6 +19229,58 @@ library (nsxlib.lib) {
         }
     }
 
+    cell (sff1r_x4) {
+        area : 145.80 ;
+        cell_leakage_power : 0.013 ;
+        pin (i) {
+            direction : input ;
+            capacitance : 8.68 ;
+            internal_power (energy_i) {
+                rise_power (energy_inslew_5__0) {
+                    values ("536.4, 612.8, 762.6, 1060.1, 1653.8");
+                }
+                fall_power (energy_inslew_5__0) {
+                    values ("520.9, 574.5, 680.6, 891.6, 1312.9");
+                }
+            }
+        }
+        pin (ck) {
+            direction : input ;
+            clock : true ;
+            capacitance : 9.07 ;
+            internal_power (energy_ck) {
+                rise_power (energy_inslew_5__0) {
+                    values ("1194.0, 1270.6, 1421.5, 1720.4, 2315.2");
+                }
+                fall_power (energy_inslew_5__0) {
+                    values ("1167.5, 1222.7, 1330.7, 1543.8, 1967.0");
+                }
+            }
+        }
+        pin (nrst) {
+            direction : input ;
+            capacitance : 18.07 ;
+            internal_power (energy_nrst) {
+                rise_power (energy_inslew_5__0) {
+                    values ("1194.0, 1270.6, 1421.5, 1720.4, 2315.2");
+                }
+                fall_power (energy_inslew_5__0) {
+                    values ("1167.5, 1222.7, 1330.7, 1543.8, 1967.0");
+                }
+            }
+        }
+        pin (q) {
+            direction : output ;
+            capacitance : 22.67 ;
+            function : "IQ" ;
+        }
+        ff(IQ,IQN) {
+            next_state : "i";
+            clocked_on : "ck";
+            clear : "nrst'";
+        }
+    }
+
     cell (nao22_x1) {
         area : 48.60 ;
         cell_leakage_power : 0.0024 ;

@@ -1,7 +1,7 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/nsxlib>" -*-
 
  PHYSICAL_SYNTHESIS = Alliance
-         DESIGN_KIT = nsxlib45
+         DESIGN_KIT = nsxlib
 
  include ./mk/design-flow.mk
  include ./mk/check-library.mk
@@ -14,6 +14,7 @@ characterize: nsxlib-dot-lib
 
 
 check-lib-test: ./check/inv_x1.ok \
-                ./check/sff1_x4.ok
+                ./check/sff1_x4.ok \
+                ./check/sff1r_x4.ok
 
 check-clean: ; rm -f ./check/*

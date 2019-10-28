@@ -81,17 +81,17 @@ class amd2901_dpt ( Model ) :
 
   def Netlist ( self ) :
 
-    Generate ( "DpgenSff",                    "sff_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenNbuse",                "nbuse_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenInv",             "inv_drive8_4bits", param = {'nbit' : 4, 'drive' : 8,        'physical' : True} )
-    Generate ( "DpgenMux2",                  "mux2_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenNand2mask", "nand2mask_0b0000_4bits", param = {'nbit' : 4, 'const' : "0b0000", 'physical' : True} )
-    Generate ( "DpgenXnor2",                "xnor2_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenNand2",                "nand2_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenNor2",                  "nor2_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenXor2",                  "xor2_4bits", param = {'nbit' : 4,                     'physical' : True} )
-    Generate ( "DpgenXnor2",         "xnor2_drive4_4bits", param = {'nbit' : 4, 'drive' : 4,        'physical' : True} )
-    Generate ( "DpgenBuff",                  "buff_2bits", param = {'nbit' : 2,                     'physical' : True} )
+    Generate ( "DpgenSff",                    "sff_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenNbuse",                "nbuse_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenInv",             "inv_drive8_4bits", param = {'nbit' : 4, 'drive' : 8,        'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenMux2",                  "mux2_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenNand2mask", "nand2mask_0b0000_4bits", param = {'nbit' : 4, 'const' : "0b0000", 'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenXnor2",                "xnor2_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenNand2",                "nand2_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenNor2",                  "nor2_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenXor2",                  "xor2_4bits", param = {'nbit' : 4,                     'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenXnor2",         "xnor2_drive4_4bits", param = {'nbit' : 4, 'drive' : 4,        'physical' : True, 'flags' : 0} )
+    Generate ( "DpgenBuff",                  "buff_2bits", param = {'nbit' : 2,                     'physical' : True, 'flags' : 0} )
 
     # List of Signals  
     ram_d       = Signal ( "ram_d",      4 )

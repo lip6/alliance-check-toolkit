@@ -3,6 +3,7 @@
  declare -A benchRules
  benchRules["adder/cmos"]="druc lvx clean"
  benchRules["AM2901/standart_cells"]="druc lvx clean"
+ benchRules["AM2901/datapath"]="druc lvx clean"
  benchRules["6502/cmos"]="druc lvx clean"
  benchRules["6502/cmos45"]="lvx clean"
  benchRules["arlet6502/cmos350"]="lvx clean"
@@ -18,6 +19,7 @@
  benchs=""
  benchs="${benchs} adder/cmos"
  benchs="${benchs} AM2901/standart_cells/cmos"
+ benchs="${benchs} AM2901/datapath/cmos"
  benchs="${benchs} 6502/cmos"
  benchs="${benchs} 6502/cmos45"
  benchs="${benchs} arlet6502/cmos350"

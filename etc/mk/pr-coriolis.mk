@@ -60,22 +60,22 @@ cgt-run: $(CORE_NETLIST).blif
 
    ifeq ($(USE_CLOCKTREE),Yes)
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst ioring.py $(CORONA).vst $(NETLISTS_PNR_VST)
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst ./coriolis2/ioring.py $(CORONA).vst $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for manually created CHIP/CORONA (clock tree enabled)."
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CHIP))
 	-touch *_cts.*
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py $(NETLISTS_PNR_VST)
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ./coriolis2/ioring.py $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for automatic CHIP/CORONA generation (clock tree enabled)."
 	-$(call run_if_older,$@,$(CORE_NETLIST),$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prGCTS --cell=$(CORE_NETLIST)))
 	-touch *_cts.*
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py $(NETLISTS_PNR_VST) $(DESIGN).py
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ./coriolis2/ioring.py $(NETLISTS_PNR_VST) $(DESIGN).py
 	-@echo "Using implicit rule for CORE/BLOCK creation from a Python design (clock tree enabled)."
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --script=$(DESIGN))
 	-touch *_cts.*
 
-%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ioring.py  $(NETLISTS_PNR_VST)
+%_cts_r.ap  %_cts_r.vst  %_cts.vst:  ./coriolis2/ioring.py  $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for CORE/BLOCK creation from a VST netlist (clock tree enabled)."
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CORE_NETLIST))
 
@@ -85,11 +85,11 @@ cgt-run: $(CORE_NETLIST).blif
 
    else   # USE_CLOCKTREE
 
-%_r.ap  %_r.vst:  $(NETLISTS_PNR_VST) $(DESIGN).py ioring.py
+%_r.ap  %_r.vst:  $(NETLISTS_PNR_VST) $(DESIGN).py ./coriolis2/ioring.py
 	-@echo "Using implicit rule for CORE creation from a Python design (no clock tree)."
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) --script=$(DESIGN))
 
-%_r.ap  %_r.vst:  $(NETLISTS_PNR_VST) ioring.py 
+%_r.ap  %_r.vst:  $(NETLISTS_PNR_VST) ./coriolis2/ioring.py 
 	-@echo "Using implicit rule for manually created CHIP/CORONA (no clock tree)."
 	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCS --cell=$*)
 
