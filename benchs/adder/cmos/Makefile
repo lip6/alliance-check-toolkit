@@ -11,7 +11,7 @@
                   LOONOPT =
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
-                USE_DEBUG = No
+                USE_DEBUG = Yes
                  USE_KITE = No
                   RM_CHIP = Yes
 

@@ -9,6 +9,10 @@ try:
   import os.path
   import optparse
   import Cfg        
+  import helpers
+  from   helpers.io import ErrorMessage
+  from   helpers    import showPythonTrace
+  helpers.loadUserSettings()
   import Hurricane  
   from   Hurricane  import DbU
   from   Hurricane  import UpdateSession
@@ -17,9 +21,6 @@ try:
   from   Hurricane  import Instance
   import Viewer
   import CRL
-  import helpers
-  from   helpers.io import ErrorMessage
-  from   helpers    import showPythonTrace
   import Anabatic
   import Katana
   import Etesian
@@ -251,6 +252,8 @@ def ScriptMain ( **kw ):
 
 if __name__ == '__main__':
   try:
+   #helpers.setTraceLevel( 550 )
+
     parser = optparse.OptionParser()
     parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'         , help='The name of the chip to build, without extension.')
     parser.add_option( '-s', '--script', type='string',                      dest='script'       , help='The name of a Python script, without extension.')

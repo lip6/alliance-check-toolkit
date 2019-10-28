@@ -15,7 +15,7 @@
  include ./mk/design-flow.mk
 
 blif:   Arlet6502.blif
-vst:    arlet6502_cts.vst
+vst:    arlet6502.vst
 layout: arlet6502_cts_r.ap
 gds:    arlet6502_cts_r.gds
 
