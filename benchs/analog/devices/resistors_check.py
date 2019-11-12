@@ -6,34 +6,19 @@ import Cfg
 import NDA.node350.c35b4
 from   Hurricane import *
 import CRL
-from   Analog import CapacitorFamily
-from   Analog import MultiCapacitor
+from   Analog import ResistorFamily
+from   Analog import Resistor
 from   Analog import LayoutGenerator
-from   Analog import Matrix
-from   Bora   import MatrixParameterRange
+from   Bora   import StepParameterRange
 
 
 def toDbU ( value ): return DbU.fromPhysical( value, DbU.UnitPowerMicro )
 
 
-def checkCapas ( editor ):
-
-    mrange = MatrixParameterRange()
-   #mrange.addValue( [ [ 0, 1 ]
-   #                 , [ 2, 0 ]
-   #                 ] )
-   #mrange.addValue( [ [ 0, 1, 0 ]
-   #                 , [ 1, 0, 1 ]
-   #                 , [ 0, 1, 0 ]
-   #                 ] )
-    mrange.addValue( [ [ 1, 1, 1, 0 ]
-                     , [ 0, 1, 1, 1 ]
-                     , [ 1, 1, 1, 0 ]
-                     , [ 0, 1, 1, 1 ]
-                     ] )
+def checkResistors ( editor ):
 
     UpdateSession.open()
-    cell = CRL.AllianceFramework.get().createCell( 'check_capas' )
+    cell = CRL.AllianceFramework.get().createCell( 'check_resistors' )
 
     library = DataBase.getDB().getRootLibrary().getLibrary( 'AnalogRootLibrary' )
     if not library:
@@ -41,25 +26,24 @@ def checkCapas ( editor ):
 
     generator = LayoutGenerator()
 
-    print '     - Generating Device of %s...' % MultiCapacitor
+    print '     - Generating Device of %s...' % Resistor
 
-    device  = MultiCapacitor.create( library, 'capa0', CapacitorFamily.PIP, 2 )
-    device.getParameter( 'Layout Styles' ).setValue( 'Matrix' )
-    device.getParameter( 'capacities'    ).setValue( 0, 372  )
-    device.getParameter( 'capacities'    ).setValue( 1, 1116 )
-    pmatrix = device.getParameter( 'matrix' )
-   #mrange.progress()
-    pmatrix.setMatrix( mrange.getValue() )
+    bendsRange = StepParameterRange( 1, 10, 1 )
 
-    print device.getParameter( 'capacities' )
+    device = Resistor.create( library, 'resistor0', ResistorFamily.LOWRES )
+    device.getParameter( 'Layout Styles' ).setValue( 'Snake' )
+    device.getParameter( 'R'             ).setValue( 100.0  )
+    bends = device.getParameter( 'bends' )
+   #bendsRange.progress()
+    bends.setValue( bendsRange.getValue() )
 
     generator.setDevice( device )
     generator.drawLayout()
 
     transformation = Transformation()
-    instance       = Instance.create( cell, 'capa0', device, transformation, Instance.PlacementStatus.PLACED )
+    instance       = Instance.create( cell, 'resistor0', device, transformation, Instance.PlacementStatus.PLACED )
 
-    print '       Done %s' % MultiCapacitor
+    print '       Done %s' % Resistor
 
     UpdateSession.close()
 
@@ -90,5 +74,5 @@ def ScriptMain ( **kw ):
         UpdateSession.close()
         print 'Previous "check_capas" cell destroyed.'
 
-    checkCapas( editor )
+    checkResistors( editor )
     return True

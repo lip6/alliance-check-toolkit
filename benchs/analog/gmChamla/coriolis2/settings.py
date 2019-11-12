@@ -1,10 +1,33 @@
 # -*- Mode:Python -*-
 
+import sys
 import os
+import os.path
+import socket
+import helpers
+
+
+NdaDirectory = None
+if os.environ.has_key('NDA_TOP'):
+  NdaDirectory = os.environ['NDA_TOP']
+
+if not NdaDirectory:
+  hostname = socket.gethostname()
+  if hostname.startswith('lepka'):
+    NdaDirectory = '/dsk/l1/jpc/crypted/soc/techno'
+    if not os.path.isdir(NdaDirectory):
+      print '[ERROR] You forgot to mount the NDA encrypted directory, stupid!'
+  else:
+    NdaDirectory = '/users/soft/techno/techno'
+
+helpers.setNdaTopDir( NdaDirectory )
+
+
 import Cfg
 import Viewer
 import CRL
 import node180.scn6m_deep_09
+#import NDA.node350.c35b4
 from   helpers       import l, u, n
 
 
