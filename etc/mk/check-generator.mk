@@ -22,10 +22,10 @@
 
 
 %_r.ap %_r.vst: ./check/generate.py
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
 	                     ./check/generate.py -m $* \
 	                         $(foreach param,$(subst _p_, ,$(subst $(MBLOCK),,$*)), -$(subst _, ,$(param))))
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
+	$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; \
                           $(DoCHIP) -rS --cell=$*)
 
 
@@ -36,7 +36,7 @@
 	 $(COUGAR_spice) -ar -ac -t $*
 
 cgt:
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v)
+	$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v)
 
 cgt-%:
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v --cell=$*)
+	$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -v --cell=$*)

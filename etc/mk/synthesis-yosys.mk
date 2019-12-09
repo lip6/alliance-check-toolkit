@@ -50,4 +50,4 @@
 	 yosys -c $*.tcl
 
 $(addsuffix .vst,$(NETLISTS_SYNTH)): $(VLOG_MODULE).blif
-	-@$(call run_if_older,$@,$(VLOG_MODULE).blif,$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE)) )
+	-@$(call run_if_older,$@,$(VLOG_MODULE).blif,$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE)) )

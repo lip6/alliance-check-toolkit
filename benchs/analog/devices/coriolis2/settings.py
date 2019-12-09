@@ -21,6 +21,17 @@ if not NdaDirectory:
 helpers.setNdaTopDir( NdaDirectory )
 
 import Cfg
+Cfg.Configuration.pushDefaultPriority( Cfg.Parameter.Priority.UserFile )
+Cfg.getParamBool      ( 'misc.catchCore'              ).setBool      ( False     )
+Cfg.getParamBool      ( 'misc.info'                   ).setBool      ( False     )
+Cfg.getParamBool      ( 'misc.paranoid'               ).setBool      ( False     )
+Cfg.getParamBool      ( 'misc.bug'                    ).setBool      ( False     )
+Cfg.getParamBool      ( 'misc.logMode'                ).setBool      ( False     )
+Cfg.getParamBool      ( 'misc.verboseLevel1'          ).setBool      ( True      )
+Cfg.getParamBool      ( 'misc.verboseLevel2'          ).setBool      ( True      )
+#Cfg.getParamInt       ( 'misc.minTraceLevel'          ).setInt       ( 159       )
+#Cfg.getParamInt       ( 'misc.maxTraceLevel'          ).setInt       ( 160       )
+
 import Viewer
 import CRL
 #import node180.scn6m_deep_09
@@ -35,7 +46,6 @@ else:
   cellsTop = '../../../cells'
 
 
-Cfg.Configuration.pushDefaultPriority( Cfg.Parameter.Priority.UserFile )
 
 Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
 
@@ -46,15 +56,6 @@ env.addSYSTEM_LIBRARY( library=cellsTop+'/nsxlib', mode=CRL.Environment.Prepend 
 env.addSYSTEM_LIBRARY( library=cellsTop+'/mpxlib', mode=CRL.Environment.Prepend )
 
  
-Cfg.getParamBool      ( 'misc.catchCore'              ).setBool      ( False     )
-Cfg.getParamBool      ( 'misc.info'                   ).setBool      ( False     )
-Cfg.getParamBool      ( 'misc.paranoid'               ).setBool      ( False     )
-Cfg.getParamBool      ( 'misc.bug'                    ).setBool      ( False     )
-Cfg.getParamBool      ( 'misc.logMode'                ).setBool      ( False     )
-Cfg.getParamBool      ( 'misc.verboseLevel1'          ).setBool      ( True      )
-Cfg.getParamBool      ( 'misc.verboseLevel2'          ).setBool      ( True      )
-#Cfg.getParamInt       ( 'misc.minTraceLevel'          ).setInt       ( 159       )
-#Cfg.getParamInt       ( 'misc.maxTraceLevel'          ).setInt       ( 160       )
 #Cfg.getParamBool      ( 'etesian.uniformDensity'      ).setBool      ( True      )
 #Cfg.getParamEnumerate ( 'etesian.effort'              ).setInt       ( 2         )
 #Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 5.0       )

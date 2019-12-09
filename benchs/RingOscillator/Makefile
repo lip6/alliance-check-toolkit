@@ -18,7 +18,7 @@
           CLEAN_SYNTHESIS += ringoscillator.vst
 
 ringoscillator.ap  ringoscillator.vst: ringoscillator.py
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt --text --script=ringoscillator)
+	-$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; cgt --text --script=ringoscillator)
 
 layout: ringoscillator.ap
 lvx:    lvx-1-ringoscillator
