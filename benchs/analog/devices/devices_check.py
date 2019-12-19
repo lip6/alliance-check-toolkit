@@ -15,7 +15,6 @@ from   Analog import SimpleCurrentMirror
 from   Analog import LayoutGenerator
 import helpers
 
-helpers.staticInitialization( quiet=True )
 
 def toDbU ( value ): return DbU.fromPhysical( value, DbU.UnitPowerMicro )
 
@@ -41,20 +40,22 @@ def analogDemo ( editor ):
              #, ( SimpleCurrentMirror, 't6'    , None               , toDbU(37.00)         , 4, True    , 2    , False )
               ]
 
+    technoName = DataBase.getDB().getTechnology().getName()
+
     xspacing  = toDbU(14.0)
     yspacing  = toDbU(28.0)
     xspacingl = DbU.fromLambda(50.0)
-    if helpers.technoDir.endswith('350/c35b4'):
+    if technoName == 'c35b4':
       print '  o  Using AMS 350nm (c34b4) settings.'
       xspacing  = toDbU( 5.0)
       yspacing  = toDbU(11.0)
       xspacingl = DbU.fromLambda(20.0)
-    elif helpers.technoDir.endswith('65/cmos065'):
+    elif technoName == 'cmos065':
       print '  o  Using 65nm settings.'
       xspacing  = toDbU( 5.0)
       yspacing  = toDbU(11.0)
       xspacingl = DbU.fromLambda(20.0)
-    elif helpers.technoDir.endswith('180/scn6m_deep_09'):
+    elif technoName == 'scn6m_deep_09':
       print '  o  Using MOSIS 180nm settings (scn6m_deep_09).'
       xspacing  = toDbU( 6.0)
       yspacing  = toDbU(14.0)
@@ -100,16 +101,23 @@ def analogDemo ( editor ):
       elif i == 100: transformation = Transformation( toDbU(0.0)  , yspacing   , Transformation.Orientation.ID )
       else:          transformation = Transformation( xspacing*(i), toDbU( 0.0), Transformation.Orientation.ID )
 
-      instance = Instance.create( cell, devices[i][1], device, transformation )
+      instance = Instance.create( cell
+                                , devices[i][1]
+                                , device
+                                , transformation
+                                , Instance.PlacementStatus.FIXED )
 
       print '       Done %s' % devices[i][0]
 
     inv_x1   = CRL.AllianceFramework.get().getCell( 'inv_x1', CRL.Catalog.State.Views )
     if inv_x1:
-      inverter = Instance.create( cell, 'inverter', inv_x1, Transformation(-xspacingl
-                                                                          ,DbU.fromLambda(  0)
-                                                                          ,Transformation.Orientation.ID) )
-      inverter.setPlacementStatus( Instance.PlacementStatus.FIXED )
+      inverter = Instance.create( cell
+                                , 'inverter'
+                                , inv_x1
+                                , Transformation( -xspacingl
+                                                , DbU.fromLambda(  0)
+                                                , Transformation.Orientation.ID )
+                                , Instance.PlacementStatus.FIXED )
     else:
       print '[ERROR] Cell "inv_x1" has not been found in the libraries.'
 
