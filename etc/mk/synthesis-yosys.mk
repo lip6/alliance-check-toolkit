@@ -38,13 +38,13 @@
 %.blif: %.v
 	 yosysArgs="--input-lang=Verilog --design=$* --top=$* --liberty=$(LIBERTY_FILE)"; \
 	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi;   \
-	 $(YOSYS_PY) $$yosysArgs
+	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 
 %.blif: %.il
 	 yosysArgs="--input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";          \
 	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi; \
-	 $(YOSYS_PY) $$yosysArgs
+	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 
 #%.blif: %.v
@@ -66,4 +66,4 @@
 #	 yosys -c $*.tcl
 
 $(addsuffix .vst,$(NETLISTS_SYNTH)): $(VLOG_MODULE).blif
-	-@$(call run_if_older,$@,$(VLOG_MODULE).blif,$(call scl_cols,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE)) )
+	-@$(call run_if_older,$@,$(VLOG_MODULE).blif,$(call scl_cols,$(call c2env, $(BLIF2VST) $(VST_FLAGS) --cell=$(VLOG_MODULE))) )
