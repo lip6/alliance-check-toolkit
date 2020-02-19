@@ -44,6 +44,7 @@
  L2P           = $(ALLIANCE_BIN)/l2p
  DoCHIP        = $(TOOLKIT_BIN)/doChip.py
  BLIF2VST      = $(TOOLKIT_BIN)/blif2vst.py
+ YOSYS_PY      = $(TOOLKIT_BIN)/yosys.py
  COUGAR_spice  = MBK_SPI_MODEL=$(ALLIANCE_TOP)/etc/spimodel.cfg; export MBK_SPI_MODEL; \
                  MBK_SEPAR='_';                                  export MBK_SEPAR    ; \
                  MBK_OUT_LO=spi;                                 export MBK_OUT_LO   ; \

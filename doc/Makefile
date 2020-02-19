@@ -13,7 +13,7 @@ $(DOCUMENT).pdf: $(DOCUMENT).tex
 	latex $(DOCUMENT); \
 	dvipdfm $(DOCUMENT)
 
-$(DOCUMENT).tex: $(DOCUMENT).rst socstyle.tex
+$(DOCUMENT).tex: $(DOCUMENT).rst CheckToolkit.rst socstyle.tex
 	rst2latex --stylesheet=socstyle.tex \
 	          --graphicx-option=pdftex  \
 	          $(DOCUMENT).rst > $(DOCUMENT).tex

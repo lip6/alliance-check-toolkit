@@ -45,9 +45,14 @@ if __name__ == '__main__':
     Cfg.getParamBool('misc.verboseLevel2').setBool(True)
   if options.vstUseConcat: views    |= CRL.Catalog.State.VstUseConcat
     
+  cell = CRL.Blif.load( options.cellName )
+  if cell.getName() == 'top':
+    print '  o  Renaming RTLIL anonymous top cell "top" into "%s".' % options.cellName
+    cell.setName( options.cellName )
+
   kw          = {}
   kw['views'] = views
-  kw['cell' ] = CRL.Blif.load( options.cellName )
+  kw['cell' ] = cell
 
   plugins.RSavePlugin.ScriptMain( **kw )
 

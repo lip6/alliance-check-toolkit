@@ -765,64 +765,72 @@ div#htmlerrorcontents hr.lang_separator {
 
 
 <!-- -*- Mode: rst -*- -->
-<!-- HTML/LaTeX Mixed Macros. -->
-<!-- Acronyms & Names -->
+<!-- -*- Mode: rst; explicit-buffer-name: "definition.rst<documentation/etc>" -*- -->
+<!-- HTML/LaTeX backends mixed macros. -->
+<!-- Acronyms & names. -->
+<!-- URLs -->
+<!-- Internal URLs -->
+<!-- Standard CAO/VLSI Concepts. -->
+<!-- Alliance & MBK Concepts -->
+<!-- Hurricane Concepts. -->
 <p><span class="raw-html"><br/></span></p>
 <div class="section" id="alliance-coriolis-checker-toolkit">
-<h1><a class="toc-backref" href="#id1"><span class="sc">Alliance</span> &amp; <span class="sc">Coriolis</span> Checker Toolkit</a></h1>
+<h1><a class="toc-backref" href="#id2"><span class="sc">Alliance</span> &amp; <span class="sc">Coriolis</span> Checker Toolkit</a></h1>
 <p><span class="raw-html"><br/></span></p>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#alliance-coriolis-checker-toolkit" id="id1"><span class="sc">Alliance</span> &amp; <span class="sc">Coriolis</span> Checker Toolkit</a><ul>
-<li><a class="reference internal" href="#toolkit-purpose" id="id2">Toolkit Purpose</a></li>
-<li><a class="reference internal" href="#release-notes" id="id3">Release Notes</a><ul>
-<li><a class="reference internal" href="#august-30-2019" id="id4">August 30, 2019</a></li>
+<li><a class="reference internal" href="#alliance-coriolis-checker-toolkit" id="id2"><span class="sc">Alliance</span> &amp; <span class="sc">Coriolis</span> Checker Toolkit</a><ul>
+<li><a class="reference internal" href="#toolkit-purpose" id="id3">Toolkit Purpose</a></li>
+<li><a class="reference internal" href="#release-notes" id="id4">Release Notes</a><ul>
+<li><a class="reference internal" href="#august-30-2019" id="id5">August 30, 2019</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#toolkit-contents" id="id5">Toolkit Contents</a></li>
-<li><a class="reference internal" href="#toolkit-layout" id="id6">Toolkit Layout</a></li>
-<li><a class="reference internal" href="#benchmark-makefiles" id="id7">Benchmark Makefiles</a></li>
-<li><a class="reference internal" href="#setting-up-the-user-s-environement" id="id8">Setting Up the User's Environement</a><ul>
-<li><a class="reference internal" href="#coriolis-configuration-files" id="id9"><span class="sc">Coriolis</span> Configuration Files</a></li>
-<li><a class="reference internal" href="#coriolis-and-clock-tree-generation" id="id10"><span class="sc">Coriolis</span> and Clock Tree Generation</a></li>
-<li><a class="reference internal" href="#rhel6-and-clones" id="id11"><span class="sc">rhel6</span> and Clones</a></li>
-<li><a class="reference internal" href="#yosys-auxiliary-script" id="id12">Yosys Auxiliary Script</a></li>
+<li><a class="reference internal" href="#toolkit-contents" id="id6">Toolkit Contents</a></li>
+<li><a class="reference internal" href="#toolkit-layout" id="id7">Toolkit Layout</a></li>
+<li><a class="reference internal" href="#benchmark-makefiles" id="id8">Benchmark Makefiles</a></li>
+<li><a class="reference internal" href="#setting-up-the-user-s-environement" id="id9">Setting Up the User's Environement</a><ul>
+<li><a class="reference internal" href="#coriolis-configuration-files" id="id10"><span class="sc">Coriolis</span> Configuration Files</a></li>
+<li><a class="reference internal" href="#coriolis-and-clock-tree-generation" id="id11"><span class="sc">Coriolis</span> and Clock Tree Generation</a></li>
+<li><a class="reference internal" href="#rhel6-and-clones" id="id12"><span class="sc">rhel6</span> and Clones</a></li>
+<li><a class="reference internal" href="#yosys-wrapper-script-yosys-py" id="id13">Yosys Wrapper Script <tt class="docutils literal">yosys.py</tt></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#benchmarks-special-notes" id="id13">Benchmarks Special Notes</a><ul>
-<li><a class="reference internal" href="#alliance-run" id="id14"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></li>
-<li><a class="reference internal" href="#am2901-standard-cells" id="id15"><span class="sc">am2901</span> standard cells</a></li>
+<li><a class="reference internal" href="#benchmarks-special-notes" id="id14">Benchmarks Special Notes</a><ul>
+<li><a class="reference internal" href="#alliance-run" id="id15"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></li>
+<li><a class="reference internal" href="#am2901-standard-cells" id="id16"><span class="sc">am2901</span> standard cells</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#libraries-makefiles" id="id16">Libraries Makefiles</a><ul>
-<li><a class="reference internal" href="#checking-procedure" id="id17">Checking Procedure</a></li>
-<li><a class="reference internal" href="#synopsys-liberty-lib-generation" id="id18">Synopsys Liberty .lib Generation</a></li>
-<li><a class="reference internal" href="#helpers-scripts" id="id19">Helpers Scripts</a></li>
+<li><a class="reference internal" href="#libraries-makefiles" id="id17">Libraries Makefiles</a><ul>
+<li><a class="reference internal" href="#checking-procedure" id="id18">Checking Procedure</a></li>
+<li><a class="reference internal" href="#synopsys-liberty-lib-generation" id="id19">Synopsys Liberty .lib Generation</a></li>
+<li><a class="reference internal" href="#helpers-scripts" id="id20">Helpers Scripts</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#macro-blocks-makefiles" id="id20">Macro-Blocks Makefiles</a><ul>
-<li><a class="reference internal" href="#calling-the-generator" id="id21">Calling the Generator</a></li>
-<li><a class="reference internal" href="#scaling-the-cell-library" id="id22">Scaling the Cell Library</a></li>
+<li><a class="reference internal" href="#macro-blocks-makefiles" id="id21">Macro-Blocks Makefiles</a><ul>
+<li><a class="reference internal" href="#calling-the-generator" id="id22">Calling the Generator</a></li>
+<li><a class="reference internal" href="#scaling-the-cell-library" id="id23">Scaling the Cell Library</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#tools-scripts" id="id23">Tools &amp; Scripts</a><ul>
-<li><a class="reference internal" href="#one-script-to-run-them-all-go" id="id24">One script to run them all: <tt class="docutils literal">go.sh</tt></a></li>
-<li><a class="reference internal" href="#command-line-cgt-dochip" id="id25">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></li>
-<li><a class="reference internal" href="#blif-netlist-converter" id="id26">Blif Netlist Converter</a></li>
-<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id27">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
+<li><a class="reference internal" href="#tools-scripts" id="id24">Tools &amp; Scripts</a><ul>
+<li><a class="reference internal" href="#one-script-to-run-them-all-go" id="id25">One script to run them all: <tt class="docutils literal">go.sh</tt></a></li>
+<li><a class="reference internal" href="#command-line-cgt-dochip" id="id26">Command Line <span class="cb">cgt</span>: <tt class="docutils literal">doChip.py</tt></a></li>
+<li><a class="reference internal" href="#blif-netlist-converter" id="id27">Blif Netlist Converter</a></li>
+<li><a class="reference internal" href="#pad-layout-converter-px2mpx" id="id28">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#cadence-support" id="id28"><span class="sc">Cadence</span> Support</a></li>
-<li><a class="reference internal" href="#technologies" id="id29">Technologies</a></li>
+<li><a class="reference internal" href="#cadence-support" id="id29"><span class="sc">Cadence</span> Support</a></li>
+<li><a class="reference internal" href="#technologies" id="id30">Technologies</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <p></p>
+<!-- -*- Mode: rst -*- -->
+<!-- Acronyms & Names -->
 <div class="section" id="toolkit-purpose">
-<h2><a class="toc-backref" href="#id2">Toolkit Purpose</a></h2>
-<p>This toolkit has been created to allow developpers to share through <tt class="docutils literal">git</tt> a set
+<h2><a class="toc-backref" href="#id3">Toolkit Purpose</a></h2>
+<p>This toolkit has been created to allow developpers to share through <span class="cb">git</span> a set
 of benchmarks to validate their changes in <span class="sc">Alliance</span> &amp; <span class="sc">Coriolis</span> before commiting
 and pushing them in their central repositories. A change will be considered as
 validated when all the developpers can run successfully all the benchs in their
@@ -831,22 +839,26 @@ respective environments.</p>
 not well documenteds as they will be quick corrections made by the developpers.</p>
 </div>
 <div class="section" id="release-notes">
-<h2><a class="toc-backref" href="#id3">Release Notes</a></h2>
+<h2><a class="toc-backref" href="#id4">Release Notes</a></h2>
 <div class="section" id="august-30-2019">
-<h3><a class="toc-backref" href="#id4">August 30, 2019</a></h3>
-<p><tt class="docutils literal">katana</tt> is now used as the default router. It can now manage a complete chip design
-with I/O pads. As a consequence, the <tt class="docutils literal">Makefile</tt> are all modificated, the variable
+<h3><a class="toc-backref" href="#id5">August 30, 2019</a></h3>
+<p><span class="sc">Katana</span> is now used as the default router. It can now manage a complete chip design
+with I/O pads. As a consequence, the <span class="cb">Makefile</span> are all modificated, the variable
 <tt class="docutils literal">USE_KATANA=Yes</tt> is changed to <tt class="docutils literal">USE_KITE=No</tt> (see <a class="reference internal" href="#benchmark-makefiles">Benchmark Makefiles</a>).</p>
-<p>Designs with I/O pads are also modificated to be processed by <tt class="docutils literal">katana</tt> as it uses
+<p>Designs with I/O pads are also modificated to be processed by <span class="sc">Katana</span> as it uses
 a different approach.</p>
 <p></p>
 </div>
 </div>
 <div class="section" id="toolkit-contents">
-<h2><a class="toc-backref" href="#id5">Toolkit Contents</a></h2>
+<h2><a class="toc-backref" href="#id6">Toolkit Contents</a></h2>
 <p>The toolkit provides:</p>
 <ul class="simple">
-<li>Eight benchmark designs (unchecked are not counted and multiple target technologies count for one).</li>
+<li><strong>OK Status.</strong> A set of eight benchmark designs that are used as regression tests (see <a class="reference internal" href="#go-sh">go.sh</a>).
+Benchmarks with multiple target technologies still count as one.</li>
+<li><strong>KO Status.</strong> Examples that currently fails due to incomplete or poorly implemenented
+features of <span class="sc">Coriolis</span>.</li>
+<li><strong>Unchecked.</strong> Non-fonctional examples, or really too long to run for a regression test.</li>
 </ul>
 <table border="1" class="docutils">
 <colgroup>
@@ -993,10 +1005,21 @@ a different approach.</p>
 <td><tt class="docutils literal">corelib</tt></td>
 <td>KO</td>
 </tr>
+<tr><td colspan="4"><strong>nMigen basic ALU example</strong></td>
+</tr>
+<tr><td><span class="sc">alu</span> / scn6m_deep_09</td>
+<td><span class="sc">mosis</span></td>
+<td><tt class="docutils literal">nsxlib</tt></td>
+<td>OK</td>
+</tr>
 </tbody>
 </table>
 <p></p>
 <ul>
+<li><p class="first">The <span class="sc">nMigen</span> design is the basic <span class="sc">alu</span> taken from the distribution to perform
+integration test in the design flow. The target technology is the <span class="sc">mosis</span> 180nm
+(<tt class="docutils literal">scn6m_deep</tt>).</p>
+</li>
 <li><p class="first">The <span class="sc">Arlet6502</span> is taken from <a class="reference external" href="https://github.com/Arlet/verilog-6502">Arlet's MOS 6502 core</a> and is routed using the
 four metal symbolic technology (so the router has three availables).</p>
 </li>
@@ -1006,7 +1029,7 @@ We provides them as part of the toolkit as we are still in the process of valida
 that technology, and we may have to perform quick fixes on them. The design are
 configured to use them instead of those supplied by the <span class="sc">Alliance</span> installation.</p>
 <ol class="arabic simple">
-<li><tt class="docutils literal">nsxlib</tt> : Standard Cell library.</li>
+<li><tt class="docutils literal">nsxlib</tt> : Standard Cell library, compliant with <span class="sc">mosis</span>.</li>
 <li><tt class="docutils literal">mpxlib</tt> : Pad library, compliant with <span class="sc">Coriolis</span>.</li>
 <li><tt class="docutils literal">msplib</tt> : Pad library, compliant with <span class="sc">Alliance</span> / <tt class="docutils literal">ring</tt>. Cells in this
 library are <em>wrappers</em> around their counterpart in <tt class="docutils literal">mpxlib</tt>, they provides
@@ -1021,7 +1044,7 @@ for the same reason as the cell libraries.</p>
 </ul>
 </div>
 <div class="section" id="toolkit-layout">
-<h2><a class="toc-backref" href="#id6">Toolkit Layout</a></h2>
+<h2><a class="toc-backref" href="#id7">Toolkit Layout</a></h2>
 <p>The files are organized as follow :</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -1061,12 +1084,12 @@ must be symbolic linked into each benchmark directory</td>
 <p></p>
 </div>
 <div class="section" id="benchmark-makefiles">
-<h2><a class="toc-backref" href="#id7">Benchmark Makefiles</a></h2>
-<p>A benchmark <tt class="docutils literal">Makefile</tt> is build by setting up variables <tt class="docutils literal"><span class="pre">USE_&lt;FEATURE&gt;=Yes/No</span></tt>
+<h2><a class="toc-backref" href="#id8">Benchmark Makefiles</a></h2>
+<p>A benchmark <span class="cb">Makefile</span> is build by setting up variables <tt class="docutils literal"><span class="pre">USE_&lt;FEATURE&gt;=Yes/No</span></tt>
 then including the set of rules <tt class="docutils literal"><span class="pre">./mk/design-flow.mk</span></tt>. The directory
 <tt class="docutils literal"><span class="pre">alliance-check-toolkit/etc/mk/</span></tt> must be symlinked in the directory where the
-<tt class="docutils literal">Makefile</tt> resides.</p>
-<p>The <tt class="docutils literal">Makefile</tt> provides some or all of the following targets. If the place
+<span class="cb">Makefile</span> resides.</p>
+<p>The <span class="cb">Makefile</span> provides some or all of the following targets. If the place
 and route stage of a benchmark has multiple target technology, one directory
 is created for each.</p>
 <table border="1" class="docutils">
@@ -1080,7 +1103,7 @@ is created for each.</p>
 <td><tt class="docutils literal">blif</tt></td>
 <td>Synthetize the netlist with <tt class="docutils literal">Yosys</tt>.</td>
 </tr>
-<tr><td><tt class="docutils literal">layout</tt></td>
+<tr><td><em>layout</em></td>
 <td>The complete symbolic layout of the design (P&amp;R).</td>
 </tr>
 <tr><td><tt class="docutils literal">gds</tt></td>
@@ -1093,40 +1116,40 @@ is created for each.</p>
 <td>Perform <span class="sc">lvs</span>.</td>
 </tr>
 <tr><td><tt class="docutils literal">graal</tt></td>
-<td>Launch <tt class="docutils literal">graal</tt> in the <tt class="docutils literal">Makefile</tt> 's environement</td>
+<td>Launch <tt class="docutils literal">graal</tt> in the <span class="cb">Makefile</span> 's environement</td>
 </tr>
 <tr><td><tt class="docutils literal">dreal</tt></td>
-<td>Launch <tt class="docutils literal">dreal</tt> in the <tt class="docutils literal">Makefile</tt> 's environement, and load
+<td>Launch <tt class="docutils literal">dreal</tt> in the <span class="cb">Makefile</span> 's environement, and load
 the <tt class="docutils literal">gds</tt> file of the design.</td>
 </tr>
 <tr><td><tt class="docutils literal">view</tt></td>
-<td>Launch <tt class="docutils literal">cgt</tt> and load the design (chip)</td>
+<td>Launch <span class="cb">cgt</span> and load the design (chip)</td>
 </tr>
-<tr><td><tt class="docutils literal">cgt</tt></td>
-<td>Launch <tt class="docutils literal">cgt</tt>  in the <tt class="docutils literal">Makefile</tt> 's environement</td>
+<tr><td><span class="cb">cgt</span></td>
+<td>Launch <span class="cb">cgt</span>  in the <span class="cb">Makefile</span> 's environement</td>
 </tr>
 </tbody>
 </table>
-<p>A top <tt class="docutils literal">Makefile</tt> in a bench directory must looks like:</p>
-<pre class="literal-block">
-        LOGICAL_SYNTHESIS = Yosys
-       PHYSICAL_SYNTHESIS = Coriolis
-               DESIGN_KIT = nsxlib45
+<p>A top <span class="cb">Makefile</span> in a bench directory must looks like:</p>
+<pre class="code Makefile literal-block">
+        <span class="name variable">LOGICAL_SYNTHESIS</span> <span class="operator">=</span> Yosys
+       <span class="name variable">PHYSICAL_SYNTHESIS</span> <span class="operator">=</span> Coriolis
+               <span class="name variable">DESIGN_KIT</span> <span class="operator">=</span> nsxlib45
 
-            USE_CLOCKTREE = No
-                USE_DEBUG = No
-                 USE_KITE = No
+            <span class="name variable">USE_CLOCKTREE</span> <span class="operator">=</span> No
+                <span class="name variable">USE_DEBUG</span> <span class="operator">=</span> No
+                 <span class="name variable">USE_KITE</span> <span class="operator">=</span> No
 
-                 NETLISTS = VexRiscv
+                 <span class="name variable">NETLISTS</span> <span class="operator">=</span> VexRiscv
 
- include ./mk/design-flow.mk
+<span class="comment preproc"> include ./mk/design-flow.mk
+</span>
+<span class="name function">blif</span><span class="operator">:</span>   <span class="name">VexRiscv</span>.<span class="name">blif</span>
+<span class="name function">layout</span><span class="operator">:</span> <span class="name">vexriscv_r</span>.<span class="name">ap</span>
+<span class="name function">gds</span><span class="operator">:</span>    <span class="name">vexriscv_r</span>.<span class="name">gds</span>
 
-blif:   VexRiscv.blif
-layout: vexriscv_r.ap
-gds:    vexriscv_r.gds
-
-lvx:    lvx-vst-vexriscv
-drc:    druc-vexriscv_r
+<span class="name function">lvx</span><span class="operator">:</span>    <span class="name">lvx</span>-<span class="name">vst</span>-<span class="name">vexriscv</span>
+<span class="name function">drc</span><span class="operator">:</span>    <span class="name">druc</span>-<span class="name">vexriscv_r</span>
 </pre>
 <p></p>
 <p>Where variables have the following meaning:</p>
@@ -1168,10 +1191,10 @@ Note that the clean will remove all generated files.</td>
 <td>Adds a clock-tree to the design (<span class="sc">Coriolis</span>).</td>
 </tr>
 <tr><td><tt class="docutils literal">USE_DEBUG</tt></td>
-<td>Use the debugger enabled version of <tt class="docutils literal">cgt</tt>.</td>
+<td>Use the debugger enabled version of <span class="cb">cgt</span>.</td>
 </tr>
 <tr><td><tt class="docutils literal">USE_KITE</tt></td>
-<td>Use the old <tt class="docutils literal">kite</tt> (digital only) router.</td>
+<td>Use the old <span class="sc">Kite</span> (digital only) router.</td>
 </tr>
 </tbody>
 </table>
@@ -1191,6 +1214,10 @@ Note that the clean will remove all generated files.</td>
 <td>The default <span class="sc">Alliance</span> symbolic technology. Use the
 <tt class="docutils literal">sxlib</tt> and <tt class="docutils literal">pxlib</tt> libraries.</td>
 </tr>
+<tr><td><tt class="docutils literal">nsxlib</tt></td>
+<td>Symbolic technology fitted for <span class="sc">mosis</span> 180nm, 6 metal
+layers <span class="sc">scn6m_deep</span></td>
+</tr>
 <tr><td><tt class="docutils literal">nsxlib45</tt></td>
 <td>The symbolic technology fitted for 180nm and below.
 Used for <span class="sc">FreePDK45</span> in symbolic mode.</td>
@@ -1206,7 +1233,7 @@ Used for <span class="sc">FreePDK45</span> in symbolic mode.</td>
 <p></p>
 </div>
 <div class="section" id="setting-up-the-user-s-environement">
-<h2><a class="toc-backref" href="#id8">Setting Up the User's Environement</a></h2>
+<h2><a class="toc-backref" href="#id9">Setting Up the User's Environement</a></h2>
 <p>Before running the benchmarks, you must create a configuration file to tell
 where all the softwares are installeds. The file is to be created in the directory:</p>
 <pre class="literal-block">
@@ -1217,7 +1244,7 @@ alliance-check-toolkit/etc/mk/users.d/
 alliance-check-toolkit/etc/mk/users.d/user-jpc.mk
 </pre>
 <p>Example of file contents:</p>
-<pre class="code make literal-block">
+<pre class="code Makefile literal-block">
 <span class="comment"># Where Jean-Paul Chaput gets his tools installeds.
 </span>
 <span class="keyword">export </span><span class="name variable">NDA_TOP</span>       <span class="operator">=</span> <span class="literal string interpol">${</span><span class="name variable">HOME</span><span class="literal string interpol">}</span>/crypted/soc/techno
@@ -1231,19 +1258,19 @@ alliance-check-toolkit/etc/mk/users.d/user-jpc.mk
 </pre>
 <p>All the variable names and values are more or less self explanatory...</p>
 <div class="section" id="coriolis-configuration-files">
-<h3><a class="toc-backref" href="#id9"><span class="sc">Coriolis</span> Configuration Files</a></h3>
+<h3><a class="toc-backref" href="#id10"><span class="sc">Coriolis</span> Configuration Files</a></h3>
 <p>Unlike <span class="sc">Alliance</span> which is entirely configured through environement variables
 or system-wide configuration file, <span class="sc">Coriolis</span> uses configuration files in
 the current directory. They are present for each bench:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/.coriolis2/techno.py</span></tt> : Select which symbolic and real technology
-to use.</li>
-<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/.coriolis2/settings.py</span></tt> : Override for any system configuration,
-except for the technology.</li>
+<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/coriolis2/__init__.py</span></tt> : Just to tell <span class="sc">Python</span> that this directory
+contains a module and be able to <em>import</em> it.</li>
+<li><tt class="docutils literal"><span class="pre">&lt;cwd&gt;/coriolis2/settings.py</span></tt> : Override system configuration, and setup
+technology.</li>
 </ul>
 </div>
 <div class="section" id="coriolis-and-clock-tree-generation">
-<h3><a class="toc-backref" href="#id10"><span class="sc">Coriolis</span> and Clock Tree Generation</a></h3>
+<h3><a class="toc-backref" href="#id11"><span class="sc">Coriolis</span> and Clock Tree Generation</a></h3>
 <p>When <span class="sc">Coriolis</span> is used, it create a clock tree which modificate the original
 netlist. The new netlist, with a clock tree, has a postfix of <tt class="docutils literal">_clocked</tt>.</p>
 <div class="note">
@@ -1255,38 +1282,47 @@ relevant part of the clock-tree included.</p>
 </div>
 </div>
 <div class="section" id="rhel6-and-clones">
-<h3><a class="toc-backref" href="#id11"><span class="sc">rhel6</span> and Clones</a></h3>
+<h3><a class="toc-backref" href="#id12"><span class="sc">rhel6</span> and Clones</a></h3>
 <p>Under <span class="sc">rhel6</span> the developpement version of <span class="sc">Coriolis</span> needs the <tt class="docutils literal"><span class="pre">devtoolset-2</span></tt>.
 <tt class="docutils literal">os.mk</tt> tries, based on <tt class="docutils literal">uname</tt> to switch it on or off.</p>
 <p></p>
 </div>
-<div class="section" id="yosys-auxiliary-script">
-<h3><a class="toc-backref" href="#id12">Yosys Auxiliary Script</a></h3>
+<div class="section" id="yosys-wrapper-script-yosys-py">
+<h3><a class="toc-backref" href="#id13">Yosys Wrapper Script <tt class="docutils literal">yosys.py</tt></a></h3>
 <p>As far as I understand, <tt class="docutils literal">yosys</tt> do not allow it's scripts to be parametriseds.
-So, for each <span class="sc">Verilog</span> file that has to be synthetized, a simple script must be
-provided. Here is a basic example: <tt class="docutils literal">VexRiscv.ys</tt>:</p>
-<pre class="literal-block">
-set verilog_file VexRiscv.v
-set verilog_top  VexRiscv
-set liberty_file .../alliance-check-toolkit/cells/nsxlib/nsxlib.lib
-yosys read_verilog          $verilog_file
-yosys hierarchy -check -top $verilog_top
-yosys synth            -top $verilog_top
-yosys dfflibmap -liberty    $liberty_file
-yosys abc       -liberty    $liberty_file
-yosys clean
-yosys write_blif VexRiscv.blif
+The <tt class="docutils literal">yosys.py</tt> script is a simple wrapper around <tt class="docutils literal">yosys</tt> that generate a
+custom tailored <span class="sc">tcl</span> script then call <tt class="docutils literal">yosys</tt> itself. It can manage two
+input file formats, <span class="sc">Verilog</span> and <span class="sc">rtlil</span> and produce a <tt class="docutils literal">blif</tt> netlist.</p>
+<pre class="code bash literal-block">
+ego&#64;home:VexRiscv/cmos350$ ../../../bin/yosys.py <span class="literal string escape">\
+</span>                                       --input-lang<span class="operator">=</span>Verilog  <span class="literal string escape">\
+</span>                                       --design<span class="operator">=</span>VexRiscv     <span class="literal string escape">\
+</span>                                       --top<span class="operator">=</span>VexRiscv        <span class="literal string escape">\
+</span>                                       --liberty<span class="operator">=</span>../../../cells/nsxlib/nsxlib.lib
+</pre>
+<p>Here is an example of generated <span class="sc">tcl</span> script: <tt class="docutils literal">VexRiscv.ys</tt>:</p>
+<pre class="code tcl literal-block">
+<span class="keyword">set</span> verilog_file VexRiscv.v
+<span class="keyword">set</span> verilog_top  VexRiscv
+<span class="keyword">set</span> liberty_file ...<span class="operator">/</span>alliance-check-toolkit<span class="operator">/</span>cells<span class="operator">/</span>nsxlib<span class="operator">/</span>nsxlib.lib
+<span class="name variable">yosys</span> read_verilog          <span class="name variable">$verilog_file</span>
+<span class="name variable">yosys</span> hierarchy <span class="operator">-</span>check <span class="operator">-</span>top <span class="name variable">$verilog_top</span>
+<span class="name variable">yosys</span> synth            <span class="operator">-</span>top <span class="name variable">$verilog_top</span>
+<span class="name variable">yosys</span> dfflibmap <span class="operator">-</span>liberty    <span class="name variable">$liberty_file</span>
+<span class="name variable">yosys</span> abc       <span class="operator">-</span>liberty    <span class="name variable">$liberty_file</span>
+<span class="name variable">yosys</span> clean
+<span class="name variable">yosys</span> write_blif VexRiscv.blif
 </pre>
 </div>
 </div>
 <div class="section" id="benchmarks-special-notes">
-<h2><a class="toc-backref" href="#id13">Benchmarks Special Notes</a></h2>
+<h2><a class="toc-backref" href="#id14">Benchmarks Special Notes</a></h2>
 <div class="section" id="alliance-run">
-<h3><a class="toc-backref" href="#id14"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></h3>
+<h3><a class="toc-backref" href="#id15"><tt class="docutils literal"><span class="pre">alliance-run</span></tt></a></h3>
 <p>This benchmark comes mostly with it's own rules and do not uses the ones supplieds
 by <tt class="docutils literal">rules.mk</tt>. It uses only the top-level configuration variables.</p>
 <p>It a sligtly modified copy of the <tt class="docutils literal"><span class="pre">alliance-run</span></tt> found in the <span class="sc">Alliance</span> package
-(modification are all in the <tt class="docutils literal">Makefile</tt>). It build an <span class="sc">am2901</span>, but it is
+(modification are all in the <span class="cb">Makefile</span>). It build an <span class="sc">am2901</span>, but it is
 splitted in a control and an operative part (data-path). This is to also check
 the data-path features of <span class="sc">Alliance</span>.</p>
 <p>And lastly, it provides a check for the <span class="sc">Coriolis</span> encapsulation of <span class="sc">Alliance</span>
@@ -1294,11 +1330,11 @@ through <span class="sc">Python</span> wrappers. The support is still incomplete
 only by very experienced users. See the <tt class="docutils literal">demo*</tt> rules.</p>
 </div>
 <div class="section" id="am2901-standard-cells">
-<h3><a class="toc-backref" href="#id15"><span class="sc">am2901</span> standard cells</a></h3>
+<h3><a class="toc-backref" href="#id16"><span class="sc">am2901</span> standard cells</a></h3>
 <p>This benchmark can be run in loop to check slight variations. The clock tree generator
 modify the netlist trans-hierarchically then saves the new netlist. But, when there's
-a block <em>without</em> a clock (say an <span class="sc">alu</span> for instance) it is not modificated yet saved
-nonetheless. So the <tt class="docutils literal">vst</tt> file got rewritten. And while the netlist is rewritten
+a block <em>without</em> a clock (say an <span class="sc">alu</span> for instance) it is not modificated yet saved.
+So the <tt class="docutils literal">vst</tt> file got rewritten. And while the netlist is rewritten
 in a deterministic way (from how it was parsed), it is <em>not</em> done the same way due
 to instance and terminal re-ordering. So, from run to run, we get identical netlists
 but different files inducing slight variations in how the design is placed and routed.
@@ -1310,7 +1346,7 @@ check the router. All runs are saved in a <tt class="docutils literal">./runs</t
 </div>
 </div>
 <div class="section" id="libraries-makefiles">
-<h2><a class="toc-backref" href="#id16">Libraries Makefiles</a></h2>
+<h2><a class="toc-backref" href="#id17">Libraries Makefiles</a></h2>
 <div class="note">
 <p class="first admonition-title">Note</p>
 <p>For those part to work, you need to get <tt class="docutils literal">hitas</tt> &amp; <tt class="docutils literal">yagle</tt>:</p>
@@ -1324,7 +1360,7 @@ all the intermediate files generated by the verification tools are kept in a
 is generated too prevent it to be checked again in subsequent run. If you
 want to force the recheck of the cell, do not forget to remove this file.</p>
 <div class="section" id="checking-procedure">
-<h3><a class="toc-backref" href="#id17">Checking Procedure</a></h3>
+<h3><a class="toc-backref" href="#id18">Checking Procedure</a></h3>
 <ul class="simple">
 <li>DRC with <tt class="docutils literal">druc</tt>.</li>
 <li>Formal proof between the layout and the behavioral description. This is a
@@ -1371,7 +1407,7 @@ to be checked again.</td>
 </table>
 </div>
 <div class="section" id="synopsys-liberty-lib-generation">
-<h3><a class="toc-backref" href="#id18">Synopsys Liberty .lib Generation</a></h3>
+<h3><a class="toc-backref" href="#id19">Synopsys Liberty .lib Generation</a></h3>
 <p>The generation of the liberty file is only half-automated. <tt class="docutils literal">hitas</tt> / <tt class="docutils literal">yagle</tt>
 build the base file, then we manually perform the two modifications (see below).</p>
 <p>The rule to call to generate the liberty file is: <tt class="docutils literal"><span class="pre">&lt;libname&gt;-dot-lib</span></tt> where
@@ -1426,7 +1462,7 @@ cell (sff2_x4) {
 </div>
 </div>
 <div class="section" id="helpers-scripts">
-<h3><a class="toc-backref" href="#id19">Helpers Scripts</a></h3>
+<h3><a class="toc-backref" href="#id20">Helpers Scripts</a></h3>
 <p><span class="sc">tcl</span> scripts for <tt class="docutils literal">avt_shell</tt> related to cell validation and characterization,
 in <tt class="docutils literal">./benchs/bin</tt>, are:</p>
 <ul class="simple">
@@ -1443,30 +1479,30 @@ be determined by the <tt class="docutils literal">.spi</tt> files found in the c
 </div>
 </div>
 <div class="section" id="macro-blocks-makefiles">
-<h2><a class="toc-backref" href="#id20">Macro-Blocks Makefiles</a></h2>
+<h2><a class="toc-backref" href="#id21">Macro-Blocks Makefiles</a></h2>
 <p>The <tt class="docutils literal"><span class="pre">bench/etc/mk/check-generator.mk</span></tt> provides rules to perform the check of a
 macro block generator. As one library cell may be used to build multiple macro-blocks,
-one <tt class="docutils literal">Makefile</tt> per macro must be provided. The <em>dot</em> extension of a <tt class="docutils literal">Makefile</tt> is
+one <span class="cb">Makefile</span> per macro must be provided. The <em>dot</em> extension of a <span class="cb">Makefile</span> is
 expected to be the name of the macro-block. Here is a small example for the register
 file generator, <tt class="docutils literal">Makefile.block_rf2</tt>:</p>
-<pre class="literal-block">
-                  TK_RTOP = ../..
- export      MBK_CATA_LIB = $(TOOLKIT_CELLS_TOP)/nrf2lib
+<pre class="code Makefile literal-block">
+                  <span class="name variable">TK_RTOP</span> <span class="operator">=</span> ../..
+ <span class="name builtin">export</span>      <span class="name variable">MBK_CATA_LIB</span> <span class="operator">=</span> <span class="keyword">$(</span>TOOLKIT_CELLS_TOP<span class="keyword">)</span>/nrf2lib
 
- include $(TK_RTOP)/etc/mk/alliance.mk
- include $(TK_RTOP)/etc/mk/mosis.mk
- include $(TK_RTOP)/etc/mk/check-generator.mk
-
-check-gen: ./check/block_rf2_p_b_4_p_w_6.ok   \
-           ./check/block_rf2_p_b_2_p_w_32.ok  \
-           ./check/block_rf2_p_b_64_p_w_6.ok  \
-           ./check/block_rf2_p_b_16_p_w_32.ok \
-           ./check/block_rf2_p_b_32_p_w_32.ok
+<span class="comment preproc"> include $(TK_RTOP)/etc/mk/alliance.mk
+</span><span class="comment preproc"> include $(TK_RTOP)/etc/mk/mosis.mk
+</span><span class="comment preproc"> include $(TK_RTOP)/etc/mk/check-generator.mk
+</span>
+<span class="name function">check-gen</span><span class="operator">:</span> ./<span class="name">check</span>/<span class="name">block_rf</span>2<span class="name">_p_b_</span>4<span class="name">_p_w_</span>6.<span class="name">ok</span>   \
+           ./<span class="name">check</span>/<span class="name">block_rf</span>2<span class="name">_p_b_</span>2<span class="name">_p_w_</span>32.<span class="name">ok</span>  \
+           ./<span class="name">check</span>/<span class="name">block_rf</span>2<span class="name">_p_b_</span>64<span class="name">_p_w_</span>6.<span class="name">ok</span>  \
+           ./<span class="name">check</span>/<span class="name">block_rf</span>2<span class="name">_p_b_</span>16<span class="name">_p_w_</span>32.<span class="name">ok</span> \
+           ./<span class="name">check</span>/<span class="name">block_rf</span>2<span class="name">_p_b_</span>32<span class="name">_p_w_</span>32.<span class="name">ok</span>
 </pre>
 <div class="note">
 <p class="first admonition-title">Note</p>
 <p class="last">In the <tt class="docutils literal"><span class="pre">check-gen</span></tt> rule, the name of the block <strong>must</strong> match the <em>dot</em>
-extension of the <tt class="docutils literal">Makefile</tt>, here: <tt class="docutils literal">block_rf2</tt>.</p>
+extension of the <span class="cb">Makefile</span>, here: <tt class="docutils literal">block_rf2</tt>.</p>
 </div>
 <p>Macro-block generators are parametrized. We uses a special naming convention
 to pass parameters names and values trough the rule name. To declare a parameter,
@@ -1488,7 +1524,7 @@ add <tt class="docutils literal">_p_</tt>, then the name of the parameter and it
 </tbody>
 </table>
 <p>When multiple flavor of a generator could be built upon the same cell library,
-one <tt class="docutils literal">Makefile</tt> per flavor is provided. To run them all at once, a <tt class="docutils literal">makeAll.sh</tt>
+one <span class="cb">Makefile</span> per flavor is provided. To run them all at once, a <tt class="docutils literal">makeAll.sh</tt>
 script is also available.</p>
 <p>The <tt class="docutils literal"><span class="pre">check-gen</span></tt> rule only perform a <span class="sc">drc</span> and a <span class="sc">lvs</span> to check that their
 router as correctly connected the cells of a macro-block. It doesn't perform
@@ -1502,7 +1538,7 @@ ego&#64;home:nrf2lib&gt; make -f Makefile.block_rf2 block_rf2_b_4_p_w_6_kite.vhd
 the report file <tt class="docutils literal">block_rf2_b_4_p_w_6_kite.rep</tt> for any error or warning,
 particularly any disconnected transistor.</p>
 <div class="section" id="calling-the-generator">
-<h3><a class="toc-backref" href="#id21">Calling the Generator</a></h3>
+<h3><a class="toc-backref" href="#id22">Calling the Generator</a></h3>
 <p>A script <tt class="docutils literal">./check/generator.py</tt> must be written in order to call the generator
 in standalone mode. This script is quite straigthforward, what changes between
 generators is the command line options and the <tt class="docutils literal">stratus.buildModel()</tt> call.</p>
@@ -1515,9 +1551,9 @@ language tool from <span class="sc">Coriolis</span>.</p>
 </div>
 </div>
 <div class="section" id="scaling-the-cell-library">
-<h3><a class="toc-backref" href="#id22">Scaling the Cell Library</a></h3>
+<h3><a class="toc-backref" href="#id23">Scaling the Cell Library</a></h3>
 <p>This operation has to be done once, when the cell library is initially ported.
-The result is put in the <tt class="docutils literal">git</tt> repository, so there's no need to run it again
+The result is put in the <span class="cb">git</span> repository, so there's no need to run it again
 on a provided library.</p>
 <p>The script is <tt class="docutils literal">./check/scaleCell.py</tt>. It is very sensitive on the way
 the library pathes are set in <tt class="docutils literal">.coriolis2/settings.py</tt>. It must have the
@@ -1548,30 +1584,30 @@ is <em>not</em> shared, but customized for each one.</p>
 </div>
 </div>
 <div class="section" id="tools-scripts">
-<h2><a class="toc-backref" href="#id23">Tools &amp; Scripts</a></h2>
+<h2><a class="toc-backref" href="#id24">Tools &amp; Scripts</a></h2>
 <div class="section" id="one-script-to-run-them-all-go">
-<h3><a class="toc-backref" href="#id24">One script to run them all: <tt class="docutils literal">go.sh</tt></a></h3>
+<span id="go-sh"></span><h3><a class="toc-backref" href="#id25">One script to run them all: <tt class="docutils literal">go.sh</tt></a></h3>
 <p>To call all the bench's <tt class="docutils literal">Makefile</tt> sequentially and execute one or more rules on
 each, the small script utility <tt class="docutils literal">go.sh</tt> is available. Here are some examples:</p>
 <pre class="literal-block">
-dummy&#64;lepka:bench$ ./bin/go.sh clean
-dummy&#64;lepka:bench$ ./bin/go.sh lvx
+ego&#64;home:bench$ ./bin/go.sh clean
+ego&#64;home:bench$ ./bin/go.sh lvx
 </pre>
 </div>
 <div class="section" id="command-line-cgt-dochip">
-<h3><a class="toc-backref" href="#id25">Command Line <tt class="docutils literal">cgt</tt>: <tt class="docutils literal">doChip.py</tt></a></h3>
-<p>As a alternative to <tt class="docutils literal">cgt</tt>, the small helper script <tt class="docutils literal">doChip.py</tt> allows to
+<h3><a class="toc-backref" href="#id26">Command Line <span class="cb">cgt</span>: <tt class="docutils literal">doChip.py</tt></a></h3>
+<p>As a alternative to <span class="cb">cgt</span>, the small helper script <tt class="docutils literal">doChip.py</tt> allows to
 perform all the P&amp;R tasks, on an stand-alone block or a whole chip.</p>
 </div>
 <div class="section" id="blif-netlist-converter">
-<h3><a class="toc-backref" href="#id26">Blif Netlist Converter</a></h3>
+<h3><a class="toc-backref" href="#id27">Blif Netlist Converter</a></h3>
 <p>The <tt class="docutils literal">blif2vst.py</tt> script convert a <tt class="docutils literal">.blif</tt> netlist into an <span class="sc">Alliance</span> one
-(<tt class="docutils literal">vst</tt>). This is a very straightforward encapsulation of <span class="sc">Coriolis</span>.
+(<span class="cb">vst</span>). This is a very straightforward encapsulation of <span class="sc">Coriolis</span>.
 It could have been included in <tt class="docutils literal">doChip.py</tt>, but then the <tt class="docutils literal">make</tt> rules
 would have been much more complicateds.</p>
 </div>
 <div class="section" id="pad-layout-converter-px2mpx">
-<h3><a class="toc-backref" href="#id27">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
+<h3><a class="toc-backref" href="#id28">Pad Layout Converter <tt class="docutils literal">px2mpx.py</tt></a></h3>
 <p>The <tt class="docutils literal">px2mpx.py</tt> script convert pad layout from the <tt class="docutils literal">pxlib</tt> (<span class="sc">Alliance</span> dummy
 technology) into <tt class="docutils literal">mpxlib</tt> (<span class="sc">mosis</span> compliant symbolic technology).</p>
 <p>Basically it multiplies all the coordinate by two as the source technology
@@ -1612,7 +1648,7 @@ the pads of the system library (if any).</p>
 </div>
 </div>
 <div class="section" id="cadence-support">
-<h2><a class="toc-backref" href="#id28"><span class="sc">Cadence</span> Support</a></h2>
+<h2><a class="toc-backref" href="#id29"><span class="sc">Cadence</span> Support</a></h2>
 <p>To perform comparisons with <span class="sc">Cadence</span> <span class="sc">edi</span> tools (i.e. <tt class="docutils literal">encounter</tt>
 <span class="sc">NanoRoute</span>), some benchmarks have a sub-directory <tt class="docutils literal">encounter</tt>
 holding all the necessary files. Here is an example for the design
@@ -1662,35 +1698,35 @@ ego&#64;home:encounter&gt; . ../../etc/EDI1324.sh
 ego&#64;home:encounter&gt; encounter -init ./fpga.tcl
 </pre>
 <p>Example of <span class="sc">tcl</span> script for <tt class="docutils literal">encounter</tt>:</p>
-<pre class="literal-block">
-set_global _enable_mmmc_by_default_flow      $CTE::mmmc_default
-suppressMessage ENCEXT-2799
-win
-loadLefFile fpga_export.lef
-loadDefFile fpga_export.def
-floorPlan -site core -r 0.998676319592 0.95 0.0 0.0 0.0 0.0
-getIoFlowFlag
-fit
-setDrawView place
-setPlaceMode -fp false
-placeDesign
-generateTracks
-generateVias
-setNanoRouteMode -quiet -drouteFixAntenna 0
-setNanoRouteMode -quiet -drouteStartIteration 0
-setNanoRouteMode -quiet -routeTopRoutingLayer 5
-setNanoRouteMode -quiet -routeBottomRoutingLayer 2
-setNanoRouteMode -quiet -drouteEndIteration 0
-setNanoRouteMode -quiet -routeWithTimingDriven false
-setNanoRouteMode -quiet -routeWithSiDriven false
-routeDesign -globalDetail
-global dbgLefDefOutVersion
-set dbgLefDefOutVersion 5.7
-defOut -floorplan -netlist -routing fpga_nano.def
+<pre class="code tcl literal-block">
+<span class="name variable">set_global</span> _enable_mmmc_by_default_flow      <span class="name variable">$CTE::mmmc_default</span>
+<span class="name variable">suppressMessage</span> ENCEXT-2799
+<span class="name variable">win</span>
+<span class="name variable">loadLefFile</span> fpga_export.lef
+<span class="name variable">loadDefFile</span> fpga_export.def
+<span class="name variable">floorPlan</span> <span class="operator">-</span>site core <span class="operator">-</span>r <span class="literal number float">0.998676319592</span> <span class="literal number float">0.95</span> <span class="literal number float">0.0</span> <span class="literal number float">0.0</span> <span class="literal number float">0.0</span> <span class="literal number float">0.0</span>
+<span class="name variable">getIoFlowFlag</span>
+<span class="name variable">fit</span>
+<span class="name variable">setDrawView</span> place
+<span class="name variable">setPlaceMode</span> <span class="operator">-</span>fp false
+<span class="name variable">placeDesign</span>
+<span class="name variable">generateTracks</span>
+<span class="name variable">generateVias</span>
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>drouteFixAntenna <span class="literal number integer">0</span>
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>drouteStartIteration <span class="literal number integer">0</span>
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>routeTopRoutingLayer <span class="literal number integer">5</span>
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>routeBottomRoutingLayer <span class="literal number integer">2</span>
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>drouteEndIteration <span class="literal number integer">0</span>
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>routeWithTimingDriven false
+<span class="name variable">setNanoRouteMode</span> <span class="operator">-</span>quiet <span class="operator">-</span>routeWithSiDriven false
+<span class="name variable">routeDesign</span> <span class="operator">-</span>globalDetail
+<span class="keyword">global</span> dbgLefDefOutVersion
+<span class="keyword">set</span> dbgLefDefOutVersion <span class="literal number float">5.7</span>
+<span class="name variable">defOut</span> <span class="operator">-</span>floorplan <span class="operator">-</span>netlist <span class="operator">-</span>routing fpga_nano.def
 </pre>
 </div>
 <div class="section" id="technologies">
-<h2><a class="toc-backref" href="#id29">Technologies</a></h2>
+<h2><a class="toc-backref" href="#id30">Technologies</a></h2>
 <p>We provides configuration files for the publicly available <span class="sc">mosis</span>
 technology <tt class="docutils literal">SCN6M_DEEP</tt>.</p>
 <ul class="simple">
