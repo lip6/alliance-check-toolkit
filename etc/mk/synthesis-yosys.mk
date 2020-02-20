@@ -29,12 +29,6 @@
 	python3 $*.py generate -t il > $*.il
 
 
-# Any file put in "./non_generated/" will take precedence over the
-# generation.
-
-%.blif: ./non_generated/%.blif ;  cp $< .
-
-
 %.blif: %.v
 	 yosysArgs="--input-lang=Verilog --design=$* --top=$* --liberty=$(LIBERTY_FILE)"; \
 	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi;   \
@@ -45,6 +39,13 @@
 	 yosysArgs="--input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";          \
 	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi; \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
+
+
+# Any file put in "./non_generated/" will take precedence over the
+# generation.
+
+%.il  : ./non_generated/%.il   ;  cp $< .
+%.blif: ./non_generated/%.blif ;  cp $< .
 
 
 #%.blif: %.v

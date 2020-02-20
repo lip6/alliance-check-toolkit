@@ -28,6 +28,25 @@ except Exception, e:
 framework = CRL.AllianceFramework.get()
 
 
+def renameNMigenUniquify ( topCell ):
+    for occurrence in topCell.getLeafInstanceOccurrences():
+       masterCell = occurrence.getEntity().getMasterCell()
+       origName   = masterCell.getName()
+       replName   = origName.replace( '$$', '_unm' )
+       if origName != replName:
+         print '  - "%s" => "%s"' % (origName,replName)
+         masterCell.setName( replName )
+
+    for occurrence in topCell.getNonLeafInstanceOccurrences():
+       masterCell = occurrence.getEntity().getMasterCell()
+       origName   = masterCell.getName()
+       replName   = origName.replace( '$$', '_unm' )
+       if origName != replName:
+         print '  - "%s" => "%s"' % (origName,replName)
+         masterCell.setName( replName )
+    return
+
+
 if __name__ == '__main__':
 
   parser = optparse.OptionParser()
@@ -49,6 +68,7 @@ if __name__ == '__main__':
   if cell.getName() == 'top':
     print '  o  Renaming RTLIL anonymous top cell "top" into "%s".' % options.cellName
     cell.setName( options.cellName )
+  renameNMigenUniquify( cell )
 
   kw          = {}
   kw['views'] = views
