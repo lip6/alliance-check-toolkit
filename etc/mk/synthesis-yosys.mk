@@ -36,8 +36,8 @@
 
 
 %.blif: %.il
-	 yosysArgs="--input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";          \
-	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi; \
+	 yosysArgs="--input-lang=RTLIL --design=$* --top=$* --liberty=$(LIBERTY_FILE)";  \
+	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi;  \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 

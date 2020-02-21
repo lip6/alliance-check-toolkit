@@ -104,7 +104,7 @@ if __name__ == '__main__':
      if options.keepTcl: yosys.setKeepTcl( True )
      if options.liberty: yosys.setLiberty( options.liberty )
      
-     rcode = yosys.run( options.design, options.top )
+     rcode = yosys.run( options.design, top=options.top )
 
    except Exception, e:
      catch( e )
