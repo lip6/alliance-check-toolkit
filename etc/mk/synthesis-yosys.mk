@@ -26,7 +26,8 @@
 
 
 %.il: %.py
-	python3 $*.py generate -t il > $*.il
+	 python3 $*.py generate -t il > $*.out; \
+	 if [ ! -f "$*.il" ]; then mv $*.out $*.il; else rm $*.out; fi
 
 
 %.blif: %.v
