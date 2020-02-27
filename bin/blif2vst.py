@@ -28,6 +28,25 @@ except Exception, e:
 framework = CRL.AllianceFramework.get()
 
 
+def renameNMigenUniquify ( topCell ):
+    for occurrence in topCell.getLeafInstanceOccurrences():
+       masterCell = occurrence.getEntity().getMasterCell()
+       origName   = masterCell.getName()
+       replName   = origName.replace( '$$', '_unm' )
+       if origName != replName:
+         print '  - "%s" => "%s"' % (origName,replName)
+         masterCell.setName( replName )
+
+    for occurrence in topCell.getNonLeafInstanceOccurrences():
+       masterCell = occurrence.getEntity().getMasterCell()
+       origName   = masterCell.getName()
+       replName   = origName.replace( '$$', '_unm' )
+       if origName != replName:
+         print '  - "%s" => "%s"' % (origName,replName)
+         masterCell.setName( replName )
+    return
+
+
 if __name__ == '__main__':
 
   parser = optparse.OptionParser()
@@ -45,9 +64,15 @@ if __name__ == '__main__':
     Cfg.getParamBool('misc.verboseLevel2').setBool(True)
   if options.vstUseConcat: views    |= CRL.Catalog.State.VstUseConcat
     
+  cell = CRL.Blif.load( options.cellName )
+  if cell.getName() == 'top':
+    print '  o  Renaming RTLIL anonymous top cell "top" into "%s".' % options.cellName
+    cell.setName( options.cellName )
+  renameNMigenUniquify( cell )
+
   kw          = {}
   kw['views'] = views
-  kw['cell' ] = CRL.Blif.load( options.cellName )
+  kw['cell' ] = cell
 
   plugins.RSavePlugin.ScriptMain( **kw )
 

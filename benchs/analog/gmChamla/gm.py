@@ -66,6 +66,11 @@ from   Analog import DifferentialPair
 from   Analog import LevelShifter
 from   Analog import SimpleCurrentMirror
 from   Analog import LayoutGenerator
+from   Analog import CapacitorFamily
+from   Analog import MultiCapacitor
+from   Bora   import ParameterRange
+from   Bora   import StepParameterRange
+from   Bora   import MatrixParameterRange
 from   Bora   import SlicingNode
 from   Bora   import HSlicingNode
 from   Bora   import VSlicingNode
@@ -77,6 +82,9 @@ from   karakaze.AnalogDesign import AnalogDesign
 
 NMOS    = Transistor.NMOS
 PMOS    = Transistor.PMOS
+PIP     = CapacitorFamily.PIP
+MIM     = CapacitorFamily.MIM
+MOM     = CapacitorFamily.MOM
 Center  = SlicingNode.AlignCenter
 Left    = SlicingNode.AlignLeft
 Right   = SlicingNode.AlignRight
@@ -86,6 +94,14 @@ Unknown = SlicingNode.AlignBottom
 VNode   = 1
 HNode   = 2
 DNode   = 3
+
+oneCapa_2x2 = [ [ 0, 0 ]
+              , [ 0, 0 ]
+              ]
+
+twoCapa_2x2 = [ [ 1, 1 ]
+              , [ 0, 1 ]
+              ]
 
 
 class GmChamla ( AnalogDesign ):
@@ -132,6 +148,11 @@ class GmChamla ( AnalogDesign ):
           , [ Transistor         , 'm7bn'    , 'WIP Transistor', PMOS, 12.92   , 1.00, 4, None,  0, True , 0xf, True  ]
           , [ Transistor         , 'm8an'    , 'WIP Transistor', PMOS, 12.73   , 1.00, 4, None,  0, True , 0xf, True  ]
           , [ Transistor         , 'm8bn'    , 'WIP Transistor', PMOS, 12.73   , 1.00, 4, None,  0, True , 0xf, True  ]
+
+       #    | 0                  | 1         | 2               | 3   | 4             | 5              |
+       #    | Class              | Instance  | Layout Style    | Type| Cs            | Default Matrix |
+       #    +====================+===========+=================+=====+===============+================+
+       #  , [ MultiCapacitor     , 'c0'      , 'Matrix'        , MIM , (1.0,3.0)     , twoCapa_2x2    ]
           ]
 
         self.netTypes = \
@@ -239,78 +260,78 @@ class GmChamla ( AnalogDesign ):
        #self.addVRail( self.getNet('alim'), 'METAL3', 2, "CV1", "CV1" )
        # Ampli P.
         self.pushHNode( Center )
-        self.addDevice( 'm10ap'   , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm3ap_bp' , Center, span=(2.0, 2.0, 2.0), NF=2 )
+        self.addDevice( 'm10ap'   , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm3ap_bp' , Center, StepParameterRange(2, 2, 2) )
         self.pushVNode( Center )
        #self.addSymmetry( 0, 1 )
-        self.addDevice( 'm4ap'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm4bp'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm4ap'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm4bp'    , Center, StepParameterRange(4, 2, 2) )
         self.addSymmetry( 0, 1 )
         self.popNode()
         self.pushVNode( Center )
        #self.addSymmetry( 0, 3 )
        #self.addSymmetry( 1, 2 )
-        self.addDevice( 'm7ap'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm8ap'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm8bp'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm7bp'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm7ap'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm8ap'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm8bp'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm7bp'    , Center, StepParameterRange(4, 2, 2) )
         self.addSymmetry( 0, 3 )
         self.addSymmetry( 1, 2 )
         self.popNode()
         self.pushVNode( Center )
        #self.addSymmetry( 0, 2 )
-        self.addDevice( 'm5ap'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm6ap_bp' , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm5bp'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm5ap'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm6ap_bp' , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm5bp'    , Center, StepParameterRange(4, 2, 2) )
         self.addSymmetry( 0, 2 )
         self.popNode()
         self.popNode()
         
        # GMD.
         self.pushHNode( Center )
-        self.addDevice( 'm1ap_an' , Center, span=(2.0, 2.0, 2.0), NF=2 )
+        self.addDevice( 'm1ap_an' , Center, StepParameterRange(2, 2, 2) )
         self.pushVNode( Center )
-        self.addDevice( 'm2p'     , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm2n'     , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm2p'     , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm2n'     , Center, StepParameterRange(4, 2, 2) )
         self.popNode()
-        self.addDevice( 'm9ap_an' , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm9ap_an' , Center, StepParameterRange(4, 2, 2) )
         
        # CMC.
-        self.addDevice( 'm12ap_an', Center, span=(2.0, 2.0, 2.0), NF=2 )
+        self.addDevice( 'm12ap_an', Center, StepParameterRange(2, 2, 2) )
         self.pushVNode( Center )
        #self.addSymmetry( 0, 1 )
-        self.addDevice( 'm11ap'   , Center, span=(2.0, 2.0, 2.0), NF=2 )
-        self.addDevice( 'm11an'   , Center, span=(2.0, 2.0, 2.0), NF=2 )
+        self.addDevice( 'm11ap'   , Center, StepParameterRange(2, 2, 2) )
+        self.addDevice( 'm11an'   , Center, StepParameterRange(2, 2, 2) )
         self.addSymmetry( 0, 1 )
         self.popNode()
-        self.addDevice( 'm13'     , Center, span=(2.0, 2.0, 2.0), NF=2 )
+        self.addDevice( 'm13'     , Center, StepParameterRange(2, 2, 2) )
         self.popNode()
         
        # Ampli N.
         self.pushHNode( Center )
-        self.addDevice( 'm10an'   , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm3an_bn' , Center, span=(2.0, 2.0, 2.0), NF=2 )
+        self.addDevice( 'm10an'   , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm3an_bn' , Center, StepParameterRange(2, 2, 2) )
         self.pushVNode( Center )
        #self.addSymmetry( 0, 1 )
-        self.addDevice( 'm4bn'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm4an'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm4bn'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm4an'    , Center, StepParameterRange(4, 2, 2) )
         self.addSymmetry( 0, 1 )
         self.popNode()
         self.pushVNode( Center )
        #self.addSymmetry( 0, 3 )
        #self.addSymmetry( 1, 2 )
-        self.addDevice( 'm7bn'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm8bn'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm8an'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm7an'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm7bn'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm8bn'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm8an'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm7an'    , Center, StepParameterRange(4, 2, 2) )
         self.addSymmetry( 0, 3 )
         self.addSymmetry( 1, 2 )
         self.popNode()
         self.pushVNode( Center )
        #self.addSymmetry( 0, 2 )
-        self.addDevice( 'm5bn'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm6an_bn' , Center, span=(4.0, 2.0, 2.0), NF=4 )
-        self.addDevice( 'm5an'    , Center, span=(4.0, 2.0, 2.0), NF=4 )
+        self.addDevice( 'm5bn'    , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm6an_bn' , Center, StepParameterRange(4, 2, 2) )
+        self.addDevice( 'm5an'    , Center, StepParameterRange(4, 2, 2) )
         self.addSymmetry( 0, 2 )
         self.popNode()
         self.popNode()

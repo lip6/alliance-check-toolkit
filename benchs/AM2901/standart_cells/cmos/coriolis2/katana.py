@@ -1,6 +1,4 @@
 
-yoyo
-
 from Hurricane import DebugSession
 from Hurricane import UpdateSession
 

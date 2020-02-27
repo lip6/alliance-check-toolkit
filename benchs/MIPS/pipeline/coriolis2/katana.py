@@ -14,3 +14,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_shift32_rshift_se_c0(2)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_ct_not_hold_si)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_shift32_rshift_se_muxoutput(112)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_res_re(30)' ) )

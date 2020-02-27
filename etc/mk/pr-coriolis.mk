@@ -49,10 +49,10 @@
    $(info Coriolis is working in real mode (LEF & GDS))
 
 %_r.gds: $(CORE_NETLIST).blif
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prS --lef=$(LEF_LIBS) --blif=$*)
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prS --lef=$(LEF_LIBS) --blif=$*))
 
 cgt-run: $(CORE_NETLIST).blif
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -V --script=loadDesign)
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V --script=loadDesign))
 
  else   # REAL_MODE
 
@@ -62,44 +62,44 @@ cgt-run: $(CORE_NETLIST).blif
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(CHIP).vst ./coriolis2/ioring.py $(CORONA).vst $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for manually created CHIP/CORONA (clock tree enabled)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CHIP))
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CHIP)))
 	-touch *_cts.*
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  ./coriolis2/ioring.py $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for automatic CHIP/CORONA generation (clock tree enabled)."
-	-$(call run_if_older,$@,$(CORE_NETLIST),$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prGCTS --cell=$(CORE_NETLIST)))
+	-$(call run_if_older,$@,$(CORE_NETLIST),$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prGCTS --cell=$(CORE_NETLIST))))
 	-touch *_cts.*
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  ./coriolis2/ioring.py $(NETLISTS_PNR_VST) $(DESIGN).py
 	-@echo "Using implicit rule for CORE/BLOCK creation from a Python design (clock tree enabled)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --script=$(DESIGN))
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --script=$(DESIGN)))
 	-touch *_cts.*
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  ./coriolis2/ioring.py  $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for CORE/BLOCK creation from a VST netlist (clock tree enabled)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CORE_NETLIST))
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prCTS --cell=$(CORE_NETLIST)))
 
 %_cts_r.ap  %_cts_r.vst  %_cts.vst:  $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for CORE/BLOCK creation from a VST netlist, whithout ioring.py (clock tree enabled)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prTS --cell=$*)
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prTS --cell=$*))
 
    else   # USE_CLOCKTREE
 
 %_r.ap  %_r.vst:  $(NETLISTS_PNR_VST) $(DESIGN).py ./coriolis2/ioring.py
 	-@echo "Using implicit rule for CORE creation from a Python design (no clock tree)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) --script=$(DESIGN))
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) --script=$(DESIGN)))
 
 %_r.ap  %_r.vst:  $(NETLISTS_PNR_VST) ./coriolis2/ioring.py 
 	-@echo "Using implicit rule for manually created CHIP/CORONA (no clock tree)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prCS --cell=$*)
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prCS --cell=$*))
 
 %_r.ap  %_r.vst: $(NETLISTS_PNR_VST) %.ap
 	-@echo "Using implicit rule for routing an already placed design."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -rS --cell=$*)
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -rS --cell=$*))
 
 %_r.ap  %_r.vst: $(NETLISTS_PNR_VST)
 	-@echo "Using implicit rule for CORE/BLOCK creation from a VST netlist (no clock tree)."
-	-$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -prS --cell=$*)
+	-$(call scl_cols,$(call c2env, $(DoCHIP) $(DoCHIP_FLAGS) -prS --cell=$*))
 
 #%_r.ap  %_r.vst:  %.vst %.ap
 #	-eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(DoCHIP) $(DoCHIP_FLAGS) -rS --cell=$*
@@ -107,12 +107,12 @@ cgt-run: $(CORE_NETLIST).blif
    endif   # USE_CLOCKTREE
 
 cgt-%:
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -V --cell=$*)
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V --cell=$*))
 
  endif   # REAL_MODE
 
 cgt:
-	$(call scl_dts2,eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(VALGRIND_COMMAND) cgt -V)
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V))
 
 
  EXTENSIONS = _r.vst _r.ap

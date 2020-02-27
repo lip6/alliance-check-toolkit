@@ -218,11 +218,11 @@ def ScriptMain ( **kw ):
        #katana.printConfiguration   ()
         katana.digitalInit          ()
        #katana.runNegociatePreRouted()
-        katana.runGlobalRouter      ()
+        katana.runGlobalRouter      ( Katana.Flags.NoFlags )
         katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
         katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
         katana.runNegociate         ( Katana.Flags.NoFlags )
-        success = katana.getToolSuccess()
+        success = katana.isDetailedRoutingSuccess()
         katana.finalizeLayout()
         katana.destroy()
 

@@ -27,3 +27,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_wm_rf_nren' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'ctl_seq_ep_45' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'ctl_seq_mbk_not_ep_98' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'berr' ) )

@@ -7,6 +7,7 @@
 # * BUILD_TYPE_DIR
 # * DEBUG_OPTION
 # * USE_DEVTOOLSET_2
+# * USE_LLVMTOOLSET_7
 
 
  UNAME_S          = $(shell uname -s)
@@ -21,8 +22,9 @@
  endif
 
 # We must use devtoolset-2 only under SL6.
- BUILD_VARIANT    = Linux
- USE_DEVTOOLSET_2 = No
+ BUILD_VARIANT     = Linux
+ USE_DEVTOOLSET_2  = No
+ USE_LLVMTOOLSET_7 = No
  ifeq ($(UNAME_S),Linux)
    ifneq ($(findstring .el6.,$(UNAME_R)),)
      USE_DEVTOOLSET_2 = Yes
@@ -33,7 +35,8 @@
      BUILD_VARIANT    = Linux.slsoc6x
    endif
    ifneq ($(findstring .el7.,$(UNAME_R)),)
-     BUILD_VARIANT    = Linux.el7
+    #USE_LLVMTOOLSET_7 = Yes
+     BUILD_VARIANT     = Linux.el7
    endif
    ifneq ($(findstring -Microsoft,$(UNAME_R)),)
      BUILD_VARIANT    = Linux.x86
@@ -65,10 +68,19 @@
 
 
  ifeq ($(USE_DEVTOOLSET_2),Yes)
-   scl_dts2 = scl enable devtoolset-2 '$(1)'
+   scl_cols = scl enable devtoolset-2 '$(1)'
  else
-   scl_dts2 = $(1)
+   scl_cols = $(1)
  endif
+
+
+ ifeq ($(USE_LLVMTOOLSET_7),Yes)
+   scl_cols = scl enable llvm-toolset-7 '$(1)'
+ else
+   scl_cols = $(1)
+ endif
+
+ c2env = eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(1)
 
 
 # Standart System binary access paths.

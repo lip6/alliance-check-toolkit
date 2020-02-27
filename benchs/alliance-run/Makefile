@@ -3,7 +3,7 @@
 
 all: nb_transistors 
 
-include ../etc/rules.mk
+include ../../etc/rules.mk
 
 
 # +------------------------------------------------------------------+
