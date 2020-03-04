@@ -1,11 +1,11 @@
-# -*- explicit-buffer-name: "Makefile<snx/cmos>" -*-
+# -*- explicit-buffer-name: "Makefile<snx/nsxlib-2M>" -*-
 
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
-               DESIGN_KIT = sxlib
+               DESIGN_KIT = nsxlib
 
             USE_CLOCKTREE = No
-                USE_DEBUG = No
+                USE_DEBUG = Yes
                  USE_KITE = No
 
                  NETLISTS = snx         \

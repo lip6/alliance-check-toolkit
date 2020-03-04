@@ -18,7 +18,9 @@
  VLOG_MODULE       = $(firstword $(NETLISTS_NOMODELS))
  NETLISTS_VST      = $(shell echo $(VLOG_MODULE) | tr '[:upper:]' '[:lower:]').vst 
  NETLISTS_SYNTH    = $(foreach netlist,$(NETLISTS_NOMODELS), $(shell echo $(netlist) | tr '[:upper:]' '[:lower:]'))
- CLEAN_SYNTHESIS   = $(addsuffix .vst,$(NETLISTS_SYNTH)) $(VLOG_MODULE).il $(VLOG_MODULE).blif $(VLOG_MODULE).tcl
+ CLEAN_SYNTHESIS   = $(addsuffix .vst,$(NETLISTS_SYNTH)) \
+                     $(addsuffix .il ,$(NETLISTS_SYNTH)) \
+                     $(VLOG_MODULE).il $(VLOG_MODULE).blif $(VLOG_MODULE).tcl
 
  $(info | Verilog file & top model: "$(VLOG_MODULE)")
  $(info | Generated secondary VHDL structural files (vst):)

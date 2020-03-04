@@ -2,7 +2,7 @@
 
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
-               DESIGN_KIT = nsxlib45
+               DESIGN_KIT = nsxlib
 
                      CHIP = snx_chip
             USE_CLOCKTREE = Yes
@@ -38,6 +38,7 @@ snx_flat.path: snx_flat.vst
 	awk 'BEGIN {FS=":"; printf "BEGIN_PATH_REG\n";} \
 		{print $$1} \
 		END {printf "END_PATH_REG\nBEGIN_CONNECTOR\n SCAN_IN scin\n SCAN_OUT scout\n SCAN_TEST sctest\nEND_CONNECTOR\n"}' snx_flat.dffs > snx_flat.path
+
 
 vst:       snx_scan.vst
 layout:    snx_chip_cts_r.ap
