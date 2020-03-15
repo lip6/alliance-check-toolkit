@@ -1,0 +1,23 @@
+
+
+entity decoder is
+  port ( command : in  bit_vector(2 downto 0)
+       ; vc      : out bit_vector(7 downto 1)
+       ; vdd     : in  bit
+       ; vss     : in  bit
+         
+       );
+end decoder;
+
+architecture behavior_data_flow of decoder is
+begin
+  with command(2 downto 0) select
+    vc <= B"0000000" when B"000",
+          B"0000001" when B"001",
+          B"0000010" when B"010",
+          B"0000100" when B"011",
+          B"0001000" when B"100",
+          B"0010000" when B"101",
+          B"0100000" when B"110",
+          B"1000000" when B"111";
+end behavior_data_flow;

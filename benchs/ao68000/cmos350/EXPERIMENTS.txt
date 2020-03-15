@@ -40,4 +40,36 @@
   overflow(NE  )+4  | 3      | T/ 10+16 | 14%     |  691586  | 165033     |  24128099  |  468         | 1972/1+
   overflow(NE  )+4  | 4      | T/ 10+16 | 16%     |  397069  | 147414     |  21938182  |   42         |  379/1 
   overflow(NE  )+5  | 4      | T/ 10+16 | 18%     |  400788  | 148091     |  22434787  |   41         |  215/1 
+  overflow(NE  )+6  | 4      | T/ 10+16 | 18%     |  371528  | 146615     |  22345721  |   16         |  234/1 
+  overflow(NE  )+7  | 4      | T/ 10+16 | 21%     |  455634  | 152703     |  23282398  |   68         |  784/1+
+  overflow(NE  )+6  | 4      | T/  7+13 | 24%     |  356535  | 143786     |  22252267  |   12         |  108/1
+  overflow(NE  )+6  | 4      | T/  7+16 | 24%     |  356073  | 143947     |  22341428  |   19         |   78/1
+  overflow(NE  )+6  | 4      | T/  7+19 | 24%     |  357915  | 144292     |  22369721  |   14         |   64/1
+  overflow(NE  )+6  | 4      | T/  7+22 | 24%     |  360213  | 144640     |  22389724  |   25         |   62/1
+
+
+  With fixed height, vReservedMax:4, vPitch:8, non-static bloat profile.
+
+  Overload Formula  |  Pass  |  PR/GRI  |  Space  |  Events  |  U-Events  |  WL        |  S-Unrouted  |   OvE
+  ==================+========+==========+=========+==========+============+============+==============+=========
+  overflow(NE  )+6  | 4      | T/  7+22 | 32%     |  317061  | 141708     |  22297127  |  3           |    2/1
+  overflow(NE  )+6  | 5      | T/  7+22 | 34%     |  304699  | 140242     |  22242331  |  5           |    1/1
+
+
+  With fixed height ff:0.7, vReservedMax:4, vPitch:8, non-static bloat profile.
+
+  Overload Formula  |  Pass  |  PR/GRI  |  Space  |  Events  |  U-Events  |  WL        |  S-Unrouted  |   OvE
+  ==================+========+==========+=========+==========+============+============+==============+=========
+  overflow(NE  )+6  | 5      | T/  7+22 | 34%     |  300009  | 137728     |  22198287  |  3           |    2/1
+
+
+  With fixed height ff:0.65, vReservedMax:4, hReservedMax:7, vPitch:8, non-static bloat profile.
+
+  Overload Formula  |  Pass  |  PR/GRI  |  Space  |  Events  |  U-Events  |  WL        |  S-Unrouted  |   OvE
+  ==================+========+==========+=========+==========+============+============+==============+=========
+  overflow(NE  )+6  | 5      | T/  7+22 | 46%     |  276967  | 135887     |  23059769  |  1           |    0/1
+
+
+
+
 

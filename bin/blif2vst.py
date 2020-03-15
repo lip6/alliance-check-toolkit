@@ -29,7 +29,7 @@ framework = CRL.AllianceFramework.get()
 
 
 def renameNMigenUniquify ( topCell ):
-    for occurrence in topCell.getLeafInstanceOccurrences():
+    for occurrence in topCell.getTerminalNetlistInstanceOccurrences():
        masterCell = occurrence.getEntity().getMasterCell()
        origName   = masterCell.getName()
        replName   = origName.replace( '$$', '_unm' )
@@ -37,7 +37,7 @@ def renameNMigenUniquify ( topCell ):
          print '  - "%s" => "%s"' % (origName,replName)
          masterCell.setName( replName )
 
-    for occurrence in topCell.getNonLeafInstanceOccurrences():
+    for occurrence in topCell.getNonTerminalNetlistInstanceOccurrences():
        masterCell = occurrence.getEntity().getMasterCell()
        origName   = masterCell.getName()
        replName   = origName.replace( '$$', '_unm' )
