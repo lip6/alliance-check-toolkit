@@ -331,5 +331,6 @@ if __name__ == '__main__':
 
   except Exception, e:
     helpers.io.catch( e )
+    shellSuccess = 1
 
   sys.exit( shellSuccess )
