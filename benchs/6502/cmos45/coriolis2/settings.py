@@ -39,7 +39,7 @@ Cfg.getParamBool      ( 'etesian.uniformDensity'      ).setBool      ( True     
 Cfg.getParamEnumerate ( 'etesian.effort'              ).setInt       ( 2         )
 Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 5.0       )
 Cfg.getParamPercentage( 'etesian.aspectRatio'         ).setPercentage( 100.0     )
-Cfg.getParamString    ( 'etesian.bloat'               ).setString    ( '3metals' )
+Cfg.getParamString    ( 'etesian.bloat'               ).setString    ( 'nsxlib'  )
 Cfg.getParamPercentage( 'anabatic.saturateRatio'      ).setPercentage( 75.0      )
 Cfg.getParamInt       ( 'anabatic.edgeLenght'         ).setInt       ( 24        )
 Cfg.getParamInt       ( 'anabatic.edgeWidth'          ).setInt       ( 8         )
