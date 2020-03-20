@@ -1,4 +1,4 @@
-# -*- explicit-buffer-name: "Makefile<6502/cmos45>" -*-
+# -*- explicit-buffer-name: "Makefile<nmigen/ALU16>" -*-
 
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
@@ -16,6 +16,11 @@
 
 
  include ./mk/design-flow.mk
+
+
+alu16_r.ap alu16_r.vst: alu16.vst
+	-@echo "Overriding rules to generate layout by doAlu16.py custom script."
+	-$(call scl_cols,$(call c2env, ./doAlu16.py))
 
 
 blif:      alu16.blif

@@ -4,7 +4,6 @@ import os
 import Cfg
 import CRL
 import Viewer
-#import node180.scn6m_deep_09
 import symbolic.cmos
 from   helpers       import l, u, n
 
@@ -37,20 +36,8 @@ Cfg.getParamInt       ( 'katana.vTracksReservedLocal' ).setInt       ( 6       )
 
 Cfg.Configuration.popDefaultPriority()
 
-#cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-if os.environ.has_key('CELLS_TOP'):
-  cellsTop = os.environ['CELLS_TOP']
-else:
-  cellsTop = '../../../cells'
-
 af  = CRL.AllianceFramework.get()
 env = af.getEnvironment()
-env.addSYSTEM_LIBRARY( library=cellsTop+'/nsxlib', mode=CRL.Environment.Prepend )
-env.addSYSTEM_LIBRARY( library=cellsTop+'/mpxlib', mode=CRL.Environment.Prepend )
 env.setCLOCK( '^clk$|m_clock' )
 env.setPOWER( 'vdd' )
 env.setGROUND( 'vss' )
-
-
-print 'Successfully read user configuration'
-

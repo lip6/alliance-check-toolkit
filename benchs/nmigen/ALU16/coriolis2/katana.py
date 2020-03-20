@@ -12,3 +12,10 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'b(0)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'o_next(4)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'rst' ) )
+
+#DebugSession.addToTrace( katana.getCell().getNet( 'b(10)' ) )
+
+#for instance in katana.getCell().getInstances():
+#    if instance.getMasterCell().getName() == 'add':
+#        DebugSession.addToTrace( instance.getMasterCell().getNet( 'b(10)' ) )
+
