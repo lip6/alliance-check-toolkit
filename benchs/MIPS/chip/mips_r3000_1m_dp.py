@@ -1393,7 +1393,7 @@ class mips_r3000_1m_dp ( Model ):
     return
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
   editor = None
   if kw.has_key('editor') and kw['editor']:
     editor = kw['editor']
@@ -1405,6 +1405,6 @@ def ScriptMain ( **kw ):
 
 if __name__ == "__main__" :
   kw = {}
-  ScriptMain( **kw )
+  scriptMain( **kw )
 
   sys.exit( 0 )

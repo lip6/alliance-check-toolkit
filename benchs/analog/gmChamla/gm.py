@@ -52,8 +52,7 @@ import helpers
 import Hurricane
 from   Hurricane import DataBase
 
-helpers.staticInitialization( quiet=False )
-helpers.setTraceLevel( 100 )
+#helpers.setTraceLevel( 100 )
 #helpers.setTraceLevel( 110 )
 
 from   Analog import Device
@@ -77,7 +76,7 @@ from   Bora   import VSlicingNode
 from   Bora   import DSlicingNode
 from   Bora   import RHSlicingNode
 from   Bora   import RVSlicingNode
-from   karakaze.AnalogDesign import AnalogDesign
+from   karakaze.analogdesign import AnalogDesign
 
 
 NMOS    = Transistor.NMOS
@@ -359,7 +358,7 @@ class GmChamla ( AnalogDesign ):
         return
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
     editor = None
     if kw.has_key('editor') and kw['editor']:
       editor = kw['editor']

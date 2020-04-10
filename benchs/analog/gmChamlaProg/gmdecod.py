@@ -58,7 +58,7 @@ helpers.staticInitialization( quiet=False )
 
 from   Analog import *
 from   Bora   import *
-from   karakaze.AnalogDesign import AnalogDesign
+from   karakaze.analogdesign import AnalogDesign
 
 
 NMOS    = Transistor.NMOS
@@ -418,7 +418,7 @@ class GmDecodDigCtl ( AnalogDesign ):
         return
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
     editor = None
     if kw.has_key('editor') and kw['editor']:
       editor = kw['editor']

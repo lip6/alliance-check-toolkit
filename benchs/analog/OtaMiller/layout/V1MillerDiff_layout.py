@@ -59,7 +59,7 @@ from Bora   import VSlicingNode
 from Bora   import DSlicingNode
 from Bora   import RHSlicingNode
 from Bora   import RVSlicingNode
-from karakaze.AnalogDesign import AnalogDesign
+from karakaze.analogdesign import AnalogDesign
 
 
 NMOS    = Transistor.NMOS
@@ -218,7 +218,7 @@ class MILLERD ( AnalogDesign ):
         return
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
     editor = None
     if kw.has_key('editor') and kw['editor']:
       editor = kw['editor']

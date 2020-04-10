@@ -102,14 +102,14 @@ def placeAndRouteSnx ( **kw ):
     katana.destroy()
   
    #af.saveCell( cell, CRL.Catalog.State.Views )
-    plugins.RSavePlugin.ScriptMain( **kw )
+    plugins.RSavePlugin.scriptMain( **kw )
   
     helpers.resetCoriolis()
   
     return success
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
     for run in range(10):
       print 'Run %d ...' % run
       placeAndRouteSnx( **kw )
@@ -120,7 +120,7 @@ def ScriptMain ( **kw ):
 if __name__ == '__main__':
   try:
     kw           = {}
-    success      = ScriptMain( **kw )
+    success      = scriptMain( **kw )
     shellSuccess = 0
     if not success: shellSuccess = 1
   except ImportError, e:

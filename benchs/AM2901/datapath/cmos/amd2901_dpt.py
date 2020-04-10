@@ -476,7 +476,7 @@ class amd2901_dpt ( Model ) :
     PlaceRight ( self.mx2_out,       NOSYM )
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
   if kw.has_key('editor') and kw['editor']: setEditor( kw['editor'] )
 
   datapath = amd2901_dpt( "amd2901_dpt" )
@@ -492,7 +492,7 @@ def ScriptMain ( **kw ):
 
 if __name__ == "__main__" :
   kw      = {}
-  success = ScriptMain( **kw )
+  success = scriptMain( **kw )
   if not success: shellSuccess = 1
 
   sys.exit( shellSuccess )

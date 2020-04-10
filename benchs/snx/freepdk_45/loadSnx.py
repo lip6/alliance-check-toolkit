@@ -23,7 +23,7 @@ import Katana
 import Unicorn
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
   enforceVhdl = False
   editor      = None
   if kw.has_key('editor') and kw['editor']:

@@ -30,9 +30,12 @@ def scriptMain ( **kw ):
     editor = kw['editor']
     stratus.setEditor( editor )
 
-  cell = stratus.buildModel( 'mips_r3000_1m_dp'  , stratus.DoNetlist|stratus.DoLayout )
-  cell = stratus.buildModel( 'mips_r3000_1m_core', stratus.DoNetlist|stratus.DoLayout )
-  cell = stratus.buildModel( 'mips_r3000_1m_chip', stratus.DoNetlist )
+  cell = stratus.buildModel( 'dpgen_RF2'
+                           , stratus.DoNetlist #|stratus.DoLayout
+                           , 'DpgenRf2d'
+                           , parameters={ 'nbit' :32
+                                        , 'nword':32 }
+                           )
   return cell
 
 
@@ -43,3 +46,9 @@ if __name__ == "__main__" :
   if not success: shellSuccess = 1
 
   sys.exit( shellSuccess )
+
+
+
+
+
+Generate("DpgenRf2r0",   'banc',       param={'nbit' : 32, 'nword' : 32,'physical' : True})

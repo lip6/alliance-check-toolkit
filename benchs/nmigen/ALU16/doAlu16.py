@@ -10,7 +10,6 @@ import Cfg
 import Hurricane
 from   Hurricane import DbU
 from   Hurricane import DataBase
-from   Hurricane import UpdateSession
 from   Hurricane import Breakpoint
 from   Hurricane import Box
 from   Hurricane import Transformation
@@ -28,12 +27,13 @@ import Anabatic
 import Katana
 import Unicorn
 import helpers
-from   helpers   import l, u, n
-from   helpers   import showPythonTrace
+from   helpers         import l, u, n
+from   helpers         import showPythonTrace
+from   helpers.overlay import UpdateSession
 helpers.loadUserSettings()
-import clocktree.ClockTree
-import plugins.RSavePlugin
-import plugins.ClockTreePlugin
+import plugins.cts
+import plugins.cts.clocktree
+import plugins.rsave
 
 
 af = CRL.AllianceFramework.get()
@@ -131,104 +131,100 @@ def add ( **kw ):
     cellGauge   = af.getCellGauge()
     spaceMargin = (Cfg.getParamPercentage('etesian.spaceMargin').asPercentage()+5) / 100.0
     aspectRatio =  Cfg.getParamPercentage('etesian.aspectRatio').asPercentage()    / 100.0
-    clocktree.ClockTree.computeAbutmentBox( cell, spaceMargin, aspectRatio, cellGauge )
+    plugins.cts.clocktree.computeAbutmentBox( cell, spaceMargin, aspectRatio, cellGauge )
     ab2 = cell.getAbutmentBox()
     
     #height = ab.getHeight()
     #width = ab.getWidth()
     
-    UpdateSession.open()
-    cell.setAbutmentBox( ab )
-    
-    for i in range(16):
-        if True:
-            x   = 20.0*i + 10.0
-            y   = height
-            pin = Pin.create( cell.getNet('a(%d)' % i)
-                            , 'a(%d).0' % i
-                            , Pin.Direction.NORTH
+    with UpdateSession():
+        cell.setAbutmentBox( ab )
+        
+        for i in range(16):
+            if True:
+                x   = 20.0*i + 10.0
+                y   = height
+                pin = Pin.create( cell.getNet('a(%d)' % i)
+                                , 'a(%d).0' % i
+                                , Pin.Direction.NORTH
+                                , Pin.PlacementStatus.FIXED
+                                , METAL3
+                                , l( x ), l( y - 0 )   # Position.
+                                , l( 2.0 )            , l( 2.0 )  # Size.
+                                )
+                pin.getNet().setExternal( True )
+                NetExternalComponents.setExternal( pin )
+        for i in range(16):
+            if True:
+                pin = Pin.create( cell.getNet('o(%d)' % i)
+                                , 'o(%d).0' % i
+                                , Pin.Direction.SOUTH
+                                , Pin.PlacementStatus.FIXED
+                                , METAL3
+                                , l( 10.0*i + 100.0 ), l( 0)   # Position.
+                                , l( 2.0 )            , l( 2.0 )  # Size.
+                                )
+                pin.getNet().setExternal( True )
+                NetExternalComponents.setExternal( pin )
+        
+        for i in range(16):
+            if True:
+                net = cell.getNet('b(%d)' % i)
+                x = 20.0*i + 10.0 + 10
+                y = height - 0
+                #build_downtrace(net, METAL3, x, y+11, y)
+                #continue
+                pin = Pin.create( net
+                                , 'b(%d).0' % i
+                                , Pin.Direction.NORTH
+                                , Pin.PlacementStatus.FIXED
+                                , METAL3
+                                , l( x   ), l( y - 0 )   # Position.
+                                , l( 2.0 ), l( 2.0   )  # Size.
+                                )
+                pin.getNet().setExternal( True )
+                NetExternalComponents.setExternal( pin )
+        if False:
+            pin = Pin.create( cell.getNet('rst')
+                            , 'p_reset.0'
+                            , Pin.Direction.WEST
                             , Pin.PlacementStatus.FIXED
-                            , METAL3
-                            , l( x ), l( y - 0 )   # Position.
-                            , l( 2.0 )            , l( 2.0 )  # Size.
+                            , METAL2
+                            , l(   0.0 )
+                            , l( 140.0 )
+                            , l(   2.0 )
+                            , l(   2.0 )
                             )
             pin.getNet().setExternal( True )
             NetExternalComponents.setExternal( pin )
-    for i in range(16):
-        if True:
-            pin = Pin.create( cell.getNet('o(%d)' % i)
-                            , 'o(%d).0' % i
-                            , Pin.Direction.SOUTH
-                            , Pin.PlacementStatus.FIXED
-                            , METAL3
-                            , l( 10.0*i + 100.0 ), l( 0)   # Position.
-                            , l( 2.0 )            , l( 2.0 )  # Size.
-                            )
-            pin.getNet().setExternal( True )
-            NetExternalComponents.setExternal( pin )
-    
-    for i in range(16):
-        if True:
-            net = cell.getNet('b(%d)' % i)
-            x = 20.0*i + 10.0 + 10
-            y = height - 0
-            #build_downtrace(net, METAL3, x, y+11, y)
-            #continue
-            pin = Pin.create( net
-                            , 'b(%d).0' % i
-                            , Pin.Direction.NORTH
-                            , Pin.PlacementStatus.FIXED
-                            , METAL3
-                            , l( x   ), l( y - 0 )   # Position.
-                            , l( 2.0 ), l( 2.0   )  # Size.
-                            )
-            pin.getNet().setExternal( True )
-            NetExternalComponents.setExternal( pin )
-    if False:
-        pin = Pin.create( cell.getNet('rst')
-                        , 'p_reset.0'
-                        , Pin.Direction.WEST
-                        , Pin.PlacementStatus.FIXED
-                        , METAL2
-                        , l(   0.0 )
-                        , l( 140.0 )
-                        , l(   2.0 )
-                        , l(   2.0 )
-                        )
-        pin.getNet().setExternal( True )
-        NetExternalComponents.setExternal( pin )
-    
-    UpdateSession.close()
     
     if True:
         if editor: editor.setCell( cell )
       
         placeAndRoute( cell )
       
-        UpdateSession.open()
-        blockageNet = cell.getNet( 'blockagenet' )
-      
-        ab = cell.getAbutmentBox()
-        ab.inflate( toDbU(-5.0) )
-        Pad.create( net, BLOCKAGE2, ab )
-        Pad.create( net, BLOCKAGE3, ab )
-        Pad.create( net, BLOCKAGE4, ab )
-       #Pad.create( net, BLOCKAGE5, ab )
-        UpdateSession.close()
+        with UpdateSession():
+            blockageNet = cell.getNet( 'blockagenet' )
+          
+            ab = cell.getAbutmentBox()
+            ab.inflate( toDbU(-5.0) )
+            Pad.create( net, BLOCKAGE2, ab )
+            Pad.create( net, BLOCKAGE3, ab )
+            Pad.create( net, BLOCKAGE4, ab )
+           #Pad.create( net, BLOCKAGE5, ab )
     
     if False:
-        UpdateSession.open()
-        cell.setAbutmentBox( ab )
-        for i in range(16):
-            if True:
-                net = cell.getNet('b(%d)' % i)
-                x = 20.0*i + 10.0 + 10
-                y = height-10
-                build_downtrace(net, METAL2, x, y, y+10)
-        UpdateSession.close()
+        with UpdateSession():
+            cell.setAbutmentBox( ab )
+            for i in range(16):
+                if True:
+                    net = cell.getNet('b(%d)' % i)
+                    x = 20.0*i + 10.0 + 10
+                    y = height-10
+                    build_downtrace(net, METAL2, x, y, y+10)
     
    #af.saveCell( cell, CRL.Catalog.State.Views )
-    plugins.RSavePlugin.ScriptMain( **kw )
+    plugins.rsave.scriptMain( **kw )
 
 
 # -------------------------------------------------------------------------------
@@ -267,105 +263,102 @@ def sub ( **kw ):
     cellGauge   = af.getCellGauge()
     spaceMargin = (Cfg.getParamPercentage('etesian.spaceMargin').asPercentage()+5) / 100.0
     aspectRatio =  Cfg.getParamPercentage('etesian.aspectRatio').asPercentage()    / 100.0
-    clocktree.ClockTree.computeAbutmentBox( cell, spaceMargin, aspectRatio, cellGauge )
+    plugins.cts.clocktree.computeAbutmentBox( cell, spaceMargin, aspectRatio, cellGauge )
     ab2 = cell.getAbutmentBox()
   
     #height = ab.getHeight()
     #width = ab.getWidth()
   
-    UpdateSession.open()
-    cell.setAbutmentBox( ab )
-  
-    for i in range(16):
-        if True:
-            x   = 20.0*i + 10.0
-            y   = height
-            pin = Pin.create( cell.getNet('a(%d)' % i)
-                            , 'a(%d).0' % i
-                            , Pin.Direction.NORTH
+    with UpdateSession():
+        cell.setAbutmentBox( ab )
+      
+        for i in range(16):
+            if True:
+                x   = 20.0*i + 10.0
+                y   = height
+                pin = Pin.create( cell.getNet('a(%d)' % i)
+                                , 'a(%d).0' % i
+                                , Pin.Direction.NORTH
+                                , Pin.PlacementStatus.FIXED
+                                , METAL3
+                                , l( x ), l( y - 0 )   # Position.
+                                , l( 2.0 )            , l( 2.0 )  # Size.
+                                )
+                pin.getNet().setExternal( True )
+                NetExternalComponents.setExternal( pin )
+      
+        for i in range(16):
+            if True:
+                pin = Pin.create( cell.getNet('o(%d)' % i)
+                                , 'o(%d).0' % i
+                                , Pin.Direction.SOUTH
+                                , Pin.PlacementStatus.FIXED
+                                , METAL3
+                                , l( 10.0*i + 100.0 ), l( 0)   # Position.
+                                , l( 2.0 )            , l( 2.0 )  # Size.
+                                )
+                pin.getNet().setExternal( True )
+                NetExternalComponents.setExternal( pin )
+      
+        for i in range(16):
+            if True:
+                net = cell.getNet('b(%d)' % i)
+                x = 20.0*i + 10.0 + 10
+                y = height - 0
+                #build_downtrace(net, METAL3, x, y+11, y)
+                #continue
+                pin = Pin.create( net
+                                , 'b(%d).0' % i
+                                , Pin.Direction.NORTH
+                                , Pin.PlacementStatus.FIXED
+                                , METAL3
+                                , l( x   ), l( y   )  # Position.
+                                , l( 2.0 ), l( 2.0 )  # Size.
+                                )
+                pin.getNet().setExternal( True )
+                NetExternalComponents.setExternal( pin )
+      
+        if False:
+            pin = Pin.create( cell.getNet('rst')
+                            , 'p_reset.0'
+                            , Pin.Direction.WEST
                             , Pin.PlacementStatus.FIXED
-                            , METAL3
-                            , l( x ), l( y - 0 )   # Position.
-                            , l( 2.0 )            , l( 2.0 )  # Size.
+                            , METAL2
+                            , l(   0.0 )
+                            , l( 140.0 )
+                            , l(   2.0 )
+                            , l(   2.0 )
                             )
             pin.getNet().setExternal( True )
             NetExternalComponents.setExternal( pin )
-  
-    for i in range(16):
-        if True:
-            pin = Pin.create( cell.getNet('o(%d)' % i)
-                            , 'o(%d).0' % i
-                            , Pin.Direction.SOUTH
-                            , Pin.PlacementStatus.FIXED
-                            , METAL3
-                            , l( 10.0*i + 100.0 ), l( 0)   # Position.
-                            , l( 2.0 )            , l( 2.0 )  # Size.
-                            )
-            pin.getNet().setExternal( True )
-            NetExternalComponents.setExternal( pin )
-  
-    for i in range(16):
-        if True:
-            net = cell.getNet('b(%d)' % i)
-            x = 20.0*i + 10.0 + 10
-            y = height - 0
-            #build_downtrace(net, METAL3, x, y+11, y)
-            #continue
-            pin = Pin.create( net
-                            , 'b(%d).0' % i
-                            , Pin.Direction.NORTH
-                            , Pin.PlacementStatus.FIXED
-                            , METAL3
-                            , l( x   ), l( y   )  # Position.
-                            , l( 2.0 ), l( 2.0 )  # Size.
-                            )
-            pin.getNet().setExternal( True )
-            NetExternalComponents.setExternal( pin )
-  
-    if False:
-        pin = Pin.create( cell.getNet('rst')
-                        , 'p_reset.0'
-                        , Pin.Direction.WEST
-                        , Pin.PlacementStatus.FIXED
-                        , METAL2
-                        , l(   0.0 )
-                        , l( 140.0 )
-                        , l(   2.0 )
-                        , l(   2.0 )
-                        )
-        pin.getNet().setExternal( True )
-        NetExternalComponents.setExternal( pin )
-    UpdateSession.close()
   
     if True:
         if editor: editor.setCell( cell )
       
         placeAndRoute( cell )
       
-        UpdateSession.open()
-        blockageNet = cell.getNet( 'blockagenet' )
-      
-        ab = cell.getAbutmentBox()
-        ab.inflate( toDbU(-5.0) )
-        Pad.create( net, BLOCKAGE2, ab )
-        Pad.create( net, BLOCKAGE3, ab )
-        Pad.create( net, BLOCKAGE4, ab )
-       #Pad.create( net, BLOCKAGE5, ab )
-        UpdateSession.close()
+        with UpdateSession():
+            blockageNet = cell.getNet( 'blockagenet' )
+          
+            ab = cell.getAbutmentBox()
+            ab.inflate( toDbU(-5.0) )
+            Pad.create( net, BLOCKAGE2, ab )
+            Pad.create( net, BLOCKAGE3, ab )
+            Pad.create( net, BLOCKAGE4, ab )
+           #Pad.create( net, BLOCKAGE5, ab )
       
     if False:
-      UpdateSession.open()
-      cell.setAbutmentBox( ab )
-      for i in range(16):
-          if True:
-              net = cell.getNet('b(%d)' % i)
-              x = 20.0*i + 10.0 + 10
-              y = height-10
-              build_downtrace(net, METAL2, x, y, y+10)
-      UpdateSession.close()
+      with UpdateSession():
+          cell.setAbutmentBox( ab )
+          for i in range(16):
+              if True:
+                  net = cell.getNet('b(%d)' % i)
+                  x = 20.0*i + 10.0 + 10
+                  y = height-10
+                  build_downtrace(net, METAL2, x, y, y+10)
       
    #af.saveCell( cell, CRL.Catalog.State.Views )
-    plugins.RSavePlugin.ScriptMain( **kw )
+    plugins.rsave.scriptMain( **kw )
 
 
 # -------------------------------------------------------------------------------
@@ -395,56 +388,55 @@ def alu16 ( **kw ):
             , l(1150.0 )
             , l( 700.0 ) )
   
-    UpdateSession.open()
-    cell.setAbutmentBox( ab )
-
-    ins = cell.getInstance( 'subckt_48_add' )
-    ins.setTransformation( Transformation( toDbU(100.0), toDbU(200.0), Transformation.Orientation.ID ) )
-    ins.setPlacementStatus( Instance.PlacementStatus.FIXED )
+    with UpdateSession():
+        cell.setAbutmentBox( ab )
     
-    ins = cell.getInstance( 'subckt_49_sub' )
-    ins.setTransformation( Transformation( toDbU(650.0), toDbU(200.0), Transformation.Orientation.ID ) )
-    ins.setPlacementStatus( Instance.PlacementStatus.FIXED )
-
-    yNorth = cell.getAbutmentBox().getYMax()
-  
-    for i in range(16):
-        Pin.create( cell.getNet('a(%d)' % i)
-                  , 'a(%d).0' % i
-                  , Pin.Direction.SOUTH
+        ins = cell.getInstance( 'subckt_48_add' )
+        ins.setTransformation( Transformation( toDbU(100.0), toDbU(200.0), Transformation.Orientation.ID ) )
+        ins.setPlacementStatus( Instance.PlacementStatus.FIXED )
+        
+        ins = cell.getInstance( 'subckt_49_sub' )
+        ins.setTransformation( Transformation( toDbU(650.0), toDbU(200.0), Transformation.Orientation.ID ) )
+        ins.setPlacementStatus( Instance.PlacementStatus.FIXED )
+    
+        yNorth = cell.getAbutmentBox().getYMax()
+      
+        for i in range(16):
+            Pin.create( cell.getNet('a(%d)' % i)
+                      , 'a(%d).0' % i
+                      , Pin.Direction.SOUTH
+                      , Pin.PlacementStatus.FIXED
+                      , METAL3
+                      , l( 60.0*i + 50.0 ) , l( 0.0 )  # Position.
+                      , l( 2.0 )           , l( 2.0 )  # Size.
+                      )
+            Pin.create( cell.getNet('b(%d)' % i)
+                      , 'b(%d).0' % i
+                      , Pin.Direction.SOUTH
+                      , Pin.PlacementStatus.FIXED
+                      , METAL3
+                      , l( 60.0*i + 80.0 ) , l( 0.0 )  # Position.
+                      , l( 2.0 )           , l( 2.0 )  # Size.
+                      )
+            Pin.create( cell.getNet('o(%d)' % i)
+                      , 'o(%d).0' % i
+                      , Pin.Direction.NORTH
+                      , Pin.PlacementStatus.FIXED
+                      , METAL3
+                      , l( 60.0*i + 50.0 ) , yNorth    # Position.
+                      , l( 2.0 )           , l( 2.0 )  # Size.
+                      )
+      
+        Pin.create( cell.getNet('rst')
+                  , 'rst.0'
+                  , Pin.Direction.WEST
                   , Pin.PlacementStatus.FIXED
-                  , METAL3
-                  , l( 60.0*i + 50.0 ) , l( 0.0 )  # Position.
-                  , l( 2.0 )           , l( 2.0 )  # Size.
+                  , METAL2
+                  , l(   0.0 )
+                  , l( 140.0 )
+                  , l(   2.0 )
+                  , l(   2.0 )
                   )
-        Pin.create( cell.getNet('b(%d)' % i)
-                  , 'b(%d).0' % i
-                  , Pin.Direction.SOUTH
-                  , Pin.PlacementStatus.FIXED
-                  , METAL3
-                  , l( 60.0*i + 80.0 ) , l( 0.0 )  # Position.
-                  , l( 2.0 )           , l( 2.0 )  # Size.
-                  )
-        Pin.create( cell.getNet('o(%d)' % i)
-                  , 'o(%d).0' % i
-                  , Pin.Direction.NORTH
-                  , Pin.PlacementStatus.FIXED
-                  , METAL3
-                  , l( 60.0*i + 50.0 ) , yNorth    # Position.
-                  , l( 2.0 )           , l( 2.0 )  # Size.
-                  )
-  
-    Pin.create( cell.getNet('rst')
-              , 'rst.0'
-              , Pin.Direction.WEST
-              , Pin.PlacementStatus.FIXED
-              , METAL2
-              , l(   0.0 )
-              , l( 140.0 )
-              , l(   2.0 )
-              , l(   2.0 )
-              )
-    UpdateSession.close()
   
     if editor: editor.setCell( cell )
   
@@ -452,12 +444,12 @@ def alu16 ( **kw ):
    
     cell.setName( cell.getName()+'_r' )
     af.saveCell( cell, CRL.Catalog.State.Views )
-    plugins.RSavePlugin.ScriptMain( **kw )
+    plugins.rsave.scriptMain( **kw )
   
     return success
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
     print af.getEnvironment().getPrint()
 
     add( **kw )
@@ -469,7 +461,7 @@ def ScriptMain ( **kw ):
 if __name__ == '__main__':
    try:
        kw           = {}
-       success      = ScriptMain( **kw )
+       success      = scriptMain( **kw )
        shellSuccess = 0
        if not success: shellSuccess = 1
    except ImportError, e:

@@ -135,7 +135,7 @@ def scalePlace ( editor, sourceCell ):
   return scaledCell
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
   global framework
 
   helpers.staticInitialization( quiet=True )
@@ -172,7 +172,7 @@ if __name__ == '__main__':
 
   print framework.getEnvironment().getPrint()
 
-  success = ScriptMain( **kw )
+  success = scriptMain( **kw )
   shellSuccess = 0
   if not success: shellSuccess = 1
 

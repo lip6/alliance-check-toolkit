@@ -25,7 +25,7 @@ except Exception, e:
   sys.exit(2)
 
 
-def ScriptMain ( **kw ):
+def scriptMain ( **kw ):
   editor = None
   if kw.has_key('editor') and kw['editor']:
     editor = kw['editor']
@@ -41,7 +41,7 @@ def ScriptMain ( **kw ):
 if __name__ == "__main__" :
   try:
     kw           = {}
-    success      = ScriptMain( **kw )
+    success      = scriptMain( **kw )
     shellSuccess = 0
     if not success: shellSuccess = 1
 
