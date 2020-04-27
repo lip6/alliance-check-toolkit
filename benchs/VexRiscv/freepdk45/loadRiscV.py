@@ -6,7 +6,10 @@ import re
 import traceback
 import os.path
 import optparse
-import Cfg
+import helpers
+from   helpers.io import ErrorMessage
+from   helpers    import showPythonTrace
+helpers.loadUserSettings()
 import Hurricane
 from   Hurricane import DbU
 from   Hurricane import DataBase
@@ -16,7 +19,6 @@ from   Hurricane import Transformation
 from   Hurricane import Instance
 import Viewer
 import CRL
-from   helpers   import ErrorMessage
 import Etesian
 import Anabatic
 import Katana
@@ -33,15 +35,16 @@ def scriptMain ( **kw ):
   cell = CRL.Blif.load( 'VexRiscv' )
   if editor: editor.setCell( cell )
 
-  etesian = Etesian.EtesianEngine.create(cell)
+  etesian = Etesian.EtesianEngine.create( cell )
   etesian.place()
 
-  katana = Katana.KatanaEngine.create(cell)
+  katana = Katana.KatanaEngine.create( cell )
   katana.digitalInit          ()
- #katana.runNegociatePreRouted()
-  katana.runGlobalRouter      ()
+  katana.runGlobalRouter      ( Katana.Flags.NoFlags )
   katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
   katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
   katana.runNegociate         ( Katana.Flags.NoFlags )
+
+  CRL.Gds.save( cell )
 
   return cell

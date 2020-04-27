@@ -7,16 +7,19 @@ import traceback
 import os.path
 import optparse
 import Cfg
+import helpers
+from   helpers.io import ErrorMessage
+from   helpers    import showPythonTrace
+helpers.loadUserSettings()
 import Hurricane
-from   Hurricane import DbU
-from   Hurricane import DataBase
-from   Hurricane import UpdateSession
-from   Hurricane import Breakpoint
-from   Hurricane import Transformation
-from   Hurricane import Instance
+from   Hurricane  import DbU
+from   Hurricane  import DataBase
+from   Hurricane  import UpdateSession
+from   Hurricane  import Breakpoint
+from   Hurricane  import Transformation
+from   Hurricane  import Instance
 import Viewer
 import CRL
-from   helpers   import ErrorMessage
 import Etesian
 import Anabatic
 import Katana
@@ -31,10 +34,10 @@ def scriptMain ( **kw ):
 
   checkCell = None
   library = CRL.LefImport.load( '/dsk/l1/jpc/coriolis-2.x/work/DKs/FreePDK45/osu_soc/lib/files/gscl45nm.lef' )
-  for stdCell in library.getCells():
-    stdCellGds = '/dsk/l1/jpc/coriolis-2.x/work/DKs/FreePDK45/osu_soc/lib/source/gds/' \
-               + stdCell.getName() + '.gds'
-    CRL.Gds.load( library, stdCellGds )
+ #for stdCell in library.getCells():
+ #  stdCellGds = '/dsk/l1/jpc/coriolis-2.x/work/DKs/FreePDK45/osu_soc/lib/source/gds/' \
+ #             + stdCell.getName() + '.gds'
+ #  CRL.Gds.load( library, stdCellGds )
 
   CRL.Blif.add( library )
   cell = CRL.Blif.load( 'snx', enforceVhdl )
@@ -46,10 +49,11 @@ def scriptMain ( **kw ):
 
   katana = Katana.KatanaEngine.create(cell)
   katana.digitalInit          ()
- #katana.runNegociatePreRouted()
-  katana.runGlobalRouter      ()
+  katana.runGlobalRouter      ( Katana.Flags.NoFlags )
   katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
   katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
   katana.runNegociate         ( Katana.Flags.NoFlags )
+
+  CRL.Gds.save( cell )
 
   return cell
