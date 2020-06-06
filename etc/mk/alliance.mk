@@ -32,7 +32,8 @@
 # -------------------------------------------------------------------
 # Alliance Rules (pattern matching).
 
- $(info PATTERNS = "$(PATTERNS)".)
+ $(info Using ALLIANCE_TOP = "$(ALLIANCE_TOP)".)
+ $(info Using PATTERNS = "$(PATTERNS)".)
 
 
 %.pat           : %_pat.c              ;  $(GENPAT)       $*_pat

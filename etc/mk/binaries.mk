@@ -31,6 +31,7 @@
  OCP           = $(ALLIANCE_BIN)/ocp
  NERO          = $(ALLIANCE_BIN)/nero
  RING          = $(ALLIANCE_BIN)/ring
+ FLATLO        = $(ALLIANCE_BIN)/flatlo
  FLATPH        = $(ALLIANCE_BIN)/flatph
  S2R           = $(ALLIANCE_BIN)/s2r
  S2R_cif       = export RDS_OUT=cif; \
