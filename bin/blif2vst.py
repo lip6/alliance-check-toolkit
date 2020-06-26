@@ -55,6 +55,7 @@ if __name__ == '__main__':
     parser.add_option( '-V', '--very-verbose'    , action='store_true', dest='veryVerbose'   , help='Second level of verbosity.')
     parser.add_option(       '--vst-use-concat'  , action='store_true', dest='vstUseConcat'  , help='The VST driver will use "&" (concat) in PORT MAP.')
     parser.add_option(       '--vst-no-lowercase', action='store_true', dest='vstNoLowerCase', help='The VST will keep the case of all identifiers.')
+    parser.add_option(       '--vst-no-linkage'  , action='store_true', dest='vstNoLinkage'  , help='Undefined direction will be set to "in" instead of "linkage".')
     (options, args) = parser.parse_args()
     
     views = CRL.Catalog.State.Logical
@@ -65,6 +66,7 @@ if __name__ == '__main__':
         Cfg.getParamBool('misc.verboseLevel2').setBool(True)
     if options.vstUseConcat:   views |= CRL.Catalog.State.VstUseConcat
     if options.vstNoLowerCase: views |= CRL.Catalog.State.VstNoLowerCase
+    if options.vstNoLinkage:   views |= CRL.Catalog.State.VstNoLinkage
       
     cell = CRL.Blif.load( options.cellName )
     if cell.getName() == 'top':
