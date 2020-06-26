@@ -229,7 +229,9 @@ def scriptMain ( **kw ):
             plugins.rsave.scriptMain( **kw )
         
         if doStages & DoRouting:
-            if doStages & DoChip: cell = chip
+            if doStages & DoChip:
+                framework.saveCell( cell, CRL.Catalog.State.Views|views )
+                cell = chip
             
             saveCellName  = cell.getName()
             saveCellName += '_r'
