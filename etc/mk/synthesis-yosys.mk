@@ -8,6 +8,12 @@
  ifeq ($(YOSYS_FLATTEN),)
    YOSYS_FLATTEN = No
  endif
+ $(info - Using YOSYS_FLATTEN = "$(YOSYS_FLATTEN)".)
+
+ ifeq ($(YOSYS_SET_TOP),)
+   YOSYS_SET_TOP = Yes
+ endif
+ $(info - Using YOSYS_SET_TOP = "$(YOSYS_SET_TOP)".)
 
 
 # -------------------------------------------------------------------
@@ -39,7 +45,8 @@
 
 
 %.blif: %.il
-	 yosysArgs="--input-lang=RTLIL --design=$* --top=$* --liberty=$(LIBERTY_FILE)";  \
+	 yosysArgs="--input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";  \
+	 if [ "$(YOSYS_SET_TOP)" = "Yes" ]; then yosysArgs="$$yosysArgs --top=$*" ; fi;   \
 	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi;  \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
