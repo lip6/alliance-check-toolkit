@@ -37,7 +37,7 @@ Cfg.getParamBool      ( 'misc.verboseLevel2'          ).setBool      ( True     
 #Cfg.getParamInt       ( 'misc.maxTraceLevel'          ).setInt       ( 160       )
 Cfg.getParamBool      ( 'etesian.uniformDensity'      ).setBool      ( True      )
 Cfg.getParamEnumerate ( 'etesian.effort'              ).setInt       ( 2         )
-Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 7.0       )
+Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 8.0       )
 Cfg.getParamPercentage( 'etesian.aspectRatio'         ).setPercentage( 100.0     )
 #Cfg.getParamString    ( 'etesian.bloat'               ).setString    ( 'nsxlib'  )
 Cfg.getParamPercentage( 'anabatic.saturateRatio'      ).setPercentage( 75.0      )
