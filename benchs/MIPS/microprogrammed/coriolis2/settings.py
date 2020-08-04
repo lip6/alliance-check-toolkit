@@ -5,30 +5,28 @@ import Viewer
 import CRL
 import symbolic.cmos
 from   helpers       import l, u, n
+from   helpers       import overlay
 
+with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+    # Common settings for all runs.
+    cfg.misc.catchCore              = False
+    cfg.misc.info                   = False
+    cfg.misc.paranoid               = False
+    cfg.misc.bug                    = False
+    cfg.misc.logMode                = True
+    cfg.misc.verboseLevel1          = True
+    cfg.misc.verboseLevel2          = True
+    #cfg.misc.minTraceLevel          = 110
+    #cfg.misc.maxTraceLevel          = 120
+    cfg.katana.eventsLimit          = 1000000
+    cfg.anabatic.topRoutingLayer    = 'METAL5'
+    cfg.katana.hTracksReservedLocal = 6
+    cfg.katana.vTracksReservedLocal = 6
+    cfg.katana.hTracksReservedMin   = 1
+    cfg.katana.vTracksReservedMin   = 2
 
-Cfg.Configuration.pushDefaultPriority( Cfg.Parameter.Priority.UserFile )
+    Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
 
-af  = CRL.AllianceFramework.get()
-env = af.getEnvironment()
-
-env.setCLOCK( 'do_not_recognize_ck' )
-
-
-Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
- 
-Cfg.getParamBool      ( 'misc.catchCore'              ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.info'                   ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.paranoid'               ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.bug'                    ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.logMode'                ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.verboseLevel1'          ).setBool      ( True    )
-Cfg.getParamBool      ( 'misc.verboseLevel2'          ).setBool      ( True    )
-#Cfg.getParamInt       ( 'misc.minTraceLevel'          ).setInt       ( 110     )
-#Cfg.getParamInt       ( 'misc.maxTraceLevel'          ).setInt       ( 120     )
-Cfg.getParamInt       ( 'katana.eventsLimit'          ).setInt       ( 1000000 )
-Cfg.getParamString    ( 'anabatic.topRoutingLayer'    ).setString    ( 'METAL5')
-Cfg.getParamInt       ( 'katana.hTracksReservedLocal' ).setInt       ( 6       )
-Cfg.getParamInt       ( 'katana.vTracksReservedLocal' ).setInt       ( 6       )
-
-Cfg.Configuration.popDefaultPriority()
+    af  = CRL.AllianceFramework.get()
+    env = af.getEnvironment()
+    env.setCLOCK( 'do_not_recognize_ck' )
