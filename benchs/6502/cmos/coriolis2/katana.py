@@ -10,3 +10,5 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n763' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n800' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12491_n428_1' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'm_clock_0_root_bl_bl' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'adrs(0)' ) )
