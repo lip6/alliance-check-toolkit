@@ -106,10 +106,10 @@ cgt-run: $(CORE_NETLIST).blif
 
    endif   # USE_CLOCKTREE
 
+ endif   # REAL_MODE
+
 cgt-%:
 	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V --cell=$*))
-
- endif   # REAL_MODE
 
 cgt:
 	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V))
