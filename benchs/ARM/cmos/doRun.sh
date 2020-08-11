@@ -1,5 +1,11 @@
 #!/bin/bash
 
+ which lvx > /dev/null 2>&1
+ if [ $? -ne 0 ]; then
+   echo "[ERROR] lvx program not found. Please initialize Alliance environement."
+   exit 1
+ fi
+
  make clean > /dev/null
 
  rewritens="ifetch_model exec_model shifter alu mem"
@@ -34,7 +40,7 @@
 
    pushd runs > /dev/null
    for file in $rewritens; do
-     lvx vst vst ${file}-ref ${file}-run${run} > /dev/null 2>&1
+     lvx vst vst ${file}-ref ${file}-run${run} > /dev/null 2>&1 
      if [ $? -ne 0 ]; then
        runSuccess=0
        echo -n " VST driver on \"$file\""

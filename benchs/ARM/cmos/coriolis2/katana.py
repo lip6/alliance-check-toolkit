@@ -16,3 +16,6 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.na3_x1_305_sig' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.ao22_x2_182_sig' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.oa2ao222_x2_493_sig' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.not_p446_6_def_56' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.not_wadr2(2)' ) )
+DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.wadr1(0)' ) )
