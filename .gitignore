@@ -8,15 +8,27 @@
 
 patchs/
 
-benchs/doc/README.tex
-benchs/doc/README.aux
-benchs/doc/README.log
-benchs/doc/README.dvi
-benchs/doc/README.out
-benchs/doc/README.toc
+doc/README.tex
+doc/README.aux
+doc/README.log
+doc/README.dvi
+doc/README.out
+doc/README.toc
 
-benchs/snx/tcb773pdgo/
+perf.data
+*.profile.txt
+*.katana.dat
+*.histogram.dat
+*.histogram.plt
+
 c35b4
+benchs/tests/
+benchs/snx/tcb773pdgo/
+benchs/snx/nshimizu
+benchs/snx/phenitec06_3
+benchs/snx/phenitec06_20190926_submit
+benchs/ARM/cmos/runs/
+benchs/AM2901/standart_cells/cmos/runs
 
 .ipynb_checkpoints
 .vscode
