@@ -70,7 +70,7 @@ def scriptMain ( **kw ):
         blockAlu16.useBlockInstance( 'subckt_48_add'
                                     , Transformation( l(100), l(100), Transformation.Orientation.ID ))
         blockAlu16.useBlockInstance( 'subckt_49_sub'
-                                    , Transformation( l(550), l(100), Transformation.Orientation.ID ))
+                                    , Transformation( l(600), l(100), Transformation.Orientation.ID ))
         blockAlu16.setUnexpandPins( IoPin.SOUTH )
         blockAlu16.state.cfg.etesian.uniformDensity    =  True
         blockAlu16.state.cfg.etesian.aspectRatio       =  1.0
@@ -78,8 +78,8 @@ def scriptMain ( **kw ):
         blockAlu16.state.cfg.katana.searchHalo         =  20
         blockAlu16.state.cfg.katana.vTracksReservedMin =  1
         blockAlu16.state.cfg.katana.hTracksReservedMin =  1
-        blockAlu16.state.fixedHeight = l( 800)
-        blockAlu16.state.fixedWidth  = l(1000)
+        blockAlu16.state.fixedHeight = l( 750)
+        blockAlu16.state.fixedWidth  = l(1050)
         blockAlu16.state.useSpares   = False
         blockAlu16.state.editor      = editor
         rvalue = blockAlu16.build()

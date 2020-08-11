@@ -19,3 +19,6 @@ from Hurricane import DebugSession
 #    if instance.getMasterCell().getName() == 'add':
 #        DebugSession.addToTrace( instance.getMasterCell().getNet( 'b(10)' ) )
 
+#DebugSession.addToTrace( katana.getCell().getNet( 'o_next(3)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'sub_o(14)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'b(4)' ) )
