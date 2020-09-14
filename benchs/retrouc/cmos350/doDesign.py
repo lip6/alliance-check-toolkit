@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
 
     rvalue = True
     try:
-       #helpers.setTraceLevel( 550 )
+        helpers.setTraceLevel( 550 )
         cell, editor = plugins.kwParseMain( **kw )
 
         cell = af.getCell( 'retrouc_2020beta', CRL.Catalog.State.Logical )
@@ -74,12 +74,12 @@ def scriptMain ( **kw ):
         retrouc.state.cfg.katana.vTracksReservedLocal = 9
         retrouc.state.cfg.katana.hTracksReservedMin   = 3
         retrouc.state.cfg.katana.vTracksReservedMin   = 1
-        retrouc.state.cfg.block.spareSide             = l(800)
+        retrouc.state.cfg.block.spareSide             = l(700)
         retrouc.state.editor       = editor
         retrouc.state.useSpares    = True
         retrouc.state.useClockTree = True
-        retrouc.state.bColumns     = 2
-        retrouc.state.bRows        = 2
+        retrouc.state.bColumns     = 4
+        retrouc.state.bRows        = 4
         rvalue = retrouc.build()
     except Exception, e:
         helpers.io.catch( e )

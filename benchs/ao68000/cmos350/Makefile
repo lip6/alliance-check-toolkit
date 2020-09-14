@@ -26,7 +26,7 @@ endif
  include ./mk/design-flow.mk
 
 blif:   ao68000.blif
-vst:    ao68000_cts.vst
+vst:    ao68000.vst
 layout: ao68000_cts_r.ap
 gds:    ao68000_cts_r.gds
 
