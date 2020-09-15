@@ -4,7 +4,6 @@
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = sxlib
 
-#           YOSYS_FLATTEN = Yes
             USE_CLOCKTREE = No
                 USE_DEBUG = No
                  USE_KITE = No

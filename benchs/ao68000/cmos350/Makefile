@@ -9,7 +9,7 @@
                  USE_KITE = No
             YOSYS_FLATTEN = Yes
 
-ifeq ($(YOSYS_FLATTEN),Yes)
+ifneq ($(YOSYS_FLATTEN),)
                  NETLISTS = ao68000
 else
                  NETLISTS = ao68000 \

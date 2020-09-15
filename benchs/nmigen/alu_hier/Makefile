@@ -4,7 +4,6 @@
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = nsxlib
 
-            YOSYS_FLATTEN = No
                 VST_FLAGS = --vst-use-concat
             USE_CLOCKTREE = No
                 USE_DEBUG = No

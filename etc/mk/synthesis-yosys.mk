@@ -5,10 +5,12 @@
    $(error YOSYS_TOP has not been set)
  endif
 
- ifeq ($(YOSYS_FLATTEN),)
-   YOSYS_FLATTEN = No
+ ifneq ($(YOSYS_FLATTEN),)
+   $(info | Flattening blocks:)
+   $(foreach block,$(YOSYS_FLATTEN),$(info |  - "$(block)"))
+   FLATTEN_ARG = --flatten=$(shell echo "$(YOSYS_FLATTEN)" | sed 's: :,:g')
+   $(info - FLATTEN_ARG = $(FLATTEN_ARG))
  endif
- $(info - Using YOSYS_FLATTEN = "$(YOSYS_FLATTEN)".)
 
  ifeq ($(YOSYS_SET_TOP),)
    YOSYS_SET_TOP = Yes
@@ -40,14 +42,14 @@
 
 %.blif: %.v
 	 yosysArgs="--input-lang=Verilog --design=$* --top=$* --liberty=$(LIBERTY_FILE)"; \
-	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi;   \
+	 yosysArgs="$$yosysArgs $(FLATTEN_ARG)"; \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 
 %.blif: %.il
 	 yosysArgs="--input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";  \
 	 if [ "$(YOSYS_SET_TOP)" = "Yes" ]; then yosysArgs="$$yosysArgs --top=$*" ; fi;   \
-	 if [ "$(YOSYS_FLATTEN)" = "Yes" ]; then yosysArgs="$$yosysArgs --flatten"; fi;  \
+	 if [ ! -z "$(FLATTEN_ARG)"      ]; then yosysArgs="$$yosysArgs --flatten=$(FLATTEN_ARG)"; fi;  \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 
