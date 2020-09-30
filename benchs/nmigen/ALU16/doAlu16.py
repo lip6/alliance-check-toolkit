@@ -8,6 +8,7 @@ import helpers
 from   helpers.io import ErrorMessage
 from   helpers.io import WarningMessage
 from   helpers    import trace, l
+helpers.loadUserSettings()
 import plugins
 from   Hurricane  import DbU
 from   Hurricane  import Pin
@@ -15,7 +16,6 @@ from   Hurricane  import Transformation
 from   plugins.alpha.block.block         import Block
 from   plugins.alpha.block.configuration import IoPin
 
-helpers.loadUserSettings()
 af = CRL.AllianceFramework.get()
 
 
