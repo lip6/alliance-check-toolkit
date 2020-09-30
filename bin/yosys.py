@@ -96,28 +96,32 @@ class Yosys ( object ):
 
 if __name__ == '__main__':
 
-   parser = optparse.OptionParser()
-   parser.add_option ( '-d', '--design'    , action='store'     , type='string', dest='design'   , help='The name of the design file, without extension.' )
-   parser.add_option ( '-t', '--top'       , action='store'     , type='string', dest='top'
-                                                                               , default='top'   , help='The hierarchy top level name model.' )
-   parser.add_option ( '-f', '--flatten'                        , type='string', dest='flatten'  , help='Flatten the design hierarchy.' )
-   parser.add_option ( '-k', '--keep-tcl'  , action='store_true',                dest='keepTcl'  , help='Keep the Yosys TCL command script.' )
-   parser.add_option ( '-i', '--input-lang', action='store'     , type='string', dest='inputLang', help='Set the input description language (RTLIL or Verilog).' )
-   parser.add_option ( '-l', '--liberty'   , action='store'     , type='string', dest='liberty'  , help='Set the path to the liberty file (.lib).' )
-   (options, args) = parser.parse_args()
+    parser = optparse.OptionParser()
+    parser.add_option ( '-d', '--design'    , action='store'     , type='string', dest='design'   , help='The name of the design file, without extension.' )
+    parser.add_option ( '-t', '--top'       , action='store'     , type='string', dest='top'
+                                                                                , default='top'   , help='The hierarchy top level name model.' )
+    parser.add_option ( '-f', '--flatten'                        , type='string', dest='flatten'  , help='Flatten the design hierarchy.' )
+    parser.add_option ( '-k', '--keep-tcl'  , action='store_true',                dest='keepTcl'  , help='Keep the Yosys TCL command script.' )
+    parser.add_option ( '-i', '--input-lang', action='store'     , type='string', dest='inputLang', help='Set the input description language (RTLIL or Verilog).' )
+    parser.add_option ( '-l', '--liberty'   , action='store'     , type='string', dest='liberty'  , help='Set the path to the liberty file (.lib).' )
+    (options, args) = parser.parse_args()
 
-   try:
-     yosys = Yosys()
-     if options.inputLang == 'Verilog': yosys.setInputVerilog()
-     if options.inputLang == 'RTLIL'  : yosys.setInputRTLIL()
-     if options.flatten: yosys.setFlatten( options.flatten.split('=')[1].split(',') )
-     if options.keepTcl: yosys.setKeepTcl( True )
-     if options.liberty: yosys.setLiberty( options.liberty )
-     
-     rcode = yosys.run( options.design, top=options.top )
-
-   except Exception, e:
-     catch( e )
-     sys.exit(2)
-
-   sys.exit( rcode )
+    try:
+        flatten = None
+        if options.flatten:
+            if options.flatten.startswith('--flatten'):
+                flatten = options.flatten.split('=')[1].split(',')
+            else:
+                flatten = [ options.flatten ]
+        yosys = Yosys()
+        if options.inputLang == 'Verilog': yosys.setInputVerilog()
+        if options.inputLang == 'RTLIL'  : yosys.setInputRTLIL()
+        if flatten:                        yosys.setFlatten( flatten )
+        if options.keepTcl: yosys.setKeepTcl( True )
+        if options.liberty: yosys.setLiberty( options.liberty )
+        rcode = yosys.run( options.design, top=options.top )
+    except Exception, e:
+        catch( e )
+        sys.exit(2)
+    
+    sys.exit( rcode )
