@@ -58,7 +58,8 @@ def scriptMain ( **kw ):
         arlet6502.state.useSpares    = True
         arlet6502.state.useClockTree = True
         arlet6502.state.bColumns     = 2
-        arlet6502.state.bRows        = 2
+        arlet6502.state.bRows        = 3
+        arlet6502.state.chipName     = 'chip'
         rvalue = arlet6502.build()
     except Exception, e:
         helpers.io.catch( e )
