@@ -24,6 +24,8 @@
    include ./mk/dks.d/nsxlib45.mk
  else ifeq ($(DESIGN_KIT),c35b4)
    include ./mk/dks.d/c35b4.mk
+ else ifeq ($(DESIGN_KIT),FlexLib018)
+   include ./mk/dks.d/FlexLib018.mk
  else
    $(error DESIGN_KIT variable has not been set or has an unsupported value)
  endif

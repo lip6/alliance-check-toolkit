@@ -32,7 +32,7 @@
  benchs="${benchs} VexRiscv/cmos45"
 #benchs="${benchs} ARM/cmos"
  benchs="${benchs} RingOscillator"
- benchs="${benchs} nmigen/ALU16"
+#benchs="${benchs} nmigen/ALU16"
 
  for bench in ${benchs}; do
    rules="${benchRules[$bench]}"
