@@ -87,7 +87,7 @@ def scriptMain ( **kw ):
         adderConf.cfg.etesian.uniformDensity = True
         adderConf.cfg.etesian.aspectRatio    = 1.0
         adderConf.cfg.etesian.spaceMargin    = 0.05
-        adderConf.cfg.block.spareSide        = l(300)
+        adderConf.cfg.block.spareSide        = l(350)
         adderConf.editor              = editor
         adderConf.useSpares           = True
         adderConf.useClockTree        = True

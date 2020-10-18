@@ -3,36 +3,28 @@
 import Cfg
 import Viewer
 import symbolic.cmos
-from   helpers       import l, u, n
+from   helpers import overlay, l, u, n
 
 
-Cfg.Configuration.pushDefaultPriority( Cfg.Parameter.Priority.UserFile )
-
-
-Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
- 
-Cfg.getParamBool      ( 'misc.catchCore'              ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.info'                   ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.paranoid'               ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.bug'                    ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.logMode'                ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.verboseLevel1'          ).setBool      ( True    )
-Cfg.getParamBool      ( 'misc.verboseLevel2'          ).setBool      ( True    )
-#Cfg.getParamInt       ( 'misc.minTraceLevel'          ).setInt       ( 159     )
-#Cfg.getParamInt       ( 'misc.maxTraceLevel'          ).setInt       ( 160     )
-Cfg.getParamEnumerate ( 'etesian.effort'              ).setInt       ( 2       )
-Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 10.0    )
-Cfg.getParamPercentage( 'etesian.aspectRatio'         ).setPercentage( 100.0   )
-Cfg.getParamBool      ( 'etesian.uniformDensity'      ).setBool      ( True    )
-Cfg.getParamInt       ( 'anabatic.edgeLenght'         ).setInt       ( 24      )
-Cfg.getParamInt       ( 'anabatic.edgeWidth'          ).setInt       ( 8       )
-Cfg.getParamString    ( 'anabatic.topRoutingLayer'    ).setString    ( 'METAL5')
-Cfg.getParamInt       ( 'katana.eventsLimit'          ).setInt       ( 1000000 )
-Cfg.getParamInt       ( 'katana.hTracksReservedLocal' ).setInt       ( 7       )
-Cfg.getParamInt       ( 'katana.vTracksReservedLocal' ).setInt       ( 6       )
-#Cfg.getParamInt       ( 'clockTree.minimumSide'       ).setInt       ( l(1000) )
-Cfg.getParamInt       ( 'block.spareSide'             ).setInt       ( l(1000) )
-
-Cfg.Configuration.popDefaultPriority()
-
-print 'Successfully read user configuration'
+with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+    cfg.misc.catchCore              = False
+    cfg.misc.info                   = False
+    cfg.misc.paranoid               = False
+    cfg.misc.bug                    = False
+    cfg.misc.logMode                = False
+    cfg.misc.verboseLevel1          = True
+    cfg.misc.verboseLevel2          = True
+    #cfg.misc.minTraceLevel          = 159
+    #cfg.misc.maxTraceLevel          = 160
+    cfg.etesian.effort              = 2
+    cfg.etesian.spaceMargin         = 0.10
+    cfg.etesian.aspectRatio         = 1.0
+    cfg.etesian.uniformDensity      = True
+    cfg.anabatic.topRoutingLayer    = 'METAL5'
+    cfg.katana.eventsLimit          = 1000000
+    cfg.katana.hTracksReservedMin   = 2
+    cfg.katana.hTracksReservedLocal = 7
+    cfg.katana.vTracksReservedLocal = 6
+    #cfg.clockTree.minimumSide       = l(1000)
+    cfg.block.spareSide             = l(1000)
+    Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
