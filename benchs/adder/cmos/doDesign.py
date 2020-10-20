@@ -31,6 +31,9 @@ def scriptMain ( **kw ):
         buildChip       = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'adder', CRL.Catalog.State.Logical )
+        if cell is None:
+            print( ErrorMessage( 2, 'doDesign.scriptMain(): Unable to load cell "{}".'.format('adder') ))
+            sys.exit( 1 )
         if editor: editor.setCell( cell ) 
 
         if usePadsPosition:
