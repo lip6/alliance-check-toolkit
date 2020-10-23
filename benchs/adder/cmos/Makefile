@@ -2,6 +2,7 @@
 
         LOGICAL_SYNTHESIS = Alliance
        PHYSICAL_SYNTHESIS = Coriolis
+              #DESIGN_KIT = cmos45
                DESIGN_KIT = sxlib
 
                      CHIP = chip
@@ -20,13 +21,18 @@
  include ./mk/design-flow.mk
 
 
-lvx:         lvx-chip_cts_r
-druc:        druc-chip_cts_r
-dreal:       dreal-chip_cts_r
-flatph:      flatph-chip_cts_r
-view:        cgt-chip_cts_r
+chip_r.vst: adder.vst
+	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
 
-layout:      chip_cts_r.ap
-gds:         chip_cts_r.gds
-gds_flat:    chip_cts_r_flat.gds
-cif:         chip_cts_r.cif
+chip_r.ap: chip_r.vst
+
+lvx:         lvx-chip_r
+druc:        druc-chip_r
+dreal:       dreal-chip_r
+flatph:      flatph-chip_r
+view:        cgt-chip_r
+
+layout:      chip_r.ap
+gds:         chip_r.gds
+gds_flat:    chip_r_flat.gds
+cif:         chip_r.cif

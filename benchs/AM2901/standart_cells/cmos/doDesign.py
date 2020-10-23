@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-        helpers.setTraceLevel( 550 )
+       #helpers.setTraceLevel( 540 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'coeur', CRL.Catalog.State.Logical )

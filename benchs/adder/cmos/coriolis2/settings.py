@@ -1,32 +1,43 @@
 # -*- Mode:Python -*-
 
+useNsxlib = False
+
+import os
 import Cfg
+import CRL
 import Viewer
-import symbolic.cmos
-from   helpers       import l, u, n
+from   helpers       import overlay, l, u, n
 
+if useNsxlib:
+    if os.environ.has_key('CELLS_TOP'):
+        cellsTop = os.environ['CELLS_TOP']
+    else:
+        cellsTop = '../../../cells'
+    import symbolic.cmos45
+else:
+    import symbolic.cmos
 
-Cfg.Configuration.pushDefaultPriority( Cfg.Parameter.Priority.UserFile )
-
-Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
- 
-Cfg.getParamBool      ( 'misc.catchCore'              ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.info'                   ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.paranoid'               ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.bug'                    ).setBool      ( False   )
-Cfg.getParamBool      ( 'misc.logMode'                ).setBool      ( True    )
-Cfg.getParamBool      ( 'misc.verboseLevel1'          ).setBool      ( True    )
-Cfg.getParamBool      ( 'misc.verboseLevel2'          ).setBool      ( True    )
-#Cfg.getParamInt       ( 'misc.minTraceLevel'          ).setInt       ( 159     )
-#Cfg.getParamInt       ( 'misc.maxTraceLevel'          ).setInt       ( 160     )
-Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 5.0     )
-Cfg.getParamPercentage( 'etesian.aspectRatio'         ).setPercentage( 100.0   )
-Cfg.getParamInt       ( 'anabatic.edgeLenght'         ).setInt       ( 24      )
-Cfg.getParamInt       ( 'anabatic.edgeWidth'          ).setInt       ( 8       )
-Cfg.getParamInt       ( 'katana.eventsLimit'          ).setInt       ( 1000000 )
-Cfg.getParamString    ( 'anabatic.topRoutingLayer'    ).setString    ( 'METAL4')
-#Cfg.getParamInt       ( 'katana.hTracksReservedLocal' ).setInt       ( 4       )
-#Cfg.getParamInt       ( 'katana.vTracksReservedLocal' ).setInt       ( 5       )
-#Cfg.getParamInt       ( 'clockTree.minimumSide'       ).setInt       ( l(1000) )
-
-Cfg.Configuration.popDefaultPriority()
+with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+    cfg.misc.catchCore           = False
+    cfg.misc.info                = False
+    cfg.misc.paranoid            = False
+    cfg.misc.bug                 = False
+    cfg.misc.logMode             = True
+    cfg.misc.verboseLevel1       = True
+    cfg.misc.verboseLevel2       = True
+    cfg.etesian.graphics         = 3
+    cfg.etesian.spaceMargin      = 0.05
+    cfg.etesian.aspectRatio      = 1.0
+    cfg.anabatic.edgeLenght      = 24
+    cfg.anabatic.edgeWidth       = 8
+    if useNsxlib:
+        cfg.anabatic.routingGauge    = 'msxlib4'
+        cfg.anabatic.topRoutingLayer = 'METAL4'
+    cfg.katana.eventsLimit       = 4000000
+    Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
+    af  = CRL.AllianceFramework.get()
+    env = af.getEnvironment()
+    env.setCLOCK( '^m_clock|^reset|^ck$' )
+    if useNsxlib:
+        env.addSYSTEM_LIBRARY( library=cellsTop+'/niolib', mode=CRL.Environment.Prepend )
+        env.addSYSTEM_LIBRARY( library=cellsTop+'/nsxlib', mode=CRL.Environment.Prepend )

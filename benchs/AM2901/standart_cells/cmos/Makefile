@@ -24,9 +24,14 @@
  include ./mk/design-flow.mk
 
 
-lvx:     lvx-am2901_cts_r
-druc:    druc-am2901_cts_r
-view:    cgt-am2901_cts_r
+am2901_r.vst: coeur.vst
+	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
 
-layout:  am2901_cts_r.ap
-gds:     am2901_cts_r.gds
+am2901_r.ap: am2901_r.vst
+
+lvx:     lvx-am2901_r
+druc:    druc-am2901_r
+view:    cgt-am2901_r
+
+layout:  am2901_r.ap
+gds:     am2901_r.gds
