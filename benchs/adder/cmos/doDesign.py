@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
+        helpers.setTraceLevel( 540 )
         usePadsPosition = True
         buildChip       = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -38,16 +38,16 @@ def scriptMain ( **kw ):
 
         if usePadsPosition:
             ioPadsSpec = [ (IoPin.SOUTH, l( 400.0), 'a_1'        , 'a(1)'   , 'a(1)'   )
-                         , (IoPin.SOUTH, l( 600.0), 'power_0'    , 'vddpad' , 'vdd'    )
+                         , (IoPin.SOUTH, l( 600.0), 'allpower_0' , 'vddpad' , 'vdd'    )
                          , (IoPin.SOUTH, l(1000.0), 'a_0'        , 'a(0)'   , 'a(0)'   )
                          , (IoPin.EAST , l( 400.0), 'a_2'        , 'a(2)'   , 'a(2)'   )
                          , (IoPin.EAST , l( 600.0), 'a_3'        , 'a(3)'   , 'a(3)'   )
-                         , (IoPin.EAST , l( 800.0), 'ground_0'   , 'vsspad' , 'vss'    )
+                         , (IoPin.EAST , l( 800.0), 'allground_0', 'vsspad' , 'vss'    )
                          , (IoPin.EAST , l(1000.0), 'b_3'        , 'b(3)'   , 'b(3)'   )
                          , (IoPin.EAST , l(1200.0), 'b_2'        , 'b(2)'   , 'b(2)'   )
                          , (IoPin.NORTH, l( 400.0), 'b_1'        , 'b(1)'   , 'b(1)'   )
                          , (IoPin.NORTH, l( 600.0), 'b_0'        , 'b(0)'   , 'b(0)'   )
-                         , (IoPin.NORTH, l( 800.0), 'ground_1'   , 'vsspad' , 'vss'    )
+                         , (IoPin.NORTH, l( 800.0), 'allground_1', 'vsspad' , 'vss'    )
                          , (IoPin.NORTH, l(1200.0), 'p_reset'    , 'p_reset', 'p_reset')
                          , (IoPin.NORTH, l( 400.0), 'clock_0'    , 'm_clock', 'm_clock')
                          , (IoPin.WEST , l( 600.0), 'f_3'        , 'f(3)'   , 'f(3)'   )
