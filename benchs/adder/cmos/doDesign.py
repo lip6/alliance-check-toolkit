@@ -4,15 +4,12 @@ import sys
 import traceback
 import CRL
 import helpers
-from   helpers.io import ErrorMessage
-from   helpers.io import WarningMessage
-from   helpers    import trace
-from   helpers    import l, u, n
+from   helpers.io import ErrorMessage, WarningMessage
+from   helpers    import trace, l, u, n
 import plugins
-from   Hurricane  import DbU
+from   Hurricane  import Breakpoint, DbU
 from   plugins.alpha.block.block         import Block
-from   plugins.alpha.block.configuration import IoPin
-from   plugins.alpha.block.configuration import GaugeConf
+from   plugins.alpha.block.configuration import IoPin, GaugeConf
 from   plugins.alpha.core2chip.cmos      import CoreToChip
 from   plugins.alpha.chip.configuration  import ChipConf
 from   plugins.alpha.chip.chip           import Chip
@@ -26,7 +23,8 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-        helpers.setTraceLevel( 540 )
+        #helpers.setTraceLevel( 540 )
+        #Breakpoint.setStopLevel( 100 )
         usePadsPosition = True
         buildChip       = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -100,7 +98,7 @@ def scriptMain ( **kw ):
         adderConf.chipConf.name       = 'chip'
         adderConf.chipConf.ioPadGauge = 'pxlib'
         adderConf.coreSize            = ( l( 800), l( 800) )
-        adderConf.chipSize            = ( l(2016), l(2016) )
+        adderConf.chipSize            = ( l(2116), l(2116) )
         if buildChip:
             adderToChip = CoreToChip( adderConf )
             adderToChip.buildChip()
