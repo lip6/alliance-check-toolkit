@@ -61,10 +61,10 @@
  endif
 
  VALGRIND_COMMAND =
- ifeq ($(USE_DEBUG),Yes)
-   VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes
-  #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes --free-fill=0xff
- endif
+#ifeq ($(USE_DEBUG),Yes)
+#  VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes
+# #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes --free-fill=0xff
+#endif
 
 
  ifeq ($(USE_DEVTOOLSET_2),Yes)
