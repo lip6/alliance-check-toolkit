@@ -24,7 +24,7 @@
  benchs="${benchs} AM2901/standart_cells/cmos"
  benchs="${benchs} AM2901/datapath/cmos"
  benchs="${benchs} 6502/cmos"
- benchs="${benchs} 6502/cmos45"
+#benchs="${benchs} 6502/cmos45"
 #benchs="${benchs} arlet6502/cmos350"
  benchs="${benchs} MIPS/microprogrammed"
  benchs="${benchs} MIPS/pipeline"
