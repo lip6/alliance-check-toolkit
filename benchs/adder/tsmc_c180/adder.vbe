@@ -1,0 +1,205 @@
+-- VHDL data flow description generated from `adder`
+--		date : Mon Apr  7 15:40:25 2014
+
+
+-- Entity Declaration
+
+ENTITY adder IS
+  PORT (
+  p_reset : in BIT;	-- p_reset
+  m_clock : in BIT;	-- m_clock
+  f : out bit_vector(3 DOWNTO 0) ;	-- f
+  a : in bit_vector(3 DOWNTO 0) ;	-- a
+  b : in bit_vector(3 DOWNTO 0) ;	-- b
+  vdd : in BIT;	-- vdd
+  vss : in BIT	-- vss
+  );
+END adder;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF adder IS
+  SIGNAL r1 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r1
+  SIGNAL r2 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r2
+  SIGNAL r3 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r3
+  SIGNAL r4 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r4
+  SIGNAL r5 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r5
+  SIGNAL r6 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r6
+  SIGNAL r7 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r7
+  SIGNAL r8 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r8
+  SIGNAL r9 : REG_VECTOR(3 DOWNTO 0) REGISTER;	-- r9
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux1 : BIT;		-- aux1
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux4 : BIT;		-- aux4
+  SIGNAL aux5 : BIT;		-- aux5
+  SIGNAL aux6 : BIT;		-- aux6
+
+BEGIN
+  aux6 <= (a(2) OR b(2));
+  aux5 <= (a(2) AND b(2));
+  aux4 <= (a(3) XOR b(3));
+  aux3 <= (a(2) XOR (b(1) XOR b(2)));
+  aux1 <= NOT(a(2) XOR b(2));
+  aux0 <= (a(0) AND b(0));
+  label0 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r9 (0) <= GUARDED r8(0);
+  END BLOCK label0;
+  label1 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r9 (1) <= GUARDED r8(1);
+  END BLOCK label1;
+  label2 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r9 (2) <= GUARDED r8(2);
+  END BLOCK label2;
+  label3 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r9 (3) <= GUARDED r8(3);
+  END BLOCK label3;
+  label4 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r8 (0) <= GUARDED r7(0);
+  END BLOCK label4;
+  label5 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r8 (1) <= GUARDED r7(1);
+  END BLOCK label5;
+  label6 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r8 (2) <= GUARDED r7(2);
+  END BLOCK label6;
+  label7 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r8 (3) <= GUARDED r7(3);
+  END BLOCK label7;
+  label8 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r7 (0) <= GUARDED r6(0);
+  END BLOCK label8;
+  label9 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r7 (1) <= GUARDED r6(1);
+  END BLOCK label9;
+  label10 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r7 (2) <= GUARDED r6(2);
+  END BLOCK label10;
+  label11 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r7 (3) <= GUARDED r6(3);
+  END BLOCK label11;
+  label12 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r6 (0) <= GUARDED r5(0);
+  END BLOCK label12;
+  label13 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r6 (1) <= GUARDED r5(1);
+  END BLOCK label13;
+  label14 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r6 (2) <= GUARDED r5(2);
+  END BLOCK label14;
+  label15 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r6 (3) <= GUARDED r5(3);
+  END BLOCK label15;
+  label16 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r5 (0) <= GUARDED r4(0);
+  END BLOCK label16;
+  label17 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r5 (1) <= GUARDED r4(1);
+  END BLOCK label17;
+  label18 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r5 (2) <= GUARDED r4(2);
+  END BLOCK label18;
+  label19 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r5 (3) <= GUARDED r4(3);
+  END BLOCK label19;
+  label20 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r4 (0) <= GUARDED r3(0);
+  END BLOCK label20;
+  label21 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r4 (1) <= GUARDED r3(1);
+  END BLOCK label21;
+  label22 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r4 (2) <= GUARDED r3(2);
+  END BLOCK label22;
+  label23 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r4 (3) <= GUARDED r3(3);
+  END BLOCK label23;
+  label24 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r3 (0) <= GUARDED r2(0);
+  END BLOCK label24;
+  label25 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r3 (1) <= GUARDED r2(1);
+  END BLOCK label25;
+  label26 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r3 (2) <= GUARDED r2(2);
+  END BLOCK label26;
+  label27 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r3 (3) <= GUARDED r2(3);
+  END BLOCK label27;
+  label28 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r2 (0) <= GUARDED r1(0);
+  END BLOCK label28;
+  label29 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r2 (1) <= GUARDED r1(1);
+  END BLOCK label29;
+  label30 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r2 (2) <= GUARDED r1(2);
+  END BLOCK label30;
+  label31 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r2 (3) <= GUARDED r1(3);
+  END BLOCK label31;
+  label32 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r1 (0) <= GUARDED (a(0) XOR b(0));
+  END BLOCK label32;
+  label33 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r1 (1) <= GUARDED (b(1) XOR aux0 XOR a(1));
+  END BLOCK label33;
+  label34 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r1 (2) <= GUARDED ((((aux1 AND aux0) OR (aux3 AND NOT(aux0))) AND 
+a(1)) OR (((aux3 AND aux0) OR (NOT(aux1) AND NOT(aux0
+))) AND NOT(a(1))));
+  END BLOCK label34;
+  label35 : BLOCK ((NOT((m_clock'STABLE)) AND m_clock) = '1')
+  BEGIN
+    r1 (3) <= GUARDED (((((((aux5 OR b(1) OR a(0)) AND aux6) XOR aux4) 
+AND b(0)) OR ((((a(2) AND (b(2) OR b(1))) OR (b(2) 
+AND b(1))) XOR aux4) AND NOT(b(0)))) AND a(1)) OR ((
+((((aux6 AND b(1) AND a(0)) OR aux5) XOR aux4) AND
+ b(0)) OR ((aux5 XOR aux4) AND NOT(b(0)))) AND NOT
+(a(1))));
+  END BLOCK label35;
+
+f (0) <= r9(0);
+
+f (1) <= r9(1);
+
+f (2) <= r9(2);
+
+f (3) <= r9(3);
+END;
