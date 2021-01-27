@@ -98,7 +98,7 @@ def scriptMain ( **kw ):
         adderConf.chipConf.name       = 'chip'
         adderConf.chipConf.ioPadGauge = 'pxlib'
         adderConf.coreSize            = ( l( 800), l( 800) )
-        adderConf.chipSize            = ( l(2116), l(2116) )
+        adderConf.chipSize            = ( l(2116), l(2066) )
         if buildChip:
             adderToChip = CoreToChip( adderConf )
             adderToChip.buildChip()

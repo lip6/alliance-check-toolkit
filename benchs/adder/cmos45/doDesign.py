@@ -7,7 +7,7 @@ import helpers
 from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
-from   Hurricane  import DbU
+from   Hurricane  import DbU, Breakpoint
 from   plugins.alpha.block.block         import Block
 from   plugins.alpha.block.configuration import IoPin, GaugeConf
 from   plugins.alpha.core2chip.niolib    import CoreToChip
@@ -23,7 +23,8 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-        helpers.setTraceLevel( 550 )
+        #helpers.setTraceLevel( 550 )
+        #Breakpoint.setStopLevel( 100 )
         buildChip       = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'adder', CRL.Catalog.State.Logical )
