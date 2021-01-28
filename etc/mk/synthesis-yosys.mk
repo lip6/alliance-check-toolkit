@@ -12,6 +12,13 @@
    $(info - FLATTEN_ARG = $(FLATTEN_ARG))
  endif
 
+ ifneq ($(YOSYS_BLACKBOXES),)
+   $(info | Using black boxes:)
+   $(foreach blackbox,$(YOSYS_BLACKBOXES),$(info |  - "$(blackbox)"))
+   BLACKBOXES_ARG = --blackboxes=$(shell echo "$(YOSYS_BLACKBOXES)" | sed 's: :,:g')
+   $(info - BLACKBOXES_ARG = $(BLACKBOXES_ARG))
+ endif
+
  ifeq ($(YOSYS_SET_TOP),)
    YOSYS_SET_TOP = Yes
  endif
@@ -47,9 +54,10 @@
 
 
 %.blif: %.il
-	 yosysArgs="--input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";  \
+	 yosysArgs="-k --input-lang=RTLIL --design=$* --liberty=$(LIBERTY_FILE)";  \
 	 if [ "$(YOSYS_SET_TOP)" = "Yes" ]; then yosysArgs="$$yosysArgs --top=$*" ; fi;   \
-	 if [ ! -z "$(FLATTEN_ARG)"      ]; then yosysArgs="$$yosysArgs --flatten=$(FLATTEN_ARG)"; fi;  \
+	 if [ ! -z "$(FLATTEN_ARG)"      ]; then yosysArgs="$$yosysArgs $(FLATTEN_ARG)"; fi;  \
+	 if [ ! -z "$(BLACKBOXES_ARG)"   ]; then yosysArgs="$$yosysArgs $(BLACKBOXES_ARG)"; fi;  \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 

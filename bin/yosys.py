@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from   __future__ import print_function
 import sys
 import os
 import os.path
@@ -21,6 +22,7 @@ class Yosys ( object ):
         self.flags       = Yosys.ReadRTLIL
         self.libertyFile = None
         self.blocks      = []
+        self.blackboxes  = []
         return
 
     def setFlags ( self, mask, value ):
@@ -31,16 +33,29 @@ class Yosys ( object ):
     def setFlatten ( self, blocks ):
         self.setFlags( Yosys.Flatten, True )
         self.blocks = blocks
-        print self.blocks
 
     def setKeepTcl ( self, value ):
         self.setFlags( Yosys.KeepTcl, True )
 
     def setLiberty ( self, libertyFile ):
         if not os.path.isfile(libertyFile):
-          raise ErrorMessage( 1, [ 'Yosys.setLiberty(): Can\'t find liberty file.'
-                                 , '"%s"' % libertyFile ] )
+            raise ErrorMessage( 1, [ 'Yosys.setLiberty(): Can\'t find liberty file.'
+                                   , '"{}"'.format(libertyFile) ] )
         self.libertyFile = libertyFile
+        return
+
+    def setBlackboxes ( self, blackboxes ):
+        for blackbox in blackboxes:
+            if blackbox is None: continue
+            blackboxFile = None
+            for extension in [ '.v' ]:
+                blackboxFile = blackbox + extension
+                if os.path.isfile(blackboxFile): break
+            if blackboxFile is None:
+                raise ErrorMessage( 1, [ 'Yosys.setBlackboxes(): Can\'t find blackbox file.'
+                                       , '"{}{{.v}}"'.format(blackbox) ] )
+            else:
+                self.blackboxes.append( blackboxFile )
         return
 
     def setInputRTLIL ( self ):
@@ -54,42 +69,42 @@ class Yosys ( object ):
         return
 
     def run ( self, designName, top='top' ):
+        tclScript = ''
+        for blackbox in self.blackboxes:
+            if blackbox.endswith('.v'):
+                tclScript += 'yosys read_verilog {}\n'.format(blackbox)
         if self.flags & Yosys.ReadRTLIL:
-          if not os.path.isfile(designName+'.il'):
-            raise ErrorMessage( 1, 'Yosys.run(): Can\'t find RTLIL design file "%s.il".' % designName )
-          tclScript = 'yosys read_ilang   %(designName)s.il\n'
+            if not os.path.isfile(designName+'.il'):
+                raise ErrorMessage( 1, 'Yosys.run(): Can\'t find RTLIL design file "{}.il".' \
+                                       .format(designName) )
+            tclScript += 'yosys read_ilang   {designName}.il\n'
         else:
-          if not os.path.isfile(designName+".v"):
-            raise ErrorMessage( 1, 'Yosys.run(): Can\'t find Verilog design file "%s.v".' % designName )
-          tclScript = 'yosys read_verilog %(designName)s.v\n'
-
-        tclScript += 'yosys hierarchy -check -top %(designTop)s\n' \
-                     'yosys synth            -top %(designTop)s\n'
-
+            if not os.path.isfile(designName+".v"):
+                raise ErrorMessage( 1, 'Yosys.run(): Can\'t find Verilog design file "{}.v".' \
+                                       .format(designName) )
+            tclScript += 'yosys read_verilog {designName}.v\n'
+        tclScript += 'yosys hierarchy -check -top {designTop}\n' \
+                     'yosys synth            -top {designTop}\n'
         blocks = ''
         if self.flags & Yosys.Flatten:
-          tclScript += 'yosys flatten               %(blocks)s\n'    \
-                       'yosys hierarchy        -top %(designTop)s\n'
-          for block in self.blocks:
-              if len(blocks) > 0: blocks += ' '
-              blocks += block
-
-        tclScript += 'yosys dfflibmap -liberty    %(libertyFile)s\n' \
-                     'yosys abc       -liberty    %(libertyFile)s\n' \
-                     'yosys clean\n'                                 \
-                     'yosys write_blif %(designName)s.blif\n'
-
+            tclScript += 'yosys flatten               {blocks}\n'    \
+                         'yosys hierarchy        -top {designTop}\n'
+            for block in self.blocks:
+                if len(blocks) > 0: blocks += ' '
+                blocks += block
+        tclScript += 'yosys dfflibmap -liberty    {libertyFile}\n' \
+                     'yosys abc       -liberty    {libertyFile}\n' \
+                     'yosys clean\n'                               \
+                     'yosys write_blif {designName}.blif\n'
         tclFile = designName + '.tcl'
-        tclFd   = open( tclFile, 'w' )
-        tclFd.write( tclScript % { 'designName' : designName
-                                 , 'designTop'  : top
-                                 , 'blocks'     : blocks
-                                 , 'libertyFile': self.libertyFile
-                                 } )
-        tclFd.close()
-
+        with open( tclFile, 'w' ) as tclFd:
+            keywords = { 'designName' : designName
+                       , 'designTop'  : top
+                       , 'blocks'     : blocks
+                       , 'libertyFile': self.libertyFile
+                       }
+            tclFd.write( tclScript.format( **keywords ))
         status = subprocess.call( [ 'yosys', '-c', tclFile ] )
-
         if not (self.flags & Yosys.KeepTcl): os.unlink( tclFile )
         return status
 
@@ -97,28 +112,30 @@ class Yosys ( object ):
 if __name__ == '__main__':
 
     parser = optparse.OptionParser()
-    parser.add_option ( '-d', '--design'    , action='store'     , type='string', dest='design'   , help='The name of the design file, without extension.' )
-    parser.add_option ( '-t', '--top'       , action='store'     , type='string', dest='top'
-                                                                                , default='top'   , help='The hierarchy top level name model.' )
-    parser.add_option ( '-f', '--flatten'                        , type='string', dest='flatten'  , help='Flatten the design hierarchy.' )
-    parser.add_option ( '-k', '--keep-tcl'  , action='store_true',                dest='keepTcl'  , help='Keep the Yosys TCL command script.' )
-    parser.add_option ( '-i', '--input-lang', action='store'     , type='string', dest='inputLang', help='Set the input description language (RTLIL or Verilog).' )
-    parser.add_option ( '-l', '--liberty'   , action='store'     , type='string', dest='liberty'  , help='Set the path to the liberty file (.lib).' )
+    parser.add_option ( '-d', '--design'    , action='store'     , type='string', dest='design'    , help='The name of the design file, without extension.' )
+    parser.add_option ( '-t', '--top'       , action='store'     , type='string', dest='top'       
+                                                                                , default='top'    , help='The hierarchy top level name model.' )
+    parser.add_option ( '-f', '--flatten'                        , type='string', dest='flatten'   , help='Flatten the design hierarchy.' )
+    parser.add_option ( '-k', '--keep-tcl'  , action='store_true',                dest='keepTcl'   , help='Keep the Yosys TCL command script.' )
+    parser.add_option ( '-i', '--input-lang', action='store'     , type='string', dest='inputLang' , help='Set the input description language (RTLIL or Verilog).' )
+    parser.add_option ( '-l', '--liberty'   , action='store'     , type='string', dest='liberty'   , help='Set the path to the liberty file (.lib).' )
+    parser.add_option ( '-b', '--blackboxes',                      type='string', dest='blackboxes', help='A comma separated list of black boxes.' )
     (options, args) = parser.parse_args()
 
     try:
         flatten = None
         if options.flatten:
-            if options.flatten.startswith('--flatten'):
-                flatten = options.flatten.split('=')[1].split(',')
-            else:
-                flatten = [ options.flatten ]
+            flatten = options.flatten.split(',')
+        blackboxes = None
+        if options.blackboxes:
+            blackboxes = options.blackboxes.split(',')
         yosys = Yosys()
         if options.inputLang == 'Verilog': yosys.setInputVerilog()
         if options.inputLang == 'RTLIL'  : yosys.setInputRTLIL()
         if flatten:                        yosys.setFlatten( flatten )
         if options.keepTcl: yosys.setKeepTcl( True )
         if options.liberty: yosys.setLiberty( options.liberty )
+        if blackboxes:      yosys.setBlackboxes( blackboxes )
         rcode = yosys.run( options.design, top=options.top )
     except Exception, e:
         catch( e )
