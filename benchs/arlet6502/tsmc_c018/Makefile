@@ -5,8 +5,8 @@
 
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-                 USE_KITE = No
 
+                  RM_CHIP = Yes
                  NETLISTS = Arlet6502 \
                             alu       \
                             cpu

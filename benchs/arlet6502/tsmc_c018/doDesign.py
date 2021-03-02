@@ -25,7 +25,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #helpers.setTraceLevel( 540 )
-        Breakpoint.setStopLevel( 99 )
+       #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
@@ -126,6 +126,8 @@ def scriptMain ( **kw ):
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
+        arlet6502Conf.cfg.chip.supplyRailWidth        = u(35)
+        arlet6502Conf.cfg.chip.supplyRailPitch        = u(90)
         arlet6502Conf.editor              = editor
         arlet6502Conf.useSpares           = True
         arlet6502Conf.useClockTree        = True

@@ -29,15 +29,15 @@ LibreSOCMem.setup()
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False
-    cfg.misc.minTraceLevel       = 147
-    cfg.misc.maxTraceLevel       = 148
+    cfg.misc.minTraceLevel       = 14700
+    cfg.misc.maxTraceLevel       = 14800
     cfg.misc.info                = False
     cfg.misc.paranoid            = False
     cfg.misc.bug                 = False
-    cfg.misc.logMode             = True
+    cfg.misc.logMode             = False
     cfg.misc.verboseLevel1       = True
     cfg.misc.verboseLevel2       = True
-    cfg.etesian.graphics         = 3
+    cfg.etesian.graphics         = 2
     cfg.etesian.spaceMargin      = 0.10
     cfg.katana.eventsLimit       = 4000000
     af  = AllianceFramework.get()
