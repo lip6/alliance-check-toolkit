@@ -103,6 +103,7 @@ def scriptMain ( **kw ):
             adderToChip = CoreToChip( adderConf )
             adderToChip.buildChip()
             chipBuilder = Chip( adderConf )
+            chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:

@@ -25,7 +25,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #helpers.setTraceLevel( 540 )
-       #Breakpoint.setStopLevel( 100 )
+        Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
@@ -142,6 +142,7 @@ def scriptMain ( **kw ):
             arlet6502ToChip = CoreToChip( arlet6502Conf )
             arlet6502ToChip.buildChip()
             chipBuilder = Chip( arlet6502Conf )
+            chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
             CRL.Gds.save( arlet6502Conf.chip )

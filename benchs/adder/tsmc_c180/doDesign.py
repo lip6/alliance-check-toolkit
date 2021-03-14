@@ -94,6 +94,7 @@ def scriptMain ( **kw ):
             arlet6502ToChip = CoreToChip( adderConf )
             arlet6502ToChip.buildChip()
             chipBuilder = Chip( adderConf )
+            chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
             CRL.Gds.save( adderConf.chip )
