@@ -80,15 +80,17 @@ def scriptMain ( **kw ):
        #adderConf.cfg.chip.padCoreSide            = 'North'
        #adderConf.cfg.chip.use45corners           = False
         adderConf.cfg.chip.useAbstractPads        = True
+        adderConf.cfg.chip.supplyRailWidth        = u(35)
+        adderConf.cfg.chip.supplyRailPitch        = u(90)
         adderConf.editor              = editor
-        adderConf.useSpares           = False
-        adderConf.useClockTree        = False
+        adderConf.useSpares           = True
+        adderConf.useClockTree        = True
         adderConf.useHFNS             = False
         adderConf.bColumns            = 2
         adderConf.bRows               = 3
         adderConf.chipName            = 'chip'
         adderConf.chipConf.ioPadGauge = 'LibreSOCIO'
-        adderConf.coreSize            = ( u( 150.0), u( 400.0) )
+        adderConf.coreSize            = ( u( 130.0), u( 130.0) )
         adderConf.chipSize            = ( u( 700.0), u(1508.0) )
         if buildChip:
             arlet6502ToChip = CoreToChip( adderConf )
@@ -97,6 +99,7 @@ def scriptMain ( **kw ):
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
+            CRL.Gds.save( adderConf.corona )
             CRL.Gds.save( adderConf.chip )
         else:
             blockBuilder = Block( adderConf )

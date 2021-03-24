@@ -29,8 +29,8 @@ LibreSOCMem.setup()
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False
-    cfg.misc.minTraceLevel       = 147
-    cfg.misc.maxTraceLevel       = 148
+    cfg.misc.minTraceLevel       = 14700
+    cfg.misc.maxTraceLevel       = 14800
     cfg.misc.info                = False
     cfg.misc.paranoid            = False
     cfg.misc.bug                 = False
@@ -42,4 +42,4 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.katana.eventsLimit       = 4000000
     af  = AllianceFramework.get()
     env = af.getEnvironment()
-    env.setCLOCK( '^m_clock' )
+    env.setCLOCK( '^m_clock.*' )

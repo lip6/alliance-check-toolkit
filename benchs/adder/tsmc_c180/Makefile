@@ -6,17 +6,20 @@
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
                  USE_KITE = No
+                  RM_CHIP = Yes
 
+                     CHIP = chip
                  NETLISTS = adder
 
  include ./mk/design-flow.mk
 
+chip_cts_r.vst: adder.vst
+	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
+
+chip_cts_r.gds: chip_cts_r.vst
+	-@echo "[INFO] Overriden default GDS rule (for use with FlexLib)."
+
 blif:   adder.blif
 vst:    adder.vst
-layout: adder_cts_r.ap
-gds:    adder_cts_r.gds
-
-lvx:    lvx-vst-adder_cts
-druc:   druc-adder_cts_r
-
-view:   cgt-adder
+gds:    chip_cts_r.gds
+view:   cgt-chip_r
