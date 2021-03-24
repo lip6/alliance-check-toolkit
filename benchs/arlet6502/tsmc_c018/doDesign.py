@@ -25,7 +25,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #helpers.setTraceLevel( 540 )
-        Breakpoint.setStopLevel( 100 )
+       #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
@@ -122,7 +122,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
-        arlet6502Conf.cfg.block.spareSide             = u(200)
+        arlet6502Conf.cfg.block.spareSide             = u(9*13)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
@@ -145,6 +145,7 @@ def scriptMain ( **kw ):
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
+            CRL.Gds.save( arlet6502Conf.corona )
             CRL.Gds.save( arlet6502Conf.chip )
         else:
             blockBuilder = Block( arlet6502Conf )
