@@ -25,7 +25,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #helpers.setTraceLevel( 540 )
-       #Breakpoint.setStopLevel( 100 )
+        Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
@@ -122,7 +122,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
-        arlet6502Conf.cfg.block.spareSide             = u(9*13)
+        arlet6502Conf.cfg.block.spareSide             = u(7*13)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
@@ -133,11 +133,16 @@ def scriptMain ( **kw ):
         arlet6502Conf.useClockTree        = True
         arlet6502Conf.useHFNS             = True
         arlet6502Conf.bColumns            = 2
-        arlet6502Conf.bRows               = 3
+        arlet6502Conf.bRows               = 2
         arlet6502Conf.chipName            = 'chip'
         arlet6502Conf.chipConf.ioPadGauge = 'LibreSOCIO'
-        arlet6502Conf.coreSize            = ( u( 500.5), u( 500.0) )
-        arlet6502Conf.chipSize            = ( u(2000.0), u(2060.0) )
+        # 29 is minimum with everything disabled       -> ~  6% free space.
+        # Can really be reached when running the P&R on the sole block.
+        # This is very suspicious.
+        # 33 is minimum for obstacle density           -> ~ 25% free space.
+        # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
+        arlet6502Conf.coreSize            = ( u(34*13.0), u(34*13.0) )
+        arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
         if buildChip:
             arlet6502ToChip = CoreToChip( arlet6502Conf )
             arlet6502ToChip.buildChip()

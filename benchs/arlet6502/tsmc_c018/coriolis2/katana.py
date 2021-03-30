@@ -65,3 +65,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'do_to_pad(4)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.subckt_0_cpu.add_bit6_hfns_0' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.subckt_0_cpu.abc_11829_new_n851' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.subckt_0_cpu.abc_11829_new_n531' ) )
