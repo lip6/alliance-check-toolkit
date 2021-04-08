@@ -94,6 +94,7 @@ def scriptMain ( **kw ):
             am2901ToChip = CoreToChip( am2901Conf )
             am2901ToChip.buildChip()
             chipBuilder = Chip( am2901Conf )
+            chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:

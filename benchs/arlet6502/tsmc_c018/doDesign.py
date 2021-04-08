@@ -24,8 +24,8 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
-        Breakpoint.setStopLevel( 100 )
+       #helpers.setTraceLevel( 550 )
+       #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
@@ -122,10 +122,12 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
+        arlet6502Conf.cfg.katana.runRealignStage      = True
         arlet6502Conf.cfg.block.spareSide             = u(7*13)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
+        arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
         arlet6502Conf.cfg.chip.supplyRailWidth        = u(35)
         arlet6502Conf.cfg.chip.supplyRailPitch        = u(90)
         arlet6502Conf.editor              = editor
