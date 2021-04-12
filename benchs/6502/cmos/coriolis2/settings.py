@@ -11,7 +11,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.info                   = False
     cfg.misc.paranoid               = False
     cfg.misc.bug                    = False
-    cfg.misc.logMode                = False
+    cfg.misc.logMode                = True
     cfg.misc.verboseLevel1          = True
     cfg.misc.verboseLevel2          = True
     #cfg.misc.minTraceLevel          = 159
@@ -25,6 +25,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.katana.hTracksReservedMin   = 2
     cfg.katana.hTracksReservedLocal = 7
     cfg.katana.vTracksReservedLocal = 6
+    cfg.katana.runRealignStage      = True
     #cfg.clockTree.minimumSide       = l(1000)
     cfg.block.spareSide             = l(1000)
     Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
