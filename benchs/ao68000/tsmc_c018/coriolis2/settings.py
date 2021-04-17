@@ -29,8 +29,8 @@ LibreSOCMem.setup()
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False
-    cfg.misc.minTraceLevel       = 14700
-    cfg.misc.maxTraceLevel       = 14800
+    cfg.misc.minTraceLevel       = 15900
+    cfg.misc.maxTraceLevel       = 16000
     cfg.misc.info                = False
     cfg.misc.paranoid            = False
     cfg.misc.bug                 = False

@@ -171,7 +171,7 @@ def scriptMain ( **kw ):
         ao68000Conf.editor              = editor
         ao68000Conf.useSpares           = True
         ao68000Conf.useClockTree        = True
-        ao68000Conf.useHFNS             = False
+        ao68000Conf.useHFNS             = True
         ao68000Conf.bColumns            = 3
         ao68000Conf.bRows               = 3
         ao68000Conf.chipName            = 'chip'
