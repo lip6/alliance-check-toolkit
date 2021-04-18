@@ -48,8 +48,10 @@
 
 
 %.blif: %.v
-	 yosysArgs="--input-lang=Verilog --design=$* --top=$* --liberty=$(LIBERTY_FILE)"; \
-	 yosysArgs="$$yosysArgs $(FLATTEN_ARG)"; \
+	 yosysArgs="--input-lang=Verilog --design=$* --liberty=$(LIBERTY_FILE)"; \
+	 if [ "$(YOSYS_SET_TOP)" = "Yes" ]; then yosysArgs="$$yosysArgs --top=$*" ; fi;   \
+	 if [ ! -z "$(FLATTEN_ARG)"      ]; then yosysArgs="$$yosysArgs $(FLATTEN_ARG)"; fi;  \
+	 if [ ! -z "$(BLACKBOXES_ARG)"   ]; then yosysArgs="$$yosysArgs $(BLACKBOXES_ARG)"; fi;  \
 	 $(call c2env, $(YOSYS_PY) $$yosysArgs)
 
 
