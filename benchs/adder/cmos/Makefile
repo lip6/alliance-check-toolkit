@@ -13,6 +13,7 @@
                 NSL2VHOPT = -vasy
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
+             USE_VALGRIND = No
                  USE_KITE = No
                   RM_CHIP = Yes
 
@@ -22,7 +23,7 @@
 
 
 chip_r.vst: adder.vst
-	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
+	-$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
 
 chip_r.ap: chip_r.vst
 

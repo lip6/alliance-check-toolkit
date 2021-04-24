@@ -5,6 +5,7 @@
 
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
+             USE_VALGRIND = No
                  USE_KITE = No
                   RM_CHIP = Yes
 
