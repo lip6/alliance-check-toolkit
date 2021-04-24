@@ -1,4 +1,8 @@
 
+ ifneq ($(PDKMASTER_TOP),)
+     export NDA_TOP = $(PDKMASTER_TOP)/coriolis/techno
+ endif
+
  include ./mk/os.mk
  include ./mk/users.mk
  include ./mk/binaries.mk
@@ -26,6 +30,8 @@
    include ./mk/dks.d/c35b4.mk
  else ifeq ($(DESIGN_KIT),FlexLib018)
    include ./mk/dks.d/FlexLib018.mk
+ else ifeq ($(DESIGN_KIT),FreePDK_C4M45)
+   include ./mk/dks.d/FreePDK_C4M45.mk
  else
    $(error DESIGN_KIT variable has not been set or has an unsupported value)
  endif

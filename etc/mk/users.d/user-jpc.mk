@@ -1,9 +1,11 @@
 # Where Jean-Paul Chaput gets his tools installeds.
 
- ifeq ($(shell hostname),lepka)
-     export NDA_TOP       = ${HOME}/crypted/soc/techno
- else
-     export NDA_TOP       = /users/soft/techno/techno
+ ifeq ($(NDA_TOP),)
+     ifeq ($(shell hostname),lepka)
+         export NDA_TOP = ${HOME}/crypted/soc/techno
+     else
+         export NDA_TOP = /users/soft/techno/techno
+     endif
  endif
  export AMS_C35B4     = ${NDA_TOP}/AMS/035hv-4.10
  export FreePDK_45    = ${HOME}/coriolis-2.x/work/DKs/FreePDK45
