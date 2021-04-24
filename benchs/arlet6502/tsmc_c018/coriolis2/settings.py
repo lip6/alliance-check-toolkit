@@ -20,17 +20,18 @@ helpers.setNdaTopDir( NdaDirectory )
 import Cfg
 from   CRL     import AllianceFramework
 from   helpers import overlay, l, u, n
-from   NDA.node180.tsmc_c018 import techno, FlexLib, LibreSOCIO, LibreSOCMem
+from   NDA.node180.tsmc_c018 import techno, FlexLib, LibreSOCIO, LibreSOCMem #, pll
 
 techno.setup()
 FlexLib.setup()
 LibreSOCIO.setup()
 LibreSOCMem.setup()
+#pll.setup()
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False
-    cfg.misc.minTraceLevel       = 14700
-    cfg.misc.maxTraceLevel       = 14800
+    cfg.misc.minTraceLevel       = 10100
+    cfg.misc.maxTraceLevel       = 10200
     cfg.misc.info                = False
     cfg.misc.paranoid            = False
     cfg.misc.bug                 = False

@@ -24,8 +24,9 @@ def scriptMain ( **kw ):
         if not gdsLib:
             print 'Creating GDS library.'
             gdsLib = Library.create( rootLib, 'GDS' )
-        cell = Cell.create( gdsLib, 'quad_reference' )
-        CRL.Gds.load( gdsLib, './quad_reference.gds' )
+       #cell = Cell.create( gdsLib, 'quad_reference' )
+        CRL.Gds.load( gdsLib, './PLL.gds' )
+        cell = gdsLib.getCell( 'gds_PLL' )
         #cell = Cell.create( gdsLib, 'inv_x1' )
         #CRL.Gds.load( gdsLib, './inv_x1.gds' )
         if editor: editor.setCell( cell )

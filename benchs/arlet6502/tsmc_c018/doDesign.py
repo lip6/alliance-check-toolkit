@@ -143,7 +143,7 @@ def scriptMain ( **kw ):
         # This is very suspicious.
         # 33 is minimum for obstacle density           -> ~ 25% free space.
         # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
-        arlet6502Conf.coreSize            = ( u(34*13.0), u(34*13.0) )
+        arlet6502Conf.coreSize            = ( u(35*13.0), u(34*13.0) )
         arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
         if buildChip:
             arlet6502ToChip = CoreToChip( arlet6502Conf )

@@ -10,8 +10,8 @@
                      CHIP = chip
                   RM_CHIP = Yes
                  NETLISTS = Arlet6502 \
-                            alu       \
-                            cpu
+                            cmpt_alu  \
+                            cmpt_cpu
 
  include ./mk/design-flow.mk
 
