@@ -32,12 +32,12 @@ def doIoPowerCap ( flags ):
     if flags & IoPin.A_BEGIN:
         ioPadPower = [ (side , None,    'power_{}'.format(powerCount),   'vdd' )
                      , (side , None,   'ground_{}'.format(powerCount),   'vss' )
-                     , (side , None, 'ioground_{}'.format(powerCount), 'iovss' )
+                     , (side , None, 'ioground_{}'.format(powerCount),   'vss' )
                      , (side , None,  'iopower_{}'.format(powerCount), 'iovdd' )
                      ]
     else:
         ioPadPower = [ (side , None,  'iopower_{}'.format(powerCount), 'iovdd' )
-                     , (side , None, 'ioground_{}'.format(powerCount), 'iovss' )
+                     , (side , None, 'ioground_{}'.format(powerCount),   'vss' )
                      , (side , None,   'ground_{}'.format(powerCount),   'vss' )
                      , (side , None,    'power_{}'.format(powerCount),   'vdd' )
                      ]

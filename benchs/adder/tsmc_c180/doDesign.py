@@ -24,7 +24,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
+        helpers.setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 99 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -42,12 +42,12 @@ def scriptMain ( **kw ):
                      , (IoPin.WEST , None    , 'b_1'        , 'b(1)'   , 'b(1)'  )
                      , (IoPin.WEST , None    , 'b_2'        , 'b(2)'   , 'b(2)'  )
                      , (IoPin.WEST , None    , 'b_3'        , 'b(3)'   , 'b(3)'  )
-                     , (IoPin.WEST , None    , 'ioground_0' , 'iovss'  )
+                     , (IoPin.WEST , None    , 'ioground_0' , 'vss'    )
                      , (IoPin.WEST , None    , 'iopower_0'  , 'iovdd'  )
                      , (IoPin.SOUTH, None    , 'iopower_1'  , 'iovdd'  )
-                     , (IoPin.SOUTH, None    , 'ioground_1' , 'iovss'  )
+                     , (IoPin.SOUTH, None    , 'ioground_1' , 'vss'    )
                      , (IoPin.EAST , None    , 'iopower_2'  , 'iovdd'  )
-                     , (IoPin.EAST , None    , 'ioground_2' , 'iovss'  )
+                     , (IoPin.EAST , None    , 'ioground_2' , 'vss'    )
                      , (IoPin.EAST , None    , 'f_0'        , 'f(0)'   , 'f(0)'   )
                      , (IoPin.EAST , None    , 'f_1'        , 'f(1)'   , 'f(1)'   )
                      , (IoPin.EAST , None    , 'f_2'        , 'f(2)'   , 'f(2)'   )
