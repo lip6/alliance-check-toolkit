@@ -110,7 +110,7 @@ def scriptMain ( **kw ):
        #ioPinsSpec = []
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         arlet6502Conf.cfg.viewer.pixelThreshold       = 5
-        arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
+        arlet6502Conf.cfg.etesian.bloat               = 'Flexlib'
         arlet6502Conf.cfg.etesian.uniformDensity      = True
         arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
@@ -152,13 +152,10 @@ def scriptMain ( **kw ):
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
-            CRL.Gds.save( arlet6502Conf.corona )
-            CRL.Gds.save( arlet6502Conf.chip )
         else:
             blockBuilder = Block( arlet6502Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-            CRL.Gds.save( arlet6502Conf.cell )
     except Exception, e:
         helpers.io.catch( e )
         rvalue = False

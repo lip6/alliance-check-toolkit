@@ -148,7 +148,7 @@ def scriptMain ( **kw ):
        #ioPinsSpec = []
         ao68000Conf = ChipConf( cell, ioPins=[], ioPads=ioPadsSpec ) 
         ao68000Conf.cfg.viewer.pixelThreshold       = 5
-        ao68000Conf.cfg.etesian.bloat               = 'nsxlib'
+        ao68000Conf.cfg.etesian.bloat               = 'Flexlib'
         ao68000Conf.cfg.etesian.uniformDensity      = True
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
@@ -182,7 +182,7 @@ def scriptMain ( **kw ):
         # 33 is minimum for obstacle density           -> ~ 25% free space.
         # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
         if buildChip:
-            ao68000Conf.coreSize = ( u(110*13.0          ), u(120*13.0          ) )
+            ao68000Conf.coreSize = ( u(130*13.0          ), u(120*13.0          ) )
             ao68000Conf.chipSize = ( u( 40*90.0 + 2*214.0), u( 40*90.0 + 2*214.0) )
             ao68000ToChip = CoreToChip( ao68000Conf )
             ao68000ToChip.buildChip()
@@ -190,13 +190,10 @@ def scriptMain ( **kw ):
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
-            CRL.Gds.save( ao68000Conf.corona )
-            CRL.Gds.save( ao68000Conf.chip )
         else:
             blockBuilder = Block( ao68000Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-            CRL.Gds.save( ao68000Conf.cell )
     except Exception, e:
         helpers.io.catch( e )
         rvalue = False

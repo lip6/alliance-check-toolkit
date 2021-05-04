@@ -24,7 +24,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-        helpers.setTraceLevel( 550 )
+       #helpers.setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 99 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -64,7 +64,7 @@ def scriptMain ( **kw ):
        #ioPinsSpec = []
         adderConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         adderConf.cfg.viewer.pixelThreshold       = 5
-        adderConf.cfg.etesian.bloat               = 'nsxlib'
+        adderConf.cfg.etesian.bloat               = 'Flexlib'
         adderConf.cfg.etesian.uniformDensity      = True
         adderConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
@@ -93,19 +93,16 @@ def scriptMain ( **kw ):
         adderConf.coreSize            = ( u( 130.0), u( 130.0) )
         adderConf.chipSize            = ( u( 700.0), u(1508.0) )
         if buildChip:
-            arlet6502ToChip = CoreToChip( adderConf )
-            arlet6502ToChip.buildChip()
+            adderToChip = CoreToChip( adderConf )
+            adderToChip.buildChip()
             chipBuilder = Chip( adderConf )
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
-            CRL.Gds.save( adderConf.corona )
-            CRL.Gds.save( adderConf.chip )
         else:
             blockBuilder = Block( adderConf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-            CRL.Gds.save( adderConf.cell )
     except Exception, e:
         helpers.io.catch( e )
         rvalue = False
