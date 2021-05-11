@@ -197,6 +197,7 @@ def scriptMain ( **kw ):
                     print cell
                     etesian = Etesian.EtesianEngine.create( cell )
                     etesian.place()
+                    etesian.toHurricane()
                     etesian.destroy()
             if editor: editor.refresh()
             plugins.rsave.scriptMain( **kw )
