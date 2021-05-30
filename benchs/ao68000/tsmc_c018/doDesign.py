@@ -176,6 +176,9 @@ def scriptMain ( **kw ):
         ao68000Conf.bRows               = 3
         ao68000Conf.chipName            = 'chip'
         ao68000Conf.chipConf.ioPadGauge = 'LibreSOCIO'
+        ao68000Conf.useHTree( 'clk_i_from_pad' )
+        ao68000Conf.useHTree( 'reset_n_from_pad' )
+        ao68000Conf.useHTree( 'reset_o_to_pad' )
         # 29 is minimum with everything disabled       -> ~  6% free space.
         # Can really be reached when running the P&R on the sole block.
         # This is very suspicious.

@@ -134,8 +134,8 @@ def scriptMain ( **kw ):
         arlet6502Conf.useSpares           = True
         arlet6502Conf.useClockTree        = True
         arlet6502Conf.useHFNS             = True
-        arlet6502Conf.bColumns            = 2
-        arlet6502Conf.bRows               = 2
+        arlet6502Conf.bColumns            = 3
+        arlet6502Conf.bRows               = 3
         arlet6502Conf.chipName            = 'chip'
         arlet6502Conf.chipConf.ioPadGauge = 'LibreSOCIO'
         # 29 is minimum with everything disabled       -> ~  6% free space.
@@ -143,8 +143,11 @@ def scriptMain ( **kw ):
         # This is very suspicious.
         # 33 is minimum for obstacle density           -> ~ 25% free space.
         # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
-        arlet6502Conf.coreSize            = ( u(35*13.0), u(34*13.0) )
+        arlet6502Conf.coreSize            = ( u(36*13.0), u(36*13.0) )
         arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
+        arlet6502Conf.useHTree( 'clk_from_pad' )
+        arlet6502Conf.useHTree( 'reset_from_pad' )
+        arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
             arlet6502ToChip = CoreToChip( arlet6502Conf )
             arlet6502ToChip.buildChip()

@@ -43,4 +43,4 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.katana.eventsLimit       = 4000000
     af  = AllianceFramework.get()
     env = af.getEnvironment()
-    env.setCLOCK( '^clk|^reset' )
+    env.setCLOCK( '^clk' )
