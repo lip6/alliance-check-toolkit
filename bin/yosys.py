@@ -92,7 +92,8 @@ class Yosys ( object ):
             for block in self.blocks:
                 if len(blocks) > 0: blocks += ' '
                 blocks += block
-        tclScript += 'yosys dfflibmap -liberty    {libertyFile}\n' \
+        tclScript += 'yosys memory\n'                              \
+                     'yosys dfflibmap -liberty    {libertyFile}\n' \
                      'yosys abc       -liberty    {libertyFile}\n' \
                      'yosys clean\n'                               \
                      'yosys write_blif {designName}.blif\n'
