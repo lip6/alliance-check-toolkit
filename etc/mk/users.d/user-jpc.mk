@@ -3,6 +3,8 @@
  ifeq ($(NDA_TOP),)
      ifeq ($(shell hostname),lepka)
          export NDA_TOP = ${HOME}/crypted/soc/techno
+     else ($(shell hostname),rolland)
+         export NDA_TOP = ${HOME}/crypted/soc/techno
      else
          export NDA_TOP = /users/soft/techno/techno
      endif

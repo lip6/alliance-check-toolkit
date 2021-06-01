@@ -9,7 +9,7 @@ if os.environ.has_key('NDA_TOP'):
     NdaDirectory = os.environ['NDA_TOP']
 if not NdaDirectory:
     hostname = socket.gethostname()
-    if hostname.startswith('lepka'):
+    if hostname.startswith('lepka') or hostname.startswith('rolland'):
         NdaDirectory = '/dsk/l1/jpc/crypted/soc/techno'
         if not os.path.isdir(NdaDirectory):
             print '[ERROR] You forgot to mount the NDA encrypted directory, stupid!'
