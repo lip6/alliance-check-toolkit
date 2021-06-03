@@ -1,12 +1,12 @@
 
+                USE_DEBUG = No
+             USE_VALGRIND = No
+
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = FlexLib018
 
             USE_CLOCKTREE = Yes
-                USE_DEBUG = No
-             USE_VALGRIND = No
-
             YOSYS_FLATTEN = ao68000
                      CHIP = chip
                   RM_CHIP = Yes

@@ -56,14 +56,18 @@
  DEBUG_OPTION   = 
  BUILD_TYPE_DIR = Release.Shared
  ifeq ($(USE_DEBUG),Yes)
+   $(info Running in debug mode (4x slower) (USE_DEBUG="$(USE_DEBUG)").)
    DEBUG_OPTION   = --debug
    BUILD_TYPE_DIR = Debug.Shared
+ else
+   $(info Running in normal mode (USE_DEBUG="$(USE_DEBUG)").)
  endif
 
  VALGRIND_COMMAND =
  ifeq ($(USE_VALGRIND),Yes)
-   VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --track-origins=yes --trace-children=yes
+  #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --track-origins=yes --trace-children=yes
   #VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes --free-fill=0xff
+   VALGRIND_COMMAND = valgrind --keep-stacktraces=alloc-and-free --read-var-info=yes --trace-children=yes
  endif
 
 
