@@ -1,0 +1,50 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Jun 04, 2021, 13:12
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity wrappll is
+  port ( a0                  : in bit
+       ; a1                  : in bit
+       ; ref_v               : in bit
+       ; div_out_test        : out bit
+       ; out_v               : out bit
+       ; vco_test_ana        : out bit
+       ; vdd                 : in bit
+       ; vss                 : in bit
+       );
+end wrappll;
+
+architecture structural of wrappll is
+
+component pll
+  port ( a0                  : in bit
+       ; a1                  : in bit
+       ; ref_v               : in bit
+       ; div_out_test        : out bit
+       ; out_v               : out bit
+       ; vco_test_ana        : out bit
+       ; vdd                 : in bit
+       ; vss                 : in bit
+       );
+end component;
+
+begin
+
+  subckt_0_pll : pll
+  port map ( a0           => a0
+           , a1           => a1
+           , ref_v        => ref_v
+           , div_out_test => div_out_test
+           , out_v        => out_v
+           , vco_test_ana => vco_test_ana
+           , vdd          => vdd
+           , vss          => vss
+           );
+
+end structural;
+
