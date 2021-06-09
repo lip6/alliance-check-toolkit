@@ -185,7 +185,7 @@ def scriptMain ( **kw ):
         # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
         if buildChip:
             ao68000Conf.coreSize = ( u(130*13.0          ), u(120*13.0          ) )
-            ao68000Conf.chipSize = ( u( 40*90.0 + 2*214.0), u( 40*90.0 + 2*214.0) )
+            ao68000Conf.chipSize = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
             ao68000ToChip = CoreToChip( ao68000Conf )
             ao68000ToChip.buildChip()
             chipBuilder = Chip( ao68000Conf )
