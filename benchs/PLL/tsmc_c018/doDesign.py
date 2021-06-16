@@ -161,8 +161,13 @@ def scriptMain (**kw):
         pllConf.bRows = 2
         pllConf.chipConf.name = 'chip'
         pllConf.chipConf.ioPadGauge = 'LibreSOCIO'
-        pllConf.coreSize = (coreSizeX, coreSizeY)
-        pllConf.chipSize = (coreSizeX + chipBorder + u(5.0), coreSizeY + chipBorder - u(0.04) )
+        pllConf.coreSize  = (coreSizeX, coreSizeY)
+        pllConf.chipSize  = (coreSizeX + chipBorder + u(5.0), coreSizeY + chipBorder - u(0.04) )
+        pllConf.chipLogos = [ 'C4MLogo_norm'
+                            , 'libresoc_logo_norm'
+                            , 'sorbonne_logo_norm'
+                            , 'lip6_norm'
+                            ]
 
         pllToChip = CoreToChip( pllConf )
         pllToChip.buildChip()
