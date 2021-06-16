@@ -71,7 +71,6 @@ proof-%: %.vbe %_yag.vhd
               *.xsc                     \
               *.al                      \
               *.drc                     \
-              *.gds                     \
               *.cif                     \
               alldata.dat               \
               *_cts*                    \
@@ -95,7 +94,7 @@ proof-%: %.vbe %_yag.vhd
  ifneq ($(CHIP),)
    CLEAN_CHIP += $(CHIP).ap corona.vst corona.ap
    ifeq ($(RM_CHIP),Yes)
-     CLEAN_CHIP += $(CHIP).vst
+     CLEAN_CHIP += $(CHIP).vst $(CHIP).gds $(CHIP)_r.gds
    endif
  endif
 
