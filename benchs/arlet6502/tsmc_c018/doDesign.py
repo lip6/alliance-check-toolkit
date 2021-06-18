@@ -147,7 +147,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
         arlet6502Conf.useHTree( 'clk_from_pad' )
         arlet6502Conf.useHTree( 'reset_from_pad' )
-        arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
+        #arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
             arlet6502ToChip = CoreToChip( arlet6502Conf )
             arlet6502ToChip.buildChip()

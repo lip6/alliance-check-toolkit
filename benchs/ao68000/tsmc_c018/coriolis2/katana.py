@@ -20,3 +20,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'dat_i_from_pad(24)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.auto_dfflegalize_cc_346_handle_ff_75107_hfns_0' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.alu_m_result_bit10_hfns_0' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.alu_m_result(11)' ) )
