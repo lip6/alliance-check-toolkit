@@ -122,6 +122,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
+        arlet6502Conf.cfg.katana.trackFill            = 4
         arlet6502Conf.cfg.katana.runRealignStage      = True
         arlet6502Conf.cfg.block.spareSide             = u(7*13)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
