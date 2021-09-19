@@ -1,7 +1,5 @@
-#!/usr/bin/env python
 
 from helpers import l, u, n
-
 
 chip = { 'pads.ioPadGauge' : 'pxlib'
        , 'pads.south'      : [ 'p_cin'    , 'p_np'   , 'p_ng' , 'p_vssick0', 'p_vddeck0', 'p_vsseck1'

@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # This file is part of the Coriolis Software.
-# Copyright (c) SU 2020-2020, All Rights Reserved
+# Copyright (c) SU 2020-2021, All Rights Reserved
 #
 # +-----------------------------------------------------------------+
 # |     A l l i a n c e   C h e c k   T o o l k i t                 |
@@ -14,7 +14,6 @@
 # +-----------------------------------------------------------------+
 
 
-from   __future__ import print_function
 import sys
 import os
 import os.path
@@ -47,7 +46,7 @@ from   helpers.io      import catch
 from   helpers.overlay import UpdateSession
 
 NdaDirectory = None
-if os.environ.has_key('NDA_TOP'):
+if 'NDA_TOP' in os.environ:
     NdaDirectory = os.environ['NDA_TOP']
 if not NdaDirectory:
     hostname = socket.gethostname()
@@ -228,7 +227,7 @@ if __name__ == '__main__':
         for cell in flexiolib.getLibrary().getCells():
             converter = Converter( cell )
             converter.doCell()
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         sys.exit( 1 )
     sys.exit( 0 )

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 try:
@@ -36,22 +36,22 @@ try:
   import helpers
   from   helpers import trace
   from   helpers import ErrorMessage
-except ImportError, e:
+except ImportError as e:
   serror = str(e)
   if serror.startswith('No module named'):
     module = serror.split()[-1]
-    print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
-    print '        Please check the integrity of the <coriolis> package.'
+    print( '[ERROR] The <%s> python module or symbol cannot be loaded.' % module )
+    print( '        Please check the integrity of the <coriolis> package.' )
   if str(e).find('cannot open shared object file'):
     library = serror.split(':')[0]
-    print '[ERROR] The <%s> shared library cannot be loaded.' % library
-    print '        Under RHEL 6, you must be under devtoolset-2.'
-    print '        (scl enable devtoolset-2 bash)'
+    print( '[ERROR] The <%s> shared library cannot be loaded.' % library )
+    print( '        Under RHEL 6, you must be under devtoolset-2.' )
+    print( '        (scl enable devtoolset-2 bash)' )
   sys.exit(1)
-except Exception, e:
-  print '[ERROR] A strange exception occurred while loading the basic Coriolis/Python'
-  print '        modules. Something may be wrong at Python/C API level.\n'
-  print '        %s' % e
+except Exception as e:
+  print( '[ERROR] A strange exception occurred while loading the basic Coriolis/Python' )
+  print( '        modules. Something may be wrong at Python/C API level.\n' )
+  print( '        %s' % e )
   sys.exit(2)
 
 
@@ -84,11 +84,11 @@ def getDeltas ( layer ):
            }
 
   dbuLayerDeltas = ( 0, 0, 0 )
-  if deltas.has_key(layer.getName()):
+  if layer.getName() in deltas:
     deltas         = deltas[ layer.getName() ]
     dbuLayerDeltas = DbU.fromLambda(deltas[0]), DbU.fromLambda(deltas[1]), DbU.fromLambda(deltas[2]) 
   else:
-    print '[WARNING] Layer \"%s\" has no deltas corrections.' % layer.getName()
+    print( '[WARNING] Layer \"%s\" has no deltas corrections.' % layer.getName())
 
   return dbuLayerDeltas
 
@@ -101,7 +101,7 @@ def scaleCell ( editor, sourceCell ):
     raise ErrorMessage( 3, 'scaleCell.scaleCell(): Mandatory sourceCell argument is None.' )
   scaledCell = None
 
-  print '\n  o  Processing', sourceCell
+  print( '\n  o  Processing', sourceCell )
 
   UpdateSession.open()
   try:
@@ -136,8 +136,8 @@ def scaleCell ( editor, sourceCell ):
 
           if     component.getLayer().getName() == 'METAL3' \
              and component.getSourceX() == component.getTargetX():
-            print '[WARNING] Rotating badly oriented METAL3 terminal (H -> V).'
-            print '          %s' % component
+            print( '[WARNING] Rotating badly oriented METAL3 terminal (H -> V).' )
+            print( '          %s' % component )
 
             width = component.getWidth()*scale
             if component.getWidth() <= mW: width += dW
@@ -149,7 +149,7 @@ def scaleCell ( editor, sourceCell ):
                                           , component.getY()*scale - dL
                                           , component.getY()*scale + dL
                                           )
-            print '     |', dupComponent
+            print( '     |', dupComponent )
 
           else:
             if component.getSourceX() > component.getTargetX(): component.invert()
@@ -166,9 +166,9 @@ def scaleCell ( editor, sourceCell ):
                                               , component.getDxSource()*scale - dL
                                               , component.getDxTarget()*scale + dL
                                               )
-              print '     |', dupComponent
+              print( '     |', dupComponent )
             else:
-              print '[WARNING] Horizontal component too small *or* skipped, not converted.'
+              print( '[WARNING] Horizontal component too small *or* skipped, not converted.' )
 
         elif isinstance(component,Vertical):
           mW, dW, dL = getDeltas( component.getLayer() )
@@ -187,20 +187,20 @@ def scaleCell ( editor, sourceCell ):
                                           , component.getDySource()*scale - dL
                                           , component.getDyTarget()*scale + dL
                                           )
-            print '     |', dupComponent
+            print( '     |', dupComponent )
           else:
-            print '[WARNING] Vertical component too small *or* skipped, not converted.'
+            print( '[WARNING] Vertical component too small *or* skipped, not converted.' )
 
         else:
-          print '[WARNING] Unchanged component:', component
+          print( '[WARNING] Unchanged component:', component )
 
         if dupComponent and NetExternalComponents.isExternal( component ):
           NetExternalComponents.setExternal( dupComponent )
 
-  except ErrorMessage, e:
-      print e; errorCode = e.code
-  except Exception, e:
-      print '\n\n', e; errorCode = 1
+  except ErrorMessage as e:
+      print( e ); errorCode = e.code
+  except Exception as e:
+      print( '\n\n', e ); errorCode = 1
       traceback.print_tb(sys.exc_info()[2])
 
   UpdateSession.close()
@@ -222,7 +222,7 @@ def scriptMain ( **kw ):
   scaledDir = framework.getAllianceLibrary(0).getPath()
   alibrary  = framework.getAllianceLibrary(1)
   if not alibrary:
-    print '[ERROR] No Library at index 1, please check SYSTEM_LIBRARY in settings.py.'
+    print( '[ERROR] No Library at index 1, please check SYSTEM_LIBRARY in settings.py.' )
     return 1
 
   hasCatal = False
@@ -234,35 +234,35 @@ def scriptMain ( **kw ):
     if file[-3:] ==   '.ap': apCount  += 1
 
   if hasCatal or vbeCount or apCount:
-    print '[ERROR] Target directory already contains CATAL/.vbe/.ap files.'
-    print '        You must remove them before proceeding with this script.'
-    print '        (%s)' % scaledDir
+    print( '[ERROR] Target directory already contains CATAL/.vbe/.ap files.' )
+    print( '        You must remove them before proceeding with this script.' )
+    print( '        (%s)' % scaledDir )
     return 1
 
   sourceCell = None
-  if kw.has_key('cell') and kw['cell']:
+  if 'cell' in kw and kw['cell']:
     sourceCell = kw['cell']
 
   editor = None
-  if kw.has_key('editor') and kw['editor']:
+  if 'editor' in kw and kw['editor']:
     editor = kw['editor']
-    print '  o  Editor detected, running in graphic mode.'
+    print( '  o  Editor detected, running in graphic mode.' )
     if sourceCell == None: sourceCell = editor.getCell()
 
   if sourceCell:
     scaledCell = scaleCell( editor, sourceCell )
   else:
-    print '  o  Processing library "%s".' % alibrary.getLibrary().getName() 
-    print '     (path:%s)'                % alibrary.getPath()
+    print( '  o  Processing library "%s".' % alibrary.getLibrary().getName() )
+    print( '     (path:%s)'                % alibrary.getPath() )
     framework.loadLibraryCells( alibrary.getLibrary() )
     for sourceCell in alibrary.getLibrary().getCells():
       scaledCell = scaleCell( editor, sourceCell )
 
-    print ''
-    print '  o  Direct copy of ".vbe" & CATAL files.'
+    print( '' )
+    print( '  o  Direct copy of ".vbe" & CATAL files.' )
     for file in os.listdir( alibrary.getPath() ):
       if file == 'CATAL' or file[-4:] == '.vbe':
-        print '     | %s' % file
+        print( '     | %s' % file )
         shutil.copy( alibrary.getPath()+'/'+file, scaledDir )
       
   return 0
@@ -281,7 +281,7 @@ if __name__ == '__main__':
   if options.verbose:     Cfg.getParamBool('misc.verboseLevel1').setBool(True)
   if options.veryVerbose: Cfg.getParamBool('misc.verboseLevel2').setBool(True)
 
-  print framework.getEnvironment().getPrint()
+  print( framework.getEnvironment().getPrint() )
 
   success = scriptMain( **kw )
   shellSuccess = 0

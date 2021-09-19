@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 try:
   import sys
@@ -35,22 +35,22 @@ try:
   import helpers
   from   helpers    import trace
   from   helpers.io import ErrorMessage
-except ImportError, e:
+except ImportError as e:
   serror = str(e)
   if serror.startswith('No module named'):
     module = serror.split()[-1]
-    print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
-    print '        Please check the integrity of the <coriolis> package.'
+    print( '[ERROR] The <%s> python module or symbol cannot be loaded.' % module )
+    print( '        Please check the integrity of the <coriolis> package.' )
   if str(e).find('cannot open shared object file'):
     library = serror.split(':')[0]
-    print '[ERROR] The <%s> shared library cannot be loaded.' % library
-    print '        Under RHEL 6, you must be under devtoolset-2.'
-    print '        (scl enable devtoolset-2 bash)'
+    print( '[ERROR] The <%s> shared library cannot be loaded.' % library )
+    print( '        Under RHEL 6, you must be under devtoolset-2.')
+    print( '        (scl enable devtoolset-2 bash)' )
   sys.exit(1)
-except Exception, e:
-  print '[ERROR] A strange exception occurred while loading the basic Coriolis/Python'
-  print '        modules. Something may be wrong at Python/C API level.\n'
-  print '        %s' % e
+except Exception as e:
+  print( '[ERROR] A strange exception occurred while loading the basic Coriolis/Python' )
+  print( '        modules. Something may be wrong at Python/C API level.\n' )
+  print( '        %s' % e )
   sys.exit(2)
 
 
@@ -70,7 +70,7 @@ def patch ( editor, cell ):
     raise ErrorMessage( 3, 'correctM1Cap.patch(): Mandatory cell argument is None.' )
   patchedCell = None
 
-  print '\n  o  Processing', cell
+  print( '\n  o  Processing', cell )
 
   UpdateSession.open()
   try:
@@ -87,32 +87,32 @@ def patch ( editor, cell ):
 
         yMin = component.getSourceY()
         if yMin < 0:
-          print '[ERROR] Negative source Y for %s, skipped.' % component
+          print( '[ERROR] Negative source Y for %s, skipped.' % component )
         else:
           modulo = yMin % hPitch
           if (modulo <= oneLambda):
             component.setDySource( yMin - modulo )
-            print '     | Source cap adjusted (was above):', component
+            print( '     | Source cap adjusted (was above):', component )
           if (modulo >= 4 * oneLambda):
             component.setDySource( yMin + hPitch - modulo )
-            print '     | Source cap adjusted (was below):', component
+            print( '     | Source cap adjusted (was below):', component )
 
         yMax = component.getTargetY()
         if yMax < 0:
-          print '[ERROR] Negative target Y for %s, skipped.' % component
+          print( '[ERROR] Negative target Y for %s, skipped.' % component )
         else:
           modulo = yMax % hPitch
           if (hPitch - modulo <= oneLambda):
             component.setDyTarget( yMax + (hPitch - modulo) )
-            print '     | Target cap adjusted (was above):', component
+            print( '     | Target cap adjusted (was above):', component )
           if (modulo <= 4 * oneLambda):
             component.setDyTarget( yMax - modulo )
-            print '     | Target cap adjusted (was below):', component
+            print( '     | Target cap adjusted (was below):', component )
 
-  except ErrorMessage, e:
-      print e; errorCode = e.code
-  except Exception, e:
-      print '\n\n', e; errorCode = 1
+  except ErrorMessage as e:
+      print( e ); errorCode = e.code
+  except Exception as e:
+      print( '\n\n', e ); errorCode = 1
       traceback.print_tb(sys.exc_info()[2])
 
   UpdateSession.close()
@@ -133,7 +133,7 @@ def scriptMain ( **kw ):
   patchedLib = framework.getAllianceLibrary(0).getPath()
   alibrary   = framework.getAllianceLibrary(1)
   if not alibrary:
-    print '[ERROR] No Library at index 1, please check SYSTEM_LIBRARY in settings.py.'
+    print( '[ERROR] No Library at index 1, please check SYSTEM_LIBRARY in settings.py.' )
     return 1
 
   hasCatal = False
@@ -145,35 +145,35 @@ def scriptMain ( **kw ):
     if file[-3:] ==   '.ap': apCount  += 1
 
   if hasCatal or vbeCount or apCount:
-    print '[ERROR] Target directory already contains CATAL/.vbe/.ap files.'
-    print '        You must remove them before proceeding with this script.'
-    print '        (%s)' % patchedLib
+    print( '[ERROR] Target directory already contains CATAL/.vbe/.ap files.' )
+    print( '        You must remove them before proceeding with this script.' )
+    print( '        (%s)' % patchedLib )
     return 1
 
   cell = None
-  if kw.has_key('cell') and kw['cell']:
+  if 'cell' in kw and kw['cell']:
     cell = kw['cell']
 
   editor = None
-  if kw.has_key('editor') and kw['editor']:
+  if 'editor' in kw and kw['editor']:
     editor = kw['editor']
-    print '  o  Editor detected, running in graphic mode.'
+    print( '  o  Editor detected, running in graphic mode.' )
     if cell == None: cell = editor.getCell()
 
   if cell:
     patchedCell = patch( editor, cell )
   else:
-    print '  o  Processing library "%s".' % alibrary.getLibrary().getName() 
-    print '     (path:%s)'                % alibrary.getPath()
+    print( '  o  Processing library "%s".' % alibrary.getLibrary().getName() )
+    print( '     (path:%s)'                % alibrary.getPath() )
     framework.loadLibraryCells( alibrary.getLibrary() )
     for cell in alibrary.getLibrary().getCells():
       patchedCell = patch( editor, cell )
 
-    print ''
-    print '  o  Direct copy of ".vbe" & CATAL files.'
+    print( '' )
+    print( '  o  Direct copy of ".vbe" & CATAL files.' )
     for file in os.listdir( alibrary.getPath() ):
       if file == 'CATAL' or file[-4:] == '.vbe':
-        print '     | %s' % file
+        print( '     | %s' % file )
         shutil.copy( alibrary.getPath()+'/'+file, patchedLib )
       
   return 0
@@ -192,7 +192,7 @@ if __name__ == '__main__':
   if options.verbose:     Cfg.getParamBool('misc.verboseLevel1').setBool(True)
   if options.veryVerbose: Cfg.getParamBool('misc.verboseLevel2').setBool(True)
 
-  print framework.getEnvironment().getPrint()
+  print( framework.getEnvironment().getPrint() )
 
   success = scriptMain( **kw )
   shellSuccess = 0

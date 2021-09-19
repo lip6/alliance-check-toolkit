@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
 
     rvalue = True
     try:
-       #helpers.setTraceLevel( 550 )
+        helpers.setTraceLevel( 550 )
         cell, editor = plugins.kwParseMain( **kw )
 
         cell = af.getCell( 'ao68000', CRL.Catalog.State.Logical )
@@ -72,7 +72,7 @@ def scriptMain ( **kw ):
         ao68000.state.useSpares    = True
         ao68000.state.useClockTree = True
         ao68000.state.bColumns     = 4
-        ao68000.state.bRows        = 4
+        ao68000.state.bRows        = 5
         rvalue = ao68000.build()
     except Exception, e:
         helpers.io.catch( e )

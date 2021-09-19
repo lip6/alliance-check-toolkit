@@ -24,14 +24,16 @@
  include ./mk/design-flow.mk
 
 
-am2901_r.vst: coeur.vst
+CLEAN_CUSTOM = $(foreach ext, .vst .spi, $(addsuffix $(ext),$(NETLISTS)))
+
+$(CHIP)_r.vst: coeur.vst $(NETLISTS_VST)
 	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
 
-am2901_r.ap: am2901_r.vst
+$(CHIP)_r.ap: $(CHIP)_r.vst
 
-lvx:     lvx-am2901_r
-druc:    druc-am2901_r
-view:    cgt-am2901_r
+lvx:     lvx-$(CHIP)_r
+druc:    druc-$(CHIP)_r
+view:    cgt-$(CHIP)_r
 
-layout:  am2901_r.ap
-gds:     am2901_r.gds
+layout:  $(CHIP)_r.ap
+gds:     $(CHIP)_r.gds

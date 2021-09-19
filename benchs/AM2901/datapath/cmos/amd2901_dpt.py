@@ -1,26 +1,26 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 try:
   import sys
   from   helpers import l
   from   stratus import *
-except ImportError, e:
+except ImportError as e:
   serror = str(e)
   if serror.startswith('No module named'):
     module = serror.split()[-1]
-    print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
-    print '        Please check the integrity of the <coriolis> package.'
+    print( '[ERROR] The "{}" python module or symbol cannot be loaded.'.format(module) )
+    print( '        Please check the integrity of the "coriolis" package.' )
     sys.exit(1)
   if str(e).find('cannot open shared object file'):
     library = serror.split(':')[0]
-    print '[ERROR] The <%s> shared library cannot be loaded.' % library
-    print '        Under RHEL 6, you must be under devtoolset-2.'
-    print '        (scl enable devtoolset-2 bash)'
+    print( '[ERROR] The "{}" shared library cannot be loaded.'.format(library) )
+    print( '        Under RHEL 6, you must be under devtoolset-2.' )
+    print( '        (scl enable devtoolset-2 bash)' )
   sys.exit(1)
-except Exception, e:
-  print '[ERROR] A strange exception occurred while loading the basic Coriolis/Python'
-  print '        modules. Something may be wrong at Python/C API level.\n'
-  print '        %s' % e
+except Exception as e:
+  print( '[ERROR] A strange exception occurred while loading the basic Coriolis/Python' )
+  print( '        modules. Something may be wrong at Python/C API level.\n' )
+  print( '        {}'.format(e) )
   sys.exit(2)
 
 
@@ -477,7 +477,7 @@ class amd2901_dpt ( Model ) :
 
 
 def scriptMain ( **kw ):
-  if kw.has_key('editor') and kw['editor']: setEditor( kw['editor'] )
+  if 'editor' in kw and kw['editor']: setEditor( kw['editor'] )
 
   datapath = amd2901_dpt( "amd2901_dpt" )
 

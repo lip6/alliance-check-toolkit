@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import sys
@@ -25,7 +25,7 @@ import Unicorn
 
 def scriptMain ( **kw ):
   editor = None
-  if kw.has_key('editor') and kw['editor']:
+  if 'editor' in kw and kw['editor']:
     editor = kw['editor']
 
   cell = CRL.AllianceFramework.get().getCell( 'mips_core_flat', CRL.Catalog.State.Views )

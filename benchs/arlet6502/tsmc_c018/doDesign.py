@@ -1,5 +1,4 @@
 
-from   __future__ import print_function
 import sys
 import traceback
 import CRL
@@ -11,6 +10,7 @@ import plugins
 from   Hurricane  import DbU, Breakpoint
 from   plugins.alpha.block.block          import Block
 from   plugins.alpha.block.configuration  import IoPin, GaugeConf
+from   plugins.alpha.block.spares         import Spares
 from   plugins.alpha.core2chip.libresocio import CoreToChip
 from   plugins.alpha.chip.configuration   import ChipConf
 from   plugins.alpha.chip.chip            import Chip
@@ -24,7 +24,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 550 )
+       #helpers.setTraceLevel( 540 )
        #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -122,7 +122,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
-        arlet6502Conf.cfg.katana.trackFill            = 4
+        arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = True
         arlet6502Conf.cfg.block.spareSide             = u(7*13)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
@@ -146,7 +146,7 @@ def scriptMain ( **kw ):
         # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
         arlet6502Conf.coreSize            = ( u(36*13.0), u(36*13.0) )
         arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
-        arlet6502Conf.useHTree( 'clk_from_pad' )
+        arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
         arlet6502Conf.useHTree( 'reset_from_pad' )
         #arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
@@ -160,9 +160,10 @@ def scriptMain ( **kw ):
             blockBuilder = Block( arlet6502Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    return rvalue
+    shellRValue = 0 if rvalue else 1
+    sys.exit( shellRValue )

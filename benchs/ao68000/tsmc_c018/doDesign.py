@@ -1,5 +1,4 @@
 
-from   __future__ import print_function
 import sys
 import traceback
 import collections
@@ -12,6 +11,7 @@ import plugins
 from   Hurricane  import DbU, Breakpoint
 from   plugins.alpha.block.block          import Block
 from   plugins.alpha.block.configuration  import IoPin, GaugeConf
+from   plugins.alpha.block.spares         import Spares
 from   plugins.alpha.core2chip.libresocio import CoreToChip
 from   plugins.alpha.chip.configuration   import ChipConf
 from   plugins.alpha.chip.chip            import Chip
@@ -176,7 +176,7 @@ def scriptMain ( **kw ):
         ao68000Conf.bRows               = 3
         ao68000Conf.chipName            = 'chip'
         ao68000Conf.chipConf.ioPadGauge = 'LibreSOCIO'
-        ao68000Conf.useHTree( 'clk_i_from_pad' )
+        ao68000Conf.useHTree( 'clk_i_from_pad', Spares.HEAVY_LEAF_LOAD )
         ao68000Conf.useHTree( 'reset_n_from_pad' )
         # 29 is minimum with everything disabled       -> ~  6% free space.
         # Can really be reached when running the P&R on the sole block.
@@ -196,9 +196,10 @@ def scriptMain ( **kw ):
             blockBuilder = Block( ao68000Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    return rvalue
+    shellRValue = 0 if rvalue else 1
+    sys.exit( shellRValue )

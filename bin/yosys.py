@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-from   __future__ import print_function
 import sys
 import os
 import os.path
@@ -138,7 +137,7 @@ if __name__ == '__main__':
         if options.liberty: yosys.setLiberty( options.liberty )
         if blackboxes:      yosys.setBlackboxes( blackboxes )
         rcode = yosys.run( options.design, top=options.top )
-    except Exception, e:
+    except Exception as e:
         catch( e )
         sys.exit(2)
     

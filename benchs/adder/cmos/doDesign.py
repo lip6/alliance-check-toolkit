@@ -1,5 +1,4 @@
 
-from   __future__ import print_function
 import sys
 import traceback
 import CRL
@@ -23,7 +22,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-        #helpers.setTraceLevel( 540 )
+        #helpers.setTraceLevel( 550 )
         #Breakpoint.setStopLevel( 100 )
         usePadsPosition = True
         buildChip       = True
@@ -111,7 +110,7 @@ def scriptMain ( **kw ):
             blockBuilder = Block( adderConf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         rvalue = False
     sys.stdout.flush()

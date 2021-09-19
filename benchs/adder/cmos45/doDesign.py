@@ -1,5 +1,4 @@
 
-from   __future__ import print_function
 import sys
 import traceback
 import CRL
@@ -79,7 +78,7 @@ def scriptMain ( **kw ):
         chipBuilder.doChipFloorplan()
         rvalue = chipBuilder.doPnR()
         chipBuilder.save()
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         rvalue = False
     sys.stdout.flush()

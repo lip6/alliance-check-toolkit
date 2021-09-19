@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 enableProfiling = False
 
@@ -36,10 +36,10 @@ try:
         import numpy      as     np
         from   matplotlib import pyplot
         from   matplotlib import ticker
-except ImportError, e:
+except ImportError as e:
     showPythonTrace( __file__, e, False )
     sys.exit(1)
-except Exception, e:
+except Exception as e:
     showPythonTrace( __file__, e )
     sys.exit(2)
 
@@ -54,7 +54,7 @@ ProfileRouter = 0x0040
 ChipStages    = DoChip|DoPlacement|DoRouting
 
 framework     = CRL.AllianceFramework.create(0)
-print framework.getEnvironment().getPrint()
+print( framework.getEnvironment().getPrint() )
 
 technoName = Hurricane.DataBase.getDB().getTechnology().getName()
 coreToChip = None
@@ -143,30 +143,24 @@ def scriptMain ( **kw ):
     success  = False
     doStages = kw['doStages']
     views    = kw['views']
-    
     try:
         cell, editor = plugins.kwParseMain( **kw )
         corona       = None
         chip         = None 
-        
         if doStages & GenerateChip:
-            print '  o  Technology selected for I/O pad ring: %s.' % technoName
+            print( '  o  Technology selected for I/O pad ring: "{}".'.format(technoName) )
             if technoName == 'cmos':       success = plugins.core2chip_cmos   .scriptMain( **kw )
             if technoName == 'c35b4':      success = plugins.core2chip_c35b4  .scriptMain( **kw )
             if technoName == 'phenitec06': success = plugins.core2chip_phlib80.scriptMain( **kw )
             if not success: return False
-            
             for instance in cell.getSlaveInstances():
                 corona = instance.getCell()
                 break
-            
             for instance in corona.getSlaveInstances():
                 chip = instance.getCell()
                 break
-            
             cell         = chip
             kw[ 'cell' ] = cell
-        
         if doStages & DoPlacement:
             if doStages & DoChip:
                 chip    = cell
@@ -180,7 +174,7 @@ def scriptMain ( **kw ):
                         corona = cell
                     
                 if not corona:          
-                    print '[ERROR] Cannot guess the corona instance/model, must contains the word "corona"...'
+                    print( '[ERROR] Cannot guess the corona instance/model, must contains the word "corona"...' )
                     sys.exit(1)
             else:
                #if cell.getAbutmentBox().isEmpty():
@@ -194,14 +188,14 @@ def scriptMain ( **kw ):
                     success = plugins.clocktree.scriptMain( **kw )
                    #if not success: return False
                 else:
-                    print cell
+                    print( cell )
                     etesian = Etesian.EtesianEngine.create( cell )
                     etesian.place()
                     etesian.toHurricane()
+                    etesian.flattenPower()
                     etesian.destroy()
             if editor: editor.refresh()
             plugins.rsave.scriptMain( **kw )
-        
         if doStages & DoRouting:
             routingNets = []
             if doStages & UseKite:
@@ -225,10 +219,8 @@ def scriptMain ( **kw ):
                 success = katana.isDetailedRoutingSuccess()
                 katana.finalizeLayout()
                 katana.destroy()
-        
         if doStages & DoPlacement:
             plugins.rsave.scriptMain( **kw )
-        
         if doStages & DoRouting:
             if doStages & DoChip:
                 framework.saveCell( cell, CRL.Catalog.State.Views|views )
@@ -238,23 +230,20 @@ def scriptMain ( **kw ):
             saveCellName += '_r'
             cell.setName( saveCellName )
             framework.saveCell( cell, CRL.Catalog.State.Views|views )
-        
         if doStages & ProfileRouter:
             profile = RouterProfile ( doStages )
             profile.savefig()
             profile.close()
             return
-        
-    
-    except Exception, e:
-      print e
-    
+    except Exception as e:
+        print( traceback.format_exc() )
+        print( e )
     return success
 
 
 if __name__ == '__main__':
     try:
-       #helpers.setTraceLevel( 550 )
+        helpers.setTraceLevel( 550 )
        
         parser = optparse.OptionParser()
         parser.add_option( '-c', '--cell'  , type='string',                      dest='cell'         , help='The name of the chip to build, without extension.')
@@ -298,40 +287,41 @@ if __name__ == '__main__':
         if options.script:
             try:
                 sys.path.append(os.path.dirname(options.script))
-               #print sys.path
+               #print( sys.path )
               
                 module = __import__( options.script, globals(), locals() )
-                if not module.__dict__.has_key('scriptMain'):
-                    print '[ERROR] Script module <%s> do not contains a ScripMain() function.' % options.script
+                if not 'scriptMain' in module.__dict__:
+                    print( '[ERROR] Script module "{}" do not contains a ScripMain() function.' \
+                           .format(options.script) )
                     sys.exit(1)
               
                 cell = module.__dict__['scriptMain']( **kw )
                 kw['cell'] = cell
             
-            except ImportError, e:
+            except ImportError as e:
                 module = str(e).split()[-1]
-                print '[ERROR] The <%s> script cannot be loaded.' % module
-                print '        Please check your design hierarchy.'
+                print( '[ERROR] The "{}" script cannot be loaded.'.format(module) )
+                print( '        Please check your design hierarchy.' )
                 sys.exit(1)
-            except Exception, e:
-                print '[ERROR] A strange exception occurred while loading the Python'
-                print '        script <%s>. Please check that module for error:\n' % options.script
+            except Exception as e:
+                print( '[ERROR] A strange exception occurred while loading the Python' )
+                print( '        script "{}". Please check that module for error:\n'.format(options.script) )
                 showPythonTrace( options.script, e )
                 sys.exit(2)
         elif options.cell:
             kw['cell'] = framework.getCell( options.cell, CRL.Catalog.State.Views )
             if not kw['cell']:
-                print '[ERROR] Unable to load cell "%s" (option "--cell=...")' % options.cell
+                print( '[ERROR] Unable to load cell "{}" (option "--cell=...")'.format(options.cell) )
         elif options.blif:
             kw['cell'] = CRL.Blif.load( options.blif )
             if not kw['cell']:
-                print '[ERROR] Unable to load cell "%s" (option "--blif=...")' % options.blif
+                print( '[ERROR] Unable to load cell "{}" (option "--blif=...")'.format(options.blif) )
         
         success      = scriptMain( **kw )
         shellSuccess = 0
         if not success: shellSuccess = 1
   
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         shellSuccess = 1
   

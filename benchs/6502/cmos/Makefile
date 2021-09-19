@@ -1,4 +1,4 @@
-# -*- explicit-buffer-name: "Makefile<6502/cmos45>" -*-
+# -*- explicit-buffer-name: "Makefile<6502/cmos>" -*-
 
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
@@ -17,6 +17,13 @@
 
 
  include ./mk/design-flow.mk
+
+ 
+m65s_cts_r.vst: m65s.vst
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
+
+m65s_cts_r.ap: m65s_cts_r.vst
+	@echo "[INFO] Dummy rule to fool GNU Make (m65s_cts_r.ap <- m65s_cts_r.vst)..."
 
 
 blif:      m65s.blif

@@ -1,5 +1,4 @@
 
-from   __future__ import print_function
 import sys
 import traceback
 import CRL
@@ -104,9 +103,10 @@ def scriptMain ( **kw ):
             blockBuilder = Block( adderConf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-    except Exception, e:
+    except Exception as e:
         helpers.io.catch( e )
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    return rvalue
+    shellRValue = 0 if rvalue else 1
+    sys.exit( shellRValue )

@@ -25,11 +25,17 @@
 
  include ./mk/design-flow.mk
 
+ 
+chip_r.vst: synth
+	-$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
+
+chip_r.ap: chip_r.vst
+
 synth:     $(NETLISTS_VST)
 
-layout:    chip_cts_r.ap
-gds:       chip_cts_r.gds
+layout:    chip_r.ap
+gds:       chip_r.gds
 
-lvx:       lvx-chip_cts_r
-druc:      druc-chip_cts_r
-view:      cgt-chip_cts_r
+lvx:       lvx-chip_r
+druc:      druc-chip_r
+view:      cgt-chip_r

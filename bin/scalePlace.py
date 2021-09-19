@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 try:
@@ -39,22 +39,22 @@ try:
   import Viewer
   import CRL
   from   CRL import RoutingLayerGauge
-except ImportError, e:
+except ImportError as e:
   serror = str(e)
   if serror.startswith('No module named'):
     module = serror.split()[-1]
-    print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
-    print '        Please check the integrity of the <coriolis> package.'
+    print( '[ERROR] The <%s> python module or symbol cannot be loaded.' % module )
+    print( '        Please check the integrity of the <coriolis> package.' )
   if str(e).find('cannot open shared object file'):
     library = serror.split(':')[0]
-    print '[ERROR] The <%s> shared library cannot be loaded.' % library
-    print '        Under RHEL 6, you must be under devtoolset-2.'
-    print '        (scl enable devtoolset-2 bash)'
+    print( '[ERROR] The <%s> shared library cannot be loaded.' % library )
+    print( '        Under RHEL 6, you must be under devtoolset-2.' )
+    print( '        (scl enable devtoolset-2 bash)' )
   sys.exit(1)
-except Exception, e:
-  print '[ERROR] A strange exception occurred while loading the basic Coriolis/Python'
-  print '        modules. Something may be wrong at Python/C API level.\n'
-  print '        %s' % e
+except Exception as e:
+  print( '[ERROR] A strange exception occurred while loading the basic Coriolis/Python' )
+  print( '        modules. Something may be wrong at Python/C API level.\n' )
+  print( '        %s' % e )
   sys.exit(2)
 
 
@@ -69,7 +69,7 @@ def scalePlace ( editor, sourceCell ):
     raise ErrorMessage( 3, 'scalePlace.scalePlace(): Mandatory sourceCell argument is None.' )
   scaledCell = None
 
-  print '\n  o  Processing', sourceCell
+  print( '\n  o  Processing', sourceCell )
 
   UpdateSession.open()
   try:
@@ -89,7 +89,7 @@ def scalePlace ( editor, sourceCell ):
 
     for instance in sourceCell.getInstances():
       origTransf   = instance.getTransformation()
-      print instance, origTransf
+      print( instance, origTransf )
 
       if    origTransf.getOrientation() == Transformation.Orientation.MY \
          or origTransf.getOrientation() == Transformation.Orientation.R2:
@@ -119,10 +119,10 @@ def scalePlace ( editor, sourceCell ):
             copyInstance.getMasterCell().getNet(origPlug.getMasterNet().getName())
           ).setNet( scaledCell.getNet(origNet.getName()) )
 
-  except ErrorMessage, e:
-      print e; errorCode = e.code
-  except Exception, e:
-      print '\n\n', e; errorCode = 1
+  except ErrorMessage as e:
+      print( e ); errorCode = e.code
+  except Exception as e:
+      print( '\n\n', e ); errorCode = 1
       traceback.print_tb(sys.exc_info()[2])
 
   UpdateSession.close()
@@ -142,13 +142,13 @@ def scriptMain ( **kw ):
  #helpers.setTraceLevel( 550 )
 
   sourceCell = None
-  if kw.has_key('cell') and kw['cell']:
+  if 'cell' in kw and kw['cell']:
     sourceCell = kw['cell']
 
   editor = None
-  if kw.has_key('editor') and kw['editor']:
+  if 'editor' in kw and kw['editor']:
     editor = kw['editor']
-    print '  o  Editor detected, running in graphic mode.'
+    print( '  o  Editor detected, running in graphic mode.' )
     if sourceCell == None: sourceCell = editor.getCell()
 
   if sourceCell:
@@ -170,7 +170,7 @@ if __name__ == '__main__':
   if options.verbose:     Cfg.getParamBool('misc.verboseLevel1').setBool(True)
   if options.veryVerbose: Cfg.getParamBool('misc.verboseLevel2').setBool(True)
 
-  print framework.getEnvironment().getPrint()
+  print( framework.getEnvironment().getPrint() )
 
   success = scriptMain( **kw )
   shellSuccess = 0

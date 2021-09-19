@@ -7,7 +7,7 @@
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
                  USE_KITE = No
-            YOSYS_FLATTEN = Yes
+            YOSYS_FLATTEN = ao68000
 
 ifneq ($(YOSYS_FLATTEN),)
                  NETLISTS = ao68000

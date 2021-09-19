@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # This file is part of Alliance Check Toolkit
-# Copyright (c) UPMC 2016-2018, All Rights Reserved
+# Copyright (c) Sorbonne Université 2016-2021, All Rights Reserved
 #
 # +-----------------------------------------------------------------+ 
 # |     A l l i a n c e   C h e c k   T o o l k i t                 |
@@ -111,7 +111,7 @@ class GmChamla ( AnalogDesign ):
 
 
     def build ( self, editor ):
-        print '  o  Running GmChamla.build().'
+        print( '  o  Running GmChamla.build().' )
 
        #    | 0                  | 1         | 2               | 3   | 4       |  5  | 6| 7   |8  |9     |10  | 11    | 12   | 13   | 
        #    | Class              | Instance  | Layout Style    | Type| W       |  L  | M| Mint|Dum|SFirst|Bulk| BulkC | NERC | NIRC | 
@@ -360,7 +360,7 @@ class GmChamla ( AnalogDesign ):
 
 def scriptMain ( **kw ):
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
     cell = CRL.AllianceFramework.get().getCell( 'gm', CRL.Catalog.State.Views )
@@ -368,7 +368,7 @@ def scriptMain ( **kw ):
         UpdateSession.open()
         cell.destroy()
         UpdateSession.close()
-        print 'Previous <gm> cell destroyed.'
+        print( 'Previous <gm> cell destroyed.' )
 
     design = GmChamla()
     design.build( editor )

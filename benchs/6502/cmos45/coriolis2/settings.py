@@ -9,7 +9,7 @@ from   helpers       import overlay, l, u, n
 
 
 #cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-if os.environ.has_key('CELLS_TOP'):
+if 'CELLS_TOP' in os.environ:
   cellsTop = os.environ['CELLS_TOP']
 else:
   cellsTop = '../../../cells'

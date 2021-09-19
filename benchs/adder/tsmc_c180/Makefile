@@ -4,7 +4,7 @@
                DESIGN_KIT = FlexLib018
 
             USE_CLOCKTREE = Yes
-                USE_DEBUG = No
+                USE_DEBUG = Yes
              USE_VALGRIND = No
                  USE_KITE = No
                   RM_CHIP = Yes
@@ -15,10 +15,10 @@
  include ./mk/design-flow.mk
 
 chip_cts_r.vst: adder.vst
-	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
+	$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
 
 chip_cts_r.gds: chip_cts_r.vst
-	-@echo "[INFO] Overriden default GDS rule (for use with FlexLib)."
+	@echo "[INFO] Overriden default GDS rule (for use with FlexLib)."
 
 blif:   adder.blif
 vst:    adder.vst

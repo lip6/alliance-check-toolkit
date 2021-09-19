@@ -9,7 +9,7 @@ import Viewer
 from   helpers       import overlay, l, u, n
 
 if useNsxlib:
-    if os.environ.has_key('CELLS_TOP'):
+    if 'CELLS_TOP' in os.environ:
         cellsTop = os.environ['CELLS_TOP']
     else:
         cellsTop = '../../../cells'

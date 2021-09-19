@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 try:
   import sys
@@ -34,22 +34,22 @@ try:
   import helpers
   from   helpers import trace
   from   helpers import ErrorMessage
-except ImportError, e:
+except ImportError as e:
   serror = str(e)
   if serror.startswith('No module named'):
     module = serror.split()[-1]
-    print '[ERROR] The <%s> python module or symbol cannot be loaded.' % module
-    print '        Please check the integrity of the <coriolis> package.'
+    print( '[ERROR] The <%s> python module or symbol cannot be loaded.' % module )
+    print( '        Please check the integrity of the <coriolis> package.' )
   if str(e).find('cannot open shared object file'):
     library = serror.split(':')[0]
-    print '[ERROR] The <%s> shared library cannot be loaded.' % library
-    print '        Under RHEL 6, you must be under devtoolset-2.'
-    print '        (scl enable devtoolset-2 bash)'
+    print( '[ERROR] The <%s> shared library cannot be loaded.' % library )
+    print( '        Under RHEL 6, you must be under devtoolset-2.' )
+    print( '        (scl enable devtoolset-2 bash)' )
   sys.exit(1)
-except Exception, e:
-  print '[ERROR] A strange exception occurred while loading the basic Coriolis/Python'
-  print '        modules. Something may be wrong at Python/C API level.\n'
-  print '        %s' % e
+except Exception as e:
+  print( '[ERROR] A strange exception occurred while loading the basic Coriolis/Python' )
+  print( '        modules. Something may be wrong at Python/C API level.\n' )
+  print( '        %s' % e )
   sys.exit(2)
 
 
@@ -121,7 +121,7 @@ def px2mpx ( editor, pxCell ):
     raise ErrorMessage( 3, 'px2mpx.px2mpx(): Mandatory pxCell argument is None.' )
   mpxCell = None
 
-  print '\nProcessing', pxCell
+  print( '\nProcessing', pxCell )
 
   UpdateSession.open()
   try:
@@ -168,7 +168,7 @@ def px2mpx ( editor, pxCell ):
         layer        = component.getLayer()
         dupComponent = None
 
-        print '  Processing', component
+        print( '  Processing', component )
 
         if isinstance(component,Contact):
           dupComponent = Contact.create( mpxNet
@@ -188,28 +188,28 @@ def px2mpx ( editor, pxCell ):
           if component.getSourceX() > component.getTargetX(): component.invert()
           if isinstance(layer,RegularLayer):
             if layer.getBasicLayer().getMaterial().getCode() == BasicLayer.Material.blockage:
-              print '    Blockage BB:%s vs. AB:%s' % (bb, ab)
+              print( '    Blockage BB:%s vs. AB:%s' % (bb, ab))
               if layer.getName()[-1] == '2' or layer.getName()[-1] == '4':
                 state = 0
                 if bb.getXMin() <= ab.getXMin(): state |= Left
                 if bb.getXMax() >= ab.getXMax(): state |= Right
 
                 if not (state&Left):
-                  print '      Shrink left.'
+                  print( '      Shrink left.' )
                   dLLeft  = dL - DbU.fromLambda( 1.5 )
                 if not(state&Right):
-                  print '      Shrink right.'
+                  print( '      Shrink right.' )
                   dLRight = dL - DbU.fromLambda( 1.5 )
 
                 if layer.getName()[-1] == '4' and state == AllSpan:
-                  print '      Skipping component.'
+                  print( '      Skipping component.' )
                   skipComponent = True
 
           width = mW
           if component.getWidth() > mW:
             width = component.getWidth()*2 + dW
 
-         #print DbU.toLambda(bb.getWidth()), DbU.toLambda( dLLeft-dLRight)
+         #print( DbU.toLambda(bb.getWidth()), DbU.toLambda( dLLeft-dLRight) )
           if bb.getWidth()*2 > abs(dLLeft+dLRight) and not skipComponent:
             dupComponent = Horizontal.create( mpxNet
                                             , layer
@@ -218,9 +218,9 @@ def px2mpx ( editor, pxCell ):
                                             , component.getDxSource()*2 - dLLeft
                                             , component.getDxTarget()*2 + dLRight
                                             )
-            print '    Copy:', dupComponent
+            print( '    Copy:', dupComponent )
           else:
-            print '    Horizontal component too small *or* skipped, not converted'
+            print( '    Horizontal component too small *or* skipped, not converted' )
 
         elif isinstance(component,Vertical):
           dL, dW, mW = getDeltas( component.getLayer() )
@@ -250,7 +250,7 @@ def px2mpx ( editor, pxCell ):
 
                 if layer.getName()[-1] == '5':
                   if state == AllSpan:
-                    print '      Skipping component.'
+                    print( '      Skipping component.' )
                     skipComponent = True
                   else:
                     dLTop = DbU.fromLambda(120.0) - component.getDyTarget()*2
@@ -268,20 +268,20 @@ def px2mpx ( editor, pxCell ):
                                           , component.getDyTarget()*2 + dLTop
                                           )
           else:
-            print '    Vertical component too small *or* skipped, not converted'
+            print( '    Vertical component too small *or* skipped, not converted' )
 
         else:
-          print '[WARNING] Unchanged component:', component
+          print( '[WARNING] Unchanged component:', component )
 
         if dupComponent and NetExternalComponents.isExternal( component ):
           NetExternalComponents.setExternal( dupComponent )
           
     if editor: editor.fit()
 
-  except ErrorMessage, e:
-      print e; errorCode = e.code
-  except Exception, e:
-      print '\n\n', e; errorCode = 1
+  except ErrorMessage as e:
+      print( e ); errorCode = e.code
+  except Exception as e:
+      print( '\n\n', e ); errorCode = 1
       traceback.print_tb(sys.exc_info()[2])
 
   UpdateSession.close()
@@ -296,13 +296,13 @@ def scriptMain ( **kw ):
  #helpers.setTraceLevel( 550 )
 
   pxCell = None
-  if kw.has_key('cell') and kw['cell']:
+  if 'cell' in kw and kw['cell']:
     pxCell = kw['cell']
 
   editor = None
-  if kw.has_key('editor') and kw['editor']:
+  if 'editor' in kw and kw['editor']:
     editor = kw['editor']
-    print '  o  Editor detected, running in graphic mode.'
+    print( '  o  Editor detected, running in graphic mode.' )
     if pxCell == None: pxCell = editor.getCell()
 
   if pxCell:
@@ -311,7 +311,7 @@ def scriptMain ( **kw ):
     pxlibDir  = '/dsk/l1/jpc/alliance/Linux.slsoc6x/install/cells/pxlib'
     
     if os.path.isdir(pxlibDir):
-      print '  o  <%s> found.' % pxlibDir
+      print( '  o  <%s> found.' % pxlibDir )
       for viewFile in os.listdir( pxlibDir ):
         if viewFile == 'padreal.ap':
           pxCell      = framework.getCell( viewFile[:-3], CRL.Catalog.State.Views )
@@ -328,7 +328,7 @@ def scriptMain ( **kw ):
           mpxCell = px2mpx( editor, pxCell )
           framework.saveCell( mpxCell, CRL.Catalog.State.Physical )
     else:
-      print '[WARNING] <%s> not found.' % pxlibDir
+      print( '[WARNING] <%s> not found.' % pxlibDir )
       
   return 0
 

@@ -1,7 +1,5 @@
-#!/usr/bin/env python
 
 from helpers import l, u, n
-
 
 chip = { 'pads.ioPadGauge' : 'pxlib'
                           #   | Instance  | Pad   | To Core          | From Core     | Enable    |

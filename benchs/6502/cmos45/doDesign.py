@@ -29,27 +29,27 @@ def scriptMain ( **kw ):
         if editor: editor.setCell( cell ) 
 
         # ioPinsSpec, for peripheral pin placement as a standalone block.
-        ioPinsSpec = [ (IoPin.SOUTH, 'adrs({})' , l(   5.0), l( 45.0), 16)
-                     , (IoPin.EAST , 'data({})' , l(  25.0), l( 50.0),  8)
-                     , (IoPin.EAST , 'datao({})', l(  40.0), l( 50.0),  8)
-                     , (IoPin.WEST , 'debug({})', l(  25.0), l( 25.0), 16)
-                     , (IoPin.EAST , 'debug(0)' , l(  30.0),       0 ,  1)
-                     , (IoPin.NORTH, 'irq'      , l( 100.0),       0 ,  1)
-                     , (IoPin.NORTH, 'm_clock'  , l( 150.0),       0 ,  1)
-                     , (IoPin.NORTH, 'nmi'      , l( 200.0),       0 ,  1)
-                     , (IoPin.NORTH, 'p_reset'  , l( 250.0),       0 ,  1)
-                     , (IoPin.NORTH, 'rdy'      , l( 300.0),       0 ,  1)
-                     , (IoPin.NORTH, 'start'    , l( 350.0),       0 ,  1)
-                     , (IoPin.NORTH, 'rd'       , l( 400.0),       0 ,  1)
-                     , (IoPin.NORTH, 'sync'     , l( 450.0),       0 ,  1)
-                     , (IoPin.NORTH, 'wt'       , l( 500.0),       0 ,  1)
+        ioPinsSpec = [ (IoPin.SOUTH, 'adrs({})' , l(  20.0), l(100.0), 16)
+                     , (IoPin.EAST , 'data({})' , l(  60.0), l(100.0),  8)
+                     , (IoPin.EAST , 'datao({})', l(  80.0), l(100.0),  8)
+                     , (IoPin.WEST , 'debug({})', l(  50.0), l(100.0), 16)
+                     , (IoPin.EAST , 'debug(0)' , l(  50.0),       0 ,  1)
+                     , (IoPin.NORTH, 'irq'      , l( 200.0),       0 ,  1)
+                    #, (IoPin.NORTH, 'm_clock'  , l( 300.0),       0 ,  1)
+                     , (IoPin.NORTH, 'nmi'      , l( 400.0),       0 ,  1)
+                     , (IoPin.NORTH, 'p_reset'  , l( 500.0),       0 ,  1)
+                     , (IoPin.NORTH, 'rdy'      , l( 600.0),       0 ,  1)
+                     , (IoPin.NORTH, 'start'    , l( 700.0),       0 ,  1)
+                     , (IoPin.NORTH, 'rd'       , l( 800.0),       0 ,  1)
+                     , (IoPin.NORTH, 'sync'     , l( 900.0),       0 ,  1)
+                     , (IoPin.NORTH, 'wt'       , l(1000.0),       0 ,  1)
                      ]
         m65sConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=[] ) 
         m65sConf.cfg.misc.logMode        = True
         m65sConf.cfg.etesian.spaceMargin = 0.10
         m65sConf.cfg.etesian.aspectRatio = 0.90
         m65sConf.editor                  = editor
-        m65sConf.fixedWidth              = l(700)
+        m65sConf.fixedWidth              = l(3500)
         m65sConf.useSpares               = True
         #m65sConf.useClockTree            = True
         m65sConf.useHTree( 'm_clock' )

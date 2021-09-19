@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
 
     rvalue = True
     try:
-        helpers.setTraceLevel( 550 )
+       #helpers.setTraceLevel( 550 )
         cell, editor = plugins.kwParseMain( **kw )
 
         cell = af.getCell( 'retrouc_2020beta', CRL.Catalog.State.Logical )

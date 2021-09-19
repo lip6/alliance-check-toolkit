@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 from   Hurricane import *
@@ -40,10 +40,10 @@ class Model ( object ):
         if not net:
           net = Net.create( self.cell, netName ) 
 
-        if attributes.has_key('direction' ): net.setDirection( attributes['direction' ] )
-        if attributes.has_key('isExternal'): net.setExternal ( attributes['isExternal'] )
-        if attributes.has_key('isGlobal'  ): net.setGlobal   ( attributes['isGlobal'  ] )
-        if attributes.has_key('type'      ): net.setType     ( attributes['type'      ] )
+        if 'direction'  in attributes: net.setDirection( attributes['direction' ] )
+        if 'isExternal' in attributes: net.setExternal ( attributes['isExternal'] )
+        if 'isGlobal'   in attributes: net.setGlobal   ( attributes['isGlobal'  ] )
+        if 'type'       in attributes: net.setType     ( attributes['type'      ] )
         return net
 
     def getNet ( self, netName ):
@@ -62,8 +62,8 @@ class Model ( object ):
 
         masterNet = instance.getMasterCell().getNet(pin)
         if not masterNet:
-          print '[ERROR] Master cell "%s" of instance "%s" has no connector named "%s".' \
-              % (instance.getMasterCell().getName(), instance.getName(), pin)
+          print( '[ERROR] Master cell "{}" of instance "{}" has no connector named "{}".' \
+                 .format( instance.getMasterCell().getName(), instance.getName(), pin ))
 
         instance.getPlug( instance.getMasterCell().getNet(pin) ).setNet( net )
         return
@@ -97,13 +97,13 @@ class Model ( object ):
         insName, pinName = termPath.split( '.' )
         instance = self.cell.getInstance( insName )
         if not instance:
-          print '[ERROR] Model "%s" has no instance named "%s"' \
-              % (self.cell.getName(), insName)
+          print( '[ERROR] Model "{}" has no instance named "{}"' \
+                 .format( self.cell.getName(), insName ))
         try:
           plug = instance.getPlug( instance.getMasterCell().getNet(pinName) )
         except:
-          print '[ERROR] Model "%s" of instance "%s" has no terminal named "%s"' \
-              % (instance.getMasterCell().getName(), instance.getName(), pinName)
+          print( '[ERROR] Model "{}" of instance "{}" has no terminal named "{}"' \
+                 .format( instance.getMasterCell().getName(), instance.getName(), pinName ))
         
         net      = plug.getNet()
         VIA12    = self.getLayer( 'VIA12' )
@@ -123,9 +123,9 @@ class Model ( object ):
         return contact1
 
     def createVertical ( self, contacts, x, width=None, layer=None ):
-        def yincrease ( lhs, rhs ): return int(lhs.getY() - rhs.getY())
+        def yincrease ( element ): return element.getY()
 
-        contacts.sort( yincrease )
+        contacts.sort( key=yincrease )
 
         if width is None: width = toDbU(2.0)
 
@@ -135,7 +135,7 @@ class Model ( object ):
         return
 
     def createHorizontal ( self, contactPaths, y, width=None, layer=None ):
-        def xincrease ( lhs, rhs ): return int(lhs.getX() - rhs.getX())
+        def xincrease (element ): return element.getX()
 
         if isinstance(contactPaths[0],str):
           contacts = []
@@ -146,7 +146,7 @@ class Model ( object ):
 
         if width is None: width = toDbU(2.0)
 
-        contacts.sort( xincrease )
+        contacts.sort( key=xincrease )
 
         if layer is None: layer = self.getLayer( "METAL2" )
         for i in range(1,len(contacts)):
@@ -154,7 +154,7 @@ class Model ( object ):
         return
 
     def createSerpentine ( self, contactPaths, ymin, ymax, width=None, layer=None ):
-        def xincrease ( lhs, rhs ): return int(lhs.getX() - rhs.getX())
+        def xincrease ( item ): return item.getX()
 
         if isinstance(contactPaths[0],str):
           contacts = []
@@ -164,17 +164,17 @@ class Model ( object ):
           contacts = contactPaths
 
         if len(contacts) != 2:
-          print '[ERROR] Model.createSerpentine() takes exactly two points, not %d.' % len(contacts)
+          print( '[ERROR] Model.createSerpentine() takes exactly two points, not {}.'.frormat(len(contacts)) )
 
 
         if layer is None: layer = self.getLayer( "METAL2" )
         if width is None: width = toDbU(2.0)
 
-        contacts.sort( xincrease )
+        contacts.sort( key=xincrease )
 
         turn0      = contacts[0]
         trackPitch = toDbU(5.0)
-        for i in range( (contacts[1].getX() - contacts[0].getX()) / trackPitch ):
+        for i in range( (contacts[1].getX() - contacts[0].getX()) // trackPitch ):
           y = ymin
           if i%2: y = ymax
 
@@ -193,7 +193,7 @@ class Model ( object ):
     def addFillersRow ( self, x, y, orient, length ):
         tieWidth = self.getMasterCell("tie_x0").getAbutmentBox().getWidth()
         i        = 0
-        for i in range(length/tieWidth):
+        for i in range(length//tieWidth):
           self.createInstance( "filler_%d_i" % self.fillerCount
                              , "tie_x0"
                              , transf=( x+tieWidth*i, y, orient) )
@@ -219,7 +219,7 @@ class Model ( object ):
         return
 
     def build ( self ):
-        print '[ERROR] Model.build() base class method should never be called.'
+        print( '[ERROR] Model.build() base class method should never be called.' )
         return
 
 
@@ -860,8 +860,8 @@ class RingOscillator ( Model ):
         ab           = self.getAbutmentBox()
         vdd          = self.getNet( "vdd" )
         vss          = self.getNet( "vss" )
-        vddAxis      = Box(ab).inflate( powerSpacing + powerWidth/2 )
-        vssAxis      = Box(ab).inflate( powerSpacing + powerWidth/2 + powerWidth + toDbU(10.0) )
+        vddAxis      = Box(ab).inflate( powerSpacing + powerWidth//2 )
+        vssAxis      = Box(ab).inflate( powerSpacing + powerWidth//2 + powerWidth + toDbU(10.0) )
 
        # Building "vdd" power ring.
         westContactsVdd = \
@@ -891,7 +891,7 @@ class RingOscillator ( Model ):
         self.createVertical( westContactsVdd, vddAxis.getXMin(), powerWidth )
         self.createVertical( eastContactsVdd, vddAxis.getXMax(), powerWidth )
 
-        xcenter = vddAxis.getCenter().getX() + powerWidth/2 + toDbU(5.0)
+        xcenter = vddAxis.getCenter().getX() + powerWidth//2 + toDbU(5.0)
         accessContactsVdd = \
           [ Contact.create( vdd, VIA23 , xcenter, vddAxis.getYMax(), powerWidth, powerWidth )
           , Contact.create( vdd, METAL3, xcenter,      toDbU(528.0), powerWidth, toDbU(2.0) ) 
@@ -940,7 +940,7 @@ class RingOscillator ( Model ):
         self.createVertical( westContactsVss, vssAxis.getXMin(), powerWidth )
         self.createVertical( eastContactsVss, vssAxis.getXMax(), powerWidth )
 
-        xcenter = vssAxis.getCenter().getX() - powerWidth/2 - toDbU(5.0)
+        xcenter = vssAxis.getCenter().getX() - powerWidth//2 - toDbU(5.0)
         accessContactsVss = \
           [ Contact.create( vss, VIA23 , xcenter, vssAxis.getYMax(), powerWidth, powerWidth )
           , Contact.create( vss, METAL3, xcenter,      toDbU(528.0), powerWidth, toDbU(2.0) ) 
@@ -969,7 +969,7 @@ class RingOscillator ( Model ):
 
 def scriptMain ( **kw ):
     editor = None
-    if kw.has_key("editor") and kw["editor"]:
+    if 'editor' in kw and kw["editor"]:
       editor = kw["editor"]
 
     ringo = RingOscillator( 'ringoscillator' )

@@ -99,4 +99,10 @@ proof-%: %.vbe %_yag.vhd
  endif
 
 clean:
-	-rm -f $(CLEAN_CHIP) $(CLEAN_SYNTHESIS) $(CLEAN_PR) $(CLEAN_STRATUS) core_float.ap
+	-rm -f $(CLEAN_CHIP)      \
+	       $(CLEAN_SYNTHESIS) \
+	       $(CLEAN_PR)        \
+	       $(CLEAN_STRATUS)   \
+	       core_float.ap      \
+	       $(CLEAN_CUSTOM)
+

@@ -15,7 +15,7 @@
  include ./mk/design-flow.mk
 
 ao68000_cts_r.vst: ao68000.vst
-	-$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
+	$(call scl_cols,$(call c2env, cgt -tV --script=doDesign))
 
 ao68000_cts_r.gds: ao68000_cts_r.vst
 	-@echo "[INFO] Overriden default GDS rule (for use with FlexLib)."

@@ -4,10 +4,11 @@
 # -------------------------------------------------------------------
 # Alliance Synthesis Rules (vasy/boom/boog)
 
-  NETLISTS_VST    = $(foreach netlist,$(NETLISTS), $(netlist).vst) 
- #NETLISTS_VST    = $(firstword $(NETLISTS)).vst 
-  CLEAN_SYNTHESIS = $(foreach netlist,$(NETLISTS), $(netlist).vbe $(netlist).vst $(netlist).ap $(netlist).sp $(subst _model,,$(netlist)).vst $(subst _model,,$(netlist)).ap) 
-
+  NETLISTS_VST       = $(foreach netlist,$(NETLISTS), $(netlist).vst) 
+ #NETLISTS_VST       = $(firstword $(NETLISTS)).vst 
+  CLEAN_SYNTHESIS    = $(foreach netlist,$(NETLISTS), $(netlist).vbe $(netlist).vst $(netlist).ap $(netlist).sp $(subst _model,,$(netlist)).vst $(subst _model,,$(netlist)).ap) 
+  NETLISTS_MODELTOPS = $(foreach netlist,$(filter %_model,$(NETLISTS)), $(subst _model,,$(netlist))) 
+  NETLISTS_SYNTH     = $(NETLISTS) $(NETLISTS_MODELTOPS)
 
 %_model.vbe: %.vhdl ;  $(VASY) -a -p -o -I vhdl $<
 %.vbe:       %.vhdl ;  $(VASY) -a -p -o -I vhdl $<

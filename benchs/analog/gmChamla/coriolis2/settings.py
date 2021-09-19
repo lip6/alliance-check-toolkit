@@ -8,7 +8,7 @@ import helpers
 
 
 NdaDirectory = None
-if os.environ.has_key('NDA_TOP'):
+if 'NDA_TOP' in os.environ:
   NdaDirectory = os.environ['NDA_TOP']
 
 if not NdaDirectory:
@@ -16,7 +16,7 @@ if not NdaDirectory:
   if hostname.startswith('lepka'):
     NdaDirectory = '/dsk/l1/jpc/crypted/soc/techno'
     if not os.path.isdir(NdaDirectory):
-      print '[ERROR] You forgot to mount the NDA encrypted directory, stupid!'
+      print( '[ERROR] You forgot to mount the NDA encrypted directory, stupid!' )
   else:
     NdaDirectory = '/users/soft/techno/techno'
 
@@ -32,7 +32,7 @@ from   helpers       import l, u, n
 
 
 #cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
-if os.environ.has_key('CELLS_TOP'):
+if 'CELLS_TOP' in os.environ:
   cellsTop = os.environ['CELLS_TOP']
 else:
   cellsTop = '../../../cells'

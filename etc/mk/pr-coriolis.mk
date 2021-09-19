@@ -115,8 +115,8 @@ cgt:
 	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V))
 
 
- EXTENSIONS = _r.vst _r.ap
+ EXTENSIONS = _r.vst _r.ap .spi
  ifneq ($(PLACED),Yes)
    EXTENSIONS += .ap
  endif
- CLEAN_PR = $(foreach ext, $(EXTENSIONS), $(addsuffix $(ext),$(NETLISTS_SYNTH)))
+ CLEAN_PR = $(foreach ext, $(EXTENSIONS), $(addsuffix $(ext),$(NETLISTS_SYNTH) $(CHIP) $(CORONA)))
