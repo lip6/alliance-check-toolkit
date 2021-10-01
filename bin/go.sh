@@ -1,25 +1,28 @@
 #!/bin/bash
 
  declare -A benchRules
- benchRules["adder/cmos"]="druc lvx clean"
- benchRules["adder/cmos45"]="lvx clean"
- benchRules["adder/tsmc_c180"]="gds clean"
- benchRules["AM2901/standart_cells"]="druc lvx clean"
- benchRules["AM2901/datapath"]="druc lvx clean"
- benchRules["6502/cmos"]="druc lvx clean"
- benchRules["6502/cmos45"]="lvx clean"
- benchRules["arlet6502/cmos350"]="lvx clean"
- benchRules["arlet6502/tsmc_c180"]="gds clean"
- benchRules["MIPS/microprogrammed"]="druc lvx clean"
- benchRules["MIPS/pipeline"]="druc lvx clean"
- benchRules["snx/cmos"]="druc lvx clean"
- benchRules["snx/cmos45"]="layout clean"
- benchRules["ao68000/tsmc_c180"]="druc clean"
- benchRules["VexRiscv/cmos"]="druc clean"
- benchRules["VexRiscv/cmos45"]="layout clean"
- benchRules["ARM/cmos"]="druc lvx clean"
- benchRules["RingOscillator"]="druc lvx clean"
- benchRules["nmigen/ALU16"]="lvx druc gds clean"
+ benchRules["adder/cmos"]="druc lvx"
+ benchRules["adder/cmos45"]="lvx"
+ benchRules["adder/tsmc_c180"]="gds"
+ benchRules["adder/freepdk45_c4m"]="gds"
+ benchRules["AM2901/standart_cells"]="druc lvx"
+ benchRules["AM2901/datapath"]="druc lvx"
+ benchRules["6502/cmos"]="druc lvx"
+ benchRules["6502/cmos45"]="lvx"
+ benchRules["arlet6502/cmos350"]="lvx"
+ benchRules["arlet6502/tsmc_c018"]="gds"
+ benchRules["arlet6502/freepdk45_c4m"]="gds"
+ benchRules["MIPS/microprogrammed"]="druc lvx"
+ benchRules["MIPS/pipeline"]="druc lvx"
+ benchRules["snx/cmos"]="druc lvx"
+ benchRules["snx/cmos45"]="layout"
+ benchRules["ao68000/tsmc_c018"]="gds"
+ benchRules["ao68000/freepdk45_c4m"]="gds"
+ benchRules["VexRiscv/cmos"]="druc"
+ benchRules["VexRiscv/cmos45"]="layout"
+ benchRules["ARM/cmos"]="druc lvx"
+ benchRules["RingOscillator"]="druc lvx"
+ benchRules["nmigen/ALU16"]="lvx druc gds"
 
  benchs=""
  benchs="${benchs} adder/cmos"
@@ -44,13 +47,21 @@
    benchs="${benchs} arlet6502/tsmc_c018"
    benchs="${benchs} ao68000/tsmc_c018"
  fi
+ if [ -e "/dsk/l1/jpc/coriolis-2.x/src/libre-soc/c4m-pdk-freepdk45" ]; then
+   benchs="${benchs} adder/freepdk45_c4m"
+   benchs="${benchs} arlet6502/freepdk45_c4m"
+   benchs="${benchs} ao68000/freepdk45_c4m"
+ fi
 
+ benchLog="`pwd`/make-go.log"
+ rm -f "${benchLog}"
  for bench in ${benchs}; do
    rules="${benchRules[$bench]}"
      
-  #echo "============================================================================="
-  #echo "Running bench <${bench}> with rules \"${rules}\""
-  #echo "============================================================================="
+   echo -e "\n\n\n\n" >> ${benchLog}
+   echo "=============================================================================" >> ${benchLog}
+   echo "Running bench <${bench}> with rules \"${rules}\""                              >> ${benchLog}
+   echo "=============================================================================" >> ${benchLog}
    echo -n "Running bench <${bench}> with rules \"${rules}\" ..."
 
    if [ ! -d "${bench}" ]; then
@@ -61,9 +72,8 @@
 
    pushd ${bench} > /dev/null
    for rule in ${rules}; do
-     benchLog="./make-go.log"
-     make clean   > ${benchLog} 2>&1
-     make ${rule} > ${benchLog} 2>&1
+     make clean   >> ${benchLog} 2>&1
+     make ${rule} >> ${benchLog} 2>&1
      if [ $? -ne 0 ]; then
        echo ""
        echo ""
@@ -71,7 +81,8 @@
        exit 1
      fi
    done
-   echo "success."
-   popd > ${benchLog} 2>&1
+   make clean >> ${benchLog} 2>&1
+   echo " success."
+   popd > /dev/null
  done
  exit 0
