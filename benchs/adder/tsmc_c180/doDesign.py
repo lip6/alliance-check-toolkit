@@ -108,5 +108,10 @@ def scriptMain ( **kw ):
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
+    return rvalue
+
+
+if __name__ == '__main__':
+    rvalue = scriptMain()
     shellRValue = 0 if rvalue else 1
     sys.exit( shellRValue )
