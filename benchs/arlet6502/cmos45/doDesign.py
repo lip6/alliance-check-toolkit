@@ -11,7 +11,7 @@ from   Hurricane  import DbU, Breakpoint
 from   plugins.alpha.block.block          import Block
 from   plugins.alpha.block.configuration  import IoPin, GaugeConf
 from   plugins.alpha.block.spares         import Spares
-from   plugins.alpha.core2chip.libresocio import CoreToChip
+from   plugins.alpha.core2chip.niolib     import CoreToChip
 from   plugins.alpha.chip.configuration   import ChipConf
 from   plugins.alpha.chip.chip            import Chip
 
@@ -24,7 +24,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
+       #helpers.setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -109,47 +109,39 @@ def scriptMain ( **kw ):
                      ]
        #ioPinsSpec = []
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        arlet6502Conf.cfg.viewer.pixelThreshold       = 5
-        arlet6502Conf.cfg.etesian.bloat               = 'Flexlib'
+        arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
         arlet6502Conf.cfg.etesian.uniformDensity      = True
         arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        arlet6502Conf.cfg.etesian.spaceMargin         = 0.10
-        arlet6502Conf.cfg.anabatic.searchHalo         = 2
-        arlet6502Conf.cfg.anabatic.globalIterations   = 20
+       #arlet6502Conf.cfg.etesian.spaceMargin         = 0.10
+       #arlet6502Conf.cfg.anabatic.searchHalo         = 2
+        arlet6502Conf.cfg.anabatic.globalIterations   = 10
         arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-        arlet6502Conf.cfg.katana.hTracksReservedLocal = 6
-        arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
+       #arlet6502Conf.cfg.katana.hTracksReservedLocal = 6
+       #arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
+        arlet6502Conf.cfg.katana.hTracksReservedMin   = 8
+        arlet6502Conf.cfg.katana.vTracksReservedMin   = 5
         arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = True
-        arlet6502Conf.cfg.block.spareSide             = u(7*13)
-       #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
+        arlet6502Conf.cfg.block.spareSide             = l(7*100.0)
+        arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
-        arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
-        arlet6502Conf.cfg.chip.supplyRailWidth        = u(35)
-        arlet6502Conf.cfg.chip.supplyRailPitch        = u(90)
+       #arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
+        arlet6502Conf.cfg.chip.supplyRailWidth        = l(350.0)
+        arlet6502Conf.cfg.chip.supplyRailPitch        = l(300.0)
         arlet6502Conf.editor              = editor
         arlet6502Conf.useSpares           = True
         arlet6502Conf.useClockTree        = True
-        arlet6502Conf.useHFNS             = True
-        arlet6502Conf.bColumns            = 3
-        arlet6502Conf.bRows               = 3
+        arlet6502Conf.useHFNS             = False
+        arlet6502Conf.bColumns            = 2
+        arlet6502Conf.bRows               = 2
         arlet6502Conf.chipName            = 'chip'
-        arlet6502Conf.chipConf.ioPadGauge = 'LibreSOCIO'
-        # 29 is minimum with everything disabled       -> ~  6% free space.
-        # Can really be reached when running the P&R on the sole block.
-        # This is very suspicious.
-        # 33 is minimum for obstacle density           -> ~ 25% free space.
-        # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
-        arlet6502Conf.coreSize            = ( u(36*13.0), u(36*13.0) )
-        arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
-       #arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
-        arlet6502Conf.useHTree( 'clk_from_pad' )
+        arlet6502Conf.chipConf.ioPadGauge = 'niolib'
+        arlet6502Conf.coreSize            = ( l( 40*100.0), l( 42*100.0) )
+        arlet6502Conf.chipSize            = ( l(   9400.0), l(  11400.0) )
+        arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
         arlet6502Conf.useHTree( 'reset_from_pad' )
-        #arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
             arlet6502ToChip = CoreToChip( arlet6502Conf )
             arlet6502ToChip.buildChip()
@@ -164,12 +156,12 @@ def scriptMain ( **kw ):
     except Exception as e:
         helpers.io.catch( e )
         rvalue = False
+    sys.stdout.flush()
+    sys.stderr.flush()
     return rvalue
 
 
 if __name__ == '__main__':
     rvalue = scriptMain()
-    sys.stdout.flush()
-    sys.stderr.flush()
     shellRValue = 0 if rvalue else 1
     sys.exit( shellRValue )
