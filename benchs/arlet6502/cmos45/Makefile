@@ -3,10 +3,7 @@
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
                DESIGN_KIT = cmos45
-
-            USE_CLOCKTREE = Yes
                 USE_DEBUG = No
-                 USE_KITE = No
 
                  NETLISTS = Arlet6502 \
                             cmpt_alu  \

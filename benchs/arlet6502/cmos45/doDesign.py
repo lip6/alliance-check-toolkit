@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 import sys
 import traceback
@@ -109,7 +110,8 @@ def scriptMain ( **kw ):
                      ]
        #ioPinsSpec = []
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
+        arlet6502Conf.cfg.etesian.bloat               = 'disabled'
+       #arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
         arlet6502Conf.cfg.etesian.uniformDensity      = True
         arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
@@ -117,9 +119,9 @@ def scriptMain ( **kw ):
        #arlet6502Conf.cfg.anabatic.searchHalo         = 2
         arlet6502Conf.cfg.anabatic.globalIterations   = 10
         arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-       #arlet6502Conf.cfg.katana.hTracksReservedLocal = 6
-       #arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 8
+       #arlet6502Conf.cfg.katana.hTracksReservedLocal = 0
+       #arlet6502Conf.cfg.katana.vTracksReservedLocal = 0
+        arlet6502Conf.cfg.katana.hTracksReservedMin   = 7
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 5
         arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = True
@@ -127,7 +129,6 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
-       #arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
         arlet6502Conf.cfg.chip.supplyRailWidth        = l(350.0)
         arlet6502Conf.cfg.chip.supplyRailPitch        = l(300.0)
         arlet6502Conf.editor              = editor
@@ -138,7 +139,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.bRows               = 2
         arlet6502Conf.chipName            = 'chip'
         arlet6502Conf.chipConf.ioPadGauge = 'niolib'
-        arlet6502Conf.coreSize            = ( l( 40*100.0), l( 42*100.0) )
+        arlet6502Conf.coreSize            = ( l( 35*100.0), l( 39*100.0) )
         arlet6502Conf.chipSize            = ( l(   9400.0), l(  11400.0) )
         arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
         arlet6502Conf.useHTree( 'reset_from_pad' )
