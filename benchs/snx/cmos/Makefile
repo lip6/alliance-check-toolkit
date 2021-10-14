@@ -9,7 +9,7 @@
                    MARGIN = 5
                   BOOMOPT = -A
                   BOOGOPT =
-                  LOONOPT =
+                  LOONOPT = -m 0
                 NSL2VHOPT = -vasy -split -p
             USE_CLOCKTREE = Yes
                 USE_DEBUG = No
