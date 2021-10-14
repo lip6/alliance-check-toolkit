@@ -23,7 +23,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.katana.hTracksReservedLocal = 6
     cfg.katana.vTracksReservedLocal = 6
     cfg.katana.hTracksReservedMin   = 1
-    cfg.katana.vTracksReservedMin   = 2
+    cfg.katana.vTracksReservedMin   = 3
 
     Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
 
