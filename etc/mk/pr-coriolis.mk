@@ -40,8 +40,12 @@
        CORONA = corona
      endif
    endif
-   $(info Using corona netlist: "$(CORONA).vst")
+ else
+   CHIP   = chip
+   CORONA = corona
  endif
+ $(info Using corona netlist: "$(CORONA)")
+ $(info Using chip netlist:   "$(CHIP)")
 
 
  ifeq ($(REAL_MODE),Yes)
@@ -115,8 +119,9 @@ cgt:
 	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -V))
 
 
- EXTENSIONS = _r.vst _r.ap .spi
+ EXTENSIONS = .vst _r.vst _r.ap .spi
  ifneq ($(PLACED),Yes)
    EXTENSIONS += .ap
  endif
  CLEAN_PR = $(foreach ext, $(EXTENSIONS), $(addsuffix $(ext),$(NETLISTS_SYNTH) $(CHIP) $(CORONA)))
+#$(info CLEAN_PR=$(CLEAN_PR))

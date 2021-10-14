@@ -34,7 +34,8 @@
  NETLISTS_VST      = $(shell echo $(VLOG_MODULE) | tr '[:upper:]' '[:lower:]').vst 
  NETLISTS_LOWER    = $(foreach netlist,$(NETLISTS_NOMODELS), $(shell echo $(netlist) | tr '[:upper:]' '[:lower:]'))
  NETLISTS_SYNTH    = $(foreach netlist,$(NETLISTS_LOWER), $(shell echo cmpt_$(netlist) $(netlist)))
- CLEAN_SYNTHESIS   = $(addsuffix .vst,$(NETLISTS_SYNTH)) \
+ CLEAN_SYNTHESIS   = $(addsuffix .spi,$(NETLISTS_NOMODELS)) \
+                     $(addsuffix .vst,$(NETLISTS_SYNTH)) \
                      $(addsuffix .il ,$(NETLISTS_SYNTH)) \
                      $(VLOG_MODULE).il $(VLOG_MODULE).blif $(VLOG_MODULE).tcl
 
