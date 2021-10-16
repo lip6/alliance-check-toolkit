@@ -32,6 +32,8 @@
    include ./mk/dks.d/FlexLib018.mk
  else ifeq ($(DESIGN_KIT),FreePDK_C4M45)
    include ./mk/dks.d/FreePDK_C4M45.mk
+ else ifeq ($(DESIGN_KIT),Sky130_C4M)
+   include ./mk/dks.d/Sky130_C4M.mk
  else
    $(error DESIGN_KIT variable has not been set or has an unsupported value)
  endif

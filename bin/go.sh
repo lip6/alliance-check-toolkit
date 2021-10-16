@@ -12,12 +12,14 @@
  benchRules["arlet6502/cmos350"]="lvx"
  benchRules["arlet6502/tsmc_c018"]="gds"
  benchRules["arlet6502/freepdk45_c4m"]="gds"
+ benchRules["arlet6502/sky130_c4m"]="gds"
  benchRules["MIPS/microprogrammed"]="druc lvx"
  benchRules["MIPS/pipeline"]="druc lvx"
  benchRules["snx/cmos"]="druc lvx"
  benchRules["snx/cmos45"]="layout"
  benchRules["ao68000/tsmc_c018"]="gds"
  benchRules["ao68000/freepdk45_c4m"]="gds"
+ benchRules["ao68000/sky130_c4m"]="gds"
  benchRules["VexRiscv/cmos"]="druc"
  benchRules["VexRiscv/cmos45"]="layout"
  benchRules["ARM/cmos"]="druc lvx"
@@ -51,6 +53,10 @@
    benchs="${benchs} adder/freepdk45_c4m"
    benchs="${benchs} arlet6502/freepdk45_c4m"
    benchs="${benchs} ao68000/freepdk45_c4m"
+ fi
+ if [ -e "/dsk/l1/jpc/coriolis-2.x/src/C4M/open_pdk/C4M.Sky130" ]; then
+   benchs="${benchs} arlet6502/sky130_c4m"
+   benchs="${benchs} ao68000/sky130_c4m"
  fi
 
  benchLog="`pwd`/make-go.log"
