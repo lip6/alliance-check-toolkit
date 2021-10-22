@@ -27,7 +27,7 @@ def scriptMain ( **kw ):
     try:
        #helpers.setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
-        buildChip = True
+        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
         if editor:
@@ -97,21 +97,21 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH, None, 'ioground_7' , 'vss'    )
                      , (IoPin.NORTH, None, 'iopower_7'  , 'iovdd'  )
                      ]
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  , u(  13.0), u(13.0),  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , u( 117.0), u(13.0),  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   , u(  13.0), u(13.0), 16)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  ,    l(50.0), l(50.0),  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , 14*l(50.0), l(50.0),  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   ,    l(50.0), l(50.0), 16)
                      
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , u(130.0),       0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , u(143.0),       0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'     , u(156.0),       0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'rdy'     , u(169.0),       0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , u(182.0),       0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , u(195.0),       0 ,  1)
+                    #, (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , 11*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'     , 12*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'rdy'     , 13*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , 14*l(50.0),      0 ,  1)
+                    #, (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*l(50.0),      0 ,  1)
                      ]
        #ioPinsSpec = []
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-       #arlet6502Conf.cfg.etesian.bloat               = 'disabled'
-        arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
+        arlet6502Conf.cfg.etesian.bloat               = 'disabled'
+       #arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
         arlet6502Conf.cfg.etesian.uniformDensity      = True
         arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
@@ -121,28 +121,27 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
        #arlet6502Conf.cfg.katana.hTracksReservedLocal = 0
        #arlet6502Conf.cfg.katana.vTracksReservedLocal = 0
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 8
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 6
+        arlet6502Conf.cfg.katana.hTracksReservedMin   = 7
+        arlet6502Conf.cfg.katana.vTracksReservedMin   = 5
         arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = True
-        arlet6502Conf.cfg.block.spareSide             = l(7*100.0)
+        arlet6502Conf.cfg.block.spareSide             = l(7*50.0)
         arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
         arlet6502Conf.cfg.chip.useAbstractPads        = True
-        arlet6502Conf.cfg.chip.supplyRailWidth        = l(350.0)
-        arlet6502Conf.cfg.chip.supplyRailPitch        = l(300.0)
+        arlet6502Conf.cfg.chip.supplyRailWidth        = l(250.0)
+        arlet6502Conf.cfg.chip.supplyRailPitch        = l(150.0)
         arlet6502Conf.editor              = editor
         arlet6502Conf.useSpares           = True
-        arlet6502Conf.useClockTree        = True
         arlet6502Conf.useHFNS             = False
         arlet6502Conf.bColumns            = 2
         arlet6502Conf.bRows               = 2
         arlet6502Conf.chipName            = 'chip'
         arlet6502Conf.chipConf.ioPadGauge = 'niolib'
-        arlet6502Conf.coreSize            = ( l( 37*100.0), l( 39*100.0) )
-        arlet6502Conf.chipSize            = ( l(   9400.0), l(  11400.0) )
-        arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
-        arlet6502Conf.useHTree( 'reset_from_pad' )
+        arlet6502Conf.coreSize            = ( l( 35*50.0), l( 39*50.0) )
+        arlet6502Conf.chipSize            = ( l(  5000.0), l(  5000.0) )
+        arlet6502Conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
+        arlet6502Conf.useHTree( 'reset' )
         if buildChip:
             arlet6502ToChip = CoreToChip( arlet6502Conf )
             arlet6502ToChip.buildChip()
