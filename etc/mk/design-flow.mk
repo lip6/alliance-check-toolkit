@@ -2,41 +2,25 @@
  ifneq ($(PDKMASTER_TOP),)
      export NDA_TOP = $(PDKMASTER_TOP)/coriolis/techno
  endif
+ $(info Using PDKMASTER_TOP = "${PDKMASTER_TOP}")
 
  include ./mk/os.mk
  include ./mk/users.mk
  include ./mk/binaries.mk
+ $(info =============== CELLS_TOP="$(CELLS_TOP)")
  include ./mk/alliance.mk
 
 # Some useful functions.
  run_if_older = if [ \( ! -e "$(1)" \) -o \( "$(1)" -ot "$(2)" \) ]; then $(3); else echo "\"$(1)\" newer than \"$(2)\" (skip rule)."; fi 
 
-# Select the Design Kit.
- ifeq ($(DESIGN_KIT),sxlib)
-   include ./mk/dks.d/sxlib.mk
- else ifeq ($(DESIGN_KIT),nsxlib)
-   include ./mk/dks.d/nsxlib.mk
- else ifeq ($(DESIGN_KIT),nsxlib45)
-   include ./mk/dks.d/nsxlib45.mk
- else ifeq ($(DESIGN_KIT),Hibikino)
-   include ./mk/dks.d/sxlib-hibikino.mk
- else ifeq ($(DESIGN_KIT),FreePDK_45)
-   include ./mk/dks.d/FreePDK_45.mk
- else ifeq ($(DESIGN_KIT),phenitec06)
-   include ./mk/dks.d/phenitec06.mk
- else ifeq ($(DESIGN_KIT),cmos45)
-   include ./mk/dks.d/nsxlib45.mk
- else ifeq ($(DESIGN_KIT),c35b4)
-   include ./mk/dks.d/c35b4.mk
- else ifeq ($(DESIGN_KIT),FlexLib018)
-   include ./mk/dks.d/FlexLib018.mk
- else ifeq ($(DESIGN_KIT),FreePDK_C4M45)
-   include ./mk/dks.d/FreePDK_C4M45.mk
- else ifeq ($(DESIGN_KIT),Sky130_C4M)
-   include ./mk/dks.d/Sky130_C4M.mk
+# Load the Design kit preset configuration.
+ ifeq ($(shell if [ -e "./mk/dks.d/$(DESIGN_KIT).mk" ]; then echo "FOUND"; fi),FOUND)
+   $(info Design kit configuration for "$(DESIGN_KIT)" (./mk/dks.d/$(DESIGN_KIT).mk) found.)
+   include ./mk/dks.d/$(DESIGN_KIT).mk
  else
-   $(error DESIGN_KIT variable has not been set or has an unsupported value)
+   $(error Design kit configuration for "$(DESIGN_KIT)" (./mk/dks.d/$(DESIGN_KIT).mk) NOT found.)
  endif
+ $(info CELLS_TOP="$(CELLS_TOP)")
 
 # Select the logical synthesis tools.
  ifeq ($(LOGICAL_SYNTHESIS),Yosys)

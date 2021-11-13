@@ -86,6 +86,5 @@
 
  c2env = eval `$(CORIOLIS_TOP)/etc/coriolis2/coriolisEnv.py $(DEBUG_OPTION)`; $(1)
 
-
 # Standart System binary access paths.
  STANDART_BIN = /usr/bin:/bin:/usr/sbin:/sbin
