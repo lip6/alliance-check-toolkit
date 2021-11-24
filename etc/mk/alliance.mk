@@ -87,8 +87,12 @@ proof-%: %.vbe %_yag.vhd
               *_yag.vbe                 \
               *_yag.vhd                 \
 	          *.pat                     \
+	          *_drc.gds                 \
+	          *_rng.gds                 \
               *_u[0-9][0-9]*            \
               *.pyc                     \
+              *.dat                     \
+              *.plt                     \
               *.log
 
  ifneq ($(CHIP),)
