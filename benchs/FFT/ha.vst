@@ -1,0 +1,37 @@
+entity ha is
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      cout :  out bit;
+      sout :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end ha;
+
+architecture structural of ha is
+component halfadder_x2
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      cout :  out bit;
+      sout :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end component;
+
+
+begin
+
+instance0_halfadder_x2 : halfadder_x2
+   port map ( 
+      a     => a,
+      b     => b,
+      cout  => cout,
+      sout  => sout,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+end structural;

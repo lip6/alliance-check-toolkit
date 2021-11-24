@@ -1,0 +1,167 @@
+entity buf_18bits is
+   port (
+      i   :  in bit_vector(0 to 17);
+      q   :  out bit_vector(0 to 17);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end buf_18bits;
+
+architecture structural of buf_18bits is
+component buf_x2
+   port (
+      i   :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance15_buf_x2 : buf_x2
+   port map ( 
+      i    => i(15),
+      q    => q(15),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance13_buf_x2 : buf_x2
+   port map ( 
+      i    => i(13),
+      q    => q(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance12_buf_x2 : buf_x2
+   port map ( 
+      i    => i(12),
+      q    => q(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance11_buf_x2 : buf_x2
+   port map ( 
+      i    => i(11),
+      q    => q(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_buf_x2 : buf_x2
+   port map ( 
+      i    => i(0),
+      q    => q(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_buf_x2 : buf_x2
+   port map ( 
+      i    => i(2),
+      q    => q(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance4_buf_x2 : buf_x2
+   port map ( 
+      i    => i(4),
+      q    => q(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance6_buf_x2 : buf_x2
+   port map ( 
+      i    => i(6),
+      q    => q(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance8_buf_x2 : buf_x2
+   port map ( 
+      i    => i(8),
+      q    => q(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance17_buf_x2 : buf_x2
+   port map ( 
+      i    => i(17),
+      q    => q(17),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance16_buf_x2 : buf_x2
+   port map ( 
+      i    => i(16),
+      q    => q(16),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance14_buf_x2 : buf_x2
+   port map ( 
+      i    => i(14),
+      q    => q(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_buf_x2 : buf_x2
+   port map ( 
+      i    => i(1),
+      q    => q(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_buf_x2 : buf_x2
+   port map ( 
+      i    => i(3),
+      q    => q(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance5_buf_x2 : buf_x2
+   port map ( 
+      i    => i(5),
+      q    => q(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance7_buf_x2 : buf_x2
+   port map ( 
+      i    => i(7),
+      q    => q(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance9_buf_x2 : buf_x2
+   port map ( 
+      i    => i(9),
+      q    => q(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance10_buf_x2 : buf_x2
+   port map ( 
+      i    => i(10),
+      q    => q(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

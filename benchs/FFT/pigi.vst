@@ -1,0 +1,54 @@
+entity pigi is
+   port (
+      a   :  in bit;
+      b   :  in bit;
+      gi  :  out bit;
+      pi  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end pigi;
+
+architecture structural of pigi is
+component a2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component xr2_x1
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance1_a2_x2 : a2_x2
+   port map ( 
+      i0   => a,
+      i1   => b,
+      q    => gi,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => a,
+      i1   => b,
+      q    => pi,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

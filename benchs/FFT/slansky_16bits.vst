@@ -1,0 +1,1267 @@
+entity slansky_16bits is
+   port (
+      i0  :  in bit_vector(0 to 15);
+      i1  :  in bit_vector(0 to 15);
+      o   :  out bit_vector(0 to 15);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end slansky_16bits;
+
+architecture structural of slansky_16bits is
+component xr2_x1
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component buf_x2
+   port (
+      i   :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component pg
+   port (
+      g   :  out bit;
+      g1  :  in bit;
+      g2  :  in bit;
+      p   :  out bit;
+      p1  :  in bit;
+      p2  :  in bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component pigi
+   port (
+      a   :  in bit;
+      b   :  in bit;
+      gi  :  out bit;
+      pi  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+signal g_0   : bit_vector(0 to 15);
+signal g_1   : bit_vector(0 to 15);
+signal g_2   : bit_vector(0 to 15);
+signal g_3   : bit_vector(0 to 15);
+signal gi_i0 : bit_vector(0 to 15);
+signal p_0   : bit_vector(0 to 15);
+signal p_1   : bit_vector(0 to 15);
+signal p_2   : bit_vector(0 to 15);
+signal p_3   : bit_vector(0 to 15);
+signal pi_i0 : bit_vector(0 to 15);
+
+begin
+
+instance39_pg : pg
+   port map ( 
+      g    => g_0(15),
+      g1   => gi_i0(15),
+      g2   => gi_i0(14),
+      p    => p_0(15),
+      p1   => pi_i0(15),
+      p2   => pi_i0(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance12_pigi : pigi
+   port map ( 
+      a    => i0(12),
+      b    => i1(12),
+      gi   => gi_i0(12),
+      pi   => pi_i0(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance67_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(1),
+      q    => g_2(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance68_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(2),
+      q    => p_2(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance73_pg : pg
+   port map ( 
+      g    => g_2(5),
+      g1   => g_1(5),
+      g2   => g_1(3),
+      p    => p_2(5),
+      p1   => p_1(5),
+      p2   => p_1(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance78_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(9),
+      q    => p_2(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance108_pg : pg
+   port map ( 
+      g    => g_3(12),
+      g1   => g_2(12),
+      g2   => g_2(7),
+      p    => p_3(12),
+      p1   => p_2(12),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance40_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(0),
+      q    => p_1(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance28_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(8),
+      q    => p_0(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance27_pg : pg
+   port map ( 
+      g    => g_0(7),
+      g1   => gi_i0(7),
+      g2   => gi_i0(6),
+      p    => p_0(7),
+      p1   => pi_i0(7),
+      p2   => pi_i0(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance8_pigi : pigi
+   port map ( 
+      a    => i0(8),
+      b    => i1(8),
+      gi   => gi_i0(8),
+      pi   => pi_i0(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_pigi : pigi
+   port map ( 
+      a    => i0(0),
+      b    => i1(0),
+      gi   => gi_i0(0),
+      pi   => pi_i0(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance54_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(9),
+      q    => p_1(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance56_pg : pg
+   port map ( 
+      g    => g_1(10),
+      g1   => g_0(10),
+      g2   => g_0(9),
+      p    => p_1(10),
+      p1   => p_0(10),
+      p2   => p_0(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance122_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(10),
+      i1   => g_3(9),
+      q    => o(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance92_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(2),
+      q    => p_3(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance41_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(0),
+      q    => g_1(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance42_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(1),
+      q    => p_1(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance58_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(12),
+      q    => p_1(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance125_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(13),
+      i1   => g_3(12),
+      q    => o(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance85_pg : pg
+   port map ( 
+      g    => g_2(13),
+      g1   => g_1(13),
+      g2   => g_1(11),
+      p    => p_2(13),
+      p1   => p_1(13),
+      p2   => p_1(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance26_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(6),
+      q    => g_0(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance5_pigi : pigi
+   port map ( 
+      a    => i0(5),
+      b    => i1(5),
+      gi   => gi_i0(5),
+      pi   => pi_i0(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_pigi : pigi
+   port map ( 
+      a    => i0(1),
+      b    => i1(1),
+      gi   => gi_i0(1),
+      pi   => pi_i0(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance16_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(0),
+      q    => p_0(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance47_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(4),
+      q    => g_1(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance52_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(8),
+      q    => p_1(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance71_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(3),
+      q    => g_2(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance77_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(8),
+      q    => g_2(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance118_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(6),
+      i1   => g_3(5),
+      q    => o(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance100_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(6),
+      q    => p_3(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance98_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(5),
+      q    => p_3(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance93_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(2),
+      q    => g_3(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance35_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(12),
+      q    => g_0(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance10_pigi : pigi
+   port map ( 
+      a    => i0(10),
+      b    => i1(10),
+      gi   => gi_i0(10),
+      pi   => pi_i0(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance4_pigi : pigi
+   port map ( 
+      a    => i0(4),
+      b    => i1(4),
+      gi   => gi_i0(4),
+      pi   => pi_i0(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance43_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(1),
+      q    => g_1(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance61_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(13),
+      q    => g_1(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance123_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(11),
+      i1   => g_3(10),
+      q    => o(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance116_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(4),
+      i1   => g_3(3),
+      q    => o(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance84_pg : pg
+   port map ( 
+      g    => g_2(12),
+      g1   => g_1(12),
+      g2   => g_1(11),
+      p    => p_2(12),
+      p1   => p_1(12),
+      p2   => p_1(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance33_pg : pg
+   port map ( 
+      g    => g_0(11),
+      g1   => gi_i0(11),
+      g2   => gi_i0(10),
+      p    => p_0(11),
+      p1   => pi_i0(11),
+      p2   => pi_i0(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_pigi : pigi
+   port map ( 
+      a    => i0(3),
+      b    => i1(3),
+      gi   => gi_i0(3),
+      pi   => pi_i0(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance44_pg : pg
+   port map ( 
+      g    => g_1(2),
+      g1   => g_0(2),
+      g2   => g_0(1),
+      p    => p_1(2),
+      p1   => p_0(2),
+      p2   => p_0(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance59_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(12),
+      q    => g_1(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance63_pg : pg
+   port map ( 
+      g    => g_1(15),
+      g1   => g_0(15),
+      g2   => g_0(13),
+      p    => p_1(15),
+      p1   => p_0(15),
+      p2   => p_0(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance79_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(9),
+      q    => g_2(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance106_pg : pg
+   port map ( 
+      g    => g_3(10),
+      g1   => g_2(10),
+      g2   => g_2(7),
+      p    => p_3(10),
+      p1   => p_2(10),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance105_pg : pg
+   port map ( 
+      g    => g_3(9),
+      g1   => g_2(9),
+      g2   => g_2(7),
+      p    => p_3(9),
+      p1   => p_2(9),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance91_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(1),
+      q    => g_3(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance83_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(11),
+      q    => g_2(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance81_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(10),
+      q    => g_2(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance24_pg : pg
+   port map ( 
+      g    => g_0(5),
+      g1   => gi_i0(5),
+      g2   => gi_i0(4),
+      p    => p_0(5),
+      p1   => pi_i0(5),
+      p2   => pi_i0(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance21_pg : pg
+   port map ( 
+      g    => g_0(3),
+      g1   => gi_i0(3),
+      g2   => gi_i0(2),
+      p    => p_0(3),
+      p1   => pi_i0(3),
+      p2   => pi_i0(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance7_pigi : pigi
+   port map ( 
+      a    => i0(7),
+      b    => i1(7),
+      gi   => gi_i0(7),
+      pi   => pi_i0(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance49_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(5),
+      q    => g_1(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance72_pg : pg
+   port map ( 
+      g    => g_2(4),
+      g1   => g_1(4),
+      g2   => g_1(3),
+      p    => p_2(4),
+      p1   => p_1(4),
+      p2   => p_1(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance119_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(7),
+      i1   => g_3(6),
+      q    => o(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance117_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(5),
+      i1   => g_3(4),
+      q    => o(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance115_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(3),
+      i1   => g_3(2),
+      q    => o(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance113_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(1),
+      i1   => g_3(0),
+      q    => o(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance109_pg : pg
+   port map ( 
+      g    => g_3(13),
+      g1   => g_2(13),
+      g2   => g_2(7),
+      p    => p_3(13),
+      p1   => p_2(13),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance103_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(7),
+      q    => g_3(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance101_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(6),
+      q    => g_3(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance6_pigi : pigi
+   port map ( 
+      a    => i0(6),
+      b    => i1(6),
+      gi   => gi_i0(6),
+      pi   => pi_i0(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_pigi : pigi
+   port map ( 
+      a    => i0(2),
+      b    => i1(2),
+      gi   => gi_i0(2),
+      pi   => pi_i0(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance17_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(0),
+      q    => g_0(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance19_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(2),
+      q    => p_0(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance20_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(2),
+      q    => g_0(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance50_pg : pg
+   port map ( 
+      g    => g_1(6),
+      g1   => g_0(6),
+      g2   => g_0(5),
+      p    => p_1(6),
+      p1   => p_0(6),
+      p2   => p_0(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance53_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(8),
+      q    => g_1(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance65_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(0),
+      q    => g_2(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance75_pg : pg
+   port map ( 
+      g    => g_2(7),
+      g1   => g_1(7),
+      g2   => g_1(3),
+      p    => p_2(7),
+      p1   => p_1(7),
+      p2   => p_1(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance127_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(15),
+      i1   => g_3(14),
+      q    => o(15),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance88_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(0),
+      q    => p_3(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance87_pg : pg
+   port map ( 
+      g    => g_2(15),
+      g1   => g_1(15),
+      g2   => g_1(11),
+      p    => p_2(15),
+      p1   => p_1(15),
+      p2   => p_1(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance22_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(4),
+      q    => p_0(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance14_pigi : pigi
+   port map ( 
+      a    => i0(14),
+      b    => i1(14),
+      gi   => gi_i0(14),
+      pi   => pi_i0(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance15_pigi : pigi
+   port map ( 
+      a    => i0(15),
+      b    => i1(15),
+      gi   => gi_i0(15),
+      pi   => pi_i0(15),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance18_pg : pg
+   port map ( 
+      g    => g_0(1),
+      g1   => gi_i0(1),
+      g2   => gi_i0(0),
+      p    => p_0(1),
+      p1   => pi_i0(1),
+      p2   => pi_i0(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance55_buf_x2 : buf_x2
+   port map ( 
+      i    => g_0(9),
+      q    => g_1(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance107_pg : pg
+   port map ( 
+      g    => g_3(11),
+      g1   => g_2(11),
+      g2   => g_2(7),
+      p    => p_3(11),
+      p1   => p_2(11),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance95_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(3),
+      q    => g_3(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance30_pg : pg
+   port map ( 
+      g    => g_0(9),
+      g1   => gi_i0(9),
+      g2   => gi_i0(8),
+      p    => p_0(9),
+      p1   => pi_i0(9),
+      p2   => pi_i0(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance29_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(8),
+      q    => g_0(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance51_pg : pg
+   port map ( 
+      g    => g_1(7),
+      g1   => g_0(7),
+      g2   => g_0(5),
+      p    => p_1(7),
+      p1   => p_0(7),
+      p2   => p_0(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance57_pg : pg
+   port map ( 
+      g    => g_1(11),
+      g1   => g_0(11),
+      g2   => g_0(9),
+      p    => p_1(11),
+      p1   => p_0(11),
+      p2   => p_0(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance66_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(1),
+      q    => p_2(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance121_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(9),
+      i1   => g_3(8),
+      q    => o(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance25_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(6),
+      q    => p_0(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance76_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(8),
+      q    => p_2(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance114_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(2),
+      i1   => g_3(1),
+      q    => o(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance112_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(0),
+      q    => o(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance104_pg : pg
+   port map ( 
+      g    => g_3(8),
+      g1   => g_2(8),
+      g2   => g_2(7),
+      p    => p_3(8),
+      p1   => p_2(8),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance94_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(3),
+      q    => p_3(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance89_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(0),
+      q    => g_3(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance11_pigi : pigi
+   port map ( 
+      a    => i0(11),
+      b    => i1(11),
+      gi   => gi_i0(11),
+      pi   => pi_i0(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance13_pigi : pigi
+   port map ( 
+      a    => i0(13),
+      b    => i1(13),
+      gi   => gi_i0(13),
+      pi   => pi_i0(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance45_pg : pg
+   port map ( 
+      g    => g_1(3),
+      g1   => g_0(3),
+      g2   => g_0(1),
+      p    => p_1(3),
+      p1   => p_0(3),
+      p2   => p_0(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance64_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(0),
+      q    => p_2(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance37_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(14),
+      q    => p_0(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance34_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(12),
+      q    => p_0(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance36_pg : pg
+   port map ( 
+      g    => g_0(13),
+      g1   => gi_i0(13),
+      g2   => gi_i0(12),
+      p    => p_0(13),
+      p1   => pi_i0(13),
+      p2   => pi_i0(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance9_pigi : pigi
+   port map ( 
+      a    => i0(9),
+      b    => i1(9),
+      gi   => gi_i0(9),
+      pi   => pi_i0(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance70_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(3),
+      q    => p_2(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance74_pg : pg
+   port map ( 
+      g    => g_2(6),
+      g1   => g_1(6),
+      g2   => g_1(3),
+      p    => p_2(6),
+      p1   => p_1(6),
+      p2   => p_1(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance126_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(14),
+      i1   => g_3(13),
+      q    => o(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance124_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(12),
+      i1   => g_3(11),
+      q    => o(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance111_pg : pg
+   port map ( 
+      g    => g_3(15),
+      g1   => g_2(15),
+      g2   => g_2(7),
+      p    => p_3(15),
+      p1   => p_2(15),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance97_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(4),
+      q    => g_3(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance96_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(4),
+      q    => p_3(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance90_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(1),
+      q    => p_3(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance82_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(11),
+      q    => p_2(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance32_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(10),
+      q    => g_0(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance31_buf_x2 : buf_x2
+   port map ( 
+      i    => pi_i0(10),
+      q    => p_0(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance46_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(4),
+      q    => p_1(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance120_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => pi_i0(8),
+      i1   => g_3(7),
+      q    => o(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance110_pg : pg
+   port map ( 
+      g    => g_3(14),
+      g1   => g_2(14),
+      g2   => g_2(7),
+      p    => p_3(14),
+      p1   => p_2(14),
+      p2   => p_2(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance102_buf_x2 : buf_x2
+   port map ( 
+      i    => p_2(7),
+      q    => p_3(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance99_buf_x2 : buf_x2
+   port map ( 
+      i    => g_2(5),
+      q    => g_3(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance86_pg : pg
+   port map ( 
+      g    => g_2(14),
+      g1   => g_1(14),
+      g2   => g_1(11),
+      p    => p_2(14),
+      p1   => p_1(14),
+      p2   => p_1(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance38_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(14),
+      q    => g_0(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance23_buf_x2 : buf_x2
+   port map ( 
+      i    => gi_i0(4),
+      q    => g_0(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance48_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(5),
+      q    => p_1(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance60_buf_x2 : buf_x2
+   port map ( 
+      i    => p_0(13),
+      q    => p_1(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance62_pg : pg
+   port map ( 
+      g    => g_1(14),
+      g1   => g_0(14),
+      g2   => g_0(13),
+      p    => p_1(14),
+      p1   => p_0(14),
+      p2   => p_0(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance69_buf_x2 : buf_x2
+   port map ( 
+      i    => g_1(2),
+      q    => g_2(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance80_buf_x2 : buf_x2
+   port map ( 
+      i    => p_1(10),
+      q    => p_2(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

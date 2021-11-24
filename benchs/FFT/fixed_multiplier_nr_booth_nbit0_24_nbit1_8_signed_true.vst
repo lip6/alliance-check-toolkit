@@ -1,0 +1,1468 @@
+entity fixed_multiplier_nr_booth_nbit0_24_nbit1_8_signed_true is
+   port (
+      i0  :  in bit_vector(0 to 23);
+      i1  :  in bit_vector(0 to 7);
+      o   :  out bit_vector(0 to 31);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end fixed_multiplier_nr_booth_nbit0_24_nbit1_8_signed_true;
+
+architecture structural of fixed_multiplier_nr_booth_nbit0_24_nbit1_8_signed_true is
+component zero_x0
+   port (
+      nq  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component booth_mux
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      comp :  in bit;
+      deca :  in bit;
+      nul  :  in bit;
+      pp   :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end component;
+
+component extend_26_30_signed
+   port (
+      i   :  in bit_vector(0 to 25);
+      o   :  out bit_vector(0 to 29);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component extend_26_28_signed
+   port (
+      i   :  in bit_vector(0 to 25);
+      o   :  out bit_vector(0 to 27);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component extend_26_32_signed
+   port (
+      i   :  in bit_vector(0 to 25);
+      o   :  out bit_vector(0 to 31);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component booth_decoder
+   port (
+      b      :  in bit;
+      bminus :  in bit;
+      bplus  :  in bit;
+      comp   :  out bit;
+      deca   :  out bit;
+      nul    :  out bit;
+      vdd    :  in bit;
+      vss    :  in bit
+   );
+end component;
+
+component dadda_2fd9327177d516083fa12cfcc72d381e
+   port (
+      c0  :  in bit;
+      c1  :  in bit;
+      c2  :  in bit;
+      c3  :  in bit;
+      pp0 :  in bit_vector(0 to 31);
+      pp1 :  in bit_vector(0 to 29);
+      pp2 :  in bit_vector(0 to 27);
+      pp3 :  in bit_vector(0 to 25);
+      s0  :  out bit_vector(0 to 33);
+      s1  :  out bit_vector(0 to 33);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component slansky_32bits
+   port (
+      i0  :  in bit_vector(0 to 31);
+      i1  :  in bit_vector(0 to 31);
+      o   :  out bit_vector(0 to 31);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+signal comp                    : bit_vector(0 to 3);
+signal deca                    : bit_vector(0 to 3);
+signal matrice_0               : bit_vector(0 to 25);
+signal matrice_1               : bit_vector(0 to 25);
+signal matrice_2               : bit_vector(0 to 25);
+signal matrice_3               : bit_vector(0 to 25);
+signal nul                     : bit_vector(0 to 3);
+signal output_sum_0            : bit_vector(0 to 33);
+signal output_sum_1            : bit_vector(0 to 33);
+signal produits_partiels_0_bis : bit_vector(0 to 31);
+signal produits_partiels_1_bis : bit_vector(0 to 29);
+signal produits_partiels_2_bis : bit_vector(0 to 27);
+signal zero                    : bit;
+
+begin
+
+booth_mux_3_1 : booth_mux
+   port map ( 
+      a     => i0(0),
+      b     => i0(1),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(1),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_9 : booth_mux
+   port map ( 
+      a     => i0(8),
+      b     => i0(9),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(9),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_20 : booth_mux
+   port map ( 
+      a     => i0(19),
+      b     => i0(20),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(20),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_decocer_0 : booth_decoder
+   port map ( 
+      b       => i1(0),
+      bminus  => zero,
+      bplus   => i1(1),
+      comp    => comp(0),
+      deca    => deca(0),
+      nul     => nul(0),
+      vdd     => vdd,
+      vss     => vss
+   );
+
+booth_mux_1_23 : booth_mux
+   port map ( 
+      a     => i0(22),
+      b     => i0(23),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(23),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_23 : booth_mux
+   port map ( 
+      a     => i0(22),
+      b     => i0(23),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(23),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_15 : booth_mux
+   port map ( 
+      a     => i0(14),
+      b     => i0(15),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(15),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_2 : booth_mux
+   port map ( 
+      a     => i0(1),
+      b     => i0(2),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(2),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_3 : booth_mux
+   port map ( 
+      a     => i0(2),
+      b     => i0(3),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(3),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_22 : booth_mux
+   port map ( 
+      a     => i0(21),
+      b     => i0(22),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(22),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_3 : booth_mux
+   port map ( 
+      a     => i0(2),
+      b     => i0(3),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(3),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_14 : booth_mux
+   port map ( 
+      a     => i0(13),
+      b     => i0(14),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(14),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_1 : booth_mux
+   port map ( 
+      a     => i0(0),
+      b     => i0(1),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(1),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_2 : booth_mux
+   port map ( 
+      a     => i0(1),
+      b     => i0(2),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(2),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_8 : booth_mux
+   port map ( 
+      a     => i0(7),
+      b     => i0(8),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(8),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_18 : booth_mux
+   port map ( 
+      a     => i0(17),
+      b     => i0(18),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(18),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_25 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(25),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_7 : booth_mux
+   port map ( 
+      a     => i0(6),
+      b     => i0(7),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(7),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_8 : booth_mux
+   port map ( 
+      a     => i0(7),
+      b     => i0(8),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(8),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance0_zero_x0 : zero_x0
+   port map ( 
+      nq   => zero,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+booth_mux_0_17 : booth_mux
+   port map ( 
+      a     => i0(16),
+      b     => i0(17),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(17),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_22 : booth_mux
+   port map ( 
+      a     => i0(21),
+      b     => i0(22),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(22),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_21 : booth_mux
+   port map ( 
+      a     => i0(20),
+      b     => i0(21),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(21),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_20 : booth_mux
+   port map ( 
+      a     => i0(19),
+      b     => i0(20),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(20),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_1 : booth_mux
+   port map ( 
+      a     => i0(0),
+      b     => i0(1),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(1),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_7 : booth_mux
+   port map ( 
+      a     => i0(6),
+      b     => i0(7),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(7),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_2 : booth_mux
+   port map ( 
+      a     => i0(1),
+      b     => i0(2),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(2),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_1 : booth_mux
+   port map ( 
+      a     => i0(0),
+      b     => i0(1),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(1),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_16 : booth_mux
+   port map ( 
+      a     => i0(15),
+      b     => i0(16),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(16),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_13 : booth_mux
+   port map ( 
+      a     => i0(12),
+      b     => i0(13),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(13),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_22 : booth_mux
+   port map ( 
+      a     => i0(21),
+      b     => i0(22),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(22),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_14 : booth_mux
+   port map ( 
+      a     => i0(13),
+      b     => i0(14),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(14),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_2 : booth_mux
+   port map ( 
+      a     => i0(1),
+      b     => i0(2),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(2),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_24 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(24),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_5 : booth_mux
+   port map ( 
+      a     => i0(4),
+      b     => i0(5),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(5),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_4 : booth_mux
+   port map ( 
+      a     => i0(3),
+      b     => i0(4),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(4),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_0 : booth_mux
+   port map ( 
+      a     => zero,
+      b     => i0(0),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(0),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_13 : booth_mux
+   port map ( 
+      a     => i0(12),
+      b     => i0(13),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(13),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_20 : booth_mux
+   port map ( 
+      a     => i0(19),
+      b     => i0(20),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(20),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_7 : booth_mux
+   port map ( 
+      a     => i0(6),
+      b     => i0(7),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(7),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance5_slansky_32bits : slansky_32bits
+   port map ( 
+      i0   => output_sum_0(0)&output_sum_0(1)&output_sum_0(2)&output_sum_0(3)&output_sum_0(4)&output_sum_0(5)&output_sum_0(6)&output_sum_0(7)&output_sum_0(8)&output_sum_0(9)&output_sum_0(10)&output_sum_0(11)&output_sum_0(12)&output_sum_0(13)&output_sum_0(14)&output_sum_0(15)&output_sum_0(16)&output_sum_0(17)&output_sum_0(18)&output_sum_0(19)&output_sum_0(20)&output_sum_0(21)&output_sum_0(22)&output_sum_0(23)&output_sum_0(24)&output_sum_0(25)&output_sum_0(26)&output_sum_0(27)&output_sum_0(28)&output_sum_0(29)&output_sum_0(30)&output_sum_0(31),
+      i1   => output_sum_1(0)&output_sum_1(1)&output_sum_1(2)&output_sum_1(3)&output_sum_1(4)&output_sum_1(5)&output_sum_1(6)&output_sum_1(7)&output_sum_1(8)&output_sum_1(9)&output_sum_1(10)&output_sum_1(11)&output_sum_1(12)&output_sum_1(13)&output_sum_1(14)&output_sum_1(15)&output_sum_1(16)&output_sum_1(17)&output_sum_1(18)&output_sum_1(19)&output_sum_1(20)&output_sum_1(21)&output_sum_1(22)&output_sum_1(23)&output_sum_1(24)&output_sum_1(25)&output_sum_1(26)&output_sum_1(27)&output_sum_1(28)&output_sum_1(29)&output_sum_1(30)&output_sum_1(31),
+      o    => o(0)&o(1)&o(2)&o(3)&o(4)&o(5)&o(6)&o(7)&o(8)&o(9)&o(10)&o(11)&o(12)&o(13)&o(14)&o(15)&o(16)&o(17)&o(18)&o(19)&o(20)&o(21)&o(22)&o(23)&o(24)&o(25)&o(26)&o(27)&o(28)&o(29)&o(30)&o(31),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_extend_26_28_signed : extend_26_28_signed
+   port map ( 
+      i    => matrice_2(0)&matrice_2(1)&matrice_2(2)&matrice_2(3)&matrice_2(4)&matrice_2(5)&matrice_2(6)&matrice_2(7)&matrice_2(8)&matrice_2(9)&matrice_2(10)&matrice_2(11)&matrice_2(12)&matrice_2(13)&matrice_2(14)&matrice_2(15)&matrice_2(16)&matrice_2(17)&matrice_2(18)&matrice_2(19)&matrice_2(20)&matrice_2(21)&matrice_2(22)&matrice_2(23)&matrice_2(24)&matrice_2(25),
+      o    => produits_partiels_2_bis(0)&produits_partiels_2_bis(1)&produits_partiels_2_bis(2)&produits_partiels_2_bis(3)&produits_partiels_2_bis(4)&produits_partiels_2_bis(5)&produits_partiels_2_bis(6)&produits_partiels_2_bis(7)&produits_partiels_2_bis(8)&produits_partiels_2_bis(9)&produits_partiels_2_bis(10)&produits_partiels_2_bis(11)&produits_partiels_2_bis(12)&produits_partiels_2_bis(13)&produits_partiels_2_bis(14)&produits_partiels_2_bis(15)&produits_partiels_2_bis(16)&produits_partiels_2_bis(17)&produits_partiels_2_bis(18)&produits_partiels_2_bis(19)&produits_partiels_2_bis(20)&produits_partiels_2_bis(21)&produits_partiels_2_bis(22)&produits_partiels_2_bis(23)&produits_partiels_2_bis(24)&produits_partiels_2_bis(25)&produits_partiels_2_bis(26)&produits_partiels_2_bis(27),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+booth_mux_3_24 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(24),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_9 : booth_mux
+   port map ( 
+      a     => i0(8),
+      b     => i0(9),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(9),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_6 : booth_mux
+   port map ( 
+      a     => i0(5),
+      b     => i0(6),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(6),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_decocer_3 : booth_decoder
+   port map ( 
+      b       => i1(6),
+      bminus  => i1(5),
+      bplus   => i1(7),
+      comp    => comp(3),
+      deca    => deca(3),
+      nul     => nul(3),
+      vdd     => vdd,
+      vss     => vss
+   );
+
+booth_mux_1_7 : booth_mux
+   port map ( 
+      a     => i0(6),
+      b     => i0(7),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(7),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_6 : booth_mux
+   port map ( 
+      a     => i0(5),
+      b     => i0(6),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(6),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_15 : booth_mux
+   port map ( 
+      a     => i0(14),
+      b     => i0(15),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(15),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_12 : booth_mux
+   port map ( 
+      a     => i0(11),
+      b     => i0(12),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(12),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance2_extend_26_30_signed : extend_26_30_signed
+   port map ( 
+      i    => matrice_1(0)&matrice_1(1)&matrice_1(2)&matrice_1(3)&matrice_1(4)&matrice_1(5)&matrice_1(6)&matrice_1(7)&matrice_1(8)&matrice_1(9)&matrice_1(10)&matrice_1(11)&matrice_1(12)&matrice_1(13)&matrice_1(14)&matrice_1(15)&matrice_1(16)&matrice_1(17)&matrice_1(18)&matrice_1(19)&matrice_1(20)&matrice_1(21)&matrice_1(22)&matrice_1(23)&matrice_1(24)&matrice_1(25),
+      o    => produits_partiels_1_bis(0)&produits_partiels_1_bis(1)&produits_partiels_1_bis(2)&produits_partiels_1_bis(3)&produits_partiels_1_bis(4)&produits_partiels_1_bis(5)&produits_partiels_1_bis(6)&produits_partiels_1_bis(7)&produits_partiels_1_bis(8)&produits_partiels_1_bis(9)&produits_partiels_1_bis(10)&produits_partiels_1_bis(11)&produits_partiels_1_bis(12)&produits_partiels_1_bis(13)&produits_partiels_1_bis(14)&produits_partiels_1_bis(15)&produits_partiels_1_bis(16)&produits_partiels_1_bis(17)&produits_partiels_1_bis(18)&produits_partiels_1_bis(19)&produits_partiels_1_bis(20)&produits_partiels_1_bis(21)&produits_partiels_1_bis(22)&produits_partiels_1_bis(23)&produits_partiels_1_bis(24)&produits_partiels_1_bis(25)&produits_partiels_1_bis(26)&produits_partiels_1_bis(27)&produits_partiels_1_bis(28)&produits_partiels_1_bis(29),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+booth_mux_3_19 : booth_mux
+   port map ( 
+      a     => i0(18),
+      b     => i0(19),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(19),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_decocer_2 : booth_decoder
+   port map ( 
+      b       => i1(4),
+      bminus  => i1(3),
+      bplus   => i1(5),
+      comp    => comp(2),
+      deca    => deca(2),
+      nul     => nul(2),
+      vdd     => vdd,
+      vss     => vss
+   );
+
+booth_mux_2_6 : booth_mux
+   port map ( 
+      a     => i0(5),
+      b     => i0(6),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(6),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_10 : booth_mux
+   port map ( 
+      a     => i0(9),
+      b     => i0(10),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(10),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_13 : booth_mux
+   port map ( 
+      a     => i0(12),
+      b     => i0(13),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(13),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_14 : booth_mux
+   port map ( 
+      a     => i0(13),
+      b     => i0(14),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(14),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_12 : booth_mux
+   port map ( 
+      a     => i0(11),
+      b     => i0(12),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(12),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_21 : booth_mux
+   port map ( 
+      a     => i0(20),
+      b     => i0(21),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(21),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_23 : booth_mux
+   port map ( 
+      a     => i0(22),
+      b     => i0(23),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(23),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_5 : booth_mux
+   port map ( 
+      a     => i0(4),
+      b     => i0(5),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(5),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_6 : booth_mux
+   port map ( 
+      a     => i0(5),
+      b     => i0(6),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(6),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_decocer_1 : booth_decoder
+   port map ( 
+      b       => i1(2),
+      bminus  => i1(1),
+      bplus   => i1(3),
+      comp    => comp(1),
+      deca    => deca(1),
+      nul     => nul(1),
+      vdd     => vdd,
+      vss     => vss
+   );
+
+booth_mux_2_11 : booth_mux
+   port map ( 
+      a     => i0(10),
+      b     => i0(11),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(11),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_17 : booth_mux
+   port map ( 
+      a     => i0(16),
+      b     => i0(17),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(17),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_18 : booth_mux
+   port map ( 
+      a     => i0(17),
+      b     => i0(18),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(18),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_21 : booth_mux
+   port map ( 
+      a     => i0(20),
+      b     => i0(21),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(21),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_9 : booth_mux
+   port map ( 
+      a     => i0(8),
+      b     => i0(9),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(9),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_11 : booth_mux
+   port map ( 
+      a     => i0(10),
+      b     => i0(11),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(11),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_13 : booth_mux
+   port map ( 
+      a     => i0(12),
+      b     => i0(13),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(13),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_17 : booth_mux
+   port map ( 
+      a     => i0(16),
+      b     => i0(17),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(17),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_19 : booth_mux
+   port map ( 
+      a     => i0(18),
+      b     => i0(19),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(19),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_5 : booth_mux
+   port map ( 
+      a     => i0(4),
+      b     => i0(5),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(5),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_17 : booth_mux
+   port map ( 
+      a     => i0(16),
+      b     => i0(17),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(17),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_12 : booth_mux
+   port map ( 
+      a     => i0(11),
+      b     => i0(12),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(12),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_11 : booth_mux
+   port map ( 
+      a     => i0(10),
+      b     => i0(11),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(11),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_25 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(25),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_14 : booth_mux
+   port map ( 
+      a     => i0(13),
+      b     => i0(14),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(14),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_16 : booth_mux
+   port map ( 
+      a     => i0(15),
+      b     => i0(16),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(16),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_20 : booth_mux
+   port map ( 
+      a     => i0(19),
+      b     => i0(20),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(20),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_21 : booth_mux
+   port map ( 
+      a     => i0(20),
+      b     => i0(21),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(21),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_4 : booth_mux
+   port map ( 
+      a     => i0(3),
+      b     => i0(4),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(4),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_25 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(25),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_5 : booth_mux
+   port map ( 
+      a     => i0(4),
+      b     => i0(5),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(5),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_16 : booth_mux
+   port map ( 
+      a     => i0(15),
+      b     => i0(16),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(16),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_22 : booth_mux
+   port map ( 
+      a     => i0(21),
+      b     => i0(22),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(22),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_0 : booth_mux
+   port map ( 
+      a     => zero,
+      b     => i0(0),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(0),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_8 : booth_mux
+   port map ( 
+      a     => i0(7),
+      b     => i0(8),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(8),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_18 : booth_mux
+   port map ( 
+      a     => i0(17),
+      b     => i0(18),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(18),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_18 : booth_mux
+   port map ( 
+      a     => i0(17),
+      b     => i0(18),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(18),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_4 : booth_mux
+   port map ( 
+      a     => i0(3),
+      b     => i0(4),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(4),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_24 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(24),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_16 : booth_mux
+   port map ( 
+      a     => i0(15),
+      b     => i0(16),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(16),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_19 : booth_mux
+   port map ( 
+      a     => i0(18),
+      b     => i0(19),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(19),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_24 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(24),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_15 : booth_mux
+   port map ( 
+      a     => i0(14),
+      b     => i0(15),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(15),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_19 : booth_mux
+   port map ( 
+      a     => i0(18),
+      b     => i0(19),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(19),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance4_dadda_2fd9327177d516083fa12cfcc72d381e : dadda_2fd9327177d516083fa12cfcc72d381e
+   port map ( 
+      c0   => comp(0),
+      c1   => comp(1),
+      c2   => comp(2),
+      c3   => comp(3),
+      pp0  => produits_partiels_0_bis(0)&produits_partiels_0_bis(1)&produits_partiels_0_bis(2)&produits_partiels_0_bis(3)&produits_partiels_0_bis(4)&produits_partiels_0_bis(5)&produits_partiels_0_bis(6)&produits_partiels_0_bis(7)&produits_partiels_0_bis(8)&produits_partiels_0_bis(9)&produits_partiels_0_bis(10)&produits_partiels_0_bis(11)&produits_partiels_0_bis(12)&produits_partiels_0_bis(13)&produits_partiels_0_bis(14)&produits_partiels_0_bis(15)&produits_partiels_0_bis(16)&produits_partiels_0_bis(17)&produits_partiels_0_bis(18)&produits_partiels_0_bis(19)&produits_partiels_0_bis(20)&produits_partiels_0_bis(21)&produits_partiels_0_bis(22)&produits_partiels_0_bis(23)&produits_partiels_0_bis(24)&produits_partiels_0_bis(25)&produits_partiels_0_bis(26)&produits_partiels_0_bis(27)&produits_partiels_0_bis(28)&produits_partiels_0_bis(29)&produits_partiels_0_bis(30)&produits_partiels_0_bis(31),
+      pp1  => produits_partiels_1_bis(0)&produits_partiels_1_bis(1)&produits_partiels_1_bis(2)&produits_partiels_1_bis(3)&produits_partiels_1_bis(4)&produits_partiels_1_bis(5)&produits_partiels_1_bis(6)&produits_partiels_1_bis(7)&produits_partiels_1_bis(8)&produits_partiels_1_bis(9)&produits_partiels_1_bis(10)&produits_partiels_1_bis(11)&produits_partiels_1_bis(12)&produits_partiels_1_bis(13)&produits_partiels_1_bis(14)&produits_partiels_1_bis(15)&produits_partiels_1_bis(16)&produits_partiels_1_bis(17)&produits_partiels_1_bis(18)&produits_partiels_1_bis(19)&produits_partiels_1_bis(20)&produits_partiels_1_bis(21)&produits_partiels_1_bis(22)&produits_partiels_1_bis(23)&produits_partiels_1_bis(24)&produits_partiels_1_bis(25)&produits_partiels_1_bis(26)&produits_partiels_1_bis(27)&produits_partiels_1_bis(28)&produits_partiels_1_bis(29),
+      pp2  => produits_partiels_2_bis(0)&produits_partiels_2_bis(1)&produits_partiels_2_bis(2)&produits_partiels_2_bis(3)&produits_partiels_2_bis(4)&produits_partiels_2_bis(5)&produits_partiels_2_bis(6)&produits_partiels_2_bis(7)&produits_partiels_2_bis(8)&produits_partiels_2_bis(9)&produits_partiels_2_bis(10)&produits_partiels_2_bis(11)&produits_partiels_2_bis(12)&produits_partiels_2_bis(13)&produits_partiels_2_bis(14)&produits_partiels_2_bis(15)&produits_partiels_2_bis(16)&produits_partiels_2_bis(17)&produits_partiels_2_bis(18)&produits_partiels_2_bis(19)&produits_partiels_2_bis(20)&produits_partiels_2_bis(21)&produits_partiels_2_bis(22)&produits_partiels_2_bis(23)&produits_partiels_2_bis(24)&produits_partiels_2_bis(25)&produits_partiels_2_bis(26)&produits_partiels_2_bis(27),
+      pp3  => matrice_3(0)&matrice_3(1)&matrice_3(2)&matrice_3(3)&matrice_3(4)&matrice_3(5)&matrice_3(6)&matrice_3(7)&matrice_3(8)&matrice_3(9)&matrice_3(10)&matrice_3(11)&matrice_3(12)&matrice_3(13)&matrice_3(14)&matrice_3(15)&matrice_3(16)&matrice_3(17)&matrice_3(18)&matrice_3(19)&matrice_3(20)&matrice_3(21)&matrice_3(22)&matrice_3(23)&matrice_3(24)&matrice_3(25),
+      s0   => output_sum_0(0)&output_sum_0(1)&output_sum_0(2)&output_sum_0(3)&output_sum_0(4)&output_sum_0(5)&output_sum_0(6)&output_sum_0(7)&output_sum_0(8)&output_sum_0(9)&output_sum_0(10)&output_sum_0(11)&output_sum_0(12)&output_sum_0(13)&output_sum_0(14)&output_sum_0(15)&output_sum_0(16)&output_sum_0(17)&output_sum_0(18)&output_sum_0(19)&output_sum_0(20)&output_sum_0(21)&output_sum_0(22)&output_sum_0(23)&output_sum_0(24)&output_sum_0(25)&output_sum_0(26)&output_sum_0(27)&output_sum_0(28)&output_sum_0(29)&output_sum_0(30)&output_sum_0(31)&output_sum_0(32)&output_sum_0(33),
+      s1   => output_sum_1(0)&output_sum_1(1)&output_sum_1(2)&output_sum_1(3)&output_sum_1(4)&output_sum_1(5)&output_sum_1(6)&output_sum_1(7)&output_sum_1(8)&output_sum_1(9)&output_sum_1(10)&output_sum_1(11)&output_sum_1(12)&output_sum_1(13)&output_sum_1(14)&output_sum_1(15)&output_sum_1(16)&output_sum_1(17)&output_sum_1(18)&output_sum_1(19)&output_sum_1(20)&output_sum_1(21)&output_sum_1(22)&output_sum_1(23)&output_sum_1(24)&output_sum_1(25)&output_sum_1(26)&output_sum_1(27)&output_sum_1(28)&output_sum_1(29)&output_sum_1(30)&output_sum_1(31)&output_sum_1(32)&output_sum_1(33),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+booth_mux_3_11 : booth_mux
+   port map ( 
+      a     => i0(10),
+      b     => i0(11),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(11),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_3 : booth_mux
+   port map ( 
+      a     => i0(2),
+      b     => i0(3),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(3),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_10 : booth_mux
+   port map ( 
+      a     => i0(9),
+      b     => i0(10),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(10),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_4 : booth_mux
+   port map ( 
+      a     => i0(3),
+      b     => i0(4),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(4),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_23 : booth_mux
+   port map ( 
+      a     => i0(22),
+      b     => i0(23),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(23),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_10 : booth_mux
+   port map ( 
+      a     => i0(9),
+      b     => i0(10),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(10),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_15 : booth_mux
+   port map ( 
+      a     => i0(14),
+      b     => i0(15),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(15),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_0 : booth_mux
+   port map ( 
+      a     => zero,
+      b     => i0(0),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(0),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_9 : booth_mux
+   port map ( 
+      a     => i0(8),
+      b     => i0(9),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(9),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance1_extend_26_32_signed : extend_26_32_signed
+   port map ( 
+      i    => matrice_0(0)&matrice_0(1)&matrice_0(2)&matrice_0(3)&matrice_0(4)&matrice_0(5)&matrice_0(6)&matrice_0(7)&matrice_0(8)&matrice_0(9)&matrice_0(10)&matrice_0(11)&matrice_0(12)&matrice_0(13)&matrice_0(14)&matrice_0(15)&matrice_0(16)&matrice_0(17)&matrice_0(18)&matrice_0(19)&matrice_0(20)&matrice_0(21)&matrice_0(22)&matrice_0(23)&matrice_0(24)&matrice_0(25),
+      o    => produits_partiels_0_bis(0)&produits_partiels_0_bis(1)&produits_partiels_0_bis(2)&produits_partiels_0_bis(3)&produits_partiels_0_bis(4)&produits_partiels_0_bis(5)&produits_partiels_0_bis(6)&produits_partiels_0_bis(7)&produits_partiels_0_bis(8)&produits_partiels_0_bis(9)&produits_partiels_0_bis(10)&produits_partiels_0_bis(11)&produits_partiels_0_bis(12)&produits_partiels_0_bis(13)&produits_partiels_0_bis(14)&produits_partiels_0_bis(15)&produits_partiels_0_bis(16)&produits_partiels_0_bis(17)&produits_partiels_0_bis(18)&produits_partiels_0_bis(19)&produits_partiels_0_bis(20)&produits_partiels_0_bis(21)&produits_partiels_0_bis(22)&produits_partiels_0_bis(23)&produits_partiels_0_bis(24)&produits_partiels_0_bis(25)&produits_partiels_0_bis(26)&produits_partiels_0_bis(27)&produits_partiels_0_bis(28)&produits_partiels_0_bis(29)&produits_partiels_0_bis(30)&produits_partiels_0_bis(31),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+booth_mux_3_10 : booth_mux
+   port map ( 
+      a     => i0(9),
+      b     => i0(10),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(10),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_3_8 : booth_mux
+   port map ( 
+      a     => i0(7),
+      b     => i0(8),
+      comp  => comp(3),
+      deca  => deca(3),
+      nul   => nul(3),
+      pp    => matrice_3(8),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_1_0 : booth_mux
+   port map ( 
+      a     => zero,
+      b     => i0(0),
+      comp  => comp(1),
+      deca  => deca(1),
+      nul   => nul(1),
+      pp    => matrice_1(0),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_25 : booth_mux
+   port map ( 
+      a     => i0(23),
+      b     => i0(23),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(25),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_0_12 : booth_mux
+   port map ( 
+      a     => i0(11),
+      b     => i0(12),
+      comp  => comp(0),
+      deca  => deca(0),
+      nul   => nul(0),
+      pp    => matrice_0(12),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+booth_mux_2_3 : booth_mux
+   port map ( 
+      a     => i0(2),
+      b     => i0(3),
+      comp  => comp(2),
+      deca  => deca(2),
+      nul   => nul(2),
+      pp    => matrice_2(3),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+end structural;

@@ -1,0 +1,56 @@
+entity extend_10_12_signed is
+   port (
+      i   :  in bit_vector(0 to 9);
+      o   :  out bit_vector(0 to 11);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end extend_10_12_signed;
+
+architecture structural of extend_10_12_signed is
+component buf_x2
+   port (
+      i   :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component buf_10bits
+   port (
+      i   :  in bit_vector(0 to 9);
+      q   :  out bit_vector(0 to 9);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance2_buf_x2 : buf_x2
+   port map ( 
+      i    => i(9),
+      q    => o(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_buf_x2 : buf_x2
+   port map ( 
+      i    => i(9),
+      q    => o(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_buf_10bits : buf_10bits
+   port map ( 
+      i    => i(0)&i(1)&i(2)&i(3)&i(4)&i(5)&i(6)&i(7)&i(8)&i(9),
+      q    => o(0)&o(1)&o(2)&o(3)&o(4)&o(5)&o(6)&o(7)&o(8)&o(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

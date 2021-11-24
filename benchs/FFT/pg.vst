@@ -1,0 +1,66 @@
+entity pg is
+   port (
+      g   :  out bit;
+      g1  :  in bit;
+      g2  :  in bit;
+      p   :  out bit;
+      p1  :  in bit;
+      p2  :  in bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end pg;
+
+architecture structural of pg is
+component o2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component a2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+signal net_out_1 : bit;
+
+begin
+
+instance2_o2_x2 : o2_x2
+   port map ( 
+      i0   => g1,
+      i1   => net_out_1,
+      q    => g,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_a2_x2 : a2_x2
+   port map ( 
+      i0   => g2,
+      i1   => p1,
+      q    => net_out_1,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_a2_x2 : a2_x2
+   port map ( 
+      i0   => p1,
+      i1   => p2,
+      q    => p,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

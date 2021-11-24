@@ -1,0 +1,1120 @@
+entity dadda_2fd9327177d516083fa12cfcc72d381e is
+   port (
+      c0  :  in bit;
+      c1  :  in bit;
+      c2  :  in bit;
+      c3  :  in bit;
+      pp0 :  in bit_vector(0 to 31);
+      pp1 :  in bit_vector(0 to 29);
+      pp2 :  in bit_vector(0 to 27);
+      pp3 :  in bit_vector(0 to 25);
+      s0  :  out bit_vector(0 to 33);
+      s1  :  out bit_vector(0 to 33);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end dadda_2fd9327177d516083fa12cfcc72d381e;
+
+architecture structural of dadda_2fd9327177d516083fa12cfcc72d381e is
+component zero_x0
+   port (
+      nq  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component buf_x2
+   port (
+      i   :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component fa
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      cin  :  in bit;
+      cout :  out bit;
+      sout :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end component;
+
+component ha
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      cout :  out bit;
+      sout :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end component;
+
+signal cout_fa1  : bit;
+signal cout_fa10 : bit;
+signal cout_fa11 : bit;
+signal cout_fa12 : bit;
+signal cout_fa13 : bit;
+signal cout_fa14 : bit;
+signal cout_fa15 : bit;
+signal cout_fa16 : bit;
+signal cout_fa17 : bit;
+signal cout_fa18 : bit;
+signal cout_fa19 : bit;
+signal cout_fa2  : bit;
+signal cout_fa20 : bit;
+signal cout_fa21 : bit;
+signal cout_fa22 : bit;
+signal cout_fa23 : bit;
+signal cout_fa24 : bit;
+signal cout_fa25 : bit;
+signal cout_fa26 : bit;
+signal cout_fa3  : bit;
+signal cout_fa4  : bit;
+signal cout_fa5  : bit;
+signal cout_fa6  : bit;
+signal cout_fa7  : bit;
+signal cout_fa8  : bit;
+signal cout_fa9  : bit;
+signal cout_ha1  : bit;
+signal cout_ha10 : bit;
+signal cout_ha11 : bit;
+signal cout_ha12 : bit;
+signal cout_ha13 : bit;
+signal cout_ha14 : bit;
+signal cout_ha15 : bit;
+signal cout_ha16 : bit;
+signal cout_ha17 : bit;
+signal cout_ha18 : bit;
+signal cout_ha19 : bit;
+signal cout_ha2  : bit;
+signal cout_ha20 : bit;
+signal cout_ha21 : bit;
+signal cout_ha22 : bit;
+signal cout_ha23 : bit;
+signal cout_ha24 : bit;
+signal cout_ha25 : bit;
+signal cout_ha26 : bit;
+signal cout_ha27 : bit;
+signal cout_ha28 : bit;
+signal cout_ha3  : bit;
+signal cout_ha4  : bit;
+signal cout_ha5  : bit;
+signal cout_ha6  : bit;
+signal cout_ha7  : bit;
+signal cout_ha8  : bit;
+signal cout_ha9  : bit;
+signal sout_fa1  : bit;
+signal sout_fa10 : bit;
+signal sout_fa11 : bit;
+signal sout_fa12 : bit;
+signal sout_fa13 : bit;
+signal sout_fa14 : bit;
+signal sout_fa15 : bit;
+signal sout_fa16 : bit;
+signal sout_fa17 : bit;
+signal sout_fa18 : bit;
+signal sout_fa19 : bit;
+signal sout_fa2  : bit;
+signal sout_fa20 : bit;
+signal sout_fa21 : bit;
+signal sout_fa22 : bit;
+signal sout_fa23 : bit;
+signal sout_fa24 : bit;
+signal sout_fa25 : bit;
+signal sout_fa26 : bit;
+signal sout_fa3  : bit;
+signal sout_fa4  : bit;
+signal sout_fa5  : bit;
+signal sout_fa6  : bit;
+signal sout_fa7  : bit;
+signal sout_fa8  : bit;
+signal sout_fa9  : bit;
+signal sout_ha1  : bit;
+signal sout_ha10 : bit;
+signal sout_ha11 : bit;
+signal sout_ha12 : bit;
+signal sout_ha13 : bit;
+signal sout_ha14 : bit;
+signal sout_ha15 : bit;
+signal sout_ha16 : bit;
+signal sout_ha17 : bit;
+signal sout_ha18 : bit;
+signal sout_ha19 : bit;
+signal sout_ha2  : bit;
+signal sout_ha20 : bit;
+signal sout_ha21 : bit;
+signal sout_ha22 : bit;
+signal sout_ha23 : bit;
+signal sout_ha24 : bit;
+signal sout_ha25 : bit;
+signal sout_ha26 : bit;
+signal sout_ha27 : bit;
+signal sout_ha28 : bit;
+signal sout_ha3  : bit;
+signal sout_ha4  : bit;
+signal sout_ha5  : bit;
+signal sout_ha6  : bit;
+signal sout_ha7  : bit;
+signal sout_ha8  : bit;
+signal sout_ha9  : bit;
+
+begin
+
+instance8_ha : ha
+   port map ( 
+      a     => pp3(8),
+      b     => pp2(10),
+      cout  => cout_ha9,
+      sout  => sout_ha9,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance12_ha : ha
+   port map ( 
+      a     => pp3(12),
+      b     => pp2(14),
+      cout  => cout_ha13,
+      sout  => sout_ha13,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance13_ha : ha
+   port map ( 
+      a     => pp3(13),
+      b     => pp2(15),
+      cout  => cout_ha14,
+      sout  => sout_ha14,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance19_ha : ha
+   port map ( 
+      a     => pp3(19),
+      b     => pp2(21),
+      cout  => cout_ha20,
+      sout  => sout_ha20,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance55_ha : ha
+   port map ( 
+      a     => pp1(1),
+      b     => pp0(3),
+      cout  => s0(4),
+      sout  => s1(3),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance76_fa : fa
+   port map ( 
+      a     => sout_ha19,
+      b     => cout_fa18,
+      cin   => sout_fa19,
+      cout  => s0(25),
+      sout  => s1(24),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance38_fa : fa
+   port map ( 
+      a     => pp1(14),
+      b     => pp0(16),
+      cin   => cout_ha10,
+      cout  => cout_fa11,
+      sout  => sout_fa11,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance32_fa : fa
+   port map ( 
+      a     => pp1(8),
+      b     => pp0(10),
+      cin   => cout_ha4,
+      cout  => cout_fa5,
+      sout  => sout_fa5,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance4_ha : ha
+   port map ( 
+      a     => pp3(4),
+      b     => pp2(6),
+      cout  => cout_ha5,
+      sout  => sout_ha5,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance74_fa : fa
+   port map ( 
+      a     => sout_ha17,
+      b     => cout_fa16,
+      cin   => sout_fa17,
+      cout  => s0(23),
+      sout  => s1(22),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance37_fa : fa
+   port map ( 
+      a     => pp1(13),
+      b     => pp0(15),
+      cin   => cout_ha9,
+      cout  => cout_fa10,
+      sout  => sout_fa10,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance30_fa : fa
+   port map ( 
+      a     => pp1(6),
+      b     => pp0(8),
+      cin   => cout_ha2,
+      cout  => cout_fa3,
+      sout  => sout_fa3,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance16_ha : ha
+   port map ( 
+      a     => pp3(16),
+      b     => pp2(18),
+      cout  => cout_ha17,
+      sout  => sout_ha17,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance52_fa : fa
+   port map ( 
+      a     => pp1(28),
+      b     => pp0(30),
+      cin   => cout_ha24,
+      cout  => cout_fa25,
+      sout  => sout_fa25,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance23_ha : ha
+   port map ( 
+      a     => pp3(23),
+      b     => pp2(25),
+      cout  => cout_ha24,
+      sout  => sout_ha24,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance0_ha : ha
+   port map ( 
+      a     => pp3(0),
+      b     => pp2(2),
+      cout  => cout_ha1,
+      sout  => sout_ha1,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance53_fa : fa
+   port map ( 
+      a     => pp1(29),
+      b     => pp0(31),
+      cin   => cout_ha25,
+      cout  => cout_fa26,
+      sout  => sout_fa26,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance75_fa : fa
+   port map ( 
+      a     => sout_ha18,
+      b     => cout_fa17,
+      cin   => sout_fa18,
+      cout  => s0(24),
+      sout  => s1(23),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance35_fa : fa
+   port map ( 
+      a     => pp1(11),
+      b     => pp0(13),
+      cin   => cout_ha7,
+      cout  => cout_fa8,
+      sout  => sout_fa8,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance34_fa : fa
+   port map ( 
+      a     => pp1(10),
+      b     => pp0(12),
+      cin   => cout_ha6,
+      cout  => cout_fa7,
+      sout  => sout_fa7,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance28_fa : fa
+   port map ( 
+      a     => pp1(4),
+      b     => pp0(6),
+      cin   => c3,
+      cout  => cout_fa1,
+      sout  => sout_fa1,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance24_ha : ha
+   port map ( 
+      a     => pp3(24),
+      b     => pp2(26),
+      cout  => cout_ha25,
+      sout  => sout_ha25,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance85_buf_x2 : buf_x2
+   port map ( 
+      i    => pp0(0),
+      q    => s0(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance29_fa : fa
+   port map ( 
+      a     => pp1(5),
+      b     => pp0(7),
+      cin   => cout_ha1,
+      cout  => cout_fa2,
+      sout  => sout_fa2,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance18_ha : ha
+   port map ( 
+      a     => pp3(18),
+      b     => pp2(20),
+      cout  => cout_ha19,
+      sout  => sout_ha19,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance51_fa : fa
+   port map ( 
+      a     => pp1(27),
+      b     => pp0(29),
+      cin   => cout_ha23,
+      cout  => cout_fa24,
+      sout  => sout_fa24,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance56_fa : fa
+   port map ( 
+      a     => pp0(4),
+      b     => c2,
+      cin   => sout_ha27,
+      cout  => s0(5),
+      sout  => s1(4),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance70_fa : fa
+   port map ( 
+      a     => sout_ha13,
+      b     => cout_fa12,
+      cin   => sout_fa13,
+      cout  => s0(19),
+      sout  => s1(18),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance9_ha : ha
+   port map ( 
+      a     => pp3(9),
+      b     => pp2(11),
+      cout  => cout_ha10,
+      sout  => sout_ha10,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance11_ha : ha
+   port map ( 
+      a     => pp3(11),
+      b     => pp2(13),
+      cout  => cout_ha12,
+      sout  => sout_ha12,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance15_ha : ha
+   port map ( 
+      a     => pp3(15),
+      b     => pp2(17),
+      cout  => cout_ha16,
+      sout  => sout_ha16,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance78_fa : fa
+   port map ( 
+      a     => sout_ha21,
+      b     => cout_fa20,
+      cin   => sout_fa21,
+      cout  => s0(27),
+      sout  => s1(26),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance87_buf_x2 : buf_x2
+   port map ( 
+      i    => pp0(1),
+      q    => s0(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance86_buf_x2 : buf_x2
+   port map ( 
+      i    => c0,
+      q    => s1(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance42_fa : fa
+   port map ( 
+      a     => pp1(18),
+      b     => pp0(20),
+      cin   => cout_ha14,
+      cout  => cout_fa15,
+      sout  => sout_fa15,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance57_fa : fa
+   port map ( 
+      a     => pp0(5),
+      b     => cout_ha27,
+      cin   => sout_ha28,
+      cout  => s0(6),
+      sout  => s1(5),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance77_fa : fa
+   port map ( 
+      a     => sout_ha20,
+      b     => cout_fa19,
+      cin   => sout_fa20,
+      cout  => s0(26),
+      sout  => s1(25),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance79_fa : fa
+   port map ( 
+      a     => sout_ha22,
+      b     => cout_fa21,
+      cin   => sout_fa22,
+      cout  => s0(28),
+      sout  => s1(27),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance88_zero_x0 : zero_x0
+   port map ( 
+      nq   => s1(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance81_fa : fa
+   port map ( 
+      a     => sout_ha24,
+      b     => cout_fa23,
+      cin   => sout_fa24,
+      cout  => s0(30),
+      sout  => s1(29),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance25_ha : ha
+   port map ( 
+      a     => pp3(25),
+      b     => pp2(27),
+      cout  => cout_ha26,
+      sout  => sout_ha26,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance6_ha : ha
+   port map ( 
+      a     => pp3(6),
+      b     => pp2(8),
+      cout  => cout_ha7,
+      sout  => sout_ha7,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance3_ha : ha
+   port map ( 
+      a     => pp3(3),
+      b     => pp2(5),
+      cout  => cout_ha4,
+      sout  => sout_ha4,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance64_fa : fa
+   port map ( 
+      a     => sout_ha7,
+      b     => cout_fa6,
+      cin   => sout_fa7,
+      cout  => s0(13),
+      sout  => s1(12),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance26_ha : ha
+   port map ( 
+      a     => pp2(0),
+      b     => pp1(2),
+      cout  => cout_ha27,
+      sout  => sout_ha27,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance21_ha : ha
+   port map ( 
+      a     => pp3(21),
+      b     => pp2(23),
+      cout  => cout_ha22,
+      sout  => sout_ha22,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance10_ha : ha
+   port map ( 
+      a     => pp3(10),
+      b     => pp2(12),
+      cout  => cout_ha11,
+      sout  => sout_ha11,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance2_ha : ha
+   port map ( 
+      a     => pp3(2),
+      b     => pp2(4),
+      cout  => cout_ha3,
+      sout  => sout_ha3,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance46_fa : fa
+   port map ( 
+      a     => pp1(22),
+      b     => pp0(24),
+      cin   => cout_ha18,
+      cout  => cout_fa19,
+      sout  => sout_fa19,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance40_fa : fa
+   port map ( 
+      a     => pp1(16),
+      b     => pp0(18),
+      cin   => cout_ha12,
+      cout  => cout_fa13,
+      sout  => sout_fa13,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance33_fa : fa
+   port map ( 
+      a     => pp1(9),
+      b     => pp0(11),
+      cin   => cout_ha5,
+      cout  => cout_fa6,
+      sout  => sout_fa6,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance1_ha : ha
+   port map ( 
+      a     => pp3(1),
+      b     => pp2(3),
+      cout  => cout_ha2,
+      sout  => sout_ha2,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance50_fa : fa
+   port map ( 
+      a     => pp1(26),
+      b     => pp0(28),
+      cin   => cout_ha22,
+      cout  => cout_fa23,
+      sout  => sout_fa23,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance68_fa : fa
+   port map ( 
+      a     => sout_ha11,
+      b     => cout_fa10,
+      cin   => sout_fa11,
+      cout  => s0(17),
+      sout  => s1(16),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance69_fa : fa
+   port map ( 
+      a     => sout_ha12,
+      b     => cout_fa11,
+      cin   => sout_fa12,
+      cout  => s0(18),
+      sout  => s1(17),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance90_zero_x0 : zero_x0
+   port map ( 
+      nq   => s1(33),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance89_buf_x2 : buf_x2
+   port map ( 
+      i    => c1,
+      q    => s0(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance39_fa : fa
+   port map ( 
+      a     => pp1(15),
+      b     => pp0(17),
+      cin   => cout_ha11,
+      cout  => cout_fa12,
+      sout  => sout_fa12,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance36_fa : fa
+   port map ( 
+      a     => pp1(12),
+      b     => pp0(14),
+      cin   => cout_ha8,
+      cout  => cout_fa9,
+      sout  => sout_fa9,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance27_ha : ha
+   port map ( 
+      a     => pp2(1),
+      b     => pp1(3),
+      cout  => cout_ha28,
+      sout  => sout_ha28,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance22_ha : ha
+   port map ( 
+      a     => pp3(22),
+      b     => pp2(24),
+      cout  => cout_ha23,
+      sout  => sout_ha23,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance20_ha : ha
+   port map ( 
+      a     => pp3(20),
+      b     => pp2(22),
+      cout  => cout_ha21,
+      sout  => sout_ha21,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance41_fa : fa
+   port map ( 
+      a     => pp1(17),
+      b     => pp0(19),
+      cin   => cout_ha13,
+      cout  => cout_fa14,
+      sout  => sout_fa14,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance49_fa : fa
+   port map ( 
+      a     => pp1(25),
+      b     => pp0(27),
+      cin   => cout_ha21,
+      cout  => cout_fa22,
+      sout  => sout_fa22,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance67_fa : fa
+   port map ( 
+      a     => sout_ha10,
+      b     => cout_fa9,
+      cin   => sout_fa10,
+      cout  => s0(16),
+      sout  => s1(15),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance44_fa : fa
+   port map ( 
+      a     => pp1(20),
+      b     => pp0(22),
+      cin   => cout_ha16,
+      cout  => cout_fa17,
+      sout  => sout_fa17,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance47_fa : fa
+   port map ( 
+      a     => pp1(23),
+      b     => pp0(25),
+      cin   => cout_ha19,
+      cout  => cout_fa20,
+      sout  => sout_fa20,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance54_ha : ha
+   port map ( 
+      a     => pp1(0),
+      b     => pp0(2),
+      cout  => s0(3),
+      sout  => s1(2),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance62_fa : fa
+   port map ( 
+      a     => sout_ha5,
+      b     => cout_fa4,
+      cin   => sout_fa5,
+      cout  => s0(11),
+      sout  => s1(10),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance63_fa : fa
+   port map ( 
+      a     => sout_ha6,
+      b     => cout_fa5,
+      cin   => sout_fa6,
+      cout  => s0(12),
+      sout  => s1(11),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance84_ha : ha
+   port map ( 
+      a     => cout_ha26,
+      b     => cout_fa26,
+      cout  => s0(33),
+      sout  => s1(32),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance83_fa : fa
+   port map ( 
+      a     => sout_ha26,
+      b     => cout_fa25,
+      cin   => sout_fa26,
+      cout  => s0(32),
+      sout  => s1(31),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance5_ha : ha
+   port map ( 
+      a     => pp3(5),
+      b     => pp2(7),
+      cout  => cout_ha6,
+      sout  => sout_ha6,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance45_fa : fa
+   port map ( 
+      a     => pp1(21),
+      b     => pp0(23),
+      cin   => cout_ha17,
+      cout  => cout_fa18,
+      sout  => sout_fa18,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance48_fa : fa
+   port map ( 
+      a     => pp1(24),
+      b     => pp0(26),
+      cin   => cout_ha20,
+      cout  => cout_fa21,
+      sout  => sout_fa21,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance58_fa : fa
+   port map ( 
+      a     => sout_ha1,
+      b     => cout_ha28,
+      cin   => sout_fa1,
+      cout  => s0(7),
+      sout  => s1(6),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance65_fa : fa
+   port map ( 
+      a     => sout_ha8,
+      b     => cout_fa7,
+      cin   => sout_fa8,
+      cout  => s0(14),
+      sout  => s1(13),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance66_fa : fa
+   port map ( 
+      a     => sout_ha9,
+      b     => cout_fa8,
+      cin   => sout_fa9,
+      cout  => s0(15),
+      sout  => s1(14),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance72_fa : fa
+   port map ( 
+      a     => sout_ha15,
+      b     => cout_fa14,
+      cin   => sout_fa15,
+      cout  => s0(21),
+      sout  => s1(20),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance82_fa : fa
+   port map ( 
+      a     => sout_ha25,
+      b     => cout_fa24,
+      cin   => sout_fa25,
+      cout  => s0(31),
+      sout  => s1(30),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance31_fa : fa
+   port map ( 
+      a     => pp1(7),
+      b     => pp0(9),
+      cin   => cout_ha3,
+      cout  => cout_fa4,
+      sout  => sout_fa4,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance7_ha : ha
+   port map ( 
+      a     => pp3(7),
+      b     => pp2(9),
+      cout  => cout_ha8,
+      sout  => sout_ha8,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance59_fa : fa
+   port map ( 
+      a     => sout_ha2,
+      b     => cout_fa1,
+      cin   => sout_fa2,
+      cout  => s0(8),
+      sout  => s1(7),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance60_fa : fa
+   port map ( 
+      a     => sout_ha3,
+      b     => cout_fa2,
+      cin   => sout_fa3,
+      cout  => s0(9),
+      sout  => s1(8),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance73_fa : fa
+   port map ( 
+      a     => sout_ha16,
+      b     => cout_fa15,
+      cin   => sout_fa16,
+      cout  => s0(22),
+      sout  => s1(21),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance80_fa : fa
+   port map ( 
+      a     => sout_ha23,
+      b     => cout_fa22,
+      cin   => sout_fa23,
+      cout  => s0(29),
+      sout  => s1(28),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance14_ha : ha
+   port map ( 
+      a     => pp3(14),
+      b     => pp2(16),
+      cout  => cout_ha15,
+      sout  => sout_ha15,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance17_ha : ha
+   port map ( 
+      a     => pp3(17),
+      b     => pp2(19),
+      cout  => cout_ha18,
+      sout  => sout_ha18,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance43_fa : fa
+   port map ( 
+      a     => pp1(19),
+      b     => pp0(21),
+      cin   => cout_ha15,
+      cout  => cout_fa16,
+      sout  => sout_fa16,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance61_fa : fa
+   port map ( 
+      a     => sout_ha4,
+      b     => cout_fa3,
+      cin   => sout_fa4,
+      cout  => s0(10),
+      sout  => s1(9),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+instance71_fa : fa
+   port map ( 
+      a     => sout_ha14,
+      b     => cout_fa13,
+      cin   => sout_fa14,
+      cout  => s0(20),
+      sout  => s1(19),
+      vdd   => vdd,
+      vss   => vss
+   );
+
+end structural;

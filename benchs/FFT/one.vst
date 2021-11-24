@@ -1,0 +1,28 @@
+entity one is
+   port (
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end one;
+
+architecture structural of one is
+component one_x0
+   port (
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance0_one_x0 : one_x0
+   port map ( 
+      q    => q,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

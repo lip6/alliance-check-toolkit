@@ -1,0 +1,202 @@
+
+ \documentclass[11pt]{article}
+
+   \usepackage[T1]{fontenc}
+   \usepackage{ucs}
+   \usepackage[utf8x]{inputenc}
+   \usepackage[default,osfigures,scale=0.95]{opensans}
+   \usepackage{pifont}
+   \usepackage{xspace}
+   \usepackage{fancyhdr}
+   \usepackage[sf,bf]{titlesec}
+   \usepackage{titletoc}
+   \usepackage{float}
+   \usepackage{epic}
+   \usepackage{eepic}
+   \usepackage[dvips]{graphicx}
+  %\usepackage[dvips]{color}
+   \usepackage{listings}
+   \usepackage{rotating}
+   \usepackage{url}
+   \usepackage{html}
+   \usepackage{hyperref}
+   \usepackage[french]{babel}
+  %\usepackage{a4wide}
+   \usepackage[paper=a4paper
+              ,marginparwidth=0pt
+              ,tmargin=2cm
+              ,bmargin=3.5cm
+              ,lmargin=1cm
+              ,rmargin=1cm
+              ,headheight=30pt
+              ]{geometry}
+  %\usepackage{layouts}
+
+
+   \newcommand {\LIP}    {\textsc{lip6}\xspace}
+   \newcommand {\SoC}    {\textsc{S}o\textsc{C}\xspace}
+   \newcommand {\Chaput} {\textsc{Chaput}\xspace}
+   \newcommand {\lbd}    {$\lambda$}
+
+  %\setlength        \voffset   {  -15.5mm}
+  %\setlength \textheight       {  240.0mm}
+
+   \setlength {\parskip}        {4mm}    
+   \setlength {\itemsep}        {4mm}    
+
+   \pagestyle{fancy}
+
+  %\renewcommand{\headheight}   {14pt}
+   \renewcommand{\headrulewidth}{0.2mm}
+   \renewcommand{\footrulewidth}{0.2mm}
+   \renewcommand{\sectionmark}[1]{\markboth{\thesection\ #1}{\thesection\ #1}}
+   \renewcommand{\subsectionmark}[1]{}
+   \lhead[]{Katana -- Measurements}
+   \rhead[]{November, 2021}
+   \lfoot[]{\LIP/\SoC}
+   \rfoot[]{\thepage}
+   \cfoot[]{}
+
+  %% The LaTeX Companion -- p. 204.
+  %% Miniature display of the page layout.
+  %\newcommand{\showpage}{%
+  %  \setlayoutscale{0.65}\setlabelfont{\tiny}%
+  %  \printheadingsfalse\printparametersfalse%
+  %  \currentpage\pagedesign%
+  %}
+
+   \titlecontents{section}[1pc]
+     {\sffamily\bfseries}                                 % above code.
+     {\contentslabel{1pc}}                                % numbered entry format.
+     {The Numberless Entry Format}                        % numberless entry format.
+     {\titlerule*[8pt]{.}\textsc\textbf{{\contentspage}}} % page format.
+   \titlecontents{subsection}[3pc]
+     {\sffamily}                                          % above code.
+     {\contentslabel{2pc}}                                % numbered entry format.
+     {The Numberless Entry Format}                        % numberless entry format.
+     {\titlerule*[8pt]{.}\textsc\textbf{{\contentspage}}} % page format.
+
+
+ \begin{document}
+
+   \input{datas}
+  %\showpage
+
+   \title{Katana -- Measurements}
+   \author{Jean-Paul \Chaput}
+  %\date{\thedate}
+
+   \maketitle
+
+   \thispagestyle{fancy}
+
+   \subsection*{The Test Bench}
+
+   Those test benchs have been run with:
+   \begin{itemize}
+      \item \textsc{Coriolis}\xspace                git hash \texttt{xxxxxxxxx}.
+      \item \texttt{alliance-check-toolkit}\xspace  git hash \texttt{xxxxxxxxx}.
+   \end{itemize}
+
+   There is a bug in the power build, it's runtime is exponential whithout
+   reason. So for the purpose of the test, I did disable the power build
+   in \texttt{metal1}.
+
+   Be aware that the all the curves uses logarithmic scale on both axis.
+
+   The figures shows that:
+   \begin{enumerate}
+     \item The runtime is quasi-linear.
+     \item The memory footprint is getting better as the design size
+           increase...
+   \end{enumerate}
+
+
+   \begin{center}
+     \rotatebox{-90}{\timedatas}
+   \end{center}
+   \begin{center}
+     \rotatebox{-90}{\statsdatas}
+   \end{center}
+
+
+%  \subsection*{Saturation}
+%  
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-saturation.eepic}
+%     %\caption{\label{fig:Saturation} Saturation ratio}
+%    \end{center}
+%  \end{figure}
+
+
+   \subsection*{Times \& Speeds}
+
+   \begin{figure}[H]
+     \begin{center}
+       \sffamily
+       \input{\resultsdir/katana-alltimes.eepic}
+     \end{center}
+   \end{figure}
+
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-assigntime.eepic}
+%     %\caption{\label{fig:Runtime} Runtime}
+%    \end{center}
+%  \end{figure}
+%  
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-speedarea-vs-sat.eepic}
+%     %\caption{\label{fig:SpeedPerSaturation} Speed/Gates vs. saturation}
+%    \end{center}
+%  \end{figure}
+%  
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-speedgatessat-vs-gates.eepic}
+%     %\caption{\label{fig:SpeedPerSaturation} Speed per saturation}
+%    \end{center}
+%  \end{figure}
+%  
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-speedgates-vs-gates.eepic}
+%     %\caption{\label{fig:SpeedPerGate} Speed per gate}
+%    \end{center}
+%  \end{figure}
+%  
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-speedsegments-vs-gates.eepic}
+%     %\caption{\label{fig:SpeedPerSegment} Speed per segment}
+%    \end{center}
+%  \end{figure}
+%
+%
+%  \subsection*{Memory Footprint}
+
+   \begin{figure}[H]
+     \begin{center}
+       \sffamily
+       \input{\resultsdir/katana-memory-vs-gates.eepic}
+      %\caption{\label{fig:Memory} Memory footprint}
+     \end{center}
+   \end{figure}
+
+%  \begin{figure}[H]
+%    \begin{center}
+%      \sffamily
+%      \input{\resultsdir/katana-memorygates-vs-gates.eepic}
+%     %\caption{\label{fig:MemoryPerGates} Memory footprint per gate}
+%    \end{center}
+%  \end{figure}
+
+ \end{document}

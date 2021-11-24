@@ -1,0 +1,40 @@
+entity fa is
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      cin  :  in bit;
+      cout :  out bit;
+      sout :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end fa;
+
+architecture structural of fa is
+component fulladder
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      cin  :  in bit;
+      cout :  out bit;
+      sout :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end component;
+
+
+begin
+
+instance0_fulladder : fulladder
+   port map ( 
+      a     => a,
+      b     => b,
+      cin   => cin,
+      cout  => cout,
+      sout  => sout,
+      vdd   => vdd,
+      vss   => vss
+   );
+
+end structural;

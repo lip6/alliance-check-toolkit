@@ -1,0 +1,87 @@
+entity buf_8bits is
+   port (
+      i   :  in bit_vector(0 to 7);
+      q   :  out bit_vector(0 to 7);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end buf_8bits;
+
+architecture structural of buf_8bits is
+component buf_x2
+   port (
+      i   :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance7_buf_x2 : buf_x2
+   port map ( 
+      i    => i(7),
+      q    => q(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance6_buf_x2 : buf_x2
+   port map ( 
+      i    => i(6),
+      q    => q(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance5_buf_x2 : buf_x2
+   port map ( 
+      i    => i(5),
+      q    => q(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance4_buf_x2 : buf_x2
+   port map ( 
+      i    => i(4),
+      q    => q(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_buf_x2 : buf_x2
+   port map ( 
+      i    => i(3),
+      q    => q(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_buf_x2 : buf_x2
+   port map ( 
+      i    => i(2),
+      q    => q(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_buf_x2 : buf_x2
+   port map ( 
+      i    => i(1),
+      q    => q(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_buf_x2 : buf_x2
+   port map ( 
+      i    => i(0),
+      q    => q(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

@@ -1,0 +1,124 @@
+entity booth_mux is
+   port (
+      a    :  in bit;
+      b    :  in bit;
+      comp :  in bit;
+      deca :  in bit;
+      nul  :  in bit;
+      pp   :  out bit;
+      vdd  :  in bit;
+      vss  :  in bit
+   );
+end booth_mux;
+
+architecture structural of booth_mux is
+component inv_x1
+   port (
+      i   :  in bit;
+      nq  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component o2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component a2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component xr2_x1
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+signal net_out_0 : bit;
+signal net_out_1 : bit;
+signal net_out_2 : bit;
+signal net_out_3 : bit;
+signal net_out_4 : bit;
+signal net_out_5 : bit;
+
+begin
+
+instance6_a2_x2 : a2_x2
+   port map ( 
+      i0   => net_out_4,
+      i1   => net_out_5,
+      q    => pp,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance5_inv_x1 : inv_x1
+   port map ( 
+      i    => nul,
+      nq   => net_out_5,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance4_xr2_x1 : xr2_x1
+   port map ( 
+      i0   => net_out_3,
+      i1   => comp,
+      q    => net_out_4,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_o2_x2 : o2_x2
+   port map ( 
+      i0   => net_out_0,
+      i1   => net_out_2,
+      q    => net_out_3,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_a2_x2 : a2_x2
+   port map ( 
+      i0   => net_out_1,
+      i1   => b,
+      q    => net_out_2,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_inv_x1 : inv_x1
+   port map ( 
+      i    => deca,
+      nq   => net_out_1,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_a2_x2 : a2_x2
+   port map ( 
+      i0   => deca,
+      i1   => a,
+      q    => net_out_0,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

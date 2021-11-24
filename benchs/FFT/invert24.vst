@@ -1,0 +1,215 @@
+entity invert24 is
+   port (
+      i   :  in bit_vector(0 to 23);
+      nq  :  out bit_vector(0 to 23);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end invert24;
+
+architecture structural of invert24 is
+component inv_x1
+   port (
+      i   :  in bit;
+      nq  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance23_inv_x1 : inv_x1
+   port map ( 
+      i    => i(23),
+      nq   => nq(23),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance6_inv_x1 : inv_x1
+   port map ( 
+      i    => i(6),
+      nq   => nq(6),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance15_inv_x1 : inv_x1
+   port map ( 
+      i    => i(15),
+      nq   => nq(15),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance16_inv_x1 : inv_x1
+   port map ( 
+      i    => i(16),
+      nq   => nq(16),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance17_inv_x1 : inv_x1
+   port map ( 
+      i    => i(17),
+      nq   => nq(17),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance10_inv_x1 : inv_x1
+   port map ( 
+      i    => i(10),
+      nq   => nq(10),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance8_inv_x1 : inv_x1
+   port map ( 
+      i    => i(8),
+      nq   => nq(8),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance5_inv_x1 : inv_x1
+   port map ( 
+      i    => i(5),
+      nq   => nq(5),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_inv_x1 : inv_x1
+   port map ( 
+      i    => i(0),
+      nq   => nq(0),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance11_inv_x1 : inv_x1
+   port map ( 
+      i    => i(11),
+      nq   => nq(11),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance13_inv_x1 : inv_x1
+   port map ( 
+      i    => i(13),
+      nq   => nq(13),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance14_inv_x1 : inv_x1
+   port map ( 
+      i    => i(14),
+      nq   => nq(14),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance18_inv_x1 : inv_x1
+   port map ( 
+      i    => i(18),
+      nq   => nq(18),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance22_inv_x1 : inv_x1
+   port map ( 
+      i    => i(22),
+      nq   => nq(22),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance21_inv_x1 : inv_x1
+   port map ( 
+      i    => i(21),
+      nq   => nq(21),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance9_inv_x1 : inv_x1
+   port map ( 
+      i    => i(9),
+      nq   => nq(9),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance7_inv_x1 : inv_x1
+   port map ( 
+      i    => i(7),
+      nq   => nq(7),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance4_inv_x1 : inv_x1
+   port map ( 
+      i    => i(4),
+      nq   => nq(4),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_inv_x1 : inv_x1
+   port map ( 
+      i    => i(3),
+      nq   => nq(3),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance12_inv_x1 : inv_x1
+   port map ( 
+      i    => i(12),
+      nq   => nq(12),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance19_inv_x1 : inv_x1
+   port map ( 
+      i    => i(19),
+      nq   => nq(19),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance20_inv_x1 : inv_x1
+   port map ( 
+      i    => i(20),
+      nq   => nq(20),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_inv_x1 : inv_x1
+   port map ( 
+      i    => i(2),
+      nq   => nq(2),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_inv_x1 : inv_x1
+   port map ( 
+      i    => i(1),
+      nq   => nq(1),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

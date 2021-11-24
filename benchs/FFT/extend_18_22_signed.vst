@@ -1,0 +1,72 @@
+entity extend_18_22_signed is
+   port (
+      i   :  in bit_vector(0 to 17);
+      o   :  out bit_vector(0 to 21);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end extend_18_22_signed;
+
+architecture structural of extend_18_22_signed is
+component buf_x2
+   port (
+      i   :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component buf_18bits
+   port (
+      i   :  in bit_vector(0 to 17);
+      q   :  out bit_vector(0 to 17);
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+
+begin
+
+instance4_buf_x2 : buf_x2
+   port map ( 
+      i    => i(17),
+      q    => o(21),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_buf_x2 : buf_x2
+   port map ( 
+      i    => i(17),
+      q    => o(20),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_buf_x2 : buf_x2
+   port map ( 
+      i    => i(17),
+      q    => o(19),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_buf_x2 : buf_x2
+   port map ( 
+      i    => i(17),
+      q    => o(18),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_buf_18bits : buf_18bits
+   port map ( 
+      i    => i(0)&i(1)&i(2)&i(3)&i(4)&i(5)&i(6)&i(7)&i(8)&i(9)&i(10)&i(11)&i(12)&i(13)&i(14)&i(15)&i(16)&i(17),
+      q    => o(0)&o(1)&o(2)&o(3)&o(4)&o(5)&o(6)&o(7)&o(8)&o(9)&o(10)&o(11)&o(12)&o(13)&o(14)&o(15)&o(16)&o(17),
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;

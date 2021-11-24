@@ -1,0 +1,166 @@
+entity booth_decoder is
+   port (
+      b      :  in bit;
+      bminus :  in bit;
+      bplus  :  in bit;
+      comp   :  out bit;
+      deca   :  out bit;
+      nul    :  out bit;
+      vdd    :  in bit;
+      vss    :  in bit
+   );
+end booth_decoder;
+
+architecture structural of booth_decoder is
+component inv_x1
+   port (
+      i   :  in bit;
+      nq  :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component o2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component a2_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+component a3_x2
+   port (
+      i0  :  in bit;
+      i1  :  in bit;
+      i2  :  in bit;
+      q   :  out bit;
+      vdd :  in bit;
+      vss :  in bit
+   );
+end component;
+
+signal and1       : bit;
+signal and2       : bit;
+signal and3       : bit;
+signal and4       : bit;
+signal inv_b      : bit;
+signal inv_bminus : bit;
+signal inv_bplus  : bit;
+signal net_out_3  : bit;
+
+begin
+
+instance4_a2_x2 : a2_x2
+   port map ( 
+      i0   => net_out_3,
+      i1   => bplus,
+      q    => comp,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance5_a3_x2 : a3_x2
+   port map ( 
+      i0   => bminus,
+      i1   => b,
+      i2   => bplus,
+      q    => and1,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance6_a3_x2 : a3_x2
+   port map ( 
+      i0   => inv_bminus,
+      i1   => inv_b,
+      i2   => inv_bplus,
+      q    => and2,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance7_o2_x2 : o2_x2
+   port map ( 
+      i0   => and1,
+      i1   => and2,
+      q    => nul,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance8_a3_x2 : a3_x2
+   port map ( 
+      i0   => inv_bminus,
+      i1   => inv_b,
+      i2   => bplus,
+      q    => and3,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance9_a3_x2 : a3_x2
+   port map ( 
+      i0   => bminus,
+      i1   => b,
+      i2   => inv_bplus,
+      q    => and4,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance10_o2_x2 : o2_x2
+   port map ( 
+      i0   => and3,
+      i1   => and4,
+      q    => deca,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance0_inv_x1 : inv_x1
+   port map ( 
+      i    => bminus,
+      nq   => inv_bminus,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance1_inv_x1 : inv_x1
+   port map ( 
+      i    => b,
+      nq   => inv_b,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance2_inv_x1 : inv_x1
+   port map ( 
+      i    => bplus,
+      nq   => inv_bplus,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+instance3_o2_x2 : o2_x2
+   port map ( 
+      i0   => inv_bminus,
+      i1   => inv_b,
+      q    => net_out_3,
+      vdd  => vdd,
+      vss  => vss
+   );
+
+end structural;
