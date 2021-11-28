@@ -493,7 +493,7 @@ class Results2TeX ( object ):
             print( "Writing %s" % dataFiles[benchmark] )
             fd = open ( dataFiles[benchmark], "w" )
             for data in datas:
-                fd.write( "%-10f %.12f\n" % (data.gates,(data.katanaSize*(2**20))/float(data.gates)) )
+                fd.write( "%-10f %.12f\n" % (data.gates,(data.katanaSize*(2**30))/float(data.gates)) )
             fd.close ()
     
         script = [ "set style data linespoints"

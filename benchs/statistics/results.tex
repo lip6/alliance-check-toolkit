@@ -93,16 +93,19 @@
    \subsection*{The Test Bench}
 
    Those test benchs have been run with:
-   \begin{itemize}
-      \item \textsc{Coriolis}\xspace                git commit \texttt{ca499e024c20b50ea48a8e21f30225b60efb4527}.
-      \item \texttt{alliance-check-toolkit}\xspace  git commit \texttt{afb3d074279f8dd417a4d7c63f9fad481bba4014}.
-   \end{itemize}
 
-   All the designs have been placed with the <<golden industrial router>>.
+   \begin{tabular}{|l|l|}
+      \hline
+      \textbf{Tool}                   & \textbf{Git Commit Hash} \\
+      \hline
+      \textsc{Coriolis}               & \texttt{ca499e024c20b50ea48a8e21f30225b60efb4527} \\
+      \texttt{alliance-check-toolkit} & \texttt{afb3d074279f8dd417a4d7c63f9fad481bba4014} \\
+      \hline
+   \end{tabular}
 
-   There is a bug in the power build, it's runtime is exponential whithout
-   reason. So for the purpose of the test, I did disable the power build
-   in \texttt{metal1}.
+   All the designs have been placed with the <<golden industrial placer>>.
+   except for the \texttt{Libre-SOC}. So the runtime are only thoses of
+   the P\&R, load time, global and detailed router.
 
    Be aware that the all the curves uses logarithmic scale on both axis.
 
