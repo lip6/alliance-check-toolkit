@@ -1,7 +1,7 @@
 #!/bin/bash
 
    alcTkTop="../../../.."
- resultsDir="lepka/20211123"
+ resultsDir="lepka/20210101"
 
  pushd "$resultsDir" > /dev/null 2>&1
  if [ ! -f "./results.tex" ]; then ln -s ../../results.tex .; fi

@@ -171,34 +171,38 @@ class DataEntry ( object ):
 
     def readFromLine ( self, line, lineno ):
         fields = line.split()
-        if len(fields) == 18:
+        if len(fields) == 21:
             self.design              = "noname"
             self.gates               = int(  fields[ 0])
             self.gcells              = int(  fields[ 1])
-            self.loadTime            = float(fields[ 2])
-            self.loadSize            = int(  fields[ 3])
+            self.placeTime           = float(fields[ 2])
+            self.area                = float(fields[ 3])
+            self.saturation          = float(fields[ 4])
+            self.loadTime            = float(fields[ 5])
+            self.loadSize            = int(  fields[ 6])
            #self.knikTime            = float(fields[ X])
            #self.knikSize            = int(  fields[ X])
-            self.HovE                = int(  fields[ 4])
-            self.VovE                = int(  fields[ 5])
+            self.HovE                = int(  fields[ 7])
+            self.VovE                = int(  fields[ 8])
            #self.globalWL            = int(  fields[ X])
            #self.area                = float(fields[ X])
            #self.saturation          = float(fields[ X])
-            self.globalSegments      = int(  fields[ 6])
-            self.edges               = int(  fields[ 7])
-            self.katanaAssignTime    = float(fields[ 8])
-            self.katanaRunTime       = float(fields[ 9])
-            self.katanaSize          = float(fields[10])/1024
-            self.katanaFinalizeTime  = float(fields[11])
-            self.katanaSegments      = int(  fields[12])
-            self.katanaDetailedWL    = int(  fields[13])
-            self.katanaFailedWL      = int(  fields[14])
-            self.katanaWLexpandRatio = float(fields[15])
-            self.katanaEvents        = int(  fields[16])
-            self.katanaUniqueEvents  = int(  fields[17])
+            self.globalSegments      = int(  fields[ 9])
+            self.edges               = int(  fields[10])
+            self.katanaAssignTime    = float(fields[11])
+            self.katanaRunTime       = float(fields[12])
+            self.katanaSize          = float(fields[13])/1024
+            self.katanaFinalizeTime  = float(fields[14])
+            self.katanaSegments      = int(  fields[15])
+            self.katanaDetailedWL    = int(  fields[16])
+            self.katanaFailedWL      = int(  fields[17])
+            self.katanaWLexpandRatio = float(fields[18])
+            self.katanaEvents        = int(  fields[19])
+            self.katanaUniqueEvents  = int(  fields[20])
             return True
 
-        print( '[WARNING] Malformed data line at %d, doesn\'t have 18 fields (ignoring):' % lineno )
+        print( '[WARNING] Malformed data line at %d, doesn\'t have 21 fields (%d,ignoring):' \
+               % (lineno,len(fields)) )
         print( '          %s' % line )
         return False
 
@@ -296,10 +300,10 @@ class Results2TeX ( object ):
 
             fd.write( ' \\newcommand{\\statsdatas}{\n' )
             fd.write( ' \\ttfamily\n' )
-            fd.write( ' \\begin{tabular}{|r|r|r|r|r|r|r|r|}\n' )
+            fd.write( ' \\begin{tabular}{|r|r|r|r|r|r|r|r|r|}\n' )
             fd.write( '   \\hline\n' )
-            fd.write( '   design & \#gates & \#gcells & \\#globals & \\#segments & Detailed  & \\#events & \\#unique \\\\\n' )
-            fd.write( '          &         &          &           &            & WL         &          & events   \\\\\n' )
+            fd.write( '   design & \#gates & \#gcells & PlaceT & \\#globals & \\#segments & Detailed  & \\#events & \\#unique \\\\\n' )
+            fd.write( '          &         &          &        &           &            & WL         &          & events   \\\\\n' )
             for benchmark in self._primaryDatas.keys():
                 datas =  self._primaryDatas[benchmark]
                 if not datas: continue
@@ -308,10 +312,11 @@ class Results2TeX ( object ):
                 fd.write( "   \\multicolumn{8}{|c|}{\\textsf{\\textbf{%s benchmark}}} \\\\\n" % benchmark )
                 fd.write( "   \\hline\n" )
                 for data in self._primaryDatas[benchmark]:
-                    fd.write( "   %-30s& %7i & %9i & %7i & %7i & %9i+%i & %7i & %7i \\\\\n" \
+                    fd.write( "   %-30s& %7i & %9i & %9i & %7i & %7i & %9i+%i & %7i & %7i \\\\\n" \
                               % ( "\\texttt{%s}" % texEscape(data.design)
                                 , data.gates
                                 , data.gcells
+                                , data.placeTime
                                 , data.globalSegments
                                 , data.katanaSegments
                                 , data.katanaDetailedWL
@@ -430,6 +435,52 @@ class Results2TeX ( object ):
                  +    ', \"%s\" index 1 linewidth 2 linetype 2 pointtype  4 title "Assign"'   % (dataFiles["SoC"])
                  +    ', \"%s\" index 2 linewidth 6 linetype 1 pointtype  5 title "Algo"'     % (dataFiles["SoC"])
                  +    ', \"%s\" index 3 linewidth 2 linetype 2 pointtype 10 title "Finalize"' % (dataFiles["SoC"])
+                 ]
+        self._gnuplot.run( graphName, 0, script )
+        self._fig2dev.toEepic( graphName )
+        return
+
+    def writePlaceTimes ( self ):
+        graphName = "katana-placetimes"
+    
+        dataFiles = {}
+        for benchmark in self._primaryDatas.keys():
+            datas = self._primaryDatas[benchmark]
+            if not datas: continue
+
+            dataFiles[benchmark] = "%s/%s.%s.dat" %  (self._resultsDir,benchmark,graphName)
+            print( "Writing %s" % dataFiles[benchmark] )
+            fd = open ( dataFiles[benchmark], "w" )
+            for data in datas: fd.write( '%-10s %10s\n' % (data.gates,data.placeTime) )
+            fd.close ()
+    
+        script = [ "set style data linespoints"
+                 , "set style line 1 linewidth 1"
+                 , "set xtics font \"Helvetica Bold,11\""
+                 , "set ytics font \"Helvetica Bold,11\""
+                 , "set grid"
+                 , "set grid linestyle 1"
+                # X axis configuration.
+                 , "unset x2tics"
+                 , "set mxtics   2"
+                 , "set mxtics   10"
+                 , "set logscale x"
+                 , "set format   x \"%2.0s%c\""
+                 , "set xrange   [1e+4:1e+8]"
+                #, "set xlabel   \"#gates\" offset 0,0.5"
+                # Y axis configuration.
+                 , "unset y2tics"
+                 , 'set logscale y'
+                 , "set mytics   10"
+                 , "set format   \"%2.0s%c\""
+                 , "set yrange   [1e+1:1e+5]"
+                # Figure size configuration.
+                 , "set terminal fig size 4.5 4.5"
+                 , "set size square"
+                # Plots.
+                 , "set key inside top left"
+                 , 'set title \"TITLE Runtimes (s) vs. gates\"'
+                 , 'plot \"%s\" index 0 linewidth 6 linetype 1 pointtype  9 title "Place"' % (dataFiles["SoC"])
                  ]
         self._gnuplot.run( graphName, 0, script )
         self._fig2dev.toEepic( graphName )
@@ -886,6 +937,7 @@ if __name__ == "__main__":
         results2TeX.writeDataTabular         ( "datas" )
        #results2TeX.writeSaturation          ()
         results2TeX.writeAllTimes            ()
+        results2TeX.writePlaceTimes          ()
        #results2TeX.writeAssignTime          ()
        #results2TeX.writeSpeedAreaVsSat      ()
        #results2TeX.writeSpeedGatesSatVsGates()

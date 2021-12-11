@@ -1,0 +1,35 @@
+ \newcommand{\resultsdir}{.}
+ \newcommand{\timedatas}{
+ \ttfamily
+ \begin{tabular}{|r|r|r|r|r|r|r|r|r|r|}
+   \hline
+   design & \#gates & LoadT & LoadS & AssignT & AlgoT & AlgoS & FinT & \#segments & \#events \\
+          &         & (s)   & (Mb)  & (s)     & (s)   & (Mb)  & (s)  &            &          \\
+   \hline\hline
+   \multicolumn{10}{|c|}{\textsf{\textbf{SoC benchmark}}} \\
+   \hline
+   \texttt{matrix\_4\_4}         & 10909.00 &    4.25 &   530 &    0.14 &    9.10 &   607 &    0.34 &  64970 & 128989 \\
+   \texttt{matrix\_4\_8}         & 20933.00 &    8.01 &   653 &    0.47 &   19.30 &   788 &    0.72 & 125305 & 252616 \\
+   \texttt{matrix\_8\_8}         & 39973.00 &   15.93 &   894 &    0.57 &   40.42 &  1152 &    1.54 & 240039 & 484030 \\
+   \texttt{matrix\_8\_16}        & 78101.00 &   33.08 &  1387 &    0.91 &   83.77 &  1897 &    3.34 & 472037 & 957033 \\
+   \texttt{matrix\_16\_16}       & 152341.00 &   64.32 &  2399 &    3.95 &  199.68 &  3469 &    7.65 & 940573 & 2137577 \\
+   \hline
+ \end{tabular}
+ }
+ \newcommand{\statsdatas}{
+ \ttfamily
+ \begin{tabular}{|r|r|r|r|r|r|r|r|r|}
+   \hline
+   design & \#gates & \#gcells & PlaceT & \#globals & \#segments & Detailed  & \#events & \#unique \\
+          &         &          &        &           &            & WL         &          & events   \\
+   \hline\hline
+   \multicolumn{8}{|c|}{\textsf{\textbf{SoC benchmark}}} \\
+   \hline
+   \texttt{matrix\_4\_4}         &   10909 &      7656 &        72 &   28661 &   64970 &   2999639+0 &  128989 &   64970 \\
+   \texttt{matrix\_4\_8}         &   20933 &     14762 &        99 &   55385 &  125305 &   6097139+0 &  252616 &  125305 \\
+   \texttt{matrix\_8\_8}         &   39973 &     28224 &       325 &  106439 &  240039 &  11463316+0 &  484030 &  240039 \\
+   \texttt{matrix\_8\_16}        &   78101 &     55460 &       474 &  209137 &  472037 &  23441583+0 &  957033 &  472037 \\
+   \texttt{matrix\_16\_16}       &  152341 &    108241 &      1456 &  411931 &  940573 &  51029158+0 & 2137577 &  940573 \\
+   \hline
+ \end{tabular}
+ }

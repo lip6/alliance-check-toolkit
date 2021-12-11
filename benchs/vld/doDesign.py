@@ -34,19 +34,22 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        conf.cfg.anabatic.globalIterations   = 10
+        conf.cfg.etesian.spaceMargin         = 0.07
+        conf.cfg.anabatic.globalIterations   = 15
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-       #conf.cfg.katana.hTracksReservedLocal = 0
-       #conf.cfg.katana.vTracksReservedLocal = 0
-        conf.cfg.katana.hTracksReservedMin   = 7
-        conf.cfg.katana.vTracksReservedMin   = 5
+        conf.cfg.katana.hTracksReservedLocal = 11
+        conf.cfg.katana.vTracksReservedLocal = 10
+        conf.cfg.katana.hTracksReservedMin   = 8
+        conf.cfg.katana.vTracksReservedMin   = 6
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
+        conf.useSpares = False
+        conf.useHFNS   = False
         conf.editor = editor
         blockBuilder = Block( conf )
         cell.setTerminalNetlist( False )
-        rvalue = blockBuilder.route()
+        rvalue = blockBuilder.doPnR()
         blockBuilder.save()
     except Exception as e:
         helpers.io.catch( e )

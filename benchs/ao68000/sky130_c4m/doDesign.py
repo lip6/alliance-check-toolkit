@@ -173,13 +173,14 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.katana.vTracksReservedMin   = 1
         ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
+        ao68000Conf.cfg.katana.dumpMeasures         = True
         ao68000Conf.cfg.block.spareSide             = u(7*12)
        #ao68000Conf.cfg.chip.padCoreSide            = 'North'
        #ao68000Conf.cfg.chip.use45corners           = False
         ao68000Conf.cfg.chip.useAbstractPads        = True
         ao68000Conf.cfg.chip.minPadSpacing          = u(1.46)
-        ao68000Conf.cfg.chip.supplyRailWidth        = u(35)
-        ao68000Conf.cfg.chip.supplyRailPitch        = u(90)
+        ao68000Conf.cfg.chip.supplyRailWidth        = u(8.0)
+        ao68000Conf.cfg.chip.supplyRailPitch        = u(8.0)
         ao68000Conf.editor              = editor
         ao68000Conf.useSpares           = True
         ao68000Conf.useClockTree        = True

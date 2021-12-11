@@ -44,10 +44,12 @@ def scriptMain ( **kw ):
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
+        conf.useSpares = False
+        conf.useHFNS   = False
         conf.editor = editor
         blockBuilder = Block( conf )
         cell.setTerminalNetlist( False )
-        rvalue = blockBuilder.route()
+        rvalue = blockBuilder.doPnR()
         blockBuilder.save()
     except Exception as e:
         helpers.io.catch( e )

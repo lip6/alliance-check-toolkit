@@ -1,4 +1,5 @@
 
+import os
 import sys
 import traceback
 import CRL
@@ -8,12 +9,12 @@ from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
 from   Hurricane  import DbU, Breakpoint
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-#from   plugins.alpha.core2chip.libresocio import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
+from   plugins.alpha.block.block         import Block
+from   plugins.alpha.block.configuration import IoPin, GaugeConf
+from   plugins.alpha.block.spares        import Spares
+from   plugins.alpha.chip.configuration  import ChipConf
+from   plugins.alpha.chip.chip           import Chip
+from   plugins.alpha.core2chip.sky130    import CoreToChip
 
 
 af = CRL.AllianceFramework.get()
@@ -24,9 +25,16 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
-       #Breakpoint.setStopLevel( 101 )
-        buildChip = False
+       #helpers.setTraceLevel( 550 )
+       #Breakpoint.setStopLevel( 100 )
+        if 'CHECK_TOOLKIT' in os.environ:
+            checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
+            harnessProjectDir = checkToolkitDir + '/cells/sky130'
+        else:
+            print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
+            print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
+            sys.exit( 1 )
+        buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'counter', CRL.Catalog.State.Logical )
         if editor:
@@ -101,51 +109,61 @@ def scriptMain ( **kw ):
         ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'count({})',  10*m1pitch, 10*m1pitch,  8)
                     #, (IoPin.NORTH|IoPin.A_BEGIN, 'clk'      , 100*m2pitch,          0 , 1)
                      ]
-       #counterConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        counterConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=[] ) 
-       #counterConf.cfg.etesian.bloat               = 'Flexlib'
-        counterConf.cfg.etesian.uniformDensity      = True
-        counterConf.cfg.etesian.aspectRatio         = 1.0
+        ioPadsSpec = [ (None , None, None      , 'io_out(23)' , 'count(0)')
+                     , (None , None, None      , 'io_out(1)'  , 'count(1)')
+                     , (None , None, None      , 'io_out(2)'  , 'count(2)')
+                     , (None , None, None      , 'io_out(3)'  , 'count(3)')
+                     , (None , None, None      , 'io_out(4)'  , 'count(4)')
+                     , (None , None, None      , 'io_out(5)'  , 'count(5)')
+                     , (None , None, None      , 'io_out(6)'  , 'count(6)')
+                     , (None , None, None      , 'io_out(37)' , 'count(7)')
+                     , (None , None, None      , 'user_clock2', 'clk')
+                     , (None , None, 'power_0' , 'vccd1'      , 'vdd')
+                     , (None , None, 'ground_0', 'vssd1'      , 'vss')
+                     ]
+       #conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        conf = ChipConf( cell, ioPins=[], ioPads=ioPadsSpec  ) 
+       #conf.cfg.etesian.bloat               = 'Flexlib'
+        conf.cfg.etesian.uniformDensity      = True
+        conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        counterConf.cfg.etesian.spaceMargin         = 0.05
-        counterConf.cfg.anabatic.searchHalo         = 2
-        counterConf.cfg.anabatic.globalIterations   = 20
-        counterConf.cfg.anabatic.topRoutingLayer    = 'm4'
-        counterConf.cfg.katana.hTracksReservedLocal = 6
-        counterConf.cfg.katana.vTracksReservedLocal = 3
-        counterConf.cfg.katana.hTracksReservedMin   = 3
-        counterConf.cfg.katana.vTracksReservedMin   = 1
-        counterConf.cfg.katana.trackFill            = 0
-        counterConf.cfg.katana.runRealignStage      = True
-        counterConf.cfg.block.spareSide             = u(7*12)
-       #counterConf.cfg.chip.padCoreSide            = 'North'
-       #counterConf.cfg.chip.use45corners           = False
-        counterConf.cfg.chip.useAbstractPads        = True
-        counterConf.cfg.chip.minPadSpacing          = u(1.46)
-        counterConf.cfg.chip.supplyRailWidth        = u(8.0)
-        counterConf.cfg.chip.supplyRailPitch        = u(8.0)
-        counterConf.editor              = editor
-        counterConf.useSpares           = True
-        counterConf.useClockTree        = True
-        counterConf.useHFNS             = True
-        counterConf.bColumns            = 2
-        counterConf.bRows               = 2
-        counterConf.chipName            = 'chip'
-        counterConf.chipConf.ioPadGauge = 'LibreSOCIO'
-        counterConf.coreSize            = ( u( 21*12.0), u( 20*12.0) )
-        counterConf.chipSize            = ( u(  2020.0), u(  2060.0) )
-        counterConf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
-        counterConf.useHTree( 'reset' )
-        #counterConf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
+        conf.cfg.etesian.spaceMargin         = 0.05
+        conf.cfg.anabatic.searchHalo         = 2
+        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.topRoutingLayer    = 'm4'
+        conf.cfg.katana.hTracksReservedLocal = 6
+        conf.cfg.katana.vTracksReservedLocal = 3
+        conf.cfg.katana.hTracksReservedMin   = 3
+        conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.katana.trackFill            = 0
+        conf.cfg.katana.runRealignStage      = True
+        conf.cfg.block.spareSide             = u(7*12)
+        conf.cfg.chip.useAbstractPads        = True
+        conf.cfg.chip.minPadSpacing          = u(1.46)
+        conf.cfg.chip.supplyRailWidth        = u(20.0)
+        conf.cfg.chip.supplyRailPitch        = u(40.0)
+        conf.cfg.harness.path                = harnessProjectDir + '/user_project_wrapper.def'
+        conf.editor       = editor
+        conf.useSpares    = True
+        conf.useClockTree = True
+        conf.useHFNS      = True
+        conf.bColumns     = 2
+        conf.bRows        = 2
+        conf.chipName     = 'chip'
+        conf.coreSize     = ( u( 21*12.0), u( 20*12.0) )
+        conf.chipSize     = ( u(  2020.0), u(  2060.0) )
+        conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
         if buildChip:
-            counterToChip = CoreToChip( counterConf )
+            counterToChip = CoreToChip( conf )
             counterToChip.buildChip()
-            chipBuilder = Chip( counterConf )
+            if editor:
+                editor.setCell( conf.chip )
+            chipBuilder = Chip( conf )
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:
-            blockBuilder = Block( counterConf )
+            blockBuilder = Block( conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
     except Exception as e:

@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
         #helpers.setTraceLevel( 550 )
-        #Breakpoint.setStopLevel( 100 )
+        #Breakpoint.setStopLevel( 101 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'ao68000', CRL.Catalog.State.Logical )
         if editor: editor.setCell( cell ) 

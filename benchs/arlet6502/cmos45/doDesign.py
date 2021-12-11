@@ -139,7 +139,9 @@ def scriptMain ( **kw ):
         arlet6502Conf.bRows               = 2
         arlet6502Conf.chipName            = 'chip'
         arlet6502Conf.chipConf.ioPadGauge = 'niolib'
-        arlet6502Conf.coreSize            = ( l( 37*100.0), l( 39*100.0) )
+        # 37 x 39 --> OK.
+        # 36 x 38 --> OK.
+        arlet6502Conf.coreSize            = ( l( 36*100.0), l( 38*100.0) )
         arlet6502Conf.chipSize            = ( l(   9400.0), l(  11400.0) )
         arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
         arlet6502Conf.useHTree( 'reset_from_pad' )
