@@ -1,5 +1,6 @@
 
 import sys
+import os
 import traceback
 import CRL
 import helpers
@@ -8,12 +9,12 @@ from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
 from   Hurricane  import DbU, Breakpoint
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-#from   plugins.alpha.core2chip.libresocio import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
+from   plugins.alpha.block.block         import Block
+from   plugins.alpha.block.configuration import IoPin, GaugeConf
+from   plugins.alpha.block.spares        import Spares
+from   plugins.alpha.chip.configuration  import ChipConf
+from   plugins.alpha.chip.chip           import Chip
+from   plugins.alpha.core2chip.sky130    import CoreToChip
 
 
 af = CRL.AllianceFramework.get()
@@ -26,75 +27,62 @@ def scriptMain ( **kw ):
     try:
        #helpers.setTraceLevel( 540 )
        #Breakpoint.setStopLevel( 101 )
-        buildChip = False
+        if 'CHECK_TOOLKIT' in os.environ:
+            checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
+            harnessProjectDir = checkToolkitDir + '/cells/sky130'
+        else:
+            print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
+            print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
+            sys.exit( 1 )
+        buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
-        ioPadsSpec = [ (IoPin.WEST , None, 'iopower_0'  , 'iovdd'  )
-                     , (IoPin.WEST , None, 'ioground_0' , 'vss'    )
-                     , (IoPin.WEST , None, 'di_0'       , 'di(0)'  , 'di(0)'  )
-                     , (IoPin.WEST , None, 'di_1'       , 'di(1)'  , 'di(1)'  )
-                     , (IoPin.WEST , None, 'di_2'       , 'di(2)'  , 'di(2)'  )
-                     , (IoPin.WEST , None, 'di_3'       , 'di(3)'  , 'di(3)'  )
-                     , (IoPin.WEST , None, 'power_0'    , 'vdd'    )
-                     , (IoPin.WEST , None, 'ground_0'   , 'vss'    )
-                     , (IoPin.WEST , None, 'di_4'       , 'di(4)'  , 'di(4)'  )
-                     , (IoPin.WEST , None, 'di_5'       , 'di(5)'  , 'di(5)'  )
-                     , (IoPin.WEST , None, 'di_6'       , 'di(6)'  , 'di(6)'  )
-                     , (IoPin.WEST , None, 'di_7'       , 'di(7)'  , 'di(7)'  )
-                     , (IoPin.WEST , None, 'ioground_1' , 'vss'    )
-                     , (IoPin.WEST , None, 'iopower_1'  , 'iovdd'  )
+        ioPadsSpec = [ (None, None, 'power_0'  , 'vccd1'      , 'vdd'  )
+                     , (None, None, 'ground_0' , 'vssd1'      , 'vss'  )
+                     , (None, None, None       , 'user_clock2', 'clk'    )
+                     , (None, None, None       , 'io_in(0)'   , 'di(0)'  )
+                     , (None, None, None       , 'io_in(1)'   , 'di(1)'  )
+                     , (None, None, None       , 'io_in(2)'   , 'di(2)'  )
+                     , (None, None, None       , 'io_in(3)'   , 'di(3)'  )
+                     , (None, None, None       , 'io_in(4)'   , 'di(4)'  )
+                     , (None, None, None       , 'io_in(5)'   , 'di(5)'  )
+                     , (None, None, None       , 'io_in(6)'   , 'di(6)'  )
+                     , (None, None, None       , 'io_in(7)'   , 'di(7)'  )
 
-                     , (IoPin.SOUTH, None, 'iopower_2'  , 'iovdd'  )
-                     , (IoPin.SOUTH, None, 'ioground_2' , 'vss'    )
-                     , (IoPin.SOUTH, None, 'do_0'       , 'do(0)'  , 'do(0)'  )
-                     , (IoPin.SOUTH, None, 'do_1'       , 'do(1)'  , 'do(1)'  )
-                     , (IoPin.SOUTH, None, 'do_2'       , 'do(2)'  , 'do(2)'  )
-                     , (IoPin.SOUTH, None, 'do_3'       , 'do(3)'  , 'do(3)'  )
-                     , (IoPin.SOUTH, None, 'do_4'       , 'do(4)'  , 'do(4)'  )
-                     , (IoPin.SOUTH, None, 'do_5'       , 'do(5)'  , 'do(5)'  )
-                     , (IoPin.SOUTH, None, 'do_6'       , 'do(6)'  , 'do(6)'  )
-                     , (IoPin.SOUTH, None, 'do_7'       , 'do(7)'  , 'do(7)'  )
-                     , (IoPin.SOUTH, None, 'a_0'        , 'a(0)'   , 'a(0)'   )
-                     , (IoPin.SOUTH, None, 'a_1'        , 'a(1)'   , 'a(1)'   )
-                     , (IoPin.SOUTH, None, 'iopower_3'  , 'iovdd'  )
-                     , (IoPin.SOUTH, None, 'ioground_3' , 'vss'    )
+                     , (None, None, None       , 'io_out(8)'  , 'do(0)'  )
+                     , (None, None, None       , 'io_out(9)'  , 'do(1)'  )
+                     , (None, None, None       , 'io_out(10)' , 'do(2)'  )
+                     , (None, None, None       , 'io_out(11)' , 'do(3)'  )
+                     , (None, None, None       , 'io_out(12)' , 'do(4)'  )
+                     , (None, None, None       , 'io_out(13)' , 'do(5)'  )
+                     , (None, None, None       , 'io_out(14)' , 'do(6)'  )
+                     , (None, None, None       , 'io_out(15)' , 'do(7)'  )
 
-                     , (IoPin.EAST , None, 'iopower_4'  , 'iovdd'  )
-                     , (IoPin.EAST , None, 'ioground_4' , 'vss'    )
-                     , (IoPin.EAST , None, 'a_2'        , 'a(2)'   , 'a(2)'   )
-                     , (IoPin.EAST , None, 'a_3'        , 'a(3)'   , 'a(3)'   )
-                     , (IoPin.EAST , None, 'a_4'        , 'a(4)'   , 'a(4)'   )
-                     , (IoPin.EAST , None, 'a_5'        , 'a(5)'   , 'a(5)'   )
-                     , (IoPin.EAST , None, 'a_6'        , 'a(6)'   , 'a(6)'   )
-                     , (IoPin.EAST , None, 'a_7'        , 'a(7)'   , 'a(7)'   )
-                     , (IoPin.EAST , None, 'power_1'    , 'vdd'    )
-                     , (IoPin.EAST , None, 'ground_1'   , 'vss'    )
-                     , (IoPin.EAST , None, 'a_8'        , 'a(8)'   , 'a(8)'   )
-                     , (IoPin.EAST , None, 'a_9'        , 'a(9)'   , 'a(9)'   )
-                     , (IoPin.EAST , None, 'a_10'       , 'a(10)'  , 'a(10)'  )
-                     , (IoPin.EAST , None, 'a_11'       , 'a(11)'  , 'a(11)'  )
-                     , (IoPin.EAST , None, 'a_12'       , 'a(12)'  , 'a(12)'  )
-                     , (IoPin.EAST , None, 'a_13'       , 'a(13)'  , 'a(13)'  )
-                     , (IoPin.EAST , None, 'ioground_5' , 'vss'    )
-                     , (IoPin.EAST , None, 'iopower_5'  , 'iovdd'  )
+                     , (None, None, None       , 'io_in(16)'  , 'a(0)'   )
+                     , (None, None, None       , 'io_in(17)'  , 'a(1)'   )
+                     , (None, None, None       , 'io_in(18)'  , 'a(2)'   )
+                     , (None, None, None       , 'io_in(19)'  , 'a(3)'   )
+                     , (None, None, None       , 'io_in(20)'  , 'a(4)'   )
+                     , (None, None, None       , 'io_in(21)'  , 'a(5)'   )
+                     , (None, None, None       , 'io_in(22)'  , 'a(6)'   )
+                     , (None, None, None       , 'io_in(23)'  , 'a(7)'   )
+                     , (None, None, None       , 'io_in(24)'  , 'a(8)'   )
+                     , (None, None, None       , 'io_in(25)'  , 'a(9)'   )
+                     , (None, None, None       , 'io_in(26)'  , 'a(10)'  )
+                     , (None, None, None       , 'io_in(27)'  , 'a(11)'  )
+                     , (None, None, None       , 'io_in(28)'  , 'a(12)'  )
+                     , (None, None, None       , 'io_in(29)'  , 'a(13)'  )
+                     , (None, None, None       , 'io_in(30)'  , 'a(14)'  )
+                     , (None, None, None       , 'io_in(31)'  , 'a(15)'  )
 
-                     , (IoPin.NORTH, None, 'iopower_6'  , 'iovdd'  )
-                     , (IoPin.NORTH, None, 'ioground_6' , 'vss'    )
-                     , (IoPin.NORTH, None, 'irq'        , 'irq'    , 'irq'    )
-                     , (IoPin.NORTH, None, 'nmi'        , 'nmi'    , 'nmi'    )
-                     , (IoPin.NORTH, None, 'rdy'        , 'rdy'    , 'rdy'    )
-                     , (IoPin.NORTH, None, 'power_2'    , 'vdd'    )
-                     , (IoPin.NORTH, None, 'ground_2'   , 'vss'    )
-                     , (IoPin.NORTH, None, 'clk'        , 'clk'    , 'clk'    )
-                     , (IoPin.NORTH, None, 'reset'      , 'reset'  , 'reset'  )
-                     , (IoPin.NORTH, None, 'we'         , 'we'     , 'we'     )
-                     , (IoPin.NORTH, None, 'a_14'       , 'a(14)'  , 'a(14)'  )
-                     , (IoPin.NORTH, None, 'a_15'       , 'a(15)'  , 'a(15)'  )
-                     , (IoPin.NORTH, None, 'ioground_7' , 'vss'    )
-                     , (IoPin.NORTH, None, 'iopower_7'  , 'iovdd'  )
+                     , (None, None, None       , 'io_in(32)'  , 'irq'    )
+                     , (None, None, None       , 'io_in(33)'  , 'nmi'    )
+                     , (None, None, None       , 'io_in(34)'  , 'rdy'    )
+                     , (None, None, None       , 'io_in(35)'  , 'reset'  )
+                     , (None, None, None       , 'io_in(36)'  , 'we'     )
                      ]
         m1pitch    = u(0.46)
         m2pitch    = u(0.51)
@@ -109,53 +97,50 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , 140*m2pitch,       0 ,  1)
                     #, (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 150*m2pitch,       0 ,  1)
                      ]
-       #ioPinsSpec = []
-        arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        arlet6502Conf.cfg.viewer.pixelThreshold       = 5
-       #arlet6502Conf.cfg.etesian.bloat               = 'Flexlib'
-        arlet6502Conf.cfg.etesian.uniformDensity      = True
-        arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
+        conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+       #conf.cfg.etesian.bloat               = 'Flexlib'
+        conf.cfg.etesian.uniformDensity      = True
+        conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        arlet6502Conf.cfg.etesian.spaceMargin         = 0.10
-        arlet6502Conf.cfg.anabatic.searchHalo         = 2
-        arlet6502Conf.cfg.anabatic.globalIterations   = 20
-        arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        arlet6502Conf.cfg.katana.hTracksReservedLocal = 6
-        arlet6502Conf.cfg.katana.vTracksReservedLocal = 3
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 3
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 1
-        arlet6502Conf.cfg.katana.trackFill            = 0
-        arlet6502Conf.cfg.katana.runRealignStage      = True
-        arlet6502Conf.cfg.katana.dumpMeasures         = True
-        arlet6502Conf.cfg.block.spareSide             = u(7*12)
-       #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
-       #arlet6502Conf.cfg.chip.use45corners           = False
-        arlet6502Conf.cfg.chip.useAbstractPads        = True
-        arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
-        arlet6502Conf.cfg.chip.supplyRailWidth        = u(8.0)
-        arlet6502Conf.cfg.chip.supplyRailPitch        = u(8.0)
-        arlet6502Conf.editor              = editor
-        arlet6502Conf.useSpares           = True
-        arlet6502Conf.useClockTree        = True
-        arlet6502Conf.useHFNS             = True
-        arlet6502Conf.bColumns            = 2
-        arlet6502Conf.bRows               = 2
-        arlet6502Conf.chipName            = 'chip'
-        arlet6502Conf.chipConf.ioPadGauge = 'LibreSOCIO'
-        arlet6502Conf.coreSize            = ( u( 36*12.0), u( 36*12.0) )
-        arlet6502Conf.chipSize            = ( u(  2020.0), u(  2060.0) )
-        arlet6502Conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
-        arlet6502Conf.useHTree( 'reset' )
-        #arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
+        conf.cfg.etesian.spaceMargin         = 0.10
+        conf.cfg.anabatic.searchHalo         = 2
+        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.topRoutingLayer    = 'm4'
+        conf.cfg.katana.hTracksReservedLocal = 6
+        conf.cfg.katana.vTracksReservedLocal = 3
+        conf.cfg.katana.hTracksReservedMin   = 3
+        conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.katana.trackFill            = 0
+        conf.cfg.katana.runRealignStage      = True
+        conf.cfg.katana.dumpMeasures         = True
+        conf.cfg.block.spareSide             = u(7*12)
+        conf.cfg.chip.minPadSpacing          = u(1.46)
+        conf.cfg.chip.supplyRailWidth        = u(20.0)
+        conf.cfg.chip.supplyRailPitch        = u(40.0)
+        conf.cfg.harness.path                = harnessProjectDir + '/user_project_wrapper.def'
+        conf.editor              = editor
+        conf.useSpares           = True
+        conf.useClockTree        = True
+        conf.useHFNS             = True
+        conf.bColumns            = 2
+        conf.bRows               = 2
+        conf.chipName            = 'chip'
+        conf.coreSize            = ( u( 36*12.0), u( 36*12.0) )
+        conf.chipSize            = ( u(  2020.0), u(  2060.0) )
+        conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
+        conf.useHTree( 'reset' )
+        #conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
-            arlet6502ToChip = CoreToChip( arlet6502Conf )
+            arlet6502ToChip = CoreToChip( conf )
             arlet6502ToChip.buildChip()
-            chipBuilder = Chip( arlet6502Conf )
+            if editor:
+                editor.setCell( conf.chip )
+            chipBuilder = Chip( conf )
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:
-            blockBuilder = Block( arlet6502Conf )
+            blockBuilder = Block( conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
     except Exception as e:
