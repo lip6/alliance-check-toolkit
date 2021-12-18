@@ -22,6 +22,17 @@
  endif
  $(info CELLS_TOP="$(CELLS_TOP)")
 
+# In we are using PDKMaster, check for it's presence.
+ ifneq ($(PDKMASTER_TOP),)
+   ifeq ($(wildcard $(PDKMASTER_TOP)),)
+     $(error [ERROR] PDK Master "$(PDKMASTER_TOP)" not found.)
+   endif
+   ifeq ($(wildcard $(LIBERTY_FILE)),)
+     $(error [ERROR] Liberty file "$(LIBERTY_FILE)" not found.)
+   endif
+ endif
+
+
 # Select the logical synthesis tools.
  ifeq ($(LOGICAL_SYNTHESIS),Yosys)
    include ./mk/synthesis-yosys.mk

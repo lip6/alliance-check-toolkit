@@ -34,7 +34,7 @@ def scriptMain ( **kw ):
             print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
             print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
             sys.exit( 1 )
-        buildChip = True
+        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
         if editor:
@@ -127,7 +127,7 @@ def scriptMain ( **kw ):
         conf.chipName            = 'chip'
         conf.coreSize            = ( u( 36*12.0), u( 36*12.0) )
         conf.chipSize            = ( u(  2020.0), u(  2060.0) )
-        conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
+        conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
         conf.useHTree( 'reset' )
         #conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
