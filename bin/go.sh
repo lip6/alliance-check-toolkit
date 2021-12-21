@@ -5,7 +5,7 @@
  benchRules["adder/cmos45"]="lvx"
  benchRules["adder/tsmc_c180"]="gds"
  benchRules["adder/freepdk45_c4m"]="gds"
- benchRules["AM2901/standart_cells"]="druc lvx"
+ benchRules["AM2901/standart_cells/cmos"]="druc lvx"
  benchRules["AM2901/datapath"]="druc lvx"
  benchRules["6502/cmos"]="druc lvx"
  benchRules["6502/cmos45"]="lvx"
@@ -29,7 +29,7 @@
  benchs=""
  benchs="${benchs} adder/cmos"
  benchs="${benchs} adder/cmos45"
- benchs="${benchs} AM2901/standart_cells/cmos"
+#benchs="${benchs} AM2901/standart_cells/cmos"
 #benchs="${benchs} AM2901/datapath/cmos"
  benchs="${benchs} 6502/cmos"
  benchs="${benchs} 6502/cmos45"
@@ -59,6 +59,8 @@
    benchs="${benchs} ao68000/sky130_c4m"
  fi
 
+ mode="stopOnFailure"
+#mode="ignoreFailure"
  benchLog="`pwd`/make-go.log"
  rm -f "${benchLog}"
  for bench in ${benchs}; do
@@ -76,19 +78,24 @@
      continue
    fi
 
+   result="success."
    pushd ${bench} > /dev/null
+   make clean >> ${benchLog} 2>&1
    for rule in ${rules}; do
-     make clean   >> ${benchLog} 2>&1
      make ${rule} >> ${benchLog} 2>&1
      if [ $? -ne 0 ]; then
-       echo ""
-       echo ""
-       echo "[ERROR] go.sh: bench <${bench}> has failed."
-       exit 1
+       result="\"${rule}\" failed."
+       if [ "${mode}" = "stopOnFailure" ]; then
+         echo ""
+         echo ""
+         echo "[ERROR] go.sh: bench <${bench}> has failed."
+         exit 1
+       fi
+       break
      fi
    done
    make clean >> ${benchLog} 2>&1
-   echo " success."
+   echo " ${result}"
    popd > /dev/null
  done
  exit 0
