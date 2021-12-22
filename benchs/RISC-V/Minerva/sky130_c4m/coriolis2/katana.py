@@ -12,3 +12,5 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'io_in_from_pad_bit0_root_br_tl_tr_tr_0' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109444_new_n34872' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109444_new_n25771' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109444_new_n43572' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109444_new_n25283' ) )
