@@ -46,6 +46,8 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.10
+        conf.cfg.etesian.antennaGateMaxWL    = u(400.0)
+        conf.cfg.etesian.antennaDiodeMaxWL   = u(800.0)
         conf.cfg.anabatic.saturateRatio      = 0.90
         conf.cfg.anabatic.saturateRp         = 12
         conf.cfg.anabatic.searchHalo         = 2
@@ -54,11 +56,12 @@ def scriptMain ( **kw ):
         conf.cfg.katana.longWireUpReserve1   = 3.0
         conf.cfg.katana.hTracksReservedLocal = 25
         conf.cfg.katana.vTracksReservedLocal = 20
-        conf.cfg.katana.hTracksReservedMin   = 11
-        conf.cfg.katana.vTracksReservedMin   = 9
+        conf.cfg.katana.hTracksReservedMin   = 12
+        conf.cfg.katana.vTracksReservedMin   = 10
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
+       #conf.cfg.katana.longWireUpReserve1   = 2.0
         conf.cfg.block.spareSide             = u(7*10)
         conf.cfg.chip.supplyRailWidth        = u(20.0)
         conf.cfg.chip.supplyRailPitch        = u(40.0)
