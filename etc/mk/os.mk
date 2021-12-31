@@ -38,6 +38,12 @@
     #USE_LLVMTOOLSET_7 = Yes
      BUILD_VARIANT     = Linux.el7
    endif
+   ifneq ($(findstring .el9.,$(UNAME_R)),)
+    #USE_LLVMTOOLSET_7 = Yes
+     $(info OS guessed as Linux.el9)
+     BUILD_VARIANT = Linux.el9
+     LIB_SUFFIX_   =
+   endif
    ifneq ($(findstring -Microsoft,$(UNAME_R)),)
      BUILD_VARIANT    = Linux.x86
    endif

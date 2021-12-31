@@ -7,7 +7,6 @@
  include ./mk/os.mk
  include ./mk/users.mk
  include ./mk/binaries.mk
- $(info =============== CELLS_TOP="$(CELLS_TOP)")
  include ./mk/alliance.mk
 
 # Some useful functions.
