@@ -1,0 +1,19 @@
+
+-- Phony VHDL interface for SRAM block.
+
+entity spblock_512w64b8w is
+   port ( clk     : in  bit
+        ; we      : in  bit_vector( 7 downto 0)
+        ; a       : in  bit_vector( 8 downto 0)
+        ; d       : in  bit_vector(63 downto 0)
+        ; q       : out bit_vector(63 downto 0)
+        ; vdd     : in  bit
+        ; vss     : in  bit
+        );
+end spblock_512w64b8w;
+
+architecture behavioral of spblock_512w64b8w is
+
+begin
+
+end behavioral;
