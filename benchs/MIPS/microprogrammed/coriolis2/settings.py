@@ -21,9 +21,9 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.katana.eventsLimit          = 1000000
     cfg.anabatic.topRoutingLayer    = 'METAL5'
     cfg.katana.hTracksReservedLocal = 6
-    cfg.katana.vTracksReservedLocal = 6
+    cfg.katana.vTracksReservedLocal = 7
     cfg.katana.hTracksReservedMin   = 1
-    cfg.katana.vTracksReservedMin   = 3
+    cfg.katana.vTracksReservedMin   = 5
 
     Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
 
