@@ -23,6 +23,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.anabatic.topRoutingLayer    = 'METAL5'
     cfg.katana.eventsLimit          = 1000000
     cfg.katana.hTracksReservedMin   = 3
+    #cfg.katana.vTracksReservedMin   = 4
     cfg.katana.hTracksReservedLocal = 8
     cfg.katana.vTracksReservedLocal = 6
     cfg.katana.runRealignStage      = True

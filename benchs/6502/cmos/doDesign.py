@@ -3,12 +3,10 @@ import sys
 import traceback
 import CRL
 import helpers
-from   helpers.io import ErrorMessage
-from   helpers.io import WarningMessage
+from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l
 import plugins
-from   Hurricane  import DbU
-from   Hurricane  import Pin
+from   Hurricane  import Breakpoint, DbU, Pin
 from   plugins.alpha.block.block         import Block
 from   plugins.alpha.block.configuration import IoPin
 from   plugins.alpha.chip.configuration  import ChipConf
@@ -24,6 +22,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
         #helpers.setTraceLevel( 550 )
+        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'm65s', CRL.Catalog.State.Logical )
         if editor: editor.setCell( cell ) 
