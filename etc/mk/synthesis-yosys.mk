@@ -50,7 +50,7 @@
 
 
 %.blif: %.v
-	 yosysArgs="--input-lang=Verilog --design=$* --liberty=$(LIBERTY_FILE)"; \
+	 yosysArgs="--input-lang=Verilog --design=$* --liberty=$(LIBERTY_FILE) -k"; \
 	 if [ "$(YOSYS_SET_TOP)" = "Yes" ]; then yosysArgs="$$yosysArgs --top=$*" ; fi;   \
 	 if [ ! -z "$(FLATTEN_ARG)"      ]; then yosysArgs="$$yosysArgs $(FLATTEN_ARG)"; fi;  \
 	 if [ ! -z "$(BLACKBOXES_ARG)"   ]; then yosysArgs="$$yosysArgs $(BLACKBOXES_ARG)"; fi;  \
