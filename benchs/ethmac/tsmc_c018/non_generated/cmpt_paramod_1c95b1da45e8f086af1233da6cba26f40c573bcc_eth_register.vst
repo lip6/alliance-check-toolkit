@@ -1,0 +1,110 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on May 20, 2022, 19:11
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity cmpt_paramod_1c95b1da45e8f086af1233da6cba26f40c573bcc_eth_register is
+  port ( clk       : in bit
+       ; datain    : in bit
+       ; reset     : in bit
+       ; syncreset : in bit
+       ; write     : in bit
+       ; dataout   : out bit
+       ; vdd       : in bit
+       ; vss       : in bit
+       );
+end cmpt_paramod_1c95b1da45e8f086af1233da6cba26f40c573bcc_eth_register;
+
+architecture structural of cmpt_paramod_1c95b1da45e8f086af1233da6cba26f40c573bcc_eth_register is
+
+  component a2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component inv_x1
+    port ( i   : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component mx2_x2
+    port ( cmd : in bit
+         ; i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component sff1r_x4
+    port ( ck   : in bit
+         ; i    : in bit
+         ; nrst : in bit
+         ; q    : out bit
+         ; vdd  : in bit
+         ; vss  : in bit
+         );
+  end component;
+
+  signal abc_92803_auto_rtlil_cc_2506_notgate_71497 :  bit;
+  signal abc_92803_auto_rtlil_cc_2515_muxgate_71495 :  bit;
+  signal abc_92803_new_n10                          :  bit;
+  signal abc_92803_new_n8                           :  bit;
+
+
+begin
+
+  subckt_4_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_92803_auto_rtlil_cc_2515_muxgate_71495
+           , nrst => abc_92803_auto_rtlil_cc_2506_notgate_71497
+           , q    => dataout
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_3_a2_x2 : a2_x2
+  port map ( i0  => abc_92803_new_n10
+           , i1  => abc_92803_new_n8
+           , q   => abc_92803_auto_rtlil_cc_2515_muxgate_71495
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_2_mx2_x2 : mx2_x2
+  port map ( cmd => write
+           , i0  => dataout
+           , i1  => datain
+           , q   => abc_92803_new_n10
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_1_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_92803_auto_rtlil_cc_2506_notgate_71497
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_0_inv_x1 : inv_x1
+  port map ( i   => syncreset
+           , nq  => abc_92803_new_n8
+           , vdd => vdd
+           , vss => vss
+           );
+
+end structural;
+

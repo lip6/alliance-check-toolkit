@@ -1,0 +1,622 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on May 20, 2022, 19:11
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity cmpt_eth_maccontrol is
+  port ( crcenin                    : in bit
+       ; dlycrcen                   : in bit
+       ; mrxclk                     : in bit
+       ; mtxclk                     : in bit
+       ; padin                      : in bit
+       ; r_passall                  : in bit
+       ; receivedlengthok           : in bit
+       ; receivedpacketgood         : in bit
+       ; receiveend                 : in bit
+       ; rxendfrm                   : in bit
+       ; rxflow                     : in bit
+       ; rxreset                    : in bit
+       ; rxstartfrm                 : in bit
+       ; rxstatuswritelatched_sync2 : in bit
+       ; rxvalid                    : in bit
+       ; tpauserq                   : in bit
+       ; txabortin                  : in bit
+       ; txdonein                   : in bit
+       ; txendfrmin                 : in bit
+       ; txflow                     : in bit
+       ; txreset                    : in bit
+       ; txstartfrmin               : in bit
+       ; txuseddatain               : in bit
+       ; rxdata                     : in bit_vector(7 downto 0)
+       ; txdatain                   : in bit_vector(7 downto 0)
+       ; txpausetv                  : in bit_vector(15 downto 0)
+       ; mac                        : in bit_vector(47 downto 0)
+       ; controlfrmaddressok        : out bit
+       ; crcenout                   : out bit
+       ; padout                     : out bit
+       ; receivedpausefrm           : out bit
+       ; setpausetimer              : out bit
+       ; txabortout                 : out bit
+       ; txctrlendfrm               : out bit
+       ; txdoneout                  : out bit
+       ; txendfrmout                : out bit
+       ; txstartfrmout              : out bit
+       ; txuseddataout              : out bit
+       ; willsendcontrolframe       : out bit
+       ; txdataout                  : out bit_vector(7 downto 0)
+       ; vdd                        : in bit
+       ; vss                        : in bit
+       );
+end cmpt_eth_maccontrol;
+
+architecture structural of cmpt_eth_maccontrol is
+
+  component a2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component ao22_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component inv_x1
+    port ( i   : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component mx2_x2
+    port ( cmd : in bit
+         ; i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no3_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component o2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component oa22_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component sff1r_x4
+    port ( ck   : in bit
+         ; i    : in bit
+         ; nrst : in bit
+         ; q    : out bit
+         ; vdd  : in bit
+         ; vss  : in bit
+         );
+  end component;
+
+  component cmpt_eth_receivecontrol
+    port ( dlycrcen                   : in bit
+         ; mrxclk                     : in bit
+         ; mtxclk                     : in bit
+         ; r_passall                  : in bit
+         ; receivedlengthok           : in bit
+         ; receivedpacketgood         : in bit
+         ; receiveend                 : in bit
+         ; rxendfrm                   : in bit
+         ; rxflow                     : in bit
+         ; rxreset                    : in bit
+         ; rxstartfrm                 : in bit
+         ; rxstatuswritelatched_sync2 : in bit
+         ; rxvalid                    : in bit
+         ; txabortin                  : in bit
+         ; txdonein                   : in bit
+         ; txreset                    : in bit
+         ; txstartfrmout              : in bit
+         ; txuseddataoutdetected      : in bit
+         ; rxdata                     : in bit_vector(7 downto 0)
+         ; mac                        : in bit_vector(47 downto 0)
+         ; addressok                  : out bit
+         ; pause                      : out bit
+         ; receivedpausefrm           : out bit
+         ; setpausetimer              : out bit
+         ; vdd                        : in bit
+         ; vss                        : in bit
+         );
+  end component;
+
+  component cmpt_eth_transmitcontrol
+    port ( dlycrcen              : in bit
+         ; mtxclk                : in bit
+         ; tpauserq              : in bit
+         ; txabortin             : in bit
+         ; txdonein              : in bit
+         ; txflow                : in bit
+         ; txreset               : in bit
+         ; txstartfrmin          : in bit
+         ; txuseddatain          : in bit
+         ; txuseddataout         : in bit
+         ; txuseddataoutdetected : in bit
+         ; txpausetv             : in bit_vector(15 downto 0)
+         ; mac                   : in bit_vector(47 downto 0)
+         ; blocktxdone           : out bit
+         ; ctrlmux               : out bit
+         ; sendingctrlfrm        : out bit
+         ; txctrlendfrm          : out bit
+         ; txctrlstartfrm        : out bit
+         ; willsendcontrolframe  : out bit
+         ; controldata           : out bit_vector(7 downto 0)
+         ; vdd                   : in bit
+         ; vss                   : in bit
+         );
+  end component;
+
+  signal abc_95433_auto_rtlil_cc_2506_notgate_73875 :  bit;
+  signal abc_95433_auto_rtlil_cc_2506_notgate_73877 :  bit;
+  signal abc_95433_auto_rtlil_cc_2506_notgate_73879 :  bit;
+  signal abc_95433_auto_rtlil_cc_2506_notgate_73883 :  bit;
+  signal abc_95433_auto_rtlil_cc_2506_notgate_73887 :  bit;
+  signal abc_95433_auto_rtlil_cc_2515_muxgate_73873 :  bit;
+  signal abc_95433_auto_rtlil_cc_2515_muxgate_73881 :  bit;
+  signal abc_95433_auto_rtlil_cc_2515_muxgate_73885 :  bit;
+  signal abc_95433_new_n59                          :  bit;
+  signal abc_95433_new_n60                          :  bit;
+  signal abc_95433_new_n61                          :  bit;
+  signal abc_95433_new_n62                          :  bit;
+  signal abc_95433_new_n63                          :  bit;
+  signal abc_95433_new_n66                          :  bit;
+  signal abc_95433_new_n68                          :  bit;
+  signal abc_95433_new_n70                          :  bit;
+  signal abc_95433_new_n72                          :  bit;
+  signal abc_95433_new_n83                          :  bit;
+  signal abc_95433_new_n84                          :  bit;
+  signal abc_95433_new_n86                          :  bit;
+  signal blocktxdone                                :  bit;
+  signal ctrlmux                                    :  bit;
+  signal muxedabort                                 :  bit;
+  signal muxeddone                                  :  bit;
+  signal pause                                      :  bit;
+  signal sendingctrlfrm                             :  bit;
+  signal txabortinlatched                           :  bit;
+  signal txctrlstartfrm                             :  bit;
+  signal txdoneinlatched                            :  bit;
+  signal txuseddataoutdetected                      :  bit;
+  signal controldata                                :  bit_vector(7 downto 0);
+
+
+begin
+
+  subckt_27_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txabortin
+           , i1  => muxedabort
+           , q   => abc_95433_new_n86
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_30_o2_x2 : o2_x2
+  port map ( i0  => crcenin
+           , i1  => sendingctrlfrm
+           , q   => crcenout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_36_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtxclk
+           , i    => txabortin
+           , nrst => abc_95433_auto_rtlil_cc_2506_notgate_73877
+           , q    => txabortinlatched
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_18_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(2)
+           , i1  => controldata(2)
+           , q   => txdataout(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_17_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(1)
+           , i1  => controldata(1)
+           , q   => txdataout(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_16_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(0)
+           , i1  => controldata(0)
+           , q   => txdataout(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_15_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txendfrmin
+           , i1  => txctrlendfrm
+           , q   => txendfrmout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_13_no3_x1 : no3_x1
+  port map ( i0  => pause
+           , i1  => ctrlmux
+           , i2  => abc_95433_new_n61
+           , nq  => abc_95433_new_n72
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_11_no3_x1 : no3_x1
+  port map ( i0  => txdoneinlatched
+           , i1  => abc_95433_new_n63
+           , i2  => abc_95433_new_n59
+           , nq  => abc_95433_new_n70
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_0_inv_x1 : inv_x1
+  port map ( i   => txuseddataoutdetected
+           , nq  => abc_95433_new_n59
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_1_inv_x1 : inv_x1
+  port map ( i   => txabortin
+           , nq  => abc_95433_new_n60
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_2_inv_x1 : inv_x1
+  port map ( i   => txstartfrmin
+           , nq  => abc_95433_new_n61
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_3_inv_x1 : inv_x1
+  port map ( i   => txuseddatain
+           , nq  => abc_95433_new_n62
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_4_inv_x1 : inv_x1
+  port map ( i   => txdonein
+           , nq  => abc_95433_new_n63
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_39_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtxclk
+           , i    => abc_95433_auto_rtlil_cc_2515_muxgate_73885
+           , nrst => abc_95433_auto_rtlil_cc_2506_notgate_73887
+           , q    => txuseddataoutdetected
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_19_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(3)
+           , i1  => controldata(3)
+           , q   => txdataout(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_14_oa22_x2 : oa22_x2
+  port map ( i0  => ctrlmux
+           , i1  => txctrlstartfrm
+           , i2  => abc_95433_new_n72
+           , q   => txstartfrmout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_5_inv_x1 : inv_x1
+  port map ( i   => txreset
+           , nq  => abc_95433_auto_rtlil_cc_2506_notgate_73875
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_9_no3_x1 : no3_x1
+  port map ( i0  => abc_95433_new_n60
+           , i1  => txabortinlatched
+           , i2  => abc_95433_new_n59
+           , nq  => abc_95433_new_n68
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_10_ao22_x2 : ao22_x2
+  port map ( i0  => muxedabort
+           , i1  => abc_95433_new_n68
+           , i2  => abc_95433_new_n61
+           , q   => abc_95433_auto_rtlil_cc_2515_muxgate_73881
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_24_no2_x1 : no2_x1
+  port map ( i0  => blocktxdone
+           , i1  => txstartfrmin
+           , nq  => abc_95433_new_n83
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_28_a2_x2 : a2_x2
+  port map ( i0  => abc_95433_new_n86
+           , i1  => abc_95433_new_n83
+           , q   => txabortout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_35_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtxclk
+           , i    => abc_95433_auto_rtlil_cc_2515_muxgate_73873
+           , nrst => abc_95433_auto_rtlil_cc_2506_notgate_73875
+           , q    => muxeddone
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_6_no2_x1 : no2_x1
+  port map ( i0  => ctrlmux
+           , i1  => abc_95433_new_n62
+           , nq  => txuseddataout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_7_no2_x1 : no2_x1
+  port map ( i0  => txdonein
+           , i1  => txabortin
+           , nq  => abc_95433_new_n66
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_26_a2_x2 : a2_x2
+  port map ( i0  => abc_95433_new_n84
+           , i1  => abc_95433_new_n83
+           , q   => txdoneout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_29_o2_x2 : o2_x2
+  port map ( i0  => padin
+           , i1  => sendingctrlfrm
+           , q   => padout
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_38_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtxclk
+           , i    => abc_95433_auto_rtlil_cc_2515_muxgate_73881
+           , nrst => abc_95433_auto_rtlil_cc_2506_notgate_73883
+           , q    => muxedabort
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_40_eth_receivecontrol : cmpt_eth_receivecontrol
+  port map ( dlycrcen                   => dlycrcen
+           , mrxclk                     => mrxclk
+           , mtxclk                     => mtxclk
+           , r_passall                  => r_passall
+           , receivedlengthok           => receivedlengthok
+           , receivedpacketgood         => receivedpacketgood
+           , receiveend                 => receiveend
+           , rxendfrm                   => rxendfrm
+           , rxflow                     => rxflow
+           , rxreset                    => rxreset
+           , rxstartfrm                 => rxstartfrm
+           , rxstatuswritelatched_sync2 => rxstatuswritelatched_sync2
+           , rxvalid                    => rxvalid
+           , txabortin                  => txabortin
+           , txdonein                   => txdonein
+           , txreset                    => txreset
+           , txstartfrmout              => txstartfrmout
+           , txuseddataoutdetected      => txuseddataoutdetected
+           , rxdata                     => rxdata(7 downto 0)
+           , mac                        => mac(47 downto 0)
+           , addressok                  => controlfrmaddressok
+           , pause                      => pause
+           , receivedpausefrm           => receivedpausefrm
+           , setpausetimer              => setpausetimer
+           , vdd                        => vdd
+           , vss                        => vss
+           );
+
+  subckt_37_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtxclk
+           , i    => txdonein
+           , nrst => abc_95433_auto_rtlil_cc_2506_notgate_73879
+           , q    => txdoneinlatched
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_31_inv_x1 : inv_x1
+  port map ( i   => txreset
+           , nq  => abc_95433_auto_rtlil_cc_2506_notgate_73877
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_32_inv_x1 : inv_x1
+  port map ( i   => txreset
+           , nq  => abc_95433_auto_rtlil_cc_2506_notgate_73879
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_33_inv_x1 : inv_x1
+  port map ( i   => txreset
+           , nq  => abc_95433_auto_rtlil_cc_2506_notgate_73883
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_41_eth_transmitcontrol : cmpt_eth_transmitcontrol
+  port map ( dlycrcen              => dlycrcen
+           , mtxclk                => mtxclk
+           , tpauserq              => tpauserq
+           , txabortin             => txabortin
+           , txdonein              => txdonein
+           , txflow                => txflow
+           , txreset               => txreset
+           , txstartfrmin          => txstartfrmin
+           , txuseddatain          => txuseddatain
+           , txuseddataout         => txuseddataout
+           , txuseddataoutdetected => txuseddataoutdetected
+           , txpausetv             => txpausetv(15 downto 0)
+           , mac                   => mac(47 downto 0)
+           , blocktxdone           => blocktxdone
+           , ctrlmux               => ctrlmux
+           , sendingctrlfrm        => sendingctrlfrm
+           , txctrlendfrm          => txctrlendfrm
+           , txctrlstartfrm        => txctrlstartfrm
+           , willsendcontrolframe  => willsendcontrolframe
+           , controldata           => controldata(7 downto 0)
+           , vdd                   => vdd
+           , vss                   => vss
+           );
+
+  subckt_20_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(4)
+           , i1  => controldata(4)
+           , q   => txdataout(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_12_ao22_x2 : ao22_x2
+  port map ( i0  => muxeddone
+           , i1  => abc_95433_new_n70
+           , i2  => abc_95433_new_n61
+           , q   => abc_95433_auto_rtlil_cc_2515_muxgate_73873
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_8_ao22_x2 : ao22_x2
+  port map ( i0  => txuseddataoutdetected
+           , i1  => txuseddataout
+           , i2  => abc_95433_new_n66
+           , q   => abc_95433_auto_rtlil_cc_2515_muxgate_73885
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_21_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(5)
+           , i1  => controldata(5)
+           , q   => txdataout(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_22_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(6)
+           , i1  => controldata(6)
+           , q   => txdataout(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_23_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdatain(7)
+           , i1  => controldata(7)
+           , q   => txdataout(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_25_mx2_x2 : mx2_x2
+  port map ( cmd => ctrlmux
+           , i0  => txdonein
+           , i1  => muxeddone
+           , q   => abc_95433_new_n84
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_34_inv_x1 : inv_x1
+  port map ( i   => txreset
+           , nq  => abc_95433_auto_rtlil_cc_2506_notgate_73887
+           , vdd => vdd
+           , vss => vss
+           );
+
+end structural;
+

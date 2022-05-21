@@ -1,0 +1,1660 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on May 20, 2022, 19:11
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity cmpt_eth_shiftreg is
+  port ( clk        : in bit
+       ; mdcen_n    : in bit
+       ; mdi        : in bit
+       ; reset      : in bit
+       ; writeop    : in bit
+       ; latchbyte  : in bit_vector(1 downto 0)
+       ; byteselect : in bit_vector(3 downto 0)
+       ; fiad       : in bit_vector(4 downto 0)
+       ; rgad       : in bit_vector(4 downto 0)
+       ; ctrldata   : in bit_vector(15 downto 0)
+       ; linkfail   : out bit
+       ; shiftedbit : out bit
+       ; prsd       : out bit_vector(15 downto 0)
+       ; vdd        : in bit
+       ; vss        : in bit
+       );
+end cmpt_eth_shiftreg;
+
+architecture structural of cmpt_eth_shiftreg is
+
+  component a3_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component a4_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component ao22_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component inv_x1
+    port ( i   : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component mx2_x2
+    port ( cmd : in bit
+         ; i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component mx3_x2
+    port ( cmd0 : in bit
+         ; cmd1 : in bit
+         ; i0   : in bit
+         ; i1   : in bit
+         ; i2   : in bit
+         ; q    : out bit
+         ; vdd  : in bit
+         ; vss  : in bit
+         );
+  end component;
+
+  component na2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component na3_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component na4_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no3_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no4_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component o2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component o4_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component oa22_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component sff1r_x4
+    port ( ck   : in bit
+         ; i    : in bit
+         ; nrst : in bit
+         ; q    : out bit
+         ; vdd  : in bit
+         ; vss  : in bit
+         );
+  end component;
+
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74773 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74777 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74781 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74785 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74789 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74793 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74797 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74801 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74805 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74809 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74813 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74817 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74821 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74825 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74829 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74833 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74837 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74841 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74845 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74849 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74853 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74857 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74861 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74865 :  bit;
+  signal abc_97587_auto_rtlil_cc_2506_notgate_74869 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74771 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74775 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74779 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74783 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74787 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74791 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74795 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74799 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74803 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74807 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74811 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74815 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74819 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74823 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74827 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74831 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74835 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74839 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74843 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74847 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74851 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74855 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74859 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74863 :  bit;
+  signal abc_97587_auto_rtlil_cc_2515_muxgate_74867 :  bit;
+  signal abc_97587_new_n112                         :  bit;
+  signal abc_97587_new_n113                         :  bit;
+  signal abc_97587_new_n114                         :  bit;
+  signal abc_97587_new_n115                         :  bit;
+  signal abc_97587_new_n116                         :  bit;
+  signal abc_97587_new_n117                         :  bit;
+  signal abc_97587_new_n118                         :  bit;
+  signal abc_97587_new_n119                         :  bit;
+  signal abc_97587_new_n120                         :  bit;
+  signal abc_97587_new_n122                         :  bit;
+  signal abc_97587_new_n123                         :  bit;
+  signal abc_97587_new_n124                         :  bit;
+  signal abc_97587_new_n125                         :  bit;
+  signal abc_97587_new_n126                         :  bit;
+  signal abc_97587_new_n127                         :  bit;
+  signal abc_97587_new_n128                         :  bit;
+  signal abc_97587_new_n129                         :  bit;
+  signal abc_97587_new_n130                         :  bit;
+  signal abc_97587_new_n131                         :  bit;
+  signal abc_97587_new_n132                         :  bit;
+  signal abc_97587_new_n133                         :  bit;
+  signal abc_97587_new_n134                         :  bit;
+  signal abc_97587_new_n135                         :  bit;
+  signal abc_97587_new_n136                         :  bit;
+  signal abc_97587_new_n137                         :  bit;
+  signal abc_97587_new_n138                         :  bit;
+  signal abc_97587_new_n139                         :  bit;
+  signal abc_97587_new_n140                         :  bit;
+  signal abc_97587_new_n141                         :  bit;
+  signal abc_97587_new_n142                         :  bit;
+  signal abc_97587_new_n144                         :  bit;
+  signal abc_97587_new_n145                         :  bit;
+  signal abc_97587_new_n146                         :  bit;
+  signal abc_97587_new_n147                         :  bit;
+  signal abc_97587_new_n148                         :  bit;
+  signal abc_97587_new_n149                         :  bit;
+  signal abc_97587_new_n151                         :  bit;
+  signal abc_97587_new_n152                         :  bit;
+  signal abc_97587_new_n153                         :  bit;
+  signal abc_97587_new_n154                         :  bit;
+  signal abc_97587_new_n155                         :  bit;
+  signal abc_97587_new_n156                         :  bit;
+  signal abc_97587_new_n157                         :  bit;
+  signal abc_97587_new_n158                         :  bit;
+  signal abc_97587_new_n160                         :  bit;
+  signal abc_97587_new_n161                         :  bit;
+  signal abc_97587_new_n162                         :  bit;
+  signal abc_97587_new_n163                         :  bit;
+  signal abc_97587_new_n164                         :  bit;
+  signal abc_97587_new_n165                         :  bit;
+  signal abc_97587_new_n166                         :  bit;
+  signal abc_97587_new_n168                         :  bit;
+  signal abc_97587_new_n169                         :  bit;
+  signal abc_97587_new_n170                         :  bit;
+  signal abc_97587_new_n171                         :  bit;
+  signal abc_97587_new_n172                         :  bit;
+  signal abc_97587_new_n173                         :  bit;
+  signal abc_97587_new_n174                         :  bit;
+  signal abc_97587_new_n175                         :  bit;
+  signal abc_97587_new_n177                         :  bit;
+  signal abc_97587_new_n178                         :  bit;
+  signal abc_97587_new_n179                         :  bit;
+  signal abc_97587_new_n180                         :  bit;
+  signal abc_97587_new_n181                         :  bit;
+  signal abc_97587_new_n182                         :  bit;
+  signal abc_97587_new_n183                         :  bit;
+  signal abc_97587_new_n185                         :  bit;
+  signal abc_97587_new_n186                         :  bit;
+  signal abc_97587_new_n187                         :  bit;
+  signal abc_97587_new_n188                         :  bit;
+  signal abc_97587_new_n189                         :  bit;
+  signal abc_97587_new_n190                         :  bit;
+  signal abc_97587_new_n192                         :  bit;
+  signal abc_97587_new_n193                         :  bit;
+  signal abc_97587_new_n194                         :  bit;
+  signal abc_97587_new_n195                         :  bit;
+  signal abc_97587_new_n197                         :  bit;
+  signal abc_97587_new_n206                         :  bit;
+  signal abc_97587_new_n207                         :  bit;
+  signal abc_97587_new_n208                         :  bit;
+  signal shiftreg                                   :  bit_vector(6 downto 0);
+
+
+begin
+
+  subckt_144_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74827
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74829
+           , q    => prsd(13)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_141_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74815
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74817
+           , q    => prsd(10)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_138_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74803
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74805
+           , q    => linkfail
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_117_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74821
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_116_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74817
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_115_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74813
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_114_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74809
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_113_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74805
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_39_o4_x2 : o4_x2
+  port map ( i0  => abc_97587_new_n130
+           , i1  => abc_97587_new_n128
+           , i2  => abc_97587_new_n124
+           , i3  => writeop
+           , q   => abc_97587_new_n151
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_69_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n180
+           , i1  => abc_97587_new_n179
+           , i2  => abc_97587_new_n178
+           , i3  => abc_97587_new_n140
+           , nq  => abc_97587_new_n181
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_153_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74863
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74865
+           , q    => shiftreg(6)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_150_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74851
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74853
+           , q    => shiftreg(3)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_147_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74839
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74841
+           , q    => shiftreg(0)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_119_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74829
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_118_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74825
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_4_inv_x1 : inv_x1
+  port map ( i   => byteselect(3)
+           , nq  => abc_97587_new_n116
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_3_inv_x1 : inv_x1
+  port map ( i   => byteselect(0)
+           , nq  => abc_97587_new_n115
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_2_inv_x1 : inv_x1
+  port map ( i   => mdcen_n
+           , nq  => abc_97587_new_n114
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_1_inv_x1 : inv_x1
+  port map ( i   => latchbyte(0)
+           , nq  => abc_97587_new_n113
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_0_inv_x1 : inv_x1
+  port map ( i   => shiftreg(1)
+           , nq  => abc_97587_new_n112
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_63_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n134
+           , i1  => abc_97587_new_n114
+           , i2  => shiftreg(3)
+           , q   => abc_97587_new_n175
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_65_a4_x2 : a4_x2
+  port map ( i0  => abc_97587_new_n131
+           , i1  => abc_97587_new_n129
+           , i2  => abc_97587_new_n125
+           , i3  => fiad(3)
+           , q   => abc_97587_new_n177
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_79_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n135
+           , i0  => shiftreg(1)
+           , i1  => abc_97587_new_n190
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74843
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_10_no2_x1 : no2_x1
+  port map ( i0  => byteselect(1)
+           , i1  => byteselect(0)
+           , nq  => abc_97587_new_n122
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_9_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74773
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_8_inv_x1 : inv_x1
+  port map ( i   => ctrldata(5)
+           , nq  => abc_97587_new_n120
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_7_inv_x1 : inv_x1
+  port map ( i   => ctrldata(3)
+           , nq  => abc_97587_new_n119
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_6_inv_x1 : inv_x1
+  port map ( i   => rgad(1)
+           , nq  => abc_97587_new_n118
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_5_inv_x1 : inv_x1
+  port map ( i   => byteselect(2)
+           , nq  => abc_97587_new_n117
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_43_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n154
+           , i1  => abc_97587_new_n153
+           , i2  => abc_97587_new_n152
+           , i3  => abc_97587_new_n151
+           , nq  => abc_97587_new_n155
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_54_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n160
+           , i1  => abc_97587_new_n164
+           , i2  => abc_97587_new_n165
+           , q   => abc_97587_new_n166
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_59_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n119
+           , i1  => abc_97587_new_n131
+           , i2  => abc_97587_new_n140
+           , q   => abc_97587_new_n171
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_73_a4_x2 : a4_x2
+  port map ( i0  => abc_97587_new_n131
+           , i1  => abc_97587_new_n129
+           , i2  => abc_97587_new_n125
+           , i3  => fiad(2)
+           , q   => abc_97587_new_n185
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_96_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n207
+           , i1  => abc_97587_new_n206
+           , i2  => rgad(0)
+           , i3  => abc_97587_new_n118
+           , nq  => abc_97587_new_n208
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_14_no2_x1 : no2_x1
+  port map ( i0  => byteselect(2)
+           , i1  => byteselect(3)
+           , nq  => abc_97587_new_n126
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_49_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n126
+           , i1  => rgad(2)
+           , i2  => byteselect(1)
+           , i3  => abc_97587_new_n115
+           , nq  => abc_97587_new_n161
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_55_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n135
+           , i0  => shiftreg(4)
+           , i1  => abc_97587_new_n166
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74855
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_61_no2_x1 : no2_x1
+  port map ( i0  => abc_97587_new_n140
+           , i1  => shiftreg(2)
+           , nq  => abc_97587_new_n173
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_133_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74783
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74785
+           , q    => prsd(3)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_130_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74771
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74773
+           , q    => prsd(0)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_40_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n124
+           , i1  => ctrldata(13)
+           , nq  => abc_97587_new_n152
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_41_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n128
+           , i1  => rgad(3)
+           , nq  => abc_97587_new_n153
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_142_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74819
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74821
+           , q    => prsd(11)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_139_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74807
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74809
+           , q    => prsd(8)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_136_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74795
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74797
+           , q    => prsd(6)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_83_na3_x1 : na3_x1
+  port map ( i0  => abc_97587_new_n194
+           , i1  => abc_97587_new_n193
+           , i2  => abc_97587_new_n192
+           , nq  => abc_97587_new_n195
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_36_o2_x2 : o2_x2
+  port map ( i0  => abc_97587_new_n140
+           , i1  => shiftreg(5)
+           , q   => abc_97587_new_n148
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_31_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n135
+           , i0  => shiftedbit
+           , i1  => abc_97587_new_n142
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74867
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_15_o2_x2 : o2_x2
+  port map ( i0  => byteselect(2)
+           , i1  => byteselect(3)
+           , q   => abc_97587_new_n127
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_74_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(9)
+           , i2  => byteselect(2)
+           , i3  => abc_97587_new_n116
+           , nq  => abc_97587_new_n186
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_75_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(1)
+           , i2  => abc_97587_new_n117
+           , i3  => byteselect(3)
+           , nq  => abc_97587_new_n187
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_77_o2_x2 : o2_x2
+  port map ( i0  => abc_97587_new_n140
+           , i1  => shiftreg(0)
+           , q   => abc_97587_new_n189
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_151_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74855
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74857
+           , q    => shiftreg(4)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_145_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74831
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74833
+           , q    => prsd(14)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_124_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74849
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_123_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74845
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_122_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74841
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_121_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74837
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_120_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74833
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_38_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n135
+           , i0  => shiftreg(6)
+           , i1  => abc_97587_new_n149
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74863
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_22_no4_x1 : no4_x1
+  port map ( i0  => abc_97587_new_n133
+           , i1  => abc_97587_new_n130
+           , i2  => abc_97587_new_n128
+           , i3  => abc_97587_new_n124
+           , nq  => abc_97587_new_n134
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_47_oa22_x2 : oa22_x2
+  port map ( i0  => abc_97587_new_n155
+           , i1  => abc_97587_new_n157
+           , i2  => abc_97587_new_n158
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74859
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_76_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n187
+           , i1  => abc_97587_new_n186
+           , i2  => abc_97587_new_n140
+           , i3  => abc_97587_new_n129
+           , nq  => abc_97587_new_n188
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_154_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74867
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74869
+           , q    => shiftedbit
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_148_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74843
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74845
+           , q    => shiftreg(1)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_129_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74869
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_128_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74865
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_127_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74861
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_126_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74857
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_125_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74853
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_89_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(3)
+           , i1  => prsd(12)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74823
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_88_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(4)
+           , i1  => prsd(13)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74827
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_87_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(5)
+           , i1  => prsd(14)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74831
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_86_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(6)
+           , i1  => prsd(15)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74835
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_44_no2_x1 : no2_x1
+  port map ( i0  => abc_97587_new_n140
+           , i1  => shiftreg(4)
+           , nq  => abc_97587_new_n156
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_53_o2_x2 : o2_x2
+  port map ( i0  => abc_97587_new_n140
+           , i1  => shiftreg(3)
+           , q   => abc_97587_new_n165
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_78_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n185
+           , i1  => abc_97587_new_n188
+           , i2  => abc_97587_new_n189
+           , q   => abc_97587_new_n190
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_104_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(1)
+           , i1  => shiftreg(0)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74775
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_103_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(2)
+           , i1  => shiftreg(1)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74779
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_102_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(3)
+           , i1  => shiftreg(2)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74783
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_101_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(4)
+           , i1  => shiftreg(3)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74787
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_100_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(5)
+           , i1  => shiftreg(4)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74791
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_26_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n128
+           , i1  => fiad(0)
+           , nq  => abc_97587_new_n138
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_25_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n124
+           , i1  => ctrldata(15)
+           , nq  => abc_97587_new_n137
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_24_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n130
+           , i1  => ctrldata(7)
+           , nq  => abc_97587_new_n136
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_11_o2_x2 : o2_x2
+  port map ( i0  => byteselect(1)
+           , i1  => byteselect(0)
+           , q   => abc_97587_new_n123
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_13_na3_x1 : na3_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => byteselect(2)
+           , i2  => abc_97587_new_n116
+           , nq  => abc_97587_new_n125
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_17_na3_x1 : na3_x1
+  port map ( i0  => abc_97587_new_n126
+           , i1  => byteselect(1)
+           , i2  => abc_97587_new_n115
+           , nq  => abc_97587_new_n129
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_50_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(12)
+           , i2  => byteselect(2)
+           , i3  => abc_97587_new_n116
+           , nq  => abc_97587_new_n162
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_51_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(4)
+           , i2  => abc_97587_new_n117
+           , i3  => byteselect(3)
+           , nq  => abc_97587_new_n163
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_52_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n163
+           , i1  => abc_97587_new_n162
+           , i2  => abc_97587_new_n161
+           , i3  => abc_97587_new_n140
+           , nq  => abc_97587_new_n164
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_70_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n139
+           , i1  => abc_97587_new_n112
+           , nq  => abc_97587_new_n182
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_131_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74775
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74777
+           , q    => prsd(1)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_105_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(0)
+           , i1  => mdi
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74771
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_29_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n139
+           , i1  => shiftreg(6)
+           , nq  => abc_97587_new_n141
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_28_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n126
+           , i1  => abc_97587_new_n122
+           , nq  => abc_97587_new_n140
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_23_no2_x1 : no2_x1
+  port map ( i0  => abc_97587_new_n134
+           , i1  => abc_97587_new_n114
+           , nq  => abc_97587_new_n135
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_21_no2_x1 : no2_x1
+  port map ( i0  => abc_97587_new_n127
+           , i1  => byteselect(1)
+           , nq  => abc_97587_new_n133
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_12_no3_x1 : no3_x1
+  port map ( i0  => abc_97587_new_n123
+           , i1  => abc_97587_new_n117
+           , i2  => byteselect(3)
+           , nq  => abc_97587_new_n124
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_16_a3_x2 : a3_x2
+  port map ( i0  => abc_97587_new_n126
+           , i1  => byteselect(1)
+           , i2  => abc_97587_new_n115
+           , q   => abc_97587_new_n128
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_19_na3_x1 : na3_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => abc_97587_new_n117
+           , i2  => byteselect(3)
+           , nq  => abc_97587_new_n131
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_46_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n134
+           , i1  => abc_97587_new_n114
+           , i2  => shiftreg(5)
+           , q   => abc_97587_new_n158
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_56_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n131
+           , i1  => abc_97587_new_n129
+           , i2  => abc_97587_new_n125
+           , i3  => fiad(4)
+           , nq  => abc_97587_new_n168
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_71_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n177
+           , i1  => abc_97587_new_n181
+           , i2  => abc_97587_new_n182
+           , q   => abc_97587_new_n183
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_140_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74811
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74813
+           , q    => prsd(9)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_137_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74799
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74801
+           , q    => prsd(7)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_134_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74787
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74789
+           , q    => prsd(4)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_109_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74789
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_108_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74785
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_107_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74781
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_106_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74777
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_37_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n132
+           , i1  => abc_97587_new_n147
+           , i2  => abc_97587_new_n148
+           , q   => abc_97587_new_n149
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_27_no2_x1 : no2_x1
+  port map ( i0  => abc_97587_new_n127
+           , i1  => abc_97587_new_n123
+           , nq  => abc_97587_new_n139
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_18_no3_x1 : no3_x1
+  port map ( i0  => abc_97587_new_n123
+           , i1  => byteselect(2)
+           , i2  => abc_97587_new_n116
+           , nq  => abc_97587_new_n130
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_62_no3_x1 : no3_x1
+  port map ( i0  => abc_97587_new_n173
+           , i1  => abc_97587_new_n134
+           , i2  => abc_97587_new_n114
+           , nq  => abc_97587_new_n174
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_146_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74835
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74837
+           , q    => prsd(15)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_143_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74823
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74825
+           , q    => prsd(12)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_35_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n146
+           , i1  => abc_97587_new_n145
+           , i2  => abc_97587_new_n144
+           , i3  => abc_97587_new_n140
+           , nq  => abc_97587_new_n147
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_34_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n126
+           , i1  => rgad(4)
+           , i2  => byteselect(1)
+           , i3  => abc_97587_new_n115
+           , nq  => abc_97587_new_n146
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_33_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(14)
+           , i2  => byteselect(2)
+           , i3  => abc_97587_new_n116
+           , nq  => abc_97587_new_n145
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_32_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(6)
+           , i2  => abc_97587_new_n117
+           , i3  => byteselect(3)
+           , nq  => abc_97587_new_n144
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_30_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n141
+           , i1  => abc_97587_new_n138
+           , i2  => abc_97587_new_n137
+           , i3  => abc_97587_new_n136
+           , nq  => abc_97587_new_n142
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_80_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n131
+           , i1  => abc_97587_new_n129
+           , i2  => abc_97587_new_n125
+           , i3  => fiad(1)
+           , nq  => abc_97587_new_n192
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_152_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74859
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74861
+           , q    => shiftreg(5)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_149_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74847
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74849
+           , q    => shiftreg(2)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_92_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(0)
+           , i1  => prsd(9)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74811
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_91_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(1)
+           , i1  => prsd(10)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74815
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_90_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => shiftreg(2)
+           , i1  => prsd(11)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74819
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_85_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n139
+           , i1  => latchbyte(1)
+           , i2  => mdcen_n
+           , i3  => abc_97587_new_n113
+           , nq  => abc_97587_new_n197
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_57_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n124
+           , i1  => ctrldata(11)
+           , nq  => abc_97587_new_n169
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_58_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n128
+           , i1  => rgad(1)
+           , nq  => abc_97587_new_n170
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_98_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(7)
+           , i1  => shiftreg(6)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74799
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_97_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n208
+           , i0  => abc_97587_new_n112
+           , i1  => linkfail
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74803
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_93_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n197
+           , i0  => mdi
+           , i1  => prsd(8)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74807
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_84_mx3_x2 : mx3_x2
+  port map ( cmd0 => abc_97587_new_n135
+           , cmd1 => abc_97587_new_n140
+           , i0   => shiftreg(0)
+           , i1   => abc_97587_new_n195
+           , i2   => mdi
+           , q    => abc_97587_auto_rtlil_cc_2515_muxgate_74839
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_45_no3_x1 : no3_x1
+  port map ( i0  => abc_97587_new_n156
+           , i1  => abc_97587_new_n134
+           , i2  => abc_97587_new_n114
+           , nq  => abc_97587_new_n157
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_99_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n206
+           , i0  => prsd(6)
+           , i1  => shiftreg(5)
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74795
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_95_no3_x1 : no3_x1
+  port map ( i0  => rgad(4)
+           , i1  => rgad(2)
+           , i2  => rgad(3)
+           , nq  => abc_97587_new_n207
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_94_no3_x1 : no3_x1
+  port map ( i0  => abc_97587_new_n140
+           , i1  => abc_97587_new_n114
+           , i2  => abc_97587_new_n113
+           , nq  => abc_97587_new_n206
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_81_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n130
+           , i1  => ctrldata(0)
+           , nq  => abc_97587_new_n193
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_60_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n171
+           , i1  => abc_97587_new_n170
+           , i2  => abc_97587_new_n169
+           , i3  => abc_97587_new_n168
+           , nq  => abc_97587_new_n172
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_64_oa22_x2 : oa22_x2
+  port map ( i0  => abc_97587_new_n172
+           , i1  => abc_97587_new_n174
+           , i2  => abc_97587_new_n175
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74851
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_135_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74791
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74793
+           , q    => prsd(5)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_132_sff1r_x4 : sff1r_x4
+  port map ( ck   => clk
+           , i    => abc_97587_auto_rtlil_cc_2515_muxgate_74779
+           , nrst => abc_97587_auto_rtlil_cc_2506_notgate_74781
+           , q    => prsd(2)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_112_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74801
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_111_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74797
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_110_inv_x1 : inv_x1
+  port map ( i   => reset
+           , nq  => abc_97587_auto_rtlil_cc_2506_notgate_74793
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_82_na2_x1 : na2_x1
+  port map ( i0  => abc_97587_new_n124
+           , i1  => ctrldata(8)
+           , nq  => abc_97587_new_n194
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_20_no3_x1 : no3_x1
+  port map ( i0  => abc_97587_new_n130
+           , i1  => abc_97587_new_n128
+           , i2  => abc_97587_new_n124
+           , nq  => abc_97587_new_n132
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_42_ao22_x2 : ao22_x2
+  port map ( i0  => abc_97587_new_n120
+           , i1  => abc_97587_new_n131
+           , i2  => abc_97587_new_n140
+           , q   => abc_97587_new_n154
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_48_a4_x2 : a4_x2
+  port map ( i0  => abc_97587_new_n131
+           , i1  => abc_97587_new_n129
+           , i2  => abc_97587_new_n125
+           , i3  => writeop
+           , q   => abc_97587_new_n160
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_66_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n126
+           , i1  => rgad(0)
+           , i2  => byteselect(1)
+           , i3  => abc_97587_new_n115
+           , nq  => abc_97587_new_n178
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_67_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(2)
+           , i2  => abc_97587_new_n117
+           , i3  => byteselect(3)
+           , nq  => abc_97587_new_n179
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_68_na4_x1 : na4_x1
+  port map ( i0  => abc_97587_new_n122
+           , i1  => ctrldata(10)
+           , i2  => byteselect(2)
+           , i3  => abc_97587_new_n116
+           , nq  => abc_97587_new_n180
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_72_mx2_x2 : mx2_x2
+  port map ( cmd => abc_97587_new_n135
+           , i0  => shiftreg(2)
+           , i1  => abc_97587_new_n183
+           , q   => abc_97587_auto_rtlil_cc_2515_muxgate_74847
+           , vdd => vdd
+           , vss => vss
+           );
+
+end structural;
+

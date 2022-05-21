@@ -1,0 +1,2949 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on May 20, 2022, 19:11
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity ethmac is
+  port ( m_wb_ack_i    : in bit
+       ; m_wb_err_i    : in bit
+       ; mcoll_pad_i   : in bit
+       ; mcrs_pad_i    : in bit
+       ; md_pad_i      : in bit
+       ; mrx_clk_pad_i : in bit
+       ; mrxdv_pad_i   : in bit
+       ; mrxerr_pad_i  : in bit
+       ; mtx_clk_pad_i : in bit
+       ; wb_clk_i      : in bit
+       ; wb_cyc_i      : in bit
+       ; wb_rst_i      : in bit
+       ; wb_stb_i      : in bit
+       ; wb_we_i       : in bit
+       ; mrxd_pad_i    : in bit_vector(3 downto 0)
+       ; wb_sel_i      : in bit_vector(3 downto 0)
+       ; wb_adr_i      : in bit_vector(11 downto 2)
+       ; m_wb_dat_i    : in bit_vector(31 downto 0)
+       ; wb_dat_i      : in bit_vector(31 downto 0)
+       ; int_o         : out bit
+       ; m_wb_cyc_o    : out bit
+       ; m_wb_we_o     : out bit
+       ; md_pad_o      : out bit
+       ; md_padoe_o    : out bit
+       ; mdc_pad_o     : out bit
+       ; mtxen_pad_o   : out bit
+       ; mtxerr_pad_o  : out bit
+       ; wb_ack_o      : out bit
+       ; wb_err_o      : out bit
+       ; m_wb_bte_o    : out bit_vector(1 downto 0)
+       ; m_wb_cti_o    : out bit_vector(1 downto 0)
+       ; m_wb_sel_o    : out bit_vector(3 downto 0)
+       ; mtxd_pad_o    : out bit_vector(3 downto 0)
+       ; m_wb_adr_o    : out bit_vector(31 downto 0)
+       ; m_wb_dat_o    : out bit_vector(31 downto 0)
+       ; wb_dat_o      : out bit_vector(31 downto 0)
+       ; vdd           : in bit
+       ; vss           : in bit
+       );
+end ethmac;
+
+architecture structural of ethmac is
+
+  component a2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component a4_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component inv_x1
+    port ( i   : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component mx2_x2
+    port ( cmd : in bit
+         ; i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component na2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no2_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no3_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component no4_x1
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component o2_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component o4_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; i3  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component oa22_x2
+    port ( i0  : in bit
+         ; i1  : in bit
+         ; i2  : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component sff1_x4
+    port ( ck  : in bit
+         ; i   : in bit
+         ; q   : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component sff1r_x4
+    port ( ck   : in bit
+         ; i    : in bit
+         ; nrst : in bit
+         ; q    : out bit
+         ; vdd  : in bit
+         ; vss  : in bit
+         );
+  end component;
+
+  component zero_x0
+    port ( nq  : out bit
+         ; vdd : in bit
+         ; vss : in bit
+         );
+  end component;
+
+  component cmpt_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone
+    port ( addressmiss                : in bit
+         ; carriersenselost           : in bit
+         ; deferlatched               : in bit
+         ; dribblenibble              : in bit
+         ; invalidsymbol              : in bit
+         ; latchedcrcerror            : in bit
+         ; latecolllatched            : in bit
+         ; loadrxstatus               : in bit
+         ; m_wb_ack_i                 : in bit
+         ; m_wb_err_i                 : in bit
+         ; mrxclk                     : in bit
+         ; mtxclk                     : in bit
+         ; r_passall                  : in bit
+         ; r_rxen                     : in bit
+         ; r_rxflow                   : in bit
+         ; r_txen                     : in bit
+         ; receivedpacketgood         : in bit
+         ; receivedpackettoobig       : in bit
+         ; receivedpausefrm           : in bit
+         ; reset                      : in bit
+         ; retrylimit                 : in bit
+         ; rxabort                    : in bit
+         ; rxendfrm                   : in bit
+         ; rxlatecollision            : in bit
+         ; rxstartfrm                 : in bit
+         ; rxvalid                    : in bit
+         ; shortframe                 : in bit
+         ; txabort                    : in bit
+         ; txdone                     : in bit
+         ; txretry                    : in bit
+         ; txuseddata                 : in bit
+         ; wb_clk_i                   : in bit
+         ; wb_we_i                    : in bit
+         ; bdcs                       : in bit_vector(3 downto 0)
+         ; retrycntlatched            : in bit_vector(3 downto 0)
+         ; r_txbdnum                  : in bit_vector(7 downto 0)
+         ; rxdata                     : in bit_vector(7 downto 0)
+         ; wb_adr_i                   : in bit_vector(9 downto 2)
+         ; rxlength                   : in bit_vector(15 downto 0)
+         ; m_wb_dat_i                 : in bit_vector(31 downto 0)
+         ; wb_dat_i                   : in bit_vector(31 downto 0)
+         ; busy_irq                   : out bit
+         ; m_wb_cyc_o                 : out bit
+         ; m_wb_we_o                  : out bit
+         ; perpacketcrcen             : out bit
+         ; perpacketpad               : out bit
+         ; rstdeferlatched            : out bit
+         ; rxb_irq                    : out bit
+         ; rxe_irq                    : out bit
+         ; rxstatuswritelatched_sync2 : out bit
+         ; txb_irq                    : out bit
+         ; txe_irq                    : out bit
+         ; txendfrm                   : out bit
+         ; txstartfrm                 : out bit
+         ; txunderrun                 : out bit
+         ; wb_ack_o                   : out bit
+         ; m_wb_bte_o                 : out bit_vector(1 downto 0)
+         ; m_wb_cti_o                 : out bit_vector(1 downto 0)
+         ; m_wb_sel_o                 : out bit_vector(3 downto 0)
+         ; txdata                     : out bit_vector(7 downto 0)
+         ; m_wb_adr_o                 : out bit_vector(29 downto 0)
+         ; m_wb_dat_o                 : out bit_vector(31 downto 0)
+         ; wb_dat_o                   : out bit_vector(31 downto 0)
+         ; vdd                        : in bit
+         ; vss                        : in bit
+         );
+  end component;
+
+  component cmpt_eth_maccontrol
+    port ( crcenin                    : in bit
+         ; dlycrcen                   : in bit
+         ; mrxclk                     : in bit
+         ; mtxclk                     : in bit
+         ; padin                      : in bit
+         ; r_passall                  : in bit
+         ; receivedlengthok           : in bit
+         ; receivedpacketgood         : in bit
+         ; receiveend                 : in bit
+         ; rxendfrm                   : in bit
+         ; rxflow                     : in bit
+         ; rxreset                    : in bit
+         ; rxstartfrm                 : in bit
+         ; rxstatuswritelatched_sync2 : in bit
+         ; rxvalid                    : in bit
+         ; tpauserq                   : in bit
+         ; txabortin                  : in bit
+         ; txdonein                   : in bit
+         ; txendfrmin                 : in bit
+         ; txflow                     : in bit
+         ; txreset                    : in bit
+         ; txstartfrmin               : in bit
+         ; txuseddatain               : in bit
+         ; rxdata                     : in bit_vector(7 downto 0)
+         ; txdatain                   : in bit_vector(7 downto 0)
+         ; txpausetv                  : in bit_vector(15 downto 0)
+         ; mac                        : in bit_vector(47 downto 0)
+         ; controlfrmaddressok        : out bit
+         ; crcenout                   : out bit
+         ; padout                     : out bit
+         ; receivedpausefrm           : out bit
+         ; setpausetimer              : out bit
+         ; txabortout                 : out bit
+         ; txctrlendfrm               : out bit
+         ; txdoneout                  : out bit
+         ; txendfrmout                : out bit
+         ; txstartfrmout              : out bit
+         ; txuseddataout              : out bit
+         ; willsendcontrolframe       : out bit
+         ; txdataout                  : out bit_vector(7 downto 0)
+         ; vdd                        : in bit
+         ; vss                        : in bit
+         );
+  end component;
+
+  component cmpt_eth_macstatus
+    port ( carriersense         : in bit
+         ; collision            : in bit
+         ; deferindication      : in bit
+         ; latecollision        : in bit
+         ; loopback             : in bit
+         ; maxcollisionoccured  : in bit
+         ; mrxclk               : in bit
+         ; mrxdv                : in bit
+         ; mrxerr               : in bit
+         ; mtxclk               : in bit
+         ; r_fulld              : in bit
+         ; r_hugen              : in bit
+         ; r_recsmall           : in bit
+         ; reset                : in bit
+         ; rstdeferlatched      : in bit
+         ; rxbytecnteq0         : in bit
+         ; rxbytecntgreat2      : in bit
+         ; rxbytecntmaxframe    : in bit
+         ; rxcrcerror           : in bit
+         ; rxstateidle          : in bit
+         ; rxstatepreamble      : in bit
+         ; rxstatesfd           : in bit
+         ; starttxabort         : in bit
+         ; starttxdone          : in bit
+         ; statepreamble        : in bit
+         ; transmitting         : in bit
+         ; txstartfrm           : in bit
+         ; txuseddata           : in bit
+         ; rxstatedata          : in bit_vector(1 downto 0)
+         ; statedata            : in bit_vector(1 downto 0)
+         ; mrxd                 : in bit_vector(3 downto 0)
+         ; retrycnt             : in bit_vector(3 downto 0)
+         ; collvalid            : in bit_vector(5 downto 0)
+         ; r_maxfl              : in bit_vector(15 downto 0)
+         ; r_minfl              : in bit_vector(15 downto 0)
+         ; rxbytecnt            : in bit_vector(15 downto 0)
+         ; carriersenselost     : out bit
+         ; deferlatched         : out bit
+         ; dribblenibble        : out bit
+         ; invalidsymbol        : out bit
+         ; latchedcrcerror      : out bit
+         ; latchedmrxerr        : out bit
+         ; latecolllatched      : out bit
+         ; loadrxstatus         : out bit
+         ; receivedlengthok     : out bit
+         ; receivedpacketgood   : out bit
+         ; receivedpackettoobig : out bit
+         ; receiveend           : out bit
+         ; retrylimit           : out bit
+         ; rxlatecollision      : out bit
+         ; shortframe           : out bit
+         ; retrycntlatched      : out bit_vector(3 downto 0)
+         ; vdd                  : in bit
+         ; vss                  : in bit
+         );
+  end component;
+
+  component cmpt_eth_miim
+    port ( clk                 : in bit
+         ; mdi                 : in bit
+         ; nopre               : in bit
+         ; reset               : in bit
+         ; rstat               : in bit
+         ; scanstat            : in bit
+         ; wctrldata           : in bit
+         ; fiad                : in bit_vector(4 downto 0)
+         ; rgad                : in bit_vector(4 downto 0)
+         ; divider             : in bit_vector(7 downto 0)
+         ; ctrldata            : in bit_vector(15 downto 0)
+         ; busy                : out bit
+         ; linkfail            : out bit
+         ; mdc                 : out bit
+         ; mdo                 : out bit
+         ; mdoen               : out bit
+         ; nvalid              : out bit
+         ; rstatstart          : out bit
+         ; updatemiirx_datareg : out bit
+         ; wctrldatastart      : out bit
+         ; prsd                : out bit_vector(15 downto 0)
+         ; vdd                 : in bit
+         ; vss                 : in bit
+         );
+  end component;
+
+  component cmpt_eth_registers
+    port ( busy_irq            : in bit
+         ; busy_stat           : in bit
+         ; clk                 : in bit
+         ; linkfail            : in bit
+         ; nvalid_stat         : in bit
+         ; reset               : in bit
+         ; rstatstart          : in bit
+         ; rsttxpauserq        : in bit
+         ; rw                  : in bit
+         ; rxb_irq             : in bit
+         ; rxclk               : in bit
+         ; rxe_irq             : in bit
+         ; setpausetimer       : in bit
+         ; starttxdone         : in bit
+         ; txb_irq             : in bit
+         ; txclk               : in bit
+         ; txctrlendfrm        : in bit
+         ; txe_irq             : in bit
+         ; updatemiirx_datareg : in bit
+         ; wctrldatastart      : in bit
+         ; cs                  : in bit_vector(3 downto 0)
+         ; address             : in bit_vector(7 downto 0)
+         ; prsd                : in bit_vector(15 downto 0)
+         ; datain              : in bit_vector(31 downto 0)
+         ; dbg_dat             : in bit_vector(31 downto 0)
+         ; int_o               : out bit
+         ; r_bro               : out bit
+         ; r_crcen             : out bit
+         ; r_dlycrcen          : out bit
+         ; r_exdfren           : out bit
+         ; r_fulld             : out bit
+         ; r_hugen             : out bit
+         ; r_iam               : out bit
+         ; r_ifg               : out bit
+         ; r_loopbck           : out bit
+         ; r_miinopre          : out bit
+         ; r_nobckof           : out bit
+         ; r_nopre             : out bit
+         ; r_pad               : out bit
+         ; r_passall           : out bit
+         ; r_pro               : out bit
+         ; r_recsmall          : out bit
+         ; r_rstat             : out bit
+         ; r_rxen              : out bit
+         ; r_rxflow            : out bit
+         ; r_scanstat          : out bit
+         ; r_txen              : out bit
+         ; r_txflow            : out bit
+         ; r_txpauserq         : out bit
+         ; r_wctrldata         : out bit
+         ; r_maxret            : out bit_vector(3 downto 0)
+         ; r_fiad              : out bit_vector(4 downto 0)
+         ; r_rgad              : out bit_vector(4 downto 0)
+         ; r_collvalid         : out bit_vector(5 downto 0)
+         ; r_ipgr1             : out bit_vector(6 downto 0)
+         ; r_ipgr2             : out bit_vector(6 downto 0)
+         ; r_ipgt              : out bit_vector(6 downto 0)
+         ; r_clkdiv            : out bit_vector(7 downto 0)
+         ; r_txbdnum           : out bit_vector(7 downto 0)
+         ; r_ctrldata          : out bit_vector(15 downto 0)
+         ; r_maxfl             : out bit_vector(15 downto 0)
+         ; r_minfl             : out bit_vector(15 downto 0)
+         ; r_txpausetv         : out bit_vector(15 downto 0)
+         ; dataout             : out bit_vector(31 downto 0)
+         ; r_hash0             : out bit_vector(31 downto 0)
+         ; r_hash1             : out bit_vector(31 downto 0)
+         ; r_mac               : out bit_vector(47 downto 0)
+         ; vdd                 : in bit
+         ; vss                 : in bit
+         );
+  end component;
+
+  component cmpt_eth_rxethmac
+    port ( controlfrmaddressok : in bit
+         ; dlycrcen            : in bit
+         ; hugen               : in bit
+         ; mrxclk              : in bit
+         ; mrxdv               : in bit
+         ; passall             : in bit
+         ; r_bro               : in bit
+         ; r_ifg               : in bit
+         ; r_pro               : in bit
+         ; reset               : in bit
+         ; transmitting        : in bit
+         ; mrxd                : in bit_vector(3 downto 0)
+         ; maxfl               : in bit_vector(15 downto 0)
+         ; r_hash0             : in bit_vector(31 downto 0)
+         ; r_hash1             : in bit_vector(31 downto 0)
+         ; mac                 : in bit_vector(47 downto 0)
+         ; addressmiss         : out bit
+         ; bytecnteq0          : out bit
+         ; bytecntgreat2       : out bit
+         ; bytecntmaxframe     : out bit
+         ; crcerror            : out bit
+         ; rxabort             : out bit
+         ; rxendfrm            : out bit
+         ; rxstartfrm          : out bit
+         ; rxvalid             : out bit
+         ; stateidle           : out bit
+         ; statepreamble       : out bit
+         ; statesfd            : out bit
+         ; statedata           : out bit_vector(1 downto 0)
+         ; rxdata              : out bit_vector(7 downto 0)
+         ; bytecnt             : out bit_vector(15 downto 0)
+         ; vdd                 : in bit
+         ; vss                 : in bit
+         );
+  end component;
+
+  component cmpt_eth_txethmac
+    port ( carriersense        : in bit
+         ; collision           : in bit
+         ; crcen               : in bit
+         ; dlycrcen            : in bit
+         ; exdfren             : in bit
+         ; fulld               : in bit
+         ; hugen               : in bit
+         ; mtxclk              : in bit
+         ; nobckof             : in bit
+         ; pad                 : in bit
+         ; reset               : in bit
+         ; txendfrm            : in bit
+         ; txstartfrm          : in bit
+         ; txunderrun          : in bit
+         ; maxret              : in bit_vector(3 downto 0)
+         ; collvalid           : in bit_vector(5 downto 0)
+         ; ipgr1               : in bit_vector(6 downto 0)
+         ; ipgr2               : in bit_vector(6 downto 0)
+         ; ipgt                : in bit_vector(6 downto 0)
+         ; txdata              : in bit_vector(7 downto 0)
+         ; maxfl               : in bit_vector(15 downto 0)
+         ; minfl               : in bit_vector(15 downto 0)
+         ; deferindication     : out bit
+         ; latecollision       : out bit
+         ; maxcollisionoccured : out bit
+         ; mtxen               : out bit
+         ; mtxerr              : out bit
+         ; resetcollision      : out bit
+         ; starttxabort        : out bit
+         ; starttxdone         : out bit
+         ; statepreamble       : out bit
+         ; txabort             : out bit
+         ; txdone              : out bit
+         ; txretry             : out bit
+         ; txuseddata          : out bit
+         ; willtransmit        : out bit
+         ; statedata           : out bit_vector(1 downto 0)
+         ; mtxd                : out bit_vector(3 downto 0)
+         ; retrycnt            : out bit_vector(3 downto 0)
+         ; vdd                 : in bit
+         ; vss                 : in bit
+         );
+  end component;
+
+  signal abc_115071_abc_70334_or_ethmac_v_716_410_y  :  bit;
+  signal abc_115071_abc_70334_or_ethmac_v_718_411_y  :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91615 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91617 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91619 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91621 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91623 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91625 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91627 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91629 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91631 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91633 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91635 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91637 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91639 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91643 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91645 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91649 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91651 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91653 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91655 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91657 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91659 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91661 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91663 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91665 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91667 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91669 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91671 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91673 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91675 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91677 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91679 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91681 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91683 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91685 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91687 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91689 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91691 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91693 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91695 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91697 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91699 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91701 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91703 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91705 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91707 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91709 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91711 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91713 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91715 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91717 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91719 :  bit;
+  signal abc_115071_auto_rtlil_cc_2506_notgate_91721 :  bit;
+  signal abc_115071_auto_rtlil_cc_2515_muxgate_91613 :  bit;
+  signal abc_115071_auto_rtlil_cc_2515_muxgate_91641 :  bit;
+  signal abc_115071_auto_rtlil_cc_2515_muxgate_91647 :  bit;
+  signal abc_115071_new_n229                         :  bit;
+  signal abc_115071_new_n230                         :  bit;
+  signal abc_115071_new_n231                         :  bit;
+  signal abc_115071_new_n232                         :  bit;
+  signal abc_115071_new_n233                         :  bit;
+  signal abc_115071_new_n234                         :  bit;
+  signal abc_115071_new_n235                         :  bit;
+  signal abc_115071_new_n236                         :  bit;
+  signal abc_115071_new_n237                         :  bit;
+  signal abc_115071_new_n238                         :  bit;
+  signal abc_115071_new_n240                         :  bit;
+  signal abc_115071_new_n242                         :  bit;
+  signal abc_115071_new_n243                         :  bit;
+  signal abc_115071_new_n244                         :  bit;
+  signal abc_115071_new_n245                         :  bit;
+  signal abc_115071_new_n247                         :  bit;
+  signal abc_115071_new_n249                         :  bit;
+  signal abc_115071_new_n250                         :  bit;
+  signal abc_115071_new_n251                         :  bit;
+  signal abc_115071_new_n252                         :  bit;
+  signal abc_115071_new_n257                         :  bit;
+  signal abc_115071_new_n291                         :  bit;
+  signal abc_115071_new_n297                         :  bit;
+  signal abc_115071_new_n302                         :  bit;
+  signal addressmiss                                 :  bit;
+  signal bdack                                       :  bit;
+  signal blif_dummy_output_0                         :  bit;
+  signal busy_irq                                    :  bit;
+  signal busy_stat                                   :  bit;
+  signal carriersense_tx1                            :  bit;
+  signal carriersense_tx2                            :  bit;
+  signal carriersenselost                            :  bit;
+  signal collision                                   :  bit;
+  signal collision_tx1                               :  bit;
+  signal collision_tx2                               :  bit;
+  signal controlfrmaddressok                         :  bit;
+  signal crcenout                                    :  bit;
+  signal deferindication                             :  bit;
+  signal deferlatched                                :  bit;
+  signal dribblenibble                               :  bit;
+  signal invalidsymbol                               :  bit;
+  signal latchedcrcerror                             :  bit;
+  signal latchedmrxerr                               :  bit;
+  signal latecollision                               :  bit;
+  signal latecolllatched                             :  bit;
+  signal linkfail                                    :  bit;
+  signal loadrxstatus                                :  bit;
+  signal maxcollisionoccured                         :  bit;
+  signal mrxdv_lb                                    :  bit;
+  signal mrxerr_lb                                   :  bit;
+  signal n0_rsttxpauserq_0_0                         :  bit;
+  signal n0_temp_wb_ack_o_reg_0_0                    :  bit;
+  signal n0_temp_wb_err_o_reg_0_0                    :  bit;
+  signal n0_tpauserq_0_0                             :  bit;
+  signal n0_txpauserq_sync1_0_0                      :  bit;
+  signal nvalid_stat                                 :  bit;
+  signal padout                                      :  bit;
+  signal perpacketcrcen                              :  bit;
+  signal perpacketpad                                :  bit;
+  signal r_bro                                       :  bit;
+  signal r_crcen                                     :  bit;
+  signal r_dlycrcen                                  :  bit;
+  signal r_exdfren                                   :  bit;
+  signal r_fulld                                     :  bit;
+  signal r_hugen                                     :  bit;
+  signal r_ifg                                       :  bit;
+  signal r_loopbck                                   :  bit;
+  signal r_miinopre                                  :  bit;
+  signal r_nobckof                                   :  bit;
+  signal r_nopre                                     :  bit;
+  signal r_pad                                       :  bit;
+  signal r_passall                                   :  bit;
+  signal r_pro                                       :  bit;
+  signal r_recsmall                                  :  bit;
+  signal r_rstat                                     :  bit;
+  signal r_rxen                                      :  bit;
+  signal r_rxflow                                    :  bit;
+  signal r_scanstat                                  :  bit;
+  signal r_txen                                      :  bit;
+  signal r_txflow                                    :  bit;
+  signal r_txpauserq                                 :  bit;
+  signal r_wctrldata                                 :  bit;
+  signal receivedlengthok                            :  bit;
+  signal receivedpacketgood                          :  bit;
+  signal receivedpackettoobig                        :  bit;
+  signal receivedpausefrm                            :  bit;
+  signal receiveend                                  :  bit;
+  signal resetcollision                              :  bit;
+  signal retrylimit                                  :  bit;
+  signal rstatstart                                  :  bit;
+  signal rstdeferlatched                             :  bit;
+  signal rsttxpauserq                                :  bit;
+  signal rxabort                                     :  bit;
+  signal rxabort_latch                               :  bit;
+  signal rxabort_sync1                               :  bit;
+  signal rxabort_wb                                  :  bit;
+  signal rxabortrst                                  :  bit;
+  signal rxabortrst_sync1                            :  bit;
+  signal rxb_irq                                     :  bit;
+  signal rxbytecnteq0                                :  bit;
+  signal rxbytecntgreat2                             :  bit;
+  signal rxbytecntmaxframe                           :  bit;
+  signal rxcrcerror                                  :  bit;
+  signal rxe_irq                                     :  bit;
+  signal rxendfrm                                    :  bit;
+  signal rxensync                                    :  bit;
+  signal rxlatecollision                             :  bit;
+  signal rxstartfrm                                  :  bit;
+  signal rxstateidle                                 :  bit;
+  signal rxstatepreamble                             :  bit;
+  signal rxstatesfd                                  :  bit;
+  signal rxstatuswritelatched_sync2                  :  bit;
+  signal rxvalid                                     :  bit;
+  signal setpausetimer                               :  bit;
+  signal shortframe                                  :  bit;
+  signal starttxabort                                :  bit;
+  signal starttxdone                                 :  bit;
+  signal statepreamble                               :  bit;
+  signal tpauserq                                    :  bit;
+  signal transmitting                                :  bit;
+  signal txabort                                     :  bit;
+  signal txabortin                                   :  bit;
+  signal txb_irq                                     :  bit;
+  signal txcarriersense                              :  bit;
+  signal txctrlendfrm                                :  bit;
+  signal txdone                                      :  bit;
+  signal txdonein                                    :  bit;
+  signal txe_irq                                     :  bit;
+  signal txendfrm                                    :  bit;
+  signal txendfrmout                                 :  bit;
+  signal txpauserq_sync1                             :  bit;
+  signal txpauserq_sync2                             :  bit;
+  signal txpauserq_sync3                             :  bit;
+  signal txretry                                     :  bit;
+  signal txstartfrm                                  :  bit;
+  signal txstartfrmout                               :  bit;
+  signal txunderrun                                  :  bit;
+  signal txuseddata                                  :  bit;
+  signal txuseddatain                                :  bit;
+  signal updatemiirx_datareg                         :  bit;
+  signal wctrldatastart                              :  bit;
+  signal willsendcontrolframe                        :  bit;
+  signal willsendcontrolframe_sync1                  :  bit;
+  signal willsendcontrolframe_sync2                  :  bit;
+  signal willsendcontrolframe_sync3                  :  bit;
+  signal willtransmit                                :  bit;
+  signal willtransmit_q                              :  bit;
+  signal willtransmit_q2                             :  bit;
+  signal zero_10                                     :  bit;
+  signal zero_11                                     :  bit;
+  signal zero_12                                     :  bit;
+  signal zero_13                                     :  bit;
+  signal zero_14                                     :  bit;
+  signal zero_15                                     :  bit;
+  signal zero_16                                     :  bit;
+  signal zero_17                                     :  bit;
+  signal zero_18                                     :  bit;
+  signal zero_19                                     :  bit;
+  signal zero_2                                      :  bit;
+  signal zero_20                                     :  bit;
+  signal zero_21                                     :  bit;
+  signal zero_22                                     :  bit;
+  signal zero_23                                     :  bit;
+  signal zero_24                                     :  bit;
+  signal zero_25                                     :  bit;
+  signal zero_26                                     :  bit;
+  signal zero_27                                     :  bit;
+  signal zero_28                                     :  bit;
+  signal zero_29                                     :  bit;
+  signal zero_3                                      :  bit;
+  signal zero_30                                     :  bit;
+  signal zero_31                                     :  bit;
+  signal zero_32                                     :  bit;
+  signal zero_33                                     :  bit;
+  signal zero_4                                      :  bit;
+  signal zero_5                                      :  bit;
+  signal zero_6                                      :  bit;
+  signal zero_7                                      :  bit;
+  signal zero_8                                      :  bit;
+  signal zero_9                                      :  bit;
+  signal rxstatedata                                 :  bit_vector(1 downto 0);
+  signal statedata                                   :  bit_vector(1 downto 0);
+  signal bdcs                                        :  bit_vector(3 downto 0);
+  signal mrxd_lb                                     :  bit_vector(3 downto 0);
+  signal r_maxret                                    :  bit_vector(3 downto 0);
+  signal regcs                                       :  bit_vector(3 downto 0);
+  signal retrycnt                                    :  bit_vector(3 downto 0);
+  signal retrycntlatched                             :  bit_vector(3 downto 0);
+  signal r_fiad                                      :  bit_vector(4 downto 0);
+  signal r_rgad                                      :  bit_vector(4 downto 0);
+  signal r_collvalid                                 :  bit_vector(5 downto 0);
+  signal r_ipgr1                                     :  bit_vector(6 downto 0);
+  signal r_ipgr2                                     :  bit_vector(6 downto 0);
+  signal r_ipgt                                      :  bit_vector(6 downto 0);
+  signal r_clkdiv                                    :  bit_vector(7 downto 0);
+  signal r_txbdnum                                   :  bit_vector(7 downto 0);
+  signal rxdata                                      :  bit_vector(7 downto 0);
+  signal txdata                                      :  bit_vector(7 downto 0);
+  signal txdataout                                   :  bit_vector(7 downto 0);
+  signal prsd                                        :  bit_vector(15 downto 0);
+  signal r_ctrldata                                  :  bit_vector(15 downto 0);
+  signal r_maxfl                                     :  bit_vector(15 downto 0);
+  signal r_minfl                                     :  bit_vector(15 downto 0);
+  signal r_txpausetv                                 :  bit_vector(15 downto 0);
+  signal rxbytecnt                                   :  bit_vector(15 downto 0);
+  signal bd_wb_dat_o                                 :  bit_vector(31 downto 0);
+  signal r_hash0                                     :  bit_vector(31 downto 0);
+  signal r_hash1                                     :  bit_vector(31 downto 0);
+  signal regdataout                                  :  bit_vector(31 downto 0);
+  signal temp_wb_dat_o                               :  bit_vector(31 downto 0);
+  signal r_mac                                       :  bit_vector(47 downto 0);
+
+
+begin
+
+  subckt_185_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(29)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91715
+           , q    => wb_dat_o(29)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_179_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(23)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91703
+           , q    => wb_dat_o(23)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_80_no2_x1 : no2_x1
+  port map ( i0  => abc_115071_new_n236
+           , i1  => r_fulld
+           , nq  => transmitting
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_81_no2_x1 : no2_x1
+  port map ( i0  => willsendcontrolframe_sync3
+           , i1  => abc_115071_new_n237
+           , nq  => n0_rsttxpauserq_0_0
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_113_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91679
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_114_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91681
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_115_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91683
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_116_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91685
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_117_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91687
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_138_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => rxabort_latch
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91621
+           , q    => rxabort_sync1
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_144_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => n0_rsttxpauserq_0_0
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91633
+           , q    => rsttxpauserq
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_75_no3_x1 : no3_x1
+  port map ( i0  => abc_115071_new_n251
+           , i1  => abc_115071_new_n249
+           , i2  => wb_err_o
+           , nq  => n0_temp_wb_err_o_reg_0_0
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_83_no2_x1 : no2_x1
+  port map ( i0  => txpauserq_sync3
+           , i1  => abc_115071_new_n238
+           , nq  => n0_tpauserq_0_0
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_118_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91689
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_119_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91691
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_193_eth_rxethmac : cmpt_eth_rxethmac
+  port map ( controlfrmaddressok => controlfrmaddressok
+           , dlycrcen            => r_dlycrcen
+           , hugen               => r_hugen
+           , mrxclk              => mrx_clk_pad_i
+           , mrxdv               => mrxdv_lb
+           , passall             => r_passall
+           , r_bro               => r_bro
+           , r_ifg               => r_ifg
+           , r_pro               => r_pro
+           , reset               => wb_rst_i
+           , transmitting        => transmitting
+           , mrxd                => mrxd_lb(3 downto 0)
+           , maxfl               => r_maxfl(15 downto 0)
+           , r_hash0             => r_hash0(31 downto 0)
+           , r_hash1             => r_hash1(31 downto 0)
+           , mac                 => r_mac(47 downto 0)
+           , addressmiss         => addressmiss
+           , bytecnteq0          => rxbytecnteq0
+           , bytecntgreat2       => rxbytecntgreat2
+           , bytecntmaxframe     => rxbytecntmaxframe
+           , crcerror            => rxcrcerror
+           , rxabort             => rxabort
+           , rxendfrm            => rxendfrm
+           , rxstartfrm          => rxstartfrm
+           , rxvalid             => rxvalid
+           , stateidle           => rxstateidle
+           , statepreamble       => rxstatepreamble
+           , statesfd            => rxstatesfd
+           , statedata           => rxstatedata(1 downto 0)
+           , rxdata              => rxdata(7 downto 0)
+           , bytecnt             => rxbytecnt(15 downto 0)
+           , vdd                 => vdd
+           , vss                 => vss
+           );
+
+  subckt_69_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n297
+           , i1  => wb_sel_i(3)
+           , q   => bdcs(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_27_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n252
+           , i1  => wb_sel_i(3)
+           , q   => regcs(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_156_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(0)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91657
+           , q    => wb_dat_o(0)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_162_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(6)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91669
+           , q    => wb_dat_o(6)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_15_no2_x1 : no2_x1
+  port map ( i0  => invalidsymbol
+           , i1  => abc_115071_new_n232
+           , nq  => abc_115071_new_n244
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_14_no2_x1 : no2_x1
+  port map ( i0  => rxabortrst
+           , i1  => abc_115071_new_n229
+           , nq  => abc_115071_new_n243
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_13_no2_x1 : no2_x1
+  port map ( i0  => r_recsmall
+           , i1  => abc_115071_new_n231
+           , nq  => abc_115071_new_n242
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_174_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(18)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91693
+           , q    => wb_dat_o(18)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_168_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(12)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91681
+           , q    => wb_dat_o(12)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_18_no2_x1 : no2_x1
+  port map ( i0  => collision_tx1
+           , i1  => collision_tx2
+           , nq  => abc_115071_new_n247
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_19_no2_x1 : no2_x1
+  port map ( i0  => abc_115071_new_n247
+           , i1  => resetcollision
+           , nq  => abc_115071_auto_rtlil_cc_2515_muxgate_91613
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_25_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n252
+           , i1  => wb_sel_i(1)
+           , q   => regcs(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_190_eth_maccontrol : cmpt_eth_maccontrol
+  port map ( crcenin                    => abc_115071_abc_70334_or_ethmac_v_718_411_y
+           , dlycrcen                   => r_dlycrcen
+           , mrxclk                     => mrx_clk_pad_i
+           , mtxclk                     => mtx_clk_pad_i
+           , padin                      => abc_115071_abc_70334_or_ethmac_v_716_410_y
+           , r_passall                  => r_passall
+           , receivedlengthok           => receivedlengthok
+           , receivedpacketgood         => receivedpacketgood
+           , receiveend                 => receiveend
+           , rxendfrm                   => rxendfrm
+           , rxflow                     => r_rxflow
+           , rxreset                    => wb_rst_i
+           , rxstartfrm                 => rxstartfrm
+           , rxstatuswritelatched_sync2 => rxstatuswritelatched_sync2
+           , rxvalid                    => rxvalid
+           , tpauserq                   => tpauserq
+           , txabortin                  => txabortin
+           , txdonein                   => txdonein
+           , txendfrmin                 => txendfrm
+           , txflow                     => r_txflow
+           , txreset                    => wb_rst_i
+           , txstartfrmin               => txstartfrm
+           , txuseddatain               => txuseddatain
+           , rxdata                     => rxdata(7 downto 0)
+           , txdatain                   => txdata(7 downto 0)
+           , txpausetv                  => r_txpausetv(15 downto 0)
+           , mac                        => r_mac(47 downto 0)
+           , controlfrmaddressok        => controlfrmaddressok
+           , crcenout                   => crcenout
+           , padout                     => padout
+           , receivedpausefrm           => receivedpausefrm
+           , setpausetimer              => setpausetimer
+           , txabortout                 => txabort
+           , txctrlendfrm               => txctrlendfrm
+           , txdoneout                  => txdone
+           , txendfrmout                => txendfrmout
+           , txstartfrmout              => txstartfrmout
+           , txuseddataout              => txuseddata
+           , willsendcontrolframe       => willsendcontrolframe
+           , txdataout                  => txdataout(7 downto 0)
+           , vdd                        => vdd
+           , vss                        => vss
+           );
+
+  subckt_180_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(24)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91705
+           , q    => wb_dat_o(24)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_77_o2_x2 : o2_x2
+  port map ( i0  => r_crcen
+           , i1  => perpacketcrcen
+           , q   => abc_115071_abc_70334_or_ethmac_v_718_411_y
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_30_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(1)
+           , i1  => regdataout(1)
+           , q   => temp_wb_dat_o(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_31_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(2)
+           , i1  => regdataout(2)
+           , q   => temp_wb_dat_o(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_32_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(3)
+           , i1  => regdataout(3)
+           , q   => temp_wb_dat_o(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_139_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => rxabort_sync1
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91623
+           , q    => rxabort_wb
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_186_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(30)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91717
+           , q    => wb_dat_o(30)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_11_a2_x2 : a2_x2
+  port map ( i0  => mrxdv_pad_i
+           , i1  => rxensync
+           , q   => abc_115071_new_n240
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_21_no4_x1 : no4_x1
+  port map ( i0  => wb_sel_i(2)
+           , i1  => wb_sel_i(3)
+           , i2  => wb_sel_i(0)
+           , i3  => wb_sel_i(1)
+           , nq  => abc_115071_new_n250
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_23_no4_x1 : no4_x1
+  port map ( i0  => abc_115071_new_n250
+           , i1  => abc_115071_new_n249
+           , i2  => wb_adr_i(10)
+           , i3  => wb_adr_i(11)
+           , nq  => abc_115071_new_n252
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_33_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(4)
+           , i1  => regdataout(4)
+           , q   => temp_wb_dat_o(4)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_34_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(5)
+           , i1  => regdataout(5)
+           , q   => temp_wb_dat_o(5)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_35_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(6)
+           , i1  => regdataout(6)
+           , q   => temp_wb_dat_o(6)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_36_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(7)
+           , i1  => regdataout(7)
+           , q   => temp_wb_dat_o(7)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_37_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(8)
+           , i1  => regdataout(8)
+           , q   => temp_wb_dat_o(8)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_38_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(9)
+           , i1  => regdataout(9)
+           , q   => temp_wb_dat_o(9)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_145_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => willsendcontrolframe_sync2
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91635
+           , q    => willsendcontrolframe_sync3
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_151_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => mcoll_pad_i
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91645
+           , q    => collision_tx1
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_71_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n297
+           , i1  => wb_sel_i(1)
+           , q   => bdcs(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_39_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(10)
+           , i1  => regdataout(10)
+           , q   => temp_wb_dat_o(10)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_163_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(7)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91671
+           , q    => wb_dat_o(7)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_157_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(1)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91659
+           , q    => wb_dat_o(1)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_169_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(13)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91683
+           , q    => wb_dat_o(13)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_65_mx2_x2 : mx2_x2
+  port map ( cmd => r_loopbck
+           , i0  => mrxd_pad_i(1)
+           , i1  => mtxd_pad_o(1)
+           , q   => mrxd_lb(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_64_mx2_x2 : mx2_x2
+  port map ( cmd => r_loopbck
+           , i0  => mrxd_pad_i(0)
+           , i1  => mtxd_pad_o(0)
+           , q   => mrxd_lb(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_63_mx2_x2 : mx2_x2
+  port map ( cmd => r_loopbck
+           , i0  => abc_115071_new_n291
+           , i1  => mtxerr_pad_o
+           , q   => mrxerr_lb
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_61_mx2_x2 : mx2_x2
+  port map ( cmd => r_loopbck
+           , i0  => abc_115071_new_n240
+           , i1  => mtxen_pad_o
+           , q   => mrxdv_lb
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_60_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(31)
+           , i1  => regdataout(31)
+           , q   => temp_wb_dat_o(31)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_100_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91653
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_101_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91655
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_102_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91657
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_103_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91659
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_104_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91661
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_105_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91663
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_181_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(25)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91707
+           , q    => wb_dat_o(25)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_175_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(19)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91695
+           , q    => wb_dat_o(19)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_74_no2_x1 : no2_x1
+  port map ( i0  => abc_115071_new_n302
+           , i1  => wb_ack_o
+           , nq  => n0_temp_wb_ack_o_reg_0_0
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_73_no2_x1 : no2_x1
+  port map ( i0  => abc_115071_new_n252
+           , i1  => bdack
+           , nq  => abc_115071_new_n302
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_67_mx2_x2 : mx2_x2
+  port map ( cmd => r_loopbck
+           , i0  => mrxd_pad_i(3)
+           , i1  => mtxd_pad_o(3)
+           , q   => mrxd_lb(3)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_66_mx2_x2 : mx2_x2
+  port map ( cmd => r_loopbck
+           , i0  => mrxd_pad_i(2)
+           , i1  => mtxd_pad_o(2)
+           , q   => mrxd_lb(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_106_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91665
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_107_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91667
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_108_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91669
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_109_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91671
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_140_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => n0_tpauserq_0_0
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91625
+           , q    => tpauserq
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_78_no2_x1 : no2_x1
+  port map ( i0  => r_fulld
+           , i1  => abc_115071_new_n235
+           , nq  => txcarriersense
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_79_no2_x1 : no2_x1
+  port map ( i0  => r_fulld
+           , i1  => abc_115071_new_n230
+           , nq  => collision
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_146_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => willsendcontrolframe_sync1
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91637
+           , q    => willsendcontrolframe_sync2
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_194_eth_txethmac : cmpt_eth_txethmac
+  port map ( carriersense        => txcarriersense
+           , collision           => collision
+           , crcen               => crcenout
+           , dlycrcen            => r_dlycrcen
+           , exdfren             => r_exdfren
+           , fulld               => r_fulld
+           , hugen               => r_hugen
+           , mtxclk              => mtx_clk_pad_i
+           , nobckof             => r_nobckof
+           , pad                 => padout
+           , reset               => wb_rst_i
+           , txendfrm            => txendfrmout
+           , txstartfrm          => txstartfrmout
+           , txunderrun          => txunderrun
+           , maxret              => r_maxret(3 downto 0)
+           , collvalid           => r_collvalid(5 downto 0)
+           , ipgr1               => r_ipgr1(6 downto 0)
+           , ipgr2               => r_ipgr2(6 downto 0)
+           , ipgt                => r_ipgt(6 downto 0)
+           , txdata              => txdataout(7 downto 0)
+           , maxfl               => r_maxfl(15 downto 0)
+           , minfl               => r_minfl(15 downto 0)
+           , deferindication     => deferindication
+           , latecollision       => latecollision
+           , maxcollisionoccured => maxcollisionoccured
+           , mtxen               => mtxen_pad_o
+           , mtxerr              => mtxerr_pad_o
+           , resetcollision      => resetcollision
+           , starttxabort        => starttxabort
+           , starttxdone         => starttxdone
+           , statepreamble       => statepreamble
+           , txabort             => txabortin
+           , txdone              => txdonein
+           , txretry             => txretry
+           , txuseddata          => txuseddatain
+           , willtransmit        => willtransmit
+           , statedata           => statedata(1 downto 0)
+           , mtxd                => mtxd_pad_o(3 downto 0)
+           , retrycnt            => retrycnt(3 downto 0)
+           , vdd                 => vdd
+           , vss                 => vss
+           );
+
+  subckt_187_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(31)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91719
+           , q    => wb_dat_o(31)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_130_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91713
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_131_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91715
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_152_sff1r_x4 : sff1r_x4
+  port map ( ck   => mrx_clk_pad_i
+           , i    => abc_115071_auto_rtlil_cc_2515_muxgate_91647
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91649
+           , q    => rxensync
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_192_eth_miim : cmpt_eth_miim
+  port map ( clk                 => wb_clk_i
+           , mdi                 => md_pad_i
+           , nopre               => r_miinopre
+           , reset               => wb_rst_i
+           , rstat               => r_rstat
+           , scanstat            => r_scanstat
+           , wctrldata           => r_wctrldata
+           , fiad                => r_fiad(4 downto 0)
+           , rgad                => r_rgad(4 downto 0)
+           , divider             => r_clkdiv(7 downto 0)
+           , ctrldata            => r_ctrldata(15 downto 0)
+           , busy                => busy_stat
+           , linkfail            => linkfail
+           , mdc                 => mdc_pad_o
+           , mdo                 => md_pad_o
+           , mdoen               => md_padoe_o
+           , nvalid              => nvalid_stat
+           , rstatstart          => rstatstart
+           , updatemiirx_datareg => updatemiirx_datareg
+           , wctrldatastart      => wctrldatastart
+           , prsd                => prsd(15 downto 0)
+           , vdd                 => vdd
+           , vss                 => vss
+           );
+
+  subckt_189_eth_registers : cmpt_eth_registers
+  port map ( busy_irq            => busy_irq
+           , busy_stat           => busy_stat
+           , clk                 => wb_clk_i
+           , linkfail            => linkfail
+           , nvalid_stat         => nvalid_stat
+           , reset               => wb_rst_i
+           , rstatstart          => rstatstart
+           , rsttxpauserq        => rsttxpauserq
+           , rw                  => wb_we_i
+           , rxb_irq             => rxb_irq
+           , rxclk               => mrx_clk_pad_i
+           , rxe_irq             => rxe_irq
+           , setpausetimer       => setpausetimer
+           , starttxdone         => starttxdone
+           , txb_irq             => txb_irq
+           , txclk               => mtx_clk_pad_i
+           , txctrlendfrm        => txctrlendfrm
+           , txe_irq             => txe_irq
+           , updatemiirx_datareg => updatemiirx_datareg
+           , wctrldatastart      => wctrldatastart
+           , cs                  => regcs(3 downto 0)
+           , address             => wb_adr_i(9 downto 2)
+           , prsd                => prsd(15 downto 0)
+           , datain              => wb_dat_i(31 downto 0)
+           , dbg_dat(31)         => zero_33
+           , dbg_dat(30)         => zero_32
+           , dbg_dat(29)         => zero_31
+           , dbg_dat(28)         => zero_30
+           , dbg_dat(27)         => zero_29
+           , dbg_dat(26)         => zero_28
+           , dbg_dat(25)         => zero_27
+           , dbg_dat(24)         => zero_26
+           , dbg_dat(23)         => zero_25
+           , dbg_dat(22)         => zero_24
+           , dbg_dat(21)         => zero_23
+           , dbg_dat(20)         => zero_22
+           , dbg_dat(19)         => zero_21
+           , dbg_dat(18)         => zero_20
+           , dbg_dat(17)         => zero_19
+           , dbg_dat(16)         => zero_18
+           , dbg_dat(15)         => zero_17
+           , dbg_dat(14)         => zero_16
+           , dbg_dat(13)         => zero_15
+           , dbg_dat(12)         => zero_14
+           , dbg_dat(11)         => zero_13
+           , dbg_dat(10)         => zero_12
+           , dbg_dat(9)          => zero_11
+           , dbg_dat(8)          => zero_10
+           , dbg_dat(7)          => zero_9
+           , dbg_dat(6)          => zero_8
+           , dbg_dat(5)          => zero_7
+           , dbg_dat(4)          => zero_6
+           , dbg_dat(3)          => zero_5
+           , dbg_dat(2)          => zero_4
+           , dbg_dat(1)          => zero_3
+           , dbg_dat(0)          => zero_2
+           , int_o               => int_o
+           , r_bro               => r_bro
+           , r_crcen             => r_crcen
+           , r_dlycrcen          => r_dlycrcen
+           , r_exdfren           => r_exdfren
+           , r_fulld             => r_fulld
+           , r_hugen             => r_hugen
+           , r_iam               => blif_dummy_output_0
+           , r_ifg               => r_ifg
+           , r_loopbck           => r_loopbck
+           , r_miinopre          => r_miinopre
+           , r_nobckof           => r_nobckof
+           , r_nopre             => r_nopre
+           , r_pad               => r_pad
+           , r_passall           => r_passall
+           , r_pro               => r_pro
+           , r_recsmall          => r_recsmall
+           , r_rstat             => r_rstat
+           , r_rxen              => r_rxen
+           , r_rxflow            => r_rxflow
+           , r_scanstat          => r_scanstat
+           , r_txen              => r_txen
+           , r_txflow            => r_txflow
+           , r_txpauserq         => r_txpauserq
+           , r_wctrldata         => r_wctrldata
+           , r_maxret            => r_maxret(3 downto 0)
+           , r_fiad              => r_fiad(4 downto 0)
+           , r_rgad              => r_rgad(4 downto 0)
+           , r_collvalid         => r_collvalid(5 downto 0)
+           , r_ipgr1             => r_ipgr1(6 downto 0)
+           , r_ipgr2             => r_ipgr2(6 downto 0)
+           , r_ipgt              => r_ipgt(6 downto 0)
+           , r_clkdiv            => r_clkdiv(7 downto 0)
+           , r_txbdnum           => r_txbdnum(7 downto 0)
+           , r_ctrldata          => r_ctrldata(15 downto 0)
+           , r_maxfl             => r_maxfl(15 downto 0)
+           , r_minfl             => r_minfl(15 downto 0)
+           , r_txpausetv         => r_txpausetv(15 downto 0)
+           , dataout             => regdataout(31 downto 0)
+           , r_hash0             => r_hash0(31 downto 0)
+           , r_hash1             => r_hash1(31 downto 0)
+           , r_mac               => r_mac(47 downto 0)
+           , vdd                 => vdd
+           , vss                 => vss
+           );
+
+  subckt_90_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91629
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_91_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91631
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_92_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91633
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_93_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91635
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_132_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91717
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_133_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91719
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_134_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91721
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_158_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(2)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91661
+           , q    => wb_dat_o(2)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_170_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(14)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91685
+           , q    => wb_dat_o(14)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_164_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(8)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91673
+           , q    => wb_dat_o(8)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_94_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91637
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_95_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91639
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_96_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91643
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_97_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91645
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_98_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91649
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_99_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91651
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_9 : zero_x0
+  port map ( nq  => zero_9
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_8 : zero_x0
+  port map ( nq  => zero_8
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_7 : zero_x0
+  port map ( nq  => zero_7
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_6 : zero_x0
+  port map ( nq  => zero_6
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_5 : zero_x0
+  port map ( nq  => zero_5
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_4 : zero_x0
+  port map ( nq  => zero_4
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_3 : zero_x0
+  port map ( nq  => zero_3
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_2 : zero_x0
+  port map ( nq  => zero_2
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_176_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(20)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91697
+           , q    => wb_dat_o(20)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  cmpt_zero_0 : zero_x0
+  port map ( nq  => m_wb_adr_o(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_1 : zero_x0
+  port map ( nq  => m_wb_adr_o(1)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_135_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => abc_115071_auto_rtlil_cc_2515_muxgate_91613
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91615
+           , q    => collision_tx2
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_182_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(26)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91709
+           , q    => wb_dat_o(26)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_29_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(0)
+           , i1  => regdataout(0)
+           , q   => temp_wb_dat_o(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_141_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => n0_txpauserq_sync1_0_0
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91627
+           , q    => txpauserq_sync1
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_188_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => n0_temp_wb_err_o_reg_0_0
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91721
+           , q    => wb_err_o
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_17_o4_x2 : o4_x2
+  port map ( i0  => abc_115071_new_n245
+           , i1  => abc_115071_new_n244
+           , i2  => abc_115071_new_n243
+           , i3  => abc_115071_new_n242
+           , q   => abc_115071_auto_rtlil_cc_2515_muxgate_91641
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_0_inv_x1 : inv_x1
+  port map ( i   => rxabort_latch
+           , nq  => abc_115071_new_n229
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_1_inv_x1 : inv_x1
+  port map ( i   => collision_tx2
+           , nq  => abc_115071_new_n230
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_2_inv_x1 : inv_x1
+  port map ( i   => shortframe
+           , nq  => abc_115071_new_n231
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_3_inv_x1 : inv_x1
+  port map ( i   => latchedmrxerr
+           , nq  => abc_115071_new_n232
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_4_inv_x1 : inv_x1
+  port map ( i   => r_passall
+           , nq  => abc_115071_new_n233
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_147_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => willsendcontrolframe
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91639
+           , q    => willsendcontrolframe_sync1
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_153_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => mcrs_pad_i
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91651
+           , q    => carriersense_tx1
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_52_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(23)
+           , i1  => regdataout(23)
+           , q   => temp_wb_dat_o(23)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_51_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(22)
+           , i1  => regdataout(22)
+           , q   => temp_wb_dat_o(22)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_50_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(21)
+           , i1  => regdataout(21)
+           , q   => temp_wb_dat_o(21)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_9_inv_x1 : inv_x1
+  port map ( i   => txpauserq_sync2
+           , nq  => abc_115071_new_n238
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_5_inv_x1 : inv_x1
+  port map ( i   => wb_we_i
+           , nq  => abc_115071_new_n234
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_6_inv_x1 : inv_x1
+  port map ( i   => carriersense_tx2
+           , nq  => abc_115071_new_n235
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_7_inv_x1 : inv_x1
+  port map ( i   => willtransmit_q2
+           , nq  => abc_115071_new_n236
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_8_inv_x1 : inv_x1
+  port map ( i   => willsendcontrolframe_sync2
+           , nq  => abc_115071_new_n237
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_28_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n252
+           , i1  => abc_115071_new_n234
+           , q   => abc_115071_new_n257
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_165_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(9)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91675
+           , q    => wb_dat_o(9)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_159_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(3)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91663
+           , q    => wb_dat_o(3)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_58_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(29)
+           , i1  => regdataout(29)
+           , q   => temp_wb_dat_o(29)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_57_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(28)
+           , i1  => regdataout(28)
+           , q   => temp_wb_dat_o(28)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_56_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(27)
+           , i1  => regdataout(27)
+           , q   => temp_wb_dat_o(27)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_55_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(26)
+           , i1  => regdataout(26)
+           , q   => temp_wb_dat_o(26)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_54_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(25)
+           , i1  => regdataout(25)
+           , q   => temp_wb_dat_o(25)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_53_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(24)
+           , i1  => regdataout(24)
+           , q   => temp_wb_dat_o(24)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_26_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n252
+           , i1  => wb_sel_i(2)
+           , q   => regcs(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_171_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(15)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91687
+           , q    => wb_dat_o(15)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_59_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(30)
+           , i1  => regdataout(30)
+           , q   => temp_wb_dat_o(30)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_24_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n252
+           , i1  => wb_sel_i(0)
+           , q   => regcs(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_183_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(27)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91711
+           , q    => wb_dat_o(27)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_177_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(21)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91699
+           , q    => wb_dat_o(21)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_136_sff1r_x4 : sff1r_x4
+  port map ( ck   => mrx_clk_pad_i
+           , i    => rxabort_wb
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91617
+           , q    => rxabortrst_sync1
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_142_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => txpauserq_sync1
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91629
+           , q    => txpauserq_sync2
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  cmpt_zero_19 : zero_x0
+  port map ( nq  => zero_19
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_18 : zero_x0
+  port map ( nq  => zero_18
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_17 : zero_x0
+  port map ( nq  => zero_17
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_16 : zero_x0
+  port map ( nq  => zero_16
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_15 : zero_x0
+  port map ( nq  => zero_15
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_14 : zero_x0
+  port map ( nq  => zero_14
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_13 : zero_x0
+  port map ( nq  => zero_13
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_12 : zero_x0
+  port map ( nq  => zero_12
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_11 : zero_x0
+  port map ( nq  => zero_11
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_10 : zero_x0
+  port map ( nq  => zero_10
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_76_o2_x2 : o2_x2
+  port map ( i0  => r_pad
+           , i1  => perpacketpad
+           , q   => abc_115071_abc_70334_or_ethmac_v_716_410_y
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_72_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n297
+           , i1  => wb_sel_i(0)
+           , q   => bdcs(0)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_62_a2_x2 : a2_x2
+  port map ( i0  => mrxerr_pad_i
+           , i1  => rxensync
+           , q   => abc_115071_new_n291
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_82_a2_x2 : a2_x2
+  port map ( i0  => r_txpauserq
+           , i1  => r_txflow
+           , q   => n0_txpauserq_sync1_0_0
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_120_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91693
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_121_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91695
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_122_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91697
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_123_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91699
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_124_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91701
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_160_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(4)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91665
+           , q    => wb_dat_o(4)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_70_a2_x2 : a2_x2
+  port map ( i0  => abc_115071_new_n297
+           , i1  => wb_sel_i(2)
+           , q   => bdcs(2)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_20_na2_x1 : na2_x1
+  port map ( i0  => wb_stb_i
+           , i1  => wb_cyc_i
+           , nq  => abc_115071_new_n249
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_84_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91617
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_85_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91619
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_86_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91621
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_125_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91703
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_126_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91705
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_127_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91707
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_128_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91709
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_129_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91711
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_148_sff1r_x4 : sff1r_x4
+  port map ( ck   => mrx_clk_pad_i
+           , i    => abc_115071_auto_rtlil_cc_2515_muxgate_91641
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91643
+           , q    => rxabort_latch
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_154_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => carriersense_tx1
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91653
+           , q    => carriersense_tx2
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  cmpt_zero_29 : zero_x0
+  port map ( nq  => zero_29
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_28 : zero_x0
+  port map ( nq  => zero_28
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_27 : zero_x0
+  port map ( nq  => zero_27
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_26 : zero_x0
+  port map ( nq  => zero_26
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_25 : zero_x0
+  port map ( nq  => zero_25
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_24 : zero_x0
+  port map ( nq  => zero_24
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_23 : zero_x0
+  port map ( nq  => zero_23
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_22 : zero_x0
+  port map ( nq  => zero_22
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_21 : zero_x0
+  port map ( nq  => zero_21
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_20 : zero_x0
+  port map ( nq  => zero_20
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_12_mx2_x2 : mx2_x2
+  port map ( cmd => mrxdv_pad_i
+           , i0  => r_rxen
+           , i1  => rxensync
+           , q   => abc_115071_auto_rtlil_cc_2515_muxgate_91647
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_87_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91623
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_88_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91625
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_89_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91627
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_172_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(16)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91689
+           , q    => wb_dat_o(16)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_166_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(10)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91677
+           , q    => wb_dat_o(10)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_10_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91615
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_22_no2_x1 : no2_x1
+  port map ( i0  => abc_115071_new_n250
+           , i1  => wb_adr_i(11)
+           , nq  => abc_115071_new_n251
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_150_sff1_x4 : sff1_x4
+  port map ( ck  => mrx_clk_pad_i
+           , i   => willtransmit_q
+           , q   => willtransmit_q2
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_33 : zero_x0
+  port map ( nq  => zero_33
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_32 : zero_x0
+  port map ( nq  => zero_32
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_31 : zero_x0
+  port map ( nq  => zero_31
+           , vdd => vdd
+           , vss => vss
+           );
+
+  cmpt_zero_30 : zero_x0
+  port map ( nq  => zero_30
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_178_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(22)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91701
+           , q    => wb_dat_o(22)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_137_sff1r_x4 : sff1r_x4
+  port map ( ck   => mrx_clk_pad_i
+           , i    => rxabortrst_sync1
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91619
+           , q    => rxabortrst
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_195_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone : cmpt_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone
+  port map ( addressmiss                => addressmiss
+           , carriersenselost           => carriersenselost
+           , deferlatched               => deferlatched
+           , dribblenibble              => dribblenibble
+           , invalidsymbol              => invalidsymbol
+           , latchedcrcerror            => latchedcrcerror
+           , latecolllatched            => latecolllatched
+           , loadrxstatus               => loadrxstatus
+           , m_wb_ack_i                 => m_wb_ack_i
+           , m_wb_err_i                 => m_wb_err_i
+           , mrxclk                     => mrx_clk_pad_i
+           , mtxclk                     => mtx_clk_pad_i
+           , r_passall                  => r_passall
+           , r_rxen                     => r_rxen
+           , r_rxflow                   => r_rxflow
+           , r_txen                     => r_txen
+           , receivedpacketgood         => receivedpacketgood
+           , receivedpackettoobig       => receivedpackettoobig
+           , receivedpausefrm           => receivedpausefrm
+           , reset                      => wb_rst_i
+           , retrylimit                 => retrylimit
+           , rxabort                    => rxabort_wb
+           , rxendfrm                   => rxendfrm
+           , rxlatecollision            => rxlatecollision
+           , rxstartfrm                 => rxstartfrm
+           , rxvalid                    => rxvalid
+           , shortframe                 => shortframe
+           , txabort                    => txabort
+           , txdone                     => txdone
+           , txretry                    => txretry
+           , txuseddata                 => txuseddata
+           , wb_clk_i                   => wb_clk_i
+           , wb_we_i                    => wb_we_i
+           , bdcs                       => bdcs(3 downto 0)
+           , retrycntlatched            => retrycntlatched(3 downto 0)
+           , r_txbdnum                  => r_txbdnum(7 downto 0)
+           , rxdata                     => rxdata(7 downto 0)
+           , wb_adr_i                   => wb_adr_i(9 downto 2)
+           , rxlength                   => rxbytecnt(15 downto 0)
+           , m_wb_dat_i                 => m_wb_dat_i(31 downto 0)
+           , wb_dat_i                   => wb_dat_i(31 downto 0)
+           , busy_irq                   => busy_irq
+           , m_wb_cyc_o                 => m_wb_cyc_o
+           , m_wb_we_o                  => m_wb_we_o
+           , perpacketcrcen             => perpacketcrcen
+           , perpacketpad               => perpacketpad
+           , rstdeferlatched            => rstdeferlatched
+           , rxb_irq                    => rxb_irq
+           , rxe_irq                    => rxe_irq
+           , rxstatuswritelatched_sync2 => rxstatuswritelatched_sync2
+           , txb_irq                    => txb_irq
+           , txe_irq                    => txe_irq
+           , txendfrm                   => txendfrm
+           , txstartfrm                 => txstartfrm
+           , txunderrun                 => txunderrun
+           , wb_ack_o                   => bdack
+           , m_wb_bte_o                 => m_wb_bte_o(1 downto 0)
+           , m_wb_cti_o                 => m_wb_cti_o(1 downto 0)
+           , m_wb_sel_o                 => m_wb_sel_o(3 downto 0)
+           , txdata                     => txdata(7 downto 0)
+           , m_wb_adr_o                 => m_wb_adr_o(31 downto 2)
+           , m_wb_dat_o                 => m_wb_dat_o(31 downto 0)
+           , wb_dat_o                   => bd_wb_dat_o(31 downto 0)
+           , vdd                        => vdd
+           , vss                        => vss
+           );
+
+  subckt_184_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(28)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91713
+           , q    => wb_dat_o(28)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_143_sff1r_x4 : sff1r_x4
+  port map ( ck   => mtx_clk_pad_i
+           , i    => txpauserq_sync2
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91631
+           , q    => txpauserq_sync3
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_45_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(16)
+           , i1  => regdataout(16)
+           , q   => temp_wb_dat_o(16)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_44_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(15)
+           , i1  => regdataout(15)
+           , q   => temp_wb_dat_o(15)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_43_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(14)
+           , i1  => regdataout(14)
+           , q   => temp_wb_dat_o(14)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_42_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(13)
+           , i1  => regdataout(13)
+           , q   => temp_wb_dat_o(13)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_41_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(12)
+           , i1  => regdataout(12)
+           , q   => temp_wb_dat_o(12)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_40_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(11)
+           , i1  => regdataout(11)
+           , q   => temp_wb_dat_o(11)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_191_eth_macstatus : cmpt_eth_macstatus
+  port map ( carriersense         => carriersense_tx2
+           , collision            => mcoll_pad_i
+           , deferindication      => deferindication
+           , latecollision        => latecollision
+           , loopback             => r_loopbck
+           , maxcollisionoccured  => maxcollisionoccured
+           , mrxclk               => mrx_clk_pad_i
+           , mrxdv                => mrxdv_lb
+           , mrxerr               => mrxerr_lb
+           , mtxclk               => mtx_clk_pad_i
+           , r_fulld              => r_fulld
+           , r_hugen              => r_hugen
+           , r_recsmall           => r_recsmall
+           , reset                => wb_rst_i
+           , rstdeferlatched      => rstdeferlatched
+           , rxbytecnteq0         => rxbytecnteq0
+           , rxbytecntgreat2      => rxbytecntgreat2
+           , rxbytecntmaxframe    => rxbytecntmaxframe
+           , rxcrcerror           => rxcrcerror
+           , rxstateidle          => rxstateidle
+           , rxstatepreamble      => rxstatepreamble
+           , rxstatesfd           => rxstatesfd
+           , starttxabort         => starttxabort
+           , starttxdone          => starttxdone
+           , statepreamble        => statepreamble
+           , transmitting         => transmitting
+           , txstartfrm           => txstartfrmout
+           , txuseddata           => txuseddatain
+           , rxstatedata          => rxstatedata(1 downto 0)
+           , statedata            => statedata(1 downto 0)
+           , mrxd                 => mrxd_lb(3 downto 0)
+           , retrycnt             => retrycnt(3 downto 0)
+           , collvalid            => r_collvalid(5 downto 0)
+           , r_maxfl              => r_maxfl(15 downto 0)
+           , r_minfl              => r_minfl(15 downto 0)
+           , rxbytecnt            => rxbytecnt(15 downto 0)
+           , carriersenselost     => carriersenselost
+           , deferlatched         => deferlatched
+           , dribblenibble        => dribblenibble
+           , invalidsymbol        => invalidsymbol
+           , latchedcrcerror      => latchedcrcerror
+           , latchedmrxerr        => latchedmrxerr
+           , latecolllatched      => latecolllatched
+           , loadrxstatus         => loadrxstatus
+           , receivedlengthok     => receivedlengthok
+           , receivedpacketgood   => receivedpacketgood
+           , receivedpackettoobig => receivedpackettoobig
+           , receiveend           => receiveend
+           , retrylimit           => retrylimit
+           , rxlatecollision      => rxlatecollision
+           , shortframe           => shortframe
+           , retrycntlatched      => retrycntlatched(3 downto 0)
+           , vdd                  => vdd
+           , vss                  => vss
+           );
+
+  subckt_161_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(5)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91667
+           , q    => wb_dat_o(5)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_49_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(20)
+           , i1  => regdataout(20)
+           , q   => temp_wb_dat_o(20)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_48_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(19)
+           , i1  => regdataout(19)
+           , q   => temp_wb_dat_o(19)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_47_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(18)
+           , i1  => regdataout(18)
+           , q   => temp_wb_dat_o(18)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_46_mx2_x2 : mx2_x2
+  port map ( cmd => abc_115071_new_n257
+           , i0  => bd_wb_dat_o(17)
+           , i1  => regdataout(17)
+           , q   => temp_wb_dat_o(17)
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_155_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => n0_temp_wb_ack_o_reg_0_0
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91655
+           , q    => wb_ack_o
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_167_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(11)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91679
+           , q    => wb_dat_o(11)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_149_sff1_x4 : sff1_x4
+  port map ( ck  => mrx_clk_pad_i
+           , i   => willtransmit
+           , q   => willtransmit_q
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_173_sff1r_x4 : sff1r_x4
+  port map ( ck   => wb_clk_i
+           , i    => temp_wb_dat_o(17)
+           , nrst => abc_115071_auto_rtlil_cc_2506_notgate_91691
+           , q    => wb_dat_o(17)
+           , vdd  => vdd
+           , vss  => vss
+           );
+
+  subckt_68_a4_x2 : a4_x2
+  port map ( i0  => abc_115071_new_n251
+           , i1  => wb_adr_i(10)
+           , i2  => wb_stb_i
+           , i3  => wb_cyc_i
+           , q   => abc_115071_new_n297
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_16_oa22_x2 : oa22_x2
+  port map ( i0  => abc_115071_new_n233
+           , i1  => receivedpausefrm
+           , i2  => rxabort
+           , q   => abc_115071_new_n245
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_110_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91673
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_111_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91675
+           , vdd => vdd
+           , vss => vss
+           );
+
+  subckt_112_inv_x1 : inv_x1
+  port map ( i   => wb_rst_i
+           , nq  => abc_115071_auto_rtlil_cc_2506_notgate_91677
+           , vdd => vdd
+           , vss => vss
+           );
+
+end structural;
+
