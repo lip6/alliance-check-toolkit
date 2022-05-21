@@ -24,10 +24,10 @@ helpers.setNdaTopDir( NdaDirectory )
 import Cfg
 from   CRL       import AllianceFramework, RoutingLayerGauge
 from   helpers   import overlay, l, u, n
-from   NDA.node130.sky130 import techno, FlexLib #, LibreSOCIO
+from   node130.sky130 import techno, StdCellLib #, LibreSOCIO
 
 techno.setup()
-FlexLib.setup()
+StdCellLib.setup()
 #LibreSOCIO.setup()
 
 af = AllianceFramework.get()
@@ -46,7 +46,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.anabatic.topRoutingLayer = 'm4'
     cfg.katana.eventsLimit       = 4000000
     af  = AllianceFramework.get()
-    lg5 = af.getRoutingGauge('FlexLib').getLayerGauge( 5 )
+    lg5 = af.getRoutingGauge('StdCellLib').getLayerGauge( 5 )
     lg5.setType( RoutingLayerGauge.PowerSupply )
     env = af.getEnvironment()
     env.setCLOCK( '^sys_clk$|^ck|^jtag_tck$' )

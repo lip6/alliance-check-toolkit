@@ -133,7 +133,7 @@ def scriptMain ( **kw ):
         ioPadsSpec += doIoPinVector( (IoPin.NORTH, None, 'dat_o_{}', 'dat_o({})', 'dat_o({})'), range(32) )
         ioPadsSpec += doIoPowerCap( IoPin.NORTH|IoPin.A_END )
         
-        m1pitch    = u(0.46)
+        m1pitch    = u(0.46*6)
         m2pitch    = u(0.51)
         # ioPinsSpec, for peripheral pin placement as a standalone block.
         ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'ack_i'    ,  10*m1pitch, 0, 1)
@@ -168,9 +168,9 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
         ao68000Conf.cfg.katana.hTracksReservedLocal = 6
-        ao68000Conf.cfg.katana.vTracksReservedLocal = 3
+        ao68000Conf.cfg.katana.vTracksReservedLocal = 8
         ao68000Conf.cfg.katana.hTracksReservedMin   = 3
-        ao68000Conf.cfg.katana.vTracksReservedMin   = 1
+        ao68000Conf.cfg.katana.vTracksReservedMin   = 4
         ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
         ao68000Conf.cfg.katana.dumpMeasures         = True
