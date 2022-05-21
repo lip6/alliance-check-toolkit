@@ -1,0 +1,12 @@
+#!/bin/sh
+d=`dirname $0`
+deck=`realpath $d/../share/Sky130_extract.lvs`
+
+if [ $# -ne 2 ]
+then
+    echo "Usage `basename $0` input spice_out"
+    exit 20
+fi
+
+export SOURCE_FILE=$1 SPICE_FILE=$2
+klayout -b -r ${deck}

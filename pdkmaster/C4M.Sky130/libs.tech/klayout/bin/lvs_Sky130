@@ -1,0 +1,12 @@
+#!/bin/sh
+d=`dirname $0`
+deck=`realpath $d/../share/Sky130.lvs`
+
+if [ $# -ne 3 ]
+then
+    echo "Usage `basename $0` gds spice report"
+    exit 20
+fi
+
+export SOURCE_FILE=`realpath $1` SPICE_FILE=`realpath $2` REPORT_FILE=$3
+klayout -b -r ${deck}
