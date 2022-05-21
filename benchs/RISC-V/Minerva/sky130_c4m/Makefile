@@ -21,7 +21,7 @@
 
 
 user_project_core_lambdasoc.gds: user_project_core_lambdasoc.vst
-	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) ./doDesign.py))
 
 blif:   user_project_core_lambdasoc.blif
 vst:    user_project_core_lambdasoc.vst

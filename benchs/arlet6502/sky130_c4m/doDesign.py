@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import sys
 import os
@@ -109,7 +110,7 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.uniformDensity      = True
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        conf.cfg.etesian.spaceMargin         = 0.10
+        conf.cfg.etesian.spaceMargin         = 0.02
         conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.globalIterations   = 20
         conf.cfg.anabatic.topRoutingLayer    = 'm4'
@@ -133,7 +134,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u( 36*12.0), u( 36*12.0) )
+        conf.coreSize            = ( u( 27*12.0), u( 27*12.0) )
         conf.chipSize            = ( u(  2020.0), u(  2060.0) )
         if buildChip:
             conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )

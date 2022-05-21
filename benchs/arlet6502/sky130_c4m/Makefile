@@ -23,7 +23,7 @@
 
 
 chip_cts_r.vst: arlet6502.vst
-	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) ./doDesign.py))
 
 chip_cts_r.gds: chip_cts_r.vst
 	-@echo "[INFO] Overriden default GDS rule (for use with FlexLib)."

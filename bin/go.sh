@@ -25,6 +25,7 @@
  benchRules["ARM/cmos"]="druc lvx"
  benchRules["RingOscillator"]="druc lvx"
  benchRules["nmigen/ALU16"]="lvx druc gds"
+ benchRules["RISC-V/Minerva/sky130_c4m"]="gds"
 
  benchs=""
  benchs="${benchs} adder/cmos"
@@ -54,9 +55,10 @@
    benchs="${benchs} arlet6502/freepdk45_c4m"
    benchs="${benchs} ao68000/freepdk45_c4m"
  fi
- if [ -e "/dsk/l1/jpc/coriolis-2.x/src/C4M/open_pdk/C4M.Sky130" ]; then
+ if [ -e "../pdkmaster/C4M.Sky130" ]; then
    benchs="${benchs} arlet6502/sky130_c4m"
    benchs="${benchs} ao68000/sky130_c4m"
+   benchs="${benchs} RISC-V/Minerva/sky130_c4m"
  fi
 
  mode="stopOnFailure"

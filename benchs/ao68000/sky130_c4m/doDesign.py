@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import sys
 import traceback
@@ -163,7 +164,7 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.etesian.uniformDensity      = True
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        ao68000Conf.cfg.etesian.spaceMargin         = 0.20
+        ao68000Conf.cfg.etesian.spaceMargin         = 0.07
         ao68000Conf.cfg.anabatic.searchHalo         = 2
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
@@ -192,7 +193,7 @@ def scriptMain ( **kw ):
         ao68000Conf.useHTree( 'clk_i', Spares.HEAVY_LEAF_LOAD )
         ao68000Conf.useHTree( 'reset_n' )
         if buildChip:
-            ao68000Conf.coreSize = ( u(130*12.0          ), u(120*12.0          ) )
+            ao68000Conf.coreSize = ( u(110*12.0          ), u(100*12.0          ) )
             ao68000Conf.chipSize = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
             ao68000ToChip = CoreToChip( ao68000Conf )
             ao68000ToChip.buildChip()

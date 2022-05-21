@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import sys
 import os
@@ -72,7 +73,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u(230*10.0), u(230*10.0) )
+        conf.coreSize            = ( u(220*10.0), u(220*10.0) )
        #conf.chipSize            = ( u(  2020.0), u(  2060.0) )
         conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
         if buildChip:
