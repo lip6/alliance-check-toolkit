@@ -8,7 +8,7 @@ helpers.loadUserSettings()
 from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
-from   Hurricane  import DbU, Breakpoint
+from   Hurricane  import DebugSession, DbU, Breakpoint
 from   plugins.alpha.block.block          import Block
 from   plugins.alpha.block.configuration  import IoPin, GaugeConf
 from   plugins.alpha.block.spares         import Spares
@@ -49,12 +49,18 @@ class Tech ( object ):
     def isSky130_C4M ( self ): return self.tech == Tech.SKY130_C4M
 
 
+def setDebug ( cell ):
+   #helpers.setTraceLevel( 550 )
+   #DebugSession.addToTrace( cell.getNet( 'loadrxstatus' ))
+   #DebugSession.addToTrace( cell.getNet( 'subckt_195_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone.rxfiforeset' ))
+    pass
+
+
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
        #Breakpoint.setStopLevel( 100 )
        #
        # +--------------------------------------------------+
@@ -106,6 +112,7 @@ def scriptMain ( **kw ):
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'ethmac', CRL.Catalog.State.Logical )
         cell.uniquify( 100 )
+        setDebug( cell )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
@@ -176,16 +183,15 @@ def scriptMain ( **kw ):
         ethmacConf.cfg.chip.supplyRailWidth        = u(35)
         ethmacConf.cfg.chip.supplyRailPitch        = u(90)
         ethmacConf.editor              = editor
-        ethmacConf.useSpares           = False
-        ethmacConf.useClockTree        = False
-        ethmacConf.useHFNS             = True
+        ethmacConf.useSpares           = True
+        ethmacConf.useHFNS             = False
         ethmacConf.bColumns            = 2
         ethmacConf.bRows               = 2
         ethmacConf.chipName            = 'chip'
         ethmacConf.chipConf.ioPadGauge = 'LibreSOCIO'
         ethmacConf.coreSize            = ( coreSizeX*sliceHeight, coreSizeY*sliceHeight )
         ethmacConf.chipSize            = ( u(2020.0), u(2060.0) )
-       #ethmacConf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
+        ethmacConf.useHTree( 'wb_clk_i', Spares.HEAVY_LEAF_LOAD )
        #ethmacConf.useHTree( 'clk_from_pad' )
        #ethmacConf.useHTree( 'reset_from_pad' )
         #ethmacConf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
