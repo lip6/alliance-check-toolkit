@@ -13,9 +13,7 @@
                 USE_DEBUG = No
                  USE_KITE = No
 
-                 NETLISTS = arm_chip     \
-                            arm_corona   \
-                            arm_core     \
+                 NETLISTS = arm_core     \
                             decod_model  \
                             decod        \
                             exec_model   \
@@ -33,9 +31,9 @@
  include ./mk/design-flow.mk
 
 
-lvx:     lvx-arm_chip_cts_r
-druc:    druc-arm_chip_cts_r
-view:    cgt-arm_chip_cts_r
+lvx:     lvx-arm_core_cts_r
+druc:    druc-arm_core_cts_r
+view:    cgt-arm_core_cts_r
 
-layout:  arm_chip_cts_r.ap
-gds:     arm_chip_cts_r.gds
+layout:  arm_core_cts_r.ap
+gds:     arm_core_cts_r.gds
