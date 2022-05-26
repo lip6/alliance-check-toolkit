@@ -184,7 +184,7 @@ def scriptMain ( **kw ):
         ethmacConf.cfg.chip.supplyRailPitch        = u(90)
         ethmacConf.editor              = editor
         ethmacConf.useSpares           = True
-        ethmacConf.useHFNS             = False
+        ethmacConf.useHFNS             = True
         ethmacConf.bColumns            = 2
         ethmacConf.bRows               = 2
         ethmacConf.chipName            = 'chip'

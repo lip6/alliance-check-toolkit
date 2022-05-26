@@ -67,3 +67,10 @@ from Hurricane import DebugSession
 
 # Missing HFNS driver on top level of the tree.
 #DebugSession.addToTrace( katana.getCell().getNet( 'loadrxstatus' ) )
+
+#[ERROR] Overlap in <VerticalTrack [629] METAL3 @415.14um [-0.52um:2600.52um] [26/32]> between:
+#  <id:1427798 Vertical subckt_195_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone.subckt_2503_paramod_0c2657bd5c5455bdd610d1f801789b00c2352910_eth_fifo.write_pointer(0) METAL3 [415.14um 777.48um] [415.14um 804.54um] 0.38um rpD:2 ------CG-----w-----bb-- [776.94um:805.08um] 28.14um 0 ---T--->
+#  <id:1297113 Vertical subckt_195_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone.subckt_2503_paramod_0c2657bd5c5455bdd610d1f801789b00c2352910_eth_fifo.abc_91722_new_n1940 METAL3 [415.14um 805.2um] [415.14um 835.56um] 0.38um rpD:2 ------CG-----w-----bb-M [804.92um:835.84um] 30.92um 0 ---T--->
+#  TargetU:805.08um SourceU:804.92um
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_195_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone.subckt_2503_paramod_0c2657bd5c5455bdd610d1f801789b00c2352910_eth_fifo.write_pointer(0)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_195_paramod_8a8b45b7eb1cbc4ddab9c094bf37a8ebd8aaf536_eth_wishbone.subckt_2503_paramod_0c2657bd5c5455bdd610d1f801789b00c2352910_eth_fifo.abc_91722_new_n1940 ' ) )
