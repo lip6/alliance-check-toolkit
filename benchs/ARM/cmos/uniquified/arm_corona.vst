@@ -1,0 +1,65 @@
+
+
+entity arm_corona is
+  port ( ck           : in bit
+       ; dc_stall     : in bit
+       ; ic_stall     : in bit
+       ; reset_n      : in bit
+       ; dc_data      : in bit_vector(31 downto 0)
+       ; ic_inst      : in bit_vector(31 downto 0)
+       ; if_adr_valid : out bit
+       ; mem_load     : out bit
+       ; mem_stb      : out bit
+       ; mem_stw      : out bit
+       ; if_adr       : out bit_vector(31 downto 0)
+       ; mem_adr      : out bit_vector(31 downto 0)
+       ; mem_data     : out bit_vector(31 downto 0)
+       ; vdd          : in bit
+       ; vss          : in bit
+       );
+end arm_corona;
+
+architecture structural of arm_corona is
+
+  component arm_core
+    port ( ck           : in bit
+         ; dc_stall     : in bit
+         ; ic_stall     : in bit
+         ; reset_n      : in bit
+         ; dc_data      : in bit_vector(31 downto 0)
+         ; ic_inst      : in bit_vector(31 downto 0)
+         ; if_adr_valid : out bit
+         ; mem_load     : out bit
+         ; mem_stb      : out bit
+         ; mem_stw      : out bit
+         ; if_adr       : out bit_vector(31 downto 0)
+         ; mem_adr      : out bit_vector(31 downto 0)
+         ; mem_data     : out bit_vector(31 downto 0)
+         ; vdd          : in bit
+         ; vss          : in bit
+         );
+  end component;
+
+
+begin
+
+  arm_core_i : arm_core
+  port map ( ck           => ck
+           , dc_stall     => dc_stall
+           , ic_stall     => ic_stall
+           , reset_n      => reset_n
+           , dc_data      => dc_data(31 downto 0)
+           , ic_inst      => ic_inst(31 downto 0)
+           , if_adr_valid => if_adr_valid
+           , mem_load     => mem_load
+           , mem_stb      => mem_stb
+           , mem_stw      => mem_stw
+           , if_adr       => if_adr(31 downto 0)
+           , mem_adr      => mem_adr(31 downto 0)
+           , mem_data     => mem_data(31 downto 0)
+           , vdd          => vdd
+           , vss          => vss
+           );
+
+end structural;
+

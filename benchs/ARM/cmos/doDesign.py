@@ -214,7 +214,8 @@ def scriptMain ( **kw ):
                      , (IoPin.WEST, None, 'mem_data_9'  , 'mem_data(9)', 'mem_data(9)'  )
                      ]
         conf = ChipConf( cell , ioPins=[] , ioPads=ioPadsSpec )
-        conf.cfg.etesian.bloat                = 'nsxlib'
+       #conf.cfg.etesian.bloat                = 'nsxlib'
+        conf.cfg.etesian.bloat                = 'disabled'
         conf.cfg.etesian.effort               = 2
         conf.cfg.etesian.uniformDensity       = True
         conf.cfg.etesian.aspectRatio          = 1.0
@@ -230,15 +231,15 @@ def scriptMain ( **kw ):
         conf.cfg.katana.eventsLimit           = 4000000
         conf.editor              = editor
         conf.useHFNS             = False
-        conf.useSpares           = False
-        conf.padsHavePosition    = True
+        conf.useSpares           = True
+        conf.padsHavePosition    = False
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipConf.name       = 'chip'
         conf.chipConf.ioPadGauge = 'pxlib'
-        conf.coreSize            = ( l(13500.0), l(13500.0) )
-        conf.chipSize            = ( l(14700.0), l(14700.0) )
-       #conf.useHTree( 'ck' )
+        conf.coreSize            = ( l( 6100.0), l( 6100.0) )
+        conf.chipSize            = ( l(10300.0), l(10300.0) )
+        conf.useHTree( 'ck' )
        #conf.useHTree( 'reset_n' )
         if buildChip:
             adderToChip = CoreToChip( conf )

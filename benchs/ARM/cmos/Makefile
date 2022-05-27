@@ -31,9 +31,16 @@
  include ./mk/design-flow.mk
 
 
-lvx:     lvx-arm_core_cts_r
-druc:    druc-arm_core_cts_r
-view:    cgt-arm_core_cts_r
+chip_r.vst: arm_core.vst
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
 
-layout:  arm_core_cts_r.ap
-gds:     arm_core_cts_r.gds
+chip_r.ap: chip_r.vst
+	@echo "[INFO] Dummy rule to fool GNU Make (chip_r.ap <- chip_r.vst)..."
+
+
+lvx:     lvx-chip_r
+druc:    druc-chip_r
+view:    cgt-chip_r
+
+layout:  arm_chip_r.ap
+gds:     arm_chip_r.gds

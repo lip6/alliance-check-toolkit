@@ -1,0 +1,1984 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Jul 30, 2019, 18:10
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity arm_chip is
+  port ( ck           : in bit
+       ; dc_stall     : in bit
+       ; ic_stall     : in bit
+       ; reset_n      : in bit
+       ; dc_data      : in bit_vector(31 downto 0)
+       ; ic_inst      : in bit_vector(31 downto 0)
+       ; if_adr_valid : out bit
+       ; mem_load     : out bit
+       ; mem_stb      : out bit
+       ; mem_stw      : out bit
+       ; if_adr       : out bit_vector(31 downto 0)
+       ; mem_adr      : out bit_vector(31 downto 0)
+       ; mem_data     : out bit_vector(31 downto 0)
+       ; vdde         : in bit
+       ; vddi         : in bit
+       ; vsse         : in bit
+       ; vssi         : in bit
+       );
+end arm_chip;
+
+architecture structural of arm_chip is
+
+  component pvssick_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pvddick_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pvsseck_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pvddeck_px
+    port ( ck   : in bit
+         ; cko  : out wor_bit bus
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pck_px
+    port ( pad  : in bit
+         ; ck   : out bit
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component po_px
+    port ( ck   : in bit
+         ; i    : in bit
+         ; pad  : out bit
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component pi_px
+    port ( ck   : in bit
+         ; pad  : in bit
+         ; t    : out bit
+         ; vdde : in bit
+         ; vddi : in bit
+         ; vsse : in bit
+         ; vssi : in bit
+         );
+  end component;
+
+  component arm_corona
+    port ( ck           : in bit
+         ; dc_stall     : in bit
+         ; ic_stall     : in bit
+         ; reset_n      : in bit
+         ; dc_data      : in bit_vector(31 downto 0)
+         ; ic_inst      : in bit_vector(31 downto 0)
+         ; if_adr_valid : out bit
+         ; mem_load     : out bit
+         ; mem_stb      : out bit
+         ; mem_stw      : out bit
+         ; if_adr       : out bit_vector(31 downto 0)
+         ; mem_adr      : out bit_vector(31 downto 0)
+         ; mem_data     : out bit_vector(31 downto 0)
+         ; vdd          : in bit
+         ; vss          : in bit
+         );
+  end component;
+
+  signal ck_ring           :  bit;
+  signal core_if_adr_valid :  bit;
+  signal core_mem_load     :  bit;
+  signal core_mem_stb      :  bit;
+  signal core_mem_stw      :  bit;
+  signal pad_ck            :  bit;
+  signal pad_dc_stall      :  bit;
+  signal pad_ic_stall      :  bit;
+  signal pad_reset_n       :  bit;
+  signal core_if_adr       :  bit_vector(31 downto 0);
+  signal core_mem_adr      :  bit_vector(31 downto 0);
+  signal core_mem_data     :  bit_vector(31 downto 0);
+  signal pad_dc_data       :  bit_vector(31 downto 0);
+  signal pad_ic_inst       :  bit_vector(31 downto 0);
+
+
+begin
+
+  if_adr_23 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(23)
+           , pad  => if_adr(23)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_24 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(24)
+           , pad  => if_adr(24)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_25 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(25)
+           , pad  => if_adr(25)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_20 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(20)
+           , pad  => if_adr(20)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_21 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(21)
+           , pad  => if_adr(21)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_22 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(22)
+           , pad  => if_adr(22)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvssi_3 : pvssick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvssi_2 : pvssick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvssi_1 : pvssick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvssi_0 : pvssick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_29 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(29)
+           , pad  => if_adr(29)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_28 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(28)
+           , pad  => if_adr(28)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_27 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(27)
+           , pad  => if_adr(27)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_26 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(26)
+           , pad  => if_adr(26)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_10 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(10)
+           , pad  => mem_adr(10)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_11 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(11)
+           , pad  => mem_adr(11)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_12 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(12)
+           , pad  => mem_adr(12)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_13 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(13)
+           , pad  => mem_adr(13)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_14 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(14)
+           , pad  => mem_adr(14)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_15 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(15)
+           , pad  => mem_adr(15)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_16 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(16)
+           , pad  => mem_adr(16)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_2 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(2)
+           , pad  => mem_data(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_3 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(3)
+           , pad  => mem_data(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_4 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(4)
+           , pad  => mem_data(4)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_5 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(5)
+           , pad  => mem_data(5)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_6 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(6)
+           , pad  => mem_data(6)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_7 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(7)
+           , pad  => mem_data(7)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_8 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(8)
+           , pad  => mem_data(8)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_9 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(9)
+           , pad  => mem_data(9)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_1 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(1)
+           , pad  => mem_data(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_0 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(0)
+           , pad  => mem_data(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_19 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(19)
+           , pad  => mem_adr(19)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_18 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(18)
+           , pad  => mem_adr(18)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_17 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(17)
+           , pad  => mem_adr(17)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_31 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(31)
+           , pad  => if_adr(31)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_30 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(30)
+           , pad  => if_adr(30)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_23 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(23)
+           , pad  => mem_adr(23)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_22 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(22)
+           , pad  => mem_adr(22)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_21 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(21)
+           , pad  => mem_adr(21)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_20 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(20)
+           , pad  => mem_adr(20)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_24 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(24)
+           , pad  => mem_adr(24)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_25 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(25)
+           , pad  => mem_adr(25)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_26 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(26)
+           , pad  => mem_adr(26)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_27 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(27)
+           , pad  => mem_adr(27)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_28 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(28)
+           , pad  => mem_adr(28)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_29 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(29)
+           , pad  => mem_adr(29)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_10 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(10)
+           , t    => pad_dc_data(10)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_11 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(11)
+           , t    => pad_dc_data(11)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_12 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(12)
+           , t    => pad_dc_data(12)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_13 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(13)
+           , t    => pad_dc_data(13)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_14 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(14)
+           , t    => pad_dc_data(14)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_15 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(15)
+           , t    => pad_dc_data(15)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_16 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(16)
+           , t    => pad_dc_data(16)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_17 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(17)
+           , t    => pad_dc_data(17)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_18 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(18)
+           , t    => pad_dc_data(18)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_19 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(19)
+           , t    => pad_dc_data(19)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvdde_3 : pvddeck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvdde_2 : pvddeck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvdde_1 : pvddeck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvdde_0 : pvddeck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_30 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(30)
+           , pad  => mem_adr(30)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  preset : pi_px
+  port map ( ck   => ck_ring
+           , pad  => reset_n
+           , t    => pad_reset_n
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_31 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(31)
+           , pad  => mem_adr(31)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_20 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(20)
+           , t    => pad_dc_data(20)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_21 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(21)
+           , t    => pad_dc_data(21)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_22 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(22)
+           , t    => pad_dc_data(22)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_23 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(23)
+           , t    => pad_dc_data(23)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_24 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(24)
+           , t    => pad_dc_data(24)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_25 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(25)
+           , t    => pad_dc_data(25)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_26 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(26)
+           , t    => pad_dc_data(26)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_27 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(27)
+           , t    => pad_dc_data(27)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_28 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(28)
+           , t    => pad_dc_data(28)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_29 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(29)
+           , t    => pad_dc_data(29)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_31 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(31)
+           , t    => pad_dc_data(31)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_30 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(30)
+           , t    => pad_dc_data(30)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_stall_pad : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_stall
+           , t    => pad_dc_stall
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_stw_pad : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_stw
+           , pad  => mem_stw
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_3 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(3)
+           , t    => pad_dc_data(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_2 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(2)
+           , t    => pad_dc_data(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_1 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(1)
+           , t    => pad_dc_data(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_0 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(0)
+           , t    => pad_dc_data(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_4 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(4)
+           , t    => pad_dc_data(4)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_5 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(5)
+           , t    => pad_dc_data(5)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_6 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(6)
+           , t    => pad_dc_data(6)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_7 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(7)
+           , t    => pad_dc_data(7)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_8 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(8)
+           , t    => pad_dc_data(8)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  dc_data_9 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => dc_data(9)
+           , t    => pad_dc_data(9)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_10 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(10)
+           , pad  => mem_data(10)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_11 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(11)
+           , pad  => mem_data(11)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_12 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(12)
+           , pad  => mem_data(12)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_13 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(13)
+           , pad  => mem_data(13)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_14 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(14)
+           , pad  => mem_data(14)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_15 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(15)
+           , pad  => mem_data(15)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_16 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(16)
+           , pad  => mem_data(16)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_17 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(17)
+           , pad  => mem_data(17)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_18 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(18)
+           , pad  => mem_data(18)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_19 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(19)
+           , pad  => mem_data(19)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvsse_3 : pvsseck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvsse_2 : pvsseck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvsse_1 : pvsseck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvsse_0 : pvsseck_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_0 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(0)
+           , pad  => if_adr(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_1 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(1)
+           , pad  => if_adr(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_2 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(2)
+           , pad  => if_adr(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_3 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(3)
+           , pad  => if_adr(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_4 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(4)
+           , pad  => if_adr(4)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_5 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(5)
+           , pad  => if_adr(5)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_6 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(6)
+           , pad  => if_adr(6)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_7 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(7)
+           , pad  => if_adr(7)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_8 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(8)
+           , pad  => if_adr(8)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_9 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(9)
+           , pad  => if_adr(9)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_20 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(20)
+           , pad  => mem_data(20)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_21 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(21)
+           , pad  => mem_data(21)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_22 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(22)
+           , pad  => mem_data(22)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_23 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(23)
+           , pad  => mem_data(23)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_24 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(24)
+           , pad  => mem_data(24)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_25 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(25)
+           , pad  => mem_data(25)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_26 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(26)
+           , pad  => mem_data(26)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_27 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(27)
+           , pad  => mem_data(27)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_28 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(28)
+           , pad  => mem_data(28)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_29 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(29)
+           , pad  => mem_data(29)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_19 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(19)
+           , t    => pad_ic_inst(19)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_18 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(18)
+           , t    => pad_ic_inst(18)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_17 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(17)
+           , t    => pad_ic_inst(17)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_16 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(16)
+           , t    => pad_ic_inst(16)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_15 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(15)
+           , t    => pad_ic_inst(15)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_14 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(14)
+           , t    => pad_ic_inst(14)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_13 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(13)
+           , t    => pad_ic_inst(13)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_12 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(12)
+           , t    => pad_ic_inst(12)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_11 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(11)
+           , t    => pad_ic_inst(11)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_10 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(10)
+           , t    => pad_ic_inst(10)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_30 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(30)
+           , pad  => mem_data(30)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_data_31 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_data(31)
+           , pad  => mem_data(31)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_9 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(9)
+           , pad  => mem_adr(9)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_8 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(8)
+           , pad  => mem_adr(8)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_7 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(7)
+           , pad  => mem_adr(7)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_6 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(6)
+           , pad  => mem_adr(6)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_5 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(5)
+           , pad  => mem_adr(5)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_4 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(4)
+           , pad  => mem_adr(4)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_3 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(3)
+           , pad  => mem_adr(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_2 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(2)
+           , pad  => mem_adr(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_1 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(1)
+           , pad  => mem_adr(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_adr_0 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_adr(0)
+           , pad  => mem_adr(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_29 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(29)
+           , t    => pad_ic_inst(29)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_28 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(28)
+           , t    => pad_ic_inst(28)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_27 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(27)
+           , t    => pad_ic_inst(27)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_26 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(26)
+           , t    => pad_ic_inst(26)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_25 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(25)
+           , t    => pad_ic_inst(25)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_24 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(24)
+           , t    => pad_ic_inst(24)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_23 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(23)
+           , t    => pad_ic_inst(23)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_22 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(22)
+           , t    => pad_ic_inst(22)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_21 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(21)
+           , t    => pad_ic_inst(21)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_20 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(20)
+           , t    => pad_ic_inst(20)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvddi_0 : pvddick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvddi_3 : pvddick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvddi_2 : pvddick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pvddi_1 : pvddick_px
+  port map ( ck   => ck_ring
+           , cko  => pad_ck
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_31 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(31)
+           , t    => pad_ic_inst(31)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_30 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(30)
+           , t    => pad_ic_inst(30)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_stall_pad : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_stall
+           , t    => pad_ic_stall
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_stb_pad : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_stb
+           , pad  => mem_stb
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  pck : pck_px
+  port map ( pad  => ck
+           , ck   => ck_ring
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_0 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(0)
+           , t    => pad_ic_inst(0)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_1 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(1)
+           , t    => pad_ic_inst(1)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_2 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(2)
+           , t    => pad_ic_inst(2)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_3 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(3)
+           , t    => pad_ic_inst(3)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_4 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(4)
+           , t    => pad_ic_inst(4)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_5 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(5)
+           , t    => pad_ic_inst(5)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_6 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(6)
+           , t    => pad_ic_inst(6)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_7 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(7)
+           , t    => pad_ic_inst(7)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_8 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(8)
+           , t    => pad_ic_inst(8)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  ic_inst_9 : pi_px
+  port map ( ck   => ck_ring
+           , pad  => ic_inst(9)
+           , t    => pad_ic_inst(9)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  mem_load_pad : po_px
+  port map ( ck   => ck_ring
+           , i    => core_mem_load
+           , pad  => mem_load
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  arm_corona_i : arm_corona
+  port map ( ck           => pad_ck
+           , dc_stall     => pad_dc_stall
+           , ic_stall     => pad_ic_stall
+           , reset_n      => pad_reset_n
+           , dc_data      => pad_dc_data(31 downto 0)
+           , ic_inst      => pad_ic_inst(31 downto 0)
+           , if_adr_valid => core_if_adr_valid
+           , mem_load     => core_mem_load
+           , mem_stb      => core_mem_stb
+           , mem_stw      => core_mem_stw
+           , if_adr       => core_if_adr(31 downto 0)
+           , mem_adr      => core_mem_adr(31 downto 0)
+           , mem_data     => core_mem_data(31 downto 0)
+           , vdd          => vddi
+           , vss          => vssi
+           );
+
+  if_adr_valid_pad : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr_valid
+           , pad  => if_adr_valid
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_19 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(19)
+           , pad  => if_adr(19)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_18 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(18)
+           , pad  => if_adr(18)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_17 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(17)
+           , pad  => if_adr(17)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_16 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(16)
+           , pad  => if_adr(16)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_15 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(15)
+           , pad  => if_adr(15)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_14 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(14)
+           , pad  => if_adr(14)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_13 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(13)
+           , pad  => if_adr(13)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_12 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(12)
+           , pad  => if_adr(12)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_11 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(11)
+           , pad  => if_adr(11)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+  if_adr_10 : po_px
+  port map ( ck   => ck_ring
+           , i    => core_if_adr(10)
+           , pad  => if_adr(10)
+           , vdde => vdde
+           , vddi => vddi
+           , vsse => vsse
+           , vssi => vssi
+           );
+
+end structural;
+

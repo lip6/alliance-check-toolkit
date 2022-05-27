@@ -1,0 +1,384 @@
+
+-- =======================================================================
+-- Coriolis Structural VHDL Driver
+-- Generated on Jul 30, 2019, 18:10
+-- 
+-- To be interoperable with Alliance, it uses it's special VHDL subset.
+-- ("man vhdl" under Alliance for more informations)
+-- =======================================================================
+
+entity arm_core is
+  port ( ck           : in bit
+       ; dc_stall     : in bit
+       ; ic_stall     : in bit
+       ; reset_n      : in bit
+       ; dc_data      : in bit_vector(31 downto 0)
+       ; ic_inst      : in bit_vector(31 downto 0)
+       ; if_adr_valid : out bit
+       ; mem_load     : out bit
+       ; mem_stb      : out bit
+       ; mem_stw      : out bit
+       ; if_adr       : out bit_vector(31 downto 0)
+       ; mem_adr      : out bit_vector(31 downto 0)
+       ; mem_data     : out bit_vector(31 downto 0)
+       ; vdd          : in bit
+       ; vss          : in bit
+       );
+end arm_core;
+
+architecture structural of arm_core is
+
+  component mem
+    port ( dc_stall      : in bit
+         ; exe2mem_empty : in bit
+         ; exe_mem_lb    : in bit
+         ; exe_mem_lw    : in bit
+         ; exe_mem_sb    : in bit
+         ; exe_mem_sw    : in bit
+         ; exe_mem_dest  : in bit_vector(3 downto 0)
+         ; dc_data       : in bit_vector(31 downto 0)
+         ; exe_mem_adr   : in bit_vector(31 downto 0)
+         ; exe_mem_data  : in bit_vector(31 downto 0)
+         ; mem_load      : out bit
+         ; mem_pop       : out bit
+         ; mem_stb       : out bit
+         ; mem_stw       : out bit
+         ; mem_wb        : out bit
+         ; mem_dest      : out bit_vector(3 downto 0)
+         ; mem_adr       : out bit_vector(31 downto 0)
+         ; mem_data      : out bit_vector(31 downto 0)
+         ; mem_res       : out bit_vector(31 downto 0)
+         ; vdd           : in bit
+         ; vss           : in bit
+         );
+  end component;
+
+  component exec
+    port ( ck            : in bit
+         ; dec2exe_empty : in bit
+         ; dec_alu_add   : in bit
+         ; dec_alu_and   : in bit
+         ; dec_alu_cy    : in bit
+         ; dec_alu_or    : in bit
+         ; dec_alu_xor   : in bit
+         ; dec_comp_op1  : in bit
+         ; dec_comp_op2  : in bit
+         ; dec_cy        : in bit
+         ; dec_exe_wb    : in bit
+         ; dec_flag_wb   : in bit
+         ; dec_mem_lb    : in bit
+         ; dec_mem_lw    : in bit
+         ; dec_mem_sb    : in bit
+         ; dec_mem_sw    : in bit
+         ; dec_pre_index : in bit
+         ; dec_shift_asr : in bit
+         ; dec_shift_lsl : in bit
+         ; dec_shift_lsr : in bit
+         ; dec_shift_ror : in bit
+         ; dec_shift_rrx : in bit
+         ; mem_pop       : in bit
+         ; reset_n       : in bit
+         ; dec_exe_dest  : in bit_vector(3 downto 0)
+         ; dec_mem_dest  : in bit_vector(3 downto 0)
+         ; dec_shift_val : in bit_vector(4 downto 0)
+         ; dec_mem_data  : in bit_vector(31 downto 0)
+         ; dec_op1       : in bit_vector(31 downto 0)
+         ; dec_op2       : in bit_vector(31 downto 0)
+         ; exe2mem_empty : out bit
+         ; exe_c         : out bit
+         ; exe_flag_wb   : out bit
+         ; exe_mem_lb    : out bit
+         ; exe_mem_lw    : out bit
+         ; exe_mem_sb    : out bit
+         ; exe_mem_sw    : out bit
+         ; exe_n         : out bit
+         ; exe_pop       : out bit
+         ; exe_v         : out bit
+         ; exe_wb        : out bit
+         ; exe_z         : out bit
+         ; exe_dest      : out bit_vector(3 downto 0)
+         ; exe_mem_dest  : out bit_vector(3 downto 0)
+         ; exe_mem_adr   : out bit_vector(31 downto 0)
+         ; exe_mem_data  : out bit_vector(31 downto 0)
+         ; exe_res       : out bit_vector(31 downto 0)
+         ; vdd           : in bit
+         ; vss           : in bit
+         );
+  end component;
+
+  component decod
+    port ( ck            : in bit
+         ; exe_c         : in bit
+         ; exe_flag_wb   : in bit
+         ; exe_n         : in bit
+         ; exe_pop       : in bit
+         ; exe_v         : in bit
+         ; exe_wb        : in bit
+         ; exe_z         : in bit
+         ; if2dec_empty  : in bit
+         ; if_pop        : in bit
+         ; mem_wb        : in bit
+         ; reset_n       : in bit
+         ; exe_dest      : in bit_vector(3 downto 0)
+         ; mem_dest      : in bit_vector(3 downto 0)
+         ; exe_res       : in bit_vector(31 downto 0)
+         ; if_ir         : in bit_vector(31 downto 0)
+         ; mem_res       : in bit_vector(31 downto 0)
+         ; dec2exe_empty : out bit
+         ; dec2if_empty  : out bit
+         ; dec_alu_add   : out bit
+         ; dec_alu_and   : out bit
+         ; dec_alu_cy    : out bit
+         ; dec_alu_or    : out bit
+         ; dec_alu_xor   : out bit
+         ; dec_comp_op1  : out bit
+         ; dec_comp_op2  : out bit
+         ; dec_cy        : out bit
+         ; dec_exe_wb    : out bit
+         ; dec_flag_wb   : out bit
+         ; dec_mem_lb    : out bit
+         ; dec_mem_lw    : out bit
+         ; dec_mem_sb    : out bit
+         ; dec_mem_sw    : out bit
+         ; dec_pop       : out bit
+         ; dec_pre_index : out bit
+         ; dec_shift_asr : out bit
+         ; dec_shift_lsl : out bit
+         ; dec_shift_lsr : out bit
+         ; dec_shift_ror : out bit
+         ; dec_shift_rrx : out bit
+         ; dec_exe_dest  : out bit_vector(3 downto 0)
+         ; dec_mem_dest  : out bit_vector(3 downto 0)
+         ; dec_shift_val : out bit_vector(4 downto 0)
+         ; dec_mem_data  : out bit_vector(31 downto 0)
+         ; dec_op1       : out bit_vector(31 downto 0)
+         ; dec_op2       : out bit_vector(31 downto 0)
+         ; dec_pc        : out bit_vector(31 downto 0)
+         ; vdd           : in bit
+         ; vss           : in bit
+         );
+  end component;
+
+  component ifetch
+    port ( ck           : in bit
+         ; dec2if_empty : in bit
+         ; dec_pop      : in bit
+         ; ic_stall     : in bit
+         ; reset_n      : in bit
+         ; dec_pc       : in bit_vector(31 downto 0)
+         ; ic_inst      : in bit_vector(31 downto 0)
+         ; if2dec_empty : out bit
+         ; if_adr_valid : out bit
+         ; if_pop       : out bit
+         ; if_adr       : out bit_vector(31 downto 0)
+         ; if_ir        : out bit_vector(31 downto 0)
+         ; vdd          : in bit
+         ; vss          : in bit
+         );
+  end component;
+
+  signal dec2exe_empty :  bit;
+  signal dec2if_empty  :  bit;
+  signal dec_alu_add   :  bit;
+  signal dec_alu_and   :  bit;
+  signal dec_alu_cy    :  bit;
+  signal dec_alu_or    :  bit;
+  signal dec_alu_xor   :  bit;
+  signal dec_comp_op1  :  bit;
+  signal dec_comp_op2  :  bit;
+  signal dec_cy        :  bit;
+  signal dec_exe_wb    :  bit;
+  signal dec_flag_wb   :  bit;
+  signal dec_mem_lb    :  bit;
+  signal dec_mem_lw    :  bit;
+  signal dec_mem_sb    :  bit;
+  signal dec_mem_sw    :  bit;
+  signal dec_pop       :  bit;
+  signal dec_pre_index :  bit;
+  signal dec_shift_asr :  bit;
+  signal dec_shift_lsl :  bit;
+  signal dec_shift_lsr :  bit;
+  signal dec_shift_ror :  bit;
+  signal dec_shift_rrx :  bit;
+  signal exe2mem_empty :  bit;
+  signal exe_c         :  bit;
+  signal exe_flag_wb   :  bit;
+  signal exe_mem_lb    :  bit;
+  signal exe_mem_lw    :  bit;
+  signal exe_mem_sb    :  bit;
+  signal exe_mem_sw    :  bit;
+  signal exe_n         :  bit;
+  signal exe_pop       :  bit;
+  signal exe_v         :  bit;
+  signal exe_wb        :  bit;
+  signal exe_z         :  bit;
+  signal if2dec_empty  :  bit;
+  signal if_pop        :  bit;
+  signal mem_pop       :  bit;
+  signal mem_wb        :  bit;
+  signal dec_exe_dest  :  bit_vector(3 downto 0);
+  signal dec_mem_dest  :  bit_vector(3 downto 0);
+  signal exe_dest      :  bit_vector(3 downto 0);
+  signal exe_mem_dest  :  bit_vector(3 downto 0);
+  signal mem_dest      :  bit_vector(3 downto 0);
+  signal dec_shift_val :  bit_vector(4 downto 0);
+  signal dec_mem_data  :  bit_vector(31 downto 0);
+  signal dec_op1       :  bit_vector(31 downto 0);
+  signal dec_op2       :  bit_vector(31 downto 0);
+  signal dec_pc        :  bit_vector(31 downto 0);
+  signal exe_mem_adr   :  bit_vector(31 downto 0);
+  signal exe_mem_data  :  bit_vector(31 downto 0);
+  signal exe_res       :  bit_vector(31 downto 0);
+  signal if_ir         :  bit_vector(31 downto 0);
+  signal mem_res       :  bit_vector(31 downto 0);
+
+
+begin
+
+  mem_i : mem
+  port map ( dc_stall      => dc_stall
+           , exe2mem_empty => exe2mem_empty
+           , exe_mem_lb    => exe_mem_lb
+           , exe_mem_lw    => exe_mem_lw
+           , exe_mem_sb    => exe_mem_sb
+           , exe_mem_sw    => exe_mem_sw
+           , exe_mem_dest  => exe_mem_dest(3 downto 0)
+           , dc_data       => dc_data(31 downto 0)
+           , exe_mem_adr   => exe_mem_adr(31 downto 0)
+           , exe_mem_data  => exe_mem_data(31 downto 0)
+           , mem_load      => mem_load
+           , mem_pop       => mem_pop
+           , mem_stb       => mem_stb
+           , mem_stw       => mem_stw
+           , mem_wb        => mem_wb
+           , mem_dest      => mem_dest(3 downto 0)
+           , mem_adr       => mem_adr(31 downto 0)
+           , mem_data      => mem_data(31 downto 0)
+           , mem_res       => mem_res(31 downto 0)
+           , vdd           => vdd
+           , vss           => vss
+           );
+
+  exec_i : exec
+  port map ( ck            => ck
+           , dec2exe_empty => dec2exe_empty
+           , dec_alu_add   => dec_alu_add
+           , dec_alu_and   => dec_alu_and
+           , dec_alu_cy    => dec_alu_cy
+           , dec_alu_or    => dec_alu_or
+           , dec_alu_xor   => dec_alu_xor
+           , dec_comp_op1  => dec_comp_op1
+           , dec_comp_op2  => dec_comp_op2
+           , dec_cy        => dec_cy
+           , dec_exe_wb    => dec_exe_wb
+           , dec_flag_wb   => dec_flag_wb
+           , dec_mem_lb    => dec_mem_lb
+           , dec_mem_lw    => dec_mem_lw
+           , dec_mem_sb    => dec_mem_sb
+           , dec_mem_sw    => dec_mem_sw
+           , dec_pre_index => dec_pre_index
+           , dec_shift_asr => dec_shift_asr
+           , dec_shift_lsl => dec_shift_lsl
+           , dec_shift_lsr => dec_shift_lsr
+           , dec_shift_ror => dec_shift_ror
+           , dec_shift_rrx => dec_shift_rrx
+           , mem_pop       => mem_pop
+           , reset_n       => reset_n
+           , dec_exe_dest  => dec_exe_dest(3 downto 0)
+           , dec_mem_dest  => dec_mem_dest(3 downto 0)
+           , dec_shift_val => dec_shift_val(4 downto 0)
+           , dec_mem_data  => dec_mem_data(31 downto 0)
+           , dec_op1       => dec_op1(31 downto 0)
+           , dec_op2       => dec_op2(31 downto 0)
+           , exe2mem_empty => exe2mem_empty
+           , exe_c         => exe_c
+           , exe_flag_wb   => exe_flag_wb
+           , exe_mem_lb    => exe_mem_lb
+           , exe_mem_lw    => exe_mem_lw
+           , exe_mem_sb    => exe_mem_sb
+           , exe_mem_sw    => exe_mem_sw
+           , exe_n         => exe_n
+           , exe_pop       => exe_pop
+           , exe_v         => exe_v
+           , exe_wb        => exe_wb
+           , exe_z         => exe_z
+           , exe_dest      => exe_dest(3 downto 0)
+           , exe_mem_dest  => exe_mem_dest(3 downto 0)
+           , exe_mem_adr   => exe_mem_adr(31 downto 0)
+           , exe_mem_data  => exe_mem_data(31 downto 0)
+           , exe_res       => exe_res(31 downto 0)
+           , vdd           => vdd
+           , vss           => vss
+           );
+
+  decod_i : decod
+  port map ( ck            => ck
+           , exe_c         => exe_c
+           , exe_flag_wb   => exe_flag_wb
+           , exe_n         => exe_n
+           , exe_pop       => exe_pop
+           , exe_v         => exe_v
+           , exe_wb        => exe_wb
+           , exe_z         => exe_z
+           , if2dec_empty  => if2dec_empty
+           , if_pop        => if_pop
+           , mem_wb        => mem_wb
+           , reset_n       => reset_n
+           , exe_dest      => exe_dest(3 downto 0)
+           , mem_dest      => mem_dest(3 downto 0)
+           , exe_res       => exe_res(31 downto 0)
+           , if_ir         => if_ir(31 downto 0)
+           , mem_res       => mem_res(31 downto 0)
+           , dec2exe_empty => dec2exe_empty
+           , dec2if_empty  => dec2if_empty
+           , dec_alu_add   => dec_alu_add
+           , dec_alu_and   => dec_alu_and
+           , dec_alu_cy    => dec_alu_cy
+           , dec_alu_or    => dec_alu_or
+           , dec_alu_xor   => dec_alu_xor
+           , dec_comp_op1  => dec_comp_op1
+           , dec_comp_op2  => dec_comp_op2
+           , dec_cy        => dec_cy
+           , dec_exe_wb    => dec_exe_wb
+           , dec_flag_wb   => dec_flag_wb
+           , dec_mem_lb    => dec_mem_lb
+           , dec_mem_lw    => dec_mem_lw
+           , dec_mem_sb    => dec_mem_sb
+           , dec_mem_sw    => dec_mem_sw
+           , dec_pop       => dec_pop
+           , dec_pre_index => dec_pre_index
+           , dec_shift_asr => dec_shift_asr
+           , dec_shift_lsl => dec_shift_lsl
+           , dec_shift_lsr => dec_shift_lsr
+           , dec_shift_ror => dec_shift_ror
+           , dec_shift_rrx => dec_shift_rrx
+           , dec_exe_dest  => dec_exe_dest(3 downto 0)
+           , dec_mem_dest  => dec_mem_dest(3 downto 0)
+           , dec_shift_val => dec_shift_val(4 downto 0)
+           , dec_mem_data  => dec_mem_data(31 downto 0)
+           , dec_op1       => dec_op1(31 downto 0)
+           , dec_op2       => dec_op2(31 downto 0)
+           , dec_pc        => dec_pc(31 downto 0)
+           , vdd           => vdd
+           , vss           => vss
+           );
+
+  ifetch_i : ifetch
+  port map ( ck           => ck
+           , dec2if_empty => dec2if_empty
+           , dec_pop      => dec_pop
+           , ic_stall     => ic_stall
+           , reset_n      => reset_n
+           , dec_pc       => dec_pc(31 downto 0)
+           , ic_inst      => ic_inst(31 downto 0)
+           , if2dec_empty => if2dec_empty
+           , if_adr_valid => if_adr_valid
+           , if_pop       => if_pop
+           , if_adr       => if_adr(31 downto 0)
+           , if_ir        => if_ir(31 downto 0)
+           , vdd          => vdd
+           , vss          => vss
+           );
+
+end structural;
+

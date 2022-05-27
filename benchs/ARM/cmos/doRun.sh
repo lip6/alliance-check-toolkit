@@ -12,7 +12,7 @@
  for file in $rewritens; do
    cp non_generated/${file}.vst runs/${file}-ref.vst
  done
- cp non_generated/*.vst .
+ cp uniquified/*.vst .
 
     maxRuns=40
         run=0
@@ -25,6 +25,9 @@
    start=`date +%s`
 
    make clean > /dev/null 
+   rm -f *corona* *chip* *.spi
+   cp uniquified/arm_core.vst .
+   cp uniquified/fifo32_u01.vst .
    make lvx   > runs/make-lvx-run${run}.log 2>&1 
    if [ $? -ne 0 ]; then
      runSuccess=0
