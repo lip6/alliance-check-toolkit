@@ -88,7 +88,7 @@ class GmDecodDigCtl ( AnalogDesign ):
 
 
     def build ( self, editor ):
-        print '  o  Running GmDecodDigCtl.build().'
+        print( '  o  Running GmDecodDigCtl.build().' )
         decoderModel = loadDecoder()
         
        #    | 0                  | 1         | 2               | 3   | 4       |  5  | 6| 7   |8  |9     |10  | 11    | 12   | 13   | 
@@ -420,7 +420,7 @@ class GmDecodDigCtl ( AnalogDesign ):
 
 def scriptMain ( **kw ):
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
    #framework = CRL.AllianceFramework.get()
@@ -430,7 +430,7 @@ def scriptMain ( **kw ):
    #    UpdateSession.open()
    #    cell.destroy()
    #    UpdateSession.close()
-   #    print 'Previous <gmdecod> cell destroyed.'
+   #    print( 'Previous <gmdecod> cell destroyed.' )
 
     design = GmDecodDigCtl()
     design.build( editor )
