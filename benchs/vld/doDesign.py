@@ -34,13 +34,13 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        conf.cfg.etesian.spaceMargin         = 0.07
+        conf.cfg.etesian.spaceMargin         = 0.11
         conf.cfg.anabatic.globalIterations   = 15
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-        conf.cfg.katana.hTracksReservedLocal = 11
-        conf.cfg.katana.vTracksReservedLocal = 10
-        conf.cfg.katana.hTracksReservedMin   = 8
-        conf.cfg.katana.vTracksReservedMin   = 6
+        conf.cfg.katana.hTracksReservedLocal = 13
+        conf.cfg.katana.vTracksReservedLocal = 12
+        conf.cfg.katana.hTracksReservedMin   = 9
+        conf.cfg.katana.vTracksReservedMin   = 7
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
