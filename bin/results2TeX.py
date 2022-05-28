@@ -369,7 +369,7 @@ class Results2TeX ( object ):
                  , "set ytics    0.05"
                  , "set mytics   5"
                 # Figure size configuration.
-                 , "set terminal fig size 5.0 5.0"
+                 , "set terminal fig size 5.0, 5.0"
                  , "set size square"
                 # Plots.
                 #, "set key inside top left"
@@ -425,11 +425,11 @@ class Results2TeX ( object ):
                  , "set format   \"%2.0s%c\""
                  , "set yrange   [1e-1:1e+3]"
                 # Figure size configuration.
-                 , "set terminal fig size 4.5 4.5"
+                 , "set terminal fig size 6.0, 6.0"
                  , "set size square"
                 # Plots.
                  , "set key inside top left"
-                 , 'set title \"TITLE Runtimes (s) vs. gates\"'
+                 , 'set title \"TITLE Routing runtimes (s) vs. gates\"'
                  , 'plot \"%s\" index 0 linewidth 6 linetype 1 pointtype  9 title "Load"'     % (dataFiles["SoC"])
                 #+    ', \"%s\" index 1 linewidth 2 linetype 2 pointtype  8 title "Load"'     % (dataFiles["SoC"])
                  +    ', \"%s\" index 1 linewidth 2 linetype 2 pointtype  4 title "Assign"'   % (dataFiles["SoC"])
@@ -475,11 +475,11 @@ class Results2TeX ( object ):
                  , "set format   \"%2.0s%c\""
                  , "set yrange   [1e+1:1e+5]"
                 # Figure size configuration.
-                 , "set terminal fig size 4.5 4.5"
+                 , "set terminal fig size 6.0, 6.0"
                  , "set size square"
                 # Plots.
                  , "set key inside top left"
-                 , 'set title \"TITLE Runtimes (s) vs. gates\"'
+                 , 'set title \"TITLE Placement runtimes (s) vs. gates\"'
                  , 'plot \"%s\" index 0 linewidth 6 linetype 1 pointtype  9 title "Place"' % (dataFiles["SoC"])
                  ]
         self._gnuplot.run( graphName, 0, script )
@@ -521,7 +521,7 @@ class Results2TeX ( object ):
                  , "set format   y \"%.0s%c\""
                  , "set yrange   [1e-1:1e+1]"
                 # Figure size configuration.
-                 , "set terminal fig size 4.0 4.0"
+                 , "set terminal fig size 6.0, 6.0"
                  , "set size square"
                 # Plots.
                 #, "set key inside top left"
@@ -565,7 +565,7 @@ class Results2TeX ( object ):
                  , "set mytics   5"
                  , "set format   y \"%.0s%c\""
                 # Figure size configuration.
-                 , "set terminal fig size 4.0 4.0"
+                 , "set terminal fig size 6.0, 6.0"
                  , "set size square"
                 # Plots.
                 #, "set key inside top left"
@@ -614,7 +614,7 @@ class Results2TeX ( object ):
                  , "set mytics   10"
                  , "set format   \"%2.0s%c\""
                 # Figure size configuration.
-                 , "set terminal fig size 5.0 5.0"
+                 , "set terminal fig size 6.0, 6.0"
                  , "set size square"
                 # Plots.
                  , "set key inside top left"
@@ -828,7 +828,7 @@ class Results2TeX ( object ):
    #             , "set yrange   [10:4e+3]"
    #             , "set ylabel   \"seconds\" offset 0.5,0 rotate by 90"
    #            # Figure size configuration.
-   #             , "set terminal fig size 3.0 3.0"
+   #             , "set terminal fig size 3.0, 3.0"
    #             , "set size square"
    #            #, "plot \"./%s\" linestyle 3 notitle" % dataFiles["ICCAD04"]
    #            #+ ", \"ICCAD04.encounter-runtime.dat\" linestyle 2 notitle"
@@ -879,7 +879,7 @@ class Results2TeX ( object ):
    #             , "set yrange   [20:1000]"
    #             , "set ylabel   \"memory (MB)\" offset 0.5,0 rotate by 90"
    #            # Figure size configuration.
-   #             , "set terminal fig size 3.0 2.5"
+   #             , "set terminal fig size 3.0, 2.5"
    #             , "set key inside top left"
    #             , "plot \"./%s\" linestyle 2 title \"SoC\"" % dataFiles["SoC"]
    #             + ", \"%s\" linestyle 3 title \"ISCAS89\"" % dataFiles["ISCAS89"]
@@ -903,7 +903,7 @@ class Results2TeX ( object ):
    #                                       /float(data[Results2TeX.GatesNb]) ) )
    #        fd.close ()
    #
-   #    script = [ "set terminal fig size 3.45 2"
+   #    script = [ "set terminal fig size 3.45, 2"
    #             , "set format y \"%.0s%c\""
    #             , "set yrange [0:50e-3]"
    #             , "set ytics 10e-3"
