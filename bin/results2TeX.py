@@ -281,7 +281,7 @@ class Results2TeX ( object ):
                 fd.write( "   \\multicolumn{10}{|c|}{\\textsf{\\textbf{%s benchmark}}} \\\\\n" % benchmark )
                 fd.write( "   \\hline\n" )
                 for data in datas:
-                    fd.write( "   %-30s& %5.2f & %7.2f & %5i & %7.2f & %7.2f & %5i & %7.2f & %6i & %6i \\\\\n" \
+                    fd.write( "   %-30s& %7i & %7.2f & %5i & %7.2f & %7.2f & %5i & %7.2f & %6i & %6i \\\\\n" \
                               % ( "\\texttt{%s}" % texEscape(data.design)
                                 , data.gates
                                 , data.loadTime
@@ -309,7 +309,7 @@ class Results2TeX ( object ):
                 if not datas: continue
 
                 fd.write( "   \\hline\\hline\n" )
-                fd.write( "   \\multicolumn{8}{|c|}{\\textsf{\\textbf{%s benchmark}}} \\\\\n" % benchmark )
+                fd.write( "   \\multicolumn{9}{|c|}{\\textsf{\\textbf{%s benchmark}}} \\\\\n" % benchmark )
                 fd.write( "   \\hline\n" )
                 for data in self._primaryDatas[benchmark]:
                     fd.write( "   %-30s& %7i & %9i & %9i & %7i & %7i & %9i+%i & %7i & %7i \\\\\n" \
