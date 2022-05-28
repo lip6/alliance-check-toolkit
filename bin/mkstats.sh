@@ -42,6 +42,7 @@
  benchRules["vld"]="layout"
 
  benchs=""
+ benchs="${benchs} arlet6502/sky130_c4m"
  benchs="${benchs} DCT/lvl3"
  benchs="${benchs} DCT/lvl2"
  benchs="${benchs} DCT/lvl1"
@@ -52,10 +53,12 @@
  benchs="${benchs} eFPGA/04x08"
  benchs="${benchs} DCT/dct_lvl3"
  benchs="${benchs} DCT/dct_lvl2"
+ benchs="${benchs} ao68000/sky130_c4m"
  benchs="${benchs} ieee_division"
  benchs="${benchs} eFPGA/08x08"
  benchs="${benchs} vld"
  benchs="${benchs} eFPGA/08x16"
+ benchs="${benchs} RISC-V/Minerva/sky130_c4m"
  benchs="${benchs} eFPGA/16x16"
 
 #benchs="${benchs} adder/cmos"
@@ -113,21 +116,26 @@
 
    result="success."
    pushd ${bench} > /dev/null
-  #make clean >> ${benchLog} 2>&1
-   for rule in ${rules}; do
-     make ${rule} >> ${benchLog} 2>&1
-     if [ $? -ne 0 ]; then
-       result="\"${rule}\" failed."
-       if [ "${mode}" = "stopOnFailure" ]; then
-         echo ""
-         echo ""
-         echo "[ERROR] go.sh: bench <${bench}> has failed."
-         exit 1
+   /bin/ls *.katana.dat > /dev/null 2>&1
+   if [ $? -ne 0 ]; then
+    #make clean >> ${benchLog} 2>&1
+     for rule in ${rules}; do
+       make ${rule} >> ${benchLog} 2>&1
+       if [ $? -ne 0 ]; then
+         result="\"${rule}\" failed."
+         if [ "${mode}" = "stopOnFailure" ]; then
+           echo ""
+           echo ""
+           echo "[ERROR] go.sh: bench <${bench}> has failed."
+           exit 1
+         fi
+         break
        fi
-       break
-     fi
-     cat *.katana.dat >> ${cumulativeStats}
-   done
+     done
+   else
+     result="reuse previous run."
+   fi
+   cat *.katana.dat >> ${cumulativeStats}
   #make clean >> ${benchLog} 2>&1
    echo " ${result}"
    popd > /dev/null
