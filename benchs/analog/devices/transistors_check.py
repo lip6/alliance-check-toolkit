@@ -31,7 +31,7 @@ def analogDemo ( editor ):
              #, ( Transistor         , 't1'    , None               , toDbU( 0.54)         , 1, False   , None , False )
              #, ( CommonDrain        , 'ta'    , None               , toDbU(37.00)         , 2, False   , 2    , False )
              #, ( CommonGatePair     , 'tb'    , None               , toDbU(37.00)         , 2, False   , 2    , False )
-             #, ( CommonSourcePair   , 't4'    , 'WIP CSP'          , toDbU(10.56)         , 4, False   , 2    , True  )
+              , ( CommonSourcePair   , 't4'    , 'WIP CSP'          , toDbU(10.56)         , 4, False   , 2    , True  )
              #, ( CommonSourcePair   , 't4b'   , 'Interdigitated'   , toDbU(10.56)         , 4, True    , 2    , True  )
              #, ( CrossCoupledPair   , 't3'    , None               , toDbU(37.00)         , 4, True    , 2    , False )
              #, ( DifferentialPair   , 't4'    , 'WIP DP'           , toDbU(10.56)         , 4, False   , 2    , False )
@@ -46,23 +46,23 @@ def analogDemo ( editor ):
     yspacing  = toDbU(28.0)
     xspacingl = DbU.fromLambda(50.0)
     if technoName == 'c35b4':
-      print '  o  Using AMS 350nm (c34b4) settings.'
+      print( '  o  Using AMS 350nm (c34b4) settings.' )
       xspacing  = toDbU( 5.0)
       yspacing  = toDbU(11.0)
-      xspacingl = DbU.fromLambda(20.0)
+      xspacingl = DbU.fromLambda(40.0)
     elif technoName == 'cmos065':
-      print '  o  Using 65nm settings.'
+      print( '  o  Using 65nm settings.' )
       xspacing  = toDbU( 5.0)
       yspacing  = toDbU(11.0)
       xspacingl = DbU.fromLambda(20.0)
     elif technoName == 'scn6m_deep_09':
-      print '  o  Using MOSIS 180nm settings (scn6m_deep_09).'
+      print( '  o  Using MOSIS 180nm settings (scn6m_deep_09).' )
       xspacing  = toDbU( 6.0)
       yspacing  = toDbU(14.0)
       xspacingl = DbU.fromLambda(50.0)
     else:
-      print '[WARNING] Cannot guess technology from:'
-      print '          \"%s\"' % helpers.technoDir
+      print( '[WARNING] Cannot guess technology from:' )
+      print( '          \"%s\"' % helpers.technoDir )
 
     UpdateSession.open()
     cell = CRL.AllianceFramework.get().createCell( 'devices_check' )
@@ -74,8 +74,8 @@ def analogDemo ( editor ):
     generator = LayoutGenerator()
 
     for i in range(len(devices)):
-      print '     - Generating Device of %s...' % devices[i][0]
-      print '       w:%f' % DbU.toLambda( devices[i][3] )
+      print( '     - Generating Device of %s...' % devices[i][0] )
+      print( '       w:%f' % DbU.toLambda( devices[i][3] ) )
 
       device  = devices[i][0].create( library, devices[i][1], Transistor.NMOS, devices[i][7] )
       if devices[i][2]: device.getParameter( 'Layout Styles' ).setValue( devices[i][2] )
@@ -107,7 +107,7 @@ def analogDemo ( editor ):
                                 , transformation
                                 , Instance.PlacementStatus.FIXED )
 
-      print '       Done %s' % devices[i][0]
+      print( '       Done %s' % devices[i][0] )
 
     inv_x1   = CRL.AllianceFramework.get().getCell( 'inv_x1', CRL.Catalog.State.Views )
     if inv_x1:
@@ -119,7 +119,7 @@ def analogDemo ( editor ):
                                                 , Transformation.Orientation.ID )
                                 , Instance.PlacementStatus.FIXED )
     else:
-      print '[ERROR] Cell "inv_x1" has not been found in the libraries.'
+      print( '[ERROR] Cell "inv_x1" has not been found in the libraries.' )
 
     UpdateSession.close()
 
@@ -132,7 +132,7 @@ def analogDemo ( editor ):
 
 def scriptMain ( **kw ):
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
     cell = CRL.AllianceFramework.get().getCell( 'devices_check', CRL.Catalog.State.Views )
@@ -149,7 +149,7 @@ def scriptMain ( **kw ):
             if editor: editor.removeHistory( cell )
             cell.destroy()
         UpdateSession.close()
-        print 'Previous <devices_check> cell destroyed.'
+        print( 'Previous <devices_check> cell destroyed.' )
 
     analogDemo( editor )
     return True

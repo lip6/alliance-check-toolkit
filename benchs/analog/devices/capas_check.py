@@ -41,7 +41,7 @@ def checkCapas ( editor ):
 
     generator = LayoutGenerator()
 
-    print '     - Generating Device of %s...' % MultiCapacitor
+    print( '     - Generating Device of %s...' % MultiCapacitor )
 
     device  = MultiCapacitor.create( library, 'capa0', CapacitorFamily.PIP, 2 )
     device.getParameter( 'Layout Styles' ).setValue( 'Matrix' )
@@ -51,7 +51,7 @@ def checkCapas ( editor ):
    #mrange.progress()
     pmatrix.setMatrix( mrange.getValue() )
 
-    print device.getParameter( 'capacities' )
+    print( device.getParameter( 'capacities' ))
 
     generator.setDevice( device )
     generator.drawLayout()
@@ -59,7 +59,7 @@ def checkCapas ( editor ):
     transformation = Transformation()
     instance       = Instance.create( cell, 'capa0', device, transformation, Instance.PlacementStatus.PLACED )
 
-    print '       Done %s' % MultiCapacitor
+    print( '       Done %s' % MultiCapacitor )
 
     UpdateSession.close()
 
@@ -71,7 +71,7 @@ def checkCapas ( editor ):
 
 def scriptMain ( **kw ):
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
     cell = CRL.AllianceFramework.get().getCell( 'check_capas', CRL.Catalog.State.Views )
@@ -88,7 +88,7 @@ def scriptMain ( **kw ):
             if editor: editor.removeHistory( cell )
             cell.destroy()
         UpdateSession.close()
-        print 'Previous "check_capas" cell destroyed.'
+        print( 'Previous "check_capas" cell destroyed.' )
 
     checkCapas( editor )
     return True

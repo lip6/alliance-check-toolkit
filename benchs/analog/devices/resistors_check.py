@@ -6,6 +6,7 @@ import Cfg
 import NDA.node350.c35b4
 from   Hurricane import *
 import CRL
+import helpers
 from   Analog import ResistorFamily
 from   Analog import Resistor
 from   Analog import LayoutGenerator
@@ -26,13 +27,15 @@ def checkResistors ( editor ):
 
     generator = LayoutGenerator()
 
-    print '     - Generating Device of %s...' % Resistor
+    print( '     - Generating Device of %s...' % Resistor )
 
     bendsRange = StepParameterRange( 1, 10, 1 )
 
-    device = Resistor.create( library, 'resistor0', ResistorFamily.LOWRES )
+    device = Resistor.create( library, 'resistor0', ResistorFamily.RPOLYH )
     device.getParameter( 'Layout Styles' ).setValue( 'Snake' )
-    device.getParameter( 'R'             ).setValue( 100.0  )
+    device.getParameter( 'R'             ).setValue( 15015.5 )
+    device.getParameter( 'W'             ).setValue(    10.0 )
+    device.getParameter( 'L'             ).setValue(   200.0 )
     bends = device.getParameter( 'bends' )
    #bendsRange.progress()
     bends.setValue( bendsRange.getValue() )
@@ -43,7 +46,7 @@ def checkResistors ( editor ):
     transformation = Transformation()
     instance       = Instance.create( cell, 'resistor0', device, transformation, Instance.PlacementStatus.PLACED )
 
-    print '       Done %s' % Resistor
+    print( '       Done %s' % Resistor )
 
     UpdateSession.close()
 
@@ -54,11 +57,12 @@ def checkResistors ( editor ):
 
 
 def scriptMain ( **kw ):
+    helpers.setTraceLevel( 100 )
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
-    cell = CRL.AllianceFramework.get().getCell( 'check_capas', CRL.Catalog.State.Views )
+    cell = CRL.AllianceFramework.get().getCell( 'check_resistors', CRL.Catalog.State.Views )
     if cell:
         UpdateSession.open()
         if editor: editor.removeHistory( cell )
@@ -72,7 +76,7 @@ def scriptMain ( **kw ):
             if editor: editor.removeHistory( cell )
             cell.destroy()
         UpdateSession.close()
-        print 'Previous "check_capas" cell destroyed.'
+        print( 'Previous "check_capas" cell destroyed.' )
 
     checkResistors( editor )
     return True
