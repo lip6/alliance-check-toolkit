@@ -1,0 +1,8 @@
+* GateDecode
+.subckt GateDecode vdd vss iovdd d de ngate pgate
+Xoe_inv vdd vss de de_n inv_x1
+Xngate_nor vdd vss ngate_core d de_n nor2_x0
+Xngate_levelup vdd iovdd vss ngate_core ngate LevelUp
+Xpgate_nand vdd vss pgate_core d de nand2_x0
+Xpgate_levelup vdd iovdd vss pgate_core pgate LevelUp
+.ends GateDecode

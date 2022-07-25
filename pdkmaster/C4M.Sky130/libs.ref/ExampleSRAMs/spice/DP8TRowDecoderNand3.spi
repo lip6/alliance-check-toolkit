@@ -1,0 +1,9 @@
+* DP8TRowDecoderNand3
+.subckt DP8TRowDecoderNand3 vss vdd pd[0] pd[1] wl_en wl_n
+Mnmos[0] vss pd[0] int[0] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.65um
+Mnmos[1] int[0] pd[1] int[1] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.65um
+Mnmos[2] int[1] wl_en wl_n vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.65um
+Mpmos[0] vdd pd[0] wl_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.65um
+Mpmos[1] wl_n pd[1] vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.65um
+Mpmos[2] vdd wl_en wl_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.65um
+.ends DP8TRowDecoderNand3

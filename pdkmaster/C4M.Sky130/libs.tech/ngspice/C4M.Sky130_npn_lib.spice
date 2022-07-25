@@ -1,0 +1,17 @@
+* C4M.Sky130 npn lib file
+
+* npn model needs also diode corner
+.lib f
+.include "C4M.Sky130_npn_f_params.spice"
+.include "C4M.Sky130_npn_model.spice"
+.endl f
+* npn model needs also diode corner
+.lib t
+.include "C4M.Sky130_npn_t_params.spice"
+.include "C4M.Sky130_npn_model.spice"
+.endl t
+* npn model needs also diode corner
+.lib s
+.include "C4M.Sky130_npn_s_params.spice"
+.include "C4M.Sky130_npn_model.spice"
+.endl s

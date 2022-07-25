@@ -1,0 +1,4 @@
+* Filler4000
+.subckt Filler4000 vss vdd iovss iovdd
+Xbulkconn vdd vss iovdd iovss BulkConn_4000WNoUp
+.ends Filler4000

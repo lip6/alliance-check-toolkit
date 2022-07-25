@@ -1,0 +1,21 @@
+* SP6TSenseAmp_4M
+* tie
+.subckt tie vdd vss
+
+.ends tie
+* nsnrlatch_x1
+.subckt nsnrlatch_x1 vss nq q vdd nrst nset
+Mn_nq_1 _net1 nq vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_nq_1 q nq vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nrst_1 nq nrst vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_nrst_1 _net0 nrst nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_nset_1 vdd nset q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_nset_1 q nset _net1 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_q_1 vdd q nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_q_1 vss q _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+.ends nsnrlatch_x1
+* SP6TSenseAmp_4M
+.subckt SP6TSenseAmp_4M vss vdd bl bl_n q
+Xlatch vss nq q vdd bl bl_n nsnrlatch_x1
+Xtie vdd vss tie
+.ends SP6TSenseAmp_4M

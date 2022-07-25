@@ -1,0 +1,12 @@
+* Gallery
+.subckt Gallery vdd vss iovdd in_s in_pad out_d out_pad triout_d triout_de triout_pad io_s io_d io_de io_pad ana_out ana_outres
+Xiopadvss vss vdd vss iovdd IOPadVss
+Xiopadvdd vss vdd vss iovdd IOPadVdd
+Xiopadin vss vdd vss iovdd in_s in_pad IOPadIn
+Xiopadout vss vdd vss iovdd out_d out_pad IOPadOut
+Xiopadtriout vss vdd vss iovdd triout_d triout_de triout_pad IOPadTriOut
+Xiopadinout vss vdd vss iovdd io_s io_d io_de io_pad IOPadInOut
+Xiopadiovss vss vdd vss iovdd IOPadIOVss
+Xiopadiovdd vss vdd vss iovdd IOPadIOVdd
+Xiopadanalog vss vdd vss iovdd ana_out ana_outres IOPadAnalog
+.ends Gallery

@@ -1,0 +1,5 @@
+* DP8TArray_2X1
+.subckt DP8TArray_2X1 vss vdd wl1[0] wl1[1] wl2[0] wl2[1] bl1[0] bl1_n[0] bl2[0] bl2_n[0]
+Xinst0x0 vdd vss wl1[0] wl2[0] bl1[0] bl1_n[0] bl2[0] bl2_n[0] DP8TCell
+Xinst1x0 vdd vss wl1[1] wl2[1] bl1[0] bl1_n[0] bl2[0] bl2_n[0] DP8TCell
+.ends DP8TArray_2X1

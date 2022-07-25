@@ -1,0 +1,7 @@
+* IOPadIOVss
+.subckt IOPadIOVss vss vdd iovss iovdd
+Xpad iovss Pad_15800W12000H
+Xnclamp iovss iovdd iovss Clamp_N32N0D
+Xpclamp iovss iovdd iovss Clamp_P32N0D
+Xbulkconn vdd vss iovdd iovss BulkConn_18000WUp
+.ends IOPadIOVss

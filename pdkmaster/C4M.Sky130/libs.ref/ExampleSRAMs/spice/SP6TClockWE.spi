@@ -1,0 +1,6 @@
+* SP6TClockWE
+.subckt SP6TClockWE vss vdd clkup clklow we we_en we_n
+Xclkbuf vdd vss clkup clklow buf_x2
+Xweff vdd clklow vss we we_latched sff1_x4
+Xwenand vdd vss we_n we_en we_latched nand2_x0
+.ends SP6TClockWE

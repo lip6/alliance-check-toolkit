@@ -7,7 +7,7 @@ import CRL, Hurricane, Viewer, Cfg
 from Hurricane import (
     Technology, DataBase, DbU, Library,
     Layer, BasicLayer,
-    Cell, Net, Vertical, Rectilinear, Box, Point,
+    Cell, Net, Horizontal, Vertical, Rectilinear, Box, Point,
     NetExternalComponents,
 )
 from common.colors import toRGB
@@ -45,7 +45,7 @@ analogTechnologyTable = (
     ('minSpacing', 'li', 0.17, Length, ''),
     ('minWidth', 'm1', 0.14, Length, ''),
     ('minSpacing', 'm1', 0.14, Length, ''),
-    ('minArea', 'm1', 0.0676, Area, ''),
+    ('minArea', 'm1', 0.083, Area, ''),
     ('minWidth', 'm2', 0.14, Length, ''),
     ('minSpacing', 'm2', 0.14, Length, ''),
     ('minArea', 'm2', 0.0676, Area, ''),
@@ -96,16 +96,22 @@ analogTechnologyTable = (
     ('minSpacing', 'lvtn', 0.38, Length, ''),
     ('minArea', 'lvtn', 0.265, Area, ''),
     # ('minTransistorL', 'hvmosgate', 0.5, Length, ''),
-    # ('minTransistorW', 'hvmosgate', 0.29, Length, ''),
+    # ('minTransistorW', 'hvmosgate', 0.42, Length, ''),
     # ('minGateExtension', 'difftap', 'hvmosgate', 0.25, Length|Asymmetric, ''),
     # ('minGateExtension', 'poly', 'hvmosgate', 0.13, Length|Asymmetric, ''),
     # ('minGateSpacing', 'licon', 'hvmosgate', 0.055, Length|Asymmetric, ''),
+    # ('minTransistorW', 'mosgate', 0.42, Length, ''),
     # ('minGateExtension', 'difftap', 'mosgate', 0.25, Length|Asymmetric, ''),
     # ('minGateExtension', 'poly', 'mosgate', 0.13, Length|Asymmetric, ''),
     # ('minGateSpacing', 'licon', 'mosgate', 0.055, Length|Asymmetric, ''),
+    # ('minTransistorW', 'mosgate_sc', 0.36, Length, ''),
+    # ('minGateExtension', 'difftap', 'mosgate_sc', 0.25, Length|Asymmetric, ''),
+    # ('minGateExtension', 'poly', 'mosgate_sc', 0.13, Length|Asymmetric, ''),
+    # ('minGateSpacing', 'licon', 'mosgate_sc', 0.055, Length|Asymmetric, ''),
     # ('minGateEnclosure', 'nsdm', 'nfet_01v8', 0.07, Length|Asymmetric, ''),
     # ('minGateEnclosure', 'nsdm', 'nfet_01v8_lvt', 0.07, Length|Asymmetric, ''),
     # ('minGateEnclosure', 'lvtn', 'nfet_01v8_lvt', 0.07, Length|Asymmetric, ''),
+    # ('minGateEnclosure', 'nsdm', 'nfet_01v8_sc', 0.07, Length|Asymmetric, ''),
     # ('minGateEnclosure', 'nsdm', 'nfet_g5v0d10v5', 0.07, Length|Asymmetric, ''),
     # ('minGateEnclosure', 'psdm', 'pfet_01v8', 0.07, Length|Asymmetric, ''),
     # ('minGateEnclosure', 'psdm', 'pfet_01v8_hvt', 0.07, Length|Asymmetric, ''),
@@ -116,10 +122,10 @@ analogTechnologyTable = (
     ('minWidth', 'pad', 40.0, Length, ''),
     ('minSpacing', 'pad', 1.27, Length, ''),
     ('minEnclosure', 'm5', 'pad', 1.0, Length|Asymmetric, ''),
-    # ('minWidth', 'poly_res', 0.15, Length, ''),
+    # ('minWidth', 'poly_res', 0.33, Length, ''),
     # ('minSpacing', 'poly_res', 0.21, Length, ''),
     # ('minEnclosure', 'polyres', 'poly', 0.005, Length|Asymmetric, ''),
-    # ('minWidth', 'active_res', 0.15, Length, ''),
+    # ('minWidth', 'active_res', 0.33, Length, ''),
     # ('minSpacing', 'active_res', 0.27, Length, ''),
     # ('minEnclosure', 'diffres', 'difftap', 0.005, Length|Asymmetric, ''),
     # ('minWidth', 'pdiode', 0.15, Length, ''),
@@ -128,10 +134,16 @@ analogTechnologyTable = (
     # ('minWidth', 'ndiode', 0.15, Length, ''),
     # ('minSpacing', 'ndiode', 0.27, Length, ''),
     # ('minEnclosure', 'areaid_diode', 'difftap', 0.005, Length|Asymmetric, ''),
-    ('minSpacing', 'difftap', 'poly', 0.075, Length|Asymmetric, ''),
+    # Not implemented: Bipolar 'pnp_05v5_w0u68l0u68'
+    # Not implemented: Bipolar 'npn_05v5_w1u00l2u00'
+    # Not implemented: Bipolar 'pnp_05v5_w3u40l3u40'
+    # Not implemented: Bipolar 'npn_05v5_w1u00l1u00'
+    ('minSpacing', 'intersect(licon,poly)', 'psdm', 0.11, Length|Asymmetric, ''),
     ('minSpacing', 'licon', 'difftap', 0.19, Length|Asymmetric, ''),
-    ('minSpacing', 'difftap', 'hvi', 0.18, Length|Asymmetric, ''),
     ('minSpacing', 'difftap', 'nwm', 0.34, Length|Asymmetric, ''),
+    ('minSpacing', 'difftap', 'poly', 0.075, Length|Asymmetric, ''),
+    ('minSpacing', 'difftap', 'hvi', 0.18, Length|Asymmetric, ''),
+    ('minSpacing', 'intersect(difftap,hvi)', 0.3, Length, ''),
 )
 
 def _setup_techno():
@@ -276,7 +288,7 @@ def _setup_techno():
     )
     createBL(
         tech, 'm1', BasicLayer.Material.metal,
-        size=u(0.14), spacing=u(0.14), area=0.0676, gds2Layer=68, gds2DataType=20,
+        size=u(0.14), spacing=u(0.14), area=0.083, gds2Layer=68, gds2DataType=20,
     )
     createBL(
         tech, 'via', BasicLayer.Material.cut,
@@ -319,20 +331,36 @@ def _setup_techno():
         size=u(0.38), spacing=u(0.38), area=0.265, gds2Layer=125, gds2DataType=44,
     )
     createBL(
+        tech, 'areaid_sc', BasicLayer.Material.other,
+        gds2Layer=81, gds2DataType=4,
+    )
+    createBL(
         tech, 'pad', BasicLayer.Material.cut,
         size=u(40.0), spacing=u(1.27), gds2Layer=76, gds2DataType=20,
     )
     createBL(
-        tech, 'polyres', BasicLayer.Material.other,
-        gds2Layer=66, gds2DataType=13,
+        tech, 'areaid_diode', BasicLayer.Material.other,
+        gds2Layer=81, gds2DataType=23,
+    )
+    createBL(
+        tech, 'pnp', BasicLayer.Material.other,
+        gds2Layer=82, gds2DataType=44,
     )
     createBL(
         tech, 'diffres', BasicLayer.Material.other,
         gds2Layer=65, gds2DataType=13,
     )
     createBL(
-        tech, 'areaid_diode', BasicLayer.Material.other,
-        gds2Layer=81, gds2DataType=23,
+        tech, 'npn', BasicLayer.Material.other,
+        gds2Layer=82, gds2DataType=20,
+    )
+    createBL(
+        tech, 'polyres', BasicLayer.Material.other,
+        gds2Layer=66, gds2DataType=13,
+    )
+    createBL(
+        tech, 'prBoundary', BasicLayer.Material.other,
+        gds2Layer=235, gds2DataType=4,
     )
 
     # ViaLayers
@@ -436,14 +464,18 @@ def _setup_techno():
     # Transistors
     # GateLayer.create(tech, 'hvmosgate', 'difftap', 'poly', 'hvi')
     # GateLayer.create(tech, 'mosgate', 'difftap', 'poly')
+    # GateLayer.create(tech, 'mosgate_sc', 'difftap', 'poly')
     # TransistorLayer.create(tech, 'nfet_01v8', 'mosgate', 'nsdm')
     # TransistorLayer.create(tech, 'nfet_01v8_lvt', 'mosgate', ('nsdm', 'lvtn'))
+    # TransistorLayer.create(tech, 'nfet_01v8_sc', 'mosgate_sc', 'nsdm')
     # TransistorLayer.create(tech, 'nfet_g5v0d10v5', 'hvmosgate', 'nsdm')
     # TransistorLayer.create(tech, 'pfet_01v8', 'mosgate', 'psdm', 'nwm')
     # TransistorLayer.create(tech, 'pfet_01v8_hvt', 'mosgate', ('psdm', 'hvtp'), 'nwm')
     # TransistorLayer.create(tech, 'pfet_01v8_lvt', 'mosgate', ('psdm', 'lvtn'), 'nwm')
     # TransistorLayer.create(tech, 'pfet_g5v0d10v5', 'hvmosgate', 'psdm', 'nwm')
 
+    # Bipolars
+    # Not implemented: Bipolar 'pnp_05v5_w0u68l0u68'# Not implemented: Bipolar 'npn_05v5_w1u00l2u00'# Not implemented: Bipolar 'pnp_05v5_w3u40l3u40'# Not implemented: Bipolar 'npn_05v5_w1u00l1u00'
 def _setup_display():
     # ----------------------------------------------------------------------
     # Style: Alliance.Classic [black]

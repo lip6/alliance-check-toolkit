@@ -1,0 +1,14 @@
+* C4M.Sky130 pnp lib file
+
+.lib f
+.include "C4M.Sky130_pnp_f_params.spice"
+.include "C4M.Sky130_pnp_model.spice"
+.endl f
+.lib t
+.include "C4M.Sky130_pnp_t_params.spice"
+.include "C4M.Sky130_pnp_model.spice"
+.endl t
+.lib s
+.include "C4M.Sky130_pnp_s_params.spice"
+.include "C4M.Sky130_pnp_model.spice"
+.endl s

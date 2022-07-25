@@ -1,0 +1,16 @@
+* mx2_x2
+* mx2_x2
+.subckt mx2_x2 vss q vdd cmd i0 i1
+Mn_net1_1 vss _net1 q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mp_net1_1 vdd _net1 q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mp_net5_1 _net1 _net5 _net4 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_net5_1 _net2 _net5 _net1 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_cmd_1 _net5 cmd vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_cmd_2 _net1 cmd _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mn_cmd_1 _net5 cmd vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_cmd_2 _net3 cmd _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i0_1 vss i0 _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_i0_1 vdd i0 _net3 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_i1_1 _net4 i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i1_1 _net0 i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+.ends mx2_x2

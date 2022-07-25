@@ -1,0 +1,15 @@
+* SP6TLatchedDecoder_2A2R
+.subckt SP6TLatchedDecoder_2A2R vss vdd clk a[0] a[1] line[0] line[1] line[2] line[3]
+Xaff[0] vdd clk vss a[0] aint[0] sff1_x4
+Xaff[1] vdd clk vss a[1] aint[1] sff1_x4
+Xainv[0] vdd vss aint[0] aint_n[0] inv_x1
+Xainv[1] vdd vss aint[1] aint_n[1] inv_x1
+Xlinenand[0] vdd vss line_n[0] aint_n[0] aint_n[1] nand2_x0
+Xlinenand[1] vdd vss line_n[1] aint[0] aint_n[1] nand2_x0
+Xlinenand[2] vdd vss line_n[2] aint_n[0] aint[1] nand2_x0
+Xlinenand[3] vdd vss line_n[3] aint[0] aint[1] nand2_x0
+Xlineinv[0] vdd vss line_n[0] line[0] inv_x2
+Xlineinv[1] vdd vss line_n[1] line[1] inv_x2
+Xlineinv[2] vdd vss line_n[2] line[2] inv_x2
+Xlineinv[3] vdd vss line_n[3] line[3] inv_x2
+.ends SP6TLatchedDecoder_2A2R

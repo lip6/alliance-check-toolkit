@@ -1,0 +1,19 @@
+* SP6TRowDecoderDriverPage_2PD8R
+.subckt SP6TRowDecoderDriverPage_2PD8R vss vdd pd[0][0] wl[0] pd[0][1] wl[1] pd[0][2] wl[2] pd[0][3] wl[3] pd[0][4] wl[4] pd[0][5] wl[5] pd[0][6] wl[6] pd[0][7] wl[7] pd[1] wl_en
+Xnand3[0] vss vdd pd[0][0] pd[1] wl_en wl_n[0] SP6TRowDecoderNand3
+Xnand3[1] vss vdd pd[0][1] pd[1] wl_en wl_n[1] SP6TRowDecoderNand3
+Xnand3[2] vss vdd pd[0][2] pd[1] wl_en wl_n[2] SP6TRowDecoderNand3
+Xnand3[3] vss vdd pd[0][3] pd[1] wl_en wl_n[3] SP6TRowDecoderNand3
+Xnand3[4] vss vdd pd[0][4] pd[1] wl_en wl_n[4] SP6TRowDecoderNand3
+Xnand3[5] vss vdd pd[0][5] pd[1] wl_en wl_n[5] SP6TRowDecoderNand3
+Xnand3[6] vss vdd pd[0][6] pd[1] wl_en wl_n[6] SP6TRowDecoderNand3
+Xnand3[7] vss vdd pd[0][7] pd[1] wl_en wl_n[7] SP6TRowDecoderNand3
+Xdrive[0] vss vdd wl_n[0] wl[0] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[1] vss vdd wl_n[1] wl[1] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[2] vss vdd wl_n[2] wl[2] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[3] vss vdd wl_n[3] wl[3] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[4] vss vdd wl_n[4] wl[4] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[5] vss vdd wl_n[5] wl[5] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[6] vss vdd wl_n[6] wl[6] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[7] vss vdd wl_n[7] wl[7] SP6TWLDrive_30LN100WN30LP200WP
+.ends SP6TRowDecoderDriverPage_2PD8R

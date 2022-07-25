@@ -1,0 +1,47 @@
+* Clamp_P32N0D
+* GuardRing_N17368W8096HTF
+.subckt GuardRing_N17368W8096HTF conn
+
+.ends GuardRing_N17368W8096HTF
+* GuardRing_P18000W8728HFF
+.subckt GuardRing_P18000W8728HFF conn
+
+.ends GuardRing_P18000W8728HFF
+* Clamp_P32N0D
+.subckt Clamp_P32N0D iovss iovdd pad
+Mclamp_g0 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g1 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g2 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g3 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g4 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g5 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g6 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g7 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g8 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g9 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g10 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g11 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g12 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g13 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g14 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g15 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g16 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g17 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g18 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g19 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g20 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g21 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g22 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g23 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g24 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g25 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g26 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g27 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g28 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g29 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g30 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+Mclamp_g31 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
+XOuterRing iovss GuardRing_P18000W8728HFF
+XInnerRing iovdd GuardRing_N17368W8096HTF
+RRoff iovdd off 5579.5151515152
+.ends Clamp_P32N0D

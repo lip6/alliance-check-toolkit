@@ -1,0 +1,5 @@
+* GateLevelUp
+.subckt GateLevelUp vdd vss iovdd d ngate pgate
+Xngate_levelup vdd iovdd vss d ngate LevelUp
+Xpgate_levelup vdd iovdd vss d pgate LevelUp
+.ends GateLevelUp

@@ -1,0 +1,17 @@
+* C4M.Sky130 IO transistors lib file
+
+.lib tt
+.include "C4M.Sky130_io_tt_model.spice"
+.endl tt
+.lib ff
+.include "C4M.Sky130_io_ff_model.spice"
+.endl ff
+.lib ss
+.include "C4M.Sky130_io_ss_model.spice"
+.endl ss
+.lib fs
+.include "C4M.Sky130_io_fs_model.spice"
+.endl fs
+.lib sf
+.include "C4M.Sky130_io_sf_model.spice"
+.endl sf

@@ -1,5 +1,5 @@
 * one_x1
 .subckt one_x1 vdd vss one
-Mn vss one zero vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.4um
-Mp one zero vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.8um
+Mn vss one zero vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.35um
+Mp one zero vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.75um
 .ends one_x1
