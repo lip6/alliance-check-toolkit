@@ -1,4 +1,8 @@
-from Hurricane import Net
+import os
+import os.path
+from   pathlib   import Path
+from   Hurricane import Net
+from   CRL       import Spice
 
 def fix(lib):
     for cell in lib.getCells():
@@ -16,3 +20,8 @@ def fix(lib):
                 net.setDirection( Net.Direction.OUT )
             else:
                 net.setDirection( Net.Direction.IN )
+    spiceDir = Path( __file__ ).resolve().parents[7] / 'libs.ref' / 'StdCellLib' / 'spice'
+    for spiceFile in os.listdir(spiceDir):
+        if spiceFile == 'StdCellLib.spi': continue
+        if not spiceFile.endswith('.spi'): continue
+        Spice.load( lib, str(spiceDir / spiceFile), Spice.PIN_ORDERING )
