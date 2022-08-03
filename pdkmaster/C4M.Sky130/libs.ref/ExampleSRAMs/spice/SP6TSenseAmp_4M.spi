@@ -1,0 +1,5 @@
+* SP6TSenseAmp_4M
+.subckt SP6TSenseAmp_4M vss vdd bl bl_n q
+Xlatch vss nq q vdd bl bl_n nsnrlatch_x1
+Xtie vdd vss tie
+.ends SP6TSenseAmp_4M

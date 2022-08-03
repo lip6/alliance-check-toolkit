@@ -1,0 +1,35 @@
+* DP8TNonOverlapClock_8S
+* nand2_x0
+.subckt nand2_x0 vdd vss nq i0 i1
+Mn0 vss i0 int0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp0 vdd i0 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn1 int0 i1 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp1 nq i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends nand2_x0
+* inv_x0
+.subckt inv_x0 vdd vss i nq
+Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends inv_x0
+* DP8TNonOverlapClock_8S
+.subckt DP8TNonOverlapClock_8S vss vdd clk firststage[0] firststage[1] firststage[2] firststage[3] firststage[4] firststage[5] firststage[6] firststage[7] firststage[8] secondstage[0] secondstage[1] secondstage[2] secondstage[3] secondstage[4] secondstage[5] secondstage[6] secondstage[7] secondstage[8]
+Xclkinv vdd vss clk clk_n inv_x0
+Xfirstnand2 vdd vss firststage[0] clk secondstage[8] nand2_x0
+Xfirststage[0] vdd vss firststage[0] firststage[1] inv_x0
+Xfirststage[1] vdd vss firststage[1] firststage[2] inv_x0
+Xfirststage[2] vdd vss firststage[2] firststage[3] inv_x0
+Xfirststage[3] vdd vss firststage[3] firststage[4] inv_x0
+Xfirststage[4] vdd vss firststage[4] firststage[5] inv_x0
+Xfirststage[5] vdd vss firststage[5] firststage[6] inv_x0
+Xfirststage[6] vdd vss firststage[6] firststage[7] inv_x0
+Xfirststage[7] vdd vss firststage[7] firststage[8] inv_x0
+Xsecondnand2 vdd vss secondstage[0] clk_n firststage[8] nand2_x0
+Xsecondstage[0] vdd vss secondstage[0] secondstage[1] inv_x0
+Xsecondstage[1] vdd vss secondstage[1] secondstage[2] inv_x0
+Xsecondstage[2] vdd vss secondstage[2] secondstage[3] inv_x0
+Xsecondstage[3] vdd vss secondstage[3] secondstage[4] inv_x0
+Xsecondstage[4] vdd vss secondstage[4] secondstage[5] inv_x0
+Xsecondstage[5] vdd vss secondstage[5] secondstage[6] inv_x0
+Xsecondstage[6] vdd vss secondstage[6] secondstage[7] inv_x0
+Xsecondstage[7] vdd vss secondstage[7] secondstage[8] inv_x0
+.ends DP8TNonOverlapClock_8S

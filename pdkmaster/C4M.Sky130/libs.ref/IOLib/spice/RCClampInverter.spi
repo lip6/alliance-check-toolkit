@@ -1,0 +1,68 @@
+* RCClampInverter
+.subckt RCClampInverter supply ground in out
+Xouterguard ground GuardRing_P18000W8728HFF
+Mcapmos0 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
+Mcapmos1 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
+Mcapmos2 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
+Mcapmos3 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
+Mcapmos4 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
+Mnmos0 ground in out ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Mnmos1 out in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Mnmos2 ground in out ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Mnmos3 out in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Mnmos4 ground in out ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Mnmos5 out in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Mnmos6 ground in out ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
+Xnmosguardring ground GuardRing_P12310W3968HFT
+Mpmos0 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos1 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos2 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos3 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos4 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos5 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos6 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos7 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos8 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos9 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos10 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos11 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos12 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos13 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos14 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos15 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos16 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos17 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos18 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos19 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos20 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos21 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos22 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos23 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos24 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos25 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos26 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos27 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos28 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos29 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos30 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos31 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos32 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos33 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos34 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos35 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos36 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos37 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos38 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos39 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos40 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos41 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos42 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos43 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos44 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos45 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos46 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos47 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos48 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Mpmos49 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
+Xpmosguardring supply GuardRing_N8666W2488HTT
+.ends RCClampInverter

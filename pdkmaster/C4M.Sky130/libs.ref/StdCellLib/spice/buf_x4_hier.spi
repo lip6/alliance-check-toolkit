@@ -1,0 +1,14 @@
+* buf_x4
+* buf_x4
+.subckt buf_x4 vdd vss i q
+Mn1 ni i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_0 vss ni q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_1 q ni vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_2 vss ni q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_3 q ni vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp1 ni i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_0 vdd ni q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_1 q ni vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_2 vdd ni q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_3 q ni vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends buf_x4

@@ -1,0 +1,38 @@
+* Clamp_N32N0D
+.subckt Clamp_N32N0D iovss iovdd pad
+Mclamp_g0 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g1 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g2 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g3 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g4 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g5 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g6 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g7 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g8 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g9 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g10 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g11 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g12 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g13 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g14 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g15 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g16 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g17 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g18 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g19 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g20 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g21 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g22 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g23 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g24 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g25 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g26 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g27 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g28 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g29 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g30 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+Mclamp_g31 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
+XOuterRing iovdd GuardRing_N18000W4468HFF
+XInnerRing iovss GuardRing_P17368W3836HFF
+RRoff iovss off 2468.4242424242Ohm
+.ends Clamp_N32N0D

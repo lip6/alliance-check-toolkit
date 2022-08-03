@@ -1,0 +1,9 @@
+* DP8TClockGenerator
+.subckt DP8TClockGenerator vss vdd clk decodeclk columnclk precharge_n wl_en we_en
+Xnonovl vss vdd clk firststage[0] firststage[1] firststage[2] firststage[3] firststage[4] firststage[5] firststage[6] firstpulse firststage[8] secondstage[0] secondstage[1] secondstage[2] secondstage[3] secondstage[4] secondstage[5] secondstage[6] secondpulse secondstage[8] DP8TNonOverlapClock_8S
+Xdecodeclkbuf vdd vss clk decodeclk buf_x2
+Xcolumnclkbuf vdd vss clk columnclk buf_x2
+Xwlenbuf vdd vss firstpulse wl_en buf_x2
+Xweenbuf vdd vss firstpulse we_en buf_x2
+Xprechargeinv vdd vss secondpulse precharge_n inv_x2
+.ends DP8TClockGenerator

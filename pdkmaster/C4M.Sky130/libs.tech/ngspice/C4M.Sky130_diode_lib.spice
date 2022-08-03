@@ -1,0 +1,22 @@
+* C4M.Sky130 diode lib file
+
+.lib tt
+.include "C4M.Sky130_diode_tt_params.spice"
+.include "C4M.Sky130_diode_model.spice"
+.endl tt
+.lib ff
+.include "C4M.Sky130_diode_ff_params.spice"
+.include "C4M.Sky130_diode_model.spice"
+.endl ff
+.lib ss
+.include "C4M.Sky130_diode_ss_params.spice"
+.include "C4M.Sky130_diode_model.spice"
+.endl ss
+.lib fs
+.include "C4M.Sky130_diode_fs_params.spice"
+.include "C4M.Sky130_diode_model.spice"
+.endl fs
+.lib sf
+.include "C4M.Sky130_diode_sf_params.spice"
+.include "C4M.Sky130_diode_model.spice"
+.endl sf

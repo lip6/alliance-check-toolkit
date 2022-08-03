@@ -1,0 +1,9 @@
+* Filler200
+* BulkConn_200WNoUp
+.subckt BulkConn_200WNoUp vdd vss iovdd iovss
+
+.ends BulkConn_200WNoUp
+* Filler200
+.subckt Filler200 vss vdd iovss iovdd
+Xbulkconn vdd vss iovdd iovss BulkConn_200WNoUp
+.ends Filler200

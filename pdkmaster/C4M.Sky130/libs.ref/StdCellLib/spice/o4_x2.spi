@@ -8,6 +8,6 @@ Mn_i1_1 _net2 i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
 Mp_i1_1 _net1 i1 _net3 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
 Mn_i2_1 _net2 i2 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
 Mp_i2_1 _net0 i2 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
-Mn_i3_1 vss i3 _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
 Mp_i3_1 _net2 i3 _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
+Mn_i3_1 vss i3 _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
 .ends o4_x2

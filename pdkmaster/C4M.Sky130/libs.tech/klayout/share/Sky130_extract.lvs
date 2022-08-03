@@ -48,19 +48,25 @@ via3 = input(70, 44)
 via4 = input(71, 44)
 hvtp = input(78, 44)
 lvtn = input(125, 44)
+areaid_sc = input(81, 4)
 pad = input(76, 20)
-polyres = input(66, 13)
-diffres = input(65, 13)
 areaid_diode = input(81, 23)
-substrate__Sky130 = (extent-nwm)
-difftap__conn = (difftap-(diffres+poly))
+pnp = input(82, 44)
+diffres = input(65, 13)
+npn = input(82, 20)
+polyres = input(66, 13)
+prBoundary = input(235, 4)
+substrate__Sky130 = (extent.sized(0.34)-nwm)
+difftap__conn = (difftap-(poly+diffres))
 difftap__conn__nsdm = (difftap__conn&nsdm)
 difftap__conn__psdm = (difftap__conn&psdm)
 poly__conn = (poly-polyres)
 gate__hvmosgate = (difftap&poly__conn&hvi)
-gate__mosgate = (difftap&poly__conn&(extent-hvi))
+gate__mosgate = (difftap&poly__conn&(extent.sized(0.34)-(areaid_sc+hvi)))
+gate__mosgate_sc = (difftap&poly__conn&areaid_sc&(extent.sized(0.34)-hvi))
 gate__mosfet__nfet_01v8 = (gate__mosgate&substrate__Sky130&nsdm)
 gate__mosfet__nfet_01v8_lvt = (gate__mosgate&substrate__Sky130&nsdm&lvtn)
+gate__mosfet__nfet_01v8_sc = (gate__mosgate_sc&substrate__Sky130&nsdm)
 gate__mosfet__nfet_g5v0d10v5 = (gate__hvmosgate&substrate__Sky130&nsdm)
 gate__mosfet__pfet_01v8 = (gate__mosgate&nwm&psdm)
 gate__mosfet__pfet_01v8_hvt = (gate__mosgate&nwm&psdm&hvtp)
@@ -73,7 +79,7 @@ diode__ndiode = (difftap&areaid_diode&nsdm)
 
 # Connectivity
 # connect(substrate:Sky130,wafer)
-connect(substrate__Sky130, extent)
+connect(substrate__Sky130, extent.sized(0.34))
 # connect(difftap,difftap.pin)
 connect(difftap, difftap_pin)
 # connect(difftap__conn,difftap__conn:nsdm)
@@ -126,7 +132,7 @@ connect(via4, m5)
 
 # Resistors
 # poly_res
-extract_devices(resistor("poly_res", 300.0), {
+extract_devices(resistor("poly_res", 48.2), {
     "R" => resistor__poly_res, "C" => poly__conn,
 })
 same_device_classes("poly_res", "RES")
@@ -138,11 +144,11 @@ same_device_classes("active_res", "RES")
 
 # Diodes
 # pdiode
-extract_devices(diode("None"), {
-    "P" => diode__pdiode, "N" => substrate__Sky130, "tA" => difftap__conn
+extract_devices(diode("sky130_fd_pr__diode_pd2nw_05v5"), {
+    "P" => diode__pdiode, "N" => nwm, "tA" => difftap__conn
 })
 # ndiode
-extract_devices(diode("None"), {
+extract_devices(diode("sky130_fd_pr__diode_pw2nd_05v5"), {
     "P" => substrate__Sky130, "N" => diode__ndiode, "tC" => difftap__conn
 })
 
@@ -154,6 +160,10 @@ extract_devices(mos4("sky130_fd_pr__nfet_01v8__model"), {
 # nfet_01v8_lvt
 extract_devices(mos4("sky130_fd_pr__nfet_01v8_lvt__model"), {
     "SD" => difftap__conn, "G" => gate__mosfet__nfet_01v8_lvt, "tG" => poly__conn, "W" => substrate__Sky130,
+})
+# nfet_01v8_sc
+extract_devices(mos4("sky130_fd_pr__nfet_01v8__model"), {
+    "SD" => difftap__conn, "G" => gate__mosfet__nfet_01v8_sc, "tG" => poly__conn, "W" => substrate__Sky130,
 })
 # nfet_g5v0d10v5
 extract_devices(mos4("sky130_fd_pr__nfet_g5v0d10v5__model"), {

@@ -1,0 +1,5 @@
+* SP6TArray_4X4
+.subckt SP6TArray_4X4 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_4X2
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X2
+.ends SP6TArray_4X4

@@ -1,0 +1,5 @@
+* SP6TArray_2X1
+.subckt SP6TArray_2X1 vss vdd wl[0] wl[1] bl[0] bl_n[0]
+Xinst0x0 vdd vss wl[0] bl[0] bl_n[0] SP6TCell
+Xinst1x0 vdd vss wl[1] bl[0] bl_n[0] SP6TCell
+.ends SP6TArray_2X1

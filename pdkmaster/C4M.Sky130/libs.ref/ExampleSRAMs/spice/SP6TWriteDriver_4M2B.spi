@@ -1,0 +1,15 @@
+* SP6TWriteDriver_4M2B
+.subckt SP6TWriteDriver_4M2B vss vdd clk we_n bl[0] bl_n[0] d[0] bl[1] bl_n[1] d[1]
+Xff[0] vdd clk vss d[0] d_latched[0] sff1_x4
+Xff[1] vdd clk vss d[1] d_latched[1] sff1_x4
+Xnora[0] vdd vss bl_drive[0] d_latched[0] we_n nor2_x0
+Xnora[1] vdd vss bl_drive[1] d_latched[1] we_n nor2_x0
+Xinv[0] vdd vss d_latched[0] d_n[0] inv_x0
+Xinv[1] vdd vss d_latched[1] d_n[1] inv_x0
+Xnorb[0] vdd vss bln_drive[0] d_n[0] we_n nor2_x0
+Xnorb[1] vdd vss bln_drive[1] d_n[1] we_n nor2_x0
+Mblpd[0] vss bl_drive[0] bl[0] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+Mblpd[1] vss bl_drive[1] bl[1] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+Mblnpd[0] bl_n[0] bln_drive[0] vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+Mblnpd[1] bl_n[1] bln_drive[1] vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+.ends SP6TWriteDriver_4M2B

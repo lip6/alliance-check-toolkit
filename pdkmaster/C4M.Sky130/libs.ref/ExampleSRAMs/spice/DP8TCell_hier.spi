@@ -1,0 +1,12 @@
+* DP8TCell
+* DP8TCell
+.subckt DP8TCell vdd vss wl1 wl2 bl1 bl1_n bl2 bl2_n
+Mpu1 vdd bit_n bit vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpu2 vdd bit bit_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpd1 vss bit_n bit vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpd2 vss bit bit_n vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpg1 bl1 wl1 bit vss sky130_fd_pr__nfet_01v8__model l=0.17um w=0.36um
+Mpg1n bl1_n wl1 bit_n vss sky130_fd_pr__nfet_01v8__model l=0.17um w=0.36um
+Mpg2 bl2 wl2 bit vss sky130_fd_pr__nfet_01v8__model l=0.17um w=0.36um
+Mpg2n bl2_n wl2 bit_n vss sky130_fd_pr__nfet_01v8__model l=0.17um w=0.36um
+.ends DP8TCell

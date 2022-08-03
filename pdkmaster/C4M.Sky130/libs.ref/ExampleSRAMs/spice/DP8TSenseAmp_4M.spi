@@ -1,0 +1,5 @@
+* DP8TSenseAmp_4M
+.subckt DP8TSenseAmp_4M vss vdd bl bl_n q
+Xlatch vss nq q vdd bl bl_n nsnrlatch_x1
+Xtie vdd vss tie
+.ends DP8TSenseAmp_4M

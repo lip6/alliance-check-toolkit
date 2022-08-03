@@ -1,0 +1,12 @@
+* SP6TColMux_4C
+* SP6TColMux_4C
+.subckt SP6TColMux_4C bl[0] bl_n[0] mux[0] bl[1] bl_n[1] mux[1] bl[2] bl_n[2] mux[2] bl[3] bl_n[3] mux[3] vss muxbl muxbl_n
+Mpgbl0 bl[0] mux[0] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln0 muxbl_n mux[0] bl_n[0] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbl1 bl[1] mux[1] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln1 muxbl_n mux[1] bl_n[1] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbl2 bl[2] mux[2] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln2 muxbl_n mux[2] bl_n[2] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbl3 bl[3] mux[3] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln3 muxbl_n mux[3] bl_n[3] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+.ends SP6TColMux_4C

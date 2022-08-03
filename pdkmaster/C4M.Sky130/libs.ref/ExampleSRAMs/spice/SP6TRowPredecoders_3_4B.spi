@@ -1,0 +1,150 @@
+* SP6TRowPredecoders_3_4B
+.subckt SP6TRowPredecoders_3_4B vss vdd clk a[0] a[1] a[2] a[3] a[4] a[5] a[6] pd[0][0] pd[0][1] pd[0][2] pd[0][3] pd[0][4] pd[0][5] pd[0][6] pd[0][7] pd[1][0] pd[1][1] pd[1][2] pd[1][3] pd[1][4] pd[1][5] pd[1][6] pd[1][7] pd[1][8] pd[1][9] pd[1][10] pd[1][11] pd[1][12] pd[1][13] pd[1][14] pd[1][15]
+Xaff[0] vdd clk vss a[0] aint[0] sff1_x4
+Xaff[1] vdd clk vss a[1] aint[1] sff1_x4
+Xaff[2] vdd clk vss a[2] aint[2] sff1_x4
+Xaff[3] vdd clk vss a[3] aint[3] sff1_x4
+Xaff[4] vdd clk vss a[4] aint[4] sff1_x4
+Xaff[5] vdd clk vss a[5] aint[5] sff1_x4
+Xaff[6] vdd clk vss a[6] aint[6] sff1_x4
+Xainv[0] vdd vss aint[0] aint_n[0] inv_x1
+Xainv[1] vdd vss aint[1] aint_n[1] inv_x1
+Xainv[2] vdd vss aint[2] aint_n[2] inv_x1
+Xainv[3] vdd vss aint[3] aint_n[3] inv_x1
+Xainv[4] vdd vss aint[4] aint_n[4] inv_x1
+Xainv[5] vdd vss aint[5] aint_n[5] inv_x1
+Xainv[6] vdd vss aint[6] aint_n[6] inv_x1
+Xpd[0]and[0] vdd pd[0][0] vss aint_n[0] aint_n[1] aint_n[2] a3_x2
+Xpd[0]and[1] vdd pd[0][1] vss aint[0] aint_n[1] aint_n[2] a3_x2
+Xpd[0]and[2] vdd pd[0][2] vss aint_n[0] aint[1] aint_n[2] a3_x2
+Xpd[0]and[3] vdd pd[0][3] vss aint[0] aint[1] aint_n[2] a3_x2
+Xpd[0]and[4] vdd pd[0][4] vss aint_n[0] aint_n[1] aint[2] a3_x2
+Xpd[0]and[5] vdd pd[0][5] vss aint[0] aint_n[1] aint[2] a3_x2
+Xpd[0]and[6] vdd pd[0][6] vss aint_n[0] aint[1] aint[2] a3_x2
+Xpd[0]and[7] vdd pd[0][7] vss aint[0] aint[1] aint[2] a3_x2
+Xpd[1]and[0] vss pd[1][0] vdd aint_n[3] aint_n[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[1] vss pd[1][1] vdd aint[3] aint_n[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[2] vss pd[1][2] vdd aint_n[3] aint[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[3] vss pd[1][3] vdd aint[3] aint[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[4] vss pd[1][4] vdd aint_n[3] aint_n[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[5] vss pd[1][5] vdd aint[3] aint_n[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[6] vss pd[1][6] vdd aint_n[3] aint[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[7] vss pd[1][7] vdd aint[3] aint[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[8] vss pd[1][8] vdd aint_n[3] aint_n[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[9] vss pd[1][9] vdd aint[3] aint_n[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[10] vss pd[1][10] vdd aint_n[3] aint[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[11] vss pd[1][11] vdd aint[3] aint[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[12] vss pd[1][12] vdd aint_n[3] aint_n[4] aint[5] aint[6] a4_x2
+Xpd[1]and[13] vss pd[1][13] vdd aint[3] aint_n[4] aint[5] aint[6] a4_x2
+Xpd[1]and[14] vss pd[1][14] vdd aint_n[3] aint[4] aint[5] aint[6] a4_x2
+Xpd[1]and[15] vss pd[1][15] vdd aint[3] aint[4] aint[5] aint[6] a4_x2
+Xtie[0] vdd vss tie_diff_w4
+Xtie[1] vdd vss tie_diff_w4
+Xtie[2] vdd vss tie_diff_w4
+Xtie[3] vdd vss tie_diff_w4
+Xtie[4] vdd vss tie_diff_w4
+Xtie[5] vdd vss tie_diff_w4
+Xtie[6] vdd vss tie_diff_w4
+Xtie[7] vdd vss tie_diff_w4
+Xtie[8] vdd vss tie_diff_w4
+Xtie[9] vdd vss tie_diff_w4
+Xtie[10] vdd vss tie_diff_w4
+Xtie[11] vdd vss tie_diff_w4
+Xtie[12] vdd vss tie_diff_w4
+Xtie[13] vdd vss tie_diff_w4
+Xtie[14] vdd vss tie_diff_w4
+Xtie[15] vdd vss tie_diff_w4
+Xtie[16] vdd vss tie_diff_w4
+Xtie[17] vdd vss tie_diff_w4
+Xtie[18] vdd vss tie_diff_w4
+Xtie[19] vdd vss tie_diff_w4
+Xtie[20] vdd vss tie_diff_w4
+Xtie[21] vdd vss tie_diff_w4
+Xtie[22] vdd vss tie_diff_w4
+Xtie[23] vdd vss tie_diff_w4
+Xtie[24] vdd vss tie_diff_w4
+Xtie[25] vdd vss tie_diff_w4
+Xtie[26] vdd vss tie_diff_w4
+Xtie[27] vdd vss tie_diff_w4
+Xtie[28] vdd vss tie_diff_w4
+Xtie[29] vdd vss tie_diff_w4
+Xtie[30] vdd vss tie_diff_w4
+Xtie[31] vdd vss tie_diff_w4
+Xtie[32] vdd vss tie_diff_w4
+Xtie[33] vdd vss tie_diff_w4
+Xtie[34] vdd vss tie_diff_w4
+Xtie[35] vdd vss tie_diff_w4
+Xtie[36] vdd vss tie_diff_w4
+Xtie[37] vdd vss tie_diff_w4
+Xtie[38] vdd vss tie_diff_w4
+Xtie[39] vdd vss tie_diff_w4
+Xtie[40] vdd vss tie_diff_w4
+Xtie[41] vdd vss tie_diff_w4
+Xtie[42] vdd vss tie_diff_w4
+Xtie[43] vdd vss tie_diff_w4
+Xtie[44] vdd vss tie_diff_w4
+Xtie[45] vdd vss tie_diff_w4
+Xtie[46] vdd vss tie_diff_w4
+Xtie[47] vdd vss tie_diff_w4
+Xtie[48] vdd vss tie_diff_w4
+Xtie[49] vdd vss tie_diff_w4
+Xtie[50] vdd vss tie_diff_w4
+Xtie[51] vdd vss tie_diff_w4
+Xtie[52] vdd vss tie_diff_w4
+Xtie[53] vdd vss tie_diff_w4
+Xtie[54] vdd vss tie_diff_w4
+Xtie[55] vdd vss tie_diff_w4
+Xtie[56] vdd vss tie_diff_w4
+Xtie[57] vdd vss tie_diff_w4
+Xtie[58] vdd vss tie_diff_w4
+Xtie[59] vdd vss tie_diff_w4
+Xtie[60] vdd vss tie_diff_w4
+Xtie[61] vdd vss tie_diff_w4
+Xtie[62] vdd vss tie_diff_w4
+Xtie[63] vdd vss tie_diff_w4
+Xtie[64] vdd vss tie_diff_w4
+Xtie[65] vdd vss tie_diff_w4
+Xtie[66] vdd vss tie_diff_w4
+Xtie[67] vdd vss tie_diff_w4
+Xtie[68] vdd vss tie_diff_w4
+Xtie[69] vdd vss tie_diff_w4
+Xtie[70] vdd vss tie_diff_w4
+Xtie[71] vdd vss tie_diff_w4
+Xtie[72] vdd vss tie_diff_w4
+Xtie[73] vdd vss tie_diff_w4
+Xtie[74] vdd vss tie_diff_w4
+Xtie[75] vdd vss tie_diff_w4
+Xtie[76] vdd vss tie_diff_w4
+Xtie[77] vdd vss tie_diff_w4
+Xtie[78] vdd vss tie_diff_w4
+Xtie[79] vdd vss tie_diff_w4
+Xtie[80] vdd vss tie_diff_w4
+Xtie[81] vdd vss tie_diff_w4
+Xtie[82] vdd vss tie_diff_w4
+Xtie[83] vdd vss tie_diff_w4
+Xtie[84] vdd vss tie_diff_w4
+Xtie[85] vdd vss tie_diff_w4
+Xtie[86] vdd vss tie_diff_w4
+Xtie[87] vdd vss tie_diff_w4
+Xtie[88] vdd vss tie_diff_w4
+Xtie[89] vdd vss tie_diff_w4
+Xtie[90] vdd vss tie_diff_w4
+Xtie[91] vdd vss tie_diff_w4
+Xtie[92] vdd vss tie_diff_w4
+Xtie[93] vdd vss tie_diff_w4
+Xtie[94] vdd vss tie_diff_w4
+Xtie[95] vdd vss tie_diff_w4
+Xtie[96] vdd vss tie_diff_w4
+Xtie[97] vdd vss tie_diff_w4
+Xtie[98] vdd vss tie_diff_w4
+Xtie[99] vdd vss tie_diff_w4
+Xtie[100] vdd vss tie_diff_w4
+Xtie[101] vdd vss tie_diff_w4
+Xtie[102] vdd vss tie_diff_w4
+Xtie[103] vdd vss tie_diff_w4
+Xtie[104] vdd vss tie_diff_w4
+Xtie[105] vdd vss tie_diff_w4
+Xtie[106] vdd vss tie_diff_w4
+Xtie[107] vdd vss tie_diff_w4
+Xtie[108] vdd vss tie_diff_w4
+.ends SP6TRowPredecoders_3_4B

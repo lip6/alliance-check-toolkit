@@ -1,0 +1,6 @@
+* DP8TPrecharge_bl2
+.subckt DP8TPrecharge_bl2 vdd bl bl_n precharge_n
+Mpc1 vdd precharge_n bl vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpc2 bl precharge_n bl_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpc3 bl_n precharge_n vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+.ends DP8TPrecharge_bl2

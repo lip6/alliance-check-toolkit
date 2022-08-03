@@ -1,0 +1,5 @@
+* SP6TArray_8X8
+.subckt SP6TArray_8X8 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_8X4
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X4
+.ends SP6TArray_8X8
