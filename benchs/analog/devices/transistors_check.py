@@ -31,7 +31,7 @@ def analogDemo ( editor ):
              #, ( Transistor         , 't1'    , None               , toDbU( 0.54)         , 1, False   , None , False )
              #, ( CommonDrain        , 'ta'    , None               , toDbU(37.00)         , 2, False   , 2    , False )
              #, ( CommonGatePair     , 'tb'    , None               , toDbU(37.00)         , 2, False   , 2    , False )
-              , ( CommonSourcePair   , 't4'    , 'WIP CSP'          , toDbU(10.56)         , 4, False   , 2    , True  )
+             #, ( CommonSourcePair   , 't4'    , 'WIP CSP'          , toDbU(10.56)         , 4, False   , 2    , True  )
              #, ( CommonSourcePair   , 't4b'   , 'Interdigitated'   , toDbU(10.56)         , 4, True    , 2    , True  )
              #, ( CrossCoupledPair   , 't3'    , None               , toDbU(37.00)         , 4, True    , 2    , False )
              #, ( DifferentialPair   , 't4'    , 'WIP DP'           , toDbU(10.56)         , 4, False   , 2    , False )
@@ -49,7 +49,7 @@ def analogDemo ( editor ):
       print( '  o  Using AMS 350nm (c34b4) settings.' )
       xspacing  = toDbU( 5.0)
       yspacing  = toDbU(11.0)
-      xspacingl = DbU.fromLambda(40.0)
+      xspacingl = DbU.fromLambda(80.0)
     elif technoName == 'cmos065':
       print( '  o  Using 65nm settings.' )
       xspacing  = toDbU( 5.0)
