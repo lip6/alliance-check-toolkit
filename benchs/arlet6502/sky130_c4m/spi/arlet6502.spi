@@ -1,0 +1,89 @@
+* Coriolis Structural SPICE Driver
+* Generated on Mar 31, 2022, 12:58
+* Cell/Subckt "arlet6502".
+* 
+* INTERF     0  we.
+* INTERF     1  vss.
+* INTERF     2  vdd.
+* INTERF     3  reset.
+* INTERF     4  rdy.
+* INTERF     5  nmi.
+* INTERF     6  irq.
+* INTERF     7  do(7).
+* INTERF     8  do(6).
+* INTERF     9  do(5).
+* INTERF    10  do(4).
+* INTERF    11  do(3).
+* INTERF    12  do(2).
+* INTERF    13  do(1).
+* INTERF    14  do(0).
+* INTERF    15  di(7).
+* INTERF    16  di(6).
+* INTERF    17  di(5).
+* INTERF    18  di(4).
+* INTERF    19  di(3).
+* INTERF    20  di(2).
+* INTERF    21  di(1).
+* INTERF    22  di(0).
+* INTERF    23  clk.
+* INTERF    24  a(9).
+* INTERF    25  a(8).
+* INTERF    26  a(7).
+* INTERF    27  a(6).
+* INTERF    28  a(5).
+* INTERF    29  a(4).
+* INTERF    30  a(3).
+* INTERF    31  a(2).
+* INTERF    32  a(15).
+* INTERF    33  a(14).
+* INTERF    34  a(13).
+* INTERF    35  a(12).
+* INTERF    36  a(11).
+* INTERF    37  a(10).
+* INTERF    38  a(1).
+* INTERF    39  a(0).
+
+.subckt arlet6502 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39
+* NET     0  we.
+* NET     1  vss.
+* NET     2  vdd.
+* NET     3  reset.
+* NET     4  rdy.
+* NET     5  nmi.
+* NET     6  irq.
+* NET     7  do(7).
+* NET     8  do(6).
+* NET     9  do(5).
+* NET    10  do(4).
+* NET    11  do(3).
+* NET    12  do(2).
+* NET    13  do(1).
+* NET    14  do(0).
+* NET    15  di(7).
+* NET    16  di(6).
+* NET    17  di(5).
+* NET    18  di(4).
+* NET    19  di(3).
+* NET    20  di(2).
+* NET    21  di(1).
+* NET    22  di(0).
+* NET    23  clk.
+* NET    24  a(9).
+* NET    25  a(8).
+* NET    26  a(7).
+* NET    27  a(6).
+* NET    28  a(5).
+* NET    29  a(4).
+* NET    30  a(3).
+* NET    31  a(2).
+* NET    32  a(15).
+* NET    33  a(14).
+* NET    34  a(13).
+* NET    35  a(12).
+* NET    36  a(11).
+* NET    37  a(10).
+* NET    38  a(1).
+* NET    39  a(0).
+
+xsubckt_0_cpu 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 cmpt_cpu
+.ends arlet6502

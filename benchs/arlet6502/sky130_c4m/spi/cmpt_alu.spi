@@ -1,0 +1,566 @@
+* Coriolis Structural SPICE Driver
+* Generated on Mar 31, 2022, 12:58
+* Cell/Subckt "cmpt_alu".
+* 
+* INTERF     0  z.
+* INTERF     1  vss.
+* INTERF     2  vdd.
+* INTERF     3  v.
+* INTERF     4  right.
+* INTERF     5  rdy.
+* INTERF     6  out_v(7).
+* INTERF     7  out_v(6).
+* INTERF     8  out_v(5).
+* INTERF     9  out_v(4).
+* INTERF    10  out_v(3).
+* INTERF    11  out_v(2).
+* INTERF    12  out_v(1).
+* INTERF    13  out_v(0).
+* INTERF    14  op(3).
+* INTERF    15  op(2).
+* INTERF    16  op(1).
+* INTERF    17  op(0).
+* INTERF    18  hc.
+* INTERF    19  co.
+* INTERF    20  clk.
+* INTERF    21  ci.
+* INTERF    23  bi(7).
+* INTERF    24  bi(6).
+* INTERF    25  bi(5).
+* INTERF    26  bi(4).
+* INTERF    27  bi(3).
+* INTERF    28  bi(2).
+* INTERF    29  bi(1).
+* INTERF    30  bi(0).
+* INTERF    31  bcd.
+* INTERF    33  ai(7).
+* INTERF    34  ai(6).
+* INTERF    35  ai(5).
+* INTERF    36  ai(4).
+* INTERF    37  ai(3).
+* INTERF    38  ai(2).
+* INTERF    39  ai(1).
+* INTERF    40  ai(0).
+
+.subckt cmpt_alu 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 23 24 25 26 27 28 29 30 31 33 34 35 36 37 38 39 40
+* NET     0  z.
+* NET     1  vss.
+* NET     2  vdd.
+* NET     3  v.
+* NET     4  right.
+* NET     5  rdy.
+* NET     6  out_v(7).
+* NET     7  out_v(6).
+* NET     8  out_v(5).
+* NET     9  out_v(4).
+* NET    10  out_v(3).
+* NET    11  out_v(2).
+* NET    12  out_v(1).
+* NET    13  out_v(0).
+* NET    14  op(3).
+* NET    15  op(2).
+* NET    16  op(1).
+* NET    17  op(0).
+* NET    18  hc.
+* NET    19  co.
+* NET    20  clk.
+* NET    21  ci.
+* NET    22  bi7.
+* NET    23  bi(7).
+* NET    24  bi(6).
+* NET    25  bi(5).
+* NET    26  bi(4).
+* NET    27  bi(3).
+* NET    28  bi(2).
+* NET    29  bi(1).
+* NET    30  bi(0).
+* NET    31  bcd.
+* NET    32  ai7.
+* NET    33  ai(7).
+* NET    34  ai(6).
+* NET    35  ai(5).
+* NET    36  ai(4).
+* NET    37  ai(3).
+* NET    38  ai(2).
+* NET    39  ai(1).
+* NET    40  ai(0).
+* NET    41  abc_11882_new_n99.
+* NET    42  abc_11882_new_n98.
+* NET    43  abc_11882_new_n97.
+* NET    44  abc_11882_new_n96.
+* NET    45  abc_11882_new_n95.
+* NET    46  abc_11882_new_n94.
+* NET    47  abc_11882_new_n93.
+* NET    48  abc_11882_new_n92.
+* NET    49  abc_11882_new_n91.
+* NET    50  abc_11882_new_n90.
+* NET    51  abc_11882_new_n89.
+* NET    52  abc_11882_new_n87.
+* NET    53  abc_11882_new_n86.
+* NET    54  abc_11882_new_n85.
+* NET    55  abc_11882_new_n84.
+* NET    56  abc_11882_new_n83.
+* NET    57  abc_11882_new_n82.
+* NET    58  abc_11882_new_n81.
+* NET    59  abc_11882_new_n80.
+* NET    60  abc_11882_new_n79.
+* NET    61  abc_11882_new_n78.
+* NET    62  abc_11882_new_n77.
+* NET    63  abc_11882_new_n76.
+* NET    64  abc_11882_new_n75.
+* NET    65  abc_11882_new_n74.
+* NET    66  abc_11882_new_n73.
+* NET    67  abc_11882_new_n72.
+* NET    68  abc_11882_new_n71.
+* NET    69  abc_11882_new_n70.
+* NET    70  abc_11882_new_n69.
+* NET    71  abc_11882_new_n68.
+* NET    72  abc_11882_new_n67.
+* NET    73  abc_11882_new_n66.
+* NET    74  abc_11882_new_n65.
+* NET    75  abc_11882_new_n64.
+* NET    76  abc_11882_new_n62.
+* NET    77  abc_11882_new_n61.
+* NET    78  abc_11882_new_n59.
+* NET    79  abc_11882_new_n58.
+* NET    80  abc_11882_new_n57.
+* NET    81  abc_11882_new_n56.
+* NET    82  abc_11882_new_n55.
+* NET    83  abc_11882_new_n54.
+* NET    84  abc_11882_new_n53.
+* NET    85  abc_11882_new_n52.
+* NET    86  abc_11882_new_n51.
+* NET    87  abc_11882_new_n278.
+* NET    88  abc_11882_new_n273.
+* NET    89  abc_11882_new_n272.
+* NET    90  abc_11882_new_n270.
+* NET    91  abc_11882_new_n269.
+* NET    92  abc_11882_new_n268.
+* NET    93  abc_11882_new_n267.
+* NET    94  abc_11882_new_n266.
+* NET    95  abc_11882_new_n265.
+* NET    96  abc_11882_new_n264.
+* NET    97  abc_11882_new_n263.
+* NET    98  abc_11882_new_n262.
+* NET    99  abc_11882_new_n261.
+* NET   100  abc_11882_new_n260.
+* NET   101  abc_11882_new_n259.
+* NET   102  abc_11882_new_n258.
+* NET   103  abc_11882_new_n257.
+* NET   104  abc_11882_new_n256.
+* NET   105  abc_11882_new_n255.
+* NET   106  abc_11882_new_n254.
+* NET   107  abc_11882_new_n253.
+* NET   108  abc_11882_new_n252.
+* NET   109  abc_11882_new_n251.
+* NET   110  abc_11882_new_n250.
+* NET   111  abc_11882_new_n249.
+* NET   112  abc_11882_new_n248.
+* NET   113  abc_11882_new_n247.
+* NET   114  abc_11882_new_n246.
+* NET   115  abc_11882_new_n245.
+* NET   116  abc_11882_new_n244.
+* NET   117  abc_11882_new_n243.
+* NET   118  abc_11882_new_n242.
+* NET   119  abc_11882_new_n241.
+* NET   120  abc_11882_new_n240.
+* NET   121  abc_11882_new_n239.
+* NET   122  abc_11882_new_n238.
+* NET   123  abc_11882_new_n237.
+* NET   124  abc_11882_new_n236.
+* NET   125  abc_11882_new_n235.
+* NET   126  abc_11882_new_n234.
+* NET   127  abc_11882_new_n233.
+* NET   128  abc_11882_new_n232.
+* NET   129  abc_11882_new_n231.
+* NET   130  abc_11882_new_n230.
+* NET   131  abc_11882_new_n229.
+* NET   132  abc_11882_new_n228.
+* NET   133  abc_11882_new_n227.
+* NET   134  abc_11882_new_n226.
+* NET   135  abc_11882_new_n225.
+* NET   136  abc_11882_new_n224.
+* NET   137  abc_11882_new_n223.
+* NET   138  abc_11882_new_n222.
+* NET   139  abc_11882_new_n221.
+* NET   140  abc_11882_new_n220.
+* NET   141  abc_11882_new_n219.
+* NET   142  abc_11882_new_n218.
+* NET   143  abc_11882_new_n217.
+* NET   144  abc_11882_new_n216.
+* NET   145  abc_11882_new_n215.
+* NET   146  abc_11882_new_n214.
+* NET   147  abc_11882_new_n213.
+* NET   148  abc_11882_new_n212.
+* NET   149  abc_11882_new_n211.
+* NET   150  abc_11882_new_n210.
+* NET   151  abc_11882_new_n209.
+* NET   152  abc_11882_new_n208.
+* NET   153  abc_11882_new_n207.
+* NET   154  abc_11882_new_n206.
+* NET   155  abc_11882_new_n205.
+* NET   156  abc_11882_new_n204.
+* NET   157  abc_11882_new_n203.
+* NET   158  abc_11882_new_n202.
+* NET   159  abc_11882_new_n201.
+* NET   160  abc_11882_new_n200.
+* NET   161  abc_11882_new_n199.
+* NET   162  abc_11882_new_n198.
+* NET   163  abc_11882_new_n197.
+* NET   164  abc_11882_new_n196.
+* NET   165  abc_11882_new_n195.
+* NET   166  abc_11882_new_n194.
+* NET   167  abc_11882_new_n193.
+* NET   168  abc_11882_new_n192.
+* NET   169  abc_11882_new_n191.
+* NET   170  abc_11882_new_n190.
+* NET   171  abc_11882_new_n189.
+* NET   172  abc_11882_new_n188.
+* NET   173  abc_11882_new_n187.
+* NET   174  abc_11882_new_n186.
+* NET   175  abc_11882_new_n185.
+* NET   176  abc_11882_new_n184.
+* NET   177  abc_11882_new_n183.
+* NET   178  abc_11882_new_n182.
+* NET   179  abc_11882_new_n181.
+* NET   180  abc_11882_new_n180.
+* NET   181  abc_11882_new_n179.
+* NET   182  abc_11882_new_n178.
+* NET   183  abc_11882_new_n177.
+* NET   184  abc_11882_new_n176.
+* NET   185  abc_11882_new_n175.
+* NET   186  abc_11882_new_n174.
+* NET   187  abc_11882_new_n173.
+* NET   188  abc_11882_new_n172.
+* NET   189  abc_11882_new_n171.
+* NET   190  abc_11882_new_n170.
+* NET   191  abc_11882_new_n169.
+* NET   192  abc_11882_new_n168.
+* NET   193  abc_11882_new_n167.
+* NET   194  abc_11882_new_n166.
+* NET   195  abc_11882_new_n165.
+* NET   196  abc_11882_new_n164.
+* NET   197  abc_11882_new_n163.
+* NET   198  abc_11882_new_n162.
+* NET   199  abc_11882_new_n161.
+* NET   200  abc_11882_new_n160.
+* NET   201  abc_11882_new_n159.
+* NET   202  abc_11882_new_n158.
+* NET   203  abc_11882_new_n157.
+* NET   204  abc_11882_new_n156.
+* NET   205  abc_11882_new_n155.
+* NET   206  abc_11882_new_n154.
+* NET   207  abc_11882_new_n153.
+* NET   208  abc_11882_new_n152.
+* NET   209  abc_11882_new_n151.
+* NET   210  abc_11882_new_n150.
+* NET   211  abc_11882_new_n149.
+* NET   212  abc_11882_new_n148.
+* NET   213  abc_11882_new_n147.
+* NET   214  abc_11882_new_n146.
+* NET   215  abc_11882_new_n145.
+* NET   216  abc_11882_new_n144.
+* NET   217  abc_11882_new_n143.
+* NET   218  abc_11882_new_n142.
+* NET   219  abc_11882_new_n141.
+* NET   220  abc_11882_new_n140.
+* NET   221  abc_11882_new_n139.
+* NET   222  abc_11882_new_n138.
+* NET   223  abc_11882_new_n137.
+* NET   224  abc_11882_new_n136.
+* NET   225  abc_11882_new_n135.
+* NET   226  abc_11882_new_n134.
+* NET   227  abc_11882_new_n133.
+* NET   228  abc_11882_new_n132.
+* NET   229  abc_11882_new_n131.
+* NET   230  abc_11882_new_n130.
+* NET   231  abc_11882_new_n129.
+* NET   232  abc_11882_new_n128.
+* NET   233  abc_11882_new_n127.
+* NET   234  abc_11882_new_n126.
+* NET   235  abc_11882_new_n125.
+* NET   236  abc_11882_new_n124.
+* NET   237  abc_11882_new_n123.
+* NET   238  abc_11882_new_n122.
+* NET   239  abc_11882_new_n121.
+* NET   240  abc_11882_new_n120.
+* NET   241  abc_11882_new_n119.
+* NET   242  abc_11882_new_n118.
+* NET   243  abc_11882_new_n117.
+* NET   244  abc_11882_new_n116.
+* NET   245  abc_11882_new_n115.
+* NET   246  abc_11882_new_n114.
+* NET   247  abc_11882_new_n113.
+* NET   248  abc_11882_new_n112.
+* NET   249  abc_11882_new_n111.
+* NET   250  abc_11882_new_n110.
+* NET   251  abc_11882_new_n109.
+* NET   252  abc_11882_new_n108.
+* NET   253  abc_11882_new_n107.
+* NET   254  abc_11882_new_n106.
+* NET   255  abc_11882_new_n105.
+* NET   256  abc_11882_new_n104.
+* NET   257  abc_11882_new_n103.
+* NET   258  abc_11882_new_n102.
+* NET   259  abc_11882_new_n101.
+* NET   260  abc_11882_new_n100.
+* NET   261  abc_11882_auto_rtlil_cc_2515_muxgate_11641.
+* NET   262  abc_11882_auto_rtlil_cc_2515_muxgate_11639.
+* NET   263  abc_11882_auto_rtlil_cc_2515_muxgate_11637.
+* NET   264  abc_11882_auto_rtlil_cc_2515_muxgate_11635.
+* NET   265  abc_11882_auto_rtlil_cc_2515_muxgate_11633.
+* NET   266  abc_11882_auto_rtlil_cc_2515_muxgate_11631.
+* NET   267  abc_11882_auto_rtlil_cc_2515_muxgate_11629.
+* NET   268  abc_11882_auto_rtlil_cc_2515_muxgate_11627.
+* NET   269  abc_11882_auto_rtlil_cc_2515_muxgate_11625.
+* NET   270  abc_11882_auto_rtlil_cc_2515_muxgate_11623.
+* NET   271  abc_11882_auto_rtlil_cc_2515_muxgate_11621.
+* NET   272  abc_11882_auto_rtlil_cc_2515_muxgate_11619.
+
+xsubckt_190_nxr2_x1 1 2 119 144 120 nxr2_x1
+xsubckt_179_nxr2_x1 1 2 130 15 27 nxr2_x1
+xsubckt_170_a2_x2 1 2 139 85 27 a2_x2
+xsubckt_78_mx2_x2 1 2 231 83 235 14 mx2_x2
+xsubckt_77_mx2_x2 1 2 232 15 236 14 mx2_x2
+xsubckt_74_xr2_x1 1 2 235 15 25 xr2_x1
+xsubckt_106_ao22_x2 1 2 203 209 206 204 ao22_x2
+xsubckt_117_mx2_x2 1 2 192 200 198 203 mx2_x2
+xsubckt_118_mx2_x2 1 2 191 199 197 203 mx2_x2
+xsubckt_126_nxr2_x1 1 2 183 15 29 nxr2_x1
+xsubckt_124_nand2_x0 1 2 185 84 186 nand2_x0
+xsubckt_23_oa22_x2 1 2 65 33 23 86 oa22_x2
+xsubckt_16_nand2_x0 1 2 72 17 85 nand2_x0
+xsubckt_19_a2_x2 1 2 69 85 23 a2_x2
+xsubckt_49_a2_x2 1 2 260 84 41 a2_x2
+xsubckt_241_sff1_x4 1 2 8 265 20 sff1_x4
+xsubckt_165_oa22_x2 1 2 144 196 193 146 oa22_x2
+xsubckt_171_nand2_x0 1 2 138 85 27 nand2_x0
+xsubckt_205_a2_x2 1 2 104 238 233 a2_x2
+xsubckt_212_ao22_x2 1 2 97 50 99 56 ao22_x2
+xsubckt_237_sff1_x4 1 2 12 269 20 sff1_x4
+xsubckt_69_a2_x2 1 2 240 84 241 a2_x2
+xsubckt_18_nand3_x0 1 2 70 86 33 23 nand3_x0
+xsubckt_89_a2_x2 1 2 220 84 221 a2_x2
+xsubckt_135_a3_x2 1 2 174 86 30 40 a3_x2
+xsubckt_213_a2_x2 1 2 96 4 40 a2_x2
+xsubckt_15_a2_x2 1 2 73 17 85 a2_x2
+xsubckt_81_nand2_x0 1 2 228 4 35 nand2_x0
+xsubckt_146_xr2_x1 1 2 163 15 30 xr2_x1
+xsubckt_148_mx2_x2 1 2 161 83 163 14 mx2_x2
+xsubckt_244_sff1_x4 1 2 18 262 20 sff1_x4
+xsubckt_211_mx2_x2 1 2 98 58 54 62 mx2_x2
+xsubckt_193_nxr2_x1 1 2 116 191 147 nxr2_x1
+xsubckt_75_a2_x2 1 2 234 82 235 a2_x2
+xsubckt_66_ao22_x2 1 2 243 244 247 73 ao22_x2
+xsubckt_55_a2_x2 1 2 254 82 255 a2_x2
+xsubckt_12_nxr2_x1 1 2 3 77 76 nxr2_x1
+xsubckt_101_a3_x2 1 2 208 28 38 86 a3_x2
+xsubckt_95_a2_x2 1 2 214 82 215 a2_x2
+xsubckt_91_ao22_x2 1 2 218 228 223 219 ao22_x2
+xsubckt_83_nand3_x0 1 2 226 86 26 36 nand3_x0
+xsubckt_214_nxr2_x1 1 2 95 97 96 nxr2_x1
+xsubckt_13_a2_x2 1 2 75 4 21 a2_x2
+xsubckt_33_a2_x2 1 2 55 83 14 a2_x2
+xsubckt_160_nand2_x0 1 2 149 184 180 nand2_x0
+xsubckt_140_oa22_x2 1 2 169 172 173 72 oa22_x2
+xsubckt_119_nand2_x0 1 2 190 38 4 nand2_x0
+xsubckt_99_nand2_x0 1 2 210 217 211 nand2_x0
+xsubckt_37_mx2_x2 1 2 272 22 52 80 mx2_x2
+xsubckt_35_mx2_x2 1 2 53 83 59 14 mx2_x2
+xsubckt_34_mx2_x2 1 2 54 15 60 14 mx2_x2
+xsubckt_47_oa22_x2 1 2 42 45 46 72 oa22_x2
+xsubckt_72_oa22_x2 1 2 237 249 242 240 oa22_x2
+xsubckt_156_nand3_x0 1 2 153 159 157 154 nand3_x0
+xsubckt_93_nxr2_x1 1 2 216 15 26 nxr2_x1
+xsubckt_70_nand2_x0 1 2 239 84 241 nand2_x0
+xsubckt_162_ao22_x2 1 2 147 177 152 150 ao22_x2
+xsubckt_68_oa22_x2 1 2 241 35 25 86 oa22_x2
+xsubckt_76_nand2_x0 1 2 233 82 235 nand2_x0
+xsubckt_217_nxr2_x1 1 2 92 102 100 nxr2_x1
+xsubckt_221_oa22_x2 1 2 89 157 154 159 oa22_x2
+xsubckt_144_ao22_x2 1 2 165 175 170 166 ao22_x2
+xsubckt_143_nand2_x0 1 2 166 84 168 nand2_x0
+xsubckt_109_a2_x2 1 2 200 82 201 a2_x2
+xsubckt_108_xr2_x1 1 2 201 28 15 xr2_x1
+xsubckt_104_oa22_x2 1 2 205 38 86 28 oa22_x2
+xsubckt_102_nand2_x0 1 2 207 28 85 nand2_x0
+xsubckt_41_nand2_x0 1 2 48 4 33 nand2_x0
+xsubckt_218_ao22_x2 1 2 91 31 93 92 ao22_x2
+xsubckt_159_a2_x2 1 2 150 184 180 a2_x2
+xsubckt_149_a2_x2 1 2 160 164 161 a2_x2
+xsubckt_36_oa22_x2 1 2 52 58 55 61 oa22_x2
+xsubckt_43_nand3_x0 1 2 46 86 24 34 nand3_x0
+xsubckt_178_oa22_x2 1 2 131 143 136 134 oa22_x2
+xsubckt_204_ao22_x2 1 2 105 210 109 107 ao22_x2
+xsubckt_240_sff1_x4 1 2 9 266 20 sff1_x4
+xsubckt_137_a2_x2 1 2 172 85 30 a2_x2
+xsubckt_130_mx2_x2 1 2 179 15 183 14 mx2_x2
+xsubckt_115_a2_x2 1 2 194 203 199 a2_x2
+xsubckt_22_oa22_x2 1 2 66 69 70 72 oa22_x2
+xsubckt_187_a2_x2 1 2 122 132 127 a2_x2
+xsubckt_155_nand2_x0 1 2 154 165 162 nand2_x0
+xsubckt_236_sff1_x4 1 2 13 270 20 sff1_x4
+xsubckt_167_nand2_x0 1 2 142 4 36 nand2_x0
+xsubckt_65_nand2_x0 1 2 244 85 25 nand2_x0
+xsubckt_62_a3_x2 1 2 247 86 25 35 a3_x2
+xsubckt_59_nand2_x0 1 2 250 257 251 nand2_x0
+xsubckt_42_a3_x2 1 2 47 86 24 34 a3_x2
+xsubckt_107_nxr2_x1 1 2 202 28 15 nxr2_x1
+xsubckt_207_ao22_x2 1 2 102 230 105 104 ao22_x2
+xsubckt_192_nxr2_x1 1 2 117 192 147 nxr2_x1
+xsubckt_185_a2_x2 1 2 124 131 125 a2_x2
+xsubckt_175_a2_x2 1 2 134 84 135 a2_x2
+xsubckt_172_ao22_x2 1 2 137 138 141 73 ao22_x2
+xsubckt_11_nxr2_x1 1 2 76 6 22 nxr2_x1
+xsubckt_82_a3_x2 1 2 227 86 26 36 a3_x2
+xsubckt_94_xr2_x1 1 2 215 15 26 xr2_x1
+xsubckt_97_mx2_x2 1 2 212 15 216 14 mx2_x2
+xsubckt_98_mx2_x2 1 2 211 83 215 14 mx2_x2
+xsubckt_133_a2_x2 1 2 176 4 39 a2_x2
+xsubckt_243_sff1_x4 1 2 6 263 20 sff1_x4
+xsubckt_227_nxr2_x1 1 2 87 109 106 nxr2_x1
+xsubckt_206_mx2_x2 1 2 103 234 232 238 mx2_x2
+xsubckt_203_mx2_x2 1 2 106 214 212 218 mx2_x2
+xsubckt_169_nand3_x0 1 2 140 37 86 27 nand3_x0
+xsubckt_51_ao22_x2 1 2 258 48 43 259 ao22_x2
+xsubckt_26_ao22_x2 1 2 62 74 67 63 ao22_x2
+xsubckt_138_nand2_x0 1 2 171 85 30 nand2_x0
+xsubckt_239_sff1_x4 1 2 10 267 20 sff1_x4
+xsubckt_209_mx2_x2 1 2 100 254 252 258 mx2_x2
+xsubckt_181_a2_x2 1 2 128 82 129 a2_x2
+xsubckt_161_mx2_x2 1 2 148 181 179 184 mx2_x2
+xsubckt_150_nand2_x0 1 2 159 164 161 nand2_x0
+xsubckt_208_a2_x2 1 2 101 258 253 a2_x2
+xsubckt_200_ao22_x2 1 2 109 111 112 119 ao22_x2
+xsubckt_174_oa22_x2 1 2 135 37 86 27 oa22_x2
+xsubckt_29_xr2_x1 1 2 59 15 23 xr2_x1
+xsubckt_86_ao22_x2 1 2 223 224 227 73 ao22_x2
+xsubckt_233_mx2_x2 1 2 261 33 32 5 mx2_x2
+xsubckt_232_mx2_x2 1 2 262 18 108 80 mx2_x2
+xsubckt_231_mx2_x2 1 2 263 6 94 80 mx2_x2
+xsubckt_230_mx2_x2 1 2 264 7 92 80 mx2_x2
+xsubckt_195_nxr2_x1 1 2 114 151 148 nxr2_x1
+xsubckt_168_a3_x2 1 2 141 37 86 27 a3_x2
+xsubckt_67_oa22_x2 1 2 242 245 246 72 oa22_x2
+xsubckt_53_nxr2_x1 1 2 256 15 24 nxr2_x1
+xsubckt_0_inv_x0 1 2 86 17 inv_x0
+xsubckt_1_inv_x0 1 2 85 16 inv_x0
+xsubckt_2_inv_x0 1 2 84 4 inv_x0
+xsubckt_3_inv_x0 1 2 83 15 inv_x0
+xsubckt_4_inv_x0 1 2 82 14 inv_x0
+xsubckt_28_nxr2_x1 1 2 60 15 23 nxr2_x1
+xsubckt_92_oa22_x2 1 2 217 229 222 220 oa22_x2
+xsubckt_121_nand2_x0 1 2 188 85 29 nand2_x0
+xsubckt_122_ao22_x2 1 2 187 188 189 73 ao22_x2
+xsubckt_216_nxr2_x1 1 2 93 105 103 nxr2_x1
+xsubckt_196_ao22_x2 1 2 113 31 117 115 ao22_x2
+xsubckt_5_inv_x0 1 2 81 31 inv_x0
+xsubckt_6_inv_x0 1 2 80 5 inv_x0
+xsubckt_25_nand2_x0 1 2 63 84 65 nand2_x0
+xsubckt_31_nand2_x0 1 2 57 82 59 nand2_x0
+xsubckt_157_ao22_x2 1 2 152 159 156 155 ao22_x2
+xsubckt_58_mx2_x2 1 2 251 83 255 14 mx2_x2
+xsubckt_57_mx2_x2 1 2 252 15 256 14 mx2_x2
+xsubckt_54_xr2_x1 1 2 255 15 24 xr2_x1
+xsubckt_88_oa22_x2 1 2 221 36 26 86 oa22_x2
+xsubckt_222_a2_x2 1 2 88 153 89 a2_x2
+xsubckt_202_a2_x2 1 2 107 218 213 a2_x2
+xsubckt_186_nand2_x0 1 2 123 131 125 nand2_x0
+xsubckt_164_ao22_x2 1 2 145 195 194 147 ao22_x2
+xsubckt_163_oa22_x2 1 2 146 178 151 149 oa22_x2
+xsubckt_24_a2_x2 1 2 64 84 65 a2_x2
+xsubckt_38_o2_x2 1 2 51 19 5 o2_x2
+xsubckt_90_nand2_x0 1 2 219 84 221 nand2_x0
+xsubckt_110_nand2_x0 1 2 199 82 201 nand2_x0
+xsubckt_139_ao22_x2 1 2 170 171 174 73 ao22_x2
+xsubckt_151_nand2_x0 1 2 158 15 14 nand2_x0
+xsubckt_152_a3_x2 1 2 157 84 21 158 a3_x2
+xsubckt_125_ao22_x2 1 2 184 190 187 185 ao22_x2
+xsubckt_120_a3_x2 1 2 189 86 29 39 a3_x2
+xsubckt_84_a2_x2 1 2 225 85 26 a2_x2
+xsubckt_8_nor4_x0 1 2 78 12 13 10 11 nor4_x0
+xsubckt_44_a2_x2 1 2 45 85 24 a2_x2
+xsubckt_64_a2_x2 1 2 245 85 25 a2_x2
+xsubckt_235_sff1_x4 1 2 19 271 20 sff1_x4
+xsubckt_210_ao22_x2 1 2 99 250 102 101 ao22_x2
+xsubckt_198_oa22_x2 1 2 111 122 123 145 oa22_x2
+xsubckt_153_nand3_x0 1 2 156 84 21 158 nand3_x0
+xsubckt_145_oa22_x2 1 2 164 176 169 167 oa22_x2
+xsubckt_127_xr2_x1 1 2 182 15 29 xr2_x1
+xsubckt_116_nand2_x0 1 2 193 203 199 nand2_x0
+xsubckt_96_nand2_x0 1 2 213 82 215 nand2_x0
+xsubckt_32_a2_x2 1 2 56 62 57 a2_x2
+xsubckt_14_nand2_x0 1 2 74 4 21 nand2_x0
+xsubckt_20_nand2_x0 1 2 68 85 23 nand2_x0
+xsubckt_61_nand2_x0 1 2 248 4 34 nand2_x0
+xsubckt_199_ao22_x2 1 2 110 121 124 144 ao22_x2
+xsubckt_219_oa22_x2 1 2 90 80 94 91 oa22_x2
+xsubckt_40_a2_x2 1 2 49 4 33 a2_x2
+xsubckt_30_a2_x2 1 2 58 82 59 a2_x2
+xsubckt_60_a2_x2 1 2 249 4 34 a2_x2
+xsubckt_191_nxr2_x1 1 2 118 145 120 nxr2_x1
+xsubckt_242_sff1_x4 1 2 7 264 20 sff1_x4
+xsubckt_134_nand2_x0 1 2 175 4 39 nand2_x0
+xsubckt_10_xr2_x1 1 2 77 32 19 xr2_x1
+xsubckt_63_nand3_x0 1 2 246 86 25 35 nand3_x0
+xsubckt_80_a2_x2 1 2 229 4 35 a2_x2
+xsubckt_136_nand3_x0 1 2 173 86 30 40 nand3_x0
+xsubckt_131_nor2_x0 1 2 178 184 179 nor2_x0
+xsubckt_105_nand2_x0 1 2 204 84 205 nand2_x0
+xsubckt_17_a3_x2 1 2 71 86 33 23 a3_x2
+xsubckt_46_ao22_x2 1 2 43 44 47 73 ao22_x2
+xsubckt_71_ao22_x2 1 2 238 248 243 239 ao22_x2
+xsubckt_79_nand2_x0 1 2 230 237 231 nand2_x0
+xsubckt_238_sff1_x4 1 2 11 268 20 sff1_x4
+xsubckt_128_a2_x2 1 2 181 82 182 a2_x2
+xsubckt_85_nand2_x0 1 2 224 85 26 nand2_x0
+xsubckt_50_nand2_x0 1 2 259 84 41 nand2_x0
+xsubckt_173_oa22_x2 1 2 136 139 140 72 oa22_x2
+xsubckt_194_nxr2_x1 1 2 115 152 148 nxr2_x1
+xsubckt_113_nor2_x0 1 2 196 203 198 nor2_x0
+xsubckt_27_oa22_x2 1 2 61 75 66 64 oa22_x2
+xsubckt_52_oa22_x2 1 2 257 49 42 260 oa22_x2
+xsubckt_56_nand2_x0 1 2 253 82 255 nand2_x0
+xsubckt_215_nxr2_x1 1 2 94 99 98 nxr2_x1
+xsubckt_220_ao22_x2 1 2 271 51 95 90 ao22_x2
+xsubckt_223_mx2_x2 1 2 270 13 88 80 mx2_x2
+xsubckt_224_mx2_x2 1 2 269 12 115 80 mx2_x2
+xsubckt_225_mx2_x2 1 2 268 11 117 80 mx2_x2
+xsubckt_226_mx2_x2 1 2 267 10 118 80 mx2_x2
+xsubckt_245_sff1_x4 1 2 32 261 20 sff1_x4
+xsubckt_141_oa22_x2 1 2 168 40 30 86 oa22_x2
+xsubckt_87_oa22_x2 1 2 222 225 226 72 oa22_x2
+xsubckt_9_a2_x2 1 2 0 79 78 a2_x2
+xsubckt_73_nxr2_x1 1 2 236 15 25 nxr2_x1
+xsubckt_166_a2_x2 1 2 143 4 36 a2_x2
+xsubckt_180_xr2_x1 1 2 129 15 27 xr2_x1
+xsubckt_183_mx2_x2 1 2 126 15 130 14 mx2_x2
+xsubckt_228_mx2_x2 1 2 266 9 87 80 mx2_x2
+xsubckt_229_mx2_x2 1 2 265 8 93 80 mx2_x2
+xsubckt_154_a2_x2 1 2 155 165 162 a2_x2
+xsubckt_129_nand2_x0 1 2 180 82 182 nand2_x0
+xsubckt_103_ao22_x2 1 2 206 207 208 73 ao22_x2
+xsubckt_48_oa22_x2 1 2 41 34 24 86 oa22_x2
+xsubckt_176_nand2_x0 1 2 133 84 135 nand2_x0
+xsubckt_184_mx2_x2 1 2 125 83 129 14 mx2_x2
+xsubckt_189_mx2_x2 1 2 120 128 126 132 mx2_x2
+xsubckt_201_oa22_x2 1 2 108 110 113 118 oa22_x2
+xsubckt_142_a2_x2 1 2 167 84 168 a2_x2
+xsubckt_123_oa22_x2 1 2 186 39 29 86 oa22_x2
+xsubckt_114_o2_x2 1 2 195 203 198 o2_x2
+xsubckt_111_mx2_x2 1 2 198 15 202 14 mx2_x2
+xsubckt_100_nand2_x0 1 2 209 37 4 nand2_x0
+xsubckt_21_ao22_x2 1 2 67 68 71 73 ao22_x2
+xsubckt_177_ao22_x2 1 2 132 142 137 133 ao22_x2
+xsubckt_182_nand2_x0 1 2 127 82 129 nand2_x0
+xsubckt_158_oa22_x2 1 2 151 160 157 154 oa22_x2
+xsubckt_147_nand2_x0 1 2 162 82 163 nand2_x0
+xsubckt_132_o2_x2 1 2 177 184 179 o2_x2
+xsubckt_112_mx2_x2 1 2 197 83 201 14 mx2_x2
+xsubckt_39_nand2_x0 1 2 50 61 53 nand2_x0
+xsubckt_7_nor4_x0 1 2 79 8 9 6 7 nor4_x0
+xsubckt_45_nand2_x0 1 2 44 85 24 nand2_x0
+xsubckt_188_nand2_x0 1 2 121 132 127 nand2_x0
+xsubckt_197_oa22_x2 1 2 112 81 116 114 oa22_x2
+xsubckt_234_sff1_x4 1 2 22 272 20 sff1_x4
+.ends cmpt_alu

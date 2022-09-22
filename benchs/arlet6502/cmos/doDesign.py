@@ -8,7 +8,8 @@ helpers.loadUserSettings()
 from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
-from   Hurricane  import DbU, Breakpoint
+from   Hurricane  import DbU, Breakpoint, PythonAttributes
+from   Seabreeze  import SeabreezeEngine
 from   plugins.alpha.block.block          import Block
 from   plugins.alpha.block.configuration  import IoPin, GaugeConf
 from   plugins.alpha.block.spares         import Spares
@@ -18,6 +19,48 @@ from   plugins.alpha.chip.chip            import Chip
 
 
 af = CRL.AllianceFramework.get()
+
+
+class MyAttribute ( object ):
+
+    count = 0
+
+    def __init__ ( self ):
+        self.value = MyAttribute.count 
+        print( '{} has been created'.format(self) )
+        MyAttribute.count += 1
+
+    def __del__ ( self ):
+        print( '{} has been deleted'.format(self) )
+
+    def __str__ ( self ):
+        return '<MyAttribute {}>'.format(self.value)
+
+
+class MyDatas ( object ):
+
+    def __init__ ( self ):
+        self.value = 2
+        print( '{} has been created'.format(self) )
+
+    def __del__ ( self ):
+        print( '{} has been deleted'.format(self) )
+
+    def __str__ ( self ):
+        return '<MyDatas {}>'.format(self.value)
+
+
+class MyNetDatas ( object ):
+
+    def __init__ ( self, net ):
+        self.net = net
+        print( '{} has been created'.format(self) )
+
+    def __del__ ( self ):
+        print( '{} has been deleted'.format(self) )
+
+    def __str__ ( self ):
+        return '<MyNetDatas {}>'.format(self.net)
 
 
 def scriptMain ( **kw ):
@@ -33,6 +76,31 @@ def scriptMain ( **kw ):
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
+        PythonAttributes.enable( cell )
+        print( type(PythonAttributes.get( cell )))
+        print( dir(PythonAttributes.get( cell )))
+       #PythonAttributes.get( cell ).myAttribute = MyAttribute()
+        cell.myAttribute  = MyAttribute()
+        cell.myAttribute1 = MyAttribute()
+        sys.stdout.flush()
+        sys.stderr.flush()
+        print( 'cell.myAttribute=', cell.myAttribute )
+        print( dir(PythonAttributes.get( cell )))
+        print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
+       #del PythonAttributes.get( cell ).myAttribute
+        del cell.myAttribute
+        print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
+        print( dir(PythonAttributes.get( cell )))
+       #PythonAttributes.destroy( cell )
+       #wdatas = MyDatas()
+       #PythonAttributes.add( cell, 'Python.MyDatas', MyDatas() )
+        for net in cell.getNets():
+            PythonAttributes.enable( net )
+            net.netDatas = MyNetDatas(net)
+       #rdatas = PythonAttributes.get( cell, 'Python.MyDatas' )
+       #print( rdatas )
+       #PythonAttributes.remove( cell, 'Python.MyDatas' )
+       #sys.exit( 0 )
         ioPadsSpec = [ (IoPin.WEST , None, 'iopower_0'  , 'iovdd'  )
                      , (IoPin.WEST , None, 'ioground_0' , 'vss'    )
                      , (IoPin.WEST , None, 'di_0'       , 'di(0)'  , 'di(0)'  )
@@ -119,8 +187,8 @@ def scriptMain ( **kw ):
        #arlet6502Conf.cfg.anabatic.searchHalo         = 2
         arlet6502Conf.cfg.anabatic.globalIterations   = 10
         arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-       #arlet6502Conf.cfg.katana.hTracksReservedLocal = 0
-       #arlet6502Conf.cfg.katana.vTracksReservedLocal = 0
+        arlet6502Conf.cfg.katana.hTracksReservedLocal = 10
+        arlet6502Conf.cfg.katana.vTracksReservedLocal = 10
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 7
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 5
         arlet6502Conf.cfg.katana.trackFill            = 0
@@ -153,6 +221,17 @@ def scriptMain ( **kw ):
             blockBuilder = Block( arlet6502Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
+            seabreeze = SeabreezeEngine.create( cell )
+            seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.axys_1_2' ))
+           #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.backwards' ))
+        for net in cell.getNets():
+            try:
+                netDatas = net.netDatas
+                print( 'netDatas =', netDatas )
+            except Exception as e:
+                print( 'No prop', net )
+        PythonAttributes.disableAll( "netDatas" )
+        PythonAttributes.disableAll()
     except Exception as e:
         helpers.io.catch( e )
         rvalue = False

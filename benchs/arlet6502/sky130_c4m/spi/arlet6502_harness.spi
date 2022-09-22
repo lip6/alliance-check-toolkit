@@ -1,0 +1,355 @@
+* Coriolis Structural SPICE Driver
+* Generated on Mar 31, 2022, 12:58
+* Cell/Subckt "arlet6502_harness".
+* 
+* INTERF    30  vss.
+* INTERF    31  vdd.
+* INTERF    40  io_out(9).
+* INTERF    41  io_out(8).
+* INTERF    42  io_out(7).
+* INTERF    43  io_out(6).
+* INTERF    44  io_out(5).
+* INTERF    45  io_out(4).
+* INTERF    46  io_out(37).
+* INTERF    47  io_out(36).
+* INTERF    48  io_out(35).
+* INTERF    49  io_out(34).
+* INTERF    50  io_out(33).
+* INTERF    51  io_out(32).
+* INTERF    52  io_out(31).
+* INTERF    53  io_out(30).
+* INTERF    54  io_out(3).
+* INTERF    55  io_out(29).
+* INTERF    56  io_out(28).
+* INTERF    57  io_out(27).
+* INTERF    58  io_out(26).
+* INTERF    59  io_out(25).
+* INTERF    60  io_out(24).
+* INTERF    61  io_out(23).
+* INTERF    62  io_out(22).
+* INTERF    63  io_out(21).
+* INTERF    64  io_out(20).
+* INTERF    65  io_out(2).
+* INTERF    66  io_out(19).
+* INTERF    67  io_out(18).
+* INTERF    68  io_out(17).
+* INTERF    69  io_out(16).
+* INTERF    70  io_out(15).
+* INTERF    71  io_out(14).
+* INTERF    72  io_out(13).
+* INTERF    73  io_out(12).
+* INTERF    74  io_out(11).
+* INTERF    75  io_out(10).
+* INTERF    76  io_out(1).
+* INTERF    77  io_out(0).
+* INTERF    78  io_oeb(9).
+* INTERF    79  io_oeb(8).
+* INTERF    80  io_oeb(7).
+* INTERF    81  io_oeb(6).
+* INTERF    82  io_oeb(5).
+* INTERF    83  io_oeb(4).
+* INTERF    84  io_oeb(37).
+* INTERF    85  io_oeb(36).
+* INTERF    86  io_oeb(35).
+* INTERF    87  io_oeb(34).
+* INTERF    88  io_oeb(33).
+* INTERF    89  io_oeb(32).
+* INTERF    90  io_oeb(31).
+* INTERF    91  io_oeb(30).
+* INTERF    92  io_oeb(3).
+* INTERF    93  io_oeb(29).
+* INTERF    94  io_oeb(28).
+* INTERF    95  io_oeb(27).
+* INTERF    96  io_oeb(26).
+* INTERF    97  io_oeb(25).
+* INTERF    98  io_oeb(24).
+* INTERF    99  io_oeb(23).
+* INTERF   100  io_oeb(22).
+* INTERF   101  io_oeb(21).
+* INTERF   102  io_oeb(20).
+* INTERF   103  io_oeb(2).
+* INTERF   104  io_oeb(19).
+* INTERF   105  io_oeb(18).
+* INTERF   106  io_oeb(17).
+* INTERF   107  io_oeb(16).
+* INTERF   108  io_oeb(15).
+* INTERF   109  io_oeb(14).
+* INTERF   110  io_oeb(13).
+* INTERF   111  io_oeb(12).
+* INTERF   112  io_oeb(11).
+* INTERF   113  io_oeb(10).
+* INTERF   114  io_oeb(1).
+* INTERF   115  io_oeb(0).
+* INTERF   116  io_in(9).
+* INTERF   117  io_in(8).
+* INTERF   118  io_in(7).
+* INTERF   119  io_in(6).
+* INTERF   120  io_in(5).
+* INTERF   121  io_in(4).
+* INTERF   122  io_in(37).
+* INTERF   123  io_in(36).
+* INTERF   124  io_in(35).
+* INTERF   125  io_in(34).
+* INTERF   126  io_in(33).
+* INTERF   127  io_in(32).
+* INTERF   128  io_in(31).
+* INTERF   129  io_in(30).
+* INTERF   130  io_in(3).
+* INTERF   131  io_in(29).
+* INTERF   132  io_in(28).
+* INTERF   133  io_in(27).
+* INTERF   134  io_in(26).
+* INTERF   135  io_in(25).
+* INTERF   136  io_in(24).
+* INTERF   137  io_in(23).
+* INTERF   138  io_in(22).
+* INTERF   139  io_in(21).
+* INTERF   140  io_in(20).
+* INTERF   141  io_in(2).
+* INTERF   142  io_in(19).
+* INTERF   143  io_in(18).
+* INTERF   144  io_in(17).
+* INTERF   145  io_in(16).
+* INTERF   146  io_in(15).
+* INTERF   147  io_in(14).
+* INTERF   148  io_in(13).
+* INTERF   149  io_in(12).
+* INTERF   150  io_in(11).
+* INTERF   151  io_in(10).
+* INTERF   152  io_in(1).
+* INTERF   153  io_in(0).
+
+.subckt arlet6502_harness 30 31 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+* NET     0  zero_29.
+* NET     1  zero_28.
+* NET     2  zero_27.
+* NET     3  zero_26.
+* NET     4  zero_25.
+* NET     5  zero_24.
+* NET     6  zero_23.
+* NET     7  zero_22.
+* NET     8  zero_21.
+* NET     9  zero_20.
+* NET    10  zero_19.
+* NET    11  zero_18.
+* NET    12  zero_17.
+* NET    13  zero_16.
+* NET    14  zero_15.
+* NET    15  zero_14.
+* NET    16  zero_13.
+* NET    17  zero_12.
+* NET    18  zero_11.
+* NET    19  zero_10.
+* NET    20  zero_09.
+* NET    21  zero_08.
+* NET    22  zero_07.
+* NET    23  zero_06.
+* NET    24  zero_05.
+* NET    25  zero_04.
+* NET    26  zero_03.
+* NET    27  zero_02.
+* NET    28  zero_01.
+* NET    29  zero_00.
+* NET    30  vss.
+* NET    31  vdd.
+* NET    32  one_37.
+* NET    33  one_36.
+* NET    34  one_35.
+* NET    35  one_34.
+* NET    36  one_33.
+* NET    37  one_32.
+* NET    38  one_31.
+* NET    39  one_30.
+* NET    40  io_out(9).
+* NET    41  io_out(8).
+* NET    42  io_out(7).
+* NET    43  io_out(6).
+* NET    44  io_out(5).
+* NET    45  io_out(4).
+* NET    46  io_out(37).
+* NET    47  io_out(36).
+* NET    48  io_out(35).
+* NET    49  io_out(34).
+* NET    50  io_out(33).
+* NET    51  io_out(32).
+* NET    52  io_out(31).
+* NET    53  io_out(30).
+* NET    54  io_out(3).
+* NET    55  io_out(29).
+* NET    56  io_out(28).
+* NET    57  io_out(27).
+* NET    58  io_out(26).
+* NET    59  io_out(25).
+* NET    60  io_out(24).
+* NET    61  io_out(23).
+* NET    62  io_out(22).
+* NET    63  io_out(21).
+* NET    64  io_out(20).
+* NET    65  io_out(2).
+* NET    66  io_out(19).
+* NET    67  io_out(18).
+* NET    68  io_out(17).
+* NET    69  io_out(16).
+* NET    70  io_out(15).
+* NET    71  io_out(14).
+* NET    72  io_out(13).
+* NET    73  io_out(12).
+* NET    74  io_out(11).
+* NET    75  io_out(10).
+* NET    76  io_out(1).
+* NET    77  io_out(0).
+* NET    78  io_oeb(9).
+* NET    79  io_oeb(8).
+* NET    80  io_oeb(7).
+* NET    81  io_oeb(6).
+* NET    82  io_oeb(5).
+* NET    83  io_oeb(4).
+* NET    84  io_oeb(37).
+* NET    85  io_oeb(36).
+* NET    86  io_oeb(35).
+* NET    87  io_oeb(34).
+* NET    88  io_oeb(33).
+* NET    89  io_oeb(32).
+* NET    90  io_oeb(31).
+* NET    91  io_oeb(30).
+* NET    92  io_oeb(3).
+* NET    93  io_oeb(29).
+* NET    94  io_oeb(28).
+* NET    95  io_oeb(27).
+* NET    96  io_oeb(26).
+* NET    97  io_oeb(25).
+* NET    98  io_oeb(24).
+* NET    99  io_oeb(23).
+* NET   100  io_oeb(22).
+* NET   101  io_oeb(21).
+* NET   102  io_oeb(20).
+* NET   103  io_oeb(2).
+* NET   104  io_oeb(19).
+* NET   105  io_oeb(18).
+* NET   106  io_oeb(17).
+* NET   107  io_oeb(16).
+* NET   108  io_oeb(15).
+* NET   109  io_oeb(14).
+* NET   110  io_oeb(13).
+* NET   111  io_oeb(12).
+* NET   112  io_oeb(11).
+* NET   113  io_oeb(10).
+* NET   114  io_oeb(1).
+* NET   115  io_oeb(0).
+* NET   116  io_in(9).
+* NET   117  io_in(8).
+* NET   118  io_in(7).
+* NET   119  io_in(6).
+* NET   120  io_in(5).
+* NET   121  io_in(4).
+* NET   122  io_in(37).
+* NET   123  io_in(36).
+* NET   124  io_in(35).
+* NET   125  io_in(34).
+* NET   126  io_in(33).
+* NET   127  io_in(32).
+* NET   128  io_in(31).
+* NET   129  io_in(30).
+* NET   130  io_in(3).
+* NET   131  io_in(29).
+* NET   132  io_in(28).
+* NET   133  io_in(27).
+* NET   134  io_in(26).
+* NET   135  io_in(25).
+* NET   136  io_in(24).
+* NET   137  io_in(23).
+* NET   138  io_in(22).
+* NET   139  io_in(21).
+* NET   140  io_in(20).
+* NET   141  io_in(2).
+* NET   142  io_in(19).
+* NET   143  io_in(18).
+* NET   144  io_in(17).
+* NET   145  io_in(16).
+* NET   146  io_in(15).
+* NET   147  io_in(14).
+* NET   148  io_in(13).
+* NET   149  io_in(12).
+* NET   150  io_in(11).
+* NET   151  io_in(10).
+* NET   152  io_in(1).
+* NET   153  io_in(0).
+
+xcmpt_zero_22 7 30 31 zero_x1
+xcmpt_zero_21 8 30 31 zero_x1
+xcmpt_zero_20 9 30 31 zero_x1
+xinst_buf_30 30 31 91 39 buf_x1
+xinst_buf_33 30 31 88 36 buf_x1
+xinst_buf_32 30 31 89 37 buf_x1
+xinst_buf_31 30 31 90 38 buf_x1
+xcmpt_zero_29 0 30 31 zero_x1
+xcmpt_zero_28 1 30 31 zero_x1
+xcmpt_zero_27 2 30 31 zero_x1
+xcmpt_zero_26 3 30 31 zero_x1
+xcmpt_zero_23 6 30 31 zero_x1
+xcmpt_zero_24 5 30 31 zero_x1
+xcmpt_zero_25 4 30 31 zero_x1
+xinst_buf_37 30 31 84 32 buf_x1
+xinst_buf_36 30 31 85 33 buf_x1
+xinst_buf_35 30 31 86 34 buf_x1
+xinst_buf_34 30 31 87 35 buf_x1
+xreal_chip 131 30 31 132 133 134 135 46 47 48 49 50 51 52 53 117 118 119 120 121 130 141 152 153 143 144 145 146 147 148 149 150 136 137 138 139 140 142 151 116 arlet6502
+xinst_buf_00 30 31 115 29 buf_x1
+xinst_buf_01 30 31 114 28 buf_x1
+xinst_buf_02 30 31 103 27 buf_x1
+xinst_buf_03 30 31 92 26 buf_x1
+xinst_buf_04 30 31 83 25 buf_x1
+xinst_buf_05 30 31 82 24 buf_x1
+xinst_buf_06 30 31 81 23 buf_x1
+xinst_buf_07 30 31 80 22 buf_x1
+xinst_buf_08 30 31 79 21 buf_x1
+xinst_buf_09 30 31 78 20 buf_x1
+xcmpt_one_37 30 31 32 one_x1
+xcmpt_one_36 30 31 33 one_x1
+xcmpt_one_35 30 31 34 one_x1
+xcmpt_one_34 30 31 35 one_x1
+xcmpt_one_33 30 31 36 one_x1
+xcmpt_one_32 30 31 37 one_x1
+xcmpt_one_31 30 31 38 one_x1
+xcmpt_one_30 30 31 39 one_x1
+xinst_buf_19 30 31 104 10 buf_x1
+xinst_buf_18 30 31 105 11 buf_x1
+xinst_buf_17 30 31 106 12 buf_x1
+xinst_buf_16 30 31 107 13 buf_x1
+xinst_buf_15 30 31 108 14 buf_x1
+xinst_buf_14 30 31 109 15 buf_x1
+xinst_buf_13 30 31 110 16 buf_x1
+xinst_buf_12 30 31 111 17 buf_x1
+xinst_buf_11 30 31 112 18 buf_x1
+xinst_buf_10 30 31 113 19 buf_x1
+xcmpt_zero_00 29 30 31 zero_x1
+xcmpt_zero_01 28 30 31 zero_x1
+xcmpt_zero_02 27 30 31 zero_x1
+xcmpt_zero_03 26 30 31 zero_x1
+xcmpt_zero_04 25 30 31 zero_x1
+xcmpt_zero_05 24 30 31 zero_x1
+xcmpt_zero_06 23 30 31 zero_x1
+xcmpt_zero_07 22 30 31 zero_x1
+xcmpt_zero_08 21 30 31 zero_x1
+xcmpt_zero_09 20 30 31 zero_x1
+xinst_buf_29 30 31 93 0 buf_x1
+xinst_buf_28 30 31 94 1 buf_x1
+xinst_buf_27 30 31 95 2 buf_x1
+xinst_buf_26 30 31 96 3 buf_x1
+xinst_buf_25 30 31 97 4 buf_x1
+xinst_buf_24 30 31 98 5 buf_x1
+xinst_buf_23 30 31 99 6 buf_x1
+xinst_buf_22 30 31 100 7 buf_x1
+xinst_buf_21 30 31 101 8 buf_x1
+xinst_buf_20 30 31 102 9 buf_x1
+xcmpt_zero_19 10 30 31 zero_x1
+xcmpt_zero_18 11 30 31 zero_x1
+xcmpt_zero_17 12 30 31 zero_x1
+xcmpt_zero_16 13 30 31 zero_x1
+xcmpt_zero_15 14 30 31 zero_x1
+xcmpt_zero_14 15 30 31 zero_x1
+xcmpt_zero_13 16 30 31 zero_x1
+xcmpt_zero_12 17 30 31 zero_x1
+xcmpt_zero_11 18 30 31 zero_x1
+xcmpt_zero_10 19 30 31 zero_x1
+.ends arlet6502_harness

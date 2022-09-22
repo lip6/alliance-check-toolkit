@@ -1,0 +1,114 @@
+* Coriolis Structural SPICE Driver
+* Generated on Mar 31, 2022, 12:58
+* Cell/Subckt "Arlet6502".
+* 
+* INTERF     0  vss.
+* INTERF     1  vdd.
+* INTERF     2  reset.
+* INTERF     3  clk.
+* INTERF     4  WE.
+* INTERF     5  RDY.
+* INTERF     6  NMI.
+* INTERF     7  IRQ.
+* INTERF     8  DO(7).
+* INTERF     9  DO(6).
+* INTERF    10  DO(5).
+* INTERF    11  DO(4).
+* INTERF    12  DO(3).
+* INTERF    13  DO(2).
+* INTERF    14  DO(1).
+* INTERF    15  DO(0).
+* INTERF    16  DI(7).
+* INTERF    17  DI(6).
+* INTERF    18  DI(5).
+* INTERF    19  DI(4).
+* INTERF    20  DI(3).
+* INTERF    21  DI(2).
+* INTERF    22  DI(1).
+* INTERF    23  DI(0).
+* INTERF    24  A(9).
+* INTERF    25  A(8).
+* INTERF    26  A(7).
+* INTERF    27  A(6).
+* INTERF    28  A(5).
+* INTERF    29  A(4).
+* INTERF    30  A(3).
+* INTERF    31  A(2).
+* INTERF    32  A(15).
+* INTERF    33  A(14).
+* INTERF    34  A(13).
+* INTERF    35  A(12).
+* INTERF    36  A(11).
+* INTERF    37  A(10).
+* INTERF    38  A(1).
+* INTERF    39  A(0).
+
+* Terminal models (aka standard cells) used througout all the hierarchy.
+.include a3_x2.spi
+.include nand3_x0.spi
+.include nor4_x0.spi
+.include nor3_x0.spi
+.include nand2_x0.spi
+.include ao22_x2.spi
+.include mx2_x2.spi
+.include a2_x2.spi
+.include nor2_x0.spi
+.include sff1_x4.spi
+.include a4_x2.spi
+.include oa22_x2.spi
+.include nand4_x0.spi
+.include o3_x2.spi
+.include o4_x2.spi
+.include nxr2_x1.spi
+.include o2_x2.spi
+.include inv_x0.spi
+.include xr2_x1.spi
+
+* Non-terminal models (part of the user's design hierarchy).
+.include cmpt_cpu.spi
+.include cmpt_ALU.spi
+
+.subckt Arlet6502 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39
+* NET     0  vss.
+* NET     1  vdd.
+* NET     2  reset.
+* NET     3  clk.
+* NET     4  WE.
+* NET     5  RDY.
+* NET     6  NMI.
+* NET     7  IRQ.
+* NET     8  DO(7).
+* NET     9  DO(6).
+* NET    10  DO(5).
+* NET    11  DO(4).
+* NET    12  DO(3).
+* NET    13  DO(2).
+* NET    14  DO(1).
+* NET    15  DO(0).
+* NET    16  DI(7).
+* NET    17  DI(6).
+* NET    18  DI(5).
+* NET    19  DI(4).
+* NET    20  DI(3).
+* NET    21  DI(2).
+* NET    22  DI(1).
+* NET    23  DI(0).
+* NET    24  A(9).
+* NET    25  A(8).
+* NET    26  A(7).
+* NET    27  A(6).
+* NET    28  A(5).
+* NET    29  A(4).
+* NET    30  A(3).
+* NET    31  A(2).
+* NET    32  A(15).
+* NET    33  A(14).
+* NET    34  A(13).
+* NET    35  A(12).
+* NET    36  A(11).
+* NET    37  A(10).
+* NET    38  A(1).
+* NET    39  A(0).
+
+xsubckt_0_cpu 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 cmpt_cpu
+.ends Arlet6502

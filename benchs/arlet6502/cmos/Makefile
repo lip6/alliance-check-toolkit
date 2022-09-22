@@ -1,6 +1,7 @@
 # -*- explicit-buffer-name: "Makefile<Arlet6502/cmos>" -*-
 
                 USE_DEBUG = No
+             USE_VALGRIND = No
 
         LOGICAL_SYNTHESIS = Yosys
        PHYSICAL_SYNTHESIS = Coriolis
