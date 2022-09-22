@@ -1,0 +1,1 @@
+../rtl/ethmac_defines.v
