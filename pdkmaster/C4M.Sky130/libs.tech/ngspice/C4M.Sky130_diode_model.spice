@@ -1,0 +1,120 @@
+* Copyright 2020 The SkyWater PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+* SKY130 Spice File.
+.model sky130_fd_pr__diode_pw2nd_05v5 d
++ level = 3.0
++ tlevc = 1.0
++ area = 1.0e+12
+* Junction Capacitance Parameters
++ cj = '0.0013459*1e-12*sky130_fd_pr__nfet_01v8__ajunction_mult' 
++ mj = 0.44
++ pb = 0.729 
++ cjsw = '3.6001e-011*1e-6*sky130_fd_pr__nfet_01v8__pjunction_mult' 
++ mjsw = 0.0009
++ php = 0.2 
++ cta = 0.000792 
++ ctp = 1e-005 
++ tpb = 0.0012287 
++ tphp = 0 
+* Diode IV Parameters
++ js = 2.75e-015 
++ jsw = 6e-016 
++ n = 1.2928
++ rs = 981 
++ ik = '1.3e-009/1e-12' 
++ ikr = '0/1e-12' 
++ vb = 11.7 
++ ibv = 0.00106 
++ trs = 0 
++ eg = 1.05 
++ xti = 2.0
++ tref = 30 
+* Default Parameters
++ tcv = 0 
++ gap1 = 0.000473 
++ gap2 = 1110.0
++ ttt1 = 0 
++ ttt2 = 0 
++ tm1 = 0 
++ tm2 = 0 
++ lm = 0 
++ lp = 0 
++ wm = 0 
++ wp = 0 
++ xm = 0 
++ xoi = 10000.0
++ xom = 10000 
++ xp = 0 
++ xw = 0 
+* Copyright 2020 The SkyWater PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+* SKY130 Spice File.
+.model sky130_fd_pr__diode_pd2nw_05v5 d
++ level = 3.0
++ tlevc = 1.0
++ area = 1.0e+12
+* Junction Capacitance Parameters
++ cj = '0.00074079*1e-12*sky130_fd_pr__pfet_01v8__ajunction_mult' 
++ mj = 0.34629
++ pb = 0.6587 
++ cjsw = '9.88e-011*1e-6*sky130_fd_pr__pfet_01v8__pjunction_mult' 
++ mjsw = 0.29781
++ php = 0.7418 
++ cta = 0.0012407 
++ ctp = 0.00037357 
++ tpb = 0.0020386 
++ tphp = 0.001246 
+* Diode IV Parameters
++ js = 2.1483e-017 
++ jsw = 8.04e-016 
++ n = 1.3632
++ rs = 600 
++ ik = '4.76e-008/1e-12' 
++ ikr = '0/1e-12' 
++ vb = 12.69 
++ ibv = 0.00106 
++ trs = 0 
++ eg = 1.05 
++ xti = 5.2
++ tref = 30 
+* Default Parameters
++ tcv = 0 
++ gap1 = 0.000473 
++ gap2 = 1110.0
++ ttt1 = 0 
++ ttt2 = 0 
++ tm1 = 0 
++ tm2 = 0 
++ lm = 0 
++ lp = 0 
++ wm = 0 
++ wp = 0 
++ xm = 0 
++ xoi = 10000.0
++ xom = 10000 
++ xp = 0 
++ xw = 0 

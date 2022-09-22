@@ -1,0 +1,5 @@
+* DP8TArray_8X4
+.subckt DP8TArray_8X4 vss vdd wl1[0] wl2[0] wl1[1] wl2[1] wl1[2] wl2[2] wl1[3] wl2[3] wl1[4] wl2[4] wl1[5] wl2[5] wl1[6] wl2[6] wl1[7] wl2[7] bl1[0] bl1_n[0] bl2[0] bl2_n[0] bl1[1] bl1_n[1] bl2[1] bl2_n[1] bl1[2] bl1_n[2] bl2[2] bl2_n[2] bl1[3] bl1_n[3] bl2[3] bl2_n[3]
+Xinst0x0 vss vdd wl1[0] wl2[0] wl1[1] wl2[1] wl1[2] wl2[2] wl1[3] wl2[3] bl1[0] bl1_n[0] bl2[0] bl2_n[0] bl1[1] bl1_n[1] bl2[1] bl2_n[1] bl1[2] bl1_n[2] bl2[2] bl2_n[2] bl1[3] bl1_n[3] bl2[3] bl2_n[3] DP8TArray_4X4
+Xinst1x0 vss vdd wl1[4] wl2[4] wl1[5] wl2[5] wl1[6] wl2[6] wl1[7] wl2[7] bl1[0] bl1_n[0] bl2[0] bl2_n[0] bl1[1] bl1_n[1] bl2[1] bl2_n[1] bl1[2] bl1_n[2] bl2[2] bl2_n[2] bl1[3] bl1_n[3] bl2[3] bl2_n[3] DP8TArray_4X4
+.ends DP8TArray_8X4

@@ -1,0 +1,9 @@
+* IOPadInOut
+.subckt IOPadInOut vss vdd iovss iovdd s d de pad
+Xpad pad Pad_15800W12000H
+Xnclamp iovss iovdd pad ngate Clamp_N32N4D
+Xpclamp iovss iovdd pad pgate Clamp_P32N4D
+Xbulkconn vdd vss iovdd iovss BulkConn_18000WUp
+Xgatedec vdd vss iovdd d de ngate pgate GateDecode
+Xleveldown vdd vss iovdd iovss pad s LevelDown
+.ends IOPadInOut

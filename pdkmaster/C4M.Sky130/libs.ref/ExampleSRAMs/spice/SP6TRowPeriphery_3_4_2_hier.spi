@@ -1,0 +1,348 @@
+* SP6TRowPeriphery_3_4_2
+* SP6TWLDrive_30LN100WN30LP200WP
+.subckt SP6TWLDrive_30LN100WN30LP200WP vss vdd wl_n wl_drive
+Mnmos1 vss wl_n wl_drive vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.5um
+Mnmos2 wl_drive wl_n vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.5um
+Mpmos1 vdd wl_n wl_drive vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=1.0um
+Mpmos2 wl_drive wl_n vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=1.0um
+.ends SP6TWLDrive_30LN100WN30LP200WP
+* SP6TRowDecoderNand3
+.subckt SP6TRowDecoderNand3 vss vdd pd[0] pd[1] wl_en wl_n
+Mnmos[0] vss pd[0] int[0] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.84um
+Mnmos[1] int[0] pd[1] int[1] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.84um
+Mnmos[2] int[1] wl_en wl_n vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.84um
+Mpmos[0] vdd pd[0] wl_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.84um
+Mpmos[1] wl_n pd[1] vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.84um
+Mpmos[2] vdd wl_en wl_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.84um
+.ends SP6TRowDecoderNand3
+* tie_diff_w4
+.subckt tie_diff_w4 vdd vss
+
+.ends tie_diff_w4
+* a4_x2
+.subckt a4_x2 vss q vdd i0 i1 i2 i3
+Mn_net1_1 vss _net1 q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mp_net1_1 vdd _net1 q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mp_i0_1 vdd i0 _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i0_1 _net1 i0 _net3 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_i1_1 _net1 i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i1_1 _net3 i1 _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_i2_1 vdd i2 _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i2_1 _net0 i2 _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_i3_1 _net1 i3 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i3_1 _net2 i3 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+.ends a4_x2
+* a3_x2
+.subckt a3_x2 vdd q vss i0 i1 i2
+Mp_net1_1 vdd _net1 q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mn_net1_1 vss _net1 q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mp_i0_1 _net1 i0 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i0_1 _net1 i0 _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mn_i1_1 _net0 i1 _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_i1_1 vdd i1 _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i2_1 _net2 i2 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_i2_1 _net1 i2 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends a3_x2
+* inv_x0
+.subckt inv_x0 vdd vss i nq
+Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends inv_x0
+* SP6TRowDecoderDriverPage_2PD8R
+.subckt SP6TRowDecoderDriverPage_2PD8R vss vdd pd[0][0] wl[0] pd[0][1] wl[1] pd[0][2] wl[2] pd[0][3] wl[3] pd[0][4] wl[4] pd[0][5] wl[5] pd[0][6] wl[6] pd[0][7] wl[7] pd[1] wl_en
+Xnand3[0] vss vdd pd[0][0] pd[1] wl_en wl_n[0] SP6TRowDecoderNand3
+Xnand3[1] vss vdd pd[0][1] pd[1] wl_en wl_n[1] SP6TRowDecoderNand3
+Xnand3[2] vss vdd pd[0][2] pd[1] wl_en wl_n[2] SP6TRowDecoderNand3
+Xnand3[3] vss vdd pd[0][3] pd[1] wl_en wl_n[3] SP6TRowDecoderNand3
+Xnand3[4] vss vdd pd[0][4] pd[1] wl_en wl_n[4] SP6TRowDecoderNand3
+Xnand3[5] vss vdd pd[0][5] pd[1] wl_en wl_n[5] SP6TRowDecoderNand3
+Xnand3[6] vss vdd pd[0][6] pd[1] wl_en wl_n[6] SP6TRowDecoderNand3
+Xnand3[7] vss vdd pd[0][7] pd[1] wl_en wl_n[7] SP6TRowDecoderNand3
+Xdrive[0] vss vdd wl_n[0] wl[0] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[1] vss vdd wl_n[1] wl[1] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[2] vss vdd wl_n[2] wl[2] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[3] vss vdd wl_n[3] wl[3] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[4] vss vdd wl_n[4] wl[4] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[5] vss vdd wl_n[5] wl[5] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[6] vss vdd wl_n[6] wl[6] SP6TWLDrive_30LN100WN30LP200WP
+Xdrive[7] vss vdd wl_n[7] wl[7] SP6TWLDrive_30LN100WN30LP200WP
+.ends SP6TRowDecoderDriverPage_2PD8R
+* SP6TRowPredecoders_3_4B
+.subckt SP6TRowPredecoders_3_4B vss vdd clk a[0] a[1] a[2] a[3] a[4] a[5] a[6] pd[0][0] pd[0][1] pd[0][2] pd[0][3] pd[0][4] pd[0][5] pd[0][6] pd[0][7] pd[1][0] pd[1][1] pd[1][2] pd[1][3] pd[1][4] pd[1][5] pd[1][6] pd[1][7] pd[1][8] pd[1][9] pd[1][10] pd[1][11] pd[1][12] pd[1][13] pd[1][14] pd[1][15]
+Xaff[0] vdd clk vss a[0] aint[0] sff1_x4
+Xaff[1] vdd clk vss a[1] aint[1] sff1_x4
+Xaff[2] vdd clk vss a[2] aint[2] sff1_x4
+Xaff[3] vdd clk vss a[3] aint[3] sff1_x4
+Xaff[4] vdd clk vss a[4] aint[4] sff1_x4
+Xaff[5] vdd clk vss a[5] aint[5] sff1_x4
+Xaff[6] vdd clk vss a[6] aint[6] sff1_x4
+Xainv[0] vdd vss aint[0] aint_n[0] inv_x1
+Xainv[1] vdd vss aint[1] aint_n[1] inv_x1
+Xainv[2] vdd vss aint[2] aint_n[2] inv_x1
+Xainv[3] vdd vss aint[3] aint_n[3] inv_x1
+Xainv[4] vdd vss aint[4] aint_n[4] inv_x1
+Xainv[5] vdd vss aint[5] aint_n[5] inv_x1
+Xainv[6] vdd vss aint[6] aint_n[6] inv_x1
+Xpd[0]and[0] vdd pd[0][0] vss aint_n[0] aint_n[1] aint_n[2] a3_x2
+Xpd[0]and[1] vdd pd[0][1] vss aint[0] aint_n[1] aint_n[2] a3_x2
+Xpd[0]and[2] vdd pd[0][2] vss aint_n[0] aint[1] aint_n[2] a3_x2
+Xpd[0]and[3] vdd pd[0][3] vss aint[0] aint[1] aint_n[2] a3_x2
+Xpd[0]and[4] vdd pd[0][4] vss aint_n[0] aint_n[1] aint[2] a3_x2
+Xpd[0]and[5] vdd pd[0][5] vss aint[0] aint_n[1] aint[2] a3_x2
+Xpd[0]and[6] vdd pd[0][6] vss aint_n[0] aint[1] aint[2] a3_x2
+Xpd[0]and[7] vdd pd[0][7] vss aint[0] aint[1] aint[2] a3_x2
+Xpd[1]and[0] vss pd[1][0] vdd aint_n[3] aint_n[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[1] vss pd[1][1] vdd aint[3] aint_n[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[2] vss pd[1][2] vdd aint_n[3] aint[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[3] vss pd[1][3] vdd aint[3] aint[4] aint_n[5] aint_n[6] a4_x2
+Xpd[1]and[4] vss pd[1][4] vdd aint_n[3] aint_n[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[5] vss pd[1][5] vdd aint[3] aint_n[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[6] vss pd[1][6] vdd aint_n[3] aint[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[7] vss pd[1][7] vdd aint[3] aint[4] aint[5] aint_n[6] a4_x2
+Xpd[1]and[8] vss pd[1][8] vdd aint_n[3] aint_n[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[9] vss pd[1][9] vdd aint[3] aint_n[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[10] vss pd[1][10] vdd aint_n[3] aint[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[11] vss pd[1][11] vdd aint[3] aint[4] aint_n[5] aint[6] a4_x2
+Xpd[1]and[12] vss pd[1][12] vdd aint_n[3] aint_n[4] aint[5] aint[6] a4_x2
+Xpd[1]and[13] vss pd[1][13] vdd aint[3] aint_n[4] aint[5] aint[6] a4_x2
+Xpd[1]and[14] vss pd[1][14] vdd aint_n[3] aint[4] aint[5] aint[6] a4_x2
+Xpd[1]and[15] vss pd[1][15] vdd aint[3] aint[4] aint[5] aint[6] a4_x2
+Xtie[0] vdd vss tie_diff_w4
+Xtie[1] vdd vss tie_diff_w4
+Xtie[2] vdd vss tie_diff_w4
+Xtie[3] vdd vss tie_diff_w4
+Xtie[4] vdd vss tie_diff_w4
+Xtie[5] vdd vss tie_diff_w4
+Xtie[6] vdd vss tie_diff_w4
+Xtie[7] vdd vss tie_diff_w4
+Xtie[8] vdd vss tie_diff_w4
+Xtie[9] vdd vss tie_diff_w4
+Xtie[10] vdd vss tie_diff_w4
+Xtie[11] vdd vss tie_diff_w4
+Xtie[12] vdd vss tie_diff_w4
+Xtie[13] vdd vss tie_diff_w4
+Xtie[14] vdd vss tie_diff_w4
+Xtie[15] vdd vss tie_diff_w4
+Xtie[16] vdd vss tie_diff_w4
+Xtie[17] vdd vss tie_diff_w4
+Xtie[18] vdd vss tie_diff_w4
+Xtie[19] vdd vss tie_diff_w4
+Xtie[20] vdd vss tie_diff_w4
+Xtie[21] vdd vss tie_diff_w4
+Xtie[22] vdd vss tie_diff_w4
+Xtie[23] vdd vss tie_diff_w4
+Xtie[24] vdd vss tie_diff_w4
+Xtie[25] vdd vss tie_diff_w4
+Xtie[26] vdd vss tie_diff_w4
+Xtie[27] vdd vss tie_diff_w4
+Xtie[28] vdd vss tie_diff_w4
+Xtie[29] vdd vss tie_diff_w4
+Xtie[30] vdd vss tie_diff_w4
+Xtie[31] vdd vss tie_diff_w4
+Xtie[32] vdd vss tie_diff_w4
+Xtie[33] vdd vss tie_diff_w4
+Xtie[34] vdd vss tie_diff_w4
+Xtie[35] vdd vss tie_diff_w4
+Xtie[36] vdd vss tie_diff_w4
+Xtie[37] vdd vss tie_diff_w4
+Xtie[38] vdd vss tie_diff_w4
+Xtie[39] vdd vss tie_diff_w4
+Xtie[40] vdd vss tie_diff_w4
+Xtie[41] vdd vss tie_diff_w4
+Xtie[42] vdd vss tie_diff_w4
+Xtie[43] vdd vss tie_diff_w4
+Xtie[44] vdd vss tie_diff_w4
+Xtie[45] vdd vss tie_diff_w4
+Xtie[46] vdd vss tie_diff_w4
+Xtie[47] vdd vss tie_diff_w4
+Xtie[48] vdd vss tie_diff_w4
+Xtie[49] vdd vss tie_diff_w4
+Xtie[50] vdd vss tie_diff_w4
+Xtie[51] vdd vss tie_diff_w4
+Xtie[52] vdd vss tie_diff_w4
+Xtie[53] vdd vss tie_diff_w4
+Xtie[54] vdd vss tie_diff_w4
+Xtie[55] vdd vss tie_diff_w4
+Xtie[56] vdd vss tie_diff_w4
+Xtie[57] vdd vss tie_diff_w4
+Xtie[58] vdd vss tie_diff_w4
+Xtie[59] vdd vss tie_diff_w4
+Xtie[60] vdd vss tie_diff_w4
+Xtie[61] vdd vss tie_diff_w4
+Xtie[62] vdd vss tie_diff_w4
+Xtie[63] vdd vss tie_diff_w4
+Xtie[64] vdd vss tie_diff_w4
+Xtie[65] vdd vss tie_diff_w4
+Xtie[66] vdd vss tie_diff_w4
+Xtie[67] vdd vss tie_diff_w4
+Xtie[68] vdd vss tie_diff_w4
+Xtie[69] vdd vss tie_diff_w4
+Xtie[70] vdd vss tie_diff_w4
+Xtie[71] vdd vss tie_diff_w4
+Xtie[72] vdd vss tie_diff_w4
+Xtie[73] vdd vss tie_diff_w4
+Xtie[74] vdd vss tie_diff_w4
+Xtie[75] vdd vss tie_diff_w4
+Xtie[76] vdd vss tie_diff_w4
+Xtie[77] vdd vss tie_diff_w4
+Xtie[78] vdd vss tie_diff_w4
+Xtie[79] vdd vss tie_diff_w4
+Xtie[80] vdd vss tie_diff_w4
+Xtie[81] vdd vss tie_diff_w4
+Xtie[82] vdd vss tie_diff_w4
+Xtie[83] vdd vss tie_diff_w4
+Xtie[84] vdd vss tie_diff_w4
+Xtie[85] vdd vss tie_diff_w4
+Xtie[86] vdd vss tie_diff_w4
+Xtie[87] vdd vss tie_diff_w4
+Xtie[88] vdd vss tie_diff_w4
+Xtie[89] vdd vss tie_diff_w4
+Xtie[90] vdd vss tie_diff_w4
+Xtie[91] vdd vss tie_diff_w4
+Xtie[92] vdd vss tie_diff_w4
+Xtie[93] vdd vss tie_diff_w4
+Xtie[94] vdd vss tie_diff_w4
+Xtie[95] vdd vss tie_diff_w4
+Xtie[96] vdd vss tie_diff_w4
+Xtie[97] vdd vss tie_diff_w4
+Xtie[98] vdd vss tie_diff_w4
+Xtie[99] vdd vss tie_diff_w4
+Xtie[100] vdd vss tie_diff_w4
+Xtie[101] vdd vss tie_diff_w4
+Xtie[102] vdd vss tie_diff_w4
+Xtie[103] vdd vss tie_diff_w4
+Xtie[104] vdd vss tie_diff_w4
+Xtie[105] vdd vss tie_diff_w4
+Xtie[106] vdd vss tie_diff_w4
+Xtie[107] vdd vss tie_diff_w4
+Xtie[108] vdd vss tie_diff_w4
+.ends SP6TRowPredecoders_3_4B
+* nand2_x0
+.subckt nand2_x0 vdd vss nq i0 i1
+Mn0 vss i0 int0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp0 vdd i0 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn1 int0 i1 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp1 nq i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends nand2_x0
+* inv_x1
+.subckt inv_x1 vdd vss i nq
+Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends inv_x1
+* sff1_x4
+.subckt sff1_x4 vdd ck vss i q
+Mp_ck nckr ck vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_ck nckr ck vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_ckr_1 _net1 ckr sff_m vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_ckr_2 y ckr sff_s vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_ckr_1 sff_m ckr _net4 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_ckr_2 sff_s ckr _net0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i u i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_i u i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nckr_2 sff_m nckr _net5 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nckr_3 y nckr sff_s vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nckr_1 vdd nckr ckr vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_nckr_1 vss nckr ckr vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_nckr_3 sff_s nckr _net6 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_nckr_2 _net2 nckr sff_m vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_q_1 _net6 q vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_q_1 _net0 q vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_sffm_1 vss sff_m y vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_sffm_1 vdd sff_m y vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_sffs_1 vdd sff_s q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mn_sffs_1 vss sff_s q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mn_sffs_2 q sff_s vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mp_sffs_2 q sff_s vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mn_u vss u _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_u vdd u _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_y_1 _net4 y vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_y_1 _net5 y vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends sff1_x4
+* inv_x2
+.subckt inv_x2 vdd vss i nq
+Mn0 vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn1 nq i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp0 vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp1 nq i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends inv_x2
+* buf_x2
+.subckt buf_x2 vdd vss i q
+Mn1 ni i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn2_0 vss ni q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_1 q ni vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp1 ni i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp2_0 vdd ni q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_1 q ni vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends buf_x2
+* SP6TNonOverlapClock_8S
+.subckt SP6TNonOverlapClock_8S vss vdd clk firststage[0] firststage[1] firststage[2] firststage[3] firststage[4] firststage[5] firststage[6] firststage[7] firststage[8] secondstage[0] secondstage[1] secondstage[2] secondstage[3] secondstage[4] secondstage[5] secondstage[6] secondstage[7] secondstage[8]
+Xclkinv vdd vss clk clk_n inv_x0
+Xfirstnand2 vdd vss firststage[0] clk secondstage[8] nand2_x0
+Xfirststage[0] vdd vss firststage[0] firststage[1] inv_x0
+Xfirststage[1] vdd vss firststage[1] firststage[2] inv_x0
+Xfirststage[2] vdd vss firststage[2] firststage[3] inv_x0
+Xfirststage[3] vdd vss firststage[3] firststage[4] inv_x0
+Xfirststage[4] vdd vss firststage[4] firststage[5] inv_x0
+Xfirststage[5] vdd vss firststage[5] firststage[6] inv_x0
+Xfirststage[6] vdd vss firststage[6] firststage[7] inv_x0
+Xfirststage[7] vdd vss firststage[7] firststage[8] inv_x0
+Xsecondnand2 vdd vss secondstage[0] clk_n firststage[8] nand2_x0
+Xsecondstage[0] vdd vss secondstage[0] secondstage[1] inv_x0
+Xsecondstage[1] vdd vss secondstage[1] secondstage[2] inv_x0
+Xsecondstage[2] vdd vss secondstage[2] secondstage[3] inv_x0
+Xsecondstage[3] vdd vss secondstage[3] secondstage[4] inv_x0
+Xsecondstage[4] vdd vss secondstage[4] secondstage[5] inv_x0
+Xsecondstage[5] vdd vss secondstage[5] secondstage[6] inv_x0
+Xsecondstage[6] vdd vss secondstage[6] secondstage[7] inv_x0
+Xsecondstage[7] vdd vss secondstage[7] secondstage[8] inv_x0
+.ends SP6TNonOverlapClock_8S
+* SP6TRowDecoder_3_4B
+.subckt SP6TRowDecoder_3_4B vss vdd a[0] a[1] a[2] a[3] a[4] a[5] a[6] clk wl_en wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127]
+Xpredec vss vdd clk a[0] a[1] a[2] a[3] a[4] a[5] a[6] pd[0][0] pd[0][1] pd[0][2] pd[0][3] pd[0][4] pd[0][5] pd[0][6] pd[0][7] pd[1][0] pd[1][1] pd[1][2] pd[1][3] pd[1][4] pd[1][5] pd[1][6] pd[1][7] pd[1][8] pd[1][9] pd[1][10] pd[1][11] pd[1][12] pd[1][13] pd[1][14] pd[1][15] SP6TRowPredecoders_3_4B
+Xpage[0] vss vdd pd[0][0] wl[0] pd[0][1] wl[1] pd[0][2] wl[2] pd[0][3] wl[3] pd[0][4] wl[4] pd[0][5] wl[5] pd[0][6] wl[6] pd[0][7] wl[7] pd[1][0] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[1] vss vdd pd[0][0] wl[8] pd[0][1] wl[9] pd[0][2] wl[10] pd[0][3] wl[11] pd[0][4] wl[12] pd[0][5] wl[13] pd[0][6] wl[14] pd[0][7] wl[15] pd[1][1] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[2] vss vdd pd[0][0] wl[16] pd[0][1] wl[17] pd[0][2] wl[18] pd[0][3] wl[19] pd[0][4] wl[20] pd[0][5] wl[21] pd[0][6] wl[22] pd[0][7] wl[23] pd[1][2] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[3] vss vdd pd[0][0] wl[24] pd[0][1] wl[25] pd[0][2] wl[26] pd[0][3] wl[27] pd[0][4] wl[28] pd[0][5] wl[29] pd[0][6] wl[30] pd[0][7] wl[31] pd[1][3] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[4] vss vdd pd[0][0] wl[32] pd[0][1] wl[33] pd[0][2] wl[34] pd[0][3] wl[35] pd[0][4] wl[36] pd[0][5] wl[37] pd[0][6] wl[38] pd[0][7] wl[39] pd[1][4] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[5] vss vdd pd[0][0] wl[40] pd[0][1] wl[41] pd[0][2] wl[42] pd[0][3] wl[43] pd[0][4] wl[44] pd[0][5] wl[45] pd[0][6] wl[46] pd[0][7] wl[47] pd[1][5] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[6] vss vdd pd[0][0] wl[48] pd[0][1] wl[49] pd[0][2] wl[50] pd[0][3] wl[51] pd[0][4] wl[52] pd[0][5] wl[53] pd[0][6] wl[54] pd[0][7] wl[55] pd[1][6] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[7] vss vdd pd[0][0] wl[56] pd[0][1] wl[57] pd[0][2] wl[58] pd[0][3] wl[59] pd[0][4] wl[60] pd[0][5] wl[61] pd[0][6] wl[62] pd[0][7] wl[63] pd[1][7] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[8] vss vdd pd[0][0] wl[64] pd[0][1] wl[65] pd[0][2] wl[66] pd[0][3] wl[67] pd[0][4] wl[68] pd[0][5] wl[69] pd[0][6] wl[70] pd[0][7] wl[71] pd[1][8] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[9] vss vdd pd[0][0] wl[72] pd[0][1] wl[73] pd[0][2] wl[74] pd[0][3] wl[75] pd[0][4] wl[76] pd[0][5] wl[77] pd[0][6] wl[78] pd[0][7] wl[79] pd[1][9] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[10] vss vdd pd[0][0] wl[80] pd[0][1] wl[81] pd[0][2] wl[82] pd[0][3] wl[83] pd[0][4] wl[84] pd[0][5] wl[85] pd[0][6] wl[86] pd[0][7] wl[87] pd[1][10] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[11] vss vdd pd[0][0] wl[88] pd[0][1] wl[89] pd[0][2] wl[90] pd[0][3] wl[91] pd[0][4] wl[92] pd[0][5] wl[93] pd[0][6] wl[94] pd[0][7] wl[95] pd[1][11] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[12] vss vdd pd[0][0] wl[96] pd[0][1] wl[97] pd[0][2] wl[98] pd[0][3] wl[99] pd[0][4] wl[100] pd[0][5] wl[101] pd[0][6] wl[102] pd[0][7] wl[103] pd[1][12] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[13] vss vdd pd[0][0] wl[104] pd[0][1] wl[105] pd[0][2] wl[106] pd[0][3] wl[107] pd[0][4] wl[108] pd[0][5] wl[109] pd[0][6] wl[110] pd[0][7] wl[111] pd[1][13] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[14] vss vdd pd[0][0] wl[112] pd[0][1] wl[113] pd[0][2] wl[114] pd[0][3] wl[115] pd[0][4] wl[116] pd[0][5] wl[117] pd[0][6] wl[118] pd[0][7] wl[119] pd[1][14] wl_en SP6TRowDecoderDriverPage_2PD8R
+Xpage[15] vss vdd pd[0][0] wl[120] pd[0][1] wl[121] pd[0][2] wl[122] pd[0][3] wl[123] pd[0][4] wl[124] pd[0][5] wl[125] pd[0][6] wl[126] pd[0][7] wl[127] pd[1][15] wl_en SP6TRowDecoderDriverPage_2PD8R
+.ends SP6TRowDecoder_3_4B
+* SP6TLatchedDecoder_2A2R
+.subckt SP6TLatchedDecoder_2A2R vss vdd clk a[0] a[1] line[0] line[1] line[2] line[3]
+Xaff[0] vdd clk vss a[0] aint[0] sff1_x4
+Xaff[1] vdd clk vss a[1] aint[1] sff1_x4
+Xainv[0] vdd vss aint[0] aint_n[0] inv_x1
+Xainv[1] vdd vss aint[1] aint_n[1] inv_x1
+Xlinenand[0] vdd vss line_n[0] aint_n[0] aint_n[1] nand2_x0
+Xlinenand[1] vdd vss line_n[1] aint[0] aint_n[1] nand2_x0
+Xlinenand[2] vdd vss line_n[2] aint_n[0] aint[1] nand2_x0
+Xlinenand[3] vdd vss line_n[3] aint[0] aint[1] nand2_x0
+Xlineinv[0] vdd vss line_n[0] line[0] inv_x2
+Xlineinv[1] vdd vss line_n[1] line[1] inv_x2
+Xlineinv[2] vdd vss line_n[2] line[2] inv_x2
+Xlineinv[3] vdd vss line_n[3] line[3] inv_x2
+.ends SP6TLatchedDecoder_2A2R
+* SP6TClockGenerator
+.subckt SP6TClockGenerator vss vdd clk decodeclk columnclk precharge_n wl_en we_en
+Xnonovl vss vdd clk firststage[0] firststage[1] firststage[2] firststage[3] firststage[4] firststage[5] firststage[6] firstpulse firststage[8] secondstage[0] secondstage[1] secondstage[2] secondstage[3] secondstage[4] secondstage[5] secondstage[6] secondpulse secondstage[8] SP6TNonOverlapClock_8S
+Xdecodeclkbuf vdd vss clk decodeclk buf_x2
+Xcolumnclkbuf vdd vss clk columnclk buf_x2
+Xwlenbuf vdd vss firstpulse wl_en buf_x2
+Xweenbuf vdd vss firstpulse we_en buf_x2
+Xprechargeinv vdd vss secondpulse precharge_n inv_x2
+.ends SP6TClockGenerator
+* SP6TRowPeriphery_3_4_2
+.subckt SP6TRowPeriphery_3_4_2 vss vdd clk a[0] a[1] a[2] a[3] a[4] a[5] a[6] a[7] a[8] wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127] mux[0] mux[1] mux[2] mux[3] columnclk precharge_n we_en
+Xclkgen vss vdd clk decodeclk columnclk precharge_n wl_en we_en SP6TClockGenerator
+Xcoldec vss vdd decodeclk a[0] a[1] mux[0] mux[1] mux[2] mux[3] SP6TLatchedDecoder_2A2R
+Xrowdec vss vdd a[2] a[3] a[4] a[5] a[6] a[7] a[8] decodeclk wl_en wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127] SP6TRowDecoder_3_4B
+.ends SP6TRowPeriphery_3_4_2

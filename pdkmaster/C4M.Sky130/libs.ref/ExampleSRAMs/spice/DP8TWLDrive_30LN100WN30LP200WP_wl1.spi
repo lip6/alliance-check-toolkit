@@ -1,0 +1,7 @@
+* DP8TWLDrive_30LN100WN30LP200WP_wl1
+.subckt DP8TWLDrive_30LN100WN30LP200WP_wl1 vss vdd wl_n wl_drive
+Mnmos1 vss wl_n wl_drive vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.5um
+Mnmos2 wl_drive wl_n vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.5um
+Mpmos1 vdd wl_n wl_drive vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=1.0um
+Mpmos2 wl_drive wl_n vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=1.0um
+.ends DP8TWLDrive_30LN100WN30LP200WP_wl1

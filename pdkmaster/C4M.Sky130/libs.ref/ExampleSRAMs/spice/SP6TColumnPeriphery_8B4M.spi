@@ -1,0 +1,56 @@
+* SP6TColumnPeriphery_8B4M
+.subckt SP6TColumnPeriphery_8B4M vss vdd clk precharge_n we we_en q[0] d[0] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] q[1] d[1] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] q[2] d[2] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] q[3] d[3] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] q[4] d[4] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] q[5] d[5] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] q[6] d[6] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] q[7] d[7] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] mux[0] mux[1] mux[2] mux[3]
+Xprecharge[0] vdd bl[0] bl_n[0] precharge_n SP6TPrecharge
+Xprecharge[1] vdd bl[1] bl_n[1] precharge_n SP6TPrecharge
+Xprecharge[2] vdd bl[2] bl_n[2] precharge_n SP6TPrecharge
+Xprecharge[3] vdd bl[3] bl_n[3] precharge_n SP6TPrecharge
+Xprecharge[4] vdd bl[4] bl_n[4] precharge_n SP6TPrecharge
+Xprecharge[5] vdd bl[5] bl_n[5] precharge_n SP6TPrecharge
+Xprecharge[6] vdd bl[6] bl_n[6] precharge_n SP6TPrecharge
+Xprecharge[7] vdd bl[7] bl_n[7] precharge_n SP6TPrecharge
+Xprecharge[8] vdd bl[8] bl_n[8] precharge_n SP6TPrecharge
+Xprecharge[9] vdd bl[9] bl_n[9] precharge_n SP6TPrecharge
+Xprecharge[10] vdd bl[10] bl_n[10] precharge_n SP6TPrecharge
+Xprecharge[11] vdd bl[11] bl_n[11] precharge_n SP6TPrecharge
+Xprecharge[12] vdd bl[12] bl_n[12] precharge_n SP6TPrecharge
+Xprecharge[13] vdd bl[13] bl_n[13] precharge_n SP6TPrecharge
+Xprecharge[14] vdd bl[14] bl_n[14] precharge_n SP6TPrecharge
+Xprecharge[15] vdd bl[15] bl_n[15] precharge_n SP6TPrecharge
+Xprecharge[16] vdd bl[16] bl_n[16] precharge_n SP6TPrecharge
+Xprecharge[17] vdd bl[17] bl_n[17] precharge_n SP6TPrecharge
+Xprecharge[18] vdd bl[18] bl_n[18] precharge_n SP6TPrecharge
+Xprecharge[19] vdd bl[19] bl_n[19] precharge_n SP6TPrecharge
+Xprecharge[20] vdd bl[20] bl_n[20] precharge_n SP6TPrecharge
+Xprecharge[21] vdd bl[21] bl_n[21] precharge_n SP6TPrecharge
+Xprecharge[22] vdd bl[22] bl_n[22] precharge_n SP6TPrecharge
+Xprecharge[23] vdd bl[23] bl_n[23] precharge_n SP6TPrecharge
+Xprecharge[24] vdd bl[24] bl_n[24] precharge_n SP6TPrecharge
+Xprecharge[25] vdd bl[25] bl_n[25] precharge_n SP6TPrecharge
+Xprecharge[26] vdd bl[26] bl_n[26] precharge_n SP6TPrecharge
+Xprecharge[27] vdd bl[27] bl_n[27] precharge_n SP6TPrecharge
+Xprecharge[28] vdd bl[28] bl_n[28] precharge_n SP6TPrecharge
+Xprecharge[29] vdd bl[29] bl_n[29] precharge_n SP6TPrecharge
+Xprecharge[30] vdd bl[30] bl_n[30] precharge_n SP6TPrecharge
+Xprecharge[31] vdd bl[31] bl_n[31] precharge_n SP6TPrecharge
+Xcolmux[0] bl[0] bl_n[0] mux[0] bl[1] bl_n[1] mux[1] bl[2] bl_n[2] mux[2] bl[3] bl_n[3] mux[3] vss muxbl[0] muxbl_n[0] SP6TColMux_4C
+Xcolmux[1] bl[4] bl_n[4] mux[0] bl[5] bl_n[5] mux[1] bl[6] bl_n[6] mux[2] bl[7] bl_n[7] mux[3] vss muxbl[1] muxbl_n[1] SP6TColMux_4C
+Xcolmux[2] bl[8] bl_n[8] mux[0] bl[9] bl_n[9] mux[1] bl[10] bl_n[10] mux[2] bl[11] bl_n[11] mux[3] vss muxbl[2] muxbl_n[2] SP6TColMux_4C
+Xcolmux[3] bl[12] bl_n[12] mux[0] bl[13] bl_n[13] mux[1] bl[14] bl_n[14] mux[2] bl[15] bl_n[15] mux[3] vss muxbl[3] muxbl_n[3] SP6TColMux_4C
+Xcolmux[4] bl[16] bl_n[16] mux[0] bl[17] bl_n[17] mux[1] bl[18] bl_n[18] mux[2] bl[19] bl_n[19] mux[3] vss muxbl[4] muxbl_n[4] SP6TColMux_4C
+Xcolmux[5] bl[20] bl_n[20] mux[0] bl[21] bl_n[21] mux[1] bl[22] bl_n[22] mux[2] bl[23] bl_n[23] mux[3] vss muxbl[5] muxbl_n[5] SP6TColMux_4C
+Xcolmux[6] bl[24] bl_n[24] mux[0] bl[25] bl_n[25] mux[1] bl[26] bl_n[26] mux[2] bl[27] bl_n[27] mux[3] vss muxbl[6] muxbl_n[6] SP6TColMux_4C
+Xcolmux[7] bl[28] bl_n[28] mux[0] bl[29] bl_n[29] mux[1] bl[30] bl_n[30] mux[2] bl[31] bl_n[31] mux[3] vss muxbl[7] muxbl_n[7] SP6TColMux_4C
+Xsenseamp[0] vss vdd muxbl[0] muxbl_n[0] q[0] SP6TSenseAmp_4M
+Xsenseamp[1] vss vdd muxbl[1] muxbl_n[1] q[1] SP6TSenseAmp_4M
+Xsenseamp[2] vss vdd muxbl[2] muxbl_n[2] q[2] SP6TSenseAmp_4M
+Xsenseamp[3] vss vdd muxbl[3] muxbl_n[3] q[3] SP6TSenseAmp_4M
+Xsenseamp[4] vss vdd muxbl[4] muxbl_n[4] q[4] SP6TSenseAmp_4M
+Xsenseamp[5] vss vdd muxbl[5] muxbl_n[5] q[5] SP6TSenseAmp_4M
+Xsenseamp[6] vss vdd muxbl[6] muxbl_n[6] q[6] SP6TSenseAmp_4M
+Xsenseamp[7] vss vdd muxbl[7] muxbl_n[7] q[7] SP6TSenseAmp_4M
+Xwritedrive[0] vss vdd intclk we_n muxbl[0] muxbl_n[0] d[0] muxbl[1] muxbl_n[1] d[1] SP6TWriteDriver_4M2B
+Xwritedrive[1] vss vdd intclk we_n muxbl[2] muxbl_n[2] d[2] muxbl[3] muxbl_n[3] d[3] SP6TWriteDriver_4M2B
+Xwritedrive[2] vss vdd intclk we_n muxbl[4] muxbl_n[4] d[4] muxbl[5] muxbl_n[5] d[5] SP6TWriteDriver_4M2B
+Xwritedrive[3] vss vdd intclk we_n muxbl[6] muxbl_n[6] d[6] muxbl[7] muxbl_n[7] d[7] SP6TWriteDriver_4M2B
+Xclkwe vss vdd clk intclk we we_en we_n SP6TClockWE
+.ends SP6TColumnPeriphery_8B4M

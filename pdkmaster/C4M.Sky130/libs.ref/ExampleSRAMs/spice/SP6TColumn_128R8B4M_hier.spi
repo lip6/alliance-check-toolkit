@@ -1,0 +1,246 @@
+* SP6TColumn_128R8B4M
+* SP6TCell
+.subckt SP6TCell vdd vss wl bl bl_n
+Mpu1 vdd bit_n bit vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpu2 bit_n bit vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpd1 vss bit_n bit vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpd2 bit_n bit vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpg1 bl wl bit vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpg2 bl_n wl bit_n vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+.ends SP6TCell
+* SP6TArray_2X1
+.subckt SP6TArray_2X1 vss vdd wl[0] wl[1] bl[0] bl_n[0]
+Xinst0x0 vdd vss wl[0] bl[0] bl_n[0] SP6TCell
+Xinst1x0 vdd vss wl[1] bl[0] bl_n[0] SP6TCell
+.ends SP6TArray_2X1
+* SP6TArray_2X2
+.subckt SP6TArray_2X2 vss vdd wl[0] wl[1] bl[0] bl_n[0] bl[1] bl_n[1]
+Xinst0x0 vss vdd wl[0] wl[1] bl[0] bl_n[0] SP6TArray_2X1
+Xinst0x1 vss vdd wl[0] wl[1] bl[1] bl_n[1] SP6TArray_2X1
+.ends SP6TArray_2X2
+* SP6TArray_4X2
+.subckt SP6TArray_4X2 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1]
+Xinst0x0 vss vdd wl[0] wl[1] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_2X2
+Xinst1x0 vss vdd wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_2X2
+.ends SP6TArray_4X2
+* SP6TArray_4X4
+.subckt SP6TArray_4X4 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_4X2
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X2
+.ends SP6TArray_4X4
+* SP6TArray_8X4
+.subckt SP6TArray_8X4 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X4
+Xinst1x0 vss vdd wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X4
+.ends SP6TArray_8X4
+* SP6TArray_8X8
+.subckt SP6TArray_8X8 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_8X4
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X4
+.ends SP6TArray_8X8
+* SP6TArray_16X8
+.subckt SP6TArray_16X8 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X8
+Xinst1x0 vss vdd wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X8
+.ends SP6TArray_16X8
+* SP6TArray_16X16
+.subckt SP6TArray_16X16 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_16X8
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_16X8
+.ends SP6TArray_16X16
+* SP6TArray_32X16
+.subckt SP6TArray_32X16 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_16X16
+Xinst1x0 vss vdd wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_16X16
+.ends SP6TArray_32X16
+* nand2_x0
+.subckt nand2_x0 vdd vss nq i0 i1
+Mn0 vss i0 int0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp0 vdd i0 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn1 int0 i1 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp1 nq i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends nand2_x0
+* buf_x2
+.subckt buf_x2 vdd vss i q
+Mn1 ni i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn2_0 vss ni q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_1 q ni vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp1 ni i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp2_0 vdd ni q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_1 q ni vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends buf_x2
+* inv_x0
+.subckt inv_x0 vdd vss i nq
+Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends inv_x0
+* nor2_x0
+.subckt nor2_x0 vdd vss nq i0 i1
+Mn0 vss i0 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp0 vdd i0 int0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
+Mn1 nq i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp1 int0 i1 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
+.ends nor2_x0
+* sff1_x4
+.subckt sff1_x4 vdd ck vss i q
+Mp_ck nckr ck vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_ck nckr ck vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_ckr_1 _net1 ckr sff_m vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_ckr_2 y ckr sff_s vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_ckr_1 sff_m ckr _net4 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_ckr_2 sff_s ckr _net0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_i u i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_i u i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nckr_2 sff_m nckr _net5 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nckr_3 y nckr sff_s vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nckr_1 vdd nckr ckr vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_nckr_1 vss nckr ckr vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_nckr_3 sff_s nckr _net6 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_nckr_2 _net2 nckr sff_m vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn_q_1 _net6 q vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_q_1 _net0 q vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_sffm_1 vss sff_m y vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_sffm_1 vdd sff_m y vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_sffs_1 vdd sff_s q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mn_sffs_1 vss sff_s q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mn_sffs_2 q sff_s vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.9um
+Mp_sffs_2 q sff_s vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.0um
+Mn_u vss u _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp_u vdd u _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_y_1 _net4 y vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.9um
+Mp_y_1 _net5 y vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends sff1_x4
+* tie
+.subckt tie vdd vss
+
+.ends tie
+* nsnrlatch_x1
+.subckt nsnrlatch_x1 vss nq q vdd nrst nset
+Mn_nq_1 _net1 nq vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_nq_1 q nq vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp_nrst_1 nq nrst vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_nrst_1 _net0 nrst nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_nset_1 vdd nset q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_nset_1 q nset _net1 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp_q_1 vdd q nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn_q_1 vss q _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+.ends nsnrlatch_x1
+* SP6TArray_32X32
+.subckt SP6TArray_32X32 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_32X16
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_32X16
+.ends SP6TArray_32X32
+* SP6TClockWE
+.subckt SP6TClockWE vss vdd clkup clklow we we_en we_n
+Xclkbuf vdd vss clkup clklow buf_x2
+Xweff vdd clklow vss we we_latched sff1_x4
+Xwenand vdd vss we_n we_en we_latched nand2_x0
+.ends SP6TClockWE
+* SP6TWriteDriver_4M2B
+.subckt SP6TWriteDriver_4M2B vss vdd clk we_n bl[0] bl_n[0] d[0] bl[1] bl_n[1] d[1]
+Xff[0] vdd clk vss d[0] d_latched[0] sff1_x4
+Xff[1] vdd clk vss d[1] d_latched[1] sff1_x4
+Xnora[0] vdd vss bl_drive[0] d_latched[0] we_n nor2_x0
+Xnora[1] vdd vss bl_drive[1] d_latched[1] we_n nor2_x0
+Xinv[0] vdd vss d_latched[0] d_n[0] inv_x0
+Xinv[1] vdd vss d_latched[1] d_n[1] inv_x0
+Xnorb[0] vdd vss bln_drive[0] d_n[0] we_n nor2_x0
+Xnorb[1] vdd vss bln_drive[1] d_n[1] we_n nor2_x0
+Mblpd[0] vss bl_drive[0] bl[0] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+Mblpd[1] vss bl_drive[1] bl[1] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+Mblnpd[0] bl_n[0] bln_drive[0] vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+Mblnpd[1] bl_n[1] bln_drive[1] vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.9um
+.ends SP6TWriteDriver_4M2B
+* SP6TSenseAmp_4M
+.subckt SP6TSenseAmp_4M vss vdd bl bl_n q
+Xlatch vss nq q vdd bl bl_n nsnrlatch_x1
+Xtie vdd vss tie
+.ends SP6TSenseAmp_4M
+* SP6TColMux_4C
+.subckt SP6TColMux_4C bl[0] bl_n[0] mux[0] bl[1] bl_n[1] mux[1] bl[2] bl_n[2] mux[2] bl[3] bl_n[3] mux[3] vss muxbl muxbl_n
+Mpgbl0 bl[0] mux[0] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln0 muxbl_n mux[0] bl_n[0] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbl1 bl[1] mux[1] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln1 muxbl_n mux[1] bl_n[1] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbl2 bl[2] mux[2] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln2 muxbl_n mux[2] bl_n[2] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbl3 bl[3] mux[3] muxbl vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+Mpgbln3 muxbl_n mux[3] bl_n[3] vss sky130_fd_pr__nfet_01v8__model l=0.15um w=4.0um
+.ends SP6TColMux_4C
+* SP6TPrecharge
+.subckt SP6TPrecharge vdd bl bl_n precharge_n
+Mpc1 vdd precharge_n bl vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpc2 bl precharge_n bl_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpc3 bl_n precharge_n vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+.ends SP6TPrecharge
+* SP6TArray_64X32
+.subckt SP6TArray_64X32 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_32X32
+Xinst1x0 vss vdd wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_32X32
+.ends SP6TArray_64X32
+* SP6TColumnPeriphery_8B4M
+.subckt SP6TColumnPeriphery_8B4M vss vdd clk precharge_n we we_en q[0] d[0] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] q[1] d[1] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] q[2] d[2] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] q[3] d[3] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] q[4] d[4] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] q[5] d[5] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] q[6] d[6] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] q[7] d[7] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] mux[0] mux[1] mux[2] mux[3]
+Xprecharge[0] vdd bl[0] bl_n[0] precharge_n SP6TPrecharge
+Xprecharge[1] vdd bl[1] bl_n[1] precharge_n SP6TPrecharge
+Xprecharge[2] vdd bl[2] bl_n[2] precharge_n SP6TPrecharge
+Xprecharge[3] vdd bl[3] bl_n[3] precharge_n SP6TPrecharge
+Xprecharge[4] vdd bl[4] bl_n[4] precharge_n SP6TPrecharge
+Xprecharge[5] vdd bl[5] bl_n[5] precharge_n SP6TPrecharge
+Xprecharge[6] vdd bl[6] bl_n[6] precharge_n SP6TPrecharge
+Xprecharge[7] vdd bl[7] bl_n[7] precharge_n SP6TPrecharge
+Xprecharge[8] vdd bl[8] bl_n[8] precharge_n SP6TPrecharge
+Xprecharge[9] vdd bl[9] bl_n[9] precharge_n SP6TPrecharge
+Xprecharge[10] vdd bl[10] bl_n[10] precharge_n SP6TPrecharge
+Xprecharge[11] vdd bl[11] bl_n[11] precharge_n SP6TPrecharge
+Xprecharge[12] vdd bl[12] bl_n[12] precharge_n SP6TPrecharge
+Xprecharge[13] vdd bl[13] bl_n[13] precharge_n SP6TPrecharge
+Xprecharge[14] vdd bl[14] bl_n[14] precharge_n SP6TPrecharge
+Xprecharge[15] vdd bl[15] bl_n[15] precharge_n SP6TPrecharge
+Xprecharge[16] vdd bl[16] bl_n[16] precharge_n SP6TPrecharge
+Xprecharge[17] vdd bl[17] bl_n[17] precharge_n SP6TPrecharge
+Xprecharge[18] vdd bl[18] bl_n[18] precharge_n SP6TPrecharge
+Xprecharge[19] vdd bl[19] bl_n[19] precharge_n SP6TPrecharge
+Xprecharge[20] vdd bl[20] bl_n[20] precharge_n SP6TPrecharge
+Xprecharge[21] vdd bl[21] bl_n[21] precharge_n SP6TPrecharge
+Xprecharge[22] vdd bl[22] bl_n[22] precharge_n SP6TPrecharge
+Xprecharge[23] vdd bl[23] bl_n[23] precharge_n SP6TPrecharge
+Xprecharge[24] vdd bl[24] bl_n[24] precharge_n SP6TPrecharge
+Xprecharge[25] vdd bl[25] bl_n[25] precharge_n SP6TPrecharge
+Xprecharge[26] vdd bl[26] bl_n[26] precharge_n SP6TPrecharge
+Xprecharge[27] vdd bl[27] bl_n[27] precharge_n SP6TPrecharge
+Xprecharge[28] vdd bl[28] bl_n[28] precharge_n SP6TPrecharge
+Xprecharge[29] vdd bl[29] bl_n[29] precharge_n SP6TPrecharge
+Xprecharge[30] vdd bl[30] bl_n[30] precharge_n SP6TPrecharge
+Xprecharge[31] vdd bl[31] bl_n[31] precharge_n SP6TPrecharge
+Xcolmux[0] bl[0] bl_n[0] mux[0] bl[1] bl_n[1] mux[1] bl[2] bl_n[2] mux[2] bl[3] bl_n[3] mux[3] vss muxbl[0] muxbl_n[0] SP6TColMux_4C
+Xcolmux[1] bl[4] bl_n[4] mux[0] bl[5] bl_n[5] mux[1] bl[6] bl_n[6] mux[2] bl[7] bl_n[7] mux[3] vss muxbl[1] muxbl_n[1] SP6TColMux_4C
+Xcolmux[2] bl[8] bl_n[8] mux[0] bl[9] bl_n[9] mux[1] bl[10] bl_n[10] mux[2] bl[11] bl_n[11] mux[3] vss muxbl[2] muxbl_n[2] SP6TColMux_4C
+Xcolmux[3] bl[12] bl_n[12] mux[0] bl[13] bl_n[13] mux[1] bl[14] bl_n[14] mux[2] bl[15] bl_n[15] mux[3] vss muxbl[3] muxbl_n[3] SP6TColMux_4C
+Xcolmux[4] bl[16] bl_n[16] mux[0] bl[17] bl_n[17] mux[1] bl[18] bl_n[18] mux[2] bl[19] bl_n[19] mux[3] vss muxbl[4] muxbl_n[4] SP6TColMux_4C
+Xcolmux[5] bl[20] bl_n[20] mux[0] bl[21] bl_n[21] mux[1] bl[22] bl_n[22] mux[2] bl[23] bl_n[23] mux[3] vss muxbl[5] muxbl_n[5] SP6TColMux_4C
+Xcolmux[6] bl[24] bl_n[24] mux[0] bl[25] bl_n[25] mux[1] bl[26] bl_n[26] mux[2] bl[27] bl_n[27] mux[3] vss muxbl[6] muxbl_n[6] SP6TColMux_4C
+Xcolmux[7] bl[28] bl_n[28] mux[0] bl[29] bl_n[29] mux[1] bl[30] bl_n[30] mux[2] bl[31] bl_n[31] mux[3] vss muxbl[7] muxbl_n[7] SP6TColMux_4C
+Xsenseamp[0] vss vdd muxbl[0] muxbl_n[0] q[0] SP6TSenseAmp_4M
+Xsenseamp[1] vss vdd muxbl[1] muxbl_n[1] q[1] SP6TSenseAmp_4M
+Xsenseamp[2] vss vdd muxbl[2] muxbl_n[2] q[2] SP6TSenseAmp_4M
+Xsenseamp[3] vss vdd muxbl[3] muxbl_n[3] q[3] SP6TSenseAmp_4M
+Xsenseamp[4] vss vdd muxbl[4] muxbl_n[4] q[4] SP6TSenseAmp_4M
+Xsenseamp[5] vss vdd muxbl[5] muxbl_n[5] q[5] SP6TSenseAmp_4M
+Xsenseamp[6] vss vdd muxbl[6] muxbl_n[6] q[6] SP6TSenseAmp_4M
+Xsenseamp[7] vss vdd muxbl[7] muxbl_n[7] q[7] SP6TSenseAmp_4M
+Xwritedrive[0] vss vdd intclk we_n muxbl[0] muxbl_n[0] d[0] muxbl[1] muxbl_n[1] d[1] SP6TWriteDriver_4M2B
+Xwritedrive[1] vss vdd intclk we_n muxbl[2] muxbl_n[2] d[2] muxbl[3] muxbl_n[3] d[3] SP6TWriteDriver_4M2B
+Xwritedrive[2] vss vdd intclk we_n muxbl[4] muxbl_n[4] d[4] muxbl[5] muxbl_n[5] d[5] SP6TWriteDriver_4M2B
+Xwritedrive[3] vss vdd intclk we_n muxbl[6] muxbl_n[6] d[6] muxbl[7] muxbl_n[7] d[7] SP6TWriteDriver_4M2B
+Xclkwe vss vdd clk intclk we we_en we_n SP6TClockWE
+.ends SP6TColumnPeriphery_8B4M
+* SP6TArray_128X32
+.subckt SP6TArray_128X32 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_64X32
+Xinst1x0 vss vdd wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_64X32
+.ends SP6TArray_128X32
+* SP6TColumn_128R8B4M
+.subckt SP6TColumn_128R8B4M vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127] q[0] d[0] q[1] d[1] q[2] d[2] q[3] d[3] q[4] d[4] q[5] d[5] q[6] d[6] q[7] d[7] we clk we_en precharge_n mux[0] mux[1] mux[2] mux[3]
+Xarray vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] wl[32] wl[33] wl[34] wl[35] wl[36] wl[37] wl[38] wl[39] wl[40] wl[41] wl[42] wl[43] wl[44] wl[45] wl[46] wl[47] wl[48] wl[49] wl[50] wl[51] wl[52] wl[53] wl[54] wl[55] wl[56] wl[57] wl[58] wl[59] wl[60] wl[61] wl[62] wl[63] wl[64] wl[65] wl[66] wl[67] wl[68] wl[69] wl[70] wl[71] wl[72] wl[73] wl[74] wl[75] wl[76] wl[77] wl[78] wl[79] wl[80] wl[81] wl[82] wl[83] wl[84] wl[85] wl[86] wl[87] wl[88] wl[89] wl[90] wl[91] wl[92] wl[93] wl[94] wl[95] wl[96] wl[97] wl[98] wl[99] wl[100] wl[101] wl[102] wl[103] wl[104] wl[105] wl[106] wl[107] wl[108] wl[109] wl[110] wl[111] wl[112] wl[113] wl[114] wl[115] wl[116] wl[117] wl[118] wl[119] wl[120] wl[121] wl[122] wl[123] wl[124] wl[125] wl[126] wl[127] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_128X32
+Xperiph vss vdd clk precharge_n we we_en q[0] d[0] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] q[1] d[1] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] q[2] d[2] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] q[3] d[3] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] q[4] d[4] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] q[5] d[5] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] q[6] d[6] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] q[7] d[7] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] mux[0] mux[1] mux[2] mux[3] SP6TColumnPeriphery_8B4M
+.ends SP6TColumn_128R8B4M

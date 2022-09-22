@@ -1,0 +1,10 @@
+* nor3_x0
+* nor3_x0
+.subckt nor3_x0 vdd vss nq i0 i1 i2
+Mn0 vss i0 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp0 vdd i0 int0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
+Mn1 nq i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp1 int0 i1 int1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
+Mn2 vss i2 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp2 int1 i2 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
+.ends nor3_x0

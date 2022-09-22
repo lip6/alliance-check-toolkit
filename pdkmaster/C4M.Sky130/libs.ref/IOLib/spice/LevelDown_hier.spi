@@ -1,0 +1,15 @@
+* LevelDown
+* SecondaryProtection
+.subckt SecondaryProtection iovdd iovss pad core
+RR pad core 241.0
+DDN iovss core sky130_fd_pr__diode_pw2nd_05v5 area=3.6875e-12 pj=13.68um
+DDP core iovdd sky130_fd_pr__diode_pd2nw_05v5 area=3.6375000000000002e-12 pj=11.2um
+.ends SecondaryProtection
+* LevelDown
+.subckt LevelDown vdd vss iovdd iovss pad core
+Mn_hvinv vss padres padres_n vss sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=1.35um
+Mp_hvinv vdd padres padres_n vdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=2.45um
+Mn_lvinv core padres_n vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.46um
+Mp_lvinv core padres_n vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.56um
+Xsecondprot iovdd iovss pad padres SecondaryProtection
+.ends LevelDown

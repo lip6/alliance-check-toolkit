@@ -1,0 +1,60 @@
+* SP6TArray_32X32
+* SP6TCell
+.subckt SP6TCell vdd vss wl bl bl_n
+Mpu1 vdd bit_n bit vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpu2 bit_n bit vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.42um
+Mpd1 vss bit_n bit vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpd2 bit_n bit vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpg1 bl wl bit vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+Mpg2 bl_n wl bit_n vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.36um
+.ends SP6TCell
+* SP6TArray_2X1
+.subckt SP6TArray_2X1 vss vdd wl[0] wl[1] bl[0] bl_n[0]
+Xinst0x0 vdd vss wl[0] bl[0] bl_n[0] SP6TCell
+Xinst1x0 vdd vss wl[1] bl[0] bl_n[0] SP6TCell
+.ends SP6TArray_2X1
+* SP6TArray_2X2
+.subckt SP6TArray_2X2 vss vdd wl[0] wl[1] bl[0] bl_n[0] bl[1] bl_n[1]
+Xinst0x0 vss vdd wl[0] wl[1] bl[0] bl_n[0] SP6TArray_2X1
+Xinst0x1 vss vdd wl[0] wl[1] bl[1] bl_n[1] SP6TArray_2X1
+.ends SP6TArray_2X2
+* SP6TArray_4X2
+.subckt SP6TArray_4X2 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1]
+Xinst0x0 vss vdd wl[0] wl[1] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_2X2
+Xinst1x0 vss vdd wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_2X2
+.ends SP6TArray_4X2
+* SP6TArray_4X4
+.subckt SP6TArray_4X4 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] SP6TArray_4X2
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X2
+.ends SP6TArray_4X4
+* SP6TArray_8X4
+.subckt SP6TArray_8X4 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X4
+Xinst1x0 vss vdd wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_4X4
+.ends SP6TArray_8X4
+* SP6TArray_8X8
+.subckt SP6TArray_8X8 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] SP6TArray_8X4
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X4
+.ends SP6TArray_8X8
+* SP6TArray_16X8
+.subckt SP6TArray_16X8 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X8
+Xinst1x0 vss vdd wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_8X8
+.ends SP6TArray_16X8
+* SP6TArray_16X16
+.subckt SP6TArray_16X16 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] SP6TArray_16X8
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_16X8
+.ends SP6TArray_16X16
+* SP6TArray_32X16
+.subckt SP6TArray_32X16 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_16X16
+Xinst1x0 vss vdd wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_16X16
+.ends SP6TArray_32X16
+* SP6TArray_32X32
+.subckt SP6TArray_32X32 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31]
+Xinst0x0 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[0] bl_n[0] bl[1] bl_n[1] bl[2] bl_n[2] bl[3] bl_n[3] bl[4] bl_n[4] bl[5] bl_n[5] bl[6] bl_n[6] bl[7] bl_n[7] bl[8] bl_n[8] bl[9] bl_n[9] bl[10] bl_n[10] bl[11] bl_n[11] bl[12] bl_n[12] bl[13] bl_n[13] bl[14] bl_n[14] bl[15] bl_n[15] SP6TArray_32X16
+Xinst0x1 vss vdd wl[0] wl[1] wl[2] wl[3] wl[4] wl[5] wl[6] wl[7] wl[8] wl[9] wl[10] wl[11] wl[12] wl[13] wl[14] wl[15] wl[16] wl[17] wl[18] wl[19] wl[20] wl[21] wl[22] wl[23] wl[24] wl[25] wl[26] wl[27] wl[28] wl[29] wl[30] wl[31] bl[16] bl_n[16] bl[17] bl_n[17] bl[18] bl_n[18] bl[19] bl_n[19] bl[20] bl_n[20] bl[21] bl_n[21] bl[22] bl_n[22] bl[23] bl_n[23] bl[24] bl_n[24] bl[25] bl_n[25] bl[26] bl_n[26] bl[27] bl_n[27] bl[28] bl_n[28] bl[29] bl_n[29] bl[30] bl_n[30] bl[31] bl_n[31] SP6TArray_32X16
+.ends SP6TArray_32X32

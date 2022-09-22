@@ -1,0 +1,6 @@
+* inv_x0
+* inv_x0
+.subckt inv_x0 vdd vss i nq
+Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends inv_x0

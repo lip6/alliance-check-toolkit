@@ -1,0 +1,60 @@
+* DP8TClockGenerator
+* nand2_x0
+.subckt nand2_x0 vdd vss nq i0 i1
+Mn0 vss i0 int0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp0 vdd i0 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mn1 int0 i1 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
+Mp1 nq i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends nand2_x0
+* inv_x0
+.subckt inv_x0 vdd vss i nq
+Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+.ends inv_x0
+* inv_x2
+.subckt inv_x2 vdd vss i nq
+Mn0 vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn1 nq i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp0 vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp1 nq i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends inv_x2
+* buf_x2
+.subckt buf_x2 vdd vss i q
+Mn1 ni i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mn2_0 vss ni q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mn2_1 q ni vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
+Mp1 ni i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mp2_0 vdd ni q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mp2_1 q ni vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+.ends buf_x2
+* DP8TNonOverlapClock_8S
+.subckt DP8TNonOverlapClock_8S vss vdd clk firststage[0] firststage[1] firststage[2] firststage[3] firststage[4] firststage[5] firststage[6] firststage[7] firststage[8] secondstage[0] secondstage[1] secondstage[2] secondstage[3] secondstage[4] secondstage[5] secondstage[6] secondstage[7] secondstage[8]
+Xclkinv vdd vss clk clk_n inv_x0
+Xfirstnand2 vdd vss firststage[0] clk secondstage[8] nand2_x0
+Xfirststage[0] vdd vss firststage[0] firststage[1] inv_x0
+Xfirststage[1] vdd vss firststage[1] firststage[2] inv_x0
+Xfirststage[2] vdd vss firststage[2] firststage[3] inv_x0
+Xfirststage[3] vdd vss firststage[3] firststage[4] inv_x0
+Xfirststage[4] vdd vss firststage[4] firststage[5] inv_x0
+Xfirststage[5] vdd vss firststage[5] firststage[6] inv_x0
+Xfirststage[6] vdd vss firststage[6] firststage[7] inv_x0
+Xfirststage[7] vdd vss firststage[7] firststage[8] inv_x0
+Xsecondnand2 vdd vss secondstage[0] clk_n firststage[8] nand2_x0
+Xsecondstage[0] vdd vss secondstage[0] secondstage[1] inv_x0
+Xsecondstage[1] vdd vss secondstage[1] secondstage[2] inv_x0
+Xsecondstage[2] vdd vss secondstage[2] secondstage[3] inv_x0
+Xsecondstage[3] vdd vss secondstage[3] secondstage[4] inv_x0
+Xsecondstage[4] vdd vss secondstage[4] secondstage[5] inv_x0
+Xsecondstage[5] vdd vss secondstage[5] secondstage[6] inv_x0
+Xsecondstage[6] vdd vss secondstage[6] secondstage[7] inv_x0
+Xsecondstage[7] vdd vss secondstage[7] secondstage[8] inv_x0
+.ends DP8TNonOverlapClock_8S
+* DP8TClockGenerator
+.subckt DP8TClockGenerator vss vdd clk decodeclk columnclk precharge_n wl_en we_en
+Xnonovl vss vdd clk firststage[0] firststage[1] firststage[2] firststage[3] firststage[4] firststage[5] firststage[6] firstpulse firststage[8] secondstage[0] secondstage[1] secondstage[2] secondstage[3] secondstage[4] secondstage[5] secondstage[6] secondpulse secondstage[8] DP8TNonOverlapClock_8S
+Xdecodeclkbuf vdd vss clk decodeclk buf_x2
+Xcolumnclkbuf vdd vss clk columnclk buf_x2
+Xwlenbuf vdd vss firstpulse wl_en buf_x2
+Xweenbuf vdd vss firstpulse we_en buf_x2
+Xprechargeinv vdd vss secondpulse precharge_n inv_x2
+.ends DP8TClockGenerator

@@ -1,0 +1,12 @@
+* LevelUp
+* LevelUp
+.subckt LevelUp vdd iovdd vss i o
+Mn_i_inv i_n i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.46um
+Mp_i_inv i_n i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.56um
+Mn_lvld_n vss i lvld_n vss sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=2.4um
+Mn_lvld lvld i_n vss vss sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=2.4um
+Mp_lvld_n iovdd lvld lvld_n iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=0.42um
+Mp_lvld lvld lvld_n iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=0.42um
+Mn_lvld_n_inv vss lvld_n o vss sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=2.4um
+Mp_lvld_n_inv iovdd lvld_n o iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=4.4um
+.ends LevelUp
