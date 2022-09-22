@@ -24,6 +24,7 @@
  benchRules["RISC-V/Vex/cmos45"]="layout"
  benchRules["ARM/cmos"]="layout"
  benchRules["RISC-V/Minerva/sky130_c4m"]="gds"
+ benchRules["ethmac/sky130_c4m"]="gds"
 
  benchRules["DCT/lvl3"]="layout"
  benchRules["DCT/lvl2"]="layout"
@@ -58,6 +59,7 @@
  benchs="${benchs} eFPGA/08x08"
  benchs="${benchs} vld"
  benchs="${benchs} eFPGA/08x16"
+ benchs="${benchs} ethmac/sky130_c4m"
  benchs="${benchs} RISC-V/Minerva/sky130_c4m"
  benchs="${benchs} eFPGA/16x16"
 
