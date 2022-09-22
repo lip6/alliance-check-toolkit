@@ -85,28 +85,31 @@ def scriptMain ( **kw ):
        #
         tech = Tech()
         if tech.isTSMC_C180:
-            gaugeName = 'FlexLib'
-            topMetal  = 'METAL5'
-            hscaling  = 1
-            vscaling  = 1
-            coreSizeX = 200
-            coreSizeY = 200
+            gaugeName  = 'FlexLib'
+            topMetal   = 'METAL5'
+            hscaling   = 1
+            vscaling   = 1
+            coreSizeX  = 270
+            coreSizeY  = 146  # 21*90um = 1890um ~ 146*13um
+            iopadWidth = u(90.0)
         elif tech.isSky130_C4M:
-            gaugeName = 'StdCellLib'
-            topMetal  = 'm4'
-            hscaling  = 2
-            vscaling  = 2
-            coreSizeX = 210
-            coreSizeY = 210
+            gaugeName  = 'StdCellLib'
+            topMetal   = 'm4'
+            hscaling   = 2
+            vscaling   = 2
+            coreSizeX  = 210
+            coreSizeY  = 210
+            iopadWidth = u(90.0)
         rg = af.getRoutingGauge( gaugeName )
         cg = af.getCellGauge   ( gaugeName )
         vpitch = rg.getLayerGauge( 2 ).getPitch()
         hpitch = rg.getLayerGauge( 1 ).getPitch()
         sliceHeight = cg.getSliceHeight()
 
-        def hp ( v ): return v*hpitch*hscaling
-        def vp ( v ): return v*vpitch*vscaling
-        def sh ( v ): return v*sliceHeight
+        def hp     ( v ): return v*hpitch*hscaling
+        def vp     ( v ): return v*vpitch*vscaling
+        def sh     ( v ): return v*sliceHeight
+        def eastHP ( v ): return int( (v*iopadWidth) / hpitch ) * hpitch 
 
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
@@ -141,21 +144,22 @@ def scriptMain ( **kw ):
                      , (IoPin.WEST |IoPin.A_BEGIN, 'm_wb_bte_o(0)' , hp( 1930),      0 ,  1)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'm_wb_bte_o(1)' , hp( 1940),      0 ,  1)
 
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtx_clk_pad_i' , hp(  100),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtxd_pad_o({})', hp(  200), hp(10) ,  range(4))
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtxen_pad_o'   , hp(  300),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtxerr_pad_o'  , hp(  400),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrx_clk_pad_i' , hp(  500),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrxdv_pad_i'   , hp(  600),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrxd_pad_i({})', hp(  700), hp(10) ,  range(4))
-                    #, (IoPin.EAST |IoPin.A_BEGIN, 'mrxen_pad_i'   , hp(  800),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrxerr_pad_i'  , hp(  900),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mcoll_pad_i'   , hp( 1000),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mcrs_pad_i'    , hp( 1100),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'md_pad_i'      , hp( 1200),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'mdc_pad_o'     , hp( 1300),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'md_pad_o'      , hp( 1400),      0 ,  1)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'md_padoe_o'    , hp( 1500),      0 ,  1)
+                    # Must connect to 21 I/O pads on the east side.
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtx_clk_pad_i' , eastHP(  1),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtxd_pad_o({})', eastHP(  2), eastHP(1) ,  range(4))
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtxen_pad_o'   , eastHP(  6),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mtxerr_pad_o'  , eastHP(  7),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrx_clk_pad_i' , eastHP(  8),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrxdv_pad_i'   , eastHP(  9),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrxd_pad_i({})', eastHP( 10), eastHP(1) ,  range(4))
+                    #, (IoPin.EAST |IoPin.A_BEGIN, 'mrxen_pad_i'   , eastHP( 14),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mrxerr_pad_i'  , eastHP( 15),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mcoll_pad_i'   , eastHP( 16),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mcrs_pad_i'    , eastHP( 17),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'md_pad_i'      , eastHP( 18),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'mdc_pad_o'     , eastHP( 19),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'md_pad_o'      , eastHP( 20),         0 ,  1)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'md_padoe_o'    , eastHP( 21),         0 ,  1)
                      ]
        #ioPinsSpec = []
         ethmacConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=[] ) 
@@ -184,7 +188,7 @@ def scriptMain ( **kw ):
         ethmacConf.cfg.chip.supplyRailPitch        = u(90)
         ethmacConf.editor              = editor
         ethmacConf.useSpares           = True
-        ethmacConf.useHFNS             = True
+        ethmacConf.useHFNS             = False
         ethmacConf.bColumns            = 2
         ethmacConf.bRows               = 2
         ethmacConf.chipName            = 'chip'
