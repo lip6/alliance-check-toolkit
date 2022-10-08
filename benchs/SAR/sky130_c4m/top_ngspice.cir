@@ -1,0 +1,144 @@
+* Coriolis Structural SPICE Driver
+* Generated on Oct 07, 2022, 10:57
+* Cell/Subckt "top_ngspice.cir".
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+.TEMP 25
+.lib /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_all_lib.spice logic_tt 
+*.INCLUDE /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_tt_model.spice
+
+Vsupply evdd 0 1.8
+Vground evss 0 0
+gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include standard cells
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.ref/StdCellLib/spice/StdCellLib.spi
+* include circuit netlist
+.INCLUDE SARlogic_simu.spi
+
+*****************
+*****************
+* Circuit Instantiation
+* INTERF vss
+* INTERF vdd
+* INTERF rst
+* INTERF res[7]
+* INTERF res[6]
+* INTERF res[5]
+* INTERF res[4]
+* INTERF res[3]
+* INTERF res[2]
+* INTERF res[1]
+* INTERF res[0]
+* INTERF cmp
+* INTERF clk
+* INTERF SOC
+* INTERF SE
+* INTERF EOC
+* INTERF DAC_control[7]
+* INTERF DAC_control[6]
+* INTERF DAC_control[5]
+* INTERF DAC_control[4]
+* INTERF DAC_control[3]
+* INTERF DAC_control[2]
+* INTERF DAC_control[1]
+* INTERF DAC_control[0]
+
+* NET     0 = vss
+* NET     1 = vdd
+* NET     2 = rst
+* NET    27 = res[7]
+* NET    28 = res[6]
+* NET    29 = res[5]
+* NET    30 = res[4]
+* NET    31 = res[3]
+* NET    32 = res[2]
+* NET    33 = res[1]
+* NET    34 = res[0]
+* NET    45 = cmp
+* NET    46 = clk
+* NET   176 = SOC
+* NET   178 = SE
+* NET   180 = EOC
+* NET   189 = DAC_control[7]
+* NET   190 = DAC_control[6]
+* NET   191 = DAC_control[5]
+* NET   192 = DAC_control[4]
+* NET   193 = DAC_control[3]
+* NET   194 = DAC_control[2]
+* NET   195 = DAC_control[1]
+* NET   196 = DAC_control[0]
+
+*.subckt SARlogic evss evdd 2 27 28 29 30 31 32 33 34 45 46 176 178 180 189 190 191 192 193 194 195 196
+XSARlogic 0 1 2 27 28 29 30 31 32 33 34 45 46 176 178 180 189 190 191 192 193 194 195 196 SARlogic
+
+*load on outputs
+Cres0 34 evss 0.5pF
+Cres1 33 evss 0.5pF
+Cres2 32 evss 0.5pF
+Cres3 31 evss 0.5pF
+Cres4 30 evss 0.5pF
+Cres5 29 evss 0.5pF
+Cres6 28 evss 0.5pF
+Cres7 27 evss 0.5pF
+
+C0 196 evss 0.5pF
+C1 195 evss 0.5pF
+C2 194 evss 0.5pF
+C3 193 evss 0.5pF
+C4 192 evss 0.5pF
+C5 191 evss 0.5pF
+C6 190 evss 0.5pF
+C7 189 evss 0.5pF
+
+*clock
+vck 46 evss dc 0.6 pulse (0 1.8 5ns 1ns 1ns 50ns 110ns)
+
+* input
+** reset
+vrst 2 evss 0
+** cmp
+vcmp 45 evss 1.8
+
+*start of conversion SOC
+vsoc 176 evss dc 0.6 pulse (0 1.8 5ns 1ns 1ns 110ns 1100ns)
+
+
+* transient analysis *
+.control
+TRAN 100ps 1500ns 0 
+
+set width=110
+
+gnuplot start v(176)
++ title 'Start of Conversion'
++ xlabel 'time / s' ylabel 'Vsoc / V' 
+
+gnuplot clock v(46)
++ title 'clock'
++ xlabel 'time / s' ylabel 'VPHI and VPH2 / V' 
+
+gnuplot res v(27) v(28) v(29)
++ title 'result'
++ xlabel 'time / s' ylabel 'ResultOutput / V' 
+
+gnuplot DacCtrl v(189) v(190) v(191)
++ title 'DAC_control'
++ xlabel 'time / s' ylabel 'Dac Control / V' 
+
+plot v(45)
+
+.endc
+
+
+
+.end
+
