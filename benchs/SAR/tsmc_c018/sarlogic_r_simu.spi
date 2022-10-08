@@ -1,0 +1,1120 @@
+* Coriolis Structural SPICE Driver
+* Generated on Oct 07, 2022, 14:23
+* Cell/Subckt "sarlogic_r_simu.spi".
+* 
+* INTERF vss
+* INTERF vdd
+* INTERF soc
+* INTERF se
+* INTERF rst
+* INTERF res[7]
+* INTERF res[6]
+* INTERF res[5]
+* INTERF res[4]
+* INTERF res[3]
+* INTERF res[2]
+* INTERF res[1]
+* INTERF res[0]
+* INTERF eoc
+* INTERF dac_control[7]
+* INTERF dac_control[6]
+* INTERF dac_control[5]
+* INTERF dac_control[4]
+* INTERF dac_control[3]
+* INTERF dac_control[2]
+* INTERF dac_control[1]
+* INTERF dac_control[0]
+* INTERF cmp
+* INTERF clk
+
+* Terminal models (aka standard cells) used througout all the hierarchy.
+*.include oa22_x2.spi
+*.include tiepoly_x0.spi
+*.include a2_x2.spi
+*.include sff1_x4.spi
+*.include ao22_x2.spi
+*.include no2_x1.spi
+*.include inv_x1.spi
+*.include na2_x1.spi
+*.include o2_x2.spi
+*.include no3_x1.spi
+*.include no4_x1.spi
+*.include na3_x1.spi
+*.include a3_x2.spi
+*.include dio_x0.spi
+*.include mx2_x2.spi
+*.include o3_x2.spi
+
+* Non-terminal models (part of the user's design hierarchy).
+
+.subckt sarlogic_r 0 1 2 4 5 30 31 32 33 34 35 36 37 49 58 59 60 61 62 63 64 65 66 67
+* NET     0 = vss
+* NET     1 = vdd
+* NET     2 = soc
+* NET     3 = se_next
+* NET     4 = se
+* NET     5 = rst
+* NET     6 = res_next[7]
+* NET     7 = res_next[6]
+* NET     8 = res_next[5]
+* NET     9 = res_next[4]
+* NET    10 = res_next[3]
+* NET    11 = res_next[2]
+* NET    12 = res_next[1]
+* NET    13 = res_next[0]
+* NET    14 = res_intern_next[7]
+* NET    15 = res_intern_next[6]
+* NET    16 = res_intern_next[5]
+* NET    17 = res_intern_next[4]
+* NET    18 = res_intern_next[3]
+* NET    19 = res_intern_next[2]
+* NET    20 = res_intern_next[1]
+* NET    21 = res_intern_next[0]
+* NET    22 = res_intern[7]
+* NET    23 = res_intern[6]
+* NET    24 = res_intern[5]
+* NET    25 = res_intern[4]
+* NET    26 = res_intern[3]
+* NET    27 = res_intern[2]
+* NET    28 = res_intern[1]
+* NET    29 = res_intern[0]
+* NET    30 = res[7]
+* NET    31 = res[6]
+* NET    32 = res[5]
+* NET    33 = res[4]
+* NET    34 = res[3]
+* NET    35 = res[2]
+* NET    36 = res[1]
+* NET    37 = res[0]
+* NET    38 = i_next[2]
+* NET    39 = i_next[1]
+* NET    40 = i_next[0]
+* NET    41 = i[2]
+* NET    42 = i[1]
+* NET    43 = i[0]
+* NET    44 = fsm_state_next[1]
+* NET    45 = fsm_state_next[0]
+* NET    46 = fsm_state[1]
+* NET    47 = fsm_state[0]
+* NET    48 = eoc_next
+* NET    49 = eoc
+* NET    50 = dac_control_next[7]
+* NET    51 = dac_control_next[6]
+* NET    52 = dac_control_next[5]
+* NET    53 = dac_control_next[4]
+* NET    54 = dac_control_next[3]
+* NET    55 = dac_control_next[2]
+* NET    56 = dac_control_next[1]
+* NET    57 = dac_control_next[0]
+* NET    58 = dac_control[7]
+* NET    59 = dac_control[6]
+* NET    60 = dac_control[5]
+* NET    61 = dac_control[4]
+* NET    62 = dac_control[3]
+* NET    63 = dac_control[2]
+* NET    64 = dac_control[1]
+* NET    65 = dac_control[0]
+* NET    66 = cmp
+* NET    67 = clk
+* NET    68 = blockagenet
+* NET    69 = bittoconvert_next[7]
+* NET    70 = bittoconvert_next[6]
+* NET    71 = bittoconvert_next[5]
+* NET    72 = bittoconvert_next[4]
+* NET    73 = bittoconvert_next[3]
+* NET    74 = bittoconvert_next[2]
+* NET    75 = bittoconvert_next[1]
+* NET    76 = bittoconvert_next[0]
+* NET    77 = bittoconvert[7]
+* NET    78 = bittoconvert[6]
+* NET    79 = bittoconvert[5]
+* NET    80 = bittoconvert[4]
+* NET    81 = bittoconvert[3]
+* NET    82 = bittoconvert[2]
+* NET    83 = bittoconvert[1]
+* NET    84 = bittoconvert[0]
+* NET    85 = abc_1170_new_n99
+* NET    86 = abc_1170_new_n98
+* NET    87 = abc_1170_new_n96
+* NET    88 = abc_1170_new_n95
+* NET    89 = abc_1170_new_n94
+* NET    90 = abc_1170_new_n93
+* NET    91 = abc_1170_new_n92
+* NET    92 = abc_1170_new_n91
+* NET    93 = abc_1170_new_n90
+* NET    94 = abc_1170_new_n89
+* NET    95 = abc_1170_new_n88
+* NET    96 = abc_1170_new_n87
+* NET    97 = abc_1170_new_n86
+* NET    98 = abc_1170_new_n85
+* NET    99 = abc_1170_new_n84
+* NET   100 = abc_1170_new_n83
+* NET   101 = abc_1170_new_n82
+* NET   102 = abc_1170_new_n200
+* NET   103 = abc_1170_new_n197
+* NET   104 = abc_1170_new_n195
+* NET   105 = abc_1170_new_n193
+* NET   106 = abc_1170_new_n191
+* NET   107 = abc_1170_new_n189
+* NET   108 = abc_1170_new_n187
+* NET   109 = abc_1170_new_n185
+* NET   110 = abc_1170_new_n183
+* NET   111 = abc_1170_new_n182
+* NET   112 = abc_1170_new_n180
+* NET   113 = abc_1170_new_n178
+* NET   114 = abc_1170_new_n175
+* NET   115 = abc_1170_new_n173
+* NET   116 = abc_1170_new_n171
+* NET   117 = abc_1170_new_n169
+* NET   118 = abc_1170_new_n167
+* NET   119 = abc_1170_new_n165
+* NET   120 = abc_1170_new_n163
+* NET   121 = abc_1170_new_n161
+* NET   122 = abc_1170_new_n160
+* NET   123 = abc_1170_new_n158
+* NET   124 = abc_1170_new_n157
+* NET   125 = abc_1170_new_n155
+* NET   126 = abc_1170_new_n154
+* NET   127 = abc_1170_new_n152
+* NET   128 = abc_1170_new_n151
+* NET   129 = abc_1170_new_n149
+* NET   130 = abc_1170_new_n148
+* NET   131 = abc_1170_new_n146
+* NET   132 = abc_1170_new_n145
+* NET   133 = abc_1170_new_n143
+* NET   134 = abc_1170_new_n142
+* NET   135 = abc_1170_new_n140
+* NET   136 = abc_1170_new_n139
+* NET   137 = abc_1170_new_n137
+* NET   138 = abc_1170_new_n136
+* NET   139 = abc_1170_new_n135
+* NET   140 = abc_1170_new_n134
+* NET   141 = abc_1170_new_n132
+* NET   142 = abc_1170_new_n131
+* NET   143 = abc_1170_new_n130
+* NET   144 = abc_1170_new_n129
+* NET   145 = abc_1170_new_n128
+* NET   146 = abc_1170_new_n126
+* NET   147 = abc_1170_new_n125
+* NET   148 = abc_1170_new_n123
+* NET   149 = abc_1170_new_n122
+* NET   150 = abc_1170_new_n121
+* NET   151 = abc_1170_new_n119
+* NET   152 = abc_1170_new_n118
+* NET   153 = abc_1170_new_n117
+* NET   154 = abc_1170_new_n116
+* NET   155 = abc_1170_new_n114
+* NET   156 = abc_1170_new_n113
+* NET   157 = abc_1170_new_n112
+* NET   158 = abc_1170_new_n111
+* NET   159 = abc_1170_new_n109
+* NET   160 = abc_1170_new_n108
+* NET   161 = abc_1170_new_n106
+* NET   162 = abc_1170_new_n105
+* NET   163 = abc_1170_new_n103
+* NET   164 = abc_1170_new_n102
+* NET   165 = abc_1170_new_n100
+
+xsubckt_76_oa22_x2 1 123 0 58 92 124 oa22_x2
+xfeed_360 0 1 tiepoly_x0
+xfeed_361 0 1 tiepoly_x0
+xfeed_362 0 1 tiepoly_x0
+xfeed_363 0 1 tiepoly_x0
+xfeed_364 0 1 tiepoly_x0
+xfeed_365 0 1 tiepoly_x0
+xfeed_366 0 1 tiepoly_x0
+xfeed_367 0 1 tiepoly_x0
+xfeed_368 0 1 tiepoly_x0
+xfeed_369 0 1 tiepoly_x0
+xfeed_400 0 1 tiepoly_x0
+xfeed_401 0 1 tiepoly_x0
+xfeed_402 0 1 tiepoly_x0
+xfeed_403 0 1 tiepoly_x0
+xfeed_404 0 1 tiepoly_x0
+xfeed_405 0 1 tiepoly_x0
+xfeed_406 0 1 tiepoly_x0
+xfeed_407 0 1 tiepoly_x0
+xfeed_408 0 1 tiepoly_x0
+xfeed_409 0 1 tiepoly_x0
+xfeed_370 0 1 tiepoly_x0
+xfeed_371 0 1 tiepoly_x0
+xfeed_372 0 1 tiepoly_x0
+xfeed_373 0 1 tiepoly_x0
+xfeed_375 0 1 tiepoly_x0
+xfeed_377 0 1 tiepoly_x0
+xfeed_378 0 1 tiepoly_x0
+xfeed_379 0 1 tiepoly_x0
+xfeed_410 0 1 tiepoly_x0
+xfeed_411 0 1 tiepoly_x0
+xfeed_412 0 1 tiepoly_x0
+xfeed_413 0 1 tiepoly_x0
+xfeed_414 0 1 tiepoly_x0
+xfeed_415 0 1 tiepoly_x0
+xfeed_416 0 1 tiepoly_x0
+xfeed_417 0 1 tiepoly_x0
+xfeed_418 0 1 tiepoly_x0
+xfeed_419 0 1 tiepoly_x0
+xfeed_429 0 1 tiepoly_x0
+xfeed_428 0 1 tiepoly_x0
+xfeed_427 0 1 tiepoly_x0
+xfeed_426 0 1 tiepoly_x0
+xfeed_425 0 1 tiepoly_x0
+xfeed_424 0 1 tiepoly_x0
+xfeed_423 0 1 tiepoly_x0
+xfeed_422 0 1 tiepoly_x0
+xsubckt_65_a2_x2 0 54 1 131 101 a2_x2
+xsubckt_90_oa22_x2 1 16 0 79 121 116 oa22_x2
+xsubckt_145_sff1_x4 0 67 1 74 82 sff1_x4
+xfeed_380 0 1 tiepoly_x0
+xfeed_381 0 1 tiepoly_x0
+xfeed_382 0 1 tiepoly_x0
+xfeed_383 0 1 tiepoly_x0
+xfeed_384 0 1 tiepoly_x0
+xfeed_385 0 1 tiepoly_x0
+xfeed_386 0 1 tiepoly_x0
+xfeed_387 0 1 tiepoly_x0
+xfeed_388 0 1 tiepoly_x0
+xfeed_389 0 1 tiepoly_x0
+xfeed_420 0 1 tiepoly_x0
+xfeed_421 0 1 tiepoly_x0
+xsubckt_85_a2_x2 0 118 1 165 26 a2_x2
+xfeed_439 0 1 tiepoly_x0
+xfeed_438 0 1 tiepoly_x0
+xfeed_437 0 1 tiepoly_x0
+xfeed_436 0 1 tiepoly_x0
+xfeed_435 0 1 tiepoly_x0
+xfeed_434 0 1 tiepoly_x0
+xfeed_433 0 1 tiepoly_x0
+xfeed_432 0 1 tiepoly_x0
+xfeed_431 0 1 tiepoly_x0
+xfeed_430 0 1 tiepoly_x0
+xsubckt_86_oa22_x2 1 18 0 81 121 118 oa22_x2
+xfeed_390 0 1 tiepoly_x0
+xfeed_391 0 1 tiepoly_x0
+xfeed_392 0 1 tiepoly_x0
+xfeed_393 0 1 tiepoly_x0
+xfeed_394 0 1 tiepoly_x0
+xfeed_395 0 1 tiepoly_x0
+xfeed_396 0 1 tiepoly_x0
+xfeed_397 0 1 tiepoly_x0
+xfeed_399 0 1 tiepoly_x0
+xfeed_449 0 1 tiepoly_x0
+xfeed_448 0 1 tiepoly_x0
+xfeed_447 0 1 tiepoly_x0
+xfeed_446 0 1 tiepoly_x0
+xfeed_445 0 1 tiepoly_x0
+xfeed_444 0 1 tiepoly_x0
+xfeed_443 0 1 tiepoly_x0
+xfeed_442 0 1 tiepoly_x0
+xfeed_441 0 1 tiepoly_x0
+xfeed_440 0 1 tiepoly_x0
+xsubckt_120_sff1_x4 0 67 1 45 47 sff1_x4
+xfeed_459 0 1 tiepoly_x0
+xfeed_457 0 1 tiepoly_x0
+xfeed_456 0 1 tiepoly_x0
+xfeed_455 0 1 tiepoly_x0
+xfeed_454 0 1 tiepoly_x0
+xfeed_453 0 1 tiepoly_x0
+xfeed_452 0 1 tiepoly_x0
+xfeed_451 0 1 tiepoly_x0
+xfeed_450 0 1 tiepoly_x0
+xsubckt_155_sff1_x4 0 67 1 9 33 sff1_x4
+xsubckt_61_oa22_x2 1 133 0 63 92 134 oa22_x2
+xfeed_509 0 1 tiepoly_x0
+xfeed_508 0 1 tiepoly_x0
+xfeed_507 0 1 tiepoly_x0
+xfeed_506 0 1 tiepoly_x0
+xfeed_505 0 1 tiepoly_x0
+xfeed_504 0 1 tiepoly_x0
+xfeed_503 0 1 tiepoly_x0
+xfeed_502 0 1 tiepoly_x0
+xfeed_501 0 1 tiepoly_x0
+xfeed_469 0 1 tiepoly_x0
+xfeed_468 0 1 tiepoly_x0
+xfeed_467 0 1 tiepoly_x0
+xfeed_466 0 1 tiepoly_x0
+xfeed_465 0 1 tiepoly_x0
+xfeed_464 0 1 tiepoly_x0
+xfeed_463 0 1 tiepoly_x0
+xfeed_462 0 1 tiepoly_x0
+xfeed_461 0 1 tiepoly_x0
+xfeed_460 0 1 tiepoly_x0
+xsubckt_112_ao22_x2 1 8 0 32 154 105 ao22_x2
+xsubckt_108_ao22_x2 1 10 0 34 154 107 ao22_x2
+xfeed_519 0 1 tiepoly_x0
+xfeed_518 0 1 tiepoly_x0
+xfeed_517 0 1 tiepoly_x0
+xfeed_516 0 1 tiepoly_x0
+xfeed_515 0 1 tiepoly_x0
+xfeed_514 0 1 tiepoly_x0
+xfeed_513 0 1 tiepoly_x0
+xfeed_512 0 1 tiepoly_x0
+xfeed_511 0 1 tiepoly_x0
+xfeed_510 0 1 tiepoly_x0
+xfeed_479 0 1 tiepoly_x0
+xfeed_478 0 1 tiepoly_x0
+xfeed_477 0 1 tiepoly_x0
+xfeed_476 0 1 tiepoly_x0
+xfeed_475 0 1 tiepoly_x0
+xfeed_474 0 1 tiepoly_x0
+xfeed_473 0 1 tiepoly_x0
+xfeed_472 0 1 tiepoly_x0
+xfeed_471 0 1 tiepoly_x0
+xfeed_470 0 1 tiepoly_x0
+xsubckt_130_sff1_x4 0 67 1 14 22 sff1_x4
+xsubckt_30_no2_x1 157 0 99 1 5 no2_x1
+xfeed_529 0 1 tiepoly_x0
+xfeed_528 0 1 tiepoly_x0
+xfeed_527 0 1 tiepoly_x0
+xfeed_526 0 1 tiepoly_x0
+xfeed_525 0 1 tiepoly_x0
+xfeed_524 0 1 tiepoly_x0
+xfeed_523 0 1 tiepoly_x0
+xfeed_522 0 1 tiepoly_x0
+xfeed_521 0 1 tiepoly_x0
+xfeed_520 0 1 tiepoly_x0
+xfeed_489 0 1 tiepoly_x0
+xfeed_488 0 1 tiepoly_x0
+xfeed_487 0 1 tiepoly_x0
+xfeed_486 0 1 tiepoly_x0
+xfeed_485 0 1 tiepoly_x0
+xfeed_484 0 1 tiepoly_x0
+xfeed_483 0 1 tiepoly_x0
+xfeed_482 0 1 tiepoly_x0
+xfeed_481 0 1 tiepoly_x0
+xfeed_480 0 1 tiepoly_x0
+xsubckt_126_sff1_x4 0 67 1 18 26 sff1_x4
+xsubckt_33_no2_x1 69 0 155 1 5 no2_x1
+xsubckt_72_ao22_x2 1 126 0 78 23 154 ao22_x2
+xsubckt_1_inv_x1 0 100 47 1 inv_x1
+xsubckt_2_inv_x1 0 99 46 1 inv_x1
+xsubckt_3_inv_x1 0 98 2 1 inv_x1
+xsubckt_4_inv_x1 0 97 83 1 inv_x1
+xsubckt_37_no2_x1 151 0 154 1 43 no2_x1
+xsubckt_101_na2_x1 1 110 111 0 101 na2_x1
+xsubckt_0_inv_x1 0 101 5 1 inv_x1
+xsubckt_67_oa22_x2 1 129 0 61 92 130 oa22_x2
+xfeed_539 0 1 tiepoly_x0
+xfeed_538 0 1 tiepoly_x0
+xfeed_537 0 1 tiepoly_x0
+xfeed_536 0 1 tiepoly_x0
+xfeed_535 0 1 tiepoly_x0
+xfeed_534 0 1 tiepoly_x0
+xfeed_533 0 1 tiepoly_x0
+xfeed_532 0 1 tiepoly_x0
+xfeed_531 0 1 tiepoly_x0
+xfeed_530 0 1 tiepoly_x0
+xfeed_499 0 1 tiepoly_x0
+xfeed_498 0 1 tiepoly_x0
+xfeed_497 0 1 tiepoly_x0
+xfeed_496 0 1 tiepoly_x0
+xfeed_495 0 1 tiepoly_x0
+xfeed_494 0 1 tiepoly_x0
+xfeed_493 0 1 tiepoly_x0
+xfeed_492 0 1 tiepoly_x0
+xfeed_491 0 1 tiepoly_x0
+xfeed_490 0 1 tiepoly_x0
+xsubckt_118_ao22_x2 1 102 0 97 89 139 ao22_x2
+xsubckt_117_oa22_x2 1 76 0 84 90 91 oa22_x2
+xfeed_549 0 1 tiepoly_x0
+xfeed_548 0 1 tiepoly_x0
+xfeed_547 0 1 tiepoly_x0
+xfeed_546 0 1 tiepoly_x0
+xfeed_545 0 1 tiepoly_x0
+xfeed_544 0 1 tiepoly_x0
+xfeed_543 0 1 tiepoly_x0
+xfeed_542 0 1 tiepoly_x0
+xfeed_541 0 1 tiepoly_x0
+xfeed_540 0 1 tiepoly_x0
+xsubckt_34_a2_x2 0 154 1 46 47 a2_x2
+xsubckt_140_sff1_x4 0 67 1 40 43 sff1_x4
+xsubckt_74_a2_x2 0 51 1 125 101 a2_x2
+xsubckt_136_sff1_x4 0 67 1 52 60 sff1_x4
+xfeed_559 0 1 tiepoly_x0
+xfeed_558 0 1 tiepoly_x0
+xfeed_557 0 1 tiepoly_x0
+xfeed_556 0 1 tiepoly_x0
+xfeed_555 0 1 tiepoly_x0
+xfeed_554 0 1 tiepoly_x0
+xfeed_553 0 1 tiepoly_x0
+xfeed_552 0 1 tiepoly_x0
+xfeed_551 0 1 tiepoly_x0
+xfeed_550 0 1 tiepoly_x0
+xsubckt_43_ao22_x2 1 147 0 154 90 96 ao22_x2
+xsubckt_12_o2_x2 1 89 0 46 47 o2_x2
+xfeed_609 0 1 tiepoly_x0
+xfeed_608 0 1 tiepoly_x0
+xfeed_607 0 1 tiepoly_x0
+xfeed_606 0 1 tiepoly_x0
+xfeed_605 0 1 tiepoly_x0
+xfeed_604 0 1 tiepoly_x0
+xfeed_603 0 1 tiepoly_x0
+xfeed_602 0 1 tiepoly_x0
+xfeed_601 0 1 tiepoly_x0
+xfeed_600 0 1 tiepoly_x0
+xfeed_569 0 1 tiepoly_x0
+xfeed_568 0 1 tiepoly_x0
+xfeed_567 0 1 tiepoly_x0
+xfeed_566 0 1 tiepoly_x0
+xfeed_565 0 1 tiepoly_x0
+xfeed_564 0 1 tiepoly_x0
+xfeed_563 0 1 tiepoly_x0
+xfeed_562 0 1 tiepoly_x0
+xfeed_561 0 1 tiepoly_x0
+xfeed_560 0 1 tiepoly_x0
+xsubckt_97_no2_x1 45 0 113 1 91 no2_x1
+xsubckt_96_no2_x1 113 0 89 1 2 no2_x1
+xsubckt_150_sff1_x4 0 67 1 69 77 sff1_x4
+xsubckt_29_na2_x1 1 158 90 0 77 na2_x1
+xfeed_619 0 1 tiepoly_x0
+xfeed_618 0 1 tiepoly_x0
+xfeed_617 0 1 tiepoly_x0
+xfeed_616 0 1 tiepoly_x0
+xfeed_615 0 1 tiepoly_x0
+xfeed_614 0 1 tiepoly_x0
+xfeed_613 0 1 tiepoly_x0
+xfeed_612 0 1 tiepoly_x0
+xfeed_611 0 1 tiepoly_x0
+xfeed_610 0 1 tiepoly_x0
+xfeed_576 0 1 tiepoly_x0
+xfeed_575 0 1 tiepoly_x0
+xfeed_574 0 1 tiepoly_x0
+xfeed_573 0 1 tiepoly_x0
+xfeed_572 0 1 tiepoly_x0
+xfeed_571 0 1 tiepoly_x0
+xfeed_570 0 1 tiepoly_x0
+xsubckt_15_no3_x1 87 1 0 74 88 91 no3_x1
+xsubckt_19_no3_x1 85 1 0 73 86 91 no3_x1
+xfeed_579 0 1 tiepoly_x0
+xfeed_578 0 1 tiepoly_x0
+xfeed_577 0 1 tiepoly_x0
+xsubckt_146_sff1_x4 0 67 1 73 81 sff1_x4
+xfeed_629 0 1 tiepoly_x0
+xfeed_628 0 1 tiepoly_x0
+xfeed_627 0 1 tiepoly_x0
+xfeed_626 0 1 tiepoly_x0
+xfeed_625 0 1 tiepoly_x0
+xfeed_624 0 1 tiepoly_x0
+xfeed_623 0 1 tiepoly_x0
+xfeed_622 0 1 tiepoly_x0
+xfeed_621 0 1 tiepoly_x0
+xfeed_620 0 1 tiepoly_x0
+xfeed_583 0 1 tiepoly_x0
+xfeed_582 0 1 tiepoly_x0
+xfeed_581 0 1 tiepoly_x0
+xfeed_580 0 1 tiepoly_x0
+xfeed_589 0 1 tiepoly_x0
+xfeed_588 0 1 tiepoly_x0
+xfeed_587 0 1 tiepoly_x0
+xfeed_586 0 1 tiepoly_x0
+xfeed_585 0 1 tiepoly_x0
+xfeed_584 0 1 tiepoly_x0
+xsubckt_103_ao22_x2 1 109 0 153 28 101 ao22_x2
+xsubckt_49_ao22_x2 1 142 0 95 4 46 ao22_x2
+xfeed_639 0 1 tiepoly_x0
+xfeed_638 0 1 tiepoly_x0
+xfeed_637 0 1 tiepoly_x0
+xfeed_636 0 1 tiepoly_x0
+xfeed_635 0 1 tiepoly_x0
+xfeed_634 0 1 tiepoly_x0
+xfeed_633 0 1 tiepoly_x0
+xfeed_632 0 1 tiepoly_x0
+xfeed_631 0 1 tiepoly_x0
+xfeed_630 0 1 tiepoly_x0
+xfeed_590 0 1 tiepoly_x0
+xfeed_599 0 1 tiepoly_x0
+xfeed_598 0 1 tiepoly_x0
+xfeed_597 0 1 tiepoly_x0
+xfeed_596 0 1 tiepoly_x0
+xfeed_595 0 1 tiepoly_x0
+xfeed_594 0 1 tiepoly_x0
+xfeed_593 0 1 tiepoly_x0
+xfeed_592 0 1 tiepoly_x0
+xfeed_591 0 1 tiepoly_x0
+xsubckt_121_sff1_x4 0 67 1 44 46 sff1_x4
+xsubckt_5_a2_x2 0 96 1 42 43 a2_x2
+xfeed_646 0 1 tiepoly_x0
+xfeed_645 0 1 tiepoly_x0
+xfeed_644 0 1 tiepoly_x0
+xfeed_643 0 1 tiepoly_x0
+xfeed_642 0 1 tiepoly_x0
+xfeed_641 0 1 tiepoly_x0
+xfeed_640 0 1 tiepoly_x0
+xsubckt_156_sff1_x4 0 67 1 8 32 sff1_x4
+xfeed_649 0 1 tiepoly_x0
+xfeed_648 0 1 tiepoly_x0
+xfeed_647 0 1 tiepoly_x0
+xsubckt_63_ao22_x2 1 132 0 81 26 154 ao22_x2
+xfeed_653 0 1 tiepoly_x0
+xfeed_652 0 1 tiepoly_x0
+xfeed_651 0 1 tiepoly_x0
+xfeed_650 0 1 tiepoly_x0
+xsubckt_113_ao22_x2 1 104 0 153 23 101 ao22_x2
+xsubckt_58_oa22_x2 1 135 0 64 92 136 oa22_x2
+xfeed_659 0 1 tiepoly_x0
+xfeed_658 0 1 tiepoly_x0
+xfeed_657 0 1 tiepoly_x0
+xfeed_656 0 1 tiepoly_x0
+xfeed_655 0 1 tiepoly_x0
+xfeed_654 0 1 tiepoly_x0
+xfeed_660 0 1 tiepoly_x0
+xsubckt_109_ao22_x2 1 106 0 153 25 101 ao22_x2
+xfeed_669 0 1 tiepoly_x0
+xfeed_668 0 1 tiepoly_x0
+xfeed_667 0 1 tiepoly_x0
+xfeed_666 0 1 tiepoly_x0
+xfeed_665 0 1 tiepoly_x0
+xfeed_664 0 1 tiepoly_x0
+xfeed_663 0 1 tiepoly_x0
+xfeed_662 0 1 tiepoly_x0
+xfeed_661 0 1 tiepoly_x0
+xsubckt_131_sff1_x4 0 67 1 57 65 sff1_x4
+xsubckt_41_no2_x1 148 0 42 1 43 no2_x1
+xsubckt_83_a2_x2 0 119 1 165 27 a2_x2
+xsubckt_93_a2_x2 0 114 1 165 22 a2_x2
+xsubckt_127_sff1_x4 0 67 1 17 25 sff1_x4
+xfeed_679 0 1 tiepoly_x0
+xfeed_678 0 1 tiepoly_x0
+xfeed_677 0 1 tiepoly_x0
+xfeed_676 0 1 tiepoly_x0
+xfeed_675 0 1 tiepoly_x0
+xfeed_674 0 1 tiepoly_x0
+xfeed_673 0 1 tiepoly_x0
+xfeed_672 0 1 tiepoly_x0
+xfeed_671 0 1 tiepoly_x0
+xfeed_670 0 1 tiepoly_x0
+xsubckt_47_no2_x1 144 0 98 1 47 no2_x1
+xsubckt_69_ao22_x2 1 128 0 79 24 154 ao22_x2
+xfeed_682 0 1 tiepoly_x0
+xfeed_681 0 1 tiepoly_x0
+xfeed_680 0 1 tiepoly_x0
+xsubckt_102_inv_x1 0 13 110 1 inv_x1
+xsubckt_51_no4_x1 141 1 3 0 143 145 5 no4_x1
+xsubckt_141_sff1_x4 0 67 1 39 42 sff1_x4
+xsubckt_137_sff1_x4 0 67 1 51 59 sff1_x4
+xsubckt_82_oa22_x2 1 20 0 83 121 120 oa22_x2
+xsubckt_44_ao22_x2 1 146 0 41 147 165 ao22_x2
+xsubckt_31_na2_x1 1 156 46 0 78 na2_x1
+xsubckt_35_na2_x1 1 153 46 0 47 na2_x1
+xsubckt_151_sff1_x4 0 67 1 13 37 sff1_x4
+xsubckt_25_no3_x1 161 1 0 71 162 91 no3_x1
+xsubckt_22_no3_x1 163 1 0 72 164 91 no3_x1
+xsubckt_7_na3_x1 1 94 41 0 42 43 na3_x1
+xsubckt_28_no3_x1 159 1 0 70 160 91 no3_x1
+xsubckt_92_oa22_x2 1 15 0 78 121 115 oa22_x2
+xsubckt_147_sff1_x4 0 67 1 72 80 sff1_x4
+xsubckt_54_ao22_x2 1 138 0 100 84 46 ao22_x2
+xsubckt_88_oa22_x2 1 17 0 80 121 117 oa22_x2
+xsubckt_104_ao22_x2 1 12 0 36 154 109 ao22_x2
+xsubckt_62_a2_x2 0 55 1 133 101 a2_x2
+xsubckt_52_a2_x2 0 140 1 154 29 a2_x2
+xsubckt_122_sff1_x4 0 67 1 48 49 sff1_x4
+xsubckt_157_sff1_x4 0 67 1 7 31 sff1_x4
+xsubckt_114_ao22_x2 1 7 0 31 154 104 ao22_x2
+xsubckt_132_sff1_x4 0 67 1 56 64 sff1_x4
+xsubckt_50_no2_x1 141 0 142 1 144 no2_x1
+xsubckt_128_sff1_x4 0 67 1 16 24 sff1_x4
+xsubckt_73_oa22_x2 1 125 0 59 92 126 oa22_x2
+xsubckt_119_no3_x1 102 1 0 75 93 5 no3_x1
+xsubckt_142_sff1_x4 0 67 1 38 41 sff1_x4
+xsubckt_138_sff1_x4 0 67 1 50 58 sff1_x4
+xsubckt_99_a2_x2 0 44 1 112 165 a2_x2
+xsubckt_89_a2_x2 0 116 1 165 24 a2_x2
+xsubckt_59_a2_x2 0 56 1 135 101 a2_x2
+xsubckt_79_a2_x2 0 121 1 157 66 a2_x2
+xsubckt_45_ao22_x2 1 38 0 94 153 146 ao22_x2
+xsubckt_6_a3_x2 1 95 0 41 42 43 a3_x2
+xsubckt_152_sff1_x4 0 67 1 12 36 sff1_x4
+xsubckt_91_a2_x2 0 115 1 165 23 a2_x2
+xsubckt_81_a2_x2 0 120 1 165 28 a2_x2
+xsubckt_38_no3_x1 151 1 0 40 152 5 no3_x1
+xsubckt_71_a2_x2 0 52 1 127 101 a2_x2
+xsubckt_148_sff1_x4 0 67 1 71 79 sff1_x4
+xsubckt_105_ao22_x2 1 108 0 153 27 101 ao22_x2
+xsubckt_123_sff1_x4 0 67 1 21 29 sff1_x4
+xsubckt_158_sff1_x4 0 67 1 6 30 sff1_x4
+xsubckt_64_oa22_x2 1 131 0 62 92 132 oa22_x2
+xdiode_9 0 1 67 dio_x0
+xdiode_8 0 1 67 dio_x0
+xdiode_7 0 1 67 dio_x0
+xdiode_6 0 1 67 dio_x0
+xdiode_5 0 1 67 dio_x0
+xdiode_4 0 1 67 dio_x0
+xdiode_3 0 1 67 dio_x0
+xdiode_2 0 1 101 dio_x0
+xdiode_1 0 1 101 dio_x0
+xdiode_0 0 1 101 dio_x0
+xsubckt_115_ao22_x2 1 103 0 153 22 101 ao22_x2
+xsubckt_133_sff1_x4 0 67 1 55 63 sff1_x4
+xsubckt_40_ao22_x2 1 149 0 96 153 150 ao22_x2
+xsubckt_68_a2_x2 0 53 1 129 101 a2_x2
+xfeed_19 0 1 tiepoly_x0
+xfeed_18 0 1 tiepoly_x0
+xfeed_17 0 1 tiepoly_x0
+xfeed_16 0 1 tiepoly_x0
+xfeed_15 0 1 tiepoly_x0
+xfeed_14 0 1 tiepoly_x0
+xfeed_10 0 1 tiepoly_x0
+xsubckt_78_a2_x2 0 122 1 165 29 a2_x2
+xsubckt_129_sff1_x4 0 67 1 15 23 sff1_x4
+xsubckt_75_ao22_x2 1 124 0 77 22 154 ao22_x2
+xsubckt_36_ao22_x2 1 152 0 154 90 43 ao22_x2
+xfeed_29 0 1 tiepoly_x0
+xfeed_27 0 1 tiepoly_x0
+xfeed_26 0 1 tiepoly_x0
+xfeed_25 0 1 tiepoly_x0
+xfeed_24 0 1 tiepoly_x0
+xfeed_23 0 1 tiepoly_x0
+xfeed_22 0 1 tiepoly_x0
+xfeed_21 0 1 tiepoly_x0
+xfeed_20 0 1 tiepoly_x0
+xfeed_39 0 1 tiepoly_x0
+xfeed_37 0 1 tiepoly_x0
+xfeed_35 0 1 tiepoly_x0
+xfeed_33 0 1 tiepoly_x0
+xfeed_32 0 1 tiepoly_x0
+xfeed_31 0 1 tiepoly_x0
+xfeed_30 0 1 tiepoly_x0
+xsubckt_143_sff1_x4 0 67 1 76 84 sff1_x4
+xfeed_46 0 1 tiepoly_x0
+xfeed_45 0 1 tiepoly_x0
+xfeed_44 0 1 tiepoly_x0
+xfeed_43 0 1 tiepoly_x0
+xfeed_42 0 1 tiepoly_x0
+xfeed_41 0 1 tiepoly_x0
+xfeed_40 0 1 tiepoly_x0
+xsubckt_139_sff1_x4 0 67 1 3 4 sff1_x4
+xsubckt_84_oa22_x2 1 19 0 82 121 119 oa22_x2
+xdiode_19 0 1 153 dio_x0
+xdiode_18 0 1 154 dio_x0
+xdiode_17 0 1 154 dio_x0
+xdiode_16 0 1 154 dio_x0
+xdiode_15 0 1 154 dio_x0
+xdiode_14 0 1 165 dio_x0
+xdiode_13 0 1 165 dio_x0
+xdiode_12 0 1 67 dio_x0
+xdiode_11 0 1 67 dio_x0
+xdiode_10 0 1 67 dio_x0
+xfeed_49 0 1 tiepoly_x0
+xfeed_48 0 1 tiepoly_x0
+xfeed_47 0 1 tiepoly_x0
+xfeed_53 0 1 tiepoly_x0
+xfeed_52 0 1 tiepoly_x0
+xfeed_51 0 1 tiepoly_x0
+xfeed_50 0 1 tiepoly_x0
+xsubckt_53_na2_x1 1 139 84 0 46 na2_x1
+xdiode_21 0 1 153 dio_x0
+xdiode_20 0 1 153 dio_x0
+xfeed_101 0 1 tiepoly_x0
+xfeed_100 0 1 tiepoly_x0
+xfeed_59 0 1 tiepoly_x0
+xfeed_58 0 1 tiepoly_x0
+xfeed_57 0 1 tiepoly_x0
+xfeed_56 0 1 tiepoly_x0
+xfeed_55 0 1 tiepoly_x0
+xfeed_54 0 1 tiepoly_x0
+xsubckt_9_no2_x1 92 0 46 1 100 no2_x1
+xsubckt_8_no2_x1 93 0 94 1 100 no2_x1
+xfeed_102 0 1 tiepoly_x0
+xfeed_104 0 1 tiepoly_x0
+xfeed_105 0 1 tiepoly_x0
+xfeed_106 0 1 tiepoly_x0
+xfeed_107 0 1 tiepoly_x0
+xfeed_108 0 1 tiepoly_x0
+xfeed_109 0 1 tiepoly_x0
+xfeed_60 0 1 tiepoly_x0
+xsubckt_153_sff1_x4 0 67 1 11 35 sff1_x4
+xsubckt_42_no3_x1 148 1 0 39 149 5 no3_x1
+xsubckt_46_no3_x1 94 1 0 145 2 100 no3_x1
+xsubckt_60_ao22_x2 1 134 0 82 27 154 ao22_x2
+xfeed_69 0 1 tiepoly_x0
+xfeed_68 0 1 tiepoly_x0
+xfeed_67 0 1 tiepoly_x0
+xfeed_66 0 1 tiepoly_x0
+xfeed_64 0 1 tiepoly_x0
+xfeed_63 0 1 tiepoly_x0
+xfeed_62 0 1 tiepoly_x0
+xfeed_61 0 1 tiepoly_x0
+xsubckt_149_sff1_x4 0 67 1 70 78 sff1_x4
+xsubckt_94_oa22_x2 1 14 0 77 121 114 oa22_x2
+xsubckt_48_no3_x1 4 1 0 143 99 47 no3_x1
+xfeed_110 0 1 tiepoly_x0
+xfeed_111 0 1 tiepoly_x0
+xfeed_112 0 1 tiepoly_x0
+xfeed_113 0 1 tiepoly_x0
+xfeed_114 0 1 tiepoly_x0
+xfeed_115 0 1 tiepoly_x0
+xfeed_116 0 1 tiepoly_x0
+xfeed_117 0 1 tiepoly_x0
+xfeed_118 0 1 tiepoly_x0
+xfeed_119 0 1 tiepoly_x0
+xsubckt_110_ao22_x2 1 9 0 33 154 106 ao22_x2
+xsubckt_95_ao22_x2 1 48 0 49 93 157 ao22_x2
+xsubckt_55_oa22_x2 1 137 0 65 92 138 oa22_x2
+xsubckt_56_ao22_x2 1 57 0 137 140 101 ao22_x2
+xfeed_79 0 1 tiepoly_x0
+xfeed_78 0 1 tiepoly_x0
+xfeed_77 0 1 tiepoly_x0
+xfeed_76 0 1 tiepoly_x0
+xfeed_75 0 1 tiepoly_x0
+xfeed_74 0 1 tiepoly_x0
+xfeed_73 0 1 tiepoly_x0
+xfeed_72 0 1 tiepoly_x0
+xfeed_70 0 1 tiepoly_x0
+xsubckt_106_ao22_x2 1 11 0 35 154 108 ao22_x2
+xfeed_120 0 1 tiepoly_x0
+xfeed_121 0 1 tiepoly_x0
+xfeed_122 0 1 tiepoly_x0
+xfeed_123 0 1 tiepoly_x0
+xfeed_124 0 1 tiepoly_x0
+xfeed_125 0 1 tiepoly_x0
+xfeed_126 0 1 tiepoly_x0
+xfeed_127 0 1 tiepoly_x0
+xfeed_128 0 1 tiepoly_x0
+xfeed_89 0 1 tiepoly_x0
+xfeed_88 0 1 tiepoly_x0
+xfeed_87 0 1 tiepoly_x0
+xfeed_86 0 1 tiepoly_x0
+xfeed_85 0 1 tiepoly_x0
+xfeed_84 0 1 tiepoly_x0
+xfeed_83 0 1 tiepoly_x0
+xfeed_82 0 1 tiepoly_x0
+xfeed_81 0 1 tiepoly_x0
+xfeed_80 0 1 tiepoly_x0
+xfeed_130 0 1 tiepoly_x0
+xfeed_131 0 1 tiepoly_x0
+xfeed_132 0 1 tiepoly_x0
+xfeed_133 0 1 tiepoly_x0
+xfeed_134 0 1 tiepoly_x0
+xfeed_135 0 1 tiepoly_x0
+xfeed_136 0 1 tiepoly_x0
+xfeed_137 0 1 tiepoly_x0
+xfeed_138 0 1 tiepoly_x0
+xsubckt_77_a2_x2 0 50 1 123 101 a2_x2
+xsubckt_16_no2_x1 86 0 82 1 99 no2_x1
+xsubckt_14_no2_x1 87 0 83 1 99 no2_x1
+xsubckt_13_no2_x1 88 0 89 1 82 no2_x1
+xsubckt_11_no2_x1 90 0 46 1 47 no2_x1
+xsubckt_87_a2_x2 0 117 1 165 25 a2_x2
+xsubckt_124_sff1_x4 0 67 1 20 28 sff1_x4
+xfeed_99 0 1 tiepoly_x0
+xfeed_98 0 1 tiepoly_x0
+xfeed_97 0 1 tiepoly_x0
+xfeed_96 0 1 tiepoly_x0
+xfeed_95 0 1 tiepoly_x0
+xfeed_94 0 1 tiepoly_x0
+xfeed_93 0 1 tiepoly_x0
+xfeed_92 0 1 tiepoly_x0
+xfeed_91 0 1 tiepoly_x0
+xfeed_90 0 1 tiepoly_x0
+xsubckt_66_ao22_x2 1 130 0 80 25 154 ao22_x2
+xsubckt_18_no2_x1 165 0 90 1 5 no2_x1
+xsubckt_17_no2_x1 85 0 89 1 81 no2_x1
+xfeed_140 0 1 tiepoly_x0
+xfeed_141 0 1 tiepoly_x0
+xfeed_142 0 1 tiepoly_x0
+xfeed_143 0 1 tiepoly_x0
+xfeed_144 0 1 tiepoly_x0
+xfeed_145 0 1 tiepoly_x0
+xfeed_146 0 1 tiepoly_x0
+xfeed_147 0 1 tiepoly_x0
+xfeed_148 0 1 tiepoly_x0
+xfeed_149 0 1 tiepoly_x0
+xsubckt_39_na3_x1 1 150 153 0 89 42 na3_x1
+xsubckt_116_ao22_x2 1 6 0 30 154 103 ao22_x2
+xfeed_150 0 1 tiepoly_x0
+xfeed_151 0 1 tiepoly_x0
+xfeed_152 0 1 tiepoly_x0
+xfeed_153 0 1 tiepoly_x0
+xfeed_154 0 1 tiepoly_x0
+xfeed_155 0 1 tiepoly_x0
+xfeed_156 0 1 tiepoly_x0
+xfeed_157 0 1 tiepoly_x0
+xfeed_158 0 1 tiepoly_x0
+xfeed_159 0 1 tiepoly_x0
+xsubckt_134_sff1_x4 0 67 1 54 62 sff1_x4
+xsubckt_100_mx2_x2 1 111 0 154 37 29 mx2_x2
+xfeed_160 0 1 tiepoly_x0
+xfeed_162 0 1 tiepoly_x0
+xfeed_163 0 1 tiepoly_x0
+xfeed_164 0 1 tiepoly_x0
+xfeed_165 0 1 tiepoly_x0
+xfeed_166 0 1 tiepoly_x0
+xfeed_168 0 1 tiepoly_x0
+xfeed_169 0 1 tiepoly_x0
+xfeed_200 0 1 tiepoly_x0
+xfeed_201 0 1 tiepoly_x0
+xfeed_202 0 1 tiepoly_x0
+xfeed_203 0 1 tiepoly_x0
+xfeed_204 0 1 tiepoly_x0
+xfeed_205 0 1 tiepoly_x0
+xfeed_206 0 1 tiepoly_x0
+xfeed_207 0 1 tiepoly_x0
+xfeed_208 0 1 tiepoly_x0
+xfeed_209 0 1 tiepoly_x0
+xfeed_170 0 1 tiepoly_x0
+xfeed_171 0 1 tiepoly_x0
+xfeed_172 0 1 tiepoly_x0
+xfeed_173 0 1 tiepoly_x0
+xfeed_174 0 1 tiepoly_x0
+xfeed_175 0 1 tiepoly_x0
+xfeed_176 0 1 tiepoly_x0
+xfeed_210 0 1 tiepoly_x0
+xfeed_211 0 1 tiepoly_x0
+xfeed_212 0 1 tiepoly_x0
+xfeed_213 0 1 tiepoly_x0
+xfeed_214 0 1 tiepoly_x0
+xfeed_215 0 1 tiepoly_x0
+xfeed_216 0 1 tiepoly_x0
+xfeed_217 0 1 tiepoly_x0
+xfeed_218 0 1 tiepoly_x0
+xfeed_219 0 1 tiepoly_x0
+xfeed_180 0 1 tiepoly_x0
+xfeed_181 0 1 tiepoly_x0
+xfeed_182 0 1 tiepoly_x0
+xfeed_183 0 1 tiepoly_x0
+xfeed_184 0 1 tiepoly_x0
+xfeed_185 0 1 tiepoly_x0
+xfeed_186 0 1 tiepoly_x0
+xfeed_187 0 1 tiepoly_x0
+xfeed_188 0 1 tiepoly_x0
+xfeed_189 0 1 tiepoly_x0
+xfeed_220 0 1 tiepoly_x0
+xfeed_221 0 1 tiepoly_x0
+xfeed_222 0 1 tiepoly_x0
+xfeed_223 0 1 tiepoly_x0
+xfeed_224 0 1 tiepoly_x0
+xfeed_225 0 1 tiepoly_x0
+xfeed_226 0 1 tiepoly_x0
+xfeed_227 0 1 tiepoly_x0
+xfeed_228 0 1 tiepoly_x0
+xfeed_229 0 1 tiepoly_x0
+xsubckt_98_na3_x1 1 112 154 0 95 98 na3_x1
+xsubckt_144_sff1_x4 0 67 1 75 83 sff1_x4
+xfeed_190 0 1 tiepoly_x0
+xfeed_191 0 1 tiepoly_x0
+xfeed_192 0 1 tiepoly_x0
+xfeed_193 0 1 tiepoly_x0
+xfeed_194 0 1 tiepoly_x0
+xfeed_195 0 1 tiepoly_x0
+xfeed_196 0 1 tiepoly_x0
+xfeed_197 0 1 tiepoly_x0
+xfeed_198 0 1 tiepoly_x0
+xfeed_199 0 1 tiepoly_x0
+xfeed_230 0 1 tiepoly_x0
+xfeed_231 0 1 tiepoly_x0
+xfeed_232 0 1 tiepoly_x0
+xfeed_233 0 1 tiepoly_x0
+xfeed_234 0 1 tiepoly_x0
+xfeed_235 0 1 tiepoly_x0
+xfeed_236 0 1 tiepoly_x0
+xfeed_237 0 1 tiepoly_x0
+xfeed_238 0 1 tiepoly_x0
+xfeed_239 0 1 tiepoly_x0
+xsubckt_10_o3_x2 0 91 1 92 93 5 o3_x2
+xfeed_0 0 1 tiepoly_x0
+xfeed_240 0 1 tiepoly_x0
+xfeed_241 0 1 tiepoly_x0
+xfeed_242 0 1 tiepoly_x0
+xfeed_243 0 1 tiepoly_x0
+xfeed_244 0 1 tiepoly_x0
+xfeed_245 0 1 tiepoly_x0
+xfeed_246 0 1 tiepoly_x0
+xfeed_247 0 1 tiepoly_x0
+xfeed_248 0 1 tiepoly_x0
+xfeed_249 0 1 tiepoly_x0
+xfeed_9 0 1 tiepoly_x0
+xfeed_8 0 1 tiepoly_x0
+xfeed_7 0 1 tiepoly_x0
+xfeed_6 0 1 tiepoly_x0
+xfeed_5 0 1 tiepoly_x0
+xfeed_4 0 1 tiepoly_x0
+xfeed_3 0 1 tiepoly_x0
+xfeed_2 0 1 tiepoly_x0
+xfeed_1 0 1 tiepoly_x0
+xfeed_250 0 1 tiepoly_x0
+xfeed_251 0 1 tiepoly_x0
+xfeed_252 0 1 tiepoly_x0
+xfeed_253 0 1 tiepoly_x0
+xfeed_254 0 1 tiepoly_x0
+xfeed_255 0 1 tiepoly_x0
+xfeed_256 0 1 tiepoly_x0
+xfeed_257 0 1 tiepoly_x0
+xfeed_258 0 1 tiepoly_x0
+xfeed_259 0 1 tiepoly_x0
+xsubckt_154_sff1_x4 0 67 1 10 34 sff1_x4
+xfeed_260 0 1 tiepoly_x0
+xfeed_261 0 1 tiepoly_x0
+xfeed_262 0 1 tiepoly_x0
+xfeed_263 0 1 tiepoly_x0
+xfeed_264 0 1 tiepoly_x0
+xfeed_265 0 1 tiepoly_x0
+xfeed_266 0 1 tiepoly_x0
+xfeed_267 0 1 tiepoly_x0
+xfeed_268 0 1 tiepoly_x0
+xfeed_269 0 1 tiepoly_x0
+xfeed_300 0 1 tiepoly_x0
+xfeed_301 0 1 tiepoly_x0
+xfeed_302 0 1 tiepoly_x0
+xfeed_303 0 1 tiepoly_x0
+xfeed_304 0 1 tiepoly_x0
+xfeed_305 0 1 tiepoly_x0
+xfeed_306 0 1 tiepoly_x0
+xfeed_307 0 1 tiepoly_x0
+xfeed_308 0 1 tiepoly_x0
+xfeed_309 0 1 tiepoly_x0
+xsubckt_57_ao22_x2 1 136 0 83 28 154 ao22_x2
+xsubckt_111_ao22_x2 1 105 0 153 24 101 ao22_x2
+xspare_feed_13 0 1 tiepoly_x0
+xspare_feed_12 0 1 tiepoly_x0
+xspare_feed_11 0 1 tiepoly_x0
+xspare_feed_10 0 1 tiepoly_x0
+xfeed_270 0 1 tiepoly_x0
+xfeed_271 0 1 tiepoly_x0
+xfeed_272 0 1 tiepoly_x0
+xfeed_273 0 1 tiepoly_x0
+xfeed_274 0 1 tiepoly_x0
+xfeed_275 0 1 tiepoly_x0
+xfeed_276 0 1 tiepoly_x0
+xfeed_277 0 1 tiepoly_x0
+xfeed_278 0 1 tiepoly_x0
+xfeed_279 0 1 tiepoly_x0
+xfeed_310 0 1 tiepoly_x0
+xfeed_311 0 1 tiepoly_x0
+xfeed_312 0 1 tiepoly_x0
+xfeed_313 0 1 tiepoly_x0
+xfeed_314 0 1 tiepoly_x0
+xfeed_315 0 1 tiepoly_x0
+xfeed_316 0 1 tiepoly_x0
+xfeed_317 0 1 tiepoly_x0
+xfeed_318 0 1 tiepoly_x0
+xfeed_319 0 1 tiepoly_x0
+xspare_feed_19 0 1 tiepoly_x0
+xspare_feed_18 0 1 tiepoly_x0
+xspare_feed_17 0 1 tiepoly_x0
+xspare_feed_16 0 1 tiepoly_x0
+xspare_feed_15 0 1 tiepoly_x0
+xspare_feed_14 0 1 tiepoly_x0
+xsubckt_107_ao22_x2 1 107 0 153 26 101 ao22_x2
+xspare_feed_20 0 1 tiepoly_x0
+xfeed_280 0 1 tiepoly_x0
+xfeed_281 0 1 tiepoly_x0
+xfeed_282 0 1 tiepoly_x0
+xfeed_283 0 1 tiepoly_x0
+xfeed_284 0 1 tiepoly_x0
+xfeed_285 0 1 tiepoly_x0
+xfeed_286 0 1 tiepoly_x0
+xfeed_287 0 1 tiepoly_x0
+xfeed_288 0 1 tiepoly_x0
+xfeed_289 0 1 tiepoly_x0
+xfeed_320 0 1 tiepoly_x0
+xfeed_321 0 1 tiepoly_x0
+xfeed_322 0 1 tiepoly_x0
+xfeed_323 0 1 tiepoly_x0
+xfeed_324 0 1 tiepoly_x0
+xfeed_325 0 1 tiepoly_x0
+xfeed_326 0 1 tiepoly_x0
+xfeed_327 0 1 tiepoly_x0
+xfeed_328 0 1 tiepoly_x0
+xfeed_329 0 1 tiepoly_x0
+xspare_feed_29 0 1 tiepoly_x0
+xspare_feed_28 0 1 tiepoly_x0
+xspare_feed_27 0 1 tiepoly_x0
+xspare_feed_26 0 1 tiepoly_x0
+xspare_feed_25 0 1 tiepoly_x0
+xspare_feed_24 0 1 tiepoly_x0
+xspare_feed_23 0 1 tiepoly_x0
+xspare_feed_22 0 1 tiepoly_x0
+xspare_feed_21 0 1 tiepoly_x0
+xsubckt_125_sff1_x4 0 67 1 19 27 sff1_x4
+xsubckt_23_no2_x1 162 0 99 1 80 no2_x1
+xsubckt_21_no2_x1 163 0 89 1 80 no2_x1
+xsubckt_20_no2_x1 164 0 99 1 81 no2_x1
+xsubckt_70_oa22_x2 1 127 0 60 92 128 oa22_x2
+xspare_feed_9 0 1 tiepoly_x0
+xspare_feed_8 0 1 tiepoly_x0
+xspare_feed_7 0 1 tiepoly_x0
+xspare_feed_6 0 1 tiepoly_x0
+xspare_feed_5 0 1 tiepoly_x0
+xspare_feed_4 0 1 tiepoly_x0
+xspare_feed_3 0 1 tiepoly_x0
+xspare_feed_2 0 1 tiepoly_x0
+xspare_feed_1 0 1 tiepoly_x0
+xsubckt_32_ao22_x2 1 155 0 93 156 158 ao22_x2
+xsubckt_27_no2_x1 159 0 99 1 79 no2_x1
+xsubckt_26_no2_x1 160 0 89 1 78 no2_x1
+xsubckt_24_no2_x1 161 0 89 1 79 no2_x1
+xspare_feed_0 0 1 tiepoly_x0
+xfeed_290 0 1 tiepoly_x0
+xfeed_291 0 1 tiepoly_x0
+xfeed_292 0 1 tiepoly_x0
+xfeed_293 0 1 tiepoly_x0
+xfeed_294 0 1 tiepoly_x0
+xfeed_295 0 1 tiepoly_x0
+xfeed_296 0 1 tiepoly_x0
+xfeed_297 0 1 tiepoly_x0
+xfeed_298 0 1 tiepoly_x0
+xfeed_299 0 1 tiepoly_x0
+xfeed_330 0 1 tiepoly_x0
+xfeed_331 0 1 tiepoly_x0
+xfeed_332 0 1 tiepoly_x0
+xfeed_333 0 1 tiepoly_x0
+xfeed_334 0 1 tiepoly_x0
+xfeed_335 0 1 tiepoly_x0
+xfeed_336 0 1 tiepoly_x0
+xfeed_337 0 1 tiepoly_x0
+xfeed_338 0 1 tiepoly_x0
+xfeed_339 0 1 tiepoly_x0
+xspare_feed_39 0 1 tiepoly_x0
+xspare_feed_38 0 1 tiepoly_x0
+xspare_feed_37 0 1 tiepoly_x0
+xspare_feed_36 0 1 tiepoly_x0
+xspare_feed_35 0 1 tiepoly_x0
+xspare_feed_34 0 1 tiepoly_x0
+xspare_feed_33 0 1 tiepoly_x0
+xspare_feed_32 0 1 tiepoly_x0
+xspare_feed_31 0 1 tiepoly_x0
+xspare_feed_30 0 1 tiepoly_x0
+xfeed_340 0 1 tiepoly_x0
+xfeed_341 0 1 tiepoly_x0
+xfeed_342 0 1 tiepoly_x0
+xfeed_343 0 1 tiepoly_x0
+xfeed_344 0 1 tiepoly_x0
+xfeed_345 0 1 tiepoly_x0
+xfeed_346 0 1 tiepoly_x0
+xfeed_347 0 1 tiepoly_x0
+xfeed_348 0 1 tiepoly_x0
+xfeed_349 0 1 tiepoly_x0
+xspare_feed_49 0 1 tiepoly_x0
+xspare_feed_48 0 1 tiepoly_x0
+xspare_feed_47 0 1 tiepoly_x0
+xspare_feed_46 0 1 tiepoly_x0
+xspare_feed_45 0 1 tiepoly_x0
+xspare_feed_44 0 1 tiepoly_x0
+xspare_feed_43 0 1 tiepoly_x0
+xspare_feed_42 0 1 tiepoly_x0
+xspare_feed_41 0 1 tiepoly_x0
+xspare_feed_40 0 1 tiepoly_x0
+xfeed_350 0 1 tiepoly_x0
+xfeed_351 0 1 tiepoly_x0
+xfeed_352 0 1 tiepoly_x0
+xfeed_353 0 1 tiepoly_x0
+xfeed_354 0 1 tiepoly_x0
+xfeed_355 0 1 tiepoly_x0
+xfeed_356 0 1 tiepoly_x0
+xfeed_357 0 1 tiepoly_x0
+xfeed_358 0 1 tiepoly_x0
+xfeed_359 0 1 tiepoly_x0
+xspare_feed_59 0 1 tiepoly_x0
+xspare_feed_58 0 1 tiepoly_x0
+xspare_feed_57 0 1 tiepoly_x0
+xspare_feed_56 0 1 tiepoly_x0
+xspare_feed_55 0 1 tiepoly_x0
+xspare_feed_54 0 1 tiepoly_x0
+xspare_feed_53 0 1 tiepoly_x0
+xspare_feed_52 0 1 tiepoly_x0
+xspare_feed_51 0 1 tiepoly_x0
+xspare_feed_50 0 1 tiepoly_x0
+xsubckt_135_sff1_x4 0 67 1 53 61 sff1_x4
+xsubckt_80_oa22_x2 1 21 0 84 121 122 oa22_x2
+.ends sarlogic_r
