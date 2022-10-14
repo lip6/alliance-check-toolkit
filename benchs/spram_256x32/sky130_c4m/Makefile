@@ -9,10 +9,12 @@
                 USE_DEBUG = No
              USE_VALGRIND = No
 
+                ASIMUTOPT = -zd
             USE_CLOCKTREE = Yes
                      CHIP = chip
                   RM_CHIP = Yes
                  NETLISTS = eth_spram_256x32
+                 PATTERNS = eth_spram_256x32
 
  include ./mk/design-flow.mk
 
@@ -25,4 +27,4 @@ eth_spram_256x32_r.gds: eth_spram_256x32_r.vst
 blif:   eth_spram_256x32.blif
 vst:    eth_spram_256x32.vst
 gds:    eth_spram_256x32_r.gds
-
+sim:    asimut-eth_spram_256x32

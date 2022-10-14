@@ -43,6 +43,14 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.verboseLevel1       = True
     cfg.misc.verboseLevel2       = True
     cfg.etesian.graphics         = 2
+    cfg.etesian.uniformDensity   = True
+   # Fold 4
+   #cfg.etesian.aspectRatio      = 22.0
+   # Fold 2
+   #cfg.etesian.aspectRatio      = 5.45
+   # Fold 1
+    cfg.etesian.aspectRatio      = 1.45
+    cfg.etesian.spaceMargin      = 0.05
     cfg.anabatic.topRoutingLayer = 'm4'
     cfg.katana.eventsLimit       = 4000000
     af  = AllianceFramework.get()
