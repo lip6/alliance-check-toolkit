@@ -13,7 +13,7 @@
 
 # Secondary variables.
  ifeq ($(PATTERNS),)
-   PATTERNS  = patterns
+   PATTERNS = patterns
  endif
  ifeq ($(DESIGN),)
    DESIGN = design
