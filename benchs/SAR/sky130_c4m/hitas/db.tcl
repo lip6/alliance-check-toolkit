@@ -1,0 +1,45 @@
+#!/usr/bin/env avt_shell
+
+#############################################################
+# Timing Database Generation                                #
+#############################################################
+
+# Global Configuration
+avt_config avtLibraryDirs .
+avt_config simVthHigh 0.8
+avt_config simVthLow 0.2
+avt_config tasGenerateConeFile yes
+avt_config avtVerboseConeFile yes
+
+avt_config simToolModel ngspice
+avt_config simSlope 20e-12
+
+avt_config tasGenerateDetailTimingFile yes
+
+# Technology Parameters
+
+avt_LoadFile /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_logic_tt_model.spice spice
+avt_LoadFile top_hitas_ngspice.cir spice
+
+set fig [hitas SARlogic]
+
+set temp   [ttv_GetTimingFigureProperty $fig TEMP]
+set supply [ttv_GetTimingFigureProperty $fig DEF_SUPPLY]
+
+set slope  [ttv_GetTimingFigureProperty $fig DEF_SLOPE]
+set load   [ttv_GetTimingFigureProperty $fig DEF_LOAD]
+set date   [ttv_GetTimingFigureProperty $fig DATE]
+
+
+puts ""
+puts "Power supply: [ttv_GetTimingFigureProperty $fig DEF_SUPPLY]V"
+puts "Temperature: [ttv_GetTimingFigureProperty $fig TEMP]°C"
+set sig [ttv_GetTimingSignal $fig nq]
+puts ""
+puts "nq signal capacitance: [ttv_GetTimingSignalProperty $sig CAPA]F"
+
+puts "input slope     : $slope"
+puts "generation date : $date"
+
+puts "output load     : $load"
+
