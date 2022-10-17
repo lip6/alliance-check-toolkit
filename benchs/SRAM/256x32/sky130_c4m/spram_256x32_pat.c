@@ -68,6 +68,7 @@ int  main ( int argc, char* argv[] )
   /* DECLAR( "bit_addr0001_b_q"   , ":1", "X", SIGNAL, "31 downto 0", "" ); */
   /* DECLAR( "omux_0_to_3_b_q"    , ":1", "X", SIGNAL, "31 donwto 0", "" ); */
   /* DECLAR( "omux_0_to_255_b_q"  , ":1", "X", SIGNAL, "31 donwto 0", "" ); */
+  /* DECLAR( "rdecod_7_6_5_4_3_2_1_0_00000000", ":1", "B", SIGNAL, "", "" ); */
 
   AFFECT( tostr(0), "ce"  , "0b1" );
   AFFECT( tostr(0), "oe"  , "0b1" );
@@ -79,22 +80,23 @@ int  main ( int argc, char* argv[] )
   AFFECT( tostr(0), "di"  , tohexa( 0, 32 ));
   AFFECT( tostr(0), "addr", tohexa( 0, 8 ));
 
-  for ( unsigned long addr=0 ; addr<256 ; ++addr ) {
+  unsigned long addrCheck = 32; // 256
+  for ( unsigned long addr=0 ; addr<addrCheck ; ++addr ) {
     AFFECT( tostr(addr*30     ), "clk" , "0b0" );
     if (addr == 0)
       LABEL( "writeAllRegisters" );
     AFFECT( tostr(addr*30 + 10), "clk" , "0b1" );
     AFFECT( tostr(addr*30 + 20), "clk" , "0b0" );
-    AFFECT( tostr(addr*30     ), "addr", tohexa( addr  ,  8 ));
-    AFFECT( tostr(addr*30     ), "di"  , tohexa( addr+1, 32 ));
-    AFFECT( tostr(addr*30 + 10), "dato", tohexa( addr+1, 32 ));
+    AFFECT( tostr(addr*30     ), "addr", tohexa( addr,  8 ));
+    AFFECT( tostr(addr*30     ), "di"  , tohexa( addr, 32 ));
+    AFFECT( tostr(addr*30 + 10), "dato", tohexa( addr, 32 ));
   }
 
   unsigned long start = 256*30;
   for ( unsigned long bit=0 ; bit<32 ; ++bit ) {
     AFFECT( tostr(start + bit*30     ), "clk" , "0b0" );
     if (bit == 0)
-      LABEL( "writeAllValuesZero" );
+      LABEL( "checkBitAtAddrZero" );
     AFFECT( tostr(start + bit*30 + 10), "clk" , "0b1" );
     AFFECT( tostr(start + bit*30 + 20), "clk" , "0b0" );
     AFFECT( tostr(start + bit*30     ), "addr", tohexa(  0      ,  8 ));
