@@ -1,0 +1,23 @@
+set terminal X11 noenhanced
+set title "input and output of the inverter chain"
+set xlabel "time / s"
+set ylabel "voltage / v"
+set grid
+unset logscale x 
+set xrange [0.000000e+00:6.000000e-09]
+unset logscale y 
+set yrange [-1.459826e-01:1.809335e+00]
+#set xtics 1
+#set x2tics 1
+#set ytics 1
+#set y2tics 1
+set format y "%g"
+set format x "%g"
+plot 'res.data' using 1:2 with lines lw 1 title "v(in)",\
+'res.data' using 3:4 with lines lw 1 title "v(out)"
+set terminal push
+set terminal postscript eps color noenhanced
+set out 'res.eps'
+replot
+set term pop
+replot

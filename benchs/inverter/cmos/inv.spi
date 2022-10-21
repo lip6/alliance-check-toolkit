@@ -1,0 +1,20 @@
+*
+* inv.spi
+* 
+
+*.INCLUDE ./techno/bsim4_dummy.hsp
+*.INCLUDE ./techno/bsim4_dummy.ng
+
+.TEMP 125
+Vground gnd 0 DC 0
+Vsupply vdd 0 DC 1.62
+
+.subckt inv a y vdd gnd
+MM02 y   a   gnd gnd tn L=0.18U W=1.15U AS=0.414P AD=0.414P PS=3.02U PD=3.02U NF=20
+MM03 y   a   vdd vdd tp L=0.18U W=2.23U AS=0.8028P AD=0.8028P PS=5.18U PD=5.18U NF=20
+*Cload y gnd 0.02pF
+.ends
+
+Xc in out vdd gnd inv
+
+.end
