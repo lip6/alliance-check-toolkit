@@ -1,0 +1,62 @@
+#  
+#  Avertec Release v3.4p5 (64 bits on Linux 3.10.0-1160.62.1.el7.x86_64)
+#  [AVT_only] host: fanfare
+#  [AVT_only] arch: x86_64
+#  [AVT_only] path: /users/outil/tasyag/Linux.el7_64/install/bin/avt_shell
+#  argv: ./hitas/report_chain_ng.tcl 
+#  
+#  User: mariem
+#  Generation date Mon Oct 24 13:11:43 2022
+#  
+#  Timing figure: inv_x2_chain   generated on Mon Oct 24 13:11:28 2022
+#                 supply: 1.8  temperature: 25
+#                 slope thresholds : 0.2 / 0.8
+#                 delay threshold : 0.5
+#  
+
+     Voltage :        1.8V
+     Temperature :    25 degree C
+
+      *** Path list (unit:[ns]) ***
+
+ Path     Start     Start      Path     Total      Data    Ending       Start                                           
+           time     slope     delay     delay       lag     slope       From_node                  To_node              
+________________________________________________________________________________________________________________________
+    1     0.000     0.008     0.093     0.093     0.000     0.006   (F) in                     (R) out                  
+    2     0.000     0.008     0.089     0.089     0.000     0.005   (R) in                     (F) out                  
+
+Node type Index:
+   (C) : Clock node          (L) : Latch node         (F) : Flip-flop node
+   (B) : Breakpoint node     (K) : Latch command node (S) : Output connector node
+   (SZ): Output HZ connector (N) : Precharge node
+
+      *** Path details (unit:[ns]) ***
+
+Path (1) : 
+
+        Delay                                                                                       
+      Acc    Delta    R/F     Cap[pf]   Type   Node_Name              Net_Name               Line   
+   _________________________________________________________________________________________________
+     0.000   0.000 0.008 F      0.012          in                     in                            
+     0.020   0.020 0.019 R      0.016          1                      1                       inv   
+     0.040   0.019 0.012 F      0.016          2                      2                       inv   
+     0.062   0.023 0.020 R      0.016          3                      3                       inv   
+     0.082   0.020 0.013 F      0.016          4                      4                       inv   
+     0.093   0.011 0.006 R      0.004    (S)   out                    out                     inv   
+   _________________________________________________________________________________________________
+     0.093   0.093            (total)                                                               
+
+Path (2) : 
+
+        Delay                                                                                       
+      Acc    Delta    R/F     Cap[pf]   Type   Node_Name              Net_Name               Line   
+   _________________________________________________________________________________________________
+     0.000   0.000 0.008 R      0.012          in                     in                            
+     0.015   0.015 0.010 F      0.016          1                      1                       inv   
+     0.037   0.022 0.020 R      0.016          2                      2                       inv   
+     0.056   0.020 0.013 F      0.016          3                      3                       inv   
+     0.079   0.023 0.020 R      0.016          4                      4                       inv   
+     0.089   0.010 0.005 F      0.004    (S)   out                    out                     inv   
+   _________________________________________________________________________________________________
+     0.089   0.089            (total)                                                               
+

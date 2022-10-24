@@ -1,0 +1,33 @@
+*
+* top_inv_x2_chain.spi
+* ngspice simulation
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+.TEMP 25
+
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE inv_x2_chain.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt inv_x2_chain in out vdd gnd
+Xinv_x2_chain in out evdd evss inv_x2_chain
+
+
+.end
+
