@@ -1,6 +1,9 @@
 README_timing.rst
 =================
 
+Update October 24, 2022
+------------------------
+
 coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/cmos/README_timing.rst
 
 Goal
@@ -37,6 +40,10 @@ Running:
 
 1. Building the timing database
    ./hitas/db_ng.tcl
+
+NB. here, Hitas uses inv.spi description of the netlist 
+to detect VDD and VSS
+(see inv.rep)
 
 2. Report critical paths
    ./hitas/report_inv_ng.tcl
@@ -81,6 +88,10 @@ Running:
 
 1. Building the timing database
    ./hitas/db_chain_ng.tcl
+
+NB. here, Hitas uses inv_chain.spi description of the netlist 
+to detect VDD and VSS
+(see inv_chain.rep)
 
 2. Report critical paths
    ./hitas/report_chain_ng.tcl
