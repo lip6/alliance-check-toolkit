@@ -1,0 +1,376 @@
+* Coriolis Structural SPICE Driver
+* Generated on Oct 24, 2022, 14:56
+* Cell/Subckt "SARlogic".
+* Snadrd cell Paths have to be changed for simulation
+* 
+* INTERF vss
+* INTERF vdd
+* INTERF rst
+* INTERF res[7]
+* INTERF res[6]
+* INTERF res[5]
+* INTERF res[4]
+* INTERF res[3]
+* INTERF res[2]
+* INTERF res[1]
+* INTERF res[0]
+* INTERF cmp
+* INTERF clk
+* INTERF SOC
+* INTERF SE
+* INTERF EOC
+* INTERF DAC_control[7]
+* INTERF DAC_control[6]
+* INTERF DAC_control[5]
+* INTERF DAC_control[4]
+* INTERF DAC_control[3]
+* INTERF DAC_control[2]
+* INTERF DAC_control[1]
+* INTERF DAC_control[0]
+
+* Terminal models (aka standard cells) used througout all the hierarchy.
+* Paths have to be changed for simulation
+*.include sff1_x4.spi
+*.include ao22_x2.spi
+*.include no2_x1.spi
+*.include no3_x1.spi
+*.include na3_x1.spi
+*.include oa22_x2.spi
+*.include na2_x1.spi
+*.include inv_x1.spi
+*.include a2_x2.spi
+*.include a3_x2.spi
+*.include o2_x2.spi
+*.include mx2_x2.spi
+*.include no4_x1.spi
+*.include o3_x2.spi
+
+* Non-terminal models (part of the user's design hierarchy).
+
+.subckt SARlogic 0 1 2 27 28 29 30 31 32 33 34 45 46 144 146 148 157 158 159 160 161 162 163 164
+* NET     0 = vss
+* NET     1 = vdd
+* NET     2 = rst
+* NET     3 = res_next[7]
+* NET     4 = res_next[6]
+* NET     5 = res_next[5]
+* NET     6 = res_next[4]
+* NET     7 = res_next[3]
+* NET     8 = res_next[2]
+* NET     9 = res_next[1]
+* NET    10 = res_next[0]
+* NET    11 = res_intern_next[7]
+* NET    12 = res_intern_next[6]
+* NET    13 = res_intern_next[5]
+* NET    14 = res_intern_next[4]
+* NET    15 = res_intern_next[3]
+* NET    16 = res_intern_next[2]
+* NET    17 = res_intern_next[1]
+* NET    18 = res_intern_next[0]
+* NET    19 = res_intern[7]
+* NET    20 = res_intern[6]
+* NET    21 = res_intern[5]
+* NET    22 = res_intern[4]
+* NET    23 = res_intern[3]
+* NET    24 = res_intern[2]
+* NET    25 = res_intern[1]
+* NET    26 = res_intern[0]
+* NET    27 = res[7]
+* NET    28 = res[6]
+* NET    29 = res[5]
+* NET    30 = res[4]
+* NET    31 = res[3]
+* NET    32 = res[2]
+* NET    33 = res[1]
+* NET    34 = res[0]
+* NET    35 = i_next[2]
+* NET    36 = i_next[1]
+* NET    37 = i_next[0]
+* NET    38 = i[2]
+* NET    39 = i[1]
+* NET    40 = i[0]
+* NET    41 = fsm_state_next[1]
+* NET    42 = fsm_state_next[0]
+* NET    43 = fsm_state[1]
+* NET    44 = fsm_state[0]
+* NET    45 = cmp
+* NET    46 = clk
+* NET    47 = bitToConvert_next[7]
+* NET    48 = bitToConvert_next[6]
+* NET    49 = bitToConvert_next[5]
+* NET    50 = bitToConvert_next[4]
+* NET    51 = bitToConvert_next[3]
+* NET    52 = bitToConvert_next[2]
+* NET    53 = bitToConvert_next[1]
+* NET    54 = bitToConvert_next[0]
+* NET    55 = bitToConvert[7]
+* NET    56 = bitToConvert[6]
+* NET    57 = bitToConvert[5]
+* NET    58 = bitToConvert[4]
+* NET    59 = bitToConvert[3]
+* NET    60 = bitToConvert[2]
+* NET    61 = bitToConvert[1]
+* NET    62 = bitToConvert[0]
+* NET    63 = abc_1170_new_n99
+* NET    64 = abc_1170_new_n98
+* NET    65 = abc_1170_new_n96
+* NET    66 = abc_1170_new_n95
+* NET    67 = abc_1170_new_n94
+* NET    68 = abc_1170_new_n93
+* NET    69 = abc_1170_new_n92
+* NET    70 = abc_1170_new_n91
+* NET    71 = abc_1170_new_n90
+* NET    72 = abc_1170_new_n89
+* NET    73 = abc_1170_new_n88
+* NET    74 = abc_1170_new_n87
+* NET    75 = abc_1170_new_n86
+* NET    76 = abc_1170_new_n85
+* NET    77 = abc_1170_new_n84
+* NET    78 = abc_1170_new_n83
+* NET    79 = abc_1170_new_n82
+* NET    80 = abc_1170_new_n200
+* NET    81 = abc_1170_new_n197
+* NET    82 = abc_1170_new_n195
+* NET    83 = abc_1170_new_n193
+* NET    84 = abc_1170_new_n191
+* NET    85 = abc_1170_new_n189
+* NET    86 = abc_1170_new_n187
+* NET    87 = abc_1170_new_n185
+* NET    88 = abc_1170_new_n183
+* NET    89 = abc_1170_new_n182
+* NET    90 = abc_1170_new_n180
+* NET    91 = abc_1170_new_n178
+* NET    92 = abc_1170_new_n175
+* NET    93 = abc_1170_new_n173
+* NET    94 = abc_1170_new_n171
+* NET    95 = abc_1170_new_n169
+* NET    96 = abc_1170_new_n167
+* NET    97 = abc_1170_new_n165
+* NET    98 = abc_1170_new_n163
+* NET    99 = abc_1170_new_n161
+* NET   100 = abc_1170_new_n160
+* NET   101 = abc_1170_new_n158
+* NET   102 = abc_1170_new_n157
+* NET   103 = abc_1170_new_n155
+* NET   104 = abc_1170_new_n154
+* NET   105 = abc_1170_new_n152
+* NET   106 = abc_1170_new_n151
+* NET   107 = abc_1170_new_n149
+* NET   108 = abc_1170_new_n148
+* NET   109 = abc_1170_new_n146
+* NET   110 = abc_1170_new_n145
+* NET   111 = abc_1170_new_n143
+* NET   112 = abc_1170_new_n142
+* NET   113 = abc_1170_new_n140
+* NET   114 = abc_1170_new_n139
+* NET   115 = abc_1170_new_n137
+* NET   116 = abc_1170_new_n136
+* NET   117 = abc_1170_new_n135
+* NET   118 = abc_1170_new_n134
+* NET   119 = abc_1170_new_n132
+* NET   120 = abc_1170_new_n131
+* NET   121 = abc_1170_new_n130
+* NET   122 = abc_1170_new_n129
+* NET   123 = abc_1170_new_n128
+* NET   124 = abc_1170_new_n126
+* NET   125 = abc_1170_new_n125
+* NET   126 = abc_1170_new_n123
+* NET   127 = abc_1170_new_n122
+* NET   128 = abc_1170_new_n121
+* NET   129 = abc_1170_new_n119
+* NET   130 = abc_1170_new_n118
+* NET   131 = abc_1170_new_n117
+* NET   132 = abc_1170_new_n116
+* NET   133 = abc_1170_new_n114
+* NET   134 = abc_1170_new_n113
+* NET   135 = abc_1170_new_n112
+* NET   136 = abc_1170_new_n111
+* NET   137 = abc_1170_new_n109
+* NET   138 = abc_1170_new_n108
+* NET   139 = abc_1170_new_n106
+* NET   140 = abc_1170_new_n105
+* NET   141 = abc_1170_new_n103
+* NET   142 = abc_1170_new_n102
+* NET   143 = abc_1170_new_n100
+* NET   144 = SOC
+* NET   145 = SE_next
+* NET   146 = SE
+* NET   147 = EOC_next
+* NET   148 = EOC
+* NET   149 = DAC_control_next[7]
+* NET   150 = DAC_control_next[6]
+* NET   151 = DAC_control_next[5]
+* NET   152 = DAC_control_next[4]
+* NET   153 = DAC_control_next[3]
+* NET   154 = DAC_control_next[2]
+* NET   155 = DAC_control_next[1]
+* NET   156 = DAC_control_next[0]
+* NET   157 = DAC_control[7]
+* NET   158 = DAC_control[6]
+* NET   159 = DAC_control[5]
+* NET   160 = DAC_control[4]
+* NET   161 = DAC_control[3]
+* NET   162 = DAC_control[2]
+* NET   163 = DAC_control[1]
+* NET   164 = DAC_control[0]
+
+xsubckt_156_sff1_x4 0 46 1 5 29 sff1_x4
+xsubckt_151_sff1_x4 0 46 1 10 34 sff1_x4
+xsubckt_126_sff1_x4 0 46 1 15 23 sff1_x4
+xsubckt_106_ao22_x2 1 8 0 32 132 86 ao22_x2
+xsubckt_33_no2_x1 47 0 133 1 2 no2_x1
+xsubckt_25_no3_x1 139 1 0 49 140 69 no3_x1
+xsubckt_22_no3_x1 141 1 0 50 142 69 no3_x1
+xsubckt_7_na3_x1 1 72 38 0 39 40 na3_x1
+xsubckt_72_ao22_x2 1 104 0 56 20 132 ao22_x2
+xsubckt_76_oa22_x2 1 101 0 157 70 102 oa22_x2
+xsubckt_147_sff1_x4 0 46 1 50 58 sff1_x4
+xsubckt_142_sff1_x4 0 46 1 35 38 sff1_x4
+xsubckt_119_no3_x1 80 1 0 53 71 2 no3_x1
+xsubckt_101_na2_x1 1 88 89 0 79 na2_x1
+xsubckt_92_oa22_x2 1 12 0 56 99 93 oa22_x2
+xsubckt_37_no2_x1 129 0 132 1 40 no2_x1
+xsubckt_28_no3_x1 137 1 0 48 138 69 no3_x1
+xsubckt_4_inv_x1 0 75 61 1 inv_x1
+xsubckt_3_inv_x1 0 76 144 1 inv_x1
+xsubckt_2_inv_x1 0 77 43 1 inv_x1
+xsubckt_1_inv_x1 0 78 44 1 inv_x1
+xsubckt_0_inv_x1 0 79 2 1 inv_x1
+xsubckt_63_ao22_x2 1 110 0 59 23 132 ao22_x2
+xsubckt_67_oa22_x2 1 107 0 160 70 108 oa22_x2
+xsubckt_138_sff1_x4 0 46 1 149 157 sff1_x4
+xsubckt_133_sff1_x4 0 46 1 154 162 sff1_x4
+xsubckt_113_ao22_x2 1 82 0 131 20 79 ao22_x2
+xsubckt_99_a2_x2 0 41 1 90 143 a2_x2
+xsubckt_89_a2_x2 0 94 1 143 21 a2_x2
+xsubckt_40_ao22_x2 1 127 0 74 131 128 ao22_x2
+xsubckt_54_ao22_x2 1 116 0 78 62 43 ao22_x2
+xsubckt_58_oa22_x2 1 113 0 163 70 114 oa22_x2
+xsubckt_59_a2_x2 0 155 1 113 79 a2_x2
+xsubckt_68_a2_x2 0 152 1 107 79 a2_x2
+xsubckt_79_a2_x2 0 99 1 135 45 a2_x2
+xsubckt_154_sff1_x4 0 46 1 7 31 sff1_x4
+xsubckt_129_sff1_x4 0 46 1 12 20 sff1_x4
+xsubckt_124_sff1_x4 0 46 1 17 25 sff1_x4
+xsubckt_118_ao22_x2 1 80 0 75 67 117 ao22_x2
+xsubckt_117_oa22_x2 1 54 0 62 68 69 oa22_x2
+xsubckt_104_ao22_x2 1 9 0 33 132 87 ao22_x2
+xsubckt_88_oa22_x2 1 14 0 58 99 95 oa22_x2
+xsubckt_87_a2_x2 0 95 1 143 22 a2_x2
+xsubckt_11_no2_x1 68 0 43 1 44 no2_x1
+xsubckt_13_no2_x1 66 0 67 1 60 no2_x1
+xsubckt_14_no2_x1 65 0 61 1 77 no2_x1
+xsubckt_16_no2_x1 64 0 60 1 77 no2_x1
+xsubckt_45_ao22_x2 1 35 0 72 131 124 ao22_x2
+xsubckt_77_a2_x2 0 149 1 101 79 a2_x2
+xsubckt_78_a2_x2 0 100 1 143 26 a2_x2
+xsubckt_145_sff1_x4 0 46 1 52 60 sff1_x4
+xsubckt_140_sff1_x4 0 46 1 37 40 sff1_x4
+xsubckt_109_ao22_x2 1 84 0 131 22 79 ao22_x2
+xsubckt_90_oa22_x2 1 13 0 57 99 94 oa22_x2
+xsubckt_36_ao22_x2 1 130 0 132 68 40 ao22_x2
+xsubckt_34_a2_x2 0 132 1 43 44 a2_x2
+xsubckt_6_a3_x2 1 73 0 38 39 40 a3_x2
+xsubckt_17_no2_x1 63 0 67 1 59 no2_x1
+xsubckt_18_no2_x1 143 0 68 1 2 no2_x1
+xsubckt_65_a2_x2 0 153 1 109 79 a2_x2
+xsubckt_66_ao22_x2 1 108 0 58 22 132 ao22_x2
+xsubckt_75_ao22_x2 1 102 0 55 19 132 ao22_x2
+xsubckt_136_sff1_x4 0 46 1 151 159 sff1_x4
+xsubckt_131_sff1_x4 0 46 1 156 164 sff1_x4
+xsubckt_111_ao22_x2 1 83 0 131 21 79 ao22_x2
+xsubckt_85_a2_x2 0 96 1 143 23 a2_x2
+xsubckt_57_ao22_x2 1 114 0 61 25 132 ao22_x2
+xsubckt_74_a2_x2 0 150 1 103 79 a2_x2
+xsubckt_152_sff1_x4 0 46 1 9 33 sff1_x4
+xsubckt_127_sff1_x4 0 46 1 14 22 sff1_x4
+xsubckt_122_sff1_x4 0 46 1 147 148 sff1_x4
+xsubckt_116_ao22_x2 1 3 0 27 132 81 ao22_x2
+xsubckt_93_a2_x2 0 92 1 143 19 a2_x2
+xsubckt_86_oa22_x2 1 15 0 59 99 96 oa22_x2
+xsubckt_83_a2_x2 0 97 1 143 24 a2_x2
+xsubckt_39_na3_x1 1 128 131 0 67 39 na3_x1
+xsubckt_41_no2_x1 126 0 39 1 40 no2_x1
+xsubckt_43_ao22_x2 1 125 0 132 68 74 ao22_x2
+xsubckt_52_a2_x2 0 118 1 132 26 a2_x2
+xsubckt_62_a2_x2 0 154 1 111 79 a2_x2
+xsubckt_157_sff1_x4 0 46 1 4 28 sff1_x4
+xsubckt_143_sff1_x4 0 46 1 54 62 sff1_x4
+xsubckt_107_ao22_x2 1 85 0 131 23 79 ao22_x2
+xsubckt_91_a2_x2 0 93 1 143 20 a2_x2
+xsubckt_81_a2_x2 0 98 1 143 25 a2_x2
+xsubckt_38_no3_x1 129 1 0 37 130 2 no3_x1
+xsubckt_12_o2_x2 1 67 0 43 44 o2_x2
+xsubckt_47_no2_x1 122 0 76 1 44 no2_x1
+xsubckt_71_a2_x2 0 151 1 105 79 a2_x2
+xsubckt_148_sff1_x4 0 46 1 49 57 sff1_x4
+xsubckt_134_sff1_x4 0 46 1 153 161 sff1_x4
+xsubckt_120_sff1_x4 0 46 1 42 44 sff1_x4
+xsubckt_100_mx2_x2 1 89 0 132 34 26 mx2_x2
+xsubckt_97_no2_x1 42 0 91 1 69 no2_x1
+xsubckt_96_no2_x1 91 0 67 1 144 no2_x1
+xsubckt_69_ao22_x2 1 106 0 57 21 132 ao22_x2
+xsubckt_150_sff1_x4 0 46 1 47 55 sff1_x4
+xsubckt_139_sff1_x4 0 46 1 145 146 sff1_x4
+xsubckt_125_sff1_x4 0 46 1 16 24 sff1_x4
+xsubckt_114_ao22_x2 1 4 0 28 132 82 ao22_x2
+xsubckt_102_inv_x1 0 10 88 1 inv_x1
+xsubckt_84_oa22_x2 1 16 0 60 99 97 oa22_x2
+xsubckt_29_na2_x1 1 136 68 0 55 na2_x1
+xsubckt_23_no2_x1 140 0 77 1 58 no2_x1
+xsubckt_21_no2_x1 141 0 67 1 58 no2_x1
+xsubckt_20_no2_x1 142 0 77 1 59 no2_x1
+xsubckt_51_no4_x1 119 1 145 0 121 123 2 no4_x1
+xsubckt_70_oa22_x2 1 105 0 159 70 106 oa22_x2
+xsubckt_155_sff1_x4 0 46 1 6 30 sff1_x4
+xsubckt_141_sff1_x4 0 46 1 36 39 sff1_x4
+xsubckt_105_ao22_x2 1 86 0 131 24 79 ao22_x2
+xsubckt_32_ao22_x2 1 133 0 71 134 136 ao22_x2
+xsubckt_27_no2_x1 137 0 77 1 57 no2_x1
+xsubckt_26_no2_x1 138 0 67 1 56 no2_x1
+xsubckt_24_no2_x1 139 0 67 1 57 no2_x1
+xsubckt_15_no3_x1 65 1 0 52 66 69 no3_x1
+xsubckt_19_no3_x1 63 1 0 51 64 69 no3_x1
+xsubckt_61_oa22_x2 1 111 0 162 70 112 oa22_x2
+xsubckt_146_sff1_x4 0 46 1 51 59 sff1_x4
+xsubckt_132_sff1_x4 0 46 1 155 163 sff1_x4
+xsubckt_53_na2_x1 1 117 62 0 43 na2_x1
+xsubckt_137_sff1_x4 0 46 1 150 158 sff1_x4
+xsubckt_123_sff1_x4 0 46 1 18 26 sff1_x4
+xsubckt_112_ao22_x2 1 5 0 29 132 83 ao22_x2
+xsubckt_82_oa22_x2 1 17 0 61 99 98 oa22_x2
+xsubckt_9_no2_x1 70 0 43 1 78 no2_x1
+xsubckt_8_no2_x1 71 0 72 1 78 no2_x1
+xsubckt_44_ao22_x2 1 124 0 38 125 143 ao22_x2
+xsubckt_50_no2_x1 119 0 120 1 122 no2_x1
+xsubckt_158_sff1_x4 0 46 1 3 27 sff1_x4
+xsubckt_153_sff1_x4 0 46 1 8 32 sff1_x4
+xsubckt_128_sff1_x4 0 46 1 13 21 sff1_x4
+xsubckt_108_ao22_x2 1 7 0 31 132 85 ao22_x2
+xsubckt_103_ao22_x2 1 87 0 131 25 79 ao22_x2
+xsubckt_98_na3_x1 1 90 132 0 73 76 na3_x1
+xsubckt_42_no3_x1 126 1 0 36 127 2 no3_x1
+xsubckt_46_no3_x1 72 1 0 123 144 78 no3_x1
+xsubckt_49_ao22_x2 1 120 0 73 146 43 ao22_x2
+xsubckt_60_ao22_x2 1 112 0 60 24 132 ao22_x2
+xsubckt_73_oa22_x2 1 103 0 158 70 104 oa22_x2
+xsubckt_149_sff1_x4 0 46 1 48 56 sff1_x4
+xsubckt_144_sff1_x4 0 46 1 53 61 sff1_x4
+xsubckt_130_sff1_x4 0 46 1 11 19 sff1_x4
+xsubckt_94_oa22_x2 1 11 0 55 99 92 oa22_x2
+xsubckt_31_na2_x1 1 134 43 0 56 na2_x1
+xsubckt_48_no3_x1 146 1 0 121 77 44 no3_x1
+xsubckt_64_oa22_x2 1 109 0 161 70 110 oa22_x2
+xsubckt_135_sff1_x4 0 46 1 152 160 sff1_x4
+xsubckt_121_sff1_x4 0 46 1 41 43 sff1_x4
+xsubckt_115_ao22_x2 1 81 0 131 19 79 ao22_x2
+xsubckt_110_ao22_x2 1 6 0 30 132 84 ao22_x2
+xsubckt_95_ao22_x2 1 147 0 148 71 135 ao22_x2
+xsubckt_35_na2_x1 1 131 43 0 44 na2_x1
+xsubckt_30_no2_x1 135 0 77 1 2 no2_x1
+xsubckt_10_o3_x2 0 69 1 70 71 2 o3_x2
+xsubckt_5_a2_x2 0 74 1 39 40 a2_x2
+xsubckt_55_oa22_x2 1 115 0 164 70 116 oa22_x2
+xsubckt_56_ao22_x2 1 156 0 115 118 79 ao22_x2
+xsubckt_80_oa22_x2 1 18 0 62 99 100 oa22_x2
+.ends SARlogic

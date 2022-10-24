@@ -22,11 +22,12 @@ Vground 0 0 0
 * include standard cells
 .INCLUDE /users/soft/techno/techno/pdkmaster/views/tsmc_c018/FlexLib/spice/FlexLib.spi
 
-* include circuit netlist
-.INCLUDE SARlogic_simu.spi
+* include circuit netlist hierarchical level
+.INCLUDE SARlogic_netlist.spi
 
 *****************
 * Circuit Instantiation
+
 * INTERF vss
 * INTERF vdd
 * INTERF rst
@@ -80,25 +81,24 @@ Vground 0 0 0
 *SARlogic 0 1 2 27 28 29 30 31 32 33 34 45 46 144 146 148 157 158 159 160 161 162 163 164
 XSARlogic 0 1 2 27 28 29 30 31 32 33 34 45 46 144 146 148 157 158 159 160 161 162 163 164 SARlogic
 
-
 *load on outputs
-Cres0 34 0 0.5pF
-Cres1 33 0 0.5pF
-Cres2 32 0 0.5pF
-Cres3 31 0 0.5pF
-Cres4 30 0 0.5pF
-Cres5 29 0 0.5pF
-Cres6 28 0 0.5pF
-Cres7 27 0 0.5pF
+Cres0 34 0 0.05pF
+Cres1 33 0 0.05pF
+Cres2 32 0 0.05pF
+Cres3 31 0 0.05pF
+Cres4 30 0 0.05pF
+Cres5 29 0 0.05pF
+Cres6 28 0 0.05pF
+Cres7 27 0 0.05pF
 
-C0 164 0 0.5pF
-C1 163 0 0.5pF
-C2 162 0 0.5pF
-C3 161 0 0.5pF
-C4 160 0 0.5pF
-C5 159 0 0.5pF
-C6 158 0 0.5pF
-C7 157 0 0.5pF
+C0 164 0 0.05pF
+C1 163 0 0.05pF
+C2 162 0 0.05pF
+C3 161 0 0.05pF
+C4 160 0 0.05pF
+C5 159 0 0.05pF
+C6 158 0 0.05pF
+C7 157 0 0.05pF
 
 *clock
 vck 46 0 dc 0.6 pulse (0 1.8 5ns 1ns 1ns 50ns 110ns)
@@ -114,7 +114,7 @@ vsoc 144 0 dc 0.6 pulse (0 1.8 5ns 1ns 1ns 110ns 1100ns)
 
 .op
 .TRAN 100ps 1500ns 0 
-.PLOT TRAN v(46) v(144) v(157) v(158) v(159) v(27) v(28) v(29)
+.PLOT TRAN v(46) v(144) v(157) v(158) v(159) v(160) v(161) v(162) v(163) v(164) v(27) v(28) v(29)
 
 .end
 
