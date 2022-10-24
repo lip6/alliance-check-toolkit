@@ -1,0 +1,23 @@
+***********************
+****sta for eth_spram_256x32.spi
+****transitor model for ngspice simulator
+**********top_hspice_ngspice.spi
+
+
+*****************
+
+.TEMP 25
+.GLOBAL VDD VSS
+Vsupply vdd 0  DC 1.8
+Vground vss 0  DC 0
+
+******************
+* circuit model
+* include standard cells
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.ref/StdCellLib/spice/StdCellLib.spi
+
+* include circuit netlist
+.INCLUDE eth_spram_256x32_netlist.spi
+
+*****************
+.end
