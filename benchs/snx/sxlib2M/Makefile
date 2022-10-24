@@ -5,7 +5,7 @@
                DESIGN_KIT = nsxlib
 
             USE_CLOCKTREE = No
-                USE_DEBUG = Yes
+                USE_DEBUG = No
                  USE_KITE = No
 
                  NETLISTS = snx         \
@@ -21,6 +21,7 @@
 
 
 blif:      snx.blif
+vst:       snx.vst
 layout:    snx_r.ap
 gds:       snx_r.gds
 
