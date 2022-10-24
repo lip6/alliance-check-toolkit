@@ -1,0 +1,29 @@
+* inv_x2_hitas.spi hitas bench inv_x2 C4M-FlexLib
+* 
+
+*****************
+
+.TEMP 25
+*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT
+*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_3V
+*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_RES
+*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_DIO
+
+
+Vsupply evdd 0 1.8
+Vground evss 0 0
+
+******************
+* circuit model
+
+* include circuit netlist
+.INCLUDE inv_x2.spi
+
+*****************
+* Circuit Instantiation
+*.subckt inv_x2 vss nq i vdd
+Xinv_x2 evss nq in evdd inv_x2
+
+.end
+
+

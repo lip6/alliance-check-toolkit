@@ -1,0 +1,46 @@
+* top_chain_eldo.cir bench inv_x2_chain C4M-FlexLib
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+.TEMP 25
+.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT
+.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_3V
+.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_RES
+.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_DIO
+
+
+Vsupply evdd 0 1.8
+Vground evss 0 0
+
+******************
+* circuit model
+
+* include circuit netlist
+.INCLUDE inv_x2_chain.spi
+
+*****************
+* Circuit Instantiation
+*.subckt inv_chain in out vdd gnd
+Xinv_x2_chain in out evdd evss inv_x2_chain
+
+*load on outputs
+
+
+* input
+vin in evss dc 0.8 pulse (0 1.8 5ps 5ps 5ps 95ps 200ps)
+
+.op
+.TRAN 0.2ps 600ps 0 
+.PLOT TRAN v(in) v(out)
+.EXTRACT TRAN TRISE (v(in), vl = 0.001, vh = 1.799)
+.EXTRACT TRAN TFALL (v(in), vl=0.001,vh=1.799)
+.EXTRACT TRAN TPDDU(v(in),v(out),vth=0.9,OCCUR=2)
+.EXTRACT TRAN TPDUD(v(in),v(out),vth=0.9,OCCUR=2)
+.end
+
+

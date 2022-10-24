@@ -1,0 +1,5 @@
+* inv_x2
+.subckt inv_x2 vss nq i vdd
+Mn1 vss i nq vss nch l=0.18um w=2.6um
+Mp1 vdd i nq vdd pch l=0.18um w=3.9um
+.ends inv_x2
