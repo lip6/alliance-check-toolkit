@@ -44,8 +44,10 @@ provides :
 
 ./hitas/report.tcl
 provides :
-
--rw-r--r-- 1 mariem utmp     15649 24 oct.  18:18 eth_spram_256x32.paths
+setup and hold information for connectro addr[] 
+and
 5 longest paths
+-rw-r--r-- 1 mariem utmp  29627386 25 oct.  10:15 eth_spram_256x32.setuphold
+-rw-r--r-- 1 mariem utmp     15649 25 oct.  10:15 eth_spram_256x32.paths
 
 
