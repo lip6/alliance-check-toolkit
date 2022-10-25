@@ -21,8 +21,7 @@ avt_config simToolModel spice
 avt_config simSlope 20e-12
 
 # Technology Parameters
-# avt_LoadFile  /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/sky130_c4m/techno/C4M_LIP6_Sky130_hitas.spice spice
- avt_LoadFile  /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_tt_model_hitas.spice spice
+avt_LoadFile /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice_hitas/C4M.Sky130_tt_model_hitas.spice spice
 
 # Files
 avt_LoadFile top_hitas_ngspice.spi spice

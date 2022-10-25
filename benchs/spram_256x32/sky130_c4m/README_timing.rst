@@ -44,10 +44,15 @@ provides :
 
 ./hitas/report.tcl
 provides :
-setup and hold information for connectro addr[] 
+setup and hold information for connector addr[] and di[]
+timing access min and max of output
 and
 5 longest paths
--rw-r--r-- 1 mariem utmp  29627386 25 oct.  10:15 eth_spram_256x32.setuphold
--rw-r--r-- 1 mariem utmp     15649 25 oct.  10:15 eth_spram_256x32.paths
+-rw-r--r-- 1 mariem utmp  29627386 25 oct.  17:55 eth_spram_256x32.addr.setuphold
+-rw-r--r-- 1 mariem utmp   1862906 25 oct.  17:55 eth_spram_256x32.di.setuphold
+-rw-r--r-- 1 mariem utmp     34127 25 oct.  17:55 eth_spram_256x32.accessmax
+-rw-r--r-- 1 mariem utmp     18699 25 oct.  17:55 eth_spram_256x32.accessmin
+-rw-r--r-- 1 mariem utmp       666 25 oct.  17:55 eth_spram_256x32.comb
+-rw-r--r-- 1 mariem utmp     15649 25 oct.  17:55 eth_spram_256x32.paths
 
 
