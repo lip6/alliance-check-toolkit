@@ -6,20 +6,27 @@
 
 # Global Configuration
 avt_config avtLibraryDirs .
-avt_config simVthHigh 0.8
-avt_config simVthLow 0.2
+
+# Database Construction Options
 avt_config tasGenerateConeFile yes
 avt_config avtVerboseConeFile yes
 
-avt_config simToolModel ngspice
+avt_config tasGenerateDetailTimingFile yes
+
+# Global Configuration
+avt_config simVthHigh 0.8
+avt_config simVthLow 0.2
+
+avt_config simToolModel spice
 avt_config simSlope 20e-12
 
-avt_config tasGenerateDetailTimingFile yes
 
 # Technology Parameters
 
-avt_LoadFile /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_logic_tt_model.spice spice
-avt_LoadFile top_hitas_ngspice.cir spice
+avt_LoadFile /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice_hitas/C4M.Sky130_tt_model_hitas.spice spice
+
+# Netlist
+avt_LoadFile top_hitas_ngspice.spi spice
 
 set fig [hitas SARlogic]
 
@@ -34,9 +41,7 @@ set date   [ttv_GetTimingFigureProperty $fig DATE]
 puts ""
 puts "Power supply: [ttv_GetTimingFigureProperty $fig DEF_SUPPLY]V"
 puts "Temperature: [ttv_GetTimingFigureProperty $fig TEMP]°C"
-set sig [ttv_GetTimingSignal $fig nq]
-puts ""
-puts "nq signal capacitance: [ttv_GetTimingSignalProperty $sig CAPA]F"
+
 
 puts "input slope     : $slope"
 puts "generation date : $date"

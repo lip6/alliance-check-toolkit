@@ -1,0 +1,78 @@
+* Cell/Subckt "top_hitas_ngspice.spi".
+* 
+
+
+*****************
+
+.TEMP 25
+.GLOBAL VDD VSS
+Vsupply vdd 0  DC 1.8
+Vground vss 0  DC 0
+
+******************
+* circuit model
+* include standard cells
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.ref/StdCellLib/spice/StdCellLib.spi
+
+* include circuit netlist
+*.subckt SARlogic evss evdd 2 27 28 29 30 31 32 33 34 45 46 176 178 180 189 190 191 192 193 194 195 196
+
+.INCLUDE SARlogic_netlist.spi
+
+*****************
+*****************
+* Circuit Instantiation
+* INTERF vss
+* INTERF vdd
+* INTERF rst
+* INTERF res[7]
+* INTERF res[6]
+* INTERF res[5]
+* INTERF res[4]
+* INTERF res[3]
+* INTERF res[2]
+* INTERF res[1]
+* INTERF res[0]
+* INTERF cmp
+* INTERF clk
+* INTERF SOC
+* INTERF SE
+* INTERF EOC
+* INTERF DAC_control[7]
+* INTERF DAC_control[6]
+* INTERF DAC_control[5]
+* INTERF DAC_control[4]
+* INTERF DAC_control[3]
+* INTERF DAC_control[2]
+* INTERF DAC_control[1]
+* INTERF DAC_control[0]
+
+* NET     0 = vss
+* NET     1 = vdd
+* NET     2 = rst
+* NET    27 = res[7]
+* NET    28 = res[6]
+* NET    29 = res[5]
+* NET    30 = res[4]
+* NET    31 = res[3]
+* NET    32 = res[2]
+* NET    33 = res[1]
+* NET    34 = res[0]
+* NET    45 = cmp
+* NET    46 = clk
+* NET   176 = SOC
+* NET   178 = SE
+* NET   180 = EOC
+* NET   189 = DAC_control[7]
+* NET   190 = DAC_control[6]
+* NET   191 = DAC_control[5]
+* NET   192 = DAC_control[4]
+* NET   193 = DAC_control[3]
+* NET   194 = DAC_control[2]
+* NET   195 = DAC_control[1]
+* NET   196 = DAC_control[0]
+
+
+
+.end
+

@@ -21,8 +21,9 @@ gfoncd evdd 0 evdd 0 1.0e-15
 * circuit model
 * include standard cells
 .INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.ref/StdCellLib/spice/StdCellLib.spi
+
 * include circuit netlist
-.INCLUDE SARlogic_simu.spi
+.INCLUDE SARlogic_netlist.spi
 
 *****************
 *****************
@@ -78,26 +79,26 @@ gfoncd evdd 0 evdd 0 1.0e-15
 * NET   196 = DAC_control[0]
 
 *.subckt SARlogic evss evdd 2 27 28 29 30 31 32 33 34 45 46 176 178 180 189 190 191 192 193 194 195 196
-XSARlogic 0 1 2 27 28 29 30 31 32 33 34 45 46 176 178 180 189 190 191 192 193 194 195 196 SARlogic
+XSARlogic evss evdd 2 27 28 29 30 31 32 33 34 45 46 176 178 180 189 190 191 192 193 194 195 196 SARlogic
 
 *load on outputs
-Cres0 34 evss 0.5pF
-Cres1 33 evss 0.5pF
-Cres2 32 evss 0.5pF
-Cres3 31 evss 0.5pF
-Cres4 30 evss 0.5pF
-Cres5 29 evss 0.5pF
-Cres6 28 evss 0.5pF
-Cres7 27 evss 0.5pF
+Cres0 34 evss 0.05pF
+Cres1 33 evss 0.05pF
+Cres2 32 evss 0.05pF
+Cres3 31 evss 0.05pF
+Cres4 30 evss 0.05pF
+Cres5 29 evss 0.05pF
+Cres6 28 evss 0.05pF
+Cres7 27 evss 0.05pF
 
-C0 196 evss 0.5pF
-C1 195 evss 0.5pF
-C2 194 evss 0.5pF
-C3 193 evss 0.5pF
-C4 192 evss 0.5pF
-C5 191 evss 0.5pF
-C6 190 evss 0.5pF
-C7 189 evss 0.5pF
+C0 196 evss 0.05pF
+C1 195 evss 0.05pF
+C2 194 evss 0.05pF
+C3 193 evss 0.05pF
+C4 192 evss 0.05pF
+C5 191 evss 0.05pF
+C6 190 evss 0.05pF
+C7 189 evss 0.05pF
 
 *clock
 vck 46 evss dc 0.6 pulse (0 1.8 5ns 1ns 1ns 50ns 110ns)
@@ -114,7 +115,7 @@ vsoc 176 evss dc 0.6 pulse (0 1.8 5ns 1ns 1ns 110ns 1100ns)
 
 * transient analysis *
 .control
-TRAN 100ps 1500ns 0 
+TRAN 100ps 800ns 0 
 
 set width=110
 
@@ -130,7 +131,7 @@ gnuplot res v(27) v(28) v(29)
 + title 'result'
 + xlabel 'time / s' ylabel 'ResultOutput / V' 
 
-gnuplot DacCtrl v(189) v(190) v(191)
+gnuplot DacCtrl v(189) v(190)
 + title 'DAC_control'
 + xlabel 'time / s' ylabel 'Dac Control / V' 
 
