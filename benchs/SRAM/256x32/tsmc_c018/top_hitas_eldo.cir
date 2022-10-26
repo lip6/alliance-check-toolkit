@@ -1,0 +1,105 @@
+* top_hitas_eldo.cir bench SRAM
+* 
+
+*****************
+
+.TEMP 25
+.GLOBAL VDD VSS
+Vsupply vdd 0  DC 1.8
+Vground vss 0  DC 0
+
+******************
+* circuit model
+* include standard cells
+.INCLUDE /users/soft/techno/techno/pdkmaster/views/tsmc_c018/FlexLib/spice/FlexLib.spi
+
+* include circuit netlist
+.INCLUDE spram_256x32.spi
+
+*.subckt spram_256x32 0 1 2 3 4 5 6 8439 16645 16646 16647 16648 16649 16650 16651 16652 16653 16654 16655 16656 16657 16658 16659 16660 16661 16662 16663 16664 16665 16666 16667 16668 16669 16670 16671 16672 16673 16674 16675 16676 18261 18262 18263 18264 18265 18266 18267 18268 18269 18270 18271 18272 18273 18274 18275 18276 18277 18278 18279 18280 18281 18282 18283 18284 18285 18286 18287 18288 18289 18290 18291 18292 18293 18294 34679 34680 34681 34682 34683 34684 34685 34686
+
+* INTERF we[3]
+* INTERF we[2]
+* INTERF we[1]
+* INTERF we[0]
+* INTERF vss
+* INTERF vdd
+* INTERF rst
+* INTERF oe
+* INTERF di[9]
+* INTERF di[8]
+* INTERF di[7]
+* INTERF di[6]
+* INTERF di[5]
+* INTERF di[4]
+* INTERF di[31]
+* INTERF di[30]
+* INTERF di[3]
+* INTERF di[29]
+* INTERF di[28]
+* INTERF di[27]
+* INTERF di[26]
+* INTERF di[25]
+* INTERF di[24]
+* INTERF di[23]
+* INTERF di[22]
+* INTERF di[21]
+* INTERF di[20]
+* INTERF di[2]
+* INTERF di[19]
+* INTERF di[18]
+* INTERF di[17]
+* INTERF di[16]
+* INTERF di[15]
+* INTERF di[14]
+* INTERF di[13]
+* INTERF di[12]
+* INTERF di[11]
+* INTERF di[10]
+* INTERF di[1]
+* INTERF di[0]
+* INTERF dato[9]
+* INTERF dato[8]
+* INTERF dato[7]
+* INTERF dato[6]
+* INTERF dato[5]
+* INTERF dato[4]
+* INTERF dato[31]
+* INTERF dato[30]
+* INTERF dato[3]
+* INTERF dato[29]
+* INTERF dato[28]
+* INTERF dato[27]
+* INTERF dato[26]
+* INTERF dato[25]
+* INTERF dato[24]
+* INTERF dato[23]
+* INTERF dato[22]
+* INTERF dato[21]
+* INTERF dato[20]
+* INTERF dato[2]
+* INTERF dato[19]
+* INTERF dato[18]
+* INTERF dato[17]
+* INTERF dato[16]
+* INTERF dato[15]
+* INTERF dato[14]
+* INTERF dato[13]
+* INTERF dato[12]
+* INTERF dato[11]
+* INTERF dato[10]
+* INTERF dato[1]
+* INTERF dato[0]
+* INTERF clk
+* INTERF ce
+* INTERF addr[7]
+* INTERF addr[6]
+* INTERF addr[5]
+* INTERF addr[4]
+* INTERF addr[3]
+* INTERF addr[2]
+* INTERF addr[1]
+* INTERF addr[0]
+
+
+
