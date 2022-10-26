@@ -12,11 +12,12 @@ goal
 SARlogic synthesis, P&R, transistor simulation and sta
 
 target process : sky130_c4m
+Cells : C4M-FleCell library
 
 tools
 -----
 yosys for synthesis
-C4M-FlexLib standard Cells
+C4M-FlexCell standard Cells
 coriolis for place and route
 ngspice for transistor simulation
 hitas for static timing analysis
