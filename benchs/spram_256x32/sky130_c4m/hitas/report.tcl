@@ -9,9 +9,7 @@ set figname eth_spram_256x32
 inf_SetFigureName $figname
 
 # Set clocks
-#create_clock -period 3000 -waveform {0 1500} ck
-#create_clock -name m_clock_from_pad -period 3000 -waveform {10 10} 1
-create_clock -name clk -period 50000 -waveform {10 10} 46 
+create_clock -name clk -period 50000 -waveform {20 20} clk 
 
 # Load Timing Database
 set fig [ttv_LoadSpecifiedTimingFigure $figname]
@@ -47,7 +45,7 @@ fclose $file
 
 
 # Critical path
-set clist [ttv_GetPaths $fig * * ?? 5 critic path max]
+set clist [ttv_GetPaths $fig * * ?? 10 critic path max]
 
 set f [fopen $figname.paths "w+"]
 ttv_DisplayPathListDetail $f $clist

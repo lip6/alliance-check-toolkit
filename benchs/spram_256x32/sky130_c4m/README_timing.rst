@@ -19,14 +19,13 @@ provides
 
 -rw-r--r-- 1 mariem utmp     580 24 oct.  16:30 eth_spram_256x32.tcl
 -rw-r--r-- 1 mariem utmp 2648699 24 oct.  16:30 eth_spram_256x32.blif
-drwxr-xr-x 3 mariem utmp     512 24 oct.  16:30 coriolis2
 -rw-r--r-- 1 mariem utmp 7710003 24 oct.  16:30 eth_spram_256x32.vst
 -rw-r--r-- 1 mariem utmp 2324861 24 oct.  16:30 eth_spram_256x32.spi
 
 STA
 ===
 
-./hitas/db.tcl builds the data base
+./hitas/db.tcl builds the timing data base
 
 using
 top_hitas_ngspice.spi setting TEMP, VDD, VSS and netlist as a SUBCKT
