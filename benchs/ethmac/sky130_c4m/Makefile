@@ -8,6 +8,7 @@
 
             YOSYS_FLATTEN = 
             YOSYS_SET_TOP = Yes
+         YOSYS_BLACKBOXES = eth_spram_256x32
              USE_VALGRIND = No
                 USE_DEBUG = No
                   RM_CHIP = Yes
