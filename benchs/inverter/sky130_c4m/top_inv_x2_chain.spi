@@ -1,0 +1,64 @@
+*
+* top_inv_x2_chain.spi
+* ngspice simulation
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+.TEMP 25
+
+******************
+* BSIM4 transistor model parameters for ngspice
+*.lib /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_all_lib.spice logic_tt 
+*.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/sky130_c4m/techno/C4M_LIP6_Sky130.spice
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/sky130_c4m/techno/C4M_LIP6_Sky130_hitas.spice
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE inv_x2_chain.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt inv_x2_chain in out vdd gnd
+Xinv_x2_chain in out evdd evss inv_x2_chain
+
+*input
+vin in evss dc 0.8 pulse (0 1.8 100ps 8ps 8ps 292ps 600ps)
+
+*loading output
+*Cload out evss 0.0020pF
+
+
+* transient analysis *
+.control
+TRAN 1ps 1500ps 0 
+
+set width=110
+
+meas tran inputRslope TRIG v(in) val=0.001 RISE=1 TARG v(in) VAL=1.799 RISE=1
+meas tran inputFslope TRIG v(in) val=1.799 FALL=1 TARG v(in) VAL=0.001 FALL=1
+meas tran proptimeRF TRIG v(in) val=0.9 RISE=1 TARG v(out) VAL=0.9 FALL=1
+meas tran proptimeFR TRIG v(in) val=0.9 FALL=1 TARG v(out) VAL=0.9 RISE=1
+
+gnuplot res v(in) v(out)
++ title 'input and output of the inverter chain'
++ xlabel 'time / s' ylabel 'Voltage / V' 
+
+.endc
+
+
+
+.end
+

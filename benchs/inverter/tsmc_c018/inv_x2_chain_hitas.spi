@@ -1,0 +1,25 @@
+*
+* inv_x2_chain_hitas.spi
+* 
+
+*****************
+
+.TEMP 25
+
+Vsupply evdd 0 1.8
+Vground evss 0 0
+
+******************
+* circuit model
+* inv_x2_chain
+.INCLUDE inv_x2_chain.spi
+
+*****************
+* Circuit Instantiation
+*.subckt inv_x2_chain in out vdd gnd
+Xinv_x2_chain in out evdd evss inv_x2_chain
+
+
+.end
+
+

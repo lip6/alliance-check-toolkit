@@ -1,36 +1,29 @@
+* using
+* Coriolis Structural SPICE Driver
+* Generated on Oct 21, 2022, 15:40
+* Cell/Subckt "sarlogic_r".
+* 
 * top_r_hitas_eldo.cir bench SARlogic
 * 
 
 *****************
-.option  nopage nomod
-+        newtol numdgt=7 ingold=2 gmindc=1e-18
-.option DOTNODE
-.option MSGNODE = 0
 
 .TEMP 25
-* models are provide in the tcl file
-*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT
-*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_3V
-*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_RES
-*.lib '/users/soft/techno/dev/taiwan/T-018-CM-SP-007-K3/180/models/eldo/cmn018_assp_v1d3.eldo' TT_DIO
-
-
-Vsupply 1 0 1.8
-Vground 0 0 0
+.GLOBAL VDD VSS
+Vsupply vdd 0  DC 1.8
+Vground vss 0  DC 0
 
 ******************
 * circuit model
 * include standard cells
 .INCLUDE /users/soft/techno/techno/pdkmaster/views/tsmc_c018/FlexLib/spice/FlexLib.spi
-
-*added cell by Coriolis placer
 .INCLUDE /users/soft/techno/techno/pdkmaster/views/tsmc_c018/FlexLib/spice/tiepoly_x0.spi
 
 * include circuit netlist
-.INCLUDE sarlogic_r_simu.spi
+*.subckt sarlogic_r 0 1 2 4 5 30 31 32 33 34 35 36 37 49 58 59 60 61 62 63 64 65 66 67
+.INCLUDE sarlogic_r_netlist.spi
 
-*****************
-* Circuit Instantiation
+* Interface
 * INTERF vss
 * INTERF vdd
 * INTERF soc
@@ -80,49 +73,4 @@ Vground 0 0 0
 * NET    65 = dac_control[0]
 * NET    66 = cmp
 * NET    67 = clk
-
-*.subckt sarlogic_r 0 1 2 4 5 30 31 32 33 34 35 36 37 49 58 59 60 61 62 63 64 65 66 67
-
-Xsarlogic_r  0 1 2 4 5 30 31 32 33 34 35 36 37 49 58 59 60 61 62 63 64 65 66 67 sarlogic_r
-
-
-
-
-*load on outputs
-Cres0 37 0 0.5pF
-Cres1 36 0 0.5pF
-Cres2 35 0 0.5pF
-Cres3 34 0 0.5pF
-Cres4 33 0 0.5pF
-Cres5 32 0 0.5pF
-Cres6 31 0 0.5pF
-Cres7 30 0 0.5pF
-
-C0 65 0 0.5pF
-C1 64 0 0.5pF
-C2 63 0 0.5pF
-C3 62 0 0.5pF
-C4 61 0 0.5pF
-C5 60 0 0.5pF
-C6 59 0 0.5pF
-C7 58 0 0.5pF
-
-*clock
-vck 67 0 dc 0.6 pulse (0 1.8 5ns 1ns 1ns 50ns 110ns)
-
-* input
-** reset
-vrst 5 0 0
-** cmp
-vcmp 66 0 1.8
-
-*start of conversion SOC
-vsoc 2 0 dc 0.6 pulse (0 1.8 5ns 1ns 1ns 110ns 1100ns)
-
-.op
-.TRAN 100ps 1500ns 0 
-.PLOT TRAN v(67) v(66) v(2) v(49) v(58) v(59) v(60) v(30) v(31) v(32)
-
 .end
-
-

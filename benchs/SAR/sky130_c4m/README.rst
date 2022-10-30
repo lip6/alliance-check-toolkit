@@ -1,7 +1,7 @@
 README.rst
 ============
 
-Update 8 Octobre 2022, MM Louerat
+Update 25  October 2022, MM Louerat
 
 directory
 ---------
@@ -9,13 +9,15 @@ directory
 
 goal
 ----------
-SARlogic synthesis, P&P, transistor simulation and sta
+SARlogic synthesis, P&R, transistor simulation and sta
 
 target process : sky130_c4m
+Cells : C4M-FleCell library
 
 tools
 -----
 yosys for synthesis
+C4M-FlexCell standard Cells
 coriolis for place and route
 ngspice for transistor simulation
 hitas for static timing analysis
@@ -31,24 +33,24 @@ synthesis
 make vst
 
 provides:
--rw-r--r-- 1 mariem utmp   364  7 oct.  14:21 SARlogic.tcl
--rw-r--r-- 1 mariem utmp 14114  7 oct.  14:21 SARlogic.blif
--rw-r--r-- 1 mariem utmp 40188  7 oct.  14:21 sarlogic.vst
--rw-r--r-- 1 mariem utmp 12500  7 oct.  14:21 SARlogic.spi
+-rw-r--r-- 1 mariem utmp   530 25 oct.  10:52 SARlogic.tcl
+-rw-r--r-- 1 mariem utmp 16579 25 oct.  10:52 SARlogic.blif
+-rw-r--r-- 1 mariem utmp 48354 25 oct.  10:52 sarlogic.vst
+-rw-r--r-- 1 mariem utmp 14874 25 oct.  10:52 SARlogic.spi
 
 
 place and route
 -------------------
 make cgt
 
-use PythonScript
+Tools/PythonScript
 doDesign
 executon step by step
 
 provides
--rw-r--r-- 1 mariem utmp 105876  7 oct.  14:23 sarlogic_r.vst
--rw-r--r-- 1 mariem utmp  31330  7 oct.  14:23 sarlogic_r.spi
--rw-r--r-- 1 mariem utmp 501954  7 oct.  14:23 sarlogic_r.gds
+-rw-r--r-- 1 mariem utmp  74608 25 oct.  10:53 sarlogic_r.vst
+-rw-r--r-- 1 mariem utmp  21618 25 oct.  10:53 sarlogic_r.spi
+-rw-r--r-- 1 mariem utmp 534552 25 oct.  10:53 sarlogic_r.gds
 
 simulation at transistor level
 -------------------------------
@@ -60,11 +62,14 @@ launching ngspice on transistor netlist before placement
 ngspice top_ngspice.cir
 
 top_ngspice.cir contains the description of the hierarchical netlist BEFORE routing, using:
-SARlogic.spi, the netlist generated
-SARlogic_simu.spi, the top level netlist 
+SARlogic_netlis.spi, the top level netlist 
 
-top_ngspice.cir is the simulation netlist including SARlogic_simu.spi, with techno models and 
-all the cells (.INCLUDE refering to the standard cell library). 
+NB. In the SARlogic.spi, the netlist generated, the paths have to be changed to access to the standrd cells
+
+
+top_ngspice.cir is the simulation netlist including SARlogic_netlis.spi, 
+with BSIM4 transistor models and 
+all the cells (.INCLUDE refering to the standard cell library with appropriate path). 
 
 provides timing plots
 Results have to be checked
@@ -103,3 +108,13 @@ xtas provides a GUI to analyse timing paths
 File/open data base
 Tools/GetPaths
 Results have to be checked
+
+./hitas/report.tcl
+
+provides the timing analysis in :
+-rw-r--r-- 1 mariem utmp 492403 25 oct.  17:32 SARlogic.setuphold
+-rw-r--r-- 1 mariem utmp  13831 25 oct.  17:32 SARlogic.accessmax
+-rw-r--r-- 1 mariem utmp  13177 25 oct.  17:32 SARlogic.accessmin
+-rw-r--r-- 1 mariem utmp   2664 25 oct.  17:32 SARlogic.comb
+-rw-r--r-- 1 mariem utmp   9160 25 oct.  17:32 SARlogic.paths
+

@@ -1,0 +1,196 @@
+***********************
+****sta for spram_256x32.spi
+****transitor model for ngspice simulator
+**********top_hspice_ngspice.spi
+
+
+*****************
+
+.TEMP 25
+.GLOBAL VDD VSS
+Vsupply vdd 0  DC 1.8
+Vground vss 0  DC 0
+
+******************
+* circuit model
+* include standard cells
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.ref/StdCellLib/spice/StdCellLib.spi
+
+* include circuit netlist
+*.subckt spram_256x32 0 1 2 3 4 5 6 8439 16645 16646 16647 16648 16649 16650 16651 16652 16653 16654 16655 16656 16657 16658 16659 16660 16661 16662 16663 16664 16665 16666 16667 16668 16669 16670 16671 16672 16673 16674 16675 16676 18261 18262 18263 18264 18265 18266 18267 18268 18269 18270 18271 18272 18273 18274 18275 18276 18277 18278 18279 18280 18281 18282 18283 18284 18285 18286 18287 18288 18289 18290 18291 18292 18293 18294 34679 34680 34681 34682 34683 34684 34685 34686
+
+. INCLUDE spram_256x32.spi
+
+* INTERF we[3]
+* INTERF we[2]
+* INTERF we[1]
+* INTERF we[0]
+* INTERF vss
+* INTERF vdd
+* INTERF rst
+* INTERF oe
+* INTERF di[9]
+* INTERF di[8]
+* INTERF di[7]
+* INTERF di[6]
+* INTERF di[5]
+* INTERF di[4]
+* INTERF di[31]
+* INTERF di[30]
+* INTERF di[3]
+* INTERF di[29]
+* INTERF di[28]
+* INTERF di[27]
+* INTERF di[26]
+* INTERF di[25]
+* INTERF di[24]
+* INTERF di[23]
+* INTERF di[22]
+* INTERF di[21]
+* INTERF di[20]
+* INTERF di[2]
+* INTERF di[19]
+* INTERF di[18]
+* INTERF di[17]
+* INTERF di[16]
+* INTERF di[15]
+* INTERF di[14]
+* INTERF di[13]
+* INTERF di[12]
+* INTERF di[11]
+* INTERF di[10]
+* INTERF di[1]
+* INTERF di[0]
+* INTERF dato[9]
+* INTERF dato[8]
+* INTERF dato[7]
+* INTERF dato[6]
+* INTERF dato[5]
+* INTERF dato[4]
+* INTERF dato[31]
+* INTERF dato[30]
+* INTERF dato[3]
+* INTERF dato[29]
+* INTERF dato[28]
+* INTERF dato[27]
+* INTERF dato[26]
+* INTERF dato[25]
+* INTERF dato[24]
+* INTERF dato[23]
+* INTERF dato[22]
+* INTERF dato[21]
+* INTERF dato[20]
+* INTERF dato[2]
+* INTERF dato[19]
+* INTERF dato[18]
+* INTERF dato[17]
+* INTERF dato[16]
+* INTERF dato[15]
+* INTERF dato[14]
+* INTERF dato[13]
+* INTERF dato[12]
+* INTERF dato[11]
+* INTERF dato[10]
+* INTERF dato[1]
+* INTERF dato[0]
+* INTERF clk
+* INTERF ce
+* INTERF addr[7]
+* INTERF addr[6]
+* INTERF addr[5]
+* INTERF addr[4]
+* INTERF addr[3]
+* INTERF addr[2]
+* INTERF addr[1]
+* INTERF addr[0]
+
+
+* NET     0 = we[3]
+* NET     1 = we[2]
+* NET     2 = we[1]
+* NET     3 = we[0]
+* NET     4 = vss
+* NET     5 = vdd
+* NET     6 = rst
+
+* NET  8439 = oe
+
+* NET 16645 = di[9]
+* NET 16646 = di[8]
+* NET 16647 = di[7]
+* NET 16648 = di[6]
+* NET 16649 = di[5]
+* NET 16650 = di[4]
+* NET 16651 = di[31]
+* NET 16652 = di[30]
+* NET 16653 = di[3]
+* NET 16654 = di[29]
+* NET 16655 = di[28]
+* NET 16656 = di[27]
+* NET 16657 = di[26]
+* NET 16658 = di[25]
+* NET 16659 = di[24]
+* NET 16660 = di[23]
+* NET 16661 = di[22]
+* NET 16662 = di[21]
+* NET 16663 = di[20]
+* NET 16664 = di[2]
+* NET 16665 = di[19]
+* NET 16666 = di[18]
+* NET 16667 = di[17]
+* NET 16668 = di[16]
+* NET 16669 = di[15]
+* NET 16670 = di[14]
+* NET 16671 = di[13]
+* NET 16672 = di[12]
+* NET 16673 = di[11]
+* NET 16674 = di[10]
+* NET 16675 = di[1]
+* NET 16676 = di[0]
+
+* NET 18261 = dato[9]
+* NET 18262 = dato[8]
+* NET 18263 = dato[7]
+* NET 18264 = dato[6]
+* NET 18265 = dato[5]
+* NET 18266 = dato[4]
+* NET 18267 = dato[31]
+* NET 18268 = dato[30]
+* NET 18269 = dato[3]
+* NET 18270 = dato[29]
+* NET 18271 = dato[28]
+* NET 18272 = dato[27]
+* NET 18273 = dato[26]
+* NET 18274 = dato[25]
+* NET 18275 = dato[24]
+* NET 18276 = dato[23]
+* NET 18277 = dato[22]
+* NET 18278 = dato[21]
+* NET 18279 = dato[20]
+* NET 18280 = dato[2]
+* NET 18281 = dato[19]
+* NET 18282 = dato[18]
+* NET 18283 = dato[17]
+* NET 18284 = dato[16]
+* NET 18285 = dato[15]
+* NET 18286 = dato[14]
+* NET 18287 = dato[13]
+* NET 18288 = dato[12]
+* NET 18289 = dato[11]
+* NET 18290 = dato[10]
+* NET 18291 = dato[1]
+* NET 18292 = dato[0]
+* NET 18293 = clk
+* NET 18294 = ce
+
+* NET 34679 = addr[7]
+* NET 34680 = addr[6]
+* NET 34681 = addr[5]
+* NET 34682 = addr[4]
+* NET 34683 = addr[3]
+* NET 34684 = addr[2]
+* NET 34685 = addr[1]
+* NET 34686 = addr[0]
+
+*****************
+.end

@@ -1,0 +1,110 @@
+***********************
+****sta for eth_spram_256x32.spi
+****transitor model for ngspice simulator
+**********top_hspice_ngspice.spi
+
+
+*****************
+
+.TEMP 25
+.GLOBAL VDD VSS
+Vsupply vdd 0  DC 1.8
+Vground vss 0  DC 0
+
+******************
+* circuit model
+* include standard cells
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.ref/StdCellLib/spice/StdCellLib.spi
+
+* include circuit netlist
+*.subckt eth_spram_256x32 0 1 2 3 4 5 6 15 8216 8217 8218 8219 8220 8221 8222 8223 8224 8225 8226 8227 8228 8229 8230 8231 8232 8233 8234 8235 8236 8237 8238 8239 8240 8241 8242 8243 8244 8245 8246 8247 8248 8249 8250 8251 8252 8253 8254 8255 8256 8257 8258 8259 8260 8261 8262 8263 8264 8265 8266 8267 8268 8269 8270 8271 8272 8273 8274 8275 8276 8277 8278 8279 8280 8281 8282 8283 8284 8285 8286 8287 8288 8289
+
+* NET     0 = we[3]
+* NET     1 = we[2]
+* NET     2 = we[1]
+* NET     3 = we[0]
+* NET     4 = vss
+* NET     5 = vdd
+* NET     6 = rst
+
+* NET    15 = oe
+
+* NET  8216 = di[9]
+* NET  8217 = di[8]
+* NET  8218 = di[7]
+* NET  8219 = di[6]
+* NET  8220 = di[5]
+* NET  8221 = di[4]
+* NET  8222 = di[31]
+* NET  8223 = di[30]
+* NET  8224 = di[3]
+* NET  8225 = di[29]
+* NET  8226 = di[28]
+* NET  8227 = di[27]
+* NET  8228 = di[26]
+* NET  8229 = di[25]
+* NET  8230 = di[24]
+* NET  8231 = di[23]
+* NET  8232 = di[22]
+* NET  8233 = di[21]
+* NET  8234 = di[20]
+* NET  8235 = di[2]
+* NET  8236 = di[19]
+* NET  8237 = di[18]
+* NET  8238 = di[17]
+* NET  8239 = di[16]
+* NET  8240 = di[15]
+* NET  8241 = di[14]
+* NET  8242 = di[13]
+* NET  8243 = di[12]
+* NET  8244 = di[11]
+* NET  8245 = di[10]
+* NET  8246 = di[1]
+* NET  8247 = di[0]
+* NET  8248 = dato[9]
+* NET  8249 = dato[8]
+* NET  8250 = dato[7]
+* NET  8251 = dato[6]
+* NET  8252 = dato[5]
+* NET  8253 = dato[4]
+* NET  8254 = dato[31]
+* NET  8255 = dato[30]
+* NET  8256 = dato[3]
+* NET  8257 = dato[29]
+* NET  8258 = dato[28]
+* NET  8259 = dato[27]
+* NET  8260 = dato[26]
+* NET  8261 = dato[25]
+* NET  8262 = dato[24]
+* NET  8263 = dato[23]
+* NET  8264 = dato[22]
+* NET  8265 = dato[21]
+* NET  8266 = dato[20]
+* NET  8267 = dato[2]
+* NET  8268 = dato[19]
+* NET  8269 = dato[18]
+* NET  8270 = dato[17]
+* NET  8271 = dato[16]
+* NET  8272 = dato[15]
+* NET  8273 = dato[14]
+* NET  8274 = dato[13]
+* NET  8275 = dato[12]
+* NET  8276 = dato[11]
+* NET  8277 = dato[10]
+* NET  8278 = dato[1]
+* NET  8279 = dato[0]
+* NET  8280 = clk
+* NET  8281 = ce
+* NET  8282 = addr[7]
+* NET  8283 = addr[6]
+* NET  8284 = addr[5]
+* NET  8285 = addr[4]
+* NET  8286 = addr[3]
+* NET  8287 = addr[2]
+* NET  8288 = addr[1]
+* NET  8289 = addr[0]
+
+.INCLUDE eth_spram_256x32_netlist.spi
+
+*****************
+.end

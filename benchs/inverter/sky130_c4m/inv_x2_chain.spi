@@ -1,0 +1,18 @@
+*
+* inv_x2_chain.spi
+* 
+
+* inv_x2
+*.subckt inv_x2 vdd vss i nq
+
+.INCLUDE inv_x2.spi
+
+.subckt inv_x2_chain in out vdd gnd
+Xa vdd gnd in 1   inv_x2
+Xb vdd gnd 1  2   inv_x2
+Xc vdd gnd 2  3   inv_x2
+Xd vdd gnd 3  4   inv_x2
+Xe vdd gnd 4  out inv_x2
+.ends inv_x2_chain
+
+

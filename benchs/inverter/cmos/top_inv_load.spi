@@ -1,0 +1,64 @@
+*
+* top_inv.spi
+* ngspice simulation
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+
+******************
+* BSIM4 transistor model parameters for ngspice
+.INCLUDE ./techno/bsim4_dummy.ng
+
+*******************************
+*Simulation conditions
+.TEMP 125
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.62
+gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE inv_netlist.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt inv a y vdd gnd
+
+Xc in out evdd evss inv
+
+*input
+vin in evss dc 0.8 pulse (0 1.62 100ps 20ps 20ps 100ps 250ps)
+
+*loading output
+Cload out evss 0.020pF
+
+
+* transient analysis *
+.control
+TRAN 1ps 600ps 0 
+
+set width=110
+
+meas tran inputRslope TRIG v(in) val=0.001 RISE=1 TARG v(in) VAL=1.619 RISE=1
+meas tran inputFslope TRIG v(in) val=1.619 FALL=1 TARG v(in) VAL=0.001 FALL=1
+meas tran proptimeRF TRIG v(in) val=0.81 RISE=1 TARG v(out) VAL=0.81 FALL=1
+meas tran proptimeFR TRIG v(in) val=0.81 FALL=1 TARG v(out) VAL=0.81 RISE=1
+
+gnuplot res v(in) v(out)
++ title 'input and output of the inverter'
++ xlabel 'time / s' ylabel 'ResultOutput / V' 
+
+.endc
+
+
+
+.end
+
