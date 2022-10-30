@@ -14,3 +14,5 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'adrs(0)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_13351_new_n357' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'alu_out(6)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'debug(7)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'debug(8)' ) )
