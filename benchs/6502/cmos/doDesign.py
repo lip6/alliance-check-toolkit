@@ -45,12 +45,21 @@ def scriptMain ( **kw ):
                      ]
         m65sConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=[] ) 
         m65sConf.cfg.misc.logMode        = True
-        m65sConf.cfg.etesian.spaceMargin = 0.10
-        m65sConf.cfg.etesian.aspectRatio = 0.90
-        m65sConf.editor                  = editor
-        m65sConf.fixedWidth              = l(700)
-        m65sConf.useSpares               = True
-        #m65sConf.useClockTree            = True
+        m65sConf.cfg.etesian.effort              = 2
+        m65sConf.cfg.etesian.spaceMargin         = 0.10
+        m65sConf.cfg.etesian.aspectRatio         = 0.90
+        m65sConf.cfg.etesian.uniformDensity      = True
+        m65sConf.cfg.anabatic.topRoutingLayer    = 'METAL5'
+        m65sConf.cfg.katana.eventsLimit          = 1000000
+        m65sConf.cfg.katana.hTracksReservedMin   = 3 
+        m65sConf.cfg.katana.vTracksReservedMin   = 5
+        m65sConf.cfg.katana.hTracksReservedLocal = 8 
+        m65sConf.cfg.katana.vTracksReservedLocal = 7 
+        m65sConf.cfg.katana.runRealignStage      = True
+        m65sConf.cfg.block.spareSide             = l(1000)
+        m65sConf.editor     = editor
+        m65sConf.fixedWidth = l(700)
+        m65sConf.useSpares  = True
         m65sConf.useHTree( 'm_clock' )
         blockBuilder = Block( m65sConf )
         rvalue = blockBuilder.doPnR()
