@@ -58,7 +58,7 @@
 
 
  ifneq ($(YOSYS_TOP),)
-   YOSYS = $(YOSYS_BIN)/yosys
+   export YOSYS = $(YOSYS_BIN)/yosys
  else
    $(info YOSYS_TOP is not defined, Yosys synthesis is not available)
  endif

@@ -22,6 +22,9 @@ class Yosys ( object ):
         self.libertyFile = None
         self.blocks      = []
         self.blackboxes  = []
+        self.yosysBin    = 'yosys'
+        if 'YOSYS' in os.environ:
+            self.yosysBin = os.environ[ 'YOSYS' ]
         return
 
     def setFlags ( self, mask, value ):
@@ -104,7 +107,7 @@ class Yosys ( object ):
                        , 'libertyFile': self.libertyFile
                        }
             tclFd.write( tclScript.format( **keywords ))
-        status = subprocess.call( [ 'yosys', '-c', tclFile ] )
+        status = subprocess.call( [ self.yosysBin, '-c', tclFile ] )
         if not (self.flags & Yosys.KeepTcl): os.unlink( tclFile )
         return status
 
