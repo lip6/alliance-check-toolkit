@@ -37,7 +37,7 @@ def scriptMain ( **kw ):
             cfg.anabatic.globalIterations = 3
             cfg.katana.eventsLimit        = 800000
         
-        sram = SRAM_256x32( 4 )
+        sram = SRAM_256x32( 1 )
         sram.placeAt()
        #sram.showTree()
         cell, editor = plugins.kwParseMain( **kw )

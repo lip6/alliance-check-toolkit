@@ -144,7 +144,7 @@ def scriptMain ( **kw ):
         m65sConf.bRows               = 2
         m65sConf.chipConf.name       = 'chip'
         m65sConf.chipConf.ioPadGauge = 'niolib'
-        m65sConf.coreSize            = ( l( 4000), l( 4000) )
+        m65sConf.coreSize            = ( l( 4500), l( 4500) )
         m65sConf.chipSize            = ( l(12400), l(12400) )
         m65sConf.useHTree( 'm_clock' )
         if buildChip:

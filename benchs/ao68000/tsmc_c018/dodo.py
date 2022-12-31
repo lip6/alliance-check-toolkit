@@ -1,0 +1,39 @@
+
+from designflow.technos import setupTSMC_c180_c4m
+
+setupTSMC_c180_c4m( checkToolkit='../../..', ndaTop=None )
+
+DOIT_CONFIG = { 'verbosity' : 2 }
+
+from designflow.pnr      import PnR
+from designflow.yosys    import Yosys
+from designflow.blif2vst import Blif2Vst
+from designflow.alias    import Alias
+from designflow.clean    import Clean
+PnR.textMode  = True
+
+from doDesign  import scriptMain
+
+ruleYosys = Yosys   .mkRule( 'yosys', 'ao68000.v' )
+ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'ao68000.vst'
+                                      , 'ao68000.spi' ]
+                                    , [ruleYosys]
+                                    , flags=0 )
+rulePnR   = PnR     .mkRule( 'pnr'  , [ 'chip_r.gds'
+                                      , 'chip_r.vst'
+                                      , 'chip_r.spi'
+                                      , 'chip.vst'
+                                      , 'chip.spi'
+                                      , 'corona_cts_r.vst'
+                                      , 'corona_cts_r.spi'
+                                      , 'corona.vst'
+                                      , 'corona.spi'
+                                      , 'ao68000_cts.spi'
+                                      , 'ao68000_cts.vst' ]
+                                    , [ruleB2V]
+                                    , scriptMain )
+ruleCgt   = PnR  .mkRule( 'cgt' )
+ruleGds   = Alias.mkRule( 'gds', [rulePnR] )
+ruleClean = Clean.mkRule( [ 'corona.00.density.histogram.dat'
+                          , 'corona.00.density.histogram.plt'
+                          , 'corona.katana.dat' ] )

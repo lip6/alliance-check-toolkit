@@ -38,10 +38,10 @@ def scriptMain ( **kw ):
         #cfg.misc.maxTraceLevel          = 120
         cfg.katana.eventsLimit          = 1000000
         cfg.anabatic.topRoutingLayer    = 'METAL5'
-        cfg.katana.hTracksReservedLocal = 6 
-        cfg.katana.vTracksReservedLocal = 7 
-        cfg.katana.hTracksReservedMin   = 1 
-        cfg.katana.vTracksReservedMin   = 5 
+        cfg.katana.hTracksReservedLocal = 5 
+        cfg.katana.vTracksReservedLocal = 5 
+        #cfg.katana.hTracksReservedMin   = 1 
+        #cfg.katana.vTracksReservedMin   = 5 
     
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
         af  = CRL.AllianceFramework.get()
@@ -56,7 +56,7 @@ def scriptMain ( **kw ):
     env = af.getEnvironment()
     env.setCLOCK( 'do_not_recognize_ck' )
   
-    cell = CRL.AllianceFramework.get().getCell( 'mips_core_flat', CRL.Catalog.State.Views )
+    cell = CRL.AllianceFramework.get().getCell( 'mips_r3000_1m_core_flat', CRL.Catalog.State.Views )
     if editor: editor.setCell( cell )
   
     katana = Katana.KatanaEngine.create( cell )

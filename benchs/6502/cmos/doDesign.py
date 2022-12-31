@@ -31,7 +31,7 @@ def scriptMain ( **kw ):
         ioPinsSpec = [ (IoPin.SOUTH, 'adrs({})' , l(   5.0), l( 45.0), 16)
                      , (IoPin.EAST , 'data({})' , l(  25.0), l( 50.0),  8)
                      , (IoPin.EAST , 'datao({})', l(  40.0), l( 50.0),  8)
-                     , (IoPin.WEST , 'debug({})', l(  25.0), l( 25.0), 16)
+                     , (IoPin.WEST , 'debug({})', l(  25.0), l( 30.0), 16)
                      , (IoPin.EAST , 'debug(0)' , l(  30.0),       0 ,  1)
                      , (IoPin.NORTH, 'irq'      , l( 100.0),       0 ,  1)
                      , (IoPin.NORTH, 'm_clock'  , l( 150.0),       0 ,  1)
@@ -47,18 +47,18 @@ def scriptMain ( **kw ):
         m65sConf.cfg.misc.logMode        = True
         m65sConf.cfg.etesian.effort              = 2
         m65sConf.cfg.etesian.spaceMargin         = 0.10
-        m65sConf.cfg.etesian.aspectRatio         = 0.90
+        m65sConf.cfg.etesian.aspectRatio         = 1.00
         m65sConf.cfg.etesian.uniformDensity      = True
         m65sConf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         m65sConf.cfg.katana.eventsLimit          = 1000000
-        m65sConf.cfg.katana.hTracksReservedMin   = 4 
+        m65sConf.cfg.katana.hTracksReservedMin   = 6 
         m65sConf.cfg.katana.vTracksReservedMin   = 6
         m65sConf.cfg.katana.hTracksReservedLocal = 8 
         m65sConf.cfg.katana.vTracksReservedLocal = 8 
         m65sConf.cfg.katana.runRealignStage      = True
         m65sConf.cfg.block.spareSide             = l(1000)
         m65sConf.editor     = editor
-        m65sConf.fixedWidth = l(800)
+        #m65sConf.fixedWidth = l(800)
         m65sConf.useSpares  = True
         m65sConf.useHTree( 'm_clock' )
         blockBuilder = Block( m65sConf )
@@ -69,5 +69,4 @@ def scriptMain ( **kw ):
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    shellRValue = 0 if rvalue else 1
-    sys.exit( shellRValue )
+    return rvalue

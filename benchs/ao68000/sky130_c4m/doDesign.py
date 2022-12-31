@@ -84,6 +84,14 @@ def doIoPinVector ( ioSpec, bits ):
     return v
 
 
+
+def toVhdlInterface ( cell ):
+    for net in cell.getNets():
+        if not net.isExternal(): continue
+        vhdlName = net.getName().lower()
+        net.setName( vhdlName )
+
+
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     global af
@@ -94,6 +102,7 @@ def scriptMain ( **kw ):
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'ao68000', CRL.Catalog.State.Logical )
+        toVhdlInterface( cell )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
@@ -174,7 +183,7 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.katana.vTracksReservedMin   = 4
         ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
-        ao68000Conf.cfg.katana.dumpMeasures         = True
+        ao68000Conf.cfg.katana.dumpMeasures         = False
         ao68000Conf.cfg.block.spareSide             = u(7*12)
        #ao68000Conf.cfg.chip.padCoreSide            = 'North'
        #ao68000Conf.cfg.chip.use45corners           = False

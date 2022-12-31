@@ -222,7 +222,7 @@ def scriptMain ( **kw ):
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
             seabreeze = SeabreezeEngine.create( cell )
-            seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.axys_1_2' ))
+           #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.axys_1_2' ))
            #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.backwards' ))
         for net in cell.getNets():
             try:

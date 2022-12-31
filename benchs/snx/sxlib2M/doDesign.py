@@ -41,6 +41,7 @@ def scriptMain ( **kw ):
             cfg.etesian.effort              = 2
             cfg.etesian.aspectRatio         = 2.0
             cfg.anabatic.routingGauge       = 'nsxlib-2M'
+            cfg.anabatic.netBuilderStyle    = '2RL-'
             cfg.anabatic.topRoutingLayer    = 'METAL2'
             cfg.katana.eventsLimit          = 1000000
             Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )

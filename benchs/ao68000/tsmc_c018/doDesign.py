@@ -83,6 +83,12 @@ def doIoPinVector ( ioSpec, bits ):
     return v
 
 
+def toVhdlInterface ( cell ):
+    for net in cell.getNets():
+        if not net.isExternal(): continue
+        vhdlName = net.getName().lower()
+        net.setName( vhdlName )
+    
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     global af
@@ -93,6 +99,7 @@ def scriptMain ( **kw ):
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'ao68000', CRL.Catalog.State.Logical )
+        toVhdlInterface( cell )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )

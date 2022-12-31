@@ -5,7 +5,7 @@ import os
 import traceback
 import CRL
 import helpers
-helpers.loadUserSettings()
+#helpers.loadUserSettings()
 from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
