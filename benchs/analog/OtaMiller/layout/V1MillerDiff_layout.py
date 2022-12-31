@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # This file is part of the Chams-Designs Software.
 # Copyright (c) UPMC 2016-2019, All Rights Reserved
@@ -86,7 +86,7 @@ class MILLERD ( AnalogDesign ):
         return
 
     def build ( self, editor ):
-        print '  o  Running MILLERD.build().'
+        print( '  o  Running MILLERD.build().')
 
        #    | 0           | 1         | 2               | 3   | 4      |  5    | 6| 7   |8  |9     |10  | 11    |
        #    | Class       | Instance  | Layout Style    | Type| W      |  L    | M| Mint|Dum|SFirst|Bulk| BulkC |
@@ -220,7 +220,8 @@ class MILLERD ( AnalogDesign ):
 
 def scriptMain ( **kw ):
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    #if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
     cell = CRL.AllianceFramework.get().getCell( 'millerN', CRL.Catalog.State.Views )
@@ -228,7 +229,7 @@ def scriptMain ( **kw ):
         UpdateSession.open()
         cell.destroy()
         UpdateSession.close()
-        print 'Previous <millerN> cell destroyed.'
+        print( 'Previous <millerN> cell destroyed.')
 
     design = MILLERD()
     design.build( editor )
