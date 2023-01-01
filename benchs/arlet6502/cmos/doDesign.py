@@ -9,7 +9,7 @@ from   helpers.io import ErrorMessage, WarningMessage
 from   helpers    import trace, l, u, n
 import plugins
 from   Hurricane  import DbU, Breakpoint, PythonAttributes
-from   Seabreeze  import SeabreezeEngine
+#from   Seabreeze  import SeabreezeEngine
 from   plugins.alpha.block.block          import Block
 from   plugins.alpha.block.configuration  import IoPin, GaugeConf
 from   plugins.alpha.block.spares         import Spares
@@ -221,7 +221,7 @@ def scriptMain ( **kw ):
             blockBuilder = Block( arlet6502Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-            seabreeze = SeabreezeEngine.create( cell )
+           #seabreeze = SeabreezeEngine.create( cell )
            #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.axys_1_2' ))
            #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.backwards' ))
         for net in cell.getNets():
