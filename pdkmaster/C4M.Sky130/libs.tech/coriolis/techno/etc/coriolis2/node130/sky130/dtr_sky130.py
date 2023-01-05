@@ -1,43 +1,63 @@
 
-# Name:    sky130 -- skyWater130 CMOS General Purpose
-# Unit:    micro
-# version: rev.LIP6-1
-# December 21, 2022, MMLouerat
-#
-# Reference document: 
-# https://skywater-pdk.readthedosc.io/en/main/rules/periphery.html
-#
-# SkyWater130 Mask Acronym-of-layer-name layer-name-for-rule initial-coriolis-name
-# Beware of the existence of li1 local interconnect using licon to connect to difftap or to poly and mcon ton connect to metal1
-# beware that some rules are context dependent (via spacing at end of line or at one side, wide metal3)
-#   nWell               NWM    nwell    nwell
-#   Low Vt Nch          LVTNM  lvtn
-#   active diffusion           difftap  active
-#   Poly 1              P1M    poly     poly
-#   P+ implant          PSDM   psdm     pImplant
-#   N+ implant          NSDM   nsdm     nImplant
-#   Local Intercnt Cont LICM1  licon    XXX   contact between difftap and li1, poly and li1
-#   Local Interconnect  LI1M   li       metal metal between poly and metal1 for local interconnect
-#   Contact             CTM1   mcon     XXX  contact between li1 and metal1
-#   Metal 1             MM1    met1     metal1
-#   Via                 VIM    via      cut1
-#   Metal 2             MM2    met2     metal2
-#   Via 2-PLM           VIM2   via2     cut2
-#   Metal 3-PLM         MM3    met3     metal3
-#   Via 2-PLM           VIM3   via3     cut3
-#   Metal 4             MM4    met4     metal4
-#   Via 4               VIM4   via4     cut4
-#   Metal 5             MM5    met5     metal5
+"""
+Coriolis Design Technological Rules (DTR) for SkyWater 130nm CMOS General Purpose
+=================================================================================
 
-from Hurricane            import DbU
-from helpers.AnalogTechno import Length
-from helpers.AnalogTechno import Unit
-from helpers.AnalogTechno import Area
-from helpers.AnalogTechno import Asymmetric
+:Version: rev.LIP6-1
+:Date:    December 21, 2022
+:Authors: Marie-Minerve Louerat
+
+Reference documents: 
+    https://skywater-pdk.readthedocs.io/en/main/rules/masks.html
+    https://skywater-pdk.readthedosc.io/en/main/rules/periphery.html#x
+
+Beware of the existence of li1 local interconnect using licon to connect to
+difftap or to poly and mcon ton connect to metal1
+
+Beware that some rules are context dependent (via spacing at end of line or at
+one side, wide metal3)
+
+=====================  =======  ==========  ====================================
+SkyWater130 mask       Acronym  Layer name  Coriolis original
+purpose                         for rule    layer name
+=====================  =======  ==========  ====================================
+N-Well                 NWM      nwm         nwell
+Low Vt Nch             LVTNM    lvtn        
+active diffusion                difftap     active
+Poly 1                 P1M      poly        poly
+P+ Implant             PSDM     psdm        pImplant
+N+ Implant             NSDM     nsdm        nImplant
+Local Intr Cont. 1     LICM1    licon       cut0 contact between difftap and li1,
+                                            poly and li1
+Local Intrcnct 1       LI1M     li          metal metal between poly and metal1
+                                            for local interconnect
+Contact                CTM1     mcon        cut1 contact between li1 and metal1
+Metal 1                MM1      m1          metal1
+Via                    VIM      via         cut2
+Metal 2                MM2      m2          metal2
+Via 2-PLM              VIM2     via2        cut3
+Metal 3-PLM            MM3      m3          metal3
+Via 2-PLM              VIM3     via3        cut4
+Metal 4                MM4      m4          metal4
+Via 4                  VIM4     via4        cut5
+Metal 5                MM5      m5          metal5
+=====================  =======  ==========  ====================================
+
+"""
+
+from   Hurricane            import DbU
+from   helpers              import truncPath
+from   helpers.io           import vprint
+from   helpers.analogtechno import Length, Unit, Area, Asymmetric, loadAnalogTechno, \
+                                   addDevice
+from   oroshi               import dtr
+
+
+__all__ = [ 'loadDtr', 'loadDevices' ]
 
 
 analogTechnologyTable = \
-    ( ('Header', 'sky130', DbU.UnitPowerMicro, 'rev.LIP6-1')
+    ( ('Header', 'Sky130', DbU.UnitPowerMicro, 'rev.LIP6-1')
     # ------------------------------------------------------------------------------------
     # ( Rule name          , [Layer1]  , [Layer2]  , Value , Rule flags       , Reference )
     , ('physicalGrid'                              , 0.005 , Length           , 'GSF')
@@ -80,15 +100,15 @@ analogTechnologyTable = \
     , ('minArea'           , 'psdm'                , 0.255 , Area             , 'psd.10b')
     , ('minSpacing'        , 'psdm'    , 'difftap' , 0.130 , Length           , 'psd.7')
     , ('minGateExtension'  , 'psdm'    , 'poly'    , 0.45  , Length|Asymmetric, 'N/A')
-    , ('minOverlap'        , 'psdm'    , 'active'  , 0.45  , Length           , 'N/A')
+    , ('minOverlap'        , 'psdm'    , 'difftap' , 0.45  , Length           , 'N/A')
     , ('minEnclosure'      , 'psdm'    , 'difftap' , 0.125 , Length|Asymmetric, 'psd.5a')
     , ('minStrapEnclosure' , 'psdm'    , 'difftap' , 0.125 , Length           , 'psd.5b')
-    , ('minSpacing'        , 'nsdm'    , 'psdm    ', 0.25  , Length           , 'N/A')
+    , ('minSpacing'        , 'nsdm'    , 'psdm'    , 0.25  , Length           , 'N/A')
     , ('minEnclosure'      , 'psdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
-    , ('minLengthEnclosure', 'psdm'    , 'active'  , 0     , Length|Asymmetric, 'N/A')
+    , ('minLengthEnclosure', 'psdm'    , 'difftap' , 0     , Length|Asymmetric, 'N/A')
     , ('minWidthEnclosure' , 'psdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
     # Error: duplicated rule, needed by "old Pharos".
-    , ('minExtension'      , 'psdm'    , 'difftab' , 0.125 , Length|Asymmetric, 'dup. psd.5a')
+    , ('minExtension'      , 'psdm'    , 'difftap' , 0.125 , Length|Asymmetric, 'dup. psd.5a')
     , ('minStrapEnclosure' , 'psdm'                , 0.125 , Length           , 'dup. psd.5b')
 
     # NPLUS (nsdm)
@@ -106,7 +126,7 @@ analogTechnologyTable = \
     , ('minWidthEnclosure' , 'nsdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
     , ('minGateEnclosure'  , 'nsdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
     # Error: duplicated rule, needed by "old Pharos".
-    , ('minExtension'      , 'nsdm'    , 'difftab' , 0.125 , Length|Asymmetric, 'dup. nsd.5a')
+    , ('minExtension'      , 'nsdm'    , 'difftap' , 0.125 , Length|Asymmetric, 'dup. nsd.5a')
     , ('minStrapEnclosure' , 'nsdm'                , 0.215 , Length           , 'dup. nsd.5b')
 
     # LICM1 (licon)
@@ -122,8 +142,8 @@ analogTechnologyTable = \
     , ('minGateEnclosure'  , 'psdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
     # Error: duplicated rule, needed by "old Pharos".
     , ('minExtension'      , 'poly'    , 'licon'   , 0.05  , Length|Asymmetric, 'dup. licon.8 and licon.8a')
-    , ('minExtension'      , 'psdm'    , 'cut0'    , 0.25  , Length|Asymmetric, 'dup.')
-    , ('minExtension'      , 'nsdm'    , 'cut0'    , 0.25  , Length|Asymmetric, 'dup.')
+    , ('minExtension'      , 'psdm'    , 'licon'   , 0.25  , Length|Asymmetric, 'dup.')
+    , ('minExtension'      , 'nsdm'    , 'licon'   , 0.25  , Length|Asymmetric, 'dup.')
 
     # LI1M (li)
     , ('minWidth'          , 'li'                  , 0.17  , Length           , 'li.1')
@@ -201,4 +221,125 @@ analogTechnologyTable = \
     , ('minExtension'      , 'm5'      , 'via4'    , 0.310 , Length|Asymmetric, 'dup. m5.3 ')
 
     )
+
+
+def loadDtr ():
+    """
+    Load design kit physical rules for SkyWater 130nm.
+    """
+    loadAnalogTechno( analogTechnologyTable, __file__ )
+
+
+def loadDevices ():
+    addDevice( name       = 'DifferentialPairBulkConnected'
+            #, spice      = spiceDir+'DiffPairBulkConnected.spi'
+             , connectors = ( 'D1', 'D2', 'G1', 'G2', 'S' )
+             , layouts    = ( ('Horizontal M2'  , 'DP_horizontalM2.py'    )   
+                            , ('Symmetrical'    , 'DP_symmetrical.py'     )   
+                            , ('Common centroid', 'DP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'DP_interdigitated.py'  )
+                            , ('WIP DP'         , 'wip_dp.py'             )
+                            )
+             )
+    addDevice( name       = 'DifferentialPairBulkUnconnected'
+            #, spice      = spiceDir+'DiffPairBulkUnconnected.spi'
+             , connectors = ( 'D1', 'D2', 'G1', 'G2', 'S', 'B' )
+             , layouts    = ( ('Horizontal M2'  , 'DP_horizontalM2.py'    )   
+                            , ('Symmetrical'    , 'DP_symmetrical.py'     )   
+                            , ('Common centroid', 'DP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'DP_interdigitated.py'  )
+                            , ('WIP DP'         , 'wip_dp.py'             )
+                            )
+             )
+    addDevice( name       = 'LevelShifterBulkUnconnected'
+            #, spice      = spiceDir+'LevelShifterBulkUnconnected.spi'
+             , connectors = ( 'D1', 'D2', 'S1', 'S2', 'B' )
+             , layouts    = ( ('Horizontal M2'  , 'LS_horizontalM2.py'    )   
+                            , ('Symmetrical'    , 'LS_symmetrical.py'     )   
+                            , ('Common centroid', 'LS_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'LS_interdigitated.py'  )
+                            )
+             )
+    addDevice( name       = 'TransistorBulkConnected'
+            #, spice      = spiceDir+'TransistorBulkConnected.spi'
+             , connectors = ( 'D', 'G', 'S' )
+             , layouts    = ( ('Rotate transistor', 'Transistor_rotate.py')
+                            , ('Common transistor', 'Transistor_common.py')
+                            , ('WIP Transistor'   , 'wip_transistor.py'   )   
+                            )
+             )
+    addDevice( name       = 'TransistorBulkUnconnected'
+            #, spice      = spiceDir+'TransistorBulkUnconnected.spi'
+             , connectors = ( 'D', 'G', 'S', 'B' )
+             , layouts    = ( ('Rotate transistor', 'Transistor_rotate.py')
+                            , ('Common transistor', 'Transistor_common.py')
+                            , ('WIP Transistor'   , 'wip_transistor.py'   )
+                            )
+             )
+    addDevice( name       = 'CrossCoupledPairBulkConnected'
+            #, spice      = spiceDir+'CCPairBulkConnected.spi'
+             , connectors = ( 'D1', 'D2', 'S' )
+             , layouts    = ( ('Horizontal M2'  , 'CCP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'CCP_symmetrical.py'     )
+                            , ('Common centroid', 'CCP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'CCP_interdigitated.py'  )
+                            )
+             )
+    addDevice( name       = 'CrossCoupledPairBulkUnconnected'
+            #, spice      = spiceDir+'CCPairBulkUnconnected.spi'
+             , connectors = ( 'D1', 'D2', 'S', 'B' )
+             , layouts    = ( ('Horizontal M2'  , 'CCP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'CCP_symmetrical.py'     )
+                            , ('Common centroid', 'CCP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'CCP_interdigitated.py'  )
+                            )
+             )
+    addDevice( name       = 'CommonSourcePairBulkConnected'
+            #, spice      = spiceDir+'CommonSourcePairBulkConnected.spi'
+             , connectors = ( 'D1', 'D2', 'S', 'G' )
+             , layouts    = ( ('Horizontal M2'  , 'CSP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'CSP_symmetrical.py'     )
+                            , ('Interdigitated' , 'CSP_interdigitated.py'  )
+                            , ('WIP CSP'        , 'wip_csp.py'             )
+                            )
+             )
+    addDevice( name       = 'CommonSourcePairBulkUnconnected'
+            #, spice      = spiceDir+'CommonSourcePairBulkUnconnected.spi'
+             , connectors = ( 'D1', 'D2', 'S', 'G', 'B' )
+             , layouts    = ( ('Horizontal M2'  , 'CSP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'CSP_symmetrical.py'     )
+                            , ('Interdigitated' , 'CSP_interdigitated.py'  )
+                            , ('WIP CSP'        , 'wip_csp.py'             )
+                            )
+             )
+    addDevice( name       = 'SimpleCurrentMirrorBulkConnected'
+            #, spice      = spiceDir+'CurrMirBulkConnected.spi'
+             , connectors = ( 'D1', 'D2', 'S' )
+             , layouts    = ( ('Horizontal M2'  , 'SCM_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'SCM_symmetrical.py'     )
+                            , ('Common centroid', 'SCM_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'SCM_interdigitated.py'  )
+                            )
+             )
+    addDevice( name       = 'SimpleCurrentMirrorBulkUnconnected'
+            #, spice      = spiceDir+'CurrMirBulkUnconnected.spi'
+             , connectors = ( 'D1', 'D2', 'S', 'B' )
+             , layouts    = ( ('Horizontal M2'  , 'SCM_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'SCM_symmetrical.py'     )
+                            , ('Common centroid', 'SCM_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'SCM_interdigitated.py'  )
+                            )
+             )
+    addDevice( name       = 'MultiCapacitor'
+            #, spice      = spiceDir+'MIM_OneCapacitor.spi'
+             , connectors = ( 'T1', 'B1' )
+             , layouts    = ( ('Matrix', 'capacitormatrix.py' ),
+                            )
+             )
+    addDevice( name       = 'Resistor'
+            #, spice      = spiceDir+'MIM_OneCapacitor.spi'
+             , connectors = ( 'PIN1', 'PIN2' )
+             , layouts    = ( ('Snake', 'resistorsnake.py' ),
+                            )
+             )
 

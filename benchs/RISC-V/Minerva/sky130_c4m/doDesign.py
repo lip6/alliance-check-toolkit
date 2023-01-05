@@ -42,6 +42,8 @@ def scriptMain ( **kw ):
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
         conf = ChipConf( cell, ioPins=[], ioPads=[] ) 
+        conf.cfg.misc.verboseLevel1          = True
+        conf.cfg.misc.verboseLevel2          = True
         conf.cfg.etesian.bloat               = 'Flexlib'
         conf.cfg.etesian.uniformDensity      = True
         conf.cfg.etesian.aspectRatio         = 1.0

@@ -363,6 +363,12 @@ def _setup_techno():
         gds2Layer=235, gds2DataType=4,
     )
 
+    tech.addLayerAlias( 'm1', 'met1' )
+    tech.addLayerAlias( 'm2', 'met2' )
+    tech.addLayerAlias( 'm3', 'met3' )
+    tech.addLayerAlias( 'm4', 'met4' )
+    tech.addLayerAlias( 'm5', 'met5' )
+
     # ViaLayers
     # li<>mcon<>m1
     createVia(
@@ -583,10 +589,11 @@ def _setup_display():
 def setup():
     _setup_techno()
     _setup_display()
-    loadAnalogTechno(analogTechnologyTable, __file__)
+    #loadAnalogTechno(analogTechnologyTable, __file__)
     try:
-        from .techno_fix import fix
+        from .techno_symb import setupSymbolic
     except:
         pass
     else:
-        fix()
+        setupSymbolic()
+        

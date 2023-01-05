@@ -12,6 +12,9 @@ from   helpers import overlay, l, u, n
 NdaDirectory = None
 if 'NDA_TOP' in os.environ:
     NdaDirectory = os.environ['NDA_TOP']
+if 'PDKMASTER_TOP' in os.environ:
+    PdkMasterTop = os.environ['PDKMASTER_TOP']
+    NdaDirectory = PdkMasterTop + '/libs.tech/coriolis/techno'
 if not NdaDirectory:
     hostname = socket.gethostname()
     if hostname.startswith('lepka'):
@@ -29,7 +32,13 @@ else:
     cellsTop = '../../../cells'
 
 #import node180.scn6m_deep_09
-import NDA.node350.c35b4
+#import NDA.node350.c35b4
+from   node130.sky130 import techno, StdCellLib #, LibreSOCIO
+
+techno.setup()
+StdCellLib.setup()
+#LibreSOCIO.setup()
+
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False

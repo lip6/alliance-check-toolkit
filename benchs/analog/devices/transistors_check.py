@@ -109,7 +109,8 @@ def analogDemo ( editor ):
 
       print( '       Done %s' % devices[i][0] )
 
-    inv_x1   = CRL.AllianceFramework.get().getCell( 'inv_x1', CRL.Catalog.State.Views )
+   #inv_x1 = CRL.AllianceFramework.get().getCell( 'inv_x1', CRL.Catalog.State.Views )
+    inv_x1 = CRL.AllianceFramework.get().getLibrary('nsxlib').getCell( 'inv_x8' )
     if inv_x1:
       inverter = Instance.create( cell
                                 , 'inverter'
