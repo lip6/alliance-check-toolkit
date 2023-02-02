@@ -5,6 +5,7 @@ Coriolis Design Technological Rules (DTR) for SkyWater 130nm CMOS General Purpos
 
 :Version: rev.LIP6-1
 :Date:    December 21, 2022
+:Date:    February 2, 2023
 :Authors: Marie-Minerve Louerat
 
 Reference documents: 
@@ -61,7 +62,8 @@ analogTechnologyTable = \
     # ------------------------------------------------------------------------------------
     # ( Rule name          , [Layer1]  , [Layer2]  , Value , Rule flags       , Reference )
     , ('physicalGrid'                              , 0.005 , Length           , 'GSF')
-    , ('transistorMinL'                            , 0.38  , Length           , 'lvtn.1a')
+    , ('transistorMinL'                            , 0.15  , Length           , 'poly.1 and device details')
+    #, ('transistorMinL'                            , 0.38  , Length           , 'lvtn.1a')
     , ('transistorMaxL'                            , 38    , Length           , 'rule0002')
     , ('transistorMinW'                            , 0.42  , Length           , 'difftap.2')
     #, ('transistorMinW'                            , 0.36  , Length           , 'difftap.2b')
@@ -99,11 +101,11 @@ analogTechnologyTable = \
     , ('minSpacing'        , 'psdm'                , 0.38  , Length           , 'psd.2')
     , ('minArea'           , 'psdm'                , 0.255 , Area             , 'psd.10b')
     , ('minSpacing'        , 'psdm'    , 'difftap' , 0.130 , Length           , 'psd.7')
-    , ('minGateExtension'  , 'psdm'    , 'poly'    , 0.45  , Length|Asymmetric, 'N/A')
-    , ('minOverlap'        , 'psdm'    , 'difftap' , 0.45  , Length           , 'N/A')
+    , ('minGateExtension'  , 'psdm'    , 'poly'    , 0.00  , Length|Asymmetric, 'N/A')
+    , ('minOverlap'        , 'psdm'    , 'difftap' , 0.00  , Length           , 'N/A')
     , ('minEnclosure'      , 'psdm'    , 'difftap' , 0.125 , Length|Asymmetric, 'psd.5a')
     , ('minStrapEnclosure' , 'psdm'    , 'difftap' , 0.125 , Length           , 'psd.5b')
-    , ('minSpacing'        , 'nsdm'    , 'psdm'    , 0.25  , Length           , 'N/A')
+    , ('minSpacing'        , 'nsdm'    , 'psdm'    , 0.00  , Length           , 'N/A')
     , ('minEnclosure'      , 'psdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
     , ('minLengthEnclosure', 'psdm'    , 'difftap' , 0     , Length|Asymmetric, 'N/A')
     , ('minWidthEnclosure' , 'psdm'    , 'poly'    , 0     , Length|Asymmetric, 'N/A')
@@ -134,7 +136,8 @@ analogTechnologyTable = \
     , ('minSpacing'        , 'licon'               , 0.17  , Length           , 'licon.2')
     , ('minGateSpacing'    , 'licon'   , 'poly'    , 0.25  , Length|Asymmetric, 'licon.10')
     , ('minSpacing'        , 'licon'   , 'poly'    , 0.25  , Length|Asymmetric, 'licon.10')
-    , ('minSpacing'        , 'licon'   , 'difftap' , 0.06  , Length           , 'licon.5b')
+    , ('minSpacing'        , 'licon'   , 'difftap' , 0.19  , Length           , 'licon.14')
+    #, ('minSpacing'        , 'licon'   , 'difftap' , 0.06  , Length           , 'licon.5b')
     , ('minEnclosure'      , 'difftap' , 'licon'   , 0.04  , Length|Asymmetric, 'licon.5a and licon.7 : 0.12 isolated tap')
     , ('minEnclosure'      , 'poly'    , 'licon'   , 0.05  , Length|Asymmetric, 'licon.8 and licon.8a : 0.08')
     , ('minEnclosure'      , 'psdm'    , 'licon'   , 0     , Length|Asymmetric, 'N/A')
@@ -161,7 +164,7 @@ analogTechnologyTable = \
     , ('minWidth'          , 'm1'                  , 0.14  , Length           , 'm1.1')
     , ('minSpacing'        , 'm1'                  , 0.14  , Length           , 'm1.2')
     , ('minArea'           , 'm1'                  , 0.083 , Area             , 'm1.6')
-    , ('minEnclosure'      , 'm1'      , 'mcon'    , 0.03  , Length|Asymmetric, 'm1.4 and m1.5 : 0.085 end of line')
+    , ('minEnclosure'      , 'm1'      , 'mcon'    , 0.03  , Length|Asymmetric, 'm1.4 and m1.5 : 0.06 one side')
     # Error: duplicated rule, needed by "old Pharos".
     , ('minExtension'      , 'm1'      , 'mcon'    , 0.03  , Length|Asymmetric, 'm1.4 and m1.5')
 
