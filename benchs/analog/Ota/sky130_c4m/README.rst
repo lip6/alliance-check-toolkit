@@ -35,3 +35,6 @@ Analog/SlicingTree/slicing Tree Curve
 select a point 
 
 P&R/Step By Step/Detailed route
+
+Check sizes provided by Oceane
+nelist is netlist_OTACSTND1
