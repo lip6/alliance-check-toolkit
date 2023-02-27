@@ -1,8 +1,8 @@
 import os
 import os.path
-from   pathlib   import Path
-from   Hurricane import Net
-from   CRL       import Spice
+from   pathlib            import Path
+from   coriolis.Hurricane import Net
+from   coriolis.CRL       import Spice
 
 def fix(lib):
     for cell in lib.getCells():

@@ -6,22 +6,12 @@ import re
 import traceback
 import os.path
 import optparse
-import Cfg
-import Hurricane
-from   Hurricane import DbU
-from   Hurricane import DataBase
-from   Hurricane import UpdateSession
-from   Hurricane import Breakpoint
-from   Hurricane import Transformation
-from   Hurricane import Instance
-import Viewer
-import CRL
-from   helpers   import ErrorMessage, overlay, l, u, n
-import Etesian
-import Anabatic
-import Katana
-import Unicorn
-from   plugins.rsave import rsave
+from   coriolis.Hurricane     import DbU, DataBase, UpdateSession, Breakpoint, \
+                                     Transformation, Instance
+from   coriolis               import Cfg, Viewer, CRL, Etesian, Anabatic, Katana, \
+                                     Unicorn
+from   coriolis.helpers       import ErrorMessage, overlay, l, u, n
+from   coriolis.plugins.rsave import rsave
 
 
 def scriptMain ( **kw ):

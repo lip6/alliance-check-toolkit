@@ -1,12 +1,12 @@
 
-from designflow.technos import setupCMOS
+from coriolis.designflow.technos import setupCMOS
 
 setupCMOS()
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from designflow.copy import Copy
-from designflow      import pnrcheck
+from coriolis.designflow.copy import Copy
+from coriolis.designflow      import pnrcheck
 
 def getAllFileVariants ( source ):
     sourceVariants = []

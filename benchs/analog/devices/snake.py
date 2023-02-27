@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
 import sys		
-from   Hurricane import *
-from   CRL       import *
-import helpers
-import oroshi
+from   coriolis.Hurricane import *
+from   coriolis.CRL       import *
+from   coriolis.helpers   import staticInitialization
+from   coriolis           import oroshi
 
-helpers.staticInitialization( quiet=True )
+staticInitialization( quiet=True )
 
 
 def toDbU    ( l ): return DbU.fromPhysical( l, DbU.UnitPowerMicro )
@@ -25,7 +25,7 @@ def  buildSnake( editor ) :
     UpdateSession.open()
 
     cell = AllianceFramework.get().createCell( 'snakeT' )
-    cell.setTerminal( True )
+   #cell.setTerminal( True )
 
     cell.setAbutmentBox( Box( toDbU(0.0), toDbU(0.0), toDbU(5.5), toDbU(5.5) ) )
 
@@ -62,8 +62,7 @@ def  buildSnake( editor ) :
 
 def scriptMain( **kw ):
     editor = None
-    if kw.has_key('editor') and kw['editor']:
+    if 'editor' in kw and kw['editor']:
         editor = kw['editor']
-
     buildSnake( editor )
     return True

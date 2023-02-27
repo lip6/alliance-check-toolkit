@@ -153,8 +153,10 @@ def setupPaths ( verbose ):
         return False
 
     os.environ[ 'CORIOLIS_TOP' ] = coriolisTop.as_posix()
-    if coriolisTop == '/usr': sysconfDir = Path( 'etc', 'coriolis2' )
-    else:                     sysconfDir = coriolisTop / 'etc' / 'coriolis2'
+    #if coriolisTop == '/usr': sysconfDir = Path( 'etc', 'coriolis2' )
+    #else:                     sysconfDir = coriolisTop / 'etc' / 'coriolis2'
+    if coriolisTop == '/usr': sysconfDir = Path( 'etc' )
+    else:                     sysconfDir = coriolisTop / 'etc'
 
     # Setup PATH.
     binPath = envWriteBack( 'PATH', (coriolisTop/'bin').as_posix() )
@@ -202,11 +204,11 @@ def setupPaths ( verbose ):
         return False
     pythonPath = ''
     for packageDir in [ sitePackagesDir
-                      , sitePackagesDir / 'crlcore'
-                      , sitePackagesDir / 'cumulus'
-                      , sitePackagesDir / 'cumulus/plugins'
-                      , sitePackagesDir / 'status'
-                      , sysconfDir
+                     #, sitePackagesDir / 'crlcore'
+                     #, sitePackagesDir / 'cumulus'
+                     #, sitePackagesDir / 'cumulus/plugins'
+                     #, sitePackagesDir / 'status'
+                     #, sysconfDir
                       ]:
         sys.path.append( str(packageDir) )
         if len(pythonPath): pythonPath += ':'

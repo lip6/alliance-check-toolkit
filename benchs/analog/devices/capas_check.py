@@ -1,16 +1,14 @@
 #!/usr/bin/python
 
 import sys
-import Cfg
+from   coriolis           import Cfg
 #import node180.scn6m_deep_09
 import NDA.node350.c35b4
-from   Hurricane import *
-import CRL
-from   Analog import CapacitorFamily
-from   Analog import MultiCapacitor
-from   Analog import LayoutGenerator
-from   Analog import Matrix
-from   Bora   import MatrixParameterRange
+from   coriolis.Hurricane import *
+from   coriolis           import CRL
+from   coriolis.Analog    import CapacitorFamily, MultiCapacitor, \
+                                 LayoutGenerator, Matrix
+from   coriolis.Bora      import MatrixParameterRange
 
 
 def toDbU ( value ): return DbU.fromPhysical( value, DbU.UnitPowerMicro )

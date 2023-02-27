@@ -1,0 +1,20 @@
+
+from Hurricane import DebugSession
+
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.CI' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'A(5)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n408' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n1164' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n1159' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n482' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n409' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n1170' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.DIMUX(4)' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.cli' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_12210_new_n968' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'A(10)' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'DI(7)' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.compare' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.BI(6)' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.cond_code(1)' ))
+DebugSession.addToTrace( katana.getCell().getNet( 'clk_root_bl_bl_2' ))

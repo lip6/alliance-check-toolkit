@@ -45,10 +45,10 @@
 # -----------------------------------------------------------------------------
 
 
-from   Hurricane import *
+from   coriolis.Hurricane import *
 # Needed to import a digital block.
-import CRL
-import helpers
+from   coriolis import CRL
+from   coriolis import helpers
 
 # Ensure that all the configuration is properly loaded
 # before we do anything.
@@ -56,9 +56,9 @@ helpers.staticInitialization( quiet=False )
 #helpers.setTraceLevel( 100 )
 #helpers.setTraceLevel( 110 )
 
-from   Analog import *
-from   Bora   import *
-from   karakaze.analogdesign import AnalogDesign
+from   coriolis.Analog import *
+from   coriolis.Bora   import *
+from   coriolis.karakaze.analogdesign import AnalogDesign
 
 
 NMOS    = Transistor.NMOS

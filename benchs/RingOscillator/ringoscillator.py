@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
-from   Hurricane import *
-from   CRL       import *
+from   coriolis.Hurricane import *
+from   coriolis.CRL       import *
 
 
 

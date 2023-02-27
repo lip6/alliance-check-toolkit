@@ -1,20 +1,20 @@
 
-from designflow.technos import setupCMOS45
+from coriolis.designflow.technos import setupCMOS45
 
 setupCMOS45( useNsxlib=True, checkToolkit='../../..' )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from designflow.copy     import Copy
-from designflow.flatph   import Flatph
-from designflow.cougar   import Cougar
-from designflow.s2r      import S2R
-from designflow.lvx      import Lvx
-from designflow.druc     import Druc
-from designflow.graal    import Graal
-from designflow.dreal    import Dreal
-from designflow.pnr      import PnR
-from designflow.clean    import Clean
+from coriolis.designflow.copy     import Copy
+from coriolis.designflow.flatph   import Flatph
+from coriolis.designflow.cougar   import Cougar
+from coriolis.designflow.s2r      import S2R
+from coriolis.designflow.lvx      import Lvx
+from coriolis.designflow.druc     import Druc
+from coriolis.designflow.graal    import Graal
+from coriolis.designflow.dreal    import Dreal
+from coriolis.designflow.pnr      import PnR
+from coriolis.designflow.clean    import Clean
 PnR.textMode = True
 
 from doDesign  import scriptMain

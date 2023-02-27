@@ -1,9 +1,8 @@
 # -*- Mode:Python -*-
 
-import Cfg
-import Viewer
+from   coriolis import Cfg, Viewer
 import symbolic.cmos
-from   helpers import overlay, l, u, n
+from   coriolis.helpers import overlay, l, u, n
 
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
