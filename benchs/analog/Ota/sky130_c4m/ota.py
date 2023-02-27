@@ -31,36 +31,22 @@
 
 import os
 import sys
-import Cfg
-from   Hurricane import *
-import CRL
-import helpers
+from coriolis           import Cfg
+from coriolis.Hurricane import *
+from coriolis           import CRL, helpers
 
 #helpers.setTraceLevel( 100 )
 
-from Analog import Device
-from Analog import Transistor
-from Analog import CommonDrain
-from Analog import CommonGatePair
-from Analog import CommonSourcePair
-from Analog import CrossCoupledPair
-from Analog import DifferentialPair
-from Analog import LevelShifter
-from Analog import SimpleCurrentMirror
-from Analog import CapacitorFamily
-from Analog import MultiCapacitor
-from Analog import LayoutGenerator
-from Bora   import ParameterRange
-from Bora   import StepParameterRange
-from Bora   import MatrixParameterRange
-from Bora   import SlicingNode
-from Bora   import HSlicingNode
-from Bora   import VSlicingNode
-from Bora   import DSlicingNode
-from Bora   import RHSlicingNode
-from Bora   import RVSlicingNode
-from karakaze.analogdesign import AnalogDesign
-
+from coriolis.Analog import Device, Transistor, CommonDrain, CommonGatePair, \
+                            CommonSourcePair, CrossCoupledPair,              \
+                            DifferentialPair, LevelShifter,                  \
+                            SimpleCurrentMirror, CapacitorFamily,            \
+                            MultiCapacitor, LayoutGenerator
+from coriolis.Bora   import ParameterRange, StepParameterRange,       \
+                            MatrixParameterRange, SlicingNode,        \
+                            HSlicingNode, VSlicingNode, DSlicingNode, \
+                            RHSlicingNode, RVSlicingNode
+from coriolis.karakaze.analogdesign import AnalogDesign
 
 NMOS    = Transistor.NMOS
 PMOS    = Transistor.PMOS

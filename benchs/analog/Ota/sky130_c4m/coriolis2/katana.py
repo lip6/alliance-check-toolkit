@@ -1,4 +1,4 @@
-from Hurricane import DebugSession
+from coriolis.Hurricane import DebugSession
 
 #DebugSession.addToTrace( katana.getCell().getNet( 'Vout+' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'vb5' ) )
