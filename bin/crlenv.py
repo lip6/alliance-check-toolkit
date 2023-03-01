@@ -10,9 +10,6 @@ import re
 import argparse
 
 
-useDebug = False
-
-
 reCoriolisPattern      = re.compile( r".*coriolis.*" )
 reReleaseSharedPattern = re.compile( r".*Release\.Shared.*" )
 reReleaseStaticPattern = re.compile( r".*Release\.Static.*" )
@@ -56,18 +53,22 @@ def envWriteBack ( pathName, pathValue ):
     return pathValue
 
 
-def setupPaths ( verbose ):
+def setupPaths ( verbose, debug=False ):
     """
     Guess and setup the main variables to use Coriolis:
 
     * ``PATH``, to find the binaries.
     * ``LD_LIBRARY_PATH``, to access the dynamic libraries.
     * ``DYLD_LIBRARY_PATH``, same as above under MacOS.
-    * ``PYTHONPATH``, to access the various Python modules
-      provided by Coriolis.
+    * ``PYTHONPATH``, to access the various Python modules provided
+      by Coriolis.
+
+    :param verbose: Self explanatory.
+    :param debug:   Use the version compiled with debugging support.
+                    Be aware that it is roughly 4 times slower...                
+                    It's the tree rooted at ``Debug.Shared/install``
+                    instead of  ``Release.Shared/install``.
     """
-    global useDebug
-    
     # Setup CORIOLIS_TOP.
     osEL9             = re.compile (".*Linux.*el9.*x86_64.*")
     osSlsoc7x_64      = re.compile (".*Linux.*el7.*x86_64.*")
@@ -125,19 +126,19 @@ def setupPaths ( verbose ):
         print( '          (using: "{}")'.format( osDir ))
     osDir      = Path( osDir )
     homeDir    = Path( os.environ['HOME'] )
-    buildType  = Path( 'Release.Debug' if useDebug else 'Release.Shared' )
+    buildType  = Path( 'Debug.Shared' if debug else 'Release.Shared' )
     scriptPath = Path( __file__ ).resolve()
     topDirs    = []
-    if 'CORIOLIS_TOP' in os.environ:
-        topDirs += [ Path( os.environ['CORIOLIS_TOP'] ) ]
+
     topDirs  += [ homeDir / 'coriolis-2.x' / osDir / buildType / 'install'
                 , Path( '/soc/coriolis2' ) 
                 , Path( '/usr' ) 
                 ]
-    print( scriptPath )
+    if not debug and 'CORIOLIS_TOP' in os.environ:
+        topDirs.insert( 0, Path( os.environ['CORIOLIS_TOP'] ))
     for part in scriptPath.parts:
         if part == 'nightly':
-            topDirs.append( homeDir / 'nightly' / 'coriolis-2.x' / osDir / buildType / 'install' )
+            topDirs.insert( 0, homeDir / 'nightly' / 'coriolis-2.x' / osDir / buildType / 'install' )
             break
     if verbose:
         print( '  o  Self locating Coriolis:' )
@@ -219,7 +220,7 @@ def setupPaths ( verbose ):
 
 def printVariable ( name ):
     if not name in os.environ:
-        print( '{:<16}:'.format( name ))
+        print( '{}:'.format( name ))
         print( '- variable_not_set' )
         return
     values = os.environ[ name ].split( ':' )
@@ -266,7 +267,7 @@ if __name__ == '__main__':
     parser.add_argument( 'command', nargs='*' )
     args = parser.parse_args()
 
-    setupPaths( args.verbose )
+    setupPaths( args.verbose, args.debug )
     if not len(args.command):
         printEnvironment()
         sys.exit( 0 )
