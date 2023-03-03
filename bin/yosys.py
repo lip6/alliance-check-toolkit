@@ -5,8 +5,8 @@ import os
 import os.path
 import subprocess
 import optparse
-from   helpers.io import ErrorMessage
-from   helpers.io import catch
+from   coriolis.helpers.io import ErrorMessage
+from   coriolis.helpers.io import catch
 
 
 class Yosys ( object ):
