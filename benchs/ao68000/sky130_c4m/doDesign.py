@@ -168,6 +168,9 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'dat_o({})', 10*m2pitch, 10*m2pitch, 32 )
                      ]
         ao68000Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        ao68000Conf.cfg.misc.logMode                = True
+        ao68000Conf.cfg.misc.verboseLevel1          = True
+        ao68000Conf.cfg.misc.verboseLevel2          = True
        #ao68000Conf.cfg.etesian.bloat               = 'Flexlib'
         ao68000Conf.cfg.etesian.uniformDensity      = True
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0

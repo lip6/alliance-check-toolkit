@@ -1,5 +1,5 @@
 
-from Hurricane import DebugSession
+from coriolis.Hurricane import DebugSession
 
 #DebugSession.addToTrace( katana.getCell().getNet( 'dat_o_to_pad(0)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.registers_m_operand1(14)' ) )
