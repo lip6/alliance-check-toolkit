@@ -173,13 +173,13 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         ao68000Conf.cfg.etesian.spaceMargin         = 0.07
-        ao68000Conf.cfg.anabatic.searchHalo         = 2
+        ao68000Conf.cfg.anabatic.searchHalo         = 3
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
         ao68000Conf.cfg.katana.hTracksReservedLocal = 6
-        ao68000Conf.cfg.katana.vTracksReservedLocal = 8
+        ao68000Conf.cfg.katana.vTracksReservedLocal = 9
         ao68000Conf.cfg.katana.hTracksReservedMin   = 3
-        ao68000Conf.cfg.katana.vTracksReservedMin   = 4
+        ao68000Conf.cfg.katana.vTracksReservedMin   = 6
         ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
         ao68000Conf.cfg.katana.dumpMeasures         = False

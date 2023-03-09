@@ -3,19 +3,17 @@
 useNsxlib = False
 
 import os
-import Cfg
-import CRL
-import Viewer
-from   helpers       import overlay, l, u, n
+from   coriolis         import Cfg, CRL, Viewer
+from   coriolis.helpers import overlay, l, u, n
 
 if useNsxlib:
     if 'CELLS_TOP' in os.environ:
         cellsTop = os.environ['CELLS_TOP']
     else:
         cellsTop = '../../../cells'
-    import symbolic.cmos45
+    import coriolis.technos.symbolic.cmos45
 else:
-    import symbolic.cmos
+    import coriolis.technos.symbolic.cmos
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False

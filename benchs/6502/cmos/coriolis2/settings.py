@@ -1,7 +1,7 @@
 # -*- Mode:Python -*-
 
 from   coriolis import Cfg, Viewer
-import symbolic.cmos
+import coriolis.technos.symbolic.cmos
 from   coriolis.helpers import overlay, l, u, n
 
 

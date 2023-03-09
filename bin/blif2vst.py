@@ -5,17 +5,15 @@ import traceback
 import os.path
 import optparse
 try:
-    import helpers
-    from   helpers    import showPythonTrace
-    from   helpers.io import ErrorMessage, catch
+    from   coriolis            import helpers
+    from   coriolis.helpers.io import showPythonTrace, ErrorMessage, catch
     helpers.loadUserSettings()
-    import Cfg
-    import Hurricane
-    from   Hurricane  import DbU, UpdateSession, Breakpoint, Transformation, \
-                             Cell, Instance
-    import Viewer
-    import CRL
-    import plugins.rsave
+    from   coriolis            import Cfg
+    from   coriolis            import Hurricane
+    from   coriolis.Hurricane  import DbU, UpdateSession, Breakpoint, Transformation, \
+                                      Cell, Instance
+    from   coriolis            import Viewer, CRL
+    from   coriolis.plugins    import rsave
 except Exception as e:
     catch( e )
     sys.exit(2)
@@ -79,6 +77,6 @@ if __name__ == '__main__':
     kw['views'] = views
     kw['cell' ] = cell
   
-    plugins.rsave.scriptMain( **kw )
+    rsave.scriptMain( **kw )
   
     sys.exit( 0 )
