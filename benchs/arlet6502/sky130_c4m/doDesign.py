@@ -105,6 +105,15 @@ def scriptMain ( **kw ):
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 150*m2pitch,       0 ,  1)
                          ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        conf.cfg.misc.catchCore              = False
+        conf.cfg.misc.minTraceLevel          = 12300
+        conf.cfg.misc.maxTraceLevel          = 12400
+        conf.cfg.misc.info                   = False
+        conf.cfg.misc.paranoid               = False
+        conf.cfg.misc.bug                    = False
+        conf.cfg.misc.logMode                = True
+        conf.cfg.misc.verboseLevel1          = True
+        conf.cfg.misc.verboseLevel2          = True
        #conf.cfg.etesian.bloat               = 'Flexlib'
         conf.cfg.etesian.uniformDensity      = True
         conf.cfg.etesian.aspectRatio         = 1.0
