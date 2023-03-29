@@ -29,14 +29,17 @@ else:
     cellsTop = '../../../cells'
 
 #import node180.scn6m_deep_09
-#import NDA.node350.c35b4
+import NDA.node350.c35b4
+
 #from   node130.sky130 import techno, StdCellLib #, LibreSOCIO
 #techno.setup()
 #StdCellLib.setup()
 #LibreSOCIO.setup()
-from coriolis.designflow.technos import setupSky130_c4m
-setupSky130_c4m( checkToolkit='../../..'
-               , pdkMasterTop='../../../pdkmaster/C4M.Sky130' )
+
+#from   coriolis.designflow.technos import setupSky130_c4m
+#setupSky130_c4m( '../../..', '../../../pdkmaster/C4M.Sky130' )
+
+
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False

@@ -35,8 +35,8 @@ else:
 #StdCellLib.setup()
 #LibreSOCIO.setup()
 from coriolis.designflow.technos import setupSky130_c4m
-setupSky130_c4m( checkToolkit='../../..'
-               , pdkMasterTop='../../../pdkmaster/C4M.Sky130' )
+setupSky130_c4m( checkToolkit='../../../..'
+               , pdkMasterTop='../../../../pdkmaster/C4M.Sky130' )
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False
