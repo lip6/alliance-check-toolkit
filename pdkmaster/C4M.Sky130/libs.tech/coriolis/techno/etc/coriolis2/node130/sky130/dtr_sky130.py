@@ -46,12 +46,12 @@ Metal 5                MM5      m5          metal5
 
 """
 
-from   Hurricane            import DbU
-from   helpers              import truncPath
-from   helpers.io           import vprint
-from   helpers.analogtechno import Length, Unit, Area, Asymmetric, loadAnalogTechno, \
-                                   addDevice
-from   oroshi               import dtr
+from coriolis.Hurricane            import DbU
+from coriolis.helpers              import truncPath
+from coriolis.helpers.io           import vprint
+from coriolis.helpers.analogtechno import Length, Unit, Area, Asymmetric, loadAnalogTechno, \
+                                          addDevice
+from coriolis.oroshi               import dtr
 
 
 __all__ = [ 'loadDtr', 'loadDevices' ]
@@ -237,112 +237,112 @@ def loadDevices ():
     addDevice( name       = 'DifferentialPairBulkConnected'
             #, spice      = spiceDir+'DiffPairBulkConnected.spi'
              , connectors = ( 'D1', 'D2', 'G1', 'G2', 'S' )
-             , layouts    = ( ('Horizontal M2'  , 'DP_horizontalM2.py'    )   
-                            , ('Symmetrical'    , 'DP_symmetrical.py'     )   
-                            , ('Common centroid', 'DP_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'DP_interdigitated.py'  )
-                            , ('WIP DP'         , 'wip_dp.py'             )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.DP_horizontalM2.py'    )   
+                            , ('Symmetrical'    , 'coriolis.oroshi.DP_symmetrical.py'     )   
+                            , ('Common centroid', 'coriolis.oroshi.DP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.DP_interdigitated.py'  )
+                            , ('WIP DP'         , 'coriolis.oroshi.wip_dp.py'             )
                             )
              )
     addDevice( name       = 'DifferentialPairBulkUnconnected'
             #, spice      = spiceDir+'DiffPairBulkUnconnected.spi'
              , connectors = ( 'D1', 'D2', 'G1', 'G2', 'S', 'B' )
-             , layouts    = ( ('Horizontal M2'  , 'DP_horizontalM2.py'    )   
-                            , ('Symmetrical'    , 'DP_symmetrical.py'     )   
-                            , ('Common centroid', 'DP_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'DP_interdigitated.py'  )
-                            , ('WIP DP'         , 'wip_dp.py'             )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.DP_horizontalM2.py'    )   
+                            , ('Symmetrical'    , 'coriolis.oroshi.DP_symmetrical.py'     )   
+                            , ('Common centroid', 'coriolis.oroshi.DP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.DP_interdigitated.py'  )
+                            , ('WIP DP'         , 'coriolis.oroshi.wip_dp.py'             )
                             )
              )
     addDevice( name       = 'LevelShifterBulkUnconnected'
             #, spice      = spiceDir+'LevelShifterBulkUnconnected.spi'
              , connectors = ( 'D1', 'D2', 'S1', 'S2', 'B' )
-             , layouts    = ( ('Horizontal M2'  , 'LS_horizontalM2.py'    )   
-                            , ('Symmetrical'    , 'LS_symmetrical.py'     )   
-                            , ('Common centroid', 'LS_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'LS_interdigitated.py'  )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.LS_horizontalM2.py'    )   
+                            , ('Symmetrical'    , 'coriolis.oroshi.LS_symmetrical.py'     )   
+                            , ('Common centroid', 'coriolis.oroshi.LS_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.LS_interdigitated.py'  )
                             )
              )
     addDevice( name       = 'TransistorBulkConnected'
             #, spice      = spiceDir+'TransistorBulkConnected.spi'
              , connectors = ( 'D', 'G', 'S' )
-             , layouts    = ( ('Rotate transistor', 'Transistor_rotate.py')
-                            , ('Common transistor', 'Transistor_common.py')
-                            , ('WIP Transistor'   , 'wip_transistor.py'   )   
+             , layouts    = ( ('Rotate transistor', 'coriolis.oroshi.Transistor_rotate.py')
+                            , ('Common transistor', 'coriolis.oroshi.Transistor_common.py')
+                            , ('WIP Transistor'   , 'coriolis.oroshi.wip_transistor.py'   )   
                             )
              )
     addDevice( name       = 'TransistorBulkUnconnected'
             #, spice      = spiceDir+'TransistorBulkUnconnected.spi'
              , connectors = ( 'D', 'G', 'S', 'B' )
-             , layouts    = ( ('Rotate transistor', 'Transistor_rotate.py')
-                            , ('Common transistor', 'Transistor_common.py')
-                            , ('WIP Transistor'   , 'wip_transistor.py'   )
+             , layouts    = ( ('Rotate transistor', 'coriolis.oroshi.Transistor_rotate.py')
+                            , ('Common transistor', 'coriolis.oroshi.Transistor_common.py')
+                            , ('WIP Transistor'   , 'coriolis.oroshi.wip_transistor.py'   )
                             )
              )
     addDevice( name       = 'CrossCoupledPairBulkConnected'
             #, spice      = spiceDir+'CCPairBulkConnected.spi'
              , connectors = ( 'D1', 'D2', 'S' )
-             , layouts    = ( ('Horizontal M2'  , 'CCP_horizontalM2.py'    )
-                            , ('Symmetrical'    , 'CCP_symmetrical.py'     )
-                            , ('Common centroid', 'CCP_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'CCP_interdigitated.py'  )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.CCP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'coriolis.oroshi.CCP_symmetrical.py'     )
+                            , ('Common centroid', 'coriolis.oroshi.CCP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.CCP_interdigitated.py'  )
                             )
              )
     addDevice( name       = 'CrossCoupledPairBulkUnconnected'
             #, spice      = spiceDir+'CCPairBulkUnconnected.spi'
              , connectors = ( 'D1', 'D2', 'S', 'B' )
-             , layouts    = ( ('Horizontal M2'  , 'CCP_horizontalM2.py'    )
-                            , ('Symmetrical'    , 'CCP_symmetrical.py'     )
-                            , ('Common centroid', 'CCP_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'CCP_interdigitated.py'  )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.CCP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'coriolis.oroshi.CCP_symmetrical.py'     )
+                            , ('Common centroid', 'coriolis.oroshi.CCP_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.CCP_interdigitated.py'  )
                             )
              )
     addDevice( name       = 'CommonSourcePairBulkConnected'
             #, spice      = spiceDir+'CommonSourcePairBulkConnected.spi'
              , connectors = ( 'D1', 'D2', 'S', 'G' )
-             , layouts    = ( ('Horizontal M2'  , 'CSP_horizontalM2.py'    )
-                            , ('Symmetrical'    , 'CSP_symmetrical.py'     )
-                            , ('Interdigitated' , 'CSP_interdigitated.py'  )
-                            , ('WIP CSP'        , 'wip_csp.py'             )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.CSP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'coriolis.oroshi.CSP_symmetrical.py'     )
+                            , ('Interdigitated' , 'coriolis.oroshi.CSP_interdigitated.py'  )
+                            , ('WIP CSP'        , 'coriolis.oroshi.wip_csp.py'             )
                             )
              )
     addDevice( name       = 'CommonSourcePairBulkUnconnected'
             #, spice      = spiceDir+'CommonSourcePairBulkUnconnected.spi'
              , connectors = ( 'D1', 'D2', 'S', 'G', 'B' )
-             , layouts    = ( ('Horizontal M2'  , 'CSP_horizontalM2.py'    )
-                            , ('Symmetrical'    , 'CSP_symmetrical.py'     )
-                            , ('Interdigitated' , 'CSP_interdigitated.py'  )
-                            , ('WIP CSP'        , 'wip_csp.py'             )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.CSP_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'coriolis.oroshi.CSP_symmetrical.py'     )
+                            , ('Interdigitated' , 'coriolis.oroshi.CSP_interdigitated.py'  )
+                            , ('WIP CSP'        , 'coriolis.oroshi.wip_csp.py'             )
                             )
              )
     addDevice( name       = 'SimpleCurrentMirrorBulkConnected'
             #, spice      = spiceDir+'CurrMirBulkConnected.spi'
              , connectors = ( 'D1', 'D2', 'S' )
-             , layouts    = ( ('Horizontal M2'  , 'SCM_horizontalM2.py'    )
-                            , ('Symmetrical'    , 'SCM_symmetrical.py'     )
-                            , ('Common centroid', 'SCM_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'SCM_interdigitated.py'  )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.SCM_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'coriolis.oroshi.SCM_symmetrical.py'     )
+                            , ('Common centroid', 'coriolis.oroshi.SCM_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.SCM_interdigitated.py'  )
                             )
              )
     addDevice( name       = 'SimpleCurrentMirrorBulkUnconnected'
             #, spice      = spiceDir+'CurrMirBulkUnconnected.spi'
              , connectors = ( 'D1', 'D2', 'S', 'B' )
-             , layouts    = ( ('Horizontal M2'  , 'SCM_horizontalM2.py'    )
-                            , ('Symmetrical'    , 'SCM_symmetrical.py'     )
-                            , ('Common centroid', 'SCM_2DCommonCentroid.py')
-                            , ('Interdigitated' , 'SCM_interdigitated.py'  )
+             , layouts    = ( ('Horizontal M2'  , 'coriolis.oroshi.SCM_horizontalM2.py'    )
+                            , ('Symmetrical'    , 'coriolis.oroshi.SCM_symmetrical.py'     )
+                            , ('Common centroid', 'coriolis.oroshi.SCM_2DCommonCentroid.py')
+                            , ('Interdigitated' , 'coriolis.oroshi.SCM_interdigitated.py'  )
                             )
              )
     addDevice( name       = 'MultiCapacitor'
             #, spice      = spiceDir+'MIM_OneCapacitor.spi'
              , connectors = ( 'T1', 'B1' )
-             , layouts    = ( ('Matrix', 'capacitormatrix.py' ),
+             , layouts    = ( ('Matrix', 'coriolis.oroshi.capacitormatrix.py' ),
                             )
              )
     addDevice( name       = 'Resistor'
             #, spice      = spiceDir+'MIM_OneCapacitor.spi'
              , connectors = ( 'PIN1', 'PIN2' )
-             , layouts    = ( ('Snake', 'resistorsnake.py' ),
+             , layouts    = ( ('Snake', 'coriolis.oroshi.resistorsnake.py' ),
                             )
              )
 

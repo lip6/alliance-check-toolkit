@@ -1,11 +1,9 @@
 # -*- Mode:Python -*-
 
 import os
-import Cfg
-import Viewer
-import CRL
-import symbolic.cmos45
-from   helpers       import overlay, l, u, n
+from   coriolis import Cfg, Viewer, CRL
+import coriolis.technos.symbolic.cmos45
+from   coriolis.helpers import overlay, l, u, n
 
 
 #cellsTop = os.path.abspath( os.getcwd()+'/../cells' )

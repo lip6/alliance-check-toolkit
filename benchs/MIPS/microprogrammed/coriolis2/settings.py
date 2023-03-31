@@ -1,11 +1,9 @@
 # -*- Mode:Python -*-
 
-import Cfg
-import Viewer
-import CRL
-import symbolic.cmos
-from   helpers       import l, u, n
-from   helpers       import overlay
+from   coriolis import Cfg, Viewer, CRL
+import coriolis.technos.symbolic.cmos
+from   coriolis.helpers import l, u, n
+from   coriolis.helpers import overlay
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     # Common settings for all runs.

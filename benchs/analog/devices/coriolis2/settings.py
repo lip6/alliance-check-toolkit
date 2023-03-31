@@ -3,11 +3,8 @@
 import os
 import os
 import socket
-import Cfg
-import Viewer
-import CRL
-import helpers
-from   helpers import overlay, l, u, n
+from   coriolis         import Cfg, Viewer, CRL
+from   coriolis.helpers import setNdaTopDir, overlay, l, u, n
 
 NdaDirectory = None
 if 'NDA_TOP' in os.environ:
@@ -23,7 +20,7 @@ if not NdaDirectory:
             print( '[ERROR] You forgot to mount the NDA encrypted directory, stupid!' )
     else:
         NdaDirectory = '/users/soft/techno/techno'
-helpers.setNdaTopDir( NdaDirectory )
+setNdaTopDir( NdaDirectory )
 
 #cellsTop = os.path.abspath( os.getcwd()+'/../cells' )
 if 'CELLS_TOP' in os.environ:
@@ -33,12 +30,13 @@ else:
 
 #import node180.scn6m_deep_09
 #import NDA.node350.c35b4
-from   node130.sky130 import techno, StdCellLib #, LibreSOCIO
-
-techno.setup()
-StdCellLib.setup()
+#from   node130.sky130 import techno, StdCellLib #, LibreSOCIO
+#techno.setup()
+#StdCellLib.setup()
 #LibreSOCIO.setup()
-
+from coriolis.designflow.technos import setupSky130_c4m
+setupSky130_c4m( checkToolkit='../../..'
+               , pdkMasterTop='../../../pdkmaster/C4M.Sky130' )
 
 with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.catchCore           = False

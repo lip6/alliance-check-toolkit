@@ -1,17 +1,16 @@
 
 import sys
 import traceback
-import CRL
-import helpers
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import trace, l, u, n
-import plugins
-from   Hurricane  import DbU, Breakpoint
-from   plugins.alpha.block.block         import Block
-from   plugins.alpha.block.configuration import IoPin, GaugeConf
-from   plugins.alpha.core2chip.niolib    import CoreToChip
-from   plugins.alpha.chip.configuration  import ChipConf
-from   plugins.alpha.chip.chip           import Chip
+from   coriolis            import CRL
+from   coriolis.Hurricane  import DbU, Breakpoint
+from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
+from   coriolis.helpers    import setTraceLevel, trace, l, u, n
+from   coriolis            import plugins
+from   coriolis.plugins.block.block         import Block
+from   coriolis.plugins.block.configuration import IoPin, GaugeConf
+from   coriolis.plugins.core2chip.niolib    import CoreToChip
+from   coriolis.plugins.chip.configuration  import ChipConf
+from   coriolis.plugins.chip.chip           import Chip
 
 
 af = CRL.AllianceFramework.get()
@@ -22,7 +21,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-        #helpers.setTraceLevel( 550 )
+        #setTraceLevel( 550 )
         #Breakpoint.setStopLevel( 100 )
         buildChip       = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -79,7 +78,7 @@ def scriptMain ( **kw ):
         rvalue = chipBuilder.doPnR()
         chipBuilder.save()
     except Exception as e:
-        helpers.io.catch( e )
+        catch( e )
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()

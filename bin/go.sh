@@ -55,11 +55,11 @@
    benchs="${benchs} arlet6502/freepdk45_c4m"
    benchs="${benchs} ao68000/freepdk45_c4m"
  fi
- if [ -e "../pdkmaster/C4M.Sky130" ]; then
-   benchs="${benchs} arlet6502/sky130_c4m"
-   benchs="${benchs} ao68000/sky130_c4m"
-   benchs="${benchs} RISC-V/Minerva/sky130_c4m"
- fi
+#if [ -e "../pdkmaster/C4M.Sky130" ]; then
+#  benchs="${benchs} arlet6502/sky130_c4m"
+#  benchs="${benchs} ao68000/sky130_c4m"
+#  benchs="${benchs} RISC-V/Minerva/sky130_c4m"
+#fi
 
  mode="stopOnFailure"
 #mode="ignoreFailure"

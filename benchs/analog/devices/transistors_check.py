@@ -1,19 +1,14 @@
 #!/usr/bin/python
 
 import sys
-import Cfg
-from   Hurricane import *
-import CRL
-from   Analog import Transistor
-from   Analog import CommonDrain
-from   Analog import CommonGatePair
-from   Analog import CommonSourcePair
-from   Analog import CrossCoupledPair
-from   Analog import DifferentialPair
-from   Analog import LevelShifter
-from   Analog import SimpleCurrentMirror
-from   Analog import LayoutGenerator
-import helpers
+from   coriolis           import Cfg
+from   coriolis.Hurricane import *
+from   coriolis           import CRL
+from   coriolis.Analog    import Transistor, CommonDrain, CommonGatePair, \
+                                 CommonSourcePair, CrossCoupledPair,      \
+                                 DifferentialPair, LevelShifter,          \
+                                 SimpleCurrentMirror, LayoutGenerator
+from   coriolis. helpers  import technoDir
 
 
 def toDbU ( value ): return DbU.fromPhysical( value, DbU.UnitPowerMicro )
@@ -62,7 +57,7 @@ def analogDemo ( editor ):
       xspacingl = DbU.fromLambda(50.0)
     else:
       print( '[WARNING] Cannot guess technology from:' )
-      print( '          \"%s\"' % helpers.technoDir )
+      print( '          \"%s\"' % technoDir )
 
     UpdateSession.open()
     cell = CRL.AllianceFramework.get().createCell( 'devices_check' )
@@ -109,8 +104,8 @@ def analogDemo ( editor ):
 
       print( '       Done %s' % devices[i][0] )
 
-   #inv_x1 = CRL.AllianceFramework.get().getCell( 'inv_x1', CRL.Catalog.State.Views )
-    inv_x1 = CRL.AllianceFramework.get().getLibrary('nsxlib').getCell( 'inv_x8' )
+    inv_x1 = CRL.AllianceFramework.get().getCell( 'inv_x1', CRL.Catalog.State.Views )
+   #inv_x1 = CRL.AllianceFramework.get().getLibrary('nsxlib').getCell( 'inv_x1' )
     if inv_x1:
       inverter = Instance.create( cell
                                 , 'inverter'

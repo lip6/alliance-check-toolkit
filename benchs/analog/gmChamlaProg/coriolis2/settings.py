@@ -2,7 +2,7 @@
 
 import os
 import socket
-import helpers
+from   coriolis import helpers
 
 NdaDirectory = None
 if 'NDA_TOP' in os.environ:
@@ -17,10 +17,9 @@ if not NdaDirectory:
         NdaDirectory = '/users/soft/techno/techno'
 helpers.setNdaTopDir( NdaDirectory )
 
-import Cfg
-import CRL
-from   helpers import overlay, l, u, n
-import node180.scn6m_deep_09
+from   coriolis         import Cfg, CRL
+from   coriolis.helpers import overlay, l, u, n
+import coriolis.technos.node180.scn6m_deep_09
 #import NDA.node350.c35b4
 
 #cellsTop = os.path.abspath( os.getcwd()+'/../cells' )

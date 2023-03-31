@@ -1,10 +1,8 @@
 # -*- Mode:Python -*-
 
-import Cfg
-import Viewer
-import CRL
-import symbolic.cmos
-from   helpers       import l, u, n
+from   coriolis import Cfg, Viewer, CRL
+import coriolis.technos.symbolic.cmos
+from   coriolis.helpers import l, u, n
 
 
 Cfg.Configuration.pushDefaultPriority( Cfg.Parameter.Priority.UserFile )

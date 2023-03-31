@@ -12,8 +12,15 @@
 
  include ./mk/design-flow.mk
 
-blif:   VexRiscv.blif
-layout: vexriscv_cts_r.ap
+vexriscv_r.vst: vexriscv.vst
+	$(call scl_cols,$(call c2env, $(VALGRIND_COMMAND) cgt -tV --script=doDesign))
 
-lvx:    lvx-vst-vexriscv_cts
-druc:   druc-vexriscv_cts_r
+vexriscv_r.ap: vexriscv_r.vst
+	@echo "[INFO] Dummy rule to fool GNU Make (vexriscv_r.ap <- vexriscv_r.vst"
+
+
+blif:   VexRiscv.blif
+layout: vexriscv_r.ap
+
+lvx:    lvx-vst-vexriscv
+druc:   druc-vexriscv_r

@@ -1,17 +1,17 @@
 
-from designflow.technos import setupCMOS
+from coriolis.designflow.technos import setupCMOS
 
 setupCMOS()
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from designflow.cougar   import Cougar
-from designflow.lvx      import Lvx
-from designflow.druc     import Druc
-from designflow.pnr      import PnR
-from designflow.yosys    import Yosys
-from designflow.blif2vst import Blif2Vst
-from designflow.clean    import Clean
+from coriolis.designflow.cougar   import Cougar
+from coriolis.designflow.lvx      import Lvx
+from coriolis.designflow.druc     import Druc
+from coriolis.designflow.pnr      import PnR
+from coriolis.designflow.yosys    import Yosys
+from coriolis.designflow.blif2vst import Blif2Vst
+from coriolis.designflow.clean    import Clean
 PnR.textMode = True
 
 from doDesign  import scriptMain

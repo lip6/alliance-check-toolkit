@@ -1,0 +1,43 @@
+
+.SUBCKT OTACSTND1 ep em sp  evp1 evdd evss
+*infoceane:netpolar evp1
+*infoceane:statmos dids=8.982180e-07 MN1 nd7_1 2_1
+XMN1 nd7_1 ep 2_1 evss nlvt1v8 WF=   3.22000u L=   1.56000u NF=2 MULT=1
++ sa= 0.500000u sb= 0.500000u sd= 0.800000u aeq= 0.851190u
++ sca=7.564297e-03 scb=1.166856e-44 scc=2.159652e-88 sc=10.000000u 
++ ad=    0.634p as=    0.950p pd=    6.736u ps=   10.104u
++ nrs=  0.000 nrd=  0.000 ngcon=1 
++ tempsimu= 27.000 xpart=  0.000 disper_glob_mos=22 disper_loc_mos=0 
+*infoceane:statmos dids=8.981713e-07 MN2 sp 2_1
+XMN2 sp em 2_1 evss nlvt1v8 WF=   3.22000u L=   1.56000u NF=2 MULT=1
++ sa= 0.500000u sb= 0.500000u sd= 0.800000u aeq= 0.851190u
++ sca=7.564297e-03 scb=1.166856e-44 scc=2.159652e-88 sc=10.000000u 
++ ad=    0.634p as=    0.950p pd=    6.736u ps=   10.104u
++ nrs=  0.000 nrd=  0.000 ngcon=1 
++ tempsimu= 27.000 xpart=  0.000 disper_glob_mos=22 disper_loc_mos=0 
+*infoceane:statmos dids=1.129889e-06 MN5 2_1 evss
+XMN5 2_1 evp1 evss evss nlvt1v8 WF=   3.78000u L=   1.56000u NF=2 MULT=2
++ sa= 0.500000u sb= 0.500000u sd= 0.800000u aeq= 0.851190u
++ sca=0.000000e+00 scb=0.000000e+00 scc=0.000000e+00 sc=-1000000.000000u 
++ ad=    0.746p as=    1.118p pd=    7.856u ps=   11.784u
++ nrs=  0.000 nrd=  0.000 ngcon=1 
++ tempsimu= 27.000 xpart=  0.000 disper_glob_mos=22 disper_loc_mos=0 
+*infoceane:statmos dids=9.952155e-07 MP3 nd7_1 evdd
+XMP3 nd7_1 nd7_1 evdd evdd plvt1v8 WF=   1.89000u L=   1.56000u NF=2 MULT=2
++ sa= 0.500000u sb= 0.500000u sd= 0.800000u aeq= 0.851190u
++ sca=1.166537e+00 scb=8.485924e-06 scc=1.838743e-10 sc= 0.940000u 
++ ad=    0.378p as=    0.567p pd=    4.180u ps=    6.270u
++ nrs=  0.000 nrd=  0.000 ngcon=1 
++ tempsimu= 27.000 xpart=  0.000 disper_glob_mos=22 disper_loc_mos=0 
+XD_MP3 evss evdd dwell_sub1v8 AREA=   20.695p PJ=   18.420u  
++ disper_glob_diode=22 disper_loc_diode=0 
+*infoceane:statmos dids=9.943103e-07 MP4 sp evdd
+XMP4 sp nd7_1 evdd evdd plvt1v8 WF=   1.89000u L=   1.56000u NF=2 MULT=2
++ sa= 0.500000u sb= 0.500000u sd= 0.800000u aeq= 0.851190u
++ sca=1.166537e+00 scb=8.485924e-06 scc=1.838743e-10 sc= 0.940000u 
++ ad=    0.378p as=    0.567p pd=    4.180u ps=    6.270u
++ nrs=  0.000 nrd=  0.000 ngcon=1 
++ tempsimu= 27.000 xpart=  0.000 disper_glob_mos=22 disper_loc_mos=0 
+XD_MP4 evss evdd dwell_sub1v8 AREA=   20.695p PJ=   18.420u  
++ disper_glob_diode=22 disper_loc_diode=0 
+.ENDS OTACSTND1

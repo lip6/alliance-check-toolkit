@@ -1,4 +1,4 @@
-from Hurricane import DebugSession
+from coriolis.Hurricane import DebugSession
 
 #DebugSession.addToTrace( bora.getCell().getNet( 'Vout+' ) )
 #DebugSession.addToTrace( bora.getCell().getNet( 'vb5' ) )

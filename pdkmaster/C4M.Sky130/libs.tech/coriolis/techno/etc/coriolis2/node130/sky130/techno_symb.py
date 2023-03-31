@@ -1,7 +1,7 @@
 
-from helpers   import l, u, n
-from Hurricane import DataBase, Technology, Layer, BasicLayer, DiffusionLayer, \
-                      TransistorLayer, RegularLayer, ContactLayer, ViaLayer
+from coriolis.helpers   import l, u, n
+from coriolis.Hurricane import DataBase, Technology, Layer, BasicLayer, DiffusionLayer, \
+                               TransistorLayer, RegularLayer, ContactLayer, ViaLayer
 
 __all__ = [ 'setupSymbolic' ]
 

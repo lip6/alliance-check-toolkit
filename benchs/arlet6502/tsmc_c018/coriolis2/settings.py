@@ -2,7 +2,7 @@
 
 import os
 import socket
-import helpers
+from   coriolis import helpers
 
 NdaDirectory = None
 if 'NDA_TOP' in os.environ:
@@ -17,9 +17,9 @@ if not NdaDirectory:
         NdaDirectory = '/users/soft/techno/techno'
 helpers.setNdaTopDir( NdaDirectory )
 
-import Cfg
-from   CRL     import AllianceFramework
-from   helpers import overlay, l, u, n
+from   coriolis              import Cfg
+from   coriolis.CRL          import AllianceFramework
+from   coriolis.helpers      import overlay, l, u, n
 from   NDA.node180.tsmc_c018 import techno, FlexLib, LibreSOCIO, LibreSOCMem #, pll
 
 techno.setup()

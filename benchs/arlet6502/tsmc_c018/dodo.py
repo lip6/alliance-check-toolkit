@@ -1,15 +1,15 @@
 
-from designflow.technos import setupTSMC_c180_c4m
+from coriolis.designflow.technos import setupTSMC_c180_c4m
 
 setupTSMC_c180_c4m( checkToolkit='../../..', ndaTop=None )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from designflow.pnr      import PnR
-from designflow.yosys    import Yosys
-from designflow.blif2vst import Blif2Vst
-from designflow.alias    import Alias
-from designflow.clean    import Clean
+from coriolis.designflow.pnr      import PnR
+from coriolis.designflow.yosys    import Yosys
+from coriolis.designflow.blif2vst import Blif2Vst
+from coriolis.designflow.alias    import Alias
+from coriolis.designflow.clean    import Clean
 PnR.textMode  = True
 
 from doDesign  import scriptMain

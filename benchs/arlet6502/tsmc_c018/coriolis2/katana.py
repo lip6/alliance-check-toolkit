@@ -1,5 +1,5 @@
 
-from Hurricane import DebugSession
+from coriolis.Hurricane import DebugSession
 
 #DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abc_10753_n1000' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'subckt_0_cpu.abh(1)' ) )

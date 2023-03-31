@@ -1,19 +1,18 @@
 
 import sys
 import traceback
-import CRL
-import helpers
-helpers.loadUserSettings()
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import trace, l, u, n
-import plugins
-from   Hurricane  import DbU, Breakpoint
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-from   plugins.alpha.core2chip.libresocio import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
+from   coriolis            import CRL
+from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
+loadUserSettings()
+from   coriolis            import plugins
+from   coriolis.Hurricane  import DbU, Breakpoint
+from   coriolis.plugins.block.block          import Block
+from   coriolis.plugins.block.configuration  import IoPin, GaugeConf
+from   coriolis.plugins.block.spares         import Spares
+from   coriolis.plugins.core2chip.libresocio import CoreToChip
+from   coriolis.plugins.chip.configuration   import ChipConf
+from   coriolis.plugins.chip.chip            import Chip
 
 
 af = CRL.AllianceFramework.get()
@@ -24,7 +23,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 540 )
+       #setTraceLevel( 540 )
        #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
@@ -163,7 +162,7 @@ def scriptMain ( **kw ):
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
     except Exception as e:
-        helpers.io.catch( e )
+        catch( e )
         rvalue = False
     return rvalue
 

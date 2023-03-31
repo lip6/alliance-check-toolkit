@@ -1,16 +1,14 @@
 #!/usr/bin/python
 
 import sys
-import Cfg
+from   coriolis           import Cfg
 #import node180.scn6m_deep_09
 import NDA.node350.c35b4
-from   Hurricane import *
-import CRL
-import helpers
-from   Analog import ResistorFamily
-from   Analog import Resistor
-from   Analog import LayoutGenerator
-from   Bora   import StepParameterRange
+from   coriolis.Hurricane import *
+from   coriolis           import CRL
+from   coriolis.helpers   import setTraceLevel
+from   coriolis.Analog    import ResistorFamily, Resistor, LayoutGenerator
+from   coriolis.Bora      import StepParameterRange
 
 
 def toDbU ( value ): return DbU.fromPhysical( value, DbU.UnitPowerMicro )
@@ -57,7 +55,7 @@ def checkResistors ( editor ):
 
 
 def scriptMain ( **kw ):
-    helpers.setTraceLevel( 100 )
+    setTraceLevel( 100 )
     editor = None
     if 'editor' in kw and kw['editor']:
       editor = kw['editor']
