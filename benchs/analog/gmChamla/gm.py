@@ -84,6 +84,39 @@ twoCapa_2x2 = [ [ 1, 1 ]
               , [ 0, 1 ]
               ]
 
+class GMD ( object ):
+
+    def __init__ ( self ):
+        pass
+
+    def buildDevAndNets ( self, design ):
+        design.devicesSpecs += \
+          [ [ DifferentialPair   , 'm1ap_an' , 'WIP DP'        , NMOS,  3.445  , 3.00, 4,    2,  1, True , 0xf, True  ]
+          , [ Transistor         , 'm2p'     , 'WIP Transistor', NMOS, 50.44   , 1.00, 4, None,  0, True , 0x1, False ]
+          , [ Transistor         , 'm2n'     , 'WIP Transistor', NMOS, 50.44   , 1.00, 4, None,  0, True , 0x1, False ]
+          , [ CommonSourcePair   , 'm9ap_an' , 'WIP CSP'       , PMOS,145.46   , 1.00, 4,    2,  1, True , 0xf, True  ]
+          ]
+        design.netTypes[ 'vin+'  ] = { 'isExternal':True }
+        design.netTypes[ 'vin-'  ] = { 'isExternal':True }
+        if 'vin+' not in design.netSpecs: design.netSpecs[ 'vin+' ] = []
+        if 'vin-' not in design.netSpecs: design.netSpecs[ 'vin-' ] = []
+        design.netSpecs[ 'vin+'  ] += [ ('m1ap_an' , 'G1') ]
+        design.netSpecs[ 'vin-'  ] += [ ('m1ap_an' , 'G2') ]
+        print( design.netSpecs[ 'vout+' ] )
+        design.netSpecs[ 'vout+' ] += [ ('m2n'     , 'D' ), ('m9ap_an', 'D2') ]
+        print( design.netSpecs[ 'vout+' ] )
+        design.netSpecs[ 'vout-' ] += [ ('m2p'     , 'D' ), ('m9ap_an', 'D1') ]
+        design.netSpecs[ 'alim'  ] += [ ('m9ap_an' , 'S' ) ]
+        design.netSpecs[ 'vss'   ] += [ ('m2n'     , 'B' ), ('m1ap_an', 'S'), ('m2p', 'B') ]
+
+    def buildSlicingTree ( self, design ):
+        design.addDevice( 'm1ap_an' , Center, StepParameterRange(2, 2, 2) )
+        design.pushVNode( Center )
+        design.addDevice( 'm2p'     , Center, StepParameterRange(4, 2, 2) )
+        design.addDevice( 'm2n'     , Center, StepParameterRange(4, 2, 2) )
+        design.popNode()
+        design.addDevice( 'm9ap_an' , Center, StepParameterRange(4, 2, 2) )
+        
 
 class GmChamla ( AnalogDesign ):
 
@@ -114,10 +147,6 @@ class GmChamla ( AnalogDesign ):
           , [ DifferentialPair   , 'm11ap'   , 'WIP DP'        , NMOS,  8.57328, 1.00, 4,    2,  1, True , 0xf, False ]
           , [ DifferentialPair   , 'm12ap_an', 'WIP DP'        , NMOS,  2.94359, 1.00, 4,    2,  1, True , 0xf, True  ]
           , [ Transistor         , 'm13'     , 'WIP Transistor', PMOS,  9.95588, 1.00, 4, None,  0, True , 0xf, True  ]
-          , [ DifferentialPair   , 'm1ap_an' , 'WIP DP'        , NMOS,  3.445  , 3.00, 4,    2,  1, True , 0xf, True  ]
-          , [ Transistor         , 'm2p'     , 'WIP Transistor', NMOS, 50.44   , 1.00, 4, None,  0, True , 0x1, False ]
-          , [ Transistor         , 'm2n'     , 'WIP Transistor', NMOS, 50.44   , 1.00, 4, None,  0, True , 0x1, False ]
-          , [ CommonSourcePair   , 'm9ap_an' , 'WIP CSP'       , PMOS,145.46   , 1.00, 4,    2,  1, True , 0xf, True  ]
           , [ Transistor         , 'm10an'   , 'WIP Transistor', NMOS, 21.44   , 3.00, 4, None,  0, True , 0xf, True  ]
           , [ DifferentialPair   , 'm3an_bn' , 'WIP DP'        , NMOS, 10.56   , 3.00, 4,    2,  1, True , 0xf, True  ]
           , [ Transistor         , 'm4an'    , 'WIP Transistor', PMOS, 39.76   , 3.00, 4, None,  0, True , 0xf, True  ]
@@ -155,10 +184,8 @@ class GmChamla ( AnalogDesign ):
           }
 
         self.netSpecs = \
-          { 'vin+'   : [ ('m1ap_an' , 'G1') ]
-          , 'vin-'   : [ ('m1ap_an' , 'G2'), ]
-          , 'vout+'  : [ ('m2n'     , 'D' ), ('m9ap_an', 'D2'), ('m11ap'  , 'G1') ]
-          , 'vout-'  : [ ('m2p'     , 'D' ), ('m9ap_an', 'D1'), ('m11an'  , 'G2') ]
+          { 'vout+'  : [ ('m11ap'  , 'G1') ]
+          , 'vout-'  : [ ('m11an'  , 'G2') ]
          #, 'vout+'  : [ ('m2n'     , 'D' ), ('m9ap_an', 'D2'), ('m11ap'  , 'G1'), ('inv_x84', 'i+') ]
          #, 'vout-'  : [ ('m2p'     , 'D' ), ('m9ap_an', 'D1'), ('m11an'  , 'G2'), ('inv_x84', 'i-') ]
          # CMC.
@@ -202,13 +229,16 @@ class GmChamla ( AnalogDesign ):
           , 'vb12an' : [ ('m12ap_an', 'G2'), ]
           , 'vb12ap' : [ ('m12ap_an', 'G1'), ]
           , 'vb13'   : [ ('m13'     , 'G' ), ]
-          , 'alim'   : [ ('m9ap_an' , 'S' ), ('m11an'    , 'D2'), ('m11ap'    , 'D1'), ('m13'      , 'S' )
+          , 'alim'   : [ ('m11an'   , 'D2'), ('m11ap'    , 'D1'), ('m13'      , 'S' )
                        , ('m5an'    , 'S' ), ('m5bn'     , 'S' ), ('m6an_bn'  , 'S' ), ('m5ap'     , 'S' )
                        , ('m5bp'    , 'S' ), ('m6ap_bp'  , 'S' ) ]
-          , 'vss'    : [ ('m1ap_an' , 'S' ), ('m2p'      , 'B' ), ('m2n'      , 'B' ), ('m11an'    , 'B' )
+          , 'vss'    : [ ('m11an'   , 'B' )
                        , ('m11ap'   , 'B' ), ('m12ap_an' , 'S' ), ('m10an'    , 'S' ), ('m4an'     , 'D' )
                        , ('m4bn'    , 'D' ), ('m10ap'    , 'S' ), ('m4ap'     , 'D' ), ('m4bp'     , 'D' ) ]
           }
+
+        gmd = GMD()
+        gmd.buildDevAndNets( self )
 
         self.beginCell( 'gm' )
         self.doDevices()
@@ -270,12 +300,7 @@ class GmChamla ( AnalogDesign ):
         
        # GMD.
         self.pushHNode( Center )
-        self.addDevice( 'm1ap_an' , Center, StepParameterRange(2, 2, 2) )
-        self.pushVNode( Center )
-        self.addDevice( 'm2p'     , Center, StepParameterRange(4, 2, 2) )
-        self.addDevice( 'm2n'     , Center, StepParameterRange(4, 2, 2) )
-        self.popNode()
-        self.addDevice( 'm9ap_an' , Center, StepParameterRange(4, 2, 2) )
+        gmd.buildSlicingTree( self )
         
        # CMC.
         self.addDevice( 'm12ap_an', Center, StepParameterRange(2, 2, 2) )
