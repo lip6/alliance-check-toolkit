@@ -1,0 +1,781 @@
+# 20230301
+# ---------------------------------------------------------------------------
+# For SkyWater130
+# ---------------------------------------------------------------------------
+
+
+# -------------------------------------------------------------------
+# globals define
+# -------------------------------------------------------------------
+
+define physical_grid      0.005
+define lambda             0.140
+
+table cif_layer
+# -------------------------------------------------------------------
+# rds_name     cif_name
+# -------------------------------------------------------------------
+  rds_nwell    nwel
+  rds_pwell    pwel
+  rds_activ    active
+  rds_ntie     nplus
+  rds_ptie     pplus
+  rds_nimp     nplus
+  rds_pimp     pplus
+  rds_poly     poly
+  rds_alu1     metal1
+  rds_alu2     metal2
+  rds_alu3     metal3
+  rds_alu4     metal4
+  rds_alu5     metal5
+  rds_alu6     metal6
+  rds_cont     contact
+  rds_via1     via1
+  rds_via2     via2
+  rds_via3     via3
+  rds_via4     via4
+  rds_via5     via5
+  rds_cpas     pad
+end
+
+table gds_layer
+# -------------------------------------------------------------------
+# rds_name     gds_number
+# -------------------------------------------------------------------
+  rds_nwell    3
+# rds_pwell    8
+  rds_activ    6
+  rds_ptie     25
+  rds_ntie     26
+  rds_pimp     25
+  rds_nimp     26
+  rds_poly     17     149 
+  rds_alu1     31     131 
+  rds_alu2     32     132 
+  rds_alu3     33     133 
+  rds_alu4     34     134 
+  rds_alu5     35     135 
+  rds_alu6     36     136 
+  rds_cont     30
+  rds_via1     51
+  rds_via2     52
+  rds_via3     53
+  rds_via4     54
+  rds_via5     55
+  rds_cpas     43
+end
+
+table lynx_resistor
+# -------------------------------------------------------------------
+# rds_name square_resistor(ohm/square) # typical values
+# -------------------------------------------------------------------
+  rds_poly    10
+  rds_alu1    0.06
+  rds_alu2    0.06
+  rds_alu3    0.06
+  rds_alu4    0.06
+  rds_alu5    0.06
+  rds_alu6    0.03
+  rds_cont    15
+  rds_via1    1
+  rds_via2    1
+  rds_via3    1
+  rds_via4    1
+  rds_via5    1
+end
+
+table lynx_capa
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+  rds_poly  11.1e-5   9.5e-5  # Ca max POLY_NWELL 2Cf0 max POLY_NWELL
+  rds_alu1   2.6e-5   8.5e-5  # Ca max M1_NWELL   2Cf0 max M1_NWELL
+  rds_alu2   1.6e-5   7.9e-5  # Ca max M2_NWELL   2Cf0 max M2_NWELL
+  rds_alu3   8.0e-6   6.8e-5  # Ca max M3_NWELL   2Cf0 max M3_NWELL
+  rds_alu4   6.0e-6   6.0e-5  # Ca max M4_NWELL   2Cf0 max M4_NWELL
+  rds_alu5   6.0e-6   6.0e-5  # hyp
+  rds_alu6   6.0e-6   6.0e-5
+end
+
+table lynx_capa_poly
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+ 
+table lynx_capa_poly2
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+ 
+table lynx_capa_alu1
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+ 
+table lynx_capa_alu2
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+ 
+table lynx_capa_alu3
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+ 
+table lynx_capa_alu4
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+ 
+table lynx_capa_alu5
+# -------------------------------------------------------------------
+# rds_name area_capa(pif/um^2) peri_capa(pif/um)
+# -------------------------------------------------------------------
+end
+table mbk_to_rds_segment
+# ----------------------------------------------------------------------------------
+# mbk_name     rds_name1 dlr dwr offset mode     rds_name2 dlr dwr offset mode
+# ----------------------------------------------------------------------------------
+
+  nwell   rds_nwell  vw    0.180    0.360  .0  all
+  pwell   rds_pwell  vw    0.180    0.360  .0  all
+
+  ndif    rds_activ  vw    0.070    0.000  .0  drc\
+          rds_nimp   vw    0.195    0.250  .0  drc\
+          rds_pwell  vw    0.250    0.360  .0  ext\
+          rds_ndif   vw    0.070    0.000  .0  ext
+
+  pdif    rds_activ  vw    0.070    0.000  .0  drc\
+          rds_pimp   vw    0.195    0.250  .0  drc\
+          rds_nwell  vw    0.250    0.360  .0  ext\
+          rds_pdif   vw    0.070    0.000  .0  ext
+
+  ntie    rds_activ  vw    0.005   -0.000  .0  drc\
+          rds_ntie   vw    0.130    0.250  .0  drc\
+          rds_nwell  vw    0.185    0.360  .0  ext\
+          rds_ntie   vw    0.005   -0.000  .0  ext
+
+  ptie    rds_activ  vw    0.005   -0.000  .0  drc\
+          rds_ptie   vw    0.130    0.250  .0  drc\
+          rds_pwell  vw    0.185    0.360  .0  ext\
+          rds_ptie   vw    0.005   -0.000  .0  ext
+
+  ntrans  rds_poly   vw   -0.080    0.010  .0  all\
+          rds_nimp   vw   -0.210    0.010  .0  drc\
+          rds_activ  vw   -0.210    0.510  .0  drc\
+          rds_nimp   vw   -0.085    0.760  .0  drc\
+          rds_pwell  vw   -0.030    0.870  .0  ext\
+          rds_ndif   lcw  -0.210    0.255    0.005 ext\
+          rds_ndif   rcw  -0.210    0.255    0.005 ext
+
+  ptrans  rds_poly   vw   -0.080    0.010  .0  all\
+          rds_pimp   vw   -0.210    0.010  .0  drc\
+          rds_activ  vw   -0.210    0.510  .0  drc\
+          rds_pimp   vw   -0.085    0.760  .0  drc\
+          rds_nwell  vw   -0.030    0.870  .0  ext\
+          rds_pdif   lcw  -0.210    0.255    0.005 ext\
+          rds_pdif   rcw  -0.210    0.255    0.005 ext
+
+  poly    rds_poly   vw    0.075    0.010  .0  all
+  alu1    rds_alu1   vw    0.085    0.030  .0  all
+  alu2    rds_alu2   vw    0.088   -0.104  .0  all
+  alu3    rds_alu3   vw    0.130   -0.020  .0  all
+  alu4    rds_alu4   vw    0.160    0.040  .0  all
+  alu5    rds_alu5   vw    0.165    0.050  .0  all
+  alu6    rds_alu6   vw    0.800    1.320  .0  all
+  calu1   rds_alu1   vw    0.085    0.030  .0  all
+  calu2   rds_alu2   vw    0.088   -0.104  .0  all
+  calu3   rds_alu3   vw    0.130   -0.020  .0  all
+  calu4   rds_alu4   vw    0.160    0.040  .0  all
+  calu5   rds_alu5   vw    0.165    0.050  .0  all
+  calu6   rds_alu6   vw    0.800    1.320  .0  all
+  talu1   rds_talu1  vw    0.085    0.030  .0  all
+  talu2   rds_talu2  vw    0.088   -0.104  .0  all
+  talu3   rds_talu3  vw    0.130   -0.020  .0  all
+  talu4   rds_talu4  vw    0.160    0.040  .0  all
+  talu5   rds_talu5  vw    0.165    0.050  .0  all
+  talu6   rds_talu6  vw    0.800    1.320  .0  all
+
+end
+
+table mbk_to_rds_connector
+# -------------------------------------------------------------------
+# mbk_name  rds_name der dwr
+# -------------------------------------------------------------------
+  poly   rds_poly     0.075    0.010
+  alu1   rds_alu1     0.085    0.030
+  alu2   rds_alu2     0.088   -0.104
+  alu3   rds_alu3     0.130   -0.020
+  alu4   rds_alu4     0.160    0.040
+  alu5   rds_alu5     0.165    0.050
+  alu6   rds_alu6     0.800    1.320
+end
+
+table mbk_to_rds_reference
+# -------------------------------------------------------------------
+# mbk_name  rds_name  width
+# -------------------------------------------------------------------
+
+  ref_ref  rds_ref    0.170
+  ref_con  rds_ref    0.170
+
+end
+
+table mbk_to_rds_via
+# -------------------------------------------------------------------
+# mbk_name  rds_name1 width mode   rds_name2 width mode   ...
+## ------------------------------------------------------------------
+
+  cont_body_n \
+    rds_cont        0.170  all\
+    rds_alu1        0.310  all\
+    rds_activ       0.290  drc\
+    rds_ntie        0.540  drc\
+    rds_nwell       0.650  ext\
+    rds_ntie        0.290  ext
+
+  cont_body_p \
+    rds_cont        0.170  all\
+    rds_alu1        0.310  all\
+    rds_activ       0.290  drc\
+    rds_ptie        0.540  drc\
+    rds_pwell       0.650  ext\
+    rds_ptie        0.290  ext
+
+  cont_dif_n  \
+    rds_cont        0.170  all\
+    rds_alu1        0.310  all\
+    rds_activ       0.290  drc\
+    rds_nimp        0.540  drc\
+    rds_pwell       0.650  ext\
+    rds_ndif        0.290  ext
+
+  cont_dif_p  \
+    rds_cont        0.170  all\
+    rds_alu1        0.310  all\
+    rds_activ       0.560  drc\
+    rds_pimp        0.810  drc\
+    rds_nwell       0.920  ext\
+    rds_pdif        0.560  ext
+
+  cont_poly   \
+    rds_cont        0.170  all\
+    rds_poly        0.290  all\
+    rds_alu1        0.310  all
+
+  cont_via    \
+    rds_via1        0.170  all\
+    rds_alu1        0.170  all\
+    rds_alu2        0.176  all
+
+  cont_via2   \
+    rds_via2        0.150  all\
+    rds_alu2        0.260  all\
+    rds_alu3        0.260  all
+
+  cont_via3   \
+    rds_via3        0.200  all\
+    rds_alu3        0.280  all\
+    rds_alu4        0.330  all
+
+  cont_via4   \
+    rds_via4        0.200  all\
+    rds_alu4        0.320  all\
+    rds_alu5        0.330  all
+
+  cont_via5   \
+    rds_via5        0.800  all\
+    rds_alu5        1.180  all\
+    rds_alu6        1.420  all
+
+  c_x_n       \
+    rds_poly        0.150  all\
+    rds_activ       0.650  drc\
+    rds_nimp        0.900  drc\
+    rds_pwell       1.010  ext\
+    rds_ndif        0.650  ext
+
+  c_x_p       \
+    rds_poly        0.150  all\
+    rds_activ       0.650  drc\
+    rds_pimp        0.900  drc\
+    rds_nwell       1.010  ext\
+    rds_pdif        0.650  ext
+
+end
+
+table mbk_to_rds_bigvia_hole
+# -------------------------------------------------------------------
+# mbk_via_name  rds_hole_name side step mode
+# -------------------------------------------------------------------
+  cont_via   rds_via1    0.170   0.530 all
+  cont_via2  rds_via2    0.150   0.550 all
+  cont_via3  rds_via3    0.200   0.500 all
+  cont_via4  rds_via4    0.200   0.500 all
+  cont_via5  rds_via5    0.800   0.600 all
+
+end
+
+table mbk_to_rds_bigvia_metal
+# -------------------------------------------------------------------
+# mbk_via_name  rds_name  dwr overlap  mode
+# -------------------------------------------------------------------
+  cont_via \
+    rds_alu1    0.030   0.000  all\
+    rds_alu2   -0.104   0.030  all
+
+  cont_via2 \
+    rds_alu2   -0.104   0.055  all\
+    rds_alu3   -0.020   0.055  all
+
+  cont_via3 \
+    rds_alu3   -0.020   0.040  all\
+    rds_alu4    0.040   0.065  all
+
+  cont_via4 \
+    rds_alu4    0.040   0.060  all\
+    rds_alu5    0.050   0.065  all
+
+  cont_via5 \
+    rds_alu5    0.050   0.190  all\
+    rds_alu6    1.320   0.310  all
+
+end
+
+table mbk_to_rds_turnvia
+# -------------------------------------------------------------------
+# mbk_name rds_name dwr mode
+# -------------------------------------------------------------------
+  cont_turn1 rds_alu1    0.030 all
+  cont_turn2 rds_alu2   -0.104 all
+  cont_turn3 rds_alu3   -0.020 all
+  cont_turn4 rds_alu4    0.040 all
+  cont_turn5 rds_alu5    0.050 all
+  cont_turn6 rds_alu6    1.320 all
+end
+
+table lynx_bulk_implicit
+# -------------------------------------------------------------------
+# rds_name  type[explicit|implicit]
+# -------------------------------------------------------------------
+end
+
+table lynx_transistor
+# -------------------------------------------------------------------
+# mbk_name trans_name compostion
+# -------------------------------------------------------------------
+  ntrans  ntrans c_x_n rds_poly rds_ndif rds_activ rds_pwell
+  ptrans  ptrans c_x_p rds_poly rds_pdif rds_activ rds_nwell
+end
+
+table lynx_diffusion
+# -------------------------------------------------------------------
+# rds_name compostion
+# -------------------------------------------------------------------
+  rds_ndif  rds_activ 1 rds_nimp 1 rds_nwell 0
+  rds_pdif  rds_activ 1 rds_pimp 1 rds_nwell 1
+  rds_ntie  rds_activ 1 rds_nimp 1 rds_nwell 1
+  rds_ptie  rds_activ 1 rds_pimp 1 rds_nwell 0
+end
+
+table lynx_graph
+# -------------------------------------------------------------------
+# rds_name  in_contact_with rds_name1 rds_name2 ...
+# -------------------------------------------------------------------
+  rds_ndif   rds_cont   rds_ndif
+  rds_pdif   rds_cont   rds_pdif
+  rds_poly   rds_cont   rds_poly
+  rds_cont   rds_pdif   rds_ndif   rds_poly  rds_alu1  rds_cont
+  rds_alu1   rds_cont   rds_via1   rds_alu1  rds_ref
+  rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
+  rds_via1   rds_alu1   rds_alu2   rds_via1
+  rds_alu2   rds_via1   rds_via2   rds_alu2
+  rds_via2   rds_alu2   rds_alu3   rds_via2
+  rds_alu3   rds_via2   rds_via3   rds_alu3
+  rds_via3   rds_alu3   rds_alu4   rds_via3
+  rds_alu4   rds_via3   rds_via4   rds_alu4
+  rds_via4   rds_alu4   rds_alu5   rds_via4
+  rds_alu5   rds_via4   rds_via5   rds_alu5
+  rds_via5   rds_alu5   rds_alu6   rds_via5
+  rds_alu6   rds_via5   rds_alu6
+end
+
+table s2r_oversize_denotch
+# -------------------------------------------------------------------
+# rds_name oversized_value_for_denotching
+# -------------------------------------------------------------------
+  rds_nwell     0.635
+  rds_pwell     0.635
+  rds_poly      0.100
+  rds_alu1      0.080
+  rds_alu2      0.065
+  rds_activ     0.130
+  rds_ntie      0.190
+  rds_ptie      0.190
+  rds_nimp      0.190
+  rds_pimp      0.190
+  rds_alu3      0.065
+  rds_alu4      0.145
+  rds_alu5      0.145
+  rds_alu6      0.795
+end
+
+table s2r_bloc_ring_width
+# -------------------------------------------------------------------
+# rds_name ring_width_to_copy_up
+# -------------------------------------------------------------------
+  rds_nwell   0. # [ RD_NWEL ]
+  rds_pwell   0. # [ RD_PWEL ]
+  rds_poly    0. # [ RD_POLY ]
+  rds_alu1    0. # [ RD_ALU1 ]
+  rds_alu2    0. # [ RD_ALU2 ]
+  rds_activ   0. # [ RD_ACTI ]
+  rds_ntie    0. # [ RD_NIMP ]
+  rds_ptie    0. # [ RD_PIMP ]
+  rds_nimp    0. # [ RD_NIMP ]
+  rds_pimp    0. # [ RD_PIMP ]
+  rds_alu3    0. # [ RD_ALU3 ]
+  rds_alu4    0. # [ RD_ALU4 ]
+  rds_alu5    0. # [ RD_ALU5 ]
+  rds_alu6    0. # [ RD_ALU6 ]
+end
+
+table s2r_minimum_layer_width
+# -------------------------------------------------------------------
+# rds_name  min_layer_width_to_keep
+# -------------------------------------------------------------------
+  rds_nwell     0.840
+  rds_pwell     0.000
+  rds_poly      0.150
+  rds_alu1      0.170
+  rds_alu2      0.140
+  rds_activ     0.420
+  rds_ntie      0.380
+  rds_ptie      0.380
+  rds_nimp      0.380
+  rds_pimp      0.380
+  rds_alu3      0.140
+  rds_alu4      0.300
+  rds_alu5      0.300
+  rds_alu6      1.600
+end
+
+table s2r_post_treat
+# -------------------------------------------------------------------
+# rds_name  s2r_must_treat_or_not  second_layer_whenever_scotch
+# -------------------------------------------------------------------
+  rds_nwell        treat null
+  rds_pwell        treat null
+  rds_poly         treat null
+  rds_activ        treat null
+  rds_ntie         treat rds_pimp
+  rds_ptie         treat rds_nimp
+  rds_nimp         treat rds_ptie
+  rds_pimp         treat rds_ntie
+  rds_alu1         treat null
+  rds_alu2         treat null
+  rds_alu3         treat null
+  rds_alu4         treat null
+  rds_alu5         treat null
+  rds_alu6         treat null
+  rds_cont       notreat null
+  rds_via1       notreat null
+  rds_via2       notreat null
+  rds_via3       notreat null
+  rds_via4       notreat null
+  rds_via5       notreat null
+  rds_abox       notreat null
+end
+
+DRC_RULES
+ 
+layer RDS_NWELL   0.840 ;
+layer RDS_NTIE    0.380 ;
+layer RDS_PTIE    0.380 ;
+layer RDS_NIMP    0.380 ;
+layer RDS_PIMP    0.380 ;
+layer RDS_ACTIV   0.420 ;
+layer RDS_CONT    0.170 ;
+layer RDS_VIA1    0.170 ;
+layer RDS_VIA2    0.150 ;
+layer RDS_VIA3    0.200 ;
+layer RDS_VIA4    0.200 ;
+layer RDS_VIA5    0.800 ;
+layer RDS_POLY    0.150 ;
+layer RDS_ALU1    0.170 ;
+layer RDS_ALU2    0.140 ;
+layer RDS_ALU3    0.140 ;
+layer RDS_ALU4    0.300 ;
+layer RDS_ALU5    0.300 ;
+layer RDS_ALU6    1.600 ;
+layer RDS_USER0   0.005 ;
+layer RDS_USER1   0.005 ;
+layer RDS_USER2   0.005 ;
+
+regles
+
+# note : ``min'' is different from ``>=''.
+# min is applied on polygons and >= is applied on rectangles.
+# there is the same difference between max and <=.
+# >= is faster than min, but min must be used where it is
+# required to consider polygons, for example distance of
+# two objects in the same layer
+#
+# ----------------------------------------------------------
+
+# check the nwell shapes
+# ----------------------
+caracterise RDS_NWELL (
+  regle    1 : largeur      >=     0.840 ;
+  regle    2 : longueur_inter   min    0.840 ;
+  regle    3 : notch            >=     1.270 ;
+);
+relation RDS_NWELL , RDS_NWELL (
+  regle    4 : distance axiale  min    1.270 ;
+);
+relation RDS_NWELL , RDS_ACTI (
+  regle    5 : distance axiale  min    0.340 ;
+);
+
+# check the RDS_PIMP shapes
+# -------------------------
+caracterise RDS_PIMP (
+  regle    6 : surface          min    0.255 ;
+  regle    7 : largeur          >=     0.380 ;
+  regle    8 : longueur_inter   min    0.380 ;
+  regle    9 : notch            >=     0.380 ;
+);
+relation RDS_PIMP , RDS_PIMP (
+  regle   10 : distance axiale  min    0.380 ;
+);
+
+# check the RDS_NIMP shapes
+# -------------------------
+caracterise RDS_NIMP (
+  regle   11 : surface          min    0.265 ;
+  regle   12 : largeur          >=     0.380 ;
+  regle   13 : longueur_inter   min    0.380 ;
+  regle   14 : notch            >=     0.380 ;
+);
+relation RDS_NIMP , RDS_NIMP (
+  regle   15 : distance axiale  min    0.380 ;
+);
+
+# check the RDS_PTIE shapes
+# -------------------------
+caracterise RDS_PTIE (
+  regle   16 : surface          min    0.255 ;
+  regle   17 : largeur          >=     0.380 ;
+  regle   18 : longueur_inter   min    0.380 ;
+  regle   19 : notch            >=     0.380 ;
+);
+relation RDS_PTIE , RDS_PTIE (
+  regle   20 : distance axiale  min    0.380 ;
+);
+
+# check the RDS_NTIE shapes
+# -------------------------
+caracterise RDS_NTIE (
+  regle   21 : surface          min    0.265 ;
+  regle   22 : largeur          >=     0.380 ;
+  regle   23 : longueur_inter   min    0.380 ;
+  regle   24 : notch            >=     0.380 ;
+);
+relation RDS_NTIE , RDS_NTIE (
+  regle   25 : distance axiale  min    0.380 ;
+);
+
+# check the RDS_ACTI shapes
+# -------------------------
+caracterise RDS_ACTI (
+  regle   26 : surface          min    0.000 ;
+  regle   27 : largeur          >=     0.420 ;
+  regle   28 : longueur_inter   min    0.420 ;
+  regle   29 : notch            >=     0.270 ;
+);
+relation RDS_ACTI, RDS_ACTI (
+  regle   30 : distance axiale   min   0.270 ;
+);
+
+# check the RDS_NIMP RDS_PTIE exclusion
+# -------------------------------------
+define RDS_NIMP , RDS_PTIE intersection -> NPIMP;
+caracterise NPIMP (
+  regle   31 : largeur          =    0. ;
+);
+undefine NPIMP;
+
+# check the RDS_NTIE RDS_PIMP exclusion
+# -------------------------------------
+define RDS_NTIE , RDS_PIMP intersection -> NPIMP;
+caracterise NPIMP (
+  regle   32 : largeur          =    0. ;
+);
+undefine NPIMP;
+
+# check the RDS_POLY shapes
+# -------------------------
+caracterise RDS_POLY (
+  regle   33 : largeur          >=     0.150 ;
+  regle   34 : longueur_inter   min    0.150 ;
+  regle   35 : notch            >=     0.210 ;
+);
+relation RDS_POLY , RDS_POLY (
+  regle   36 : distance axiale  min    0.210 ;
+);
+
+define RDS_ACTI , RDS_POLY intersection -> channel;
+
+  # check the channel shapes
+  # -------------------------
+  caracterise channel (
+    regle   37 : notch            >=     0.210 ;
+  );
+  relation channel , channel (
+    regle   38 : distance axiale  min    0.210 ;
+  );
+
+undefine channel;
+
+define RDS_ACTI , RDS_CONT intersection -> cont_diff;
+
+  relation RDS_POLY , cont_diff (
+    regle   39 : distance axiale  >=     0.250 ;
+  );
+
+undefine cont_diff;
+
+
+# check RDS_ALU1 shapes
+# ---------------------
+caracterise RDS_ALU1 (
+  regle   40 : surface          min    0.056 ;
+  regle   41 : largeur          >=     0.170 ;
+  regle   42 : longueur_inter   min    0.170 ;
+  regle   43 : notch            >=     0.170 ;
+);
+relation RDS_ALU1 , RDS_ALU1 (
+  regle   44 : distance axiale  min    0.170 ;
+);
+
+# check RDS_ALU2 shapes
+# ---------------------
+caracterise RDS_ALU2 (
+  regle   45 : surface          min    0.083 ;
+  regle   46 : largeur          >=     0.140 ;
+  regle   47 : longueur_inter   min    0.140 ;
+  regle   48 : notch            >=     0.140 ;
+);
+relation RDS_ALU2 , RDS_ALU2 (
+  regle   49 : distance axiale  min    0.140 ;
+);
+
+# check RDS_ALU3 shapes
+# ---------------------
+caracterise RDS_ALU3 (
+  regle   50 : surface          min    0.068 ;
+  regle   51 : largeur          >=     0.140 ;
+  regle   52 : longueur_inter   min    0.140 ;
+  regle   53 : notch            >=     0.140 ;
+);
+relation RDS_ALU3 , RDS_ALU3 (
+  regle   54 : distance axiale  min    0.140 ;
+);
+
+# check RDS_ALU4 shapes
+# ---------------------
+caracterise RDS_ALU4 (
+  regle   55 : surface          min    0.240 ;
+  regle   56 : largeur          >=     0.300 ;
+  regle   57 : longueur_inter   min    0.300 ;
+  regle   58 : notch            >=     0.300 ;
+);
+relation RDS_ALU4 , RDS_ALU4 (
+  regle   59 : distance axiale  min    0.300 ;
+);
+
+# check RDS_ALU5 shapes
+# ---------------------
+caracterise RDS_ALU5 (
+  regle   60 : surface          min    0.240 ;
+  regle   61 : largeur          >=     0.300 ;
+  regle   62 : longueur_inter   min    0.300 ;
+  regle   63 : notch            >=     0.300 ;
+);
+relation RDS_ALU5 , RDS_ALU5 (
+  regle   64 : distance axiale  min    0.300 ;
+);
+
+# check RDS_ALU6 shapes
+# ---------------------
+caracterise RDS_ALU6 (
+  regle   65 : surface          min    4.000 ;
+  regle   66 : largeur          >=     1.600 ;
+  regle   67 : longueur_inter   min    1.600 ;
+  regle   68 : notch            >=     1.600 ;
+);
+relation RDS_ALU6 , RDS_ALU6 (
+  regle   69 : distance axiale  min    1.600 ;
+);
+
+# check any_via layers, stacking are free
+# ---------------------------------------
+relation RDS_CONT , RDS_CONT (
+  regle   70 : distance axiale  >=     0.170 ;
+);
+relation RDS_VIA , RDS_VIA (
+  regle   71 : distance axiale  >=     0.190 ;
+);
+relation RDS_VIA2 , RDS_VIA2 (
+  regle   72 : distance axiale  >=     0.170 ;
+);
+relation RDS_VIA3 , RDS_VIA3 (
+  regle   73 : distance axiale  >=     0.200 ;
+);
+relation RDS_VIA4 , RDS_VIA4 (
+  regle   74 : distance axiale  >=     0.200 ;
+);
+relation RDS_VIA5 , RDS_VIA5 (
+  regle   75 : distance axiale  >=     0.800 ;
+);
+caracterise RDS_CONT (
+  regle   76 : largeur           =     0.170 ;
+  regle   77 : longueur          =     0.170 ;
+);
+caracterise RDS_VIA (
+  regle   78 : largeur           =     0.170 ;
+  regle   79 : longueur          =     0.170 ;
+);
+caracterise RDS_VIA2 (
+  regle   80 : largeur           =     0.150 ;
+  regle   81 : longueur          =     0.150 ;
+);
+caracterise RDS_VIA3 (
+  regle   82 : largeur           =     0.200 ;
+  regle   83 : longueur          =     0.200 ;
+);
+caracterise RDS_VIA4 (
+  regle   84 : largeur           =     0.200 ;
+  regle   85 : longueur          =     0.200 ;
+);
+caracterise RDS_VIA5 (
+  regle   86 : largeur           =     0.800 ;
+  regle   87 : longueur          =     0.800 ;
+);
+
+# check RDS_POLY is distant from activ zone of transistor
+# -------------------------------------------------------
+relation RDS_POLY , RDS_ACTIV (
+  regle   88 : distance axiale  >=     0.075 ;
+);
+
+fin regles
+DRC_COMMENT
+END_DRC_COMMENT
+END_DRC_RULES
