@@ -19,6 +19,7 @@ avt_config tasGenerateDetailTimingFile yes
 
 
 # Files
+# avt_LoadFile  /users/cao/franck/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/sky130_c4m/techno/C4M_LIP6_Sky130_hitas.spice spice
 avt_LoadFile  /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/sky130_c4m/techno/C4M_LIP6_Sky130_hitas.spice spice
 avt_LoadFile ./inv_x2_hitas.spi spice
 
