@@ -1,11 +1,12 @@
 
- set techno  [lindex $argv 0]
- set libName [lindex $argv 1]
+ set techno      [lindex $argv 0]
+ set spiceFormat [lindex $argv 1]
+ set libName     [lindex $argv 2]
 
  puts "Using technology:        <$techno>"
  puts "Characterizing library:  <$libName>"
 
- avt_config   simToolModel  hspice
+ avt_config   simToolModel  $spiceFormat
  avt_LoadFile $techno       spice
 
  set cells [glob *.spi]

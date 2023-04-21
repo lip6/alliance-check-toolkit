@@ -53,3 +53,11 @@
  endif
 
  $(info Using RDS_TECHNO_NAME = "${RDS_TECHNO_NAME}")
+
+ ifeq ($(SPIMODEL),)
+   SPIMODEL = $(ALLIANCE_TOP)/etc/spimodel.cfg
+ endif
+
+ ifeq ($(SPI_FORMAT),)
+   SPI_FORMAT = hspice
+ endif

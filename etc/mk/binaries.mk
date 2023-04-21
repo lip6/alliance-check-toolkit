@@ -7,7 +7,7 @@
  SPI_MODEL         = $(SYSCONF_TOP)/spimodel.cfg
  TOOLKIT_BIN       = $(CHECK_TOOLKIT)/bin
 
- AVERTEC_BIN       = $(AVERTEC_TOP)/bin
+ AVERTEC_BIN       = $(ALLIANCE_TOP)/bin
  YOSYS_BIN         = $(YOSYS_TOP)/bin
 
  PATH              = $(ALLIANCE_BIN):$(shell echo $$PATH)
@@ -46,11 +46,11 @@
  DoCHIP        = $(TOOLKIT_BIN)/doChip.py
  BLIF2VST      = $(TOOLKIT_BIN)/blif2vst.py
  YOSYS_PY      = $(TOOLKIT_BIN)/yosys.py
- COUGAR_spice  = MBK_SPI_MODEL=$(ALLIANCE_TOP)/etc/spimodel.cfg; export MBK_SPI_MODEL; \
-                 MBK_SEPAR='_';                                  export MBK_SEPAR    ; \
-                 MBK_OUT_LO=spi;                                 export MBK_OUT_LO   ; \
+ COUGAR_spice  = MBK_SPI_MODEL=$(SPIMODEL); export MBK_SPI_MODEL; \
+                 MBK_SEPAR='_';             export MBK_SEPAR    ; \
+                 MBK_OUT_LO=spi;            export MBK_OUT_LO   ; \
                  $(ALLIANCE_BIN)/cougar
- COUGAR_vst    = MBK_OUT_LO=vst;                                 export MBK_OUT_LO   ; \
+ COUGAR_vst    = MBK_OUT_LO=vst;            export MBK_OUT_LO   ; \
                  $(ALLIANCE_BIN)/cougar
  LVX           = MBK_SEPAR='_'; export MBK_SEPAR; \
                  $(ALLIANCE_BIN)/lvx

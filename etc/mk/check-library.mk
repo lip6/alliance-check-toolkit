@@ -38,14 +38,14 @@ cell-check-proof-powmid_x0:
 cell-check-proof-%: ./%.vbe ./check/%.vhd
 	  $(CELL_CHECK_DIR); sed -i -e '/ck.delayed/d' -e 's/linkage/in/' $*.vhd
 	  $(CELL_CHECK_DIR); $(VASY) -I vhd -o -a $* $*_ext
-	  $(CELL_CHECK_DIR); $(PROOF) $* $*_ext
+	  $(CELL_CHECK_DIR); $(PROOF) -d $* $*_ext
 
 ./check/%.vhd: ./check/%.spi
-	 $(CELL_CHECK_DIR); $(YAGLE_CELL) $(SPI_TECHNO_NAME) $*
+	 $(CELL_CHECK_DIR); $(YAGLE_CELL) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $*
 
 ./check/%.spi: %.ap
 	 $(CELL_CHECK_DIR); $(COUGAR_spice) -ar -ac -t $*
 
 %-dot-lib: check-lib $(foreach cell,$(wildcard *.ap),$(patsubst %.ap,./check/%.spi,$(cell)))
-	 $(CELL_CHECK_DIR); $(YAGLE_LIB) $(SPI_TECHNO_NAME) $*
+	 $(CELL_CHECK_DIR); $(YAGLE_LIB) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $*
 	 mv -f ./check/$*.lib $*.lib.new
