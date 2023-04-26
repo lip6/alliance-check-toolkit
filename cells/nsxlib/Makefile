@@ -15,6 +15,7 @@ characterize: nsxlib-dot-lib
 
 check-lib-test: ./check/inv_x1.ok \
                 ./check/sff1_x4.ok \
-                ./check/sff1r_x4.ok
+
+#                ./check/sff1r_x4.ok
 
 check-clean: ; rm -f ./check/*

@@ -15,6 +15,6 @@
  export CORIOLIS_TOP  = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
  export ALLIANCE_TOP  = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/Release.Shared/install
  export CHECK_TOOLKIT = $(HOME)/coriolis-2.x/src/alliance-check-toolkit
- export AVERTEC_TOP   = /dsk/l1/tasyag/Linux.el7_64/install
+ export AVERTEC_TOP   = ${ALLIANCE_TOP}/share/tasyag
  export YOSYS_TOP     = /usr
 
