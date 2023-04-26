@@ -15001,13 +15001,5 @@ def setup():
         pass
     else:
         fix(lib)
-    try:
-        from .dtr_sky130 import loadDtr, loadDevices
-    except Exception as e:
-        print( e )
-        pass
-    else:
-        loadDtr()
-        loadDevices()
 
     return lib

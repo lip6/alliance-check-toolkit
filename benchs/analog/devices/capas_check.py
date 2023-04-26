@@ -3,7 +3,7 @@
 import sys
 from   coriolis           import Cfg
 #import node180.scn6m_deep_09
-import NDA.node350.c35b4
+#import NDA.node350.c35b4
 from   coriolis.Hurricane import *
 from   coriolis           import CRL
 from   coriolis.Analog    import CapacitorFamily, MultiCapacitor, \
@@ -17,18 +17,18 @@ def toDbU ( value ): return DbU.fromPhysical( value, DbU.UnitPowerMicro )
 def checkCapas ( editor ):
 
     mrange = MatrixParameterRange()
-   #mrange.addValue( [ [ 0, 1 ]
-   #                 , [ 2, 0 ]
-   #                 ] )
+    mrange.addValue( [ [ 0, 1 ]
+                     , [ 1, 0 ]
+                     ] )
    #mrange.addValue( [ [ 0, 1, 0 ]
    #                 , [ 1, 0, 1 ]
    #                 , [ 0, 1, 0 ]
    #                 ] )
-    mrange.addValue( [ [ 1, 1, 1, 0 ]
-                     , [ 0, 1, 1, 1 ]
-                     , [ 1, 1, 1, 0 ]
-                     , [ 0, 1, 1, 1 ]
-                     ] )
+   #mrange.addValue( [ [ 1, 1, 1, 0 ]
+   #                 , [ 0, 1, 1, 1 ]
+   #                 , [ 1, 1, 1, 0 ]
+   #                 , [ 0, 1, 1, 1 ]
+   #                 ] )
 
     UpdateSession.open()
     cell = CRL.AllianceFramework.get().createCell( 'check_capas' )
@@ -41,10 +41,12 @@ def checkCapas ( editor ):
 
     print( '     - Generating Device of %s...' % MultiCapacitor )
 
-    device  = MultiCapacitor.create( library, 'capa0', CapacitorFamily.PIP, 2 )
+    device  = MultiCapacitor.create( library, 'capa0', CapacitorFamily.MIM, 2 )
     device.getParameter( 'Layout Styles' ).setValue( 'Matrix' )
-    device.getParameter( 'capacities'    ).setValue( 0, 372  )
-    device.getParameter( 'capacities'    ).setValue( 1, 1116 )
+   #device.getParameter( 'capacities'    ).setValue( 0, 372  )
+   #device.getParameter( 'capacities'    ).setValue( 1, 1116 )
+    device.getParameter( 'capacities'    ).setValue( 0, 2  )
+    device.getParameter( 'capacities'    ).setValue( 1, 2 )
     pmatrix = device.getParameter( 'matrix' )
    #mrange.progress()
     pmatrix.setMatrix( mrange.getValue() )

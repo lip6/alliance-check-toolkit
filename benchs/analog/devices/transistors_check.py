@@ -55,9 +55,14 @@ def analogDemo ( editor ):
       xspacing  = toDbU( 6.0)
       yspacing  = toDbU(14.0)
       xspacingl = DbU.fromLambda(50.0)
+    elif technoName == 'Sky130':
+      print( '  o  Using SkyWater 130nm settings (sky130).' )
+      xspacing  = toDbU( 6.0)
+      yspacing  = toDbU(14.0)
+      xspacingl = DbU.fromLambda(50.0)
     else:
       print( '[WARNING] Cannot guess technology from:' )
-      print( '          \"%s\"' % technoDir )
+      print( '          \"%s\"' % technoName )
 
     UpdateSession.open()
     cell = CRL.AllianceFramework.get().createCell( 'devices_check' )
