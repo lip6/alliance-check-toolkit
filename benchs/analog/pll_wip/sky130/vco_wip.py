@@ -18,17 +18,19 @@
 # |                                                                 |
 # |  Sizing by   : Dimitri Galayko    (1 December 2022)             |
 # |                                                                 |
+# |  rev 27 April 2023                                              |
 # +-----------------------------------------------------------------+
 #
 #
-# Worj In Progress
+# Work In Progress
 # odd number of inverter cells are connected, 
 #         upfront NMOS and PMOS biasing transistors
 #         layout if described as flatten
 # Folded transistors
 # Routing described
-# To be checked: feedback wire is long, connectors appear on the wire
-#                still some issues to be checked with sizes and transistor names
+# To be checked: if feedback wire is long, connectors appear on the wire
+#                some signals seem to be routed over the active area
+#                still some improvements to be done with sizes, M and transistor names
 #                and nets
 #
 # -----------------------------------------------------------------------------
@@ -85,9 +87,11 @@ nbinv = 21
 if nbinv%2 == 0:
   print('ERROR: the number of inverters must be odd.')
 
+nblg = 3
+
 base=pd.read_csv('CMOS_VCO_cell.cir_transistor_size.txt', sep=' ', skipinitialspace=True, encoding="utf-8")
 
-all_transistor = ['MP', 'MN', 'MPc', 'MPb', 'MNb', 'MNc']
+all_transistor = ['MPb', 'MNb', 'MPc', 'MP', 'MN', 'MNc']
 
 all_transistor_base = base['Name'].tolist()
 #print(all_transistor_base)
@@ -112,7 +116,7 @@ class VCO ( AnalogDesign ):
                 W = float(base.loc[base['Name']==transistor, 'W'].to_string(index=False))*(10**6)
                 L = float(base.loc[base['Name']==transistor, 'L'].to_string(index=False))*(10**6)
                 M = int(base.loc[base['Name']==transistor, 'M'].to_string(index=False))
-                if name == 'MPc' or name == 'MPb' or name == 'MNb' or name == 'MNc':
+                if name == 'MPc' or name == 'MP' or name == 'MN' or name == 'MNc':
                   for i in range(nbinv):
                     #                         | Class | Instance | Layout Style | Type | W | L | M | Mint | Dum | SFirst | Bulk | BulkC |
                     self.devicesSpecs.append([Transistor, name+str(i+1), 'WIP Transistor',  type_dict[typ], W*M, L, M, None, 0, True, 0xf, False])
@@ -143,37 +147,29 @@ class VCO ( AnalogDesign ):
             self.netTypes['n'+str(i)]={ 'isExternal':False}  
           self.netTypes['pp'+str(i)]={ 'isExternal':False}
           self.netTypes['nn'+str(i)]={ 'isExternal':False}
-        #print(self.netTypes)
 
 
         self.netSpecs = {}
         for net in self.netTypes:
           self.netSpecs[net]=[]
-        self.netSpecs['ctrl'].extend(('MN' , 'G'))
-        self.netSpecs['m1'].extend([('MN' , 'D'), ('MP' , 'G'), ('MP' , 'D')])
-        self.netSpecs['vdd'].extend([('MP' , 'S'), ('MP' , 'B')])
-        self.netSpecs['vss'].extend([('MN' , 'S'), ('MN' , 'B')])
+        self.netSpecs['ctrl'].extend(('MNb' , 'G'))
+        self.netSpecs['m1'].extend([('MNb' , 'D'), ('MPb' , 'G'), ('MPb' , 'D')])
+        self.netSpecs['vdd'].extend([('MPb' , 'S'), ('MPb' , 'B')])
+        self.netSpecs['vss'].extend([('MNb' , 'S'), ('MNb' , 'B')])
         for i in range(1, nbinv+1):
-          #print(i)
           self.netSpecs['ctrl'].extend(('MNc'+str(i), 'G'))
-          #print(self.netSpecs['ctrl'])
           self.netSpecs['m1'].extend(('MPc'+str(i), 'G'))
-          #print(self.netSpecs['m1'])
-          self.netSpecs['pp'+str(i)].extend([('MPc'+str(i), 'D'), ('MPb'+str(i), 'S')])
-          #print(self.netSpecs['pp'+str(i)])
-          self.netSpecs['nn'+str(i)].extend([('MNc'+str(i), 'D'), ('MNb'+str(i), 'S')])
-          #print(self.netSpecs['nn'+str(i)])
+          self.netSpecs['pp'+str(i)].extend([('MPc'+str(i), 'D'), ('MP'+str(i), 'S')])
+          self.netSpecs['nn'+str(i)].extend([('MNc'+str(i), 'D'), ('MN'+str(i), 'S')])
           if i == 1:
-            self.netSpecs['n'+str(i)].extend([('MPb'+str(i), 'G'), ('MNb'+str(i), 'G'), ('MPb'+str(nbinv), 'D'), ('MNb'+str(nbinv), 'D')])
+            self.netSpecs['n'+str(i)].extend([('MP'+str(i), 'G'), ('MN'+str(i), 'G'), ('MP'+str(nbinv), 'D'), ('MN'+str(nbinv), 'D')])
           else:
-            self.netSpecs['n'+str(i)].extend([('MPb'+str(i), 'G'), ('MNb'+str(i), 'G'), ('MPb'+str(i-1), 'D'), ('MNb'+str(i-1), 'D')])
-          #print(self.netSpecs['n'+str(i)])
+            self.netSpecs['n'+str(i)].extend([('MP'+str(i), 'G'), ('MN'+str(i), 'G'), ('MP'+str(i-1), 'D'), ('MN'+str(i-1), 'D')])
           self.netSpecs['vdd'].extend([('MPc'+str(i), 'S'), ('MPc'+str(i), 'B')])
-          #print(self.netSpecs['vdd'])
           self.netSpecs['vss'].extend([('MNc'+str(i), 'S'), ('MNc'+str(i), 'B')])
-          #print(self.netSpecs['vss'])
-        #print(self.netSpecs)
-        
+
+
+        #self.readParameters( './../sizing/oceane_miller_diff.txt' )
 
         self.beginCell( 'vcoCell' )
         self.doDevices()
@@ -185,8 +181,6 @@ class VCO ( AnalogDesign ):
         self.setToleranceBandH ( 1000000000.0 )
         self.setToleranceBandW ( 1000000000.0 )
 
-########################## FloorPlan 1 (invertor block is duplicated)
-  
         # #0
         self.pushHNode( Center )
         # #1
@@ -196,20 +190,37 @@ class VCO ( AnalogDesign ):
         # #2
         self.pushHNode( Center )
         # #3
-        self.addDevice( 'MN'   , Center, StepParameterRange(int(base.loc[base['Name']=='MN', 'M'].to_string(index=False)), 1, 1) )
-        self.addDevice( 'MP'   , Center, StepParameterRange(int(base.loc[base['Name']=='MP', 'M'].to_string(index=False)), 1, 1) )
+        self.addDevice( 'MNb'   , Center, StepParameterRange(int(base.loc[base['Name']=='MNb', 'M'].to_string(index=False)), 1, 1) )
+        self.addDevice( 'MPb'   , Center, StepParameterRange(int(base.loc[base['Name']=='MPb', 'M'].to_string(index=False)), 1, 1) )
         # #3
         self.popNode()
-        for i in range(nbinv):
+        for i in range(1,(nbinv//2)+1):
           # #2
           self.pushHNode( Center )
           # #3
-          self.addDevice( 'MNc'+str(i+1)   , Center, StepParameterRange(int(base.loc[base['Name']=='MNc', 'M'].to_string(index=False)), 1, 1) )
-          self.addDevice( 'MNb'+str(i+1)   , Center, StepParameterRange(int(base.loc[base['Name']=='MNb', 'M'].to_string(index=False)), 1, 1) )
-          self.addDevice( 'MPb'+str(i+1)   , Center, StepParameterRange(int(base.loc[base['Name']=='MPb', 'M'].to_string(index=False)), 1, 1) )
-          self.addDevice( 'MPc'+str(i+1)   , Center, StepParameterRange(int(base.loc[base['Name']=='MPc', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MNc'+str(i)   , Center, StepParameterRange(int(base.loc[base['Name']=='MNc', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MN'+str(i)    , Center, StepParameterRange(int(base.loc[base['Name']=='MN', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MP'+str(i)    , Center, StepParameterRange(int(base.loc[base['Name']=='MP', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MPc'+str(i)   , Center, StepParameterRange(int(base.loc[base['Name']=='MPc', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MNc'+str(nbinv-(i-1)) , Center, StepParameterRange(int(base.loc[base['Name']=='MNc', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MN'+str(nbinv-(i-1))  , Center, StepParameterRange(int(base.loc[base['Name']=='MN', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MP'+str(nbinv-(i-1))  , Center, StepParameterRange(int(base.loc[base['Name']=='MP', 'M'].to_string(index=False)), 1, 1) )
+          self.addDevice( 'MPc'+str(nbinv-(i-1)) , Center, StepParameterRange(int(base.loc[base['Name']=='MPc', 'M'].to_string(index=False)), 1, 1) )
           # #3
           self.popNode()
+          print('i',i)
+          print('nbinv-(i-1)',nbinv-(i-1))
+          print('(nbinv//2)+1',(nbinv//2)+1)
+
+        # #2
+        self.pushHNode( Center )
+        # #3
+        self.addDevice( 'MNc'+str((nbinv//2)+1)   , Center, StepParameterRange(int(base.loc[base['Name']=='MNc', 'M'].to_string(index=False)), 1, 1) )
+        self.addDevice( 'MN'+str((nbinv//2)+1)    , Center, StepParameterRange(int(base.loc[base['Name']=='MN', 'M'].to_string(index=False)), 1, 1) )
+        self.addDevice( 'MP'+str((nbinv//2)+1)    , Center, StepParameterRange(int(base.loc[base['Name']=='MP', 'M'].to_string(index=False)), 1, 1) )
+        self.addDevice( 'MPc'+str((nbinv//2)+1)   , Center, StepParameterRange(int(base.loc[base['Name']=='MPc', 'M'].to_string(index=False)), 1, 1) )
+        # #3
+        self.popNode()        
         # #2
         self.popNode()
         # #1
@@ -217,63 +228,7 @@ class VCO ( AnalogDesign ):
         # #1
         self.popNode()
         # #0
-        
-########################## Investigation with Floorplan 2 (with matched transistors in slices)
-        """
-        # #0
-        self.pushHNode( Center )
-        # #1
-        self.addHRail( self.getNet('vss'), 'METAL4', 2, "CH1", "IH1" )
-        # #1
-        self.pushVNode( Center )
-        # #2
-        self.pushHNode( Center )
-        # #3
-        self.addDevice( 'MN'   , Center, StepParameterRange(1, 1, 1) )
-        self.addDevice( 'MP'   , Center, StepParameterRange(1, 1, 1) )
-        # #3
-        self.popNode()
-        # #2
-        self.pushHNode( Center )
-        # #3
-        self.pushVNode( Center )
-        # #4
-        for i in range(nbinv):
-          self.addDevice( 'MNc'+str(i+1)   , Center, StepParameterRange(1, 1, 1) )
-        # #4
-        self.popNode()
-        # #3
-        self.pushVNode( Center )
-        # #4
-        for i in range(nbinv):
-          self.addDevice( 'MNb'+str(i+1)   , Center, StepParameterRange(1, 1, 1) )
-        # #4
-        self.popNode()
-        # #3
-        self.pushVNode( Center )
-        # #4
-        for i in range(nbinv):
-          self.addDevice( 'MPb'+str(i+1)   , Center, StepParameterRange(1, 1, 1) )
-        # #4
-        self.popNode()
-        # #3
-        self.pushVNode( Center )
-        # #4
-        for i in range(nbinv):
-          self.addDevice( 'MPc'+str(i+1)   , Center, StepParameterRange(1, 1, 1) )
-        # #4
-        self.popNode()
-        # #3
-        self.popNode()
-        # #2
-        self.popNode()
-        # #1
-        self.addHRail( self.getNet('vdd'), 'METAL4', 2, "CH2", "IH2" )
-        # #1
-        self.popNode()
-        # #0
-        """
-        
+
         self.endSlicingTree()
     
         self.updatePlacement(  0 )
@@ -286,6 +241,7 @@ class VCO ( AnalogDesign ):
 
 def scriptMain ( **kw ):
     editor = None
+    #if kw.has_key('editor') and kw['editor']:
     if 'editor' in kw and kw['editor']:
       editor = kw['editor']
 
