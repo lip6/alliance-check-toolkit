@@ -1,5 +1,5 @@
 C	?= lsxrules#
-V	?=2#
+V	?= lsx#
 
 help:
 	@echo ""
@@ -14,7 +14,7 @@ graal:
 	graal -l $(C)
 
 dreal:
-	export RDS_TECHNO_NAME=sky130d1_$(V).rds;\
+	export RDS_TECHNO_NAME=sky130_$(V).rds;\
 	export DREAL_TECHNO_NAME=symbolic.dreal;\
 	export RDS_IN=cif;\
 	export RDS_OUT=cif;\

@@ -145,11 +145,11 @@ table mbk_to_rds_segment
 # mbk_name     rds_name1 dlr dwr offset mode     rds_name2 dlr dwr offset mode
 # ----------------------------------------------------------------------------------
 
-  nwell   rds_nwell  vw    0.320   0.280  .0  all\
-          rds_pimp   vw    0.085   0.170  .0  all
+  nwell   rds_nwell  vw    0.460   0.280  .0  all\
+          rds_pimp   vw    0.225   0.170  .0  all
                                                                                                                   
-  pwell   rds_pwell  vw    0.320   0.280  .0  all\
-          rds_nimp   vw    0.085   0.170  .0  all
+  pwell   rds_pwell  vw    0.460   0.280  .0  all\
+          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
   ndif    rds_activ  vw    0.070   0.000  .0  all\
           rds_ndif   vw    0.070   0.000  .0  ext
@@ -159,11 +159,11 @@ table mbk_to_rds_segment
                                                                                                                   
   ntie    rds_activ  vw    0.145  -0.130  .0  all\
           rds_ntie   vw    0.270   0.120  .0  all\
-          rds_nwell  vw    0.320   0.510  .0  all
+          rds_nwell  vw    0.460   0.510  .0  all
                                                                                                                   
   ptie    rds_activ  vw    0.145  -0.130  .0  all\
           rds_ptie   vw    0.270   0.120  .0  all\
-          rds_pwell  vw    0.320   0.510  .0  all
+          rds_pwell  vw    0.460   0.510  .0  all
                                                                                                                   
   ntrans  rds_poly   vw   -0.075   0.010  .0  all\
           rds_activ  vw   -0.210   0.560  .0  drc\
@@ -176,9 +176,9 @@ table mbk_to_rds_segment
           rds_pdif   rcw  -0.210   0.280    0.005 ext
                                                                                                                   
   poly    rds_poly   vw    0.075   0.010  .0  all
-  alu1    rds_alu1   vw    0.095   0.050  .0  all
+  alu1    rds_alu1   vw    0.165   0.050  .0  all
   calu1   rds_alu1   vw    0.165   0.050  .0  all
-  talu1   rds_talu1  vw    0.095   0.050  .0  all
+  talu1   rds_talu1  vw    0.165   0.050  .0  all
 
 end
 
@@ -187,15 +187,15 @@ table mbk_to_rds_connector
 # mbk_name  rds_name der dwr
 # -------------------------------------------------------------------
   poly   rds_poly     0.075    0.010
-  alu1   rds_alu1     0.095    0.050
+  alu1   rds_alu1     0.165    0.050
 end
 
 table mbk_to_rds_reference
 # -------------------------------------------------------------------
 # mbk_name  rds_name  width
 # -------------------------------------------------------------------
-  ref_ref  rds_ref    0.190
-  ref_con  rds_ref    0.190
+  ref_ref  rds_ref    0.330
+  ref_con  rds_ref    0.330
 end
 
 table mbk_to_rds_via
@@ -324,7 +324,7 @@ table s2r_minimum_layer_width
   rds_nwell     0.840
   rds_pwell     0.840
   rds_poly      0.150
-  rds_alu1      0.190
+  rds_alu1      0.330
   rds_activ     0.420
   rds_ntie      0.380
   rds_ptie      0.380

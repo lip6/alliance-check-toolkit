@@ -15,6 +15,9 @@
 ##-------------------------------------------------------------------
 # Refer to the documentation for more precise information.
 #=====================================================================
+# 1/05/23 
+# . no more CXN and CXP
+#
 # 01/11/09 ALU5/6 pitch 10
 #
 # 99/11/3 ALU5/6 rules
@@ -66,9 +69,9 @@ TABLE MBK_TO_RDS_SEGMENT
   NWELL    RDS_NWELL  VW  2.0  0.0  0.0  ALL
   NDIF     RDS_NDIF   VW  0.5  0.0  0.0  ALL
   PDIF     RDS_PDIF   VW  0.5  0.0  0.0  ALL 
-  NTIE     RDS_NTIE   VW  1.5  0.0  0.0  ALL \
+  NTIE     RDS_NTIE   VW  1.5  0.0  0.0  ALL\
            RDS_NWELL  VW  2.0  5.0  0.0  ALL
-  PTIE     RDS_PTIE   VW  1.5  0.0  0.0  ALL \
+  PTIE     RDS_PTIE   VW  1.5  0.0  0.0  ALL\
            RDS_PWELL  VW  2.0  5.0  0.0  ALL # LSX DLR 0.5 -> 1.5
   NTRANS   RDS_POLY   VW  0.0  0.0  0.0  ALL \
            RDS_NDIF  LCW -1.5  2.5  0.0  EXT \
@@ -95,7 +98,7 @@ TABLE MBK_TO_RDS_SEGMENT
   CALU5    RDS_ALU5   VW  1.0  0.0  0.0  ALL 
   CALU6    RDS_ALU6   VW  1.0  0.0  0.0  ALL 
   TPOLY    RDS_TPOLY  VW  0.5  0.0  0.0  ALL
-  TALU1    RDS_TALU1  VW  0.5  0.0  0.0  ALL
+  TALU1    RDS_TALU1  VW  1.0  0.0  0.0  ALL # SX DLR 0.5 -> 1.0
   TALU2    RDS_TALU2  VW  1.0  0.0  0.0  ALL
   TALU3    RDS_TALU3  VW  1.0  0.0  0.0  ALL
   TALU4    RDS_TALU4  VW  1.0  0.0  0.0  ALL
@@ -163,8 +166,6 @@ TABLE MBK_TO_RDS_VIA
   CONT_VIA3    RDS_ALU3 2 ALL  RDS_VIA3 1 ALL  RDS_ALU4 2 ALL
   CONT_VIA4    RDS_ALU4 2 ALL  RDS_VIA4 1 ALL  RDS_ALU5 2 ALL
   CONT_VIA5    RDS_ALU5 2 ALL  RDS_VIA5 1 ALL  RDS_ALU6 2 ALL
-  C_X_N        RDS_POLY 1 ALL  RDS_NDIF 5 ALL  RDS_ACTIV 6 ALL
-  C_X_P        RDS_POLY 1 ALL  RDS_PDIF 5 ALL  RDS_NWELL 6 ALL  RDS_ACTIV 6 ALL
 
 END
 

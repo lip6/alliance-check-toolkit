@@ -1,8 +1,8 @@
 # Default value for unregistered user.
 # This sccript *must* be edited to match your Coriolis installation.
 
- DEFAULT_ROOT=${HOME}
  DEFAULT_ROOT=/users/outil/coriolis
+ DEFAULT_ROOT=${HOME}
  ifeq ($(NDA_TOP),)
      ifeq ($(shell hostname),lepka)
          export NDA_TOP = ${DEFAULT_ROOT}/crypted/soc/techno

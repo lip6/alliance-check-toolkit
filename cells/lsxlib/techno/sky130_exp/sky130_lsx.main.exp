@@ -19,15 +19,15 @@ DW_ACTI       = sup(GRID, BW_ACTI-SW_DIFX*LAMBDA);
 DW_ATIE       = sup(GRID, BW_ATIE-SW_DIFX*LAMBDA);
 DW_ALU1       = sup(GRID, BW_ALU1-SW_ALU1*LAMBDA);
 
-DL_NWEL       = sup(GRID, DW_NWEL/2);
-DL_PWEL       = sup(GRID, DW_PWEL/2);
+DL_NWEL       = sup(GRID, 2*LAMBDA); #DW_NWEL/2);
+DL_PWEL       = sup(GRID, 2*LAMBDA); #DW_PWEL/2);
 DL_POLY       = sup(GRID, BW_POLY/2);
 DL_TRAN_POLY  = sup(GRID, BE_POLT);
 DL_TRAN_ACTI  = sup(GRID, DL_TRAN_POLY-BE_POLT_ACTI);
 DL_ACTI       = sup(GRID, 2*LAMBDA+DL_TRAN_ACTI);
 DL_ATIE       = sup(GRID, BW_ATIE/2);
 DL_ALU1       = sup(GRID, BW_ALU1/2);
-DL_CALU1      = sup(GRID, (BW_ALU1+LAMBDA)/2); # all CALU1 are 2 lambdas width mimimum
+DL_CALU1      = sup(GRID, BW_ALU1/2); 
 
 T_OFFSET      = (BW_POLY - SW_POLY*LAMBDA)/2;   # Drain & Source for extractor
 ]//
