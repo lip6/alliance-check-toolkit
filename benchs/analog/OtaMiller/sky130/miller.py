@@ -33,9 +33,11 @@
 
 import os
 import sys
-from   coriolis           import Cfg
-from   coriolis.Hurricane import *
-from   coriolis           import CRL, helpers
+from   coriolis            import Cfg
+from   coriolis.Hurricane  import *
+from   coriolis            import CRL, helpers
+from   coriolis.helpers    import l, u, n
+from   coriolis.helpers.io import catch
 
 #setTraceLevel( 100 )
 
@@ -63,6 +65,10 @@ Unknown = SlicingNode.AlignBottom
 VNode   = 1
 HNode   = 2
 DNode   = 3
+
+
+
+def toMicrons ( u ): return DbU.toPhysical( u, DbU.UnitPowerMicro )
 
 
 
@@ -94,16 +100,16 @@ class MILLERD ( AnalogDesign ):
        #    +====================+===========+=================+=====+===============+================+=======+
 
         self.devicesSpecs = \
-          [ [ Transistor  , 'mn1'     , 'WIP Transistor', NMOS, 6.0    , 0.350 , 2, None,  0, True , 0x2, False ]
-          , [ Transistor  , 'mn2'     , 'WIP Transistor', NMOS, 6.0    , 0.350 , 2, None,  0, True , 0x2, False ]
-          , [ Transistor  , 'mp3'     , 'WIP Transistor', PMOS, 20.0   , 0.350 , 4, None,  0, True , 0x1, True  ]
-          , [ Transistor  , 'mp4'     , 'WIP Transistor', PMOS, 20.0   , 0.350 , 4, None,  0, True , 0x1, True  ]
-          , [ Transistor  , 'mn5'     , 'WIP Transistor', NMOS, 14.0   , 0.350 , 4, None,  0, True , 0x2, True  ]
-          , [ Transistor  , 'mp6'     , 'WIP Transistor', PMOS, 200.0  , 0.350 ,16, None,  0, True , 0x1, True  ]
-          , [ Transistor  , 'mn7'     , 'WIP Transistor', NMOS, 30.0   , 0.350 ,10, None,  0, True , 0x2, True  ]
-          , [ Transistor  , 'mp8'     , 'WIP Transistor', PMOS, 200.0  , 0.350 ,16, None,  0, True , 0x1, True  ]
-          , [ Transistor  , 'mn9'     , 'WIP Transistor', NMOS, 30.0   , 0.350 ,10, None,  0, True , 0x2, True  ]
-          , [ MultiCapacitor     , 'MIM_1'   , 'Matrix'        , MIM , (0.13, 0.13)         , twoCapas_2x2    , False ]
+          [ [ Transistor    , 'mn1'     , 'WIP Transistor', NMOS, 6.0    , 0.350 , 2, None,  0, True , 0x2, False ]
+          , [ Transistor    , 'mn2'     , 'WIP Transistor', NMOS, 6.0    , 0.350 , 2, None,  0, True , 0x2, False ]
+          , [ Transistor    , 'mp3'     , 'WIP Transistor', PMOS, 20.0   , 0.350 , 4, None,  0, True , 0x1, True  ]
+          , [ Transistor    , 'mp4'     , 'WIP Transistor', PMOS, 20.0   , 0.350 , 4, None,  0, True , 0x1, True  ]
+          , [ Transistor    , 'mn5'     , 'WIP Transistor', NMOS, 14.0   , 0.350 , 4, None,  0, True , 0x2, True  ]
+          , [ Transistor    , 'mp6'     , 'WIP Transistor', PMOS, 200.0  , 0.350 ,16, None,  0, True , 0x1, True  ]
+          , [ Transistor    , 'mn7'     , 'WIP Transistor', NMOS, 30.0   , 0.350 ,10, None,  0, True , 0x2, True  ]
+          , [ Transistor    , 'mp8'     , 'WIP Transistor', PMOS, 200.0  , 0.350 ,16, None,  0, True , 0x1, True  ]
+          , [ Transistor    , 'mn9'     , 'WIP Transistor', NMOS, 30.0   , 0.350 ,10, None,  0, True , 0x2, True  ]
+          , [ MultiCapacitor, 'MIM_1'   , 'Matrix'        , MIM , (0.13, 0.13), twoCapas_2x2, False ]
 
           ]
 
@@ -143,6 +149,35 @@ class MILLERD ( AnalogDesign ):
         self.beginCell( 'millerN' )
         self.doDevices()
         self.doNets   ()
+
+        # To read devices parameters from the AnalogDesign DSpec table.
+        mn5_W = self.getTransW( 'mn5' )
+        print( 'mn5 W = {}'.format( mn5_W ))
+        # To read/set devices parameters directly from the device itself.
+        # W parameter, reading.
+        mn5 = self.getDevice( 'mn5' )
+        print( 'mn5 = {}'.format( mn5 ))
+        print( 'mn5.W = {}'.format( mn5.getParameter('W') ))
+        print( 'mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
+        # W parameter, setting (then reading again).
+        mn5.getParameter( "W" ).setValue( u(10.0) )
+        print( 'mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
+        # M parameter.
+        print( 'mn5.M = {}'.format( mn5.getParameter('W') ))
+        print( 'mn5.M = {}'.format( mn5.getParameter('M').getValue() ))
+        # M parameter, setting.
+        mn5.getParameter( "M" ).setValue( 2 )
+        print( 'mn5.M = {}'.format( mn5.getParameter('M').getValue() ))
+        # Check: this will raise an exception as MIM_1 is obvioulsly not a transistor.
+        #mim1_W = self.getTransW( 'MIM_1' )
+
+        # To read devices parameters from the device.
+        mn5_W = self.getDTransW( 'mn5' )
+        print( 'mn5.W = {}'.format( mn5_W ))
+        # Check: this will raise an exception as MIM_1 is obvioulsly not a transistor.
+        #mim1_W = self.getDTransW( 'MIM_1' )
+        mim1_Cs = self.getDCapaC( 'MIM_1' )
+        print( 'mimi1_Cs = {}'.format( mim1_Cs ))
     
         self.beginSlicingTree()
         self.setToleranceRatioH( 1000000000.0 )
@@ -162,7 +197,7 @@ class MILLERD ( AnalogDesign ):
         # #2
         self.pushHNode( Center )
         # #3
-        self.addDevice( 'mn5'    , Center, StepParameterRange(self.devicesSpecs[4][6], 1, 1) )
+        self.addDevice( 'mn5', Center, StepParameterRange(self.getTransM('mn5'), 1, 1) )
         # #3
         self.pushVNode( Center )
         # #4
@@ -215,6 +250,8 @@ class MILLERD ( AnalogDesign ):
     
         self.updatePlacement(  0 )
         self.endCell()
+        print( 'mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
+        print( 'mn5.M = {}'.format(            mn5.getParameter('M').getValue() ))
     
         if editor:
           editor.setCell( self.cell )
@@ -223,19 +260,26 @@ class MILLERD ( AnalogDesign ):
 
 
 def scriptMain ( **kw ):
-    editor = None
-    #if kw.has_key('editor') and kw['editor']:
-    if 'editor' in kw and kw['editor']:
-      editor = kw['editor']
-
-    cell = CRL.AllianceFramework.get().getCell( 'millerN', CRL.Catalog.State.Views )
-    if cell:
-        UpdateSession.open()
-        cell.destroy()
-        UpdateSession.close()
-        print( 'Previous <millerN> cell destroyed.')
-
-    design = MILLERD()
-    design.build( editor )
-    return True
+    rvalue = True
+    try:
+        editor = None
+        #if kw.has_key('editor') and kw['editor']:
+        if 'editor' in kw and kw['editor']:
+          editor = kw['editor']
+    
+        cell = CRL.AllianceFramework.get().getCell( 'millerN', CRL.Catalog.State.Views )
+        if cell:
+            UpdateSession.open()
+            cell.destroy()
+            UpdateSession.close()
+            print( 'Previous <millerN> cell destroyed.')
+    
+        design = MILLERD()
+        design.build( editor )
+    except Exception as e:
+        catch( e ) 
+        rvalue = False
+    sys.stdout.flush()
+    sys.stderr.flush()
+    return rvalue
 
