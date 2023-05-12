@@ -10,7 +10,12 @@ export MBK_CATA_LIB = $(CELLS_TOP)/lsxlib
 
 characterize: lsxlib-dot-lib
 
-check-lib-test: ./check/sffw2r2_x1.ok
+check-lib-test: ./check/mx2_x0.ok
+	# ./check/noa2a22_x0.ok
+	# ./check/invbuf_x3.ok
+	#./check/sffram2bw2r2.vhd
+	# ./check/ctrw2r2_x1.ok
+	# ./check/sram2b.ok 
 
 Sgraal:
 	export RDS_TECHNO_NAME=techno/symbolic.rds;\

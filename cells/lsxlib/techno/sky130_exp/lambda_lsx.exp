@@ -123,6 +123,46 @@ if (def(BE_POLT),
 
 # ---------------------------------------------------------------------------
 
+"Lambda: Pitch run ALU2 - run ALU2" =
+         (RD_ALU2+BW_ALU2)
+        /(SD_ALU2+SW_ALU2) ;
+
+"Lambda: Pitch run ALU2 - contact ALU2 on VIA1" =
+         (BW_VIA1/2+BE_ALU2_VIA1+RD_ALU2+BW_ALU2/2)
+        /(SW_VIAX/2+SE_ALU2_VIA1+SD_ALU2+SW_ALU2/2) ;
+
+"Lambda: Pitch contact ALU2 on VIA1 - contact ALU2 on VIA1" =
+         (BW_VIA1+2*BE_ALU2_VIA1+RD_ALU2)
+        /(SW_VIAX+2*SE_ALU2_VIA1+SD_ALU2) ;
+
+"Lambda: Pitch contact ALU2 on VIA2 - contact ALU2 on VIA2" =
+         (BW_VIA1+2*BE_ALU2_VIA2+RD_ALU2)
+        /(SW_VIAX+2*SE_ALU2_VIA2+SD_ALU2) ;
+
+"Lambda: Pitch VIA1 - VIA1" =
+         (BW_VIA1+RD_VIA1)
+        /(SW_VIAX+SD_VIA1) ;
+
+# ---------------------------------------------------------------------------
+
+"Lambda: Pitch run ALU3 - run ALU3" =
+         (RD_ALU3+BW_ALU3)
+        /(SD_ALU3+SW_ALU3) ;
+
+"Lambda: Pitch run ALU3 - contact ALU3 on VIA2" =
+         (BW_VIA2/2+BE_ALU3_VIA2+RD_ALU3+BW_ALU3/2)
+        /(SW_VIAX/2+SE_ALU3_VIA2+SD_ALU3+SW_ALU3/2) ;
+
+"Lambda: Pitch contact ALU3 on VIA2 - contact ALU3 on VIA2" =
+         (BW_VIA2+2*BE_ALU3_VIA2+RD_ALU3)
+        /(SW_VIAX+2*SE_ALU3_VIA2+SD_ALU3) ;
+
+"Lambda: Pitch VIA1 - VIA1" =
+         (BW_VIA2+RD_VIA2)
+        /(SW_VIAX+SD_VIA2) ;
+
+# ---------------------------------------------------------------------------
+
 LAMBDA = sup(GRID, max('Lambda.*'));   # finally LAMBDA is the greatest constraint
 LAMBDA = inf(GRID, (LAMBDA+GRID)/2)*2; # but LAMBDA must be pair
 ]//

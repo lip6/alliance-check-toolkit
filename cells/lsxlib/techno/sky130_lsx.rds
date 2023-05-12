@@ -176,18 +176,24 @@ table mbk_to_rds_segment
           rds_pdif   rcw  -0.210   0.280    0.005 ext
                                                                                                                   
   poly    rds_poly   vw    0.075   0.010  .0  all
+
   alu1    rds_alu1   vw    0.165   0.050  .0  all
   calu1   rds_alu1   vw    0.165   0.050  .0  all
   talu1   rds_talu1  vw    0.165   0.050  .0  all
 
+  alu2    rds_alu2   vw    0.165   0.050  .0  all
+  calu2   rds_alu2   vw    0.165   0.050  .0  all
+  talu2   rds_talu2  vw    0.165   0.050  .0  all
+
+  alu3    rds_alu3   vw    0.165   0.050  .0  all
+  calu3   rds_alu3   vw    0.165   0.050  .0  all
+  talu3   rds_talu3  vw    0.165   0.050  .0  all
 end
 
 table mbk_to_rds_connector
 # -------------------------------------------------------------------
 # mbk_name  rds_name der dwr
 # -------------------------------------------------------------------
-  poly   rds_poly     0.075    0.010
-  alu1   rds_alu1     0.165    0.050
 end
 
 table mbk_to_rds_reference
@@ -230,6 +236,16 @@ table mbk_to_rds_via
     rds_cont        0.170  all\
     rds_poly        0.290  all\
     rds_alu1        0.330  all
+
+  cont_via    \
+    rds_via1        0.170  all\
+    rds_alu1        0.330  all\
+    rds_alu2        0.330  all
+
+  cont_via2   \
+    rds_via2        0.170  all\
+    rds_alu2        0.330  all\
+    rds_alu3        0.330  all
 end
 
 table mbk_to_rds_bigvia_hole
@@ -249,6 +265,8 @@ table mbk_to_rds_turnvia
 # mbk_name rds_name dwr mode
 # -------------------------------------------------------------------
   cont_turn1 rds_alu1    0.050 all
+  cont_turn2 rds_alu1    0.050 all
+  cont_turn3 rds_alu1    0.050 all
 end
 
 table lynx_bulk_implicit
@@ -261,8 +279,6 @@ table lynx_transistor
 # -------------------------------------------------------------------
 # mbk_name trans_name compostion
 # -------------------------------------------------------------------
-  ntrans  ntrans c_x_n rds_poly rds_ndif rds_activ rds_pwell
-  ptrans  ptrans c_x_p rds_poly rds_pdif rds_activ rds_nwell
 end
 
 table lynx_diffusion
@@ -283,8 +299,10 @@ table lynx_graph
   rds_pdif   rds_cont   rds_pdif
   rds_poly   rds_cont   rds_poly
   rds_cont   rds_pdif   rds_ndif   rds_poly  rds_alu1  rds_cont
-  rds_alu1   rds_cont   rds_via1   rds_alu1  rds_ref
+  rds_alu1   rds_cont   rds_via1   rds_ref   rds_alu1  
   rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
+  rds_alu2   rds_via1   rds_via2   rds_alu2 
+  rds_alu3   rds_via2   rds_alu3
 end
 
 table s2r_oversize_denotch
@@ -295,6 +313,8 @@ table s2r_oversize_denotch
   rds_pwell     0.635
   rds_poly      0.100
   rds_alu1      0.080
+  rds_alu2      0.080
+  rds_alu3      0.080
   rds_activ     0.130
   rds_ntie      0.190
   rds_ptie      0.190
@@ -310,6 +330,8 @@ table s2r_bloc_ring_width
   rds_pwell   0. # [ RD_PWEL ]
   rds_poly    0. # [ RD_POLY ]
   rds_alu1    0. # [ RD_ALU1 ]
+  rds_alu2    0. # [ RD_ALU2 ]
+  rds_alu3    0. # [ RD_ALU3 ]
   rds_activ   0. # [ RD_ACTI ]
   rds_ntie    0. # [ RD_NIMP ]
   rds_ptie    0. # [ RD_PIMP ]
@@ -325,6 +347,8 @@ table s2r_minimum_layer_width
   rds_pwell     0.840
   rds_poly      0.150
   rds_alu1      0.330
+  rds_alu2      0.330
+  rds_alu3      0.330
   rds_activ     0.420
   rds_ntie      0.380
   rds_ptie      0.380
@@ -345,6 +369,8 @@ table s2r_post_treat
   rds_nimp         treat rds_ptie
   rds_pimp         treat rds_ntie
   rds_alu1         treat null
+  rds_alu2         treat null
+  rds_alu3         treat null
   rds_cont       notreat null
 end
 
@@ -359,6 +385,8 @@ layer RDS_ACTIV   0.420 ;
 layer RDS_CONT    0.170 ;
 layer RDS_POLY    0.150 ;
 layer RDS_ALU1    0.170 ;
+layer RDS_ALU2    0.170 ;
+layer RDS_ALU3    0.170 ;
 layer RDS_USER0   0.005 ;
 layer RDS_USER1   0.005 ;
 layer RDS_USER2   0.005 ;
