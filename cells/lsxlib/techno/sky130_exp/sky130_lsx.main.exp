@@ -18,6 +18,8 @@ DW_TRAN_ACTI  = sup(GRID, 2*BE_ACTI_POLT+DW_POLY);
 DW_ACTI       = sup(GRID, BW_ACTI-SW_DIFX*LAMBDA);
 DW_ATIE       = sup(GRID, BW_ATIE-SW_DIFX*LAMBDA);
 DW_ALU1       = sup(GRID, BW_ALU1-SW_ALU1*LAMBDA);
+DW_ALU2       = sup(GRID, BW_ALU2-SW_ALU2*LAMBDA);
+DW_ALU3       = sup(GRID, BW_ALU3-SW_ALU3*LAMBDA);
 
 DL_NWEL       = sup(GRID, 2*LAMBDA); #DW_NWEL/2);
 DL_PWEL       = sup(GRID, 2*LAMBDA); #DW_PWEL/2);
@@ -27,7 +29,8 @@ DL_TRAN_ACTI  = sup(GRID, DL_TRAN_POLY-BE_POLT_ACTI);
 DL_ACTI       = sup(GRID, 2*LAMBDA+DL_TRAN_ACTI);
 DL_ATIE       = sup(GRID, BW_ATIE/2);
 DL_ALU1       = sup(GRID, BW_ALU1/2);
-DL_CALU1      = sup(GRID, BW_ALU1/2); 
+DL_ALU2       = sup(GRID, BW_ALU2/2);
+DL_ALU3       = sup(GRID, BW_ALU3/2);
 
 T_OFFSET      = (BW_POLY - SW_POLY*LAMBDA)/2;   # Drain & Source for extractor
 ]//
@@ -78,18 +81,24 @@ table mbk_to_rds_segment
           rds_pdif   rcw [ DL_TRAN_ACTI                           ] [ DW_TRAN_ACTI/2                              ]  [T_OFFSET] ext
                                                                                                                   
   poly    rds_poly   vw  [ DL_POLY                                ] [ DW_POLY                                     ]  .0  all
+
   alu1    rds_alu1   vw  [ DL_ALU1                                ] [ DW_ALU1                                     ]  .0  all
-  calu1   rds_alu1   vw  [ DL_CALU1                               ] [ DW_ALU1                                     ]  .0  all
+  calu1   rds_alu1   vw  [ DL_ALU1                                ] [ DW_ALU1                                     ]  .0  all
   talu1   rds_talu1  vw  [ DL_ALU1                                ] [ DW_ALU1                                     ]  .0  all
 
+  alu2    rds_alu2   vw  [ DL_ALU2                                ] [ DW_ALU2                                     ]  .0  all
+  calu2   rds_alu2   vw  [ DL_ALU2                                ] [ DW_ALU2                                     ]  .0  all
+  talu2   rds_talu2  vw  [ DL_ALU2                                ] [ DW_ALU2                                     ]  .0  all
+
+  alu3    rds_alu3   vw  [ DL_ALU3                                ] [ DW_ALU3                                     ]  .0  all
+  calu3   rds_alu3   vw  [ DL_ALU3                                ] [ DW_ALU3                                     ]  .0  all
+  talu3   rds_talu3  vw  [ DL_ALU3                                ] [ DW_ALU3                                     ]  .0  all
 end
 
 table mbk_to_rds_connector
 # -------------------------------------------------------------------
 # mbk_name  rds_name der dwr
 # -------------------------------------------------------------------
-  poly   rds_poly   [ DL_POLY ]  [ DW_POLY ]
-  alu1   rds_alu1   [ DL_ALU1 ]  [ DW_ALU1 ]
 end
 
 table mbk_to_rds_reference
@@ -132,6 +141,16 @@ table mbk_to_rds_via
     rds_cont      [ BW_VIA0                               ]  all\
     rds_poly      [ BW_VIA0+2*(BE_POLY_VIA0)              ]  all\
     rds_alu1      [ BW_VIA0+2*(BE_ALU1_VIA0)              ]  all
+
+  cont_via1   \
+    rds_via1      [ BW_VIA1                               ]  all\
+    rds_alu1      [ BW_VIA1+2*(BE_ALU1_VIA1)              ]  all\
+    rds_alu2      [ BW_VIA1+2*(BE_ALU2_VIA1)              ]  all
+
+  cont_via2   \
+    rds_via2      [ BW_VIA2                               ]  all\
+    rds_alu2      [ BW_VIA2+2*(BE_ALU2_VIA2)              ]  all\
+    rds_alu3      [ BW_VIA2+2*(BE_ALU3_VIA2)              ]  all
 end
 
 table mbk_to_rds_bigvia_hole
@@ -151,6 +170,8 @@ table mbk_to_rds_turnvia
 # mbk_name rds_name dwr mode
 # -------------------------------------------------------------------
   cont_turn1 rds_alu1  [ DW_ALU1 ] all
+  cont_turn2 rds_alu1  [ DW_ALU2 ] all
+  cont_turn3 rds_alu1  [ DW_ALU3 ] all
 end
 
 table lynx_bulk_implicit
@@ -163,8 +184,6 @@ table lynx_transistor
 # -------------------------------------------------------------------
 # mbk_name trans_name compostion
 # -------------------------------------------------------------------
-  ntrans  ntrans c_x_n rds_poly rds_ndif rds_activ rds_pwell
-  ptrans  ptrans c_x_p rds_poly rds_pdif rds_activ rds_nwell
 end
 
 table lynx_diffusion
@@ -185,8 +204,10 @@ table lynx_graph
   rds_pdif   rds_cont   rds_pdif
   rds_poly   rds_cont   rds_poly
   rds_cont   rds_pdif   rds_ndif   rds_poly  rds_alu1  rds_cont
-  rds_alu1   rds_cont   rds_via1   rds_alu1  rds_ref
+  rds_alu1   rds_cont   rds_via1   rds_ref   rds_alu1  
   rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
+  rds_alu2   rds_via1   rds_via2   rds_alu2 
+  rds_alu3   rds_via2   rds_alu3
 end
 
 table s2r_oversize_denotch
@@ -197,6 +218,8 @@ table s2r_oversize_denotch
   rds_pwell   [ sup(GRID,RD_PWEL/2)      ]
   rds_poly    [ inf(GRID,RD_POLY/2-GRID) ]
   rds_alu1    [ inf(GRID,RD_ALU1/2-GRID) ]
+  rds_alu2    [ inf(GRID,RD_ALU2/2-GRID) ]
+  rds_alu3    [ inf(GRID,RD_ALU3/2-GRID) ]
   rds_activ   [ inf(GRID,RD_ACTI/2-GRID) ]
   rds_ntie    [ sup(GRID,RD_NIMP/2)      ]
   rds_ptie    [ sup(GRID,RD_PIMP/2)      ]
@@ -212,6 +235,8 @@ table s2r_bloc_ring_width
   rds_pwell   0. # [ RD_PWEL ]
   rds_poly    0. # [ RD_POLY ]
   rds_alu1    0. # [ RD_ALU1 ]
+  rds_alu2    0. # [ RD_ALU2 ]
+  rds_alu3    0. # [ RD_ALU3 ]
   rds_activ   0. # [ RD_ACTI ]
   rds_ntie    0. # [ RD_NIMP ]
   rds_ptie    0. # [ RD_PIMP ]
@@ -227,6 +252,8 @@ table s2r_minimum_layer_width
   rds_pwell   [ BW_PWEL ]
   rds_poly    [ BW_POLY ]
   rds_alu1    [ BW_ALU1 ]
+  rds_alu2    [ BW_ALU2 ]
+  rds_alu3    [ BW_ALU3 ]
   rds_activ   [ BW_ACTI ]
   rds_ntie    [ BW_NIMP ]
   rds_ptie    [ BW_PIMP ]
@@ -247,6 +274,8 @@ table s2r_post_treat
   rds_nimp         treat rds_ptie
   rds_pimp         treat rds_ntie
   rds_alu1         treat null
+  rds_alu2         treat null
+  rds_alu3         treat null
   rds_cont       notreat null
 end
 
@@ -261,6 +290,8 @@ layer RDS_ACTIV [ RW_ACTI ] ;
 layer RDS_CONT  [ RW_VIA0 ] ;
 layer RDS_POLY  [ RW_POLY ] ;
 layer RDS_ALU1  [ RW_ALU1 ] ;
+layer RDS_ALU2  [ RW_ALU2 ] ;
+layer RDS_ALU3  [ RW_ALU3 ] ;
 layer RDS_USER0 [ GRID    ] ;
 layer RDS_USER1 [ GRID    ] ;
 layer RDS_USER2 [ GRID    ] ;

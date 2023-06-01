@@ -34,6 +34,7 @@ cell-check-druc-%: %.ap
 cell-check-proof-tie_x0:
 cell-check-proof-rowend_x0:
 cell-check-proof-powmid_x0:
+cell-check-proof-sffw2r2_x1:
 
 cell-check-proof-%: ./%.vbe ./check/%.vhd
 	  $(CELL_CHECK_DIR); sed -i -e '/ck.delayed/d' -e 's/linkage/in/' $*.vhd
