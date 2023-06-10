@@ -263,7 +263,6 @@ def scriptMain ( **kw ):
         ethmacConf.cfg.etesian.antennaGateMaxWL    = 0
         ethmacConf.cfg.etesian.antennaDiodeMaxWL   = 0
         ethmacConf.cfg.etesian.bloat               = 'Flexlib'
-        ethmacConf.cfg.etesian.uniformDensity      = True
         ethmacConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         ethmacConf.cfg.etesian.spaceMargin         = 0.10

@@ -18,7 +18,6 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.etesian.effort              = 2
     cfg.etesian.spaceMargin         = 0.10
     cfg.etesian.aspectRatio         = 1.0
-    cfg.etesian.uniformDensity      = True
     cfg.anabatic.topRoutingLayer    = 'METAL5'
     cfg.katana.eventsLimit          = 1000000
     cfg.katana.hTracksReservedMin   = 3

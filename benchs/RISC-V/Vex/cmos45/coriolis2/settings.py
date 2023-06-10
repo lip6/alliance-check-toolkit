@@ -26,7 +26,6 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.etesian.effort              = 2
     cfg.etesian.spaceMargin         = 0.05
     cfg.etesian.aspectRatio         = 1.0
-    cfg.etesian.uniformDensity      = True
     #cfg.etesian.bloat               = 'nsxlib'
     cfg.anabatic.topRoutingLayer    = 'METAL5'
     cfg.katana.eventsLimit          = 1000000

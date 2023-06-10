@@ -139,7 +139,6 @@ def scriptMain (**kw):
        #pllConf = ChipConf( cell, ioPads=ioSpecs.ioPadsSpec )
         pllConf = ChipConf( cell, ioPads=ioPadsSpec )
         pllConf.cfg.etesian.bloat = 'Flexlib'
-        pllConf.cfg.etesian.uniformDensity = True
         pllConf.cfg.etesian.aspectRatio = 1.0
         pllConf.cfg.etesian.spaceMargin = 0.05
         pllConf.cfg.anabatic.searchHalo = 2

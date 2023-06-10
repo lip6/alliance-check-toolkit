@@ -26,7 +26,6 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     #cfg.misc.minTraceLevel          = 159
     #cfg.misc.maxTraceLevel          = 160
     cfg.etesian.effort              = 2
-    cfg.etesian.uniformDensity      = True
     cfg.anabatic.searchHalo         = 4
     cfg.anabatic.topRoutingLayer    = 'METAL5'
     cfg.katana.eventsLimit          = 1000000

@@ -135,7 +135,6 @@ def scriptMain ( **kw ):
         cfg.misc.verboseLevel1        = True
         cfg.misc.verboseLevel2        = True
         cfg.etesian.graphics          = 2
-        cfg.etesian.uniformDensity    = True
         cfg.etesian.effort            = 2
         cfg.etesian.bloat             = 'channel'
        #cfg.etesian.aspectRatio       = 2.2
@@ -210,7 +209,6 @@ def scriptMain ( **kw ):
                      ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.etesian.bloat               = 'channel'
-        conf.cfg.etesian.uniformDensity      = True
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.02

@@ -65,7 +65,6 @@ def scriptMain ( **kw ):
                            ]
                   )
         retrouc.state.cfg.etesian.bloat               = 'nsxlib'
-        retrouc.state.cfg.etesian.uniformDensity      = True
         retrouc.state.cfg.etesian.aspectRatio         = 1.0
         retrouc.state.cfg.etesian.spaceMargin         = 0.10
         retrouc.state.cfg.anabatic.searchHalo         = 2

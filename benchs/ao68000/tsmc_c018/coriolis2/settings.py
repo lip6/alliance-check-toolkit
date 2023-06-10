@@ -38,7 +38,6 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.verboseLevel1       = True
     cfg.misc.verboseLevel2       = True
     cfg.etesian.graphics         = 3
-    cfg.etesian.uniformDensity   = True
     cfg.etesian.spaceMargin      = 0.04
     cfg.anabatic.gcell.displayMode = 2
     cfg.katana.eventsLimit       = 4000000

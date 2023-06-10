@@ -110,7 +110,6 @@ def scriptMain ( **kw ):
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         arlet6502Conf.cfg.viewer.pixelThreshold       = 5
         arlet6502Conf.cfg.etesian.bloat               = 'Flexlib'
-        arlet6502Conf.cfg.etesian.uniformDensity      = True
         arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         arlet6502Conf.cfg.etesian.spaceMargin         = 0.10

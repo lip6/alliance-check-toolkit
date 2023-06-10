@@ -63,7 +63,6 @@ def scriptMain ( **kw ):
         adderConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         adderConf.cfg.viewer.pixelThreshold       = 5
         adderConf.cfg.etesian.bloat               = 'Flexlib'
-        adderConf.cfg.etesian.uniformDensity      = True
         adderConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         adderConf.cfg.etesian.spaceMargin         = 0.20

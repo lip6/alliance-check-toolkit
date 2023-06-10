@@ -77,7 +77,6 @@ def scriptMain ( **kw ):
         memoryConf = ChipConf( cell, ioPins=[], ioPads=ioPadsSpec ) 
         memoryConf.cfg.viewer.pixelThreshold       = 5
         memoryConf.cfg.etesian.bloat               = 'nsxlib'
-        memoryConf.cfg.etesian.uniformDensity      = True
         memoryConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         memoryConf.cfg.etesian.spaceMargin         = 0.20

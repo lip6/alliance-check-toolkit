@@ -118,7 +118,6 @@ def scriptMain ( **kw ):
         snxConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         snxConf.cfg.viewer.pixelThreshold       = 5
         snxConf.cfg.etesian.bloat               = 'disabled'
-        snxConf.cfg.etesian.uniformDensity      = True
         snxConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         snxConf.cfg.etesian.spaceMargin         = 0.10

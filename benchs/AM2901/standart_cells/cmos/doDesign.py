@@ -73,7 +73,6 @@ def scriptMain ( **kw ):
               ]
         am2901Conf = ChipConf( cell , ioPads=ioPadsSpec )
         am2901Conf.cfg.etesian.bloat          = 'nsxlib'
-        am2901Conf.cfg.etesian.uniformDensity = True
         am2901Conf.cfg.etesian.aspectRatio    = 1.0
         am2901Conf.cfg.etesian.spaceMargin    = 0.05
         am2901Conf.cfg.block.spareSide        = l(600)

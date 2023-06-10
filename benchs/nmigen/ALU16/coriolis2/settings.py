@@ -21,7 +21,6 @@ with Configuration(Configuration.PRIORITY_USER_FILE) as conf:
     conf.etesian_effort              = 2
     conf.etesian_spaceMargin         = '20.0%'
     conf.etesian_aspectRatio         = '100.0%'
-    conf.etesian_uniformDensity      = True
     conf.anabatic_edgeLenght         = 24
     conf.anabatic_edgeWidth          = 8
     conf.anabatic_topRoutingLayer    = 'METAL5'
@@ -46,7 +45,6 @@ Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
 #Cfg.getParamEnumerate ( 'etesian.effort'              ).setInt       ( 2       )
 #Cfg.getParamPercentage( 'etesian.spaceMargin'         ).setPercentage( 20.0    )
 #Cfg.getParamPercentage( 'etesian.aspectRatio'         ).setPercentage( 100.0   )
-#Cfg.getParamBool      ( 'etesian.uniformDensity'      ).setBool      ( True    )
 #Cfg.getParamInt       ( 'anabatic.edgeLenght'         ).setInt       ( 24      )
 #Cfg.getParamInt       ( 'anabatic.edgeWidth'          ).setInt       ( 8       )
 #Cfg.getParamString    ( 'anabatic.topRoutingLayer'    ).setString    ( 'METAL5')

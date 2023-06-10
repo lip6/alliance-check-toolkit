@@ -72,7 +72,6 @@ def scriptMain ( **kw ):
         blockAlu16.useBlockInstance( 'subckt_49_sub'
                                     , Transformation( l(600), l(100), Transformation.Orientation.ID ))
         blockAlu16.setUnexpandPins( IoPin.SOUTH )
-        blockAlu16.state.cfg.etesian.uniformDensity    =  True
         blockAlu16.state.cfg.etesian.aspectRatio       =  1.0
         blockAlu16.state.cfg.etesian.spaceMargin       =  0.07
         blockAlu16.state.cfg.katana.searchHalo         =  20

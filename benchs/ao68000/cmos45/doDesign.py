@@ -58,7 +58,6 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.etesian.spaceMargin         = 0.35
         ao68000Conf.cfg.etesian.aspectRatio         = 1.00
         ao68000Conf.cfg.etesian.effort              = 2
-        ao68000Conf.cfg.etesian.uniformDensity      = True
         ao68000Conf.cfg.anabatic.searchHalo         = 3
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         ao68000Conf.cfg.katana.hTracksReservedMin   = 7   # Minimum reserved capacity,

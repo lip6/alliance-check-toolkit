@@ -44,7 +44,6 @@ def scriptMain ( **kw ):
                            ]
                   )
         arlet6502.state.cfg.etesian.bloat               = 'nsxlib'
-        arlet6502.state.cfg.etesian.uniformDensity      = True
         arlet6502.state.cfg.etesian.aspectRatio         = 1.0
         arlet6502.state.cfg.etesian.spaceMargin         = 0.10
         arlet6502.state.cfg.anabatic.searchHalo         = 2
