@@ -43,7 +43,8 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH, 'wt'       , l( 500.0),       0 ,  1)
                      ]
         m65sConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=[] ) 
-        m65sConf.cfg.misc.logMode        = True
+        m65sConf.cfg.misc.logMode                = True
+        m65sConf.cfg.etesian.graphics            = 2
         m65sConf.cfg.etesian.effort              = 2
         m65sConf.cfg.etesian.spaceMargin         = 0.10
         m65sConf.cfg.etesian.aspectRatio         = 1.00

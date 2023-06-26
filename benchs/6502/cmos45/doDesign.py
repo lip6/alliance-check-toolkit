@@ -126,7 +126,7 @@ def scriptMain ( **kw ):
                      ]
         m65sConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         m65sConf.cfg.misc.logMode                = True
-        m65sConf.cfg.etesian.bloat               = 'nsxlib'
+       #m65sConf.cfg.etesian.bloat               = 'nsxlib'
         m65sConf.cfg.etesian.uniformDensity      = True
        #m65sConf.cfg.etesian.spaceMargin         = 0.20
        #m65sConf.cfg.etesian.aspectRatio         = 1.00

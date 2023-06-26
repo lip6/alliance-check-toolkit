@@ -2,9 +2,9 @@
 import sys
 import traceback
 from   coriolis.Hurricane  import Breakpoint, DbU
-from   coriolis            import CRL
+from   coriolis            import Cfg, CRL
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
-from   coriolis.helpers    import setTraceLevel, trace, l, u, n
+from   coriolis.helpers    import setTraceLevel, trace, overlay, l, u, n
 from   coriolis            import plugins
 from   coriolis.plugins.block.block         import Block
 from   coriolis.plugins.block.configuration import IoPin, GaugeConf
@@ -18,6 +18,18 @@ af = CRL.AllianceFramework.get()
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore               = False
+        cfg.misc.info                    = False
+        cfg.misc.paranoid                = False
+        cfg.misc.bug                     = False
+        cfg.misc.logMode                 = False
+        cfg.misc.verboseLevel1           = True
+        cfg.misc.verboseLevel2           = True
+        cfg.misc.minTraceLevel           = 1590
+        cfg.misc.maxTraceLevel           = 1600
+        cfg.etesian.graphics             = 3
+
     global af
     rvalue = True
     try:
@@ -226,7 +238,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.vTracksReservedLocal  = 12
         conf.cfg.katana.terminalReservedLocal = 10
         conf.cfg.katana.hTracksReservedMin    = 8
-        conf.cfg.katana.vTracksReservedMin    = 5
+        conf.cfg.katana.vTracksReservedMin    = 6
         conf.cfg.katana.eventsLimit           = 4000000
         conf.editor              = editor
         conf.useHFNS             = False

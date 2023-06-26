@@ -3,8 +3,8 @@
 import sys
 import traceback
 from   coriolis.Hurricane  import DbU, Breakpoint, PythonAttributes
-from   coriolis            import CRL
-from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+from   coriolis            import CRL, Cfg
+from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 loadUserSettings()
 from   coriolis            import plugins
@@ -64,6 +64,17 @@ class MyNetDatas ( object ):
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore              = False
+        cfg.misc.info                   = False
+        cfg.misc.paranoid               = False
+        cfg.misc.bug                    = False
+        cfg.misc.logMode                = False
+        cfg.misc.verboseLevel1          = True
+        cfg.misc.verboseLevel2          = True
+        cfg.misc.minTraceLevel          = 16000
+        cfg.misc.maxTraceLevel          = 17000
+
     global af
     rvalue = True
     try:
@@ -75,31 +86,31 @@ def scriptMain ( **kw ):
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
-        PythonAttributes.enable( cell )
-        print( type(PythonAttributes.get( cell )))
-        print( dir(PythonAttributes.get( cell )))
-       #PythonAttributes.get( cell ).myAttribute = MyAttribute()
-        cell.myAttribute  = MyAttribute()
-        cell.myAttribute1 = MyAttribute()
-        sys.stdout.flush()
-        sys.stderr.flush()
-        print( 'cell.myAttribute=', cell.myAttribute )
-        print( dir(PythonAttributes.get( cell )))
-        print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
-       #del PythonAttributes.get( cell ).myAttribute
-        del cell.myAttribute
-        print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
-        print( dir(PythonAttributes.get( cell )))
-       #PythonAttributes.destroy( cell )
-       #wdatas = MyDatas()
-       #PythonAttributes.add( cell, 'Python.MyDatas', MyDatas() )
-        for net in cell.getNets():
-            PythonAttributes.enable( net )
-            net.netDatas = MyNetDatas(net)
-       #rdatas = PythonAttributes.get( cell, 'Python.MyDatas' )
-       #print( rdatas )
-       #PythonAttributes.remove( cell, 'Python.MyDatas' )
-       #sys.exit( 0 )
+      # PythonAttributes.enable( cell )
+      # print( type(PythonAttributes.get( cell )))
+      # print( dir(PythonAttributes.get( cell )))
+      ##PythonAttributes.get( cell ).myAttribute = MyAttribute()
+      # cell.myAttribute  = MyAttribute()
+      # cell.myAttribute1 = MyAttribute()
+      # sys.stdout.flush()
+      # sys.stderr.flush()
+      # print( 'cell.myAttribute=', cell.myAttribute )
+      # print( dir(PythonAttributes.get( cell )))
+      # print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
+      ##del PythonAttributes.get( cell ).myAttribute
+      # del cell.myAttribute
+      # print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
+      # print( dir(PythonAttributes.get( cell )))
+      ##PythonAttributes.destroy( cell )
+      ##wdatas = MyDatas()
+      ##PythonAttributes.add( cell, 'Python.MyDatas', MyDatas() )
+      # for net in cell.getNets():
+      #     PythonAttributes.enable( net )
+      #     net.netDatas = MyNetDatas(net)
+      ##rdatas = PythonAttributes.get( cell, 'Python.MyDatas' )
+      ##print( rdatas )
+      ##PythonAttributes.remove( cell, 'Python.MyDatas' )
+      ##sys.exit( 0 )
         ioPadsSpec = [ (IoPin.WEST , None, 'iopower_0'  , 'iovdd'  )
                      , (IoPin.WEST , None, 'ioground_0' , 'vss'    )
                      , (IoPin.WEST , None, 'di_0'       , 'di(0)'  , 'di(0)'  )
@@ -223,14 +234,14 @@ def scriptMain ( **kw ):
            #seabreeze = SeabreezeEngine.create( cell )
            #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.axys_1_2' ))
            #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.backwards' ))
-        for net in cell.getNets():
-            try:
-                netDatas = net.netDatas
-                print( 'netDatas =', netDatas )
-            except Exception as e:
-                print( 'No prop', net )
-        PythonAttributes.disableAll( "netDatas" )
-        PythonAttributes.disableAll()
+       #for net in cell.getNets():
+       #    try:
+       #        netDatas = net.netDatas
+       #        print( 'netDatas =', netDatas )
+       #    except Exception as e:
+       #        print( 'No prop', net )
+       #PythonAttributes.disableAll( "netDatas" )
+       #PythonAttributes.disableAll()
     except Exception as e:
         catch( e )
         rvalue = False
