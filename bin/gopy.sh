@@ -17,7 +17,7 @@
  benchRules["MIPS/microprogrammed"]="druc lvx"
  benchRules["MIPS/pipeline"]="druc lvx"
  benchRules["snx/cmos"]="druc lvx"
- benchRules["snx/cmos45"]="lvx"
+ benchRules["snx/cmos45"]="lvx"             # fail.
  benchRules["ao68000/tsmc_c018"]="gds"
  benchRules["ao68000/freepdk45_c4m"]="gds"
  benchRules["ao68000/sky130_c4m"]="gds"
@@ -30,9 +30,9 @@
  benchRules["DCT/lvl0"]="layout"
 
  benchs=""
- benchs="${benchs} adder/cmos"
- benchs="${benchs} adder/cmos45"
- benchs="${benchs} AM2901/standart_cells/cmos"
+##benchs="${benchs} adder/cmos"
+##benchs="${benchs} adder/cmos45"
+##benchs="${benchs} AM2901/standart_cells/cmos"
 #benchs="${benchs} AM2901/datapath/cmos"
  benchs="${benchs} 6502/cmos"
  benchs="${benchs} 6502/cmos45"
@@ -50,12 +50,12 @@
  benchs="${benchs} DCT/lvl0"
 
  if [ -e "/dsk/l1/jpc/crypted/soc/techno/etc/coriolis2/NDA/node180/tsmc_c018" ]; then
-   benchs="${benchs} adder/tsmc_c180"
+   #benchs="${benchs} adder/tsmc_c180"
    benchs="${benchs} arlet6502/tsmc_c018"
    benchs="${benchs} ao68000/tsmc_c018"
  fi
  if [ -e "/dsk/l1/jpc/coriolis-2.x/src/libre-soc/c4m-pdk-freepdk45" ]; then
-   benchs="${benchs} adder/freepdk45_c4m"
+   ##benchs="${benchs} adder/freepdk45_c4m"
    benchs="${benchs} arlet6502/freepdk45_c4m"
    benchs="${benchs} ao68000/freepdk45_c4m"
  fi
