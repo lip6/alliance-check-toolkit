@@ -43,7 +43,7 @@
  benchs="${benchs} snx/cmos"
  benchs="${benchs} snx/cmos45"
  benchs="${benchs} RISC-V/Vex/cmos"
- benchs="${benchs} RISC-V/Vex/cmos45"
+#benchs="${benchs} RISC-V/Vex/cmos45"
  benchs="${benchs} ARM/cmos"
  benchs="${benchs} RingOscillator"
 #benchs="${benchs} nmigen/ALU16"
