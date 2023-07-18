@@ -32,6 +32,9 @@ As an example, you can look at the Arlet6502 design in `benchs/arlet6502/cmos`. 
 
 You can build it with:
 ``` bash
+# Source Coriolis (adapt to your build path)
+eval `~/coriolis-2.x/Linux.x86_64/Release.Shared/install/etc/coriolis2/coriolisEnv.py`
+
 cd benchs/arlet6502/cmos
 # Cleaning step
 doit clean_flow
@@ -42,5 +45,12 @@ doit pnr
 doit lvx
 ```
 
+It's often nicer to use the viewer and see your design:
+``` bash
+doit cgt
+# Go to Tools->Python Script
+# Write "doDesign"
+# Enjoy
+```
 
 
