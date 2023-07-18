@@ -20,48 +20,6 @@ from   coriolis.plugins.chip.chip           import Chip
 af = CRL.AllianceFramework.get()
 
 
-class MyAttribute ( object ):
-
-    count = 0
-
-    def __init__ ( self ):
-        self.value = MyAttribute.count 
-        print( '{} has been created'.format(self) )
-        MyAttribute.count += 1
-
-    def __del__ ( self ):
-        print( '{} has been deleted'.format(self) )
-
-    def __str__ ( self ):
-        return '<MyAttribute {}>'.format(self.value)
-
-
-class MyDatas ( object ):
-
-    def __init__ ( self ):
-        self.value = 2
-        print( '{} has been created'.format(self) )
-
-    def __del__ ( self ):
-        print( '{} has been deleted'.format(self) )
-
-    def __str__ ( self ):
-        return '<MyDatas {}>'.format(self.value)
-
-
-class MyNetDatas ( object ):
-
-    def __init__ ( self, net ):
-        self.net = net
-        print( '{} has been created'.format(self) )
-
-    def __del__ ( self ):
-        print( '{} has been deleted'.format(self) )
-
-    def __str__ ( self ):
-        return '<MyNetDatas {}>'.format(self.net)
-
-
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
@@ -86,31 +44,6 @@ def scriptMain ( **kw ):
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
-      # PythonAttributes.enable( cell )
-      # print( type(PythonAttributes.get( cell )))
-      # print( dir(PythonAttributes.get( cell )))
-      ##PythonAttributes.get( cell ).myAttribute = MyAttribute()
-      # cell.myAttribute  = MyAttribute()
-      # cell.myAttribute1 = MyAttribute()
-      # sys.stdout.flush()
-      # sys.stderr.flush()
-      # print( 'cell.myAttribute=', cell.myAttribute )
-      # print( dir(PythonAttributes.get( cell )))
-      # print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
-      ##del PythonAttributes.get( cell ).myAttribute
-      # del cell.myAttribute
-      # print( 'attr numbers =', PythonAttributes.get(cell).getDictSize() )
-      # print( dir(PythonAttributes.get( cell )))
-      ##PythonAttributes.destroy( cell )
-      ##wdatas = MyDatas()
-      ##PythonAttributes.add( cell, 'Python.MyDatas', MyDatas() )
-      # for net in cell.getNets():
-      #     PythonAttributes.enable( net )
-      #     net.netDatas = MyNetDatas(net)
-      ##rdatas = PythonAttributes.get( cell, 'Python.MyDatas' )
-      ##print( rdatas )
-      ##PythonAttributes.remove( cell, 'Python.MyDatas' )
-      ##sys.exit( 0 )
         ioPadsSpec = [ (IoPin.WEST , None, 'iopower_0'  , 'iovdd'  )
                      , (IoPin.WEST , None, 'ioground_0' , 'vss'    )
                      , (IoPin.WEST , None, 'di_0'       , 'di(0)'  , 'di(0)'  )
@@ -186,7 +119,6 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , 14*l(50.0),      0 ,  1)
                     #, (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*l(50.0),      0 ,  1)
                      ]
-       #ioPinsSpec = []
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         arlet6502Conf.cfg.etesian.bloat               = 'disabled'
        #arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
@@ -231,17 +163,6 @@ def scriptMain ( **kw ):
             blockBuilder = Block( arlet6502Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
-           #seabreeze = SeabreezeEngine.create( cell )
-           #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.axys_1_2' ))
-           #seabreeze.buildElmore( cell.getNet( 'subckt_0_cpu.backwards' ))
-       #for net in cell.getNets():
-       #    try:
-       #        netDatas = net.netDatas
-       #        print( 'netDatas =', netDatas )
-       #    except Exception as e:
-       #        print( 'No prop', net )
-       #PythonAttributes.disableAll( "netDatas" )
-       #PythonAttributes.disableAll()
     except Exception as e:
         catch( e )
         rvalue = False
