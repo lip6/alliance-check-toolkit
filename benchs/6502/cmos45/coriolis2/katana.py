@@ -1,5 +1,5 @@
 
-from Hurricane import DebugSession
+from coriolis.Hurricane import DebugSession
 
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n543' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'dl(6)' ) )

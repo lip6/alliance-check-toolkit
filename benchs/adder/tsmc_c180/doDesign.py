@@ -78,7 +78,7 @@ def scriptMain ( **kw ):
         adderConf.cfg.block.spareSide             = u(200)
        #adderConf.cfg.chip.padCoreSide            = 'North'
        #adderConf.cfg.chip.use45corners           = False
-        adderConf.cfg.chip.useAbstractPads        = True
+        adderConf.cfg.chip.useAbstractPads        = False
         adderConf.cfg.chip.supplyRailWidth        = u(35)
         adderConf.cfg.chip.supplyRailPitch        = u(90)
         adderConf.editor              = editor
@@ -91,11 +91,11 @@ def scriptMain ( **kw ):
         adderConf.chipConf.ioPadGauge = 'LibreSOCIO'
         adderConf.coreSize            = ( u( 130.0), u( 130.0) )
         adderConf.chipSize            = ( u( 700.0), u(1508.0) )
+        adderConf.coreToChipClass     = CoreToChip
         adderConf.useHTree( 'm_clock_from_pad' )
         if buildChip:
-            adderToChip = CoreToChip( adderConf )
-            adderToChip.buildChip()
             chipBuilder = Chip( adderConf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

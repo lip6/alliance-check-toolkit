@@ -148,11 +148,11 @@ def scriptMain ( **kw ):
         snxConf.chipConf.ioPadGauge = 'pxlib'
         snxConf.coreSize            = ( l( 48*50.0), l( 54*50.0) )
         snxConf.chipSize            = ( l(120*50.0), l(120*50.0) )
+        snxConf.coreToChipClass     = CoreToChip
         snxConf.useHTree( 'm_clock' )
         if buildChip:
-            snxToChip = CoreToChip( snxConf )
-            snxToChip.buildChip()
             chipBuilder = Chip( snxConf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

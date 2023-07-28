@@ -70,10 +70,10 @@ def scriptMain ( **kw ):
         adderConf.chipConf.ioPadGauge = 'niolib'
         adderConf.coreSize            = ( l(1500), l(1500) )
         adderConf.chipSize            = ( l(5400), l(5400) )
+        adderConf.coreToChipClass     = CoreToChip
         adderConf.useHTree( 'm_clock_from_pad' )
-        adderToChip = CoreToChip( adderConf )
-        adderToChip.buildChip()
         chipBuilder = Chip( adderConf )
+        chipBuilder.doChipNetlist()
         chipBuilder.doChipFloorplan()
         rvalue = chipBuilder.doPnR()
         chipBuilder.save()

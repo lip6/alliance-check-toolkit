@@ -150,12 +150,12 @@ def scriptMain ( **kw ):
         arlet6502Conf.chipConf.ioPadGauge = 'niolib'
         arlet6502Conf.coreSize            = ( l( 35*50.0), l( 39*50.0) )
         arlet6502Conf.chipSize            = ( l(  5000.0), l(  5000.0) )
+        arlet6502Conf.coreToChipClass     = CoreToChip
         arlet6502Conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
         arlet6502Conf.useHTree( 'reset' )
         if buildChip:
-            arlet6502ToChip = CoreToChip( arlet6502Conf )
-            arlet6502ToChip.buildChip()
             chipBuilder = Chip( arlet6502Conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

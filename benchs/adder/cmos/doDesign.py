@@ -95,13 +95,13 @@ def scriptMain ( **kw ):
         adderConf.bRows               = 2
         adderConf.chipConf.name       = 'chip'
         adderConf.chipConf.ioPadGauge = 'pxlib'
+        adderConf.coreToChipClass     = CoreToChip
         adderConf.coreSize            = ( l( 800), l( 800) )
         adderConf.chipSize            = ( l(2116), l(2066) )
         adderConf.useHTree( 'm_clock' )
         if buildChip:
-            adderToChip = CoreToChip( adderConf )
-            adderToChip.buildChip()
             chipBuilder = Chip( adderConf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

@@ -145,11 +145,11 @@ def scriptMain ( **kw ):
         m65sConf.chipConf.ioPadGauge = 'niolib'
         m65sConf.coreSize            = ( l( 4500), l( 4500) )
         m65sConf.chipSize            = ( l(12400), l(12400) )
+        m65sConf.coreToChipClass     = CoreToChip
         m65sConf.useHTree( 'm_clock' )
         if buildChip:
-            m65sToChip = CoreToChip( m65sConf )
-            m65sToChip.buildChip()
             chipBuilder = Chip( m65sConf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

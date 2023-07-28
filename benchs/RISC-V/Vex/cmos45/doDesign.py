@@ -42,8 +42,10 @@ def scriptMain ( **kw ):
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         conf.cfg.block.spareSide             = l(1000)
-        conf.cfg.katana.hTracksReservedLocal = 6 
-        conf.cfg.katana.vTracksReservedLocal = 5 
+        conf.cfg.katana.hTracksReservedMin   = 6
+        conf.cfg.katana.vTracksReservedMin   = 5
+        conf.cfg.katana.hTracksReservedLocal = 10
+        conf.cfg.katana.vTracksReservedLocal = 7 
         conf.cfg.katana.termSatReservedLocal = 6 
         conf.cfg.katana.termSatThreshold     = 9 
         conf.cfg.katana.trackFill            = 0

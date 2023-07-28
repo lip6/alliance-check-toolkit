@@ -30,23 +30,3 @@ techno.setup()
 StdCellLib.setup()
 #LibreSOCIO.setup()
 
-af = AllianceFramework.get()
-
-with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
-    cfg.misc.catchCore           = False
-    cfg.misc.minTraceLevel       = 13000
-    cfg.misc.maxTraceLevel       = 13100
-    cfg.misc.info                = False
-    cfg.misc.paranoid            = False
-    cfg.misc.bug                 = False
-    cfg.misc.logMode             = True
-    cfg.misc.verboseLevel1       = True
-    cfg.misc.verboseLevel2       = True
-    cfg.etesian.graphics         = 2
-    cfg.anabatic.topRoutingLayer = 'm4'
-    cfg.katana.eventsLimit       = 4000000
-    af  = AllianceFramework.get()
-    lg5 = af.getRoutingGauge('StdCellLib').getLayerGauge( 5 )
-    lg5.setType( RoutingLayerGauge.PowerSupply )
-    env = af.getEnvironment()
-    env.setCLOCK( '^sys_clk$|^ck|^jtag_tck$' )

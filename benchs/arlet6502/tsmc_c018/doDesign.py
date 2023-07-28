@@ -128,7 +128,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.block.spareSide             = u(7*13)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
-        arlet6502Conf.cfg.chip.useAbstractPads        = True
+        arlet6502Conf.cfg.chip.useAbstractPads        = False
         arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
         arlet6502Conf.cfg.chip.supplyRailWidth        = u(35)
         arlet6502Conf.cfg.chip.supplyRailPitch        = u(90)
@@ -147,14 +147,14 @@ def scriptMain ( **kw ):
         # 34 is minimum for cell packing near obstacle -> ~ 30% free space.
         arlet6502Conf.coreSize            = ( u(36*13.0), u(36*13.0) )
         arlet6502Conf.chipSize            = ( u( 2020.0), u( 2060.0) )
+        arlet6502Conf.coreToChipClass     = CoreToChip
        #arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
         arlet6502Conf.useHTree( 'clk_from_pad' )
         arlet6502Conf.useHTree( 'reset_from_pad' )
         #arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
-            arlet6502ToChip = CoreToChip( arlet6502Conf )
-            arlet6502ToChip.buildChip()
             chipBuilder = Chip( arlet6502Conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

@@ -127,7 +127,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.block.spareSide             = u(7*4)
        #arlet6502Conf.cfg.chip.padCoreSide            = 'North'
        #arlet6502Conf.cfg.chip.use45corners           = False
-        arlet6502Conf.cfg.chip.useAbstractPads        = True
+        arlet6502Conf.cfg.chip.useAbstractPads        = False
         arlet6502Conf.cfg.chip.minPadSpacing          = u(1.46)
         arlet6502Conf.cfg.chip.supplyRailWidth        = u(8.0)
         arlet6502Conf.cfg.chip.supplyRailPitch        = u(8.0)
@@ -139,6 +139,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.bRows               = 3
         arlet6502Conf.chipName            = 'chip'
         arlet6502Conf.chipConf.ioPadGauge = 'LibreSOCIO'
+        arlet6502Conf.coreToChipClass     = CoreToChip
         # 29 is minimum with everything disabled       -> ~  6% free space.
         # Can really be reached when running the P&R on the sole block.
         # This is very suspicious.
@@ -150,9 +151,8 @@ def scriptMain ( **kw ):
         arlet6502Conf.useHTree( 'reset_from_pad' )
         #arlet6502Conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
-            arlet6502ToChip = CoreToChip( arlet6502Conf )
-            arlet6502ToChip.buildChip()
             chipBuilder = Chip( arlet6502Conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

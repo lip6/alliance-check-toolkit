@@ -85,11 +85,11 @@ def scriptMain ( **kw ):
         am2901Conf.chipConf.ioPadGauge = 'pxlib'
        #am2901Conf.coreSize            = ( l(1600), l(1500) )
         am2901Conf.chipSize            = ( l(3400), l(3400) )
+        am2901Conf.coreToChipClass     = CoreToChip
         am2901Conf.useHTree( 'ck' )
         if buildChip:
-            am2901ToChip = CoreToChip( am2901Conf )
-            am2901ToChip.buildChip()
             chipBuilder = Chip( am2901Conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

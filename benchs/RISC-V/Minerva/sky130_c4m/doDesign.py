@@ -76,14 +76,14 @@ def scriptMain ( **kw ):
         conf.chipName            = 'chip'
         conf.coreSize            = ( u(220*10.0), u(220*10.0) )
        #conf.chipSize            = ( u(  2020.0), u(  2060.0) )
+        conf.coreToChipClass     = CoreToChip
         conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
         if buildChip:
-            coreToChip = CoreToChip( conf )
-            coreToChip.buildChip()
+            chipBuilder = Chip( conf )
+            chipBuilder.doChipNetlist()
+            chipBuilder.doChipFloorplan()
             if editor:
                 editor.setCell( conf.chip )
-            chipBuilder = Chip( conf )
-            chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:

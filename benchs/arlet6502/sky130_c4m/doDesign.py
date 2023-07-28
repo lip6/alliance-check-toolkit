@@ -111,7 +111,7 @@ def scriptMain ( **kw ):
         conf.cfg.misc.info                   = False
         conf.cfg.misc.paranoid               = False
         conf.cfg.misc.bug                    = False
-        conf.cfg.misc.logMode                = True
+        conf.cfg.misc.logMode                = False
         conf.cfg.misc.verboseLevel1          = True
         conf.cfg.misc.verboseLevel2          = True
        #conf.cfg.etesian.bloat               = 'Flexlib'
@@ -144,6 +144,7 @@ def scriptMain ( **kw ):
         conf.chipName            = 'chip'
         conf.coreSize            = ( u( 27*12.0), u( 27*12.0) )
         conf.chipSize            = ( u(  2020.0), u(  2060.0) )
+        conf.coreToChipClass     = CoreToChip
         if buildChip:
             conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
             conf.useHTree( 'io_in_from_pad(28)' )
@@ -152,12 +153,11 @@ def scriptMain ( **kw ):
             conf.useHTree( 'reset' )
         #conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
-            arlet6502ToChip = CoreToChip( conf )
-            arlet6502ToChip.buildChip()
+            chipBuilder = Chip( conf )
+            chipBuilder.doChipNetlist()
+            chipBuilder.doChipFloorplan()
             if editor:
                 editor.setCell( conf.chip )
-            chipBuilder = Chip( conf )
-            chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:

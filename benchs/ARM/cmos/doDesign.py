@@ -250,12 +250,12 @@ def scriptMain ( **kw ):
         conf.chipConf.ioPadGauge = 'pxlib'
         conf.coreSize            = ( l( 6100.0), l( 6100.0) )
         conf.chipSize            = ( l(10300.0), l(10300.0) )
+        conf.coreToChipClass     = CoreToChip
         conf.useHTree( 'ck' )
        #conf.useHTree( 'reset_n' )
         if buildChip:
-            adderToChip = CoreToChip( conf )
-            adderToChip.buildChip()
             chipBuilder = Chip( conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()

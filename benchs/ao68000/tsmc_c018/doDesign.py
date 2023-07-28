@@ -171,7 +171,7 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.block.spareSide             = u(7*13)
        #ao68000Conf.cfg.chip.padCoreSide            = 'North'
        #ao68000Conf.cfg.chip.use45corners           = False
-        ao68000Conf.cfg.chip.useAbstractPads        = True
+        ao68000Conf.cfg.chip.useAbstractPads        = False
         ao68000Conf.cfg.chip.minPadSpacing          = u(1.46)
         ao68000Conf.cfg.chip.supplyRailWidth        = u(35)
         ao68000Conf.cfg.chip.supplyRailPitch        = u(90)
@@ -183,6 +183,7 @@ def scriptMain ( **kw ):
         ao68000Conf.bRows               = 3
         ao68000Conf.chipName            = 'chip'
         ao68000Conf.chipConf.ioPadGauge = 'LibreSOCIO'
+        ao68000Conf.coreToChipClass     = CoreToChip
         ao68000Conf.useHTree( 'clk_i_from_pad', Spares.HEAVY_LEAF_LOAD )
         ao68000Conf.useHTree( 'reset_n_from_pad' )
         # 29 is minimum with everything disabled       -> ~  6% free space.
@@ -193,9 +194,8 @@ def scriptMain ( **kw ):
         if buildChip:
             ao68000Conf.coreSize = ( u(130*13.0          ), u(120*13.0          ) )
             ao68000Conf.chipSize = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
-            ao68000ToChip = CoreToChip( ao68000Conf )
-            ao68000ToChip.buildChip()
             chipBuilder = Chip( ao68000Conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
