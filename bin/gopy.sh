@@ -1,5 +1,20 @@
 #!/bin/bash
 
+ getString ()
+ {
+   string=`echo $1 | cut -d '=' -f 2-` 
+   echo $string
+ }
+
+ onGithub="false"
+ while [ $# -gt 0 ]; do
+   case $1 in
+     --github-runner) echo "Github/runner mode..";
+                      onGithub="true";;
+   esac
+   shift
+ done
+
  declare -A benchRules
  benchRules["adder/cmos"]="druc lvx"
  benchRules["adder/cmos45"]="lvx"
@@ -75,6 +90,7 @@
  mode="stopOnFailure"
 #mode="ignoreFailure"
  benchLog="`pwd`/doit-gopy.log"
+ failedTag="`pwd`/doit-gopy.failed"
  rm -f "${benchLog}"
  for bench in ${benchs}; do
    rules="${benchRules[$bench]}"
@@ -98,6 +114,10 @@
      ${crlenv} -- doit ${rule} >> ${benchLog} 2>&1
      if [ $? -ne 0 ]; then
        result="\"${rule}\" failed."
+       if [ "${onGithub}" = "true" ]; then
+         touch ${failedTag}
+         exit 0	   
+       fi
        if [ "${mode}" = "stopOnFailure" ]; then
          echo ""
          echo ""
