@@ -39,7 +39,11 @@
  benchRules["RISC-V/Vex/cmos"]="druc lvx"
  benchRules["RISC-V/Vex/cmos45"]="lvx"
  benchRules["ARM/cmos"]="druc lvx"
- benchRules["RingOscillator"]="druc lvx asimut"
+ if [ "${onGithub}" = "true" ]; then
+   benchRules["RingOscillator"]="druc lvx"
+ else
+   benchRules["RingOscillator"]="druc lvx asimut"
+ fi
  benchRules["nmigen/ALU16"]="lvx druc gds"
  benchRules["RISC-V/Minerva/sky130_c4m"]="gds"
  benchRules["DCT/lvl0"]="layout"
