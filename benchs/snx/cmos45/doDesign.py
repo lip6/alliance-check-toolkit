@@ -17,7 +17,7 @@ from   coriolis.plugins.chip.chip           import Chip
 
 
 def isiterable ( pyobj ):
-    if isinstance(pyobj,collections.Iterable): return True
+    if isinstance(pyobj,collections.abc.Iterable): return True
     return False
 
 
