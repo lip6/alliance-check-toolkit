@@ -29,6 +29,7 @@
  benchRules["arlet6502/tsmc_c018"]="gds"
  benchRules["arlet6502/freepdk45_c4m"]="gds"
  benchRules["arlet6502/sky130_c4m"]="gds"
+ benchRules["arlet6502/gf180mcu_c4m"]="gds"
  benchRules["MIPS/microprogrammed"]="druc lvx"
  benchRules["MIPS/pipeline"]="druc lvx"
  benchRules["snx/cmos"]="druc lvx"
@@ -68,6 +69,14 @@
 #benchs="${benchs} nmigen/ALU16"
  benchs="${benchs} DCT/lvl0"
 
+ if [ -e "../../gf180mcu-pdk" ]; then
+   benchs="${benchs} arlet6502/gf180mcu_c4m"
+ fi
+ if [ -e "../pdkmaster/C4M.Sky130" ]; then
+   benchs="${benchs} arlet6502/sky130_c4m"
+   benchs="${benchs} ao68000/sky130_c4m"
+   benchs="${benchs} RISC-V/Minerva/sky130_c4m"
+ fi
  if [ -e "/dsk/l1/jpc/crypted/soc/techno/etc/coriolis2/NDA/node180/tsmc_c018" ]; then
    benchs="${benchs} adder/tsmc_c180"
    benchs="${benchs} arlet6502/tsmc_c018"
@@ -77,11 +86,6 @@
    benchs="${benchs} adder/freepdk45_c4m"
    benchs="${benchs} arlet6502/freepdk45_c4m"
    benchs="${benchs} ao68000/freepdk45_c4m"
- fi
- if [ -e "../pdkmaster/C4M.Sky130" ]; then
-   benchs="${benchs} arlet6502/sky130_c4m"
-   benchs="${benchs} ao68000/sky130_c4m"
-   benchs="${benchs} RISC-V/Minerva/sky130_c4m"
  fi
 
  crlenv="`pwd`/../bin/crlenv.py"
