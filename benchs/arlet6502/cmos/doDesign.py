@@ -38,7 +38,7 @@ def scriptMain ( **kw ):
     try:
        #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
-        buildChip = True
+        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
         if editor:
