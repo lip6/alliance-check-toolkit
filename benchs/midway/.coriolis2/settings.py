@@ -17,7 +17,7 @@ parametersTable = \
     , ('misc.minTraceLevel'       , TypeInt       , 0       )
     , ('misc.maxTraceLevel'       , TypeInt       , 0       )
     , ("etesian.effort"           , TypeEnumerate , 2       )
-    , ('etesian.uniformDensity'   , TypeBool      , True    )
+    , ('etesian.densityVariation' , TypePercentage, 5.0     )
     , ('etesian.spaceMargin'      , TypePercentage, 15.0    )
     , ('etesian.aspectRatio'      , TypePercentage, 100.0   )
    # Kite parameters.
