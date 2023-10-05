@@ -37,7 +37,7 @@ def scriptMain ( **kw ):
             cfg.misc.verboseLevel2          = True
             cfg.misc.minTraceLevel          = 15900
             cfg.misc.maxTraceLevel          = 16000
-            cfg.etesian.uniformDensity      = True
+            cfg.etesian.densityVariation    = 0.05
             cfg.etesian.effort              = 2
             cfg.etesian.aspectRatio         = 2.0
             cfg.anabatic.routingGauge       = 'nsxlib-2M'

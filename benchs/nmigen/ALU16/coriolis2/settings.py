@@ -21,7 +21,7 @@ with Configuration(Configuration.PRIORITY_USER_FILE) as conf:
     conf.etesian_effort              = 2
     conf.etesian_spaceMargin         = '20.0%'
     conf.etesian_aspectRatio         = '100.0%'
-    conf.etesian_uniformDensity      = True
+    conf.etesian.densityVariation    = 0.05
     conf.anabatic_edgeLenght         = 24
     conf.anabatic_edgeWidth          = 8
     conf.anabatic_topRoutingLayer    = 'METAL5'

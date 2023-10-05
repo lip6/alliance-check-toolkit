@@ -43,7 +43,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.misc.verboseLevel1       = True
     cfg.misc.verboseLevel2       = True
     cfg.etesian.graphics         = 2
-    cfg.etesian.uniformDensity   = True
+    cfg.etesian.densityVariation = 0.05
    # Fold 4
    #cfg.etesian.aspectRatio      = 22.0
    # Fold 2

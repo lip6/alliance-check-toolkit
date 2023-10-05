@@ -43,7 +43,7 @@ def scriptMain ( **kw ):
             editor.setDbuMode( DbU.StringModePhysical )
         conf = ChipConf( cell, ioPins=[], ioPads=[] ) 
         conf.cfg.etesian.bloat               = 'Flexlib'
-        conf.cfg.etesian.uniformDensity      = False
+        conf.cfg.etesian.densityVariation    = 1.0
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.10

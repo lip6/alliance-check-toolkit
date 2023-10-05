@@ -83,7 +83,7 @@ def scriptMain ( **kw ):
             , ioPads=ioPadsSpec
             )
         adderConf.cfg.etesian.bloat          = 'nsxlib'
-        adderConf.cfg.etesian.uniformDensity = True
+        adderConf.cfg.etesian.densityVariation = 0.05
         adderConf.cfg.etesian.aspectRatio    = 1.0
         adderConf.cfg.etesian.spaceMargin    = 0.05
         adderConf.cfg.block.spareSide        = l(350)

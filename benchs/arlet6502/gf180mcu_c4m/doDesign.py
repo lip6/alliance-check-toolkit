@@ -125,7 +125,7 @@ def scriptMain ( **kw ):
         designConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         designConf.cfg.etesian.bloat               = 'disabled'
        #designConf.cfg.etesian.bloat               = 'nsxlib'
-        designConf.cfg.etesian.uniformDensity      = True
+        designConf.cfg.etesian.densityVariation    = 0.05
         designConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #designConf.cfg.etesian.spaceMargin         = 0.10
