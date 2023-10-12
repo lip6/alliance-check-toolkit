@@ -144,7 +144,8 @@ def setupPaths ( verbose, debug=False ):
         print( '  o  Self locating Coriolis:' )
     coriolisTop = None
     for topDir in topDirs:
-        if coriolisTop or not (topDir / 'lib64' / 'libhurricane.so').is_file():
+        if coriolisTop or not (  (topDir / 'lib'   / 'libhurricane.so').is_file() \
+                              or (topDir / 'lib64' / 'libhurricane.so').is_file() ):
             if verbose: print( '     - {}'.format(topDir) )
             continue
         if verbose: print( '     - {} *'.format(topDir) )
