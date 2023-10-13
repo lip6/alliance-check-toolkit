@@ -144,12 +144,21 @@ def setupPaths ( verbose, debug=False ):
         print( '  o  Self locating Coriolis:' )
     coriolisTop = None
     for topDir in topDirs:
-        if coriolisTop or not (  (topDir / 'lib'   / 'libhurricane.so').is_file() \
-                              or (topDir / 'lib64' / 'libhurricane.so').is_file() ):
-            if verbose: print( '     - {}'.format(topDir) )
-            continue
-        if verbose: print( '     - {} *'.format(topDir) )
-        coriolisTop = topDir
+        if not coriolisTop:
+            libHurricaneFound = False
+            if   (topDir / 'lib64' / 'libhurricane.so').is_file(): libHurricaneFound = True
+            elif (topDir / 'lib'   / 'libhurricane.so').is_file(): libHurricaneFound = True
+            else:
+                if (topDir / 'lib').is_dir():
+                    for subDir in (topDir / 'lib').iterdir():
+                        if (subDir / 'libhurricane.so').is_file():
+                            libHurricaneFound = True
+                            break
+            if libHurricaneFound:
+                coriolisTop = topDir
+                if verbose: print( '     - {} *'.format( topDir ))
+                continue
+        if verbose: print( '     - {}'.format(topDir) )
     if not coriolisTop:
         print( '[ERROR] environment.setupPaths(): Unable to locate Coriolis.' )
         return False
