@@ -195,21 +195,24 @@ def setupPaths ( verbose, debug=False ):
     # Setup PYTHONPATH.
     v = sys.version_info
     sitePackagesDir = None
-    for pyPackageDir in [ Path('python{}.{}'.format(v.major,v.minor)) / 'site-packages'
-                        , Path('python{}.{}'.format(v.major,v.minor)) / 'dist-packages'
-                        , Path('{}.{}'.format(v.major,v.minor)) / 'site-packages'
-                        , Path('python{}'.format(v.major)) / 'site-packages'
-                        , Path('python{}'.format(v.major)) / 'dist-packages'
-                        , Path('{}'.format(v.major)) / 'site-packages'
-                        ]:
-        sitePackagesDir = libDirs[-1] / pyPackageDir
-        if sitePackagesDir.is_dir():
-            if verbose:
-                print( '     - {} *'.format(sitePackagesDir) )
-            break
-        if verbose:
-            print( '     - {}'.format(sitePackagesDir) )
-        sitePackagesDir = None
+    for libDir in libDirs:
+        for pyPackageDir in [ Path('python{}.{}'.format(v.major,v.minor)) / 'site-packages'
+                            , Path('python{}.{}'.format(v.major,v.minor)) / 'dist-packages'
+                            , Path('{}.{}'.format(v.major,v.minor)) / 'site-packages'
+                            , Path('python{}'.format(v.major)) / 'site-packages'
+                            , Path('python{}'.format(v.major)) / 'dist-packages'
+                            , Path('{}'.format(v.major)) / 'site-packages'
+                            ]:
+            sitePackagesDir = libDir / pyPackageDir
+            if sitePackagesDir.is_dir():
+                if verbose:
+                    print( '     - {} *'.format(sitePackagesDir) )
+            else:
+                if verbose:
+                    print( '     - {}'.format(sitePackagesDir) )
+                sitePackagesDir = None
+            if sitePackagesDir:
+                break
     if sitePackagesDir is None:
         print( '[ERROR] environment.setupPaths(): Python {site,dist}-packages directory not found.' )
         return False
