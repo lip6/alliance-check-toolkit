@@ -143,6 +143,7 @@ def setupPaths ( verbose, debug=False ):
     if verbose:
         print( '  o  Self locating Coriolis:' )
     coriolisTop = None
+    libArchDir  = None
     for topDir in topDirs:
         if not coriolisTop:
             libHurricaneFound = False
@@ -152,6 +153,7 @@ def setupPaths ( verbose, debug=False ):
                 if (topDir / 'lib').is_dir():
                     for subDir in (topDir / 'lib').iterdir():
                         if (subDir / 'libhurricane.so').is_file():
+                            libArchDir        = subDir
                             libHurricaneFound = True
                             break
             if libHurricaneFound:
@@ -180,6 +182,8 @@ def setupPaths ( verbose, debug=False ):
         if absLibDir.is_dir():
             libDirs.append( absLibDir )
         libDir = None
+    if libArchDir:
+        libDirs.append( libArchDir )
     if not len(libDirs):
         print( '[ERROR] environment.setupPaths(): Library directory not found.' )
         return False
