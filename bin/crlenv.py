@@ -207,12 +207,13 @@ def setupPaths ( verbose, debug=False ):
             if sitePackagesDir.is_dir():
                 if verbose:
                     print( '     - {} *'.format(sitePackagesDir) )
+                break
             else:
                 if verbose:
                     print( '     - {}'.format(sitePackagesDir) )
                 sitePackagesDir = None
-            if sitePackagesDir:
-                break
+        if sitePackagesDir:
+            break
     if sitePackagesDir is None:
         print( '[ERROR] environment.setupPaths(): Python {site,dist}-packages directory not found.' )
         return False
