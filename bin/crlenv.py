@@ -10,11 +10,9 @@ import re
 import argparse
 
 
-reCoriolisPattern      = re.compile( r".*coriolis.*" )
-reReleaseSharedPattern = re.compile( r".*Release\.Shared.*" )
-reReleaseStaticPattern = re.compile( r".*Release\.Static.*" )
-reDebugSharedPattern   = re.compile( r".*Debug\.Shared.*" )
-reDebugStaticPattern   = re.compile( r".*Debug\.Static.*" )
+reCoriolisPattern = re.compile( r".*coriolis.*" )
+reReleasePattern  = re.compile( r".*release.*" )
+reDebugPattern    = re.compile( r".*debug.*" )
 
 
 def scrubPath ( pathName ):
@@ -28,11 +26,9 @@ def scrubPath ( pathName ):
     scrubbed = []
     for element in elements:
         if element == '': continue
-        if    reCoriolisPattern     .match(element) \
-           or reReleaseSharedPattern.match(element) \
-           or reReleaseStaticPattern.match(element) \
-           or reDebugSharedPattern  .match(element) \
-           or reDebugStaticPattern  .match(element):
+        if    reCoriolisPattern.match(element) \
+           or reReleasePattern .match(element) \
+           or reDebugPattern   .match(element):
             continue
         scrubbed.append( element )
     if len(scrubbed) == 0: return ''
@@ -66,71 +62,23 @@ def setupPaths ( verbose, debug=False ):
     :param verbose: Self explanatory.
     :param debug:   Use the version compiled with debugging support.
                     Be aware that it is roughly 4 times slower...                
-                    It's the tree rooted at ``Debug.Shared/install``
-                    instead of  ``Release.Shared/install``.
+                    It's the tree rooted at ``debug/install``
+                    instead of  ``release/install``.
     """
     # Setup CORIOLIS_TOP.
-    osEL9             = re.compile (".*Linux.*el9.*x86_64.*")
-    osSlsoc7x_64      = re.compile (".*Linux.*el7.*x86_64.*")
-    osSlsoc6x_64      = re.compile (".*Linux.*el6.*x86_64.*")
-    osSlsoc6x         = re.compile (".*Linux.*(el|slsoc)6.*")
-    osSLSoC5x_64      = re.compile (".*Linux.*el5.*x86_64.*")
-    osSLSoC5x         = re.compile (".*Linux.*(el5|2.6.23.13.*SoC).*")
-    osFedora_64       = re.compile (".*Linux.*fc.*x86_64.*")
-    osFedora          = re.compile (".*Linux.*fc.*")
-    osLinux_64        = re.compile (".*Linux.*x86_64.*")
-    osLinux           = re.compile (".*Linux.*")
-    osDarwin          = re.compile (".*Darwin.*")
-    osUbuntu1004      = re.compile (".*Linux.*ubuntu.*")
-    osUbuntu1004_64   = re.compile (".*Linux.*ubuntu.*x86_64.*")
-    osFreeBSD8x_amd64 = re.compile (".*FreeBSD 8.*amd64.*")
-    osFreeBSD8x_64    = re.compile (".*FreeBSD 8.*x86_64.*")
-    osFreeBSD8x       = re.compile (".*FreeBSD 8.*")
-    osCygwinW7_64     = re.compile (".*CYGWIN_NT-6\.1.*x86_64.*")
-    osCygwinW7        = re.compile (".*CYGWIN_NT-6\.1.*i686.*")
-    osCygwinW8_64     = re.compile (".*CYGWIN_NT-6\.[2-3].*x86_64.*")
-    osCygwinW8        = re.compile (".*CYGWIN_NT-6\.[2-3].*i686.*")
-    osCygwinW10_64    = re.compile (".*CYGWIN_NT-10\.[0-3].*x86_64.*")
-    osCygwinW10       = re.compile (".*CYGWIN_NT-10\.[0-3].*i686.*")
+    osDarwin = re.compile (".*Darwin.*")
+    osType   = 'Linux'
+    uname    = subprocess.Popen( ["uname", "-srm"], stdout=subprocess.PIPE )
+    lines    = uname.stdout.readlines()
+    line     = lines[0].decode( 'ascii' )
+    if osDarwin.match(line): osType = "Darwin"
 
-    uname = subprocess.Popen( ["uname", "-srm"], stdout=subprocess.PIPE )
-    lines = uname.stdout.readlines()
-    line  = lines[0].decode( 'ascii' )
-    if   osSlsoc7x_64     .match(line): osDir = "Linux.el7_64"
-    elif osEL9            .match(line): osDir = "Linux.el9"
-    elif osSlsoc6x_64     .match(line): osDir = "Linux.slsoc6x_64"
-    elif osSlsoc6x        .match(line): osDir = "Linux.slsoc6x"
-    elif osSLSoC5x_64     .match(line): osDir = "Linux.SLSoC5x_64"
-    elif osSLSoC5x        .match(line): osDir = "Linux.SLSoC5x"
-    elif osFedora_64      .match(line): osDir = "Linux.fc_64"
-    elif osFedora         .match(line): osDir = "Linux.fc"
-    elif osUbuntu1004     .match(line): osDir = "Linux.Ubuntu1004"
-    elif osUbuntu1004_64  .match(line): osDir = "Linux.Ubuntu1004_64"
-    elif osLinux_64       .match(line): osDir = "Linux.x86_64"
-    elif osLinux          .match(line): osDir = "Linux.i386"
-    elif osFreeBSD8x_64   .match(line): osDir = "FreeBSD.8x.x86_64"
-    elif osFreeBSD8x_amd64.match(line): osDir = "FreeBSD.8x.amd64"
-    elif osFreeBSD8x      .match(line): osDir = "FreeBSD.8x.i386"
-    elif osDarwin         .match(line): osDir = "Darwin"
-    elif osCygwinW7_64    .match(line): osDir = "Cygwin.W7_64"
-    elif osCygwinW7       .match(line): osDir = "Cygwin.W7"
-    elif osCygwinW8_64    .match(line): osDir = "Cygwin.W8_64"
-    elif osCygwinW8       .match(line): osDir = "Cygwin.W8"
-    elif osCygwinW10_64   .match(line): osDir = "Cygwin.W10_64"
-    elif osCygwinW10      .match(line): osDir = "Cygwin.W10"
-    else:
-        uname = subprocess.Popen( ["uname", "-sr"], stdout=subprocess.PIPE )
-        osDir = uname.stdout.readlines()[0][:-1]
-
-        print( '[WARNING] environment.setupPaths(): Unrecognized OS: "{}".'.format( line[:-1] ))
-        print( '          (using: "{}")'.format( osDir ))
-    osDir      = Path( osDir )
     homeDir    = Path( os.environ['HOME'] )
-    buildType  = Path( 'Debug.Shared' if debug else 'Release.Shared' )
+    buildType  = Path( 'debug' if debug else 'release' )
     scriptPath = Path( __file__ ).resolve()
     topDirs    = []
 
-    topDirs  += [ homeDir / 'coriolis-2.x' / osDir / buildType / 'install'
+    topDirs  += [ homeDir / 'coriolis-2.x' / buildType / 'install'
                 , Path( '/soc/coriolis2' ) 
                 , Path( '/usr' ) 
                 ]
@@ -138,7 +86,7 @@ def setupPaths ( verbose, debug=False ):
         topDirs.insert( 0, Path( os.environ['CORIOLIS_TOP'] ))
     for part in scriptPath.parts:
         if part == 'nightly':
-            topDirs.insert( 0, homeDir / 'nightly' / 'coriolis-2.x' / osDir / buildType / 'install' )
+            topDirs.insert( 0, homeDir / 'nightly' / 'coriolis-2.x' / buildType / 'install' )
             break
     if verbose:
         print( '  o  Self locating Coriolis:' )
@@ -189,7 +137,7 @@ def setupPaths ( verbose, debug=False ):
         return False
     libraryPath = ''
     ldPathName  = 'LD_LIBRARY_PATH'
-    if osDir.as_posix().startswith( 'Darwin' ):
+    if osType == 'Darwin':
         ldPathName  = 'DYLD_LIBRARY_PATH'
     for libDir in libDirs:
         if len(libraryPath): libraryPath = libraryPath + ':'
