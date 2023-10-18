@@ -64,7 +64,7 @@ def scriptMain ( **kw ):
         adderConf.cfg.viewer.pixelThreshold       = 5
        #adderConf.cfg.etesian.bloat               = 'Flexlib'
         adderConf.cfg.etesian.bloat               = 'disabled'
-        adderConf.cfg.etesian.uniformDensity      = True
+        adderConf.cfg.etesian.densityVariation    = 0.05
         adderConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         adderConf.cfg.etesian.spaceMargin         = 0.20

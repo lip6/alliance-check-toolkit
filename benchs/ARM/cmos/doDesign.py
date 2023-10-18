@@ -228,7 +228,7 @@ def scriptMain ( **kw ):
        #conf.cfg.etesian.bloat                = 'nsxlib'
         conf.cfg.etesian.bloat                = 'disabled'
         conf.cfg.etesian.effort               = 2
-        conf.cfg.etesian.uniformDensity       = True
+        conf.cfg.etesian.densityVariation     = 0.05
         conf.cfg.etesian.aspectRatio          = 1.0
         conf.cfg.etesian.spaceMargin          = 0.05
         conf.cfg.block.spareSide              = l(350)

@@ -41,7 +41,7 @@ def scriptMain ( **kw ):
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.etesian.spaceMargin         = 0.10
         conf.cfg.etesian.aspectRatio         = 1.00
-        conf.cfg.etesian.uniformDensity      = True
+        conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         conf.cfg.katana.hTracksReservedLocal = 10

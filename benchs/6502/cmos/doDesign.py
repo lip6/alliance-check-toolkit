@@ -48,7 +48,7 @@ def scriptMain ( **kw ):
         m65sConf.cfg.etesian.effort              = 2
         m65sConf.cfg.etesian.spaceMargin         = 0.10
         m65sConf.cfg.etesian.aspectRatio         = 1.00
-        m65sConf.cfg.etesian.uniformDensity      = True
+        m65sConf.cfg.etesian.densityVariation    = 0.05
         m65sConf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         m65sConf.cfg.katana.eventsLimit          = 1000000
         m65sConf.cfg.katana.hTracksReservedMin   = 6 

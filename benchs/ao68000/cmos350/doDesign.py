@@ -58,7 +58,7 @@ def scriptMain ( **kw ):
                            ]
                   )
         ao68000.state.cfg.etesian.bloat               = 'nsxlib'
-        ao68000.state.cfg.etesian.uniformDensity      = True
+        ao68000.state.cfg.etesian.densityVariation    = 0.05
         ao68000.state.cfg.etesian.aspectRatio         = 1.0
         ao68000.state.cfg.etesian.spaceMargin         = 0.10
         ao68000.state.cfg.anabatic.searchHalo         = 2

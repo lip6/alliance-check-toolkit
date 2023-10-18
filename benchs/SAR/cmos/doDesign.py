@@ -48,7 +48,7 @@ def scriptMain ( **kw ):
         sarlogicConf = ChipConf( cell, ioPins=ioPinsSpec) 
         sarlogicConf.cfg.etesian.bloat               = 'disabled'
        #arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
-        sarlogicConf.cfg.etesian.uniformDensity      = True
+        sarlogicConf.cfg.etesian.densityVariation    = 0.05
         sarlogicConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #arlet6502Conf.cfg.etesian.spaceMargin         = 0.10

@@ -157,7 +157,7 @@ def scriptMain ( **kw ):
         ao68000Conf = ChipConf( cell, ioPins=[], ioPads=ioPadsSpec ) 
         ao68000Conf.cfg.viewer.pixelThreshold       = 5
        #ao68000Conf.cfg.etesian.bloat               = 'Flexlib'
-        ao68000Conf.cfg.etesian.uniformDensity      = True
+        ao68000Conf.cfg.etesian.densityVariation    = 0.05
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         ao68000Conf.cfg.etesian.spaceMargin         = 0.10
