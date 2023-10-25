@@ -82,7 +82,7 @@
    benchs="${benchs} arlet6502/tsmc_c018"
    benchs="${benchs} ao68000/tsmc_c018"
  fi
- if [ -e "/dsk/l1/jpc/coriolis-2.x/src/libre-soc/c4m-pdk-freepdk45" ]; then
+ if [ -e "../../libre-soc/c4m-pdk-freepdk45" ]; then
    benchs="${benchs} adder/freepdk45_c4m"
    benchs="${benchs} arlet6502/freepdk45_c4m"
    benchs="${benchs} ao68000/freepdk45_c4m"
