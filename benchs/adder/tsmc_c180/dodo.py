@@ -15,8 +15,7 @@ PnR.textMode  = True
 from doDesign  import scriptMain
 
 ruleYosys = Yosys   .mkRule( 'yosys', 'adder.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'adder.vst'
-                                      , 'adder.spi' ]
+ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'adder.vst' ]
                                     , [ruleYosys]
                                     , flags=0 )
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'chip_r.gds'

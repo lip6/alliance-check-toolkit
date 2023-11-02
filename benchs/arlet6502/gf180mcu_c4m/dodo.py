@@ -35,8 +35,7 @@ rulePnR   = PnR     .mkRule( 'gds'  , [ 'chip_r.gds'
                                       , 'corona.vst'
                                       , 'corona.spi'
                                       , 'Arlet6502_cts.spi'
-                                      , 'arlet6502_cts.vst'
-                                      , 'Arlet6502.spi' ]
+                                      , 'arlet6502_cts.vst' ]
                                       , [ruleB2V]
                                     , scriptMain
                                     , topName=topName )

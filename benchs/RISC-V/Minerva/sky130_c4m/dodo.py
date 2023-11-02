@@ -17,8 +17,7 @@ from doDesign  import scriptMain
 
 ruleBlif  = Copy    .mkRule( 'blif' , 'user_project_core_lambdasoc.blif'
                                     , './non_generated/user_project_core_lambdasoc.blif' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'user_project_core_lambdasoc.vst'
-                                      , 'user_project_core_lambdasoc.spi' ]
+ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'user_project_core_lambdasoc.vst' ]
                                     , [ruleBlif]
                                     , flags=0 )
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'user_project_wrapper.gds'

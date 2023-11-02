@@ -26,7 +26,6 @@ ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'm65s.vst', [ruleYosys], flags=0 )
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'm65s_cts_r.ap'
                                       , 'm65s_cts_r.vst'
                                       , 'm65s_cts_r.spi'
-                                      , 'm65s.spi'
                                       ]
                                       , [ruleB2V]
                                     , scriptMain )
