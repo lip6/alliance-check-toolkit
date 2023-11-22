@@ -15,6 +15,7 @@ from   coriolis.plugins.rsave import rsave
 
 
 def scriptMain ( **kw ):
+    #Breakpoint.setStopLevel( 100 )
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         # Common settings for all runs.
         cfg.misc.catchCore              = False
@@ -30,8 +31,8 @@ def scriptMain ( **kw ):
         cfg.anabatic.topRoutingLayer    = 'METAL5'
         cfg.katana.hTracksReservedLocal = 5 
         cfg.katana.vTracksReservedLocal = 5 
-        #cfg.katana.hTracksReservedMin   = 1 
-        #cfg.katana.vTracksReservedMin   = 5 
+        cfg.katana.hTracksReservedMin   = 1 
+        cfg.katana.vTracksReservedMin   = 4 
     
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
         af  = CRL.AllianceFramework.get()
@@ -54,6 +55,7 @@ def scriptMain ( **kw ):
     #katana.runNegociatePreRouted()
     katana.runGlobalRouter      ( Katana.Flags.NoFlags )
     katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
+    Breakpoint.stop( 100, 'Global routing has been loaded.' )
     katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
     katana.runNegociate         ( Katana.Flags.NoFlags )
     katana.finalizeLayout()
