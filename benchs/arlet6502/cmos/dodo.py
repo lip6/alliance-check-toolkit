@@ -28,22 +28,21 @@ if buildChip:
                , 'corona_cts_r.spi'
                , 'corona.vst'
                , 'corona.spi'
-               , 'arlet6502_cts.ap'
-               , 'arlet6502_cts.vst'
-               , 'arlet6502_cts.spi'
-               , 'arlet6502.spi'
+               , 'picorv32a_cts.ap'
+               , 'picorv32a_cts.vst'
+               , 'picorv32a_cts.spi'
                ]
 else:
-    pnrFiles = [ 'arlet6502_cts_r.ap'
-               , 'arlet6502_cts_r.vst'
-               , 'arlet6502_cts_r.spi'
+    pnrFiles = [ 'picorv32a_cts_r.ap'
+               , 'picorv32a_cts_r.vst'
+               , 'picorv32a_cts_r.spi'
                ]
 
-ruleYosys  = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V    = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
+ruleYosys  = Yosys   .mkRule( 'yosys', 'picorv32a.v' )
+ruleB2V    = Blif2Vst.mkRule( 'b2v'  , 'picorv32a.vst', [ruleYosys], flags=0 )
 rulePnR    = PnR     .mkRule( 'pnr'  , pnrFiles, [ruleB2V], scriptMain )
 ruleCougar = Cougar  .mkRule( 'cougar'
-                            , 'arlet6502_cts_r_ext.al'
+                            , 'picorv32a_cts_r_ext.al'
                             , [rulePnR]
                             , flags=Cougar.Verbose|Cougar.Flatten )
 ruleLvx    = Lvx     .mkRule( 'lvx'
