@@ -3,12 +3,13 @@ README.rst
 
 MML, 1 June 2023
 MML, 25 October 2023
-MML, 18 Deecember 2023
+MML, 18 December 2023
+MML, 15 January 2024
 
 ota 5 transistors in 350nm node
 
 coriolis in analog-fixes branch
-https://github.com/lip6/coriolis/commit/83d02759490c5235f0020b003a03c6c250256171
+bulk of PMOS is NWELL
 
 XXX/coriolis-2.x/src/alliance-check-toolkit/benchs/analog/Ota/350
 
@@ -16,8 +17,8 @@ XXX/coriolis-2.x/src/alliance-check-toolkit/benchs/analog/Ota/350
 Required files
 ----------------
 
-dodo.py : python script to setup the technology and dependencies
-ota.py  : python script to describe the devices, the netlist and the silicing tree for layout generation
+dodo.py   : python script to setup the technology and dependencies
+doOta.py  : python script to describe the devices, the netlist and the silicing tree for layout generation
 
 Running layout generation
 -------------------------
@@ -30,7 +31,7 @@ launches coriolis graphical interface (cgt)
 cgt window, select:
 
 Tools/Python Script
-ota (python script without extension)
+doOta (python script without extension)
 
 Analog/SlicingTree/Update possible dimensions
 
