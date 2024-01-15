@@ -121,8 +121,7 @@ class OTAS ( AnalogDesign ):
                 print(L)
                 M = int(base.loc[base['Name']==transistor, 'M'].to_string(index=False))
                 print(M)
-                # BulkC = bool(base.loc[base['Name']==transistor, 'BulkC'].to_string(index=False))
-                BulkC =(base.loc[base['Name']==transistor, 'BulkC'].bool)
+                BulkC =(base.loc[base['Name']==transistor, 'BulkC'].bool())
                 print(BulkC)
 
                 #                         | Class | Instance | Layout Style | Type | W | L | M | Mint | Dum | SFirst | Bulk | BulkC |
