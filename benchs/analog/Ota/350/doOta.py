@@ -17,6 +17,7 @@
 # |  1 June     2023  technology migration                          |
 # |  12 January 2024  get sizes from a csv file                     |
 # |  15 January 2024  adjust layout parameters  BulkC               |
+# |  16 January 2024  adjust parameter names, not conficting, units |
 # +-----------------------------------------------------------------+
 #
 #
@@ -26,6 +27,7 @@
 # It requires transistor BULK-SOURCE unconnected (BULKC = FALSE)
 # Folded transistors
 # Routing described
+# Names and values retrieved from a csv file, maybe an output of oceane
 #
 # -----------------------------------------------------------------------------
 #                MP3 MP4    
@@ -39,9 +41,10 @@ from coriolis           import Cfg
 from coriolis.Hurricane import *
 from coriolis           import CRL, helpers
 import pandas as pd
+import numpy as np
 
 
-#helpers.setTraceLevel( 100 )
+# helpers.setTraceLevel( 100 )
 
 from coriolis.Analog import Device, Transistor, CommonDrain, CommonGatePair, \
                             CommonSourcePair, CrossCoupledPair,              \
@@ -69,17 +72,16 @@ VNode   = 1
 HNode   = 2
 DNode   = 3
 
-# define the file where the parametres are provided by the sizing operation
-# reads the parameter from the file, csv format
-# in this file, the table shows the transistor finger width in USI units
+# define the file where the parameters are provided by the sizing operation oceane_sizes.txt
+# reads the parameters from the file, csv format
+# in this file, the table shows the transistor finger width WF in MICRONS
+# base=pd.read_csv('oceane_sizes.txt', sep=' ', skipinitialspace=True, encoding="utf-8", dtype={'L': np.float64})
 base=pd.read_csv('oceane_sizes.txt', sep=' ', skipinitialspace=True, encoding="utf-8")
 
-# define the list of transistors used in the layout
+# define the list of transistors used in the layout description
 all_transistor = ['mn1', 'mn2', 'mp3', 'mp4', 'mn5']
 all_transistor_base = base['Name'].tolist()
 print(all_transistor_base)
-
-type_dict = {'NMOS': 1, 'PMOS': 2}
 
 # describe the circuit for layout generation
 class OTAS ( AnalogDesign ):
@@ -92,7 +94,7 @@ class OTAS ( AnalogDesign ):
         print( '  o  Running OTAS.build().')
        
        # device parameter list
-       # in this list, the transistor width is the total transistor width (Wfinger*M), in micro meter
+       # in this list, the transistor width is the total transistor width (WF*M), in micro meter
 
        #    | 0           | 1         | 2               | 3   | 4      |  5    | 6| 7   |8  |9     |10  | 11    |
        #    | Class       | Instance  | Layout Style    | Type| W      |  L    | M| Mint|Dum|SFirst|Bulk| BulkC |
@@ -109,27 +111,50 @@ class OTAS ( AnalogDesign ):
 
         for transistor in all_transistor:
             if transistor in all_transistor_base:
+
                 print(transistor, 'is present in the code and in the parameters base.')
+
                 name = base.loc[base['Name']==transistor, 'Name'].to_string(index=False)
+                print('type name', type(name))
                 print(name)
-                typ = base.loc[base['Name']==transistor, 'Type'].to_string(index=False)
-                print(typ)
-                # reading the transistor finger width
-                W = float(base.loc[base['Name']==transistor, 'W'].to_string(index=False))*(10**6)
-                print(W)
-                L = float(base.loc[base['Name']==transistor, 'L'].to_string(index=False))*(10**6)
+
+                typeMOS = base.loc[base['Name']==transistor, 'TMOS'].to_string(index=False)
+                if   typeMOS == 'NMOS': value = Transistor.NMOS
+                elif typeMOS == 'PMOS': value = Transistor.PMOS
+                print('type(typeMOS)',typeMOS,type(value),value)
+                print(type(typeMOS),typeMOS,type(value),value)
+
+                # reading the transistor finger width in micron
+                # WF = float(base.loc[base['Name']==transistor, 'WF'].to_string(index=False))*(10**6)
+                WF = float(base.loc[base['Name']==transistor, 'WF'].to_string(index=False))
+                print('type WF', type(WF))
+                print(WF)
+
+                # L = float(base.loc[base['Name']==transistor, 'L'].to_string(index=False))*(10**6)
+                L = float(base.loc[base['Name']==transistor, 'L'].to_string(index=False))
+                print('type L', type(L))
                 print(L)
+
                 M = int(base.loc[base['Name']==transistor, 'M'].to_string(index=False))
+                print('type M', type(M))
                 print(M)
-                BulkC =(base.loc[base['Name']==transistor, 'BulkC'].bool())
+
+                # BulkC =(base.loc[base['Name']==transistor, 'BulkC'].bool())
+                # BulkC = base.loc[base['Name']==transistor, 'BulkC'].to_string(index=False)
+                BulkSource = base.loc[base['Name']==transistor, 'BScon'].to_string(index=False)
+                if   BulkSource == 'True' : BulkC = True
+                elif BulkSource == 'False': BulkC = False
+                print('type BulkC', type(BulkC))
                 print(BulkC)
 
                 #                         | Class | Instance | Layout Style | Type | W | L | M | Mint | Dum | SFirst | Bulk | BulkC |
-                # self.devicesSpecs.append([Transistor, name, 'WIP Transistor',  type_dict[typ], W*M, L, 1, None, 0, True, 0xf, False])
+                # self.devicesSpecs.append([Transistor, name, 'WIP Transistor',  type, WF*M, L, 1, None, 0, True, 0xf, False])
                 # computing the whole transistor width from finger width and number of fingers
-                self.devicesSpecs.append([Transistor, name, 'WIP Transistor',  type_dict[typ], W*M, L, M, None, 0, True, 0xf, False])
+
+                self.devicesSpecs.append([Transistor, name, 'WIP Transistor',  value, WF*M, L, M, None, 0, True, 0xf, BulkC])
+                print(name, typeMOS,  WF, WF*M, L, M, BulkC)
                 print(self.devicesSpecs)
-                print(name, typ, type_dict[typ], W, L, M, BulkC)
+
             else:
                 # checking if transistor parameters are provided in the file
                 print('ERROR:', transistor, 'is not present in the parameters base.')
@@ -143,7 +168,8 @@ class OTAS ( AnalogDesign ):
             else:
                 pass
 
-        # adjusting the bulk of mn1 and mn2
+
+        # adjusting the bulk termianl of mn1 and mn2, south side of the transistor is used
         print(self.devicesSpecs[0][1], 'Bulk', self.devicesSpecs[0][10])
         self.devicesSpecs[0][10]=2
         print(self.devicesSpecs[0][1], 'Bulk', self.devicesSpecs[0][10])
@@ -203,6 +229,7 @@ class OTAS ( AnalogDesign ):
         # #2
         self.pushHNode( Center )
         # #3
+        # # mn5
         # self.addDevice( 'mn5'    , Center, StepParameterRange(2, 2, 4) )
         # self.addDevice( 'mn5'    , Center, StepParameterRange(self.devicesSpecs[4][6], 2, 4) )
         self.addDevice( self.devicesSpecs[4][1]   , Center, StepParameterRange(self.devicesSpecs[4][6], 2, 4) )
@@ -210,6 +237,7 @@ class OTAS ( AnalogDesign ):
         # #3
         self.pushVNode( Center )
         # #4
+        # # mn1 and mn2
         self.addSymmetry( 0, 1 )
         # self.addDevice( 'mn1' , Center, StepParameterRange(2, 1, 1) )
         # self.addDevice( 'mn1' , Center, StepParameterRange(int (base.loc[base['Name']=='mn1', 'M'].to_string(index=False)), 1, 1) )
@@ -226,6 +254,7 @@ class OTAS ( AnalogDesign ):
         # #3
         self.pushVNode( Center )
         # #4
+        # # mp3 and mp4
         self.addSymmetry( 0, 1 )
         # self.addDevice( 'mp3' , Center, StepParameterRange(2, 2, 4) )
         self.addDevice( 'mp3' , Center, StepParameterRange(self.devicesSpecs[2][6], 2, 4) )
@@ -243,7 +272,7 @@ class OTAS ( AnalogDesign ):
         self.popNode()
         # #0
         # select the index of the layout shapes which is displayed, can be changed in cgt
-        self.updatePlacement(6)
+        self.updatePlacement(7)
         self.endCell()
     
         if editor:

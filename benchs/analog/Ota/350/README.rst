@@ -5,6 +5,7 @@ MML, 1 June 2023
 MML, 25 October 2023
 MML, 18 December 2023
 MML, 15 January 2024
+MML, 16 January 2024
 
 ota 5 transistors in 350nm node
 
@@ -17,8 +18,11 @@ XXX/coriolis-2.x/src/alliance-check-toolkit/benchs/analog/Ota/350
 Required files
 ----------------
 
-dodo.py   : python script to setup the technology and dependencies
-doOta.py  : python script to describe the devices, the netlist and the silicing tree for layout generation
+dodo.py         : python script to setup the technology and dependencies
+doOta.py        : python script to describe the devices, the netlist and the silicing tree for layout generation
+ocane_sizes.txt : file in csv format to describe the sizes of transistors, **in mirons**, 
+                  as well as some useful layout style parameters
+                  may be provided by oceane, or hand written
 
 Running layout generation
 -------------------------
@@ -53,3 +57,4 @@ File/ Exit to quit
 Deprecated files
 -----------------
 coriolis2 directory to setup the technology
+ota.py is not parametrized with csv file
