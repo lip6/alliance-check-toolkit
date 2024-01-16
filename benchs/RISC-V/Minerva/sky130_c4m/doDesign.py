@@ -5,7 +5,7 @@ import os
 import traceback
 from   coriolis.Hurricane  import DbU, Breakpoint
 from   coriolis            import CRL
-from   coriolis.helpers.io import ErrorMessage, WarningMessage
+from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
 loadUserSettings()
 from   coriolis            import plugins
@@ -41,6 +41,8 @@ def scriptMain ( **kw ):
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
         conf = ChipConf( cell, ioPins=[], ioPads=[] ) 
+       #conf.cfg.misc.minTraceLevel          = 145
+       #conf.cfg.misc.maxTraceLevel          = 146
         conf.cfg.misc.verboseLevel1          = True
         conf.cfg.misc.verboseLevel2          = True
        #conf.cfg.etesian.bloat               = 'Flexlib'

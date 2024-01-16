@@ -128,7 +128,7 @@ def scriptMain ( **kw ):
         snxConf.cfg.katana.hTracksReservedLocal = 6
         snxConf.cfg.katana.vTracksReservedLocal = 3
         snxConf.cfg.katana.hTracksReservedMin   = 3
-        snxConf.cfg.katana.vTracksReservedMin   = 1
+        snxConf.cfg.katana.vTracksReservedMin   = 2
         snxConf.cfg.katana.trackFill            = 0
         snxConf.cfg.katana.runRealignStage      = True
         snxConf.cfg.block.spareSide             = l(600.0)

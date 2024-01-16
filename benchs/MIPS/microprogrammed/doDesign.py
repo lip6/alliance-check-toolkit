@@ -50,6 +50,7 @@ def scriptMain ( **kw ):
     if editor: editor.setCell( cell )
   
     katana = Katana.KatanaEngine.create( cell )
+    katana.setViewer( editor )
     katana.digitalInit          ()
     #katana.runNegociatePreRouted()
     katana.runGlobalRouter      ( Katana.Flags.NoFlags )

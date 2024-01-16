@@ -17,3 +17,6 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109383_new_n22472' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109383_new_n19826' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'io_in_from_pad(6)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.soc_cpu_minerva_multiplier_w_result(9)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.soc_cpu_minerva_payload_csr_result_117(27)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_109383_new_n17690' ) )

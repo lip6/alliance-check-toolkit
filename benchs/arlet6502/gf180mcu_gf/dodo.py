@@ -1,7 +1,22 @@
 
 from coriolis.designflow.technos import setupGF180MCU_GF
+from coriolis         import Cfg 
+from coriolis.helpers import overlay
 
-setupGF180MCU_GF( checkToolkit='../../..', pdkTop='../../../../gf180mcu-pdk' )
+def userSetup ():
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore           = False
+        cfg.misc.minTraceLevel       = 12300
+        cfg.misc.maxTraceLevel       = 12400
+        cfg.misc.info                = False
+        cfg.misc.paranoid            = False
+        cfg.misc.bug                 = False
+        cfg.misc.logMode             = True
+        cfg.misc.verboseLevel1       = True
+        cfg.misc.verboseLevel2       = True
+
+userSetup()
+setupGF180MCU_GF( checkToolkit='../../..', pdkTop='../../../../gf180mcu-pdk', useHV=False )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
@@ -20,8 +35,7 @@ ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'arlet6502_cts_r.ap'
                                       , 'arlet6502_cts_r.vst'
-                                      , 'arlet6502_cts_r.spi'
-                                      , 'Arlet6502.spi' ]
+                                      , 'arlet6502_cts_r.spi' ]
                                       , [ruleB2V]
                                     , scriptMain )
 #ruleCougar = Cougar.mkRule( 'cougar', 'arlet6502_cts_r_ext.vst', [rulePnR], flags=Cougar.Verbose )

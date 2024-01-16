@@ -16,7 +16,7 @@
  done
 
  declare -A benchRules
- benchRules["adder/cmos"]="druc lvx"
+ benchRules["adder/cmos"]="lvx"
  benchRules["adder/cmos45"]="lvx"
  benchRules["adder/tsmc_c180"]="gds"
  benchRules["adder/freepdk45_c4m"]="gds"

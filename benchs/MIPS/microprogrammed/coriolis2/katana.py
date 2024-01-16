@@ -31,3 +31,7 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_wm_rf_selw_1' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_dt_s_18' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_ad_reg_desc_scanx' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'dpt_wm_rf_sel1' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'dpt_wm_rf_sel0' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'test' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'dpt_wm_rf_dinx_0' ) )

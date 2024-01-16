@@ -7,6 +7,7 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.copy     import Copy
 from coriolis.designflow.cougar   import Cougar
+from coriolis.designflow.graal    import Graal
 from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
 from coriolis.designflow.pnr      import PnR
@@ -59,4 +60,5 @@ ruleLvx    = Lvx   .mkRule( 'lvx'
                           , flags=Lvx.Flatten )
 ruleDruc   = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
 ruleCgt    = PnR   .mkRule( 'cgt' )
+ruleGraal  = Graal .mkRule( 'graal' , [rulePnR] )
 ruleClean  = Clean .mkRule()

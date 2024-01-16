@@ -53,8 +53,8 @@ def scriptMain ( **kw ):
         m65sConf.cfg.katana.eventsLimit          = 1000000
         m65sConf.cfg.katana.hTracksReservedMin   = 6 
         m65sConf.cfg.katana.vTracksReservedMin   = 6
-        m65sConf.cfg.katana.hTracksReservedLocal = 8 
-        m65sConf.cfg.katana.vTracksReservedLocal = 8 
+        m65sConf.cfg.katana.hTracksReservedLocal = 9 
+        m65sConf.cfg.katana.vTracksReservedLocal = 9 
         m65sConf.cfg.katana.runRealignStage      = True
         m65sConf.cfg.block.spareSide             = l(1000)
         m65sConf.editor     = editor

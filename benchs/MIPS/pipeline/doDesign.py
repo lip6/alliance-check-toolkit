@@ -27,6 +27,7 @@ def scriptMain ( **kw ):
         cfg.misc.verboseLevel2          = True
         #cfg.misc.minTraceLevel          = 110
         #cfg.misc.maxTraceLevel          = 120
+        cfg.katana.searchHalo           = 1
         cfg.katana.eventsLimit          = 1000000
         cfg.anabatic.topRoutingLayer    = 'METAL5'
         cfg.katana.hTracksReservedLocal = 5 
@@ -51,6 +52,7 @@ def scriptMain ( **kw ):
     if editor: editor.setCell( cell )
   
     katana = Katana.KatanaEngine.create( cell )
+    katana.setViewer( editor )
     katana.digitalInit          ()
     #katana.runNegociatePreRouted()
     katana.runGlobalRouter      ( Katana.Flags.NoFlags )
