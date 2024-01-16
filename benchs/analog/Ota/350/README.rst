@@ -18,11 +18,11 @@ XXX/coriolis-2.x/src/alliance-check-toolkit/benchs/analog/Ota/350
 Required files
 ----------------
 
-dodo.py         : python script to setup the technology and dependencies
-doOta.py        : python script to describe the devices, the netlist and the silicing tree for layout generation
-ocane_sizes.txt : file in csv format to describe the sizes of transistors, **in mirons**, 
-                  as well as some useful layout style parameters
-                  may be provided by oceane, or hand written
+dodo.py          : python script to setup the technology and dependencies
+doOta.py         : python script to describe the devices, the netlist and the silicing tree for layout generation
+oceane_sizes.txt : file in csv format to describe the sizes of transistors (WF and L), **in microns**, M
+                   as well as some useful layout style parameters (source connection to bulk)
+                   may be provided by oceane, or hand written, or computed with you favorite python notebook
 
 Running layout generation
 -------------------------

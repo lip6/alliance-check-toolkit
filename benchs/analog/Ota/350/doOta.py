@@ -272,7 +272,8 @@ class OTAS ( AnalogDesign ):
         self.popNode()
         # #0
         # select the index of the layout shapes which is displayed, can be changed in cgt
-        self.updatePlacement(7)
+        # to be complaint with the fingers given by the sizing computation, here oceane
+        self.updatePlacement(9)
         self.endCell()
     
         if editor:
