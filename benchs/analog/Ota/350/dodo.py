@@ -25,7 +25,7 @@ from coriolis.designflow.pnr   import PnR
 from coriolis.designflow.clean import Clean
 PnR.textMode = True
 
-from ota import scriptMain
+from doOta import scriptMain
 
 rulePnR   = PnR  .mkRule( 'pnr'  , [], [], scriptMain )
 ruleCgt   = PnR  .mkRule( 'cgt' )
