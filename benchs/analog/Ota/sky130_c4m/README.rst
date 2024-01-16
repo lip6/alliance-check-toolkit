@@ -5,22 +5,28 @@ Marie-Minerve Louerat
 10 january 2023
 23 February 2023
 24 February 2023
-18 Deecember 2023
+18 December 2023
+16 January 2024
 
 --------------------
 
+ota 5 transistors in Sky130nm node
+
 coriolis-2.x/src/alliance-check-toolkit/benchs/analog/Ota/sky130_c4m
 
+coriolis in analog-fixes branch
+bulk of PMOS is NWELL
 
 
 Required files
 ----------------
 
-dodo.py         : python script to setup the technology and dependencies 
-                 (you have to choose to call ota or ota_oceane script within dodo.py)
-ota.py :         python script to describe the devices, the netlist and the silicing tree for layout generation
-ota_oceane.py :  python script to describe the devices, the netlist and the silicing tree for layout generation
-                 reading the transistor sizes from oceane_ota.txt
+dodo.py           : python script to setup the technology sky130 and dependencies 
+doOta.py :        : python script to describe the devices, the netlist and the silicing tree for layout generation
+                    reading sizes from oceane_sizes.txt
+oceane_sizes.txt  : file in csv format to describe the sizes of transistors (WF and L), **in microns**, M
+                    as well as some useful layout style parameters (source connection to bulk)
+                    may be provided by oceane, or hand written, or computed with you favorite python notebook
          
 Running layout generation
 -------------------------
@@ -72,8 +78,8 @@ mk (symbolic link)
 
 make cgt
 
-Additional Information
--------------------------
+Additional Information (deprecated)
+----------------------------------------
 
 *netlist*
 Check sizes provided by Oceane
