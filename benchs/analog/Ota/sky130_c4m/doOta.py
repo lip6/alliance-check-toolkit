@@ -79,6 +79,7 @@ DNode   = 3
 base=pd.read_csv('oceane_sizes.txt', sep=' ', skipinitialspace=True, encoding="utf-8")
 
 # define the list of transistors used in the layout description
+# the order is important toset the index in the table devicesSpecs
 all_transistor = ['mn1', 'mn2', 'mp3', 'mp4', 'mn5']
 all_transistor_base = base['Name'].tolist()
 print(all_transistor_base)
@@ -125,12 +126,10 @@ class OTAS ( AnalogDesign ):
                 print(type(typeMOS),typeMOS,type(value),value)
 
                 # reading the transistor finger width in micron
-                # WF = float(base.loc[base['Name']==transistor, 'WF'].to_string(index=False))*(10**6)
                 WF = float(base.loc[base['Name']==transistor, 'WF'].to_string(index=False))
                 print('type WF', type(WF))
                 print(WF)
 
-                # L = float(base.loc[base['Name']==transistor, 'L'].to_string(index=False))*(10**6)
                 L = float(base.loc[base['Name']==transistor, 'L'].to_string(index=False))
                 print('type L', type(L))
                 print(L)
@@ -169,7 +168,7 @@ class OTAS ( AnalogDesign ):
                 pass
 
 
-        # adjusting the bulk termianl of mn1 and mn2, south side of the transistor is used
+        # adjusting the bulk terminal of mn1 and mn2, south side of the transistor is used
         print(self.devicesSpecs[0][1], 'Bulk', self.devicesSpecs[0][10])
         self.devicesSpecs[0][10]=2
         print(self.devicesSpecs[0][1], 'Bulk', self.devicesSpecs[0][10])
@@ -220,6 +219,7 @@ class OTAS ( AnalogDesign ):
         self.pushHNode( Center )
         # #1
 
+        # #horizontal power rail VSS
         self.addHRail( self.getNet('vss'), 'METAL4', 2, "CH1", "IH1" )
 
         # #1
@@ -267,6 +267,7 @@ class OTAS ( AnalogDesign ):
         # #2
         self.popNode()
         # #1
+        # #horizontal power rail VDD
         self.addHRail( self.getNet('vdd'), 'METAL4', 2, "CH2", "IH2" )
         self.popNode()
         # #0
