@@ -4,6 +4,7 @@ alliance-check-toolkit/benchs/analog/OtaMiller/sky130/README.rst
 
 September 25, 2023, MML
 Descember 18, 2023, MML
+January 26, 2024, MML
 
 --------------------------
 
@@ -12,9 +13,10 @@ Miller OTA Layout, techno SkyWater130
 
 Rquired files:
 
-dodo.py      : python script to setup the technology and dependencies
-millerMOS.py : Python script to describe netlist, and relative placement for layout generation
-               with only transistors
+dodo.py           : python script to setup the technology and dependencies
+doMillerMos_v2.py : Python script to describe netlist, and relative placement for layout generation
+                    with only transistors
+oceane_sizes.txt  : table (CSV format), input for coriolis placement and routing
 
 ---------------
 Running layout generation
@@ -28,7 +30,7 @@ launches coriolis graphical interface (cgt)
 cgt window, select:
 
 Tools/Python Script
-millerMos (python script without extension)
+doMillerMos_v2 (python script without extension)
 
 Analog/SlicingTree/Update possible dimensions
 
@@ -47,6 +49,11 @@ Tools Controller
 
 File/ Exit to quit
 
+NB
+----
+There are code snippets to access/modify transistor and device parameters 
+for layout generation.
+Yet some parameters do not have an impact (C++/Pyton interaction to be investigated)
 
 Deprecated files
 ----------------
