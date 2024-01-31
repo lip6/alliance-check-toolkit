@@ -86,7 +86,7 @@ base=pd.read_csv('oceane_sizes.txt', sep=' ', skipinitialspace=True, encoding="u
 # IMPORTANT : the order in the list will define the index of the device
 # in the devicesSpecs table
 # the order may be different in the csv table
-# transistor index  0      1      2      3      4      5       6      7      9
+# transistor index  0      1      2      3      4      5       6      7      8
 all_transistor = ['mn1', 'mn2', 'mp3', 'mp4', 'mn5', 'mp6',  'mn7', 'mp8', 'mn9']
 all_transistor_base = base['Name'].tolist()
 print(all_transistor_base)
@@ -272,7 +272,7 @@ class MILLERD ( AnalogDesign ):
         # M parameter, setting.
         mn5.getParameter( "M" ).setValue( 2 )
         print( '8: mn5.M = {}'.format( mn5.getParameter('M').getValue() ))
-        # Check: this will raise an exception as MIM_1 is obvioulsly not a transistor.
+        # Check: this will raise an exception as MIM_1 is obviously not a transistor.
         #mim1_W = self.getTransW( 'MIM_1' )
 
         # To read devices parameters from the device.
