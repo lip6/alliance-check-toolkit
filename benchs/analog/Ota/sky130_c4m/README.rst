@@ -7,14 +7,16 @@ Marie-Minerve Louerat
 24 February 2023
 18 December 2023
 16 January 2024
+31 January 2024
 
 --------------------
 
 ota 5 transistors in Sky130nm node
 
 coriolis-2.x/src/alliance-check-toolkit/benchs/analog/Ota/sky130_c4m
+main branch
 
-coriolis in analog-fixes branch
+coriolis in main branch
 bulk of PMOS is NWELL
 
 
