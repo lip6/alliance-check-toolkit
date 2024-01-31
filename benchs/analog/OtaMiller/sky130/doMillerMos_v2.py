@@ -268,7 +268,7 @@ class MILLERD ( AnalogDesign ):
         print( '5: mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
         # M parameter.
         print( '6: mn5.M = {}'.format( mn5.getParameter('W') ))
-        print( ':7 mn5.M = {}'.format( mn5.getParameter('M').getValue() ))
+        print( '7: mn5.M = {}'.format( mn5.getParameter('M').getValue() ))
         # M parameter, setting.
         mn5.getParameter( "M" ).setValue( 2 )
         print( '8: mn5.M = {}'.format( mn5.getParameter('M').getValue() ))
@@ -307,7 +307,13 @@ class MILLERD ( AnalogDesign ):
         # #2
         self.pushHNode( Center )
         # #3
-        # mn5
+        # mn5 
+        print( '10: mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
+        print( '11: mn5.M = {}'.format(            mn5.getParameter('M').getValue() ))
+        print('transistor devicesSpecs', self.devicesSpecs[4][1], 'M', self.devicesSpecs[4][6])
+        print('transistor devicesSpecs', self.devicesSpecs[4][1], 'Wtotal', self.devicesSpecs[4][4])
+
+
         self.addDevice( self.devicesSpecs[4][1], Center, StepParameterRange(2, 2, self.devicesSpecs[4][6]/2,) )
         # #3
         self.pushVNode( Center )
@@ -368,8 +374,8 @@ class MILLERD ( AnalogDesign ):
     
         # self.updatePlacement(  0 )
         self.endCell()
-        print( 'mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
-        print( 'mn5.M = {}'.format(            mn5.getParameter('M').getValue() ))
+        print( '12: mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
+        print( '13: mn5.M = {}'.format(            mn5.getParameter('M').getValue() ))
     
         if editor:
           editor.setCell( self.cell )
