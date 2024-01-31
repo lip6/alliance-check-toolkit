@@ -41,7 +41,7 @@ launches coriolis graphical interface (cgt)
 cgt window, select:
 
 Tools/Python Script
-ota_oceane (python script without extension)
+doOta (python script without extension)
 
 Analog/SlicingTree/Update possible dimensions
 
