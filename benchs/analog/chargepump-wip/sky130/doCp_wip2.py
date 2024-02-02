@@ -10,12 +10,12 @@
 # |                              Marie Minerve Louerat              |
 # |  E-mail      :            Jean-Paul.Chaput@lip6.fr              |
 # | =============================================================== |
-# |  Python      :  "./doCp_wip1.py"                                |
+# |  Python      :  "./doCp_wip2.py"                                |
 # |                                                                 |
-# |  Python by Dimitri Galayko Marie-Minerve Louerat                |
+# |  Python by Dimitri Galayko and Marie-Minerve Louerat            |
 # |(19 April  2023)                                                 |
 # |  Sizing by Dimitri Galayko    (1 December 2022)                 |
-# |  Update by Marie-Minerve Louerat (31 January 2024)              |
+# |  Layout by Marie-Minerve Louerat (1 February 2024)              |
 # +-----------------------------------------------------------------+
 #
 #
@@ -23,18 +23,15 @@
 #         layout if described as flatten
 # Folded transistors
 # Routing described
+# Left side placement
 #
-#      M31        MPsw
-#      M3         MPsr
-#    M1  M2       MNsr
-#    M11 M21      MNsw
-#
-# Using BulkSource unconnected transistors, 4 Terminals
-# each transistor has a bulk ring
+#    M31 MPsw       matching index 1
+#    M3  MPsr       matching index 2
+#    M1  M2 MNsr    matching index 3
+#    M11 M21 MNsw   matching index 4
 #
 # M1 (NMOS)  and M3 (PMOS) which are gate-drain connected transistor seem to have missing 
 # wire between Gate and Drain
-#
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
@@ -161,6 +158,28 @@ class CHARGEPUMP ( AnalogDesign ):
             else:
               pass
 
+        # adjusting the bulk terminal, north/south side of the transistor is used
+        # PMOS on North, NMOS on Southside of the transistor cell
+        # 1 is
+        # MPsw PMOS
+        print(self.devicesSpecs[0][1], 'Bulk', self.devicesSpecs[0][10])
+        self.devicesSpecs[0][10]=1
+        print(self.devicesSpecs[0][1], 'Bulk', self.devicesSpecs[0][10])
+
+        # MPsw PMOS
+        print(self.devicesSpecs[1][1], 'Bulk', self.devicesSpecs[1][10])
+        self.devicesSpecs[1][10]=1
+        print(self.devicesSpecs[1][1], 'Bulk', self.devicesSpecs[1][10])
+
+        # M3 PMOS
+        print(self.devicesSpecs[8][1], 'Bulk', self.devicesSpecs[8][10])
+        self.devicesSpecs[8][10]=1
+        print(self.devicesSpecs[8][1], 'Bulk', self.devicesSpecs[8][10])
+
+        # M31 PMOS
+        print(self.devicesSpecs[9][1], 'Bulk', self.devicesSpecs[9][10])
+        self.devicesSpecs[9][10]=1
+        print(self.devicesSpecs[9][1], 'Bulk', self.devicesSpecs[9][10])
 
 
 
@@ -209,39 +228,43 @@ class CHARGEPUMP ( AnalogDesign ):
         # #1
         self.addHRail( self.getNet('vss'), 'METAL4', 2, "CH1", "IH1" )
         # #1
-        self.pushVNode( Center )
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
         # #2
-        self.pushHNode( Center )
-        # #3
-        self.pushVNode( Center )
-        # #4
+        # matching index 4 in the sizing input file
         self.addSymmetry( 0, 1 )
         self.addDevice( 'M11'   , Center, StepParameterRange(1, 1, 1) )
         self.addDevice( 'M21'   , Center, StepParameterRange(1, 1, 1) )
-        # #4
+        self.addDevice( 'MNsw'   , Center, StepParameterRange(10, 1, 1) )
+        # #2
         self.popNode()
-        # #3
-        self.pushVNode( Center )
-        # #4
+        # #1
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
+        # #2
+        # matching index 3 in the sizing input file
         self.addSymmetry( 0, 1 )
         self.addDevice( 'M1'    , Center, StepParameterRange(1, 1, 1) )
         self.addDevice( 'M2'    , Center, StepParameterRange(1, 1, 1) )
-        # #4
-        self.popNode()
-        # #3
-        self.addDevice( 'M3'    , Center, StepParameterRange(1, 1, 1) )
-        self.addDevice( 'M31'   , Center, StepParameterRange(1, 1, 1) )
-        # #3
-        self.popNode()
-        # #2
-        self.pushHNode( Center )
-        # #3
-        self.addDevice( 'MNsw'   , Center, StepParameterRange(10, 1, 1) )
         self.addDevice( 'MNsr'   , Center, StepParameterRange(10, 1, 1) )
-        self.addDevice( 'MPsr'   , Center, StepParameterRange(10, 1, 1) )
-        self.addDevice( 'MPsw'   , Center, StepParameterRange(10, 1, 1) )
-        # #3
+        # #2
         self.popNode()
+        # #1
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
+        # #2
+        # matching index 2 in the sizing input file
+        self.addDevice( 'M3'    , Center, StepParameterRange(1, 1, 1) )
+        self.addDevice( 'MPsr'   , Center, StepParameterRange(10, 1, 1) )
+        # #2
+        self.popNode()
+        # #1
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
+        # #2
+        # matching index 1 in the sizing input file
+        self.addDevice( 'M31'   , Center, StepParameterRange(1, 1, 1) )
+        self.addDevice( 'MPsw'   , Center, StepParameterRange(10, 1, 1) )
         # #2
         self.popNode()
         # #1

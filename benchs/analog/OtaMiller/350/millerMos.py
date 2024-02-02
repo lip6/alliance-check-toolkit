@@ -188,21 +188,26 @@ class MILLERD ( AnalogDesign ):
         # #2
         self.pushHNode( Center )
         # #3
-        self.addDevice( 'mn5', Center, StepParameterRange(self.getTransM('mn5'), 1, 1) )
+        #self.addDevice( 'mn5', Center, StepParameterRange(self.getTransM('mn5'), 1, 1) )
+        self.addDevice( 'mn5', Center, StepParameterRange(2, 1, 4) )
         # #3
         self.pushVNode( Center )
         # #4
         self.addSymmetry( 0, 1 )
-        self.addDevice( 'mn1' , Center, StepParameterRange(self.devicesSpecs[0][6], 1, 1) )
-        self.addDevice( 'mn2' , Center, StepParameterRange(self.devicesSpecs[1][6], 1, 1) )
+        #self.addDevice( 'mn1' , Center, StepParameterRange(self.devicesSpecs[0][6], 1, 1) )
+        self.addDevice( 'mn1' , Center, StepParameterRange(1, 1, 2) )
+        #self.addDevice( 'mn2' , Center, StepParameterRange(self.devicesSpecs[1][6], 1, 1) )
+        self.addDevice( 'mn2' , Center, StepParameterRange(1, 1, 2) )
         # #4
         self.popNode()
         # #3
         self.pushVNode( Center )
         # #4
         self.addSymmetry( 0, 1 )
-        self.addDevice( 'mp3' , Center, StepParameterRange(self.devicesSpecs[2][6], 1, 1) )
-        self.addDevice( 'mp4' , Center, StepParameterRange(self.devicesSpecs[3][6], 1, 1) )
+        #self.addDevice( 'mp3' , Center, StepParameterRange(self.devicesSpecs[2][6], 1, 1) )
+        self.addDevice( 'mp3' , Center, StepParameterRange(1, 1, 6) )
+        #self.addDevice( 'mp4' , Center, StepParameterRange(self.devicesSpecs[3][6], 1, 1) )
+        self.addDevice( 'mp4' , Center, StepParameterRange(1, 1, 6) )
         self.popNode()
         # #3
         self.popNode()
@@ -213,16 +218,20 @@ class MILLERD ( AnalogDesign ):
         self.pushVNode( Center )
         # #4
         self.addSymmetry( 0, 1 )
-        self.addDevice( 'mn7' , Center, StepParameterRange(self.devicesSpecs[6][6], 1, 1) )
-        self.addDevice( 'mn9' , Center, StepParameterRange(self.devicesSpecs[8][6], 1, 1) )
+        #self.addDevice( 'mn7' , Center, StepParameterRange(self.devicesSpecs[6][6], 1, 1) )
+        self.addDevice( 'mn7' , Center, StepParameterRange( 2,  2, 8)) 
+        #self.addDevice( 'mn9' , Center, StepParameterRange(self.devicesSpecs[8][6], 1, 1) )
+        self.addDevice( 'mn9' , Center, StepParameterRange( 2, 2, 8)) 
         # #4
         self.popNode()
         # #3
         self.pushVNode( Center )
         # #4
         self.addSymmetry( 0, 1 )
-        self.addDevice( 'mp6' , Center, StepParameterRange(self.devicesSpecs[5][6], 1, 1) )
-        self.addDevice( 'mp8' , Center, StepParameterRange(self.devicesSpecs[7][6], 1, 1) )
+        #self.addDevice( 'mp6' , Center, StepParameterRange(self.devicesSpecs[5][6], 1, 1) )
+        self.addDevice( 'mp6' , Center, StepParameterRange( 2, 1, 10)) 
+        #self.addDevice( 'mp8' , Center, StepParameterRange(self.devicesSpecs[7][6], 1, 1) )
+        self.addDevice( 'mp8' , Center, StepParameterRange( 2, 1, 10) )
         self.popNode()
         # #3
         self.popNode()

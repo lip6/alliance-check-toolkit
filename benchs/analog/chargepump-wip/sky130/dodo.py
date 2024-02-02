@@ -16,7 +16,7 @@ from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
 PnR.textMode  = True
 
-from doCp_wip1 import scriptMain
+from doCp_wip3 import scriptMain
 
 rulePnR   = PnR  .mkRule( 'pnr'  , [], [], scriptMain )
 ruleCgt   = PnR  .mkRule( 'cgt' )

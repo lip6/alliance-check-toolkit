@@ -10,12 +10,12 @@
 # |                              Marie Minerve Louerat              |
 # |  E-mail      :            Jean-Paul.Chaput@lip6.fr              |
 # | =============================================================== |
-# |  Python      :  "./doCp_wip1.py"                                |
+# |  Python      :  "./doCp_wip3.py"                                |
 # |                                                                 |
-# |  Python by Dimitri Galayko Marie-Minerve Louerat                |
+# |  Python by Dimitri Galayko and Marie-Minerve Louerat            |
 # |(19 April  2023)                                                 |
 # |  Sizing by Dimitri Galayko    (1 December 2022)                 |
-# |  Update by Marie-Minerve Louerat (31 January 2024)              |
+# |  Layout by Marie-Minerve Louerat (1 February 2024)              |
 # +-----------------------------------------------------------------+
 #
 #
@@ -23,18 +23,20 @@
 #         layout if described as flatten
 # Folded transistors
 # Routing described
+# Left side placement of transistors in the container
 #
-#      M31        MPsw
-#      M3         MPsr
-#    M1  M2       MNsr
-#    M11 M21      MNsw
+#    M31 MPsw       matching index 1
+#    M3  MPsr       matching index 2
+#    M1  M2 MNsr    matching index 3
+#    M11 M21 MNsw   matching index 4
 #
-# Using BulkSource unconnected transistors, 4 Terminals
-# each transistor has a bulk ring
+# Using BulkSource connected transistors
+# Defining the side of the Bulk connectors transistors
+# adjusting the bulk terminal, north/south side of the transistor is used
+# PMOS on North, NMOS on Southside of the transistor cell
 #
 # M1 (NMOS)  and M3 (PMOS) which are gate-drain connected transistor seem to have missing 
 # wire between Gate and Drain
-#
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
@@ -90,7 +92,7 @@ DNode   = 3
 # reads the parameters from the file, csv format
 # in this file, the table shows the transistor finger width WF in MICRONS
 
-base=pd.read_csv('chargepump_size_wip.txt', sep=' ', skipinitialspace=True, encoding="utf-8")
+base=pd.read_csv('chargepump_size_wip3.txt', sep=' ', skipinitialspace=True, encoding="utf-8")
 
 # define the list of transistors used in the layout description
 # IMPORTANT : the order in the list will define the index of the device
@@ -142,14 +144,34 @@ class CHARGEPUMP ( AnalogDesign ):
                 M = int(base.loc[base['Name']==transistor, 'M'].to_string(index=False))
                 print('M=',M)
 
+
+                # BulkC = base.loc[base['Name']==transistor, 'BulkC'].to_string(index=False)
+                # This parameters specifies if the bulk of the transistor is connected to the source (internally) or not
+                # BulkC= True means that Bulk is connected to the source internally, the device has 3 (D, G, S) external terminals
+                # BulkC= False means that Bulk is NOT connected internally to the source, the device has 4 (D, G, S, B) external terminals
+                # The technology process may set constraints on possible connections
+                # NB. Electrical sizing and netlist should be set accordingly
+                BulkSource = base.loc[base['Name']==transistor, 'BScon'].to_string(index=False)
+                if   BulkSource == 'True' : BulkC = True
+                elif BulkSource == 'False': BulkC = False
+                print('type BulkC', type(BulkC))
+                print(BulkC)
+
+
+                # Bulk = 0xf means guard ring, 4 side bulk connected around active
+                # Bulk = 1 means one side bulk : top
+                # Bulk = 2 means one side bulk : bottom
+                # reading the transistor Side Bulk integer 
+                Bulk = int(base.loc[base['Name']==transistor, 'SideBulk'].to_string(index=False))
+                print('Bulk=',Bulk)
+
+
                 #                         | Class | Instance | Layout Style | Type | W | L | M | Mint | Dum | SFirst | Bulk | BulkC |
                 # computing the whole transistor width from finger width and number of fingers
-                # BulkC= False means that Bulk is NOT connected internally to the source, the device has 4 (D, G, S, B) external terminals
-                # Bulk = 0xf means guard ring, 4 side bulk connected around active
 
-                self.devicesSpecs.append([Transistor, name, 'WIP Transistor', value, WF*M, L, M, None, 0, True, 0xf, False])
+                self.devicesSpecs.append([Transistor, name, 'WIP Transistor', value, WF*M, L, M, None, 0, True, Bulk, BulkC])
                 print(self.devicesSpecs)
-                print('name:',name,' type:', value, ' Wtotal:', WF*M, ' L:', L)
+                print('name:',name,' type:', value, ' Wtotal:', WF*M, ' L:', L, ' M: ' , M, ' Bulk: ' , Bulk, ' BulkC: ', BulkC)
             else:
                 print('ERROR:', transistor, 'is not present in the parameters base.')
                 sys.exit( 1 )
@@ -161,8 +183,8 @@ class CHARGEPUMP ( AnalogDesign ):
             else:
               pass
 
-
-
+        # describing the nets, using instances and internal terminals
+        # taking into account 3 (Transistor  or 4 terminals for Transistors
 
         self.netTypes = \
           { 'upmos'    : { 'isExternal':True }
@@ -190,8 +212,10 @@ class CHARGEPUMP ( AnalogDesign ):
           , 'biasp'     : [ ('M3' , 'G'), ('M3', 'D'), ('MPsr', 'G'), ('M2', 'D')]
           , 'biasn'     : [ ('M1' , 'G'), ('M1', 'D'), ('MNsr', 'G'), ('M2', 'G')]
           , 'out'       : [ ('MPsr' , 'D'), ('MNsr', 'D')]
-          , 'vdd'       : [ ('M31' , 'S'), ('M31' , 'B'), ('M3' , 'B'), ('MPsw', 'S'), ('MPsw', 'B'), ('MPsr', 'B'), ('M21' , 'G'), ('M11', 'G')]
-          , 'vss'       : [ ('M1' , 'B'),('M11' , 'S'), ('M11' , 'B'), ('M2', 'B'), ('M21', 'S'), ('M21', 'B'), ('MNsw', 'S' ), ('MNsw', 'B' ), ('MNsr', 'B'), ('M31' , 'G')]
+          #, 'vdd'       : [ ('M31' , 'S'), ('M31' , 'B'), ('M3' , 'B'), ('MPsw', 'S'), ('MPsw', 'B'), ('MPsr', 'B'), ('M21' , 'G'), ('M11', 'G')]
+          , 'vdd'       : [ ('M31' , 'S'), ('M3' , 'B'), ('MPsw', 'S'), ('MPsr', 'B'), ('M21' , 'G'), ('M11', 'G')]
+          # , 'vss'       : [ ('M1' , 'B'),('M11' , 'S'), ('M11' , 'B'), ('M2', 'B'), ('M21', 'S'), ('M21', 'B'), ('MNsw', 'S' ), ('MNsw', 'B' ), ('MNsr', 'B'), ('M31' , 'G')]
+          , 'vss'       : [ ('M1' , 'B'),('M11' , 'S'), ('M2', 'B'), ('M21', 'S'), ('MNsw', 'S' ), ('MNsr', 'B'), ('M31' , 'G')]
           }
 
         self.beginCell( 'chargepumpCell' )
@@ -209,39 +233,43 @@ class CHARGEPUMP ( AnalogDesign ):
         # #1
         self.addHRail( self.getNet('vss'), 'METAL4', 2, "CH1", "IH1" )
         # #1
-        self.pushVNode( Center )
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
         # #2
-        self.pushHNode( Center )
-        # #3
-        self.pushVNode( Center )
-        # #4
+        # matching index 4 in the sizing input file
         self.addSymmetry( 0, 1 )
         self.addDevice( 'M11'   , Center, StepParameterRange(1, 1, 1) )
         self.addDevice( 'M21'   , Center, StepParameterRange(1, 1, 1) )
-        # #4
+        self.addDevice( 'MNsw'   , Center, StepParameterRange(10, 1, 1) )
+        # #2
         self.popNode()
-        # #3
-        self.pushVNode( Center )
-        # #4
+        # #1
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
+        # #2
+        # matching index 3 in the sizing input file
         self.addSymmetry( 0, 1 )
         self.addDevice( 'M1'    , Center, StepParameterRange(1, 1, 1) )
         self.addDevice( 'M2'    , Center, StepParameterRange(1, 1, 1) )
-        # #4
-        self.popNode()
-        # #3
-        self.addDevice( 'M3'    , Center, StepParameterRange(1, 1, 1) )
-        self.addDevice( 'M31'   , Center, StepParameterRange(1, 1, 1) )
-        # #3
-        self.popNode()
-        # #2
-        self.pushHNode( Center )
-        # #3
-        self.addDevice( 'MNsw'   , Center, StepParameterRange(10, 1, 1) )
         self.addDevice( 'MNsr'   , Center, StepParameterRange(10, 1, 1) )
-        self.addDevice( 'MPsr'   , Center, StepParameterRange(10, 1, 1) )
-        self.addDevice( 'MPsw'   , Center, StepParameterRange(10, 1, 1) )
-        # #3
+        # #2
         self.popNode()
+        # #1
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
+        # #2
+        # matching index 2 in the sizing input file
+        self.addDevice( 'M3'    , Center, StepParameterRange(1, 1, 1) )
+        self.addDevice( 'MPsr'   , Center, StepParameterRange(10, 1, 1) )
+        # #2
+        self.popNode()
+        # #1
+        # self.pushVNode( Center )
+        self.pushVNode( Left )
+        # #2
+        # matching index 1 in the sizing input file
+        self.addDevice( 'M31'   , Center, StepParameterRange(1, 1, 1) )
+        self.addDevice( 'MPsw'   , Center, StepParameterRange(10, 1, 1) )
         # #2
         self.popNode()
         # #1

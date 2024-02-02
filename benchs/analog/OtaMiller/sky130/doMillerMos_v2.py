@@ -225,7 +225,7 @@ class MILLERD ( AnalogDesign ):
             
           }
           
-        # decribing the nets, using instances and internal terminals
+        # describing the nets, using instances and internal terminals
         # taking into account 3 or 4 terminals for Transistors
 
         self.netSpecs = \
@@ -251,7 +251,7 @@ class MILLERD ( AnalogDesign ):
         self.doDevices()
         self.doNets   ()
 
-        # Varuious examples to show how to access/modify Transistor/Device parameters
+        # Various examples to show how to access/modify Transistor/Device parameters
         # To read devices parameters from the AnalogDesign DeviceSpec table.
         mn5_W = self.getTransW( 'mn5' )
         print( '1: mn5 W = {}'.format( mn5_W ))

@@ -1,0 +1,11 @@
+Name L     WF   M  TMOS BScon SideBulk Matching
+MPsw 0.15  1.41 10 PMOS True  1        1
+MPsr 1.50  1.41 10 PMOS False 1        2
+MNsr 1.50  0.45 10 NMOS False 2        3
+MNsw 0.15  0.45 10 NMOS True  2        4
+M1   1.5   0.45 1  NMOS False 2        3
+M11  0.15  0.45 1  NMOS True  2        4
+M31  0.15  1.41 1  PMOS True  1        1
+M3   1.50  1.41 1  PMOS False 1        2
+M2   1.50  0.45 1  NMOS False 2        3
+M21  0.15  0.45 1  NMOS True  2        4

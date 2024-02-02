@@ -223,16 +223,16 @@ class MILLERD ( AnalogDesign ):
         self.pushVNode( Center )
         # #4
         self.addSymmetry( 0, 1 )
-        self.addDevice( 'mn7' , Center, StepParameterRange(self.devicesSpecs[6][6], 1, 1) )
-        self.addDevice( 'mn9' , Center, StepParameterRange(self.devicesSpecs[8][6], 1, 1) )
+        self.addDevice( 'mn7' , Center, StepParameterRange(2, 1, 5) )
+        self.addDevice( 'mn9' , Center, StepParameterRange(2, 1, 5) )
         # #4
         self.popNode()
         # #3
         self.pushVNode( Center )
         # #4
         self.addSymmetry( 0, 1 )
-        self.addDevice( 'mp6' , Center, StepParameterRange(self.devicesSpecs[5][6], 1, 1) )
-        self.addDevice( 'mp8' , Center, StepParameterRange(self.devicesSpecs[7][6], 1, 1) )
+        self.addDevice( 'mp6' , Center, StepParameterRange(4, 1, 4) )
+        self.addDevice( 'mp8' , Center, StepParameterRange(4, 1, 4) )
         self.popNode()
         # #3
         self.popNode()
@@ -249,7 +249,7 @@ class MILLERD ( AnalogDesign ):
 
         self.endSlicingTree()
     
-        self.updatePlacement(  0 )
+        #self.updatePlacement(  0 )
         self.endCell()
         print( 'mn5.W = {}'.format( toMicrons( mn5.getParameter('W').getValue() )))
         print( 'mn5.M = {}'.format(            mn5.getParameter('M').getValue() ))
