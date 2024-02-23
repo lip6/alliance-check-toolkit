@@ -1,0 +1,24 @@
+inv_4_chain_load
+
+******************
+* circuit model
+* include circuit netlist
+
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/skyWater130/simu/ngspice/sky130_fd_sc_hd__inv_4_chain.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt sky130_fd_sc_hd__inv_4_chain in out vdd gnd
+* 10 inverters
+* add capacitor load
+**************************************
+
+.SUBCKT inv_4_chain_load in out evdd evss
+Xinv_4_chain in out evdd evss sky130_fd_sc_hd__inv_4_chain
+Cload out evss 0.0080pF
+.ends
+
+
+.end
+

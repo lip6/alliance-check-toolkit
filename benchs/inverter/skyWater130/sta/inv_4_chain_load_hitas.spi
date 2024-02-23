@@ -1,0 +1,29 @@
+inv_4_chain_load_hitas
+***********************
+
+.TEMP 25
+
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+
+******************
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/skyWater130/sta/inv_4_chain_load.spi
+
+*****************
+
+*****************
+* Circuit Instantiation
+*.SUBCKT inv_4_chain_load in out evdd evss
+* 10 inverters and capa load
+Xinv_4_chain_load in out evdd evss inv_4_chain_load
+
+
+.end
+

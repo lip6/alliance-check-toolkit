@@ -148,7 +148,7 @@ displays timing plots with information of input slope and propagation delay :
 +-------+--------+--------------+-----------------------+
 
 where F: falling, R: rising, timing results in ps.
-there is a load Cload = 0.002 pF
+there is a load **Cload = 0.002 pF**
 
 ngpsice top_sky130_fd_sc_hd__inv_4_chain_slope.spi
 displays timing plots with information of input slope and propagation delay :
@@ -162,7 +162,7 @@ displays timing plots with information of input slope and propagation delay :
 +-------+--------+--------------+-----------------------+
 
 where F: falling, R: rising, timing results in ps.
-there is a load Cload = 0.008 pF
+there is a load **Cload = 0.008 pF**
 
 ngpsice top_sky130_fd_sc_hd__inv_4_chain_slope_nolaod.spi
 displays timing plots with information of input slope and propagation delay :
@@ -176,7 +176,7 @@ displays timing plots with information of input slope and propagation delay :
 +-------+--------+--------------+-----------------------+
 
 where F: falling, R: rising, timing results in ps.
-there is a load Cload = 0.008 pF
+there is a load **Cload = 0.000 pF**
 
 B. timing analysis of invertors with static timing analyzerHiTas
 ------------------------------------------------------------------------
@@ -218,8 +218,8 @@ provides the sky130_fd_sc_hd__inv_1_3.paths file that shows the 2 paths of the i
 where F: falling, R: rising, timing results in ps, same as provided by ngspice.
 
 
-Invertor (10 inv_4) chain timing analysis
----------------------------------------------
+Invertor (10 inv_4) chain and no load timing analysis
+-------------------------------------------------------
 
 Running:
 
@@ -285,13 +285,83 @@ Path (2) :
      0.223   0.223            (total)                                                               
 
 
-where F: falling, R: rising, timing results in ps, same as ngspice result without output load.
+where F: falling, R: rising, timing results in ps, same as ngspice result **without output load.**
 
 3. Other analysis with the Hitas GUI: Xtas
    xtas
    file/open sky130_fd_sc_hd__inv_4_chain.dtx
    Tools/Get Paths
    Select path/path Detail
+
+Invertor (10 inv_4) chain and adding Cload 8e-15F timing analysis
+-----------------------------------------------------------------------
+
+Running:
+
+1. Building the timing database
+   ./hitas/db_chain_load.tcl
+
+creates inv_4_chain_load.dtx and other files
+
+NB. Here, Hitas uses inv_4_chain_load_hitas.spi description of the netlist 
+to detect VDD and VSS
+(see inv_4_chain_load.rep)
+
+2. Report critical paths
+   ./hitas/report_chain_load.tcl
+
+provides the inv_4_chain_load.paths file that shows the 2 paths of the invertor chain.
+
++-------+--------+--------------+---------------------------+
+| input | output | input slope  |  propagation delay total
++=======+========+==============+===========================+
+| F     | F      | 10           |  246
++-------+--------+--------------+---------------------------+
+| R     | R      | 10           |  239
++-------+--------+--------------+---------------------------+
+
+where F: falling, R: rising, timing results in ps, matching ngspice result **with 8e-15F load.**
+
+
+      *** Path details (unit:[ns]) ***
+
+Path (1) : 
+
+        Delay                                                                                       
+      Acc    Delta    R/F     Cap[pf]   Type   Node_Name              Net_Name               Line   
+   _________________________________________________________________________________________________
+     0.000   0.000 0.010 F      0.008          in                     in                            
+     0.028   0.028 0.026 R      0.009          inv_4_chain.n1         inv_4_chain.n1          inv   
+     0.048   0.019 0.012 F      0.009          inv_4_chain.n2         inv_4_chain.n2          inv   
+     0.077   0.030 0.027 R      0.009          inv_4_chain.n3         inv_4_chain.n3          inv   
+     0.097   0.019 0.012 F      0.009          inv_4_chain.n4         inv_4_chain.n4          inv   
+     0.127   0.030 0.027 R      0.009          inv_4_chain.n5         inv_4_chain.n5          inv   
+     0.146   0.019 0.012 F      0.009          inv_4_chain.n6         inv_4_chain.n6          inv   
+     0.176   0.030 0.027 R      0.009          inv_4_chain.n7         inv_4_chain.n7          inv   
+     0.196   0.019 0.012 F      0.009          inv_4_chain.n8         inv_4_chain.n8          inv   
+     0.226   0.030 0.027 R      0.009          inv_4_chain.n9         inv_4_chain.n9          inv   
+     0.246   0.020 0.013 F      0.010    (S)   out                    out                     inv   
+   _________________________________________________________________________________________________
+     0.246   0.246            (total)                                                               
+
+Path (2) : 
+
+        Delay                                                                                       
+      Acc    Delta    R/F     Cap[pf]   Type   Node_Name              Net_Name               Line   
+   _________________________________________________________________________________________________
+     0.000   0.000 0.010 R      0.008          in                     in                            
+     0.014   0.014 0.009 F      0.009          inv_4_chain.n1         inv_4_chain.n1          inv   
+     0.042   0.028 0.027 R      0.009          inv_4_chain.n2         inv_4_chain.n2          inv   
+     0.061   0.019 0.012 F      0.009          inv_4_chain.n3         inv_4_chain.n3          inv   
+     0.091   0.030 0.027 R      0.009          inv_4_chain.n4         inv_4_chain.n4          inv   
+     0.110   0.019 0.012 F      0.009          inv_4_chain.n5         inv_4_chain.n5          inv   
+     0.141   0.030 0.027 R      0.009          inv_4_chain.n6         inv_4_chain.n6          inv   
+     0.160   0.019 0.012 F      0.009          inv_4_chain.n7         inv_4_chain.n7          inv   
+     0.190   0.030 0.027 R      0.009          inv_4_chain.n8         inv_4_chain.n8          inv   
+     0.209   0.019 0.012 F      0.009          inv_4_chain.n9         inv_4_chain.n9          inv   
+     0.239   0.030 0.026 R      0.010    (S)   out                    out                     inv   
+   _________________________________________________________________________________________________
+     0.239   0.239            (total)                                                               
 
 
 Clean
