@@ -1,0 +1,23 @@
+*
+* sky130_fd_sc_hd__inv_4_chain.spi
+* 
+
+* sky130_fd_sc_hd__inv_4
+*.subckt sky130_fd_sc_hd__inv_4 A VGND VNB VPB VPWR Y
+
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/skyWater130/simu/ngspice/sky130_fd_sc_hd__inv_4.spice
+
+.subckt sky130_fd_sc_hd__inv_4_chain in out vdd gnd
+Xa in gnd gnd vdd vdd n1   sky130_fd_sc_hd__inv_4
+Xb n1 gnd gnd vdd vdd n2   sky130_fd_sc_hd__inv_4
+Xc n2 gnd gnd vdd vdd n3   sky130_fd_sc_hd__inv_4
+Xd n3 gnd gnd vdd vdd n4   sky130_fd_sc_hd__inv_4
+Xe n4 gnd gnd vdd vdd n5   sky130_fd_sc_hd__inv_4
+Xf n5 gnd gnd vdd vdd n6   sky130_fd_sc_hd__inv_4
+Xg n6 gnd gnd vdd vdd n7   sky130_fd_sc_hd__inv_4
+Xh n7 gnd gnd vdd vdd n8   sky130_fd_sc_hd__inv_4
+Xi n8 gnd gnd vdd vdd n9   sky130_fd_sc_hd__inv_4
+Xj n9 gnd gnd vdd vdd out  sky130_fd_sc_hd__inv_4
+.ends sky130_fd_sc_hd__inv_4_chain
+
+

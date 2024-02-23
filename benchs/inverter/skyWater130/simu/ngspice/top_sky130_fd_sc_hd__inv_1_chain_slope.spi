@@ -1,0 +1,107 @@
+sky130_fd_sc_hd__inv_1_chain with slope and load
+*
+* top_sky130_fd_sc_hd__inv_1_chain.spi
+* ngspice simulation
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+.TEMP 25
+
+******************
+******************
+* BSIM4 transistor model parameters for ngspice
+*
+* nfet_01v8
+.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice
+.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.corner.spice
+* pfet_01v8_hvt
+.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice
+.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
+
+*******************************
+
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE sky130_fd_sc_hd__inv_1_chain.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt sky130_fd_sc_hd__inv_1_chain in out vdd gnd
+* 10 inverters
+Xinv_1_chain in out evdd evss sky130_fd_sc_hd__inv_1_chain
+
+*input
+vin in evss dc 0.8 pulse (0 1.8 100ps 10ps 10ps 280ps 600ps)
+
+*loading output
+Cload out evss 0.0020pF
+
+
+* transient analysis *
+.control
+TRAN 1ps 1200ps 0 
+
+set width=110
+
+* 10 inverters
+* RR and FF should bemeasured between in and out
+*meas tran proptimeRF TRIG v(in) val=0.9 RISE=1 TARG v(out) VAL=0.9 FALL=1
+*meas tran proptimeFR TRIG v(in) val=0.9 FALL=1 TARG v(out) VAL=0.9 RISE=1
+
+*meas tran inputRslope TRIG v(in) val=0.001 RISE=1 TARG v(in) VAL=1.799 RISE=1
+*meas tran inputFslope TRIG v(in) val=1.799 FALL=1 TARG v(in) VAL=0.001 FALL=1
+*meas tran outputRslope TRIG v(out) val=0.001 RISE=1 TARG v(out) VAL=1.799 RISE=1
+*meas tran outputFslope TRIG v(out) val=1.799 FALL=1 TARG v(out) VAL=0.001 FALL=1
+
+*meas tran inputRslope- TRIG v(in) val=0.18 RISE=1 TARG v(in) VAL=1.62 RISE=1
+*meas tran inputFslope- TRIG v(in) val=1.62 FALL=1 TARG v(in) VAL=0.18 FALL=1
+*meas tran outputRslope- TRIG v(out) val=0.18 RISE=1 TARG v(out) VAL=1.62 RISE=1
+*meas tran outputFslope- TRIG v(out) val=1.62 FALL=1 TARG v(out) VAL=0.18 FALL=1
+
+meas tran inputRslope-- TRIG v(in) val=0.018 RISE=1 TARG v(in) VAL=1.782 RISE=1
+meas tran inputFslope-- TRIG v(in) val=1.782 FALL=1 TARG v(in) VAL=0.018 FALL=1
+
+meas tran outputRslope-- TRIG v(out) val=0.018 RISE=1 TARG v(out) VAL=1.782 RISE=1
+meas tran outputFslope-- TRIG v(out) val=1.782 FALL=1 TARG v(out) VAL=0.018 FALL=1
+
+*meas tran inputRslope--- TRIG v(in) val=0.1 RISE=1 TARG v(in) VAL=1.7 RISE=1
+*meas tran inputFslope--- TRIG v(in) val=1.7 FALL=1 TARG v(in) VAL=0.1 FALL=1
+*meas tran outputRslope--- TRIG v(out) val=0.1 RISE=1 TARG v(out) VAL=1.7 RISE=1
+*meas tran outputFslope--- TRIG v(out) val=1.7 FALL=1 TARG v(out) VAL=0.1 FALL=1
+
+meas tran proptimeRR_in_out TRIG v(in) val=0.9 RISE=1 TARG v(out) VAL=0.9 RISE=1
+meas tran proptimeFF_in_out TRIG v(in) val=0.9 FALL=1 TARG v(out) VAL=0.9 FALL=1
+
+meas tran proptimeRR_in_inv8 TRIG v(in) val=0.9 RISE=1 TARG v(xinv_1_chain.n8) VAL=0.9 RISE=1
+meas tran proptimeFF_in_inv8 TRIG v(in) val=0.9 FALL=1 TARG v(xinv_1_chain.n8) VAL=0.9 FALL=1
+
+meas tran proptimeRR_inv6_inv8 TRIG v(xinv_1_chain.n6) val=0.9 RISE=1 TARG v(xinv_1_chain.n8) VAL=0.9 RISE=1
+meas tran proptimeFF_inv6_inv8 TRIG v(xinv_1_chain.n6) val=0.9 FALL=1 TARG v(xinv_1_chain.n8) VAL=0.9 FALL=1
+
+meas tran proptimeRF_inv7 TRIG v(xinv_1_chain.n6) val=0.9 RISE=1 TARG v(xinv_1_chain.n7) VAL=0.9 FALL=1
+meas tran proptimeFR_inv7 TRIG v(xinv_1_chain.n6) val=0.9 FALL=1 TARG v(xinv_1_chain.n7) VAL=0.9 RISE=1
+
+gnuplot res v(in) v(out) v(xinv_1_chain.n8) v(xinv_1_chain.n7) v(xinv_1_chain.n6)
++ title 'input and output of the 10 inverter chain inv_1 with slope and load'
++ xlabel 'time / s' ylabel 'Voltage / V' 
+
+.endc
+
+
+
+.end
+

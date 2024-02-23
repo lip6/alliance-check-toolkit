@@ -1,0 +1,45 @@
+sky130_fd_sc_hd__inv_1_3 with slope
+*
+* inv_1_3_hitas.spi
+* sta compatible ngspice
+* from simu/ngpice/top_sky130_fd_sc_hd__inv_1_3.spi
+
+*****************
+
+.TEMP 25
+
+******************
+******************
+* BSIM4 transistor model parameters for ngspice included in db_ng.tcl
+*
+* nfet_01v8
+*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice
+*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.corner.spice
+* pfet_01v8_hvt
+*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice
+*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
+
+*******************************
+
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+*gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/skyWater130/simu/ngspice/sky130_fd_sc_hd__inv_1_3.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt sky130_fd_sc_hd__inv_1_3 in out vdd gnd
+* 3 inverters loaded
+
+Xinv_1_3 in out evdd evss sky130_fd_sc_hd__inv_1_3
+
+.end
+
