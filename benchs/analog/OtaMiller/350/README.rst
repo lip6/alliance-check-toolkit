@@ -4,6 +4,7 @@ alliance-check-toolkit/benchs/analog/OtaMiller/350/README.rst
 
 September 25, 2023, MML
 December 18, 2023, MML
+Faebruary 29, 2024, MML
 
 --------------------------
 
@@ -15,6 +16,8 @@ Rquired files:
 dodo.py      : python script to setup the technology and dependencies
 millerMOS.py : Python script to describe netlist, and relative placement for layout generation
                with only transistors
+miller.py    : Python script to describe netlist, and relative placement for layout generation
+               with transistors and MIM capacitors
 
 ---------------
 Running layout generation
@@ -29,6 +32,9 @@ cgt window, select:
 
 Tools/Python Script
 millerMos (python script without extension)
+or
+miller (python script without extension)
+
 
 Analog/SlicingTree/Update possible dimensions
 
@@ -55,6 +61,3 @@ Deprecated files
 Setup the environment :
 eval `XXX/coriolis-2.x/Linux.el9/Release.Shared/install/etc/coriolis2/coriolisEnv.py`
 
-miller.py    : Python script to describe netlist, and relative placement for layout generation
-               with transistors and capacitors
-               the capacitors are not up to date
