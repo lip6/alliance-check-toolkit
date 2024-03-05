@@ -4,6 +4,7 @@ alliance-check-toolkit/benchs/analog/comparator/sky130_c4m/README.rst
 
 24 April 2024, MMLouerat
 1 March 2024, MML
+4 March 2024, MML
 
 -------------------------------------------------------------------------------------------
 
@@ -110,12 +111,8 @@ File/ Exit to quit
 
 
 
-
-
-
-
-
-
+Deprecated
+--------------
 
 To launch the layout generation:
 
