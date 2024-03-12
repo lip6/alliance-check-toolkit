@@ -31,7 +31,7 @@ def scriptMain ( **kw ):
         cfg.katana.eventsLimit          = 1000000
         cfg.anabatic.topRoutingLayer    = 'METAL5'
         cfg.katana.hTracksReservedLocal = 5 
-        cfg.katana.vTracksReservedLocal = 5 
+        cfg.katana.vTracksReservedLocal = 6 
         cfg.katana.hTracksReservedMin   = 1 
         cfg.katana.vTracksReservedMin   = 4 
     

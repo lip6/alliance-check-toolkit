@@ -2,22 +2,23 @@
 
 import sys
 import traceback
-import CRL
-import helpers
-helpers.loadUserSettings()
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import trace, l, u, n
-import plugins
-from   Hurricane  import DbU, Breakpoint, Cell
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-from   plugins.alpha.core2chip.niolib     import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
+from   coriolis.Hurricane  import DbU, Breakpoint, Cell
+from   coriolis            import CRL
+from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+from   coriolis.helpers.io import ErrorMessage, WarningMessage
+loadUserSettings()
+from   coriolis            import plugins
+from   coriolis.plugins.block.block          import Block
+from   coriolis.plugins.block.configuration  import IoPin, GaugeConf
+from   coriolis.plugins.block.spares         import Spares
+from   coriolis.plugins.core2chip.niolib     import CoreToChip
+from   coriolis.plugins.chip.configuration   import ChipConf
+from   coriolis.plugins.chip.chip            import Chip
 
 
-af = CRL.AllianceFramework.get()
+af  = CRL.AllianceFramework.get()
+env = af.getEnvironment()
+env.addSYSTEM_LIBRARY( library='../efpgalib', mode=CRL.Environment.Prepend )
 
 
 def scriptMain ( **kw ):
@@ -25,7 +26,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #helpers.setTraceLevel( 550 )
+       #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
@@ -35,24 +36,27 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        conf.cfg.etesian.densityVariation    = 0.01
+        conf.cfg.etesian.aspectRatio         = 1.0
+        conf.cfg.etesian.spaceMargin         = 0.20
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-       #conf.cfg.katana.hTracksReservedLocal = 0
-       #conf.cfg.katana.vTracksReservedLocal = 0
-        conf.cfg.katana.hTracksReservedMin   = 7
+        conf.cfg.katana.eventsLimit          = 10000000
+        conf.cfg.katana.hTracksReservedLocal = 10
+        conf.cfg.katana.vTracksReservedLocal = 10
+        conf.cfg.katana.hTracksReservedMin   = 5
         conf.cfg.katana.vTracksReservedMin   = 5
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
         conf.useSpares = False
-        conf.useHFNS   = False
-        conf.editor = editor
+        conf.editor    = editor
         blockBuilder = Block( conf )
         cell.setTerminalNetlist( False )
         rvalue = blockBuilder.doPnR()
         blockBuilder.save()
     except Exception as e:
-        helpers.io.catch( e )
+        catch( e )
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
