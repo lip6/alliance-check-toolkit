@@ -230,7 +230,7 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.effort               = 2
         conf.cfg.etesian.densityVariation     = 0.05
         conf.cfg.etesian.aspectRatio          = 1.0
-        conf.cfg.etesian.spaceMargin          = 0.05
+        conf.cfg.etesian.spaceMargin          = 0.10
         conf.cfg.block.spareSide              = l(350)
         conf.cfg.spares.maxSink               = 30
         conf.cfg.anabatic.topRoutingLayer     = 'METAL5'
@@ -238,7 +238,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.vTracksReservedLocal  = 12
         conf.cfg.katana.terminalReservedLocal = 10
         conf.cfg.katana.hTracksReservedMin    = 8
-        conf.cfg.katana.vTracksReservedMin    = 6
+        conf.cfg.katana.vTracksReservedMin    = 7
         conf.cfg.katana.eventsLimit           = 4000000
         conf.editor              = editor
         conf.useHFNS             = False
