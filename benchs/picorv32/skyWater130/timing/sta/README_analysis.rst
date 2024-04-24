@@ -10,6 +10,9 @@ Roselyne Chotin, April 2024
 Marie-Minerve Louerat, April 2024
 Naohiko Shimzu, April 2024
 
+update 24 April 2024, selected timing path generation
+                      using C4M transistor models
+
 *************************************
 
 Modifications performed in ./skylibm/library.spice
@@ -39,6 +42,7 @@ files to run Hitas:
        avt_env.sh  
        db_ng.tcl  
        report_picorv32_m.tcl
+       paths_simu.tcl
 
 **subdirectory : /skykibm/**
 homemade file containing the Open Source PDK SkyWater130 standard cell library models, 
@@ -73,8 +77,16 @@ run Hitas sta:
 * run hitas to build the timiming data base:
   ./hitas/db_ng.tcl 
 
-* run hitas to extract long path:
-  ./hitas/eport_picorv32_m.tcl
+* run hitas to extract longest paths:
+  ./hitas/report_picorv32_m.tcl
+
+* run hitas to generate the netlist of a selected timing path at tansistor level.
+  ./hitas/paths_simu.tcl
+  beware that in the used standard cells nfet uses the standard transistor nfet_01v8__tt
+  and pfet the hvt transistor pfet_01v8_hvt__tt
+  both included in alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice_hitas/C4M.Sky130_tt_model.spice
+  which has been flatten at model MOS level
+  and required for this analysis at transistor level
 
 Note
 --------
