@@ -72,7 +72,7 @@ def _routing():
     via = tech.getLayer('m4_via4_m5')
     setEnclosures(via, metal, (u(0.31), u(0.4)))
     rg.addLayerGauge(CRL.RoutingLayerGauge.create(
-        metal, CRL.RoutingLayerGauge.Horizontal, CRL.RoutingLayerGauge.Default, 5, 0.0,
+        metal, CRL.RoutingLayerGauge.Horizontal, CRL.RoutingLayerGauge.PowerSupply, 5, 0.0,
         u(0.0), u(3.2), u(1.6), u(1.6), u(0.8), u(1.6),
     ))
     af.addRoutingGauge(rg)
@@ -87,6 +87,8 @@ def _routing():
 
     # Place & Route setup
     with CfgCache(priority=Cfg.Parameter.Priority.ConfigurationFile) as cfg:
+        env = af.getEnvironment()
+        env.setRegister( '^sff.*' )
         cfg.lefImport.minTerminalWidth = 0.0
         cfg.crlcore.groundName = 'vss'
         cfg.crlcore.powerName = 'vdd'
@@ -94,12 +96,16 @@ def _routing():
         cfg.etesian.aspectRatio = [10, 1000]
         cfg.etesian.spaceMargin = 0.10
         cfg.etesian.uniformDensity = True
+        cfg.etesian.densityVariation = 0.05
         cfg.etesian.routingDriven = False
         cfg.etesian.latchUpDistance = u(30.0 - 1.0)
         cfg.etesian.diodeName = 'diode_w1'
         cfg.etesian.antennaInsertThreshold = 0.50
-        cfg.etesian.antennaMaxWL = u(250.0)
+        cfg.etesian.tieName = None
+        cfg.etesian.antennaGateMaxWL = u(400.0)
+        cfg.etesian.antennaDiodeMaxWL = u(800.0)
         cfg.etesian.feedNames = 'tie,decap_w0'
+        cfg.etesian.defaultFeed = 'tie'
         cfg.etesian.cell.zero = 'zero_x1'
         cfg.etesian.cell.one = 'one_x1'
         cfg.etesian.bloat = 'disabled'
@@ -120,7 +126,7 @@ def _routing():
         cfg.anabatic.globalLengthThreshold = 1450
         cfg.anabatic.saturateRatio = 0.90
         cfg.anabatic.saturateRp = 10
-        cfg.anabatic.topRoutingLayer = 'm5'
+        cfg.anabatic.topRoutingLayer = 'm4'
         cfg.anabatic.edgeLength = 48
         cfg.anabatic.edgeWidth = 8
         cfg.anabatic.edgeCostH = 9.0
@@ -131,10 +137,15 @@ def _routing():
         cfg.anabatic.globalIterations = [ 1, 100 ]
         cfg.anabatic.gcell.displayMode = 1
         cfg.anabatic.gcell.displayMode = (("Boundary", 1), ("Density", 2))
-        cfg.katana.hTracksReservedLocal = 4
-        cfg.katana.hTracksReservedLocal = [0, 20]
-        cfg.katana.vTracksReservedLocal = 3
-        cfg.katana.vTracksReservedLocal = [0, 20]
+        cfg.anabatic.searchHalo = 2
+        cfg.katana.trackFill = 0
+        cfg.katana.runRealignStage = True
+        cfg.katana.hTracksReservedMin   = 10
+        cfg.katana.hTracksReservedLocal = 20
+        cfg.katana.hTracksReservedLocal = [0, 30]
+        cfg.katana.vTracksReservedMin   = 8
+        cfg.katana.vTracksReservedLocal = 20
+        cfg.katana.vTracksReservedLocal = [0, 30]
         cfg.katana.termSatReservedLocal = 8
         cfg.katana.termSatThreshold = 9
         cfg.katana.eventsLimit = 4000002
@@ -158,11 +169,12 @@ def _routing():
         cfg.chip.block.rails.vWidth = u(2.68)
         cfg.chip.block.rails.hSpacing = u(0.7)
         cfg.chip.block.rails.vSpacing = u(0.7)
-        cfg.clockTree.minimumSide = l(600)
-        cfg.clockTree.buffer = 'buf_x1'
+        cfg.chip.supplyRailWidth = u(20.0)
+        cfg.chip.supplyRailPitch = u(40.0)
         cfg.clockTree.placerEngine = 'Etesian'
-        cfg.block.spareSide = 10
+        cfg.block.spareSide = 8 * u(10.0)
         cfg.spares.buffer = 'buf_x4'
+        cfg.spares.hfnsBuffer = 'buf_x4'
         cfg.spares.maxSinks = 31
 
 
