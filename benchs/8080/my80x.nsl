@@ -1,0 +1,1018 @@
+/*
+
+  Simple 80 Processor (my80x) V1.0
+	-- A variant of my80 --
+
+  (C)Copyright by Naohiko Shimizu, 2001-2011.
+  All rights are reserved.
+
+  Contact information:
+  Dr. Naohiko Shimizu
+  email: nshimizu^ip-arch.jp
+  URL: http://www.ip-arch.jp/
+
+  Update informations:
+    18-nov-2011: rewrite to NSL from SFL
+    02-dec-2002: add 2player pad
+    01-dec-2002: io_sft
+    31-oct-2002: joypad out from my80x
+    31-oct-2002: CPU for invemu
+    30-oct-2002: sft    
+    30-oct-2002: timer   
+    30-oct-2002: int   
+    22-oct-2002: pop push
+    05-Jun-2002: push ,katsu
+    24-May-2002: ram 256 to ram 64K ,katsu
+    20-Apr-2002: Restructuring to reduce gates, SHMZ
+    30-Jan-2001: Generated from the SN/1
+******************************************/
+#include "config.h"
+
+/* timer.nsl */
+/* targeted to 10MHz master clock */
+/* interrupts 100Hz interval */
+
+#ifdef SIM
+#define TIME		0x02000
+#else
+#define TIME		0x186A0
+#endif
+
+declare timer {
+  func_in  ack;
+  func_out irq;
+}
+
+ 
+#define B 0b000
+#define C 0b001
+#define D 0b010
+#define E 0b011
+#define H 0b100
+#define L 0b101
+#define F 0b110
+#define A 0b111
+#define M 0b110
+
+#define SPH 0b110
+#define SPL 0b111
+
+#ifdef STANDALONE
+declare my80x {
+    input    datai[8] ;
+    output   datao[8] ;
+    output   adrs[16] ;
+   /* func_in  extint; */
+    func_out memory_read;
+    func_out memory_write;
+   /* func_out io_read;*/
+   /* func_out io_write;*/
+    input joypad1[8] ;
+    input joypad2[8] ;
+}
+#endif
+
+declare my80core {
+    input      data[8] ;
+    output     datao[8] ;
+    output     adrs[16] ;
+    func_in  extint;
+    func_out ack;
+    func_out memory_read(adrs);
+    func_out memory_write(adrs,datao);
+    func_out io_read(adrs);
+    func_out io_write(adrs,datao);
+    
+}
+
+declare alu80 {
+    input    in1[8] ;
+    input    in2[8] ;
+    input    ci ;
+    output   out[8] ;
+    output   s,z,a,p,c;
+    func_in do_adc(in1,in2,ci);
+    func_in do_sbc(in1,in2,ci);
+    func_in do_add(in1,in2);
+    func_in do_sub(in1,in2);
+    func_in do_and(in1,in2);
+    func_in do_or (in1,in2);
+    func_in do_xor(in1,in2);
+    func_in do_cmp(in1,in2);
+}
+
+declare cpa {
+   input in1, in2, ci;
+   output out, co;
+   func_in exe(in1,in2,ci);
+}
+
+declare cpa4 {
+   input in1[4], in2[4], ci;
+   output out[4], co;
+   func_in exe(in1,in2,ci);
+}
+
+declare cpa8 {
+   input in1[8], in2[8], ci;
+   output out[8], co, ca;
+   func_in exe(in1,in2,ci);
+}
+
+/*io_sft*/
+
+declare io_sft{
+	input adrs[8];
+	input    datai[8];
+	output   datao[8];
+	func_in read(adrs);
+	func_in write(adrs,datai);
+}
+
+declare sftl{
+	input a[16],b[8];
+	output out[8];
+	func_in exe(a,b);
+}
+
+module sftl {
+
+	wire tmp[16], tmp0[16],tmp1[16],tmp2[16],tmp3[16];
+
+	func exe {
+		out = tmp[15:8];
+		any {
+			~b[0]: tmp0 = a[15:0];
+			 b[0]: tmp0 = {a[14:0],0b0};
+			~b[1]: tmp1 = tmp0[15:0];
+			 b[1]: tmp1 = {tmp0[13:0],2#0b0};
+			~b[2]: tmp2 = tmp1[15:0];
+			 b[2]: tmp2 = {tmp1[11:0],4#0b0};
+			~b[3]: tmp3 = tmp2[15:0];
+			 b[3]: tmp3 = {tmp2[7:0],8#0b0};
+			 |b[7:4]: tmp = 16#0b0; 
+			~|b[7:4]: tmp = tmp3;
+		}
+	}
+}
+
+
+
+module io_sft{
+	reg	port2_reg[8]=0, port4_reg[8]=0, oldport4[8]=0;
+	wire	tmp[16];
+	sftl	sft;
+
+	func write {
+		any{
+			adrs == 0x02 : {port2_reg := datai ; }
+			adrs == 0x04 : {
+				port4_reg := datai;
+				oldport4 := port4_reg ;
+				}
+		}
+	}
+
+	func read {
+		tmp = { port4_reg, oldport4 };
+		sft.exe( tmp, port2_reg );
+		datao = sft.out;
+	}
+}
+/*END io_sft*/
+
+module timer {
+  reg    count_reg[20]=0;
+  reg    int_req=0;
+
+  any{
+    (~(count_reg==TIME) ): count_reg := count_reg + 0x00001;
+    ( (count_reg==TIME) ): count_reg :=20#0b0;
+    ( ~int_req & (count_reg==TIME) ): int_req := 0b1;
+    ( int_req & ack )    : int_req := 0b0;
+    ( int_req )          : irq() ;
+  }
+}/*timer end*/
+
+
+module cpa {
+
+   func exe {
+     out = in1 ^ in2 ^ ci;
+     co  = (in1&in2)|(in1&ci)|(in2&ci);
+     }
+}
+
+module cpa4 {
+   cpa a1,a2,a3,a4;
+
+   func exe {
+     out = {a4.exe(in1[3],in2[3],a3.co).out,
+           a3.exe(in1[2],in2[2],a2.co).out,
+           a2.exe(in1[1],in2[1],a1.co).out,
+           a1.exe(in1[0],in2[0],ci).out};
+     co = a4.co;
+     }
+}
+
+module cpa8 {
+   cpa4 a1,a2;
+
+   func exe {
+     out = {a2.exe(in1[7:4],in2[7:4],a1.co).out,
+           a1.exe(in1[3:0],in2[3:0],ci).out};
+     co = a2.co;
+     ca = a1.co;
+     }
+}
+
+declare ha {
+   input in, ci,dec;
+   output out, co;
+   func_in exe(in,ci,dec);
+}
+
+declare inc4 {
+   input in[4],  ci,dec;
+   output out[4], co;
+   func_in exe(in,ci,dec);
+}
+
+declare inc8 {
+   input in[8], ci;
+   output out[8], co;
+   func_in up(in,ci);
+   func_in down(in,ci);
+}
+
+module ha {
+
+   func exe {
+     out = in ^ ci;
+     co  = ((in ^ dec)&ci);
+     }
+}
+
+module inc4 {
+   ha a1,a2,a3,a4;
+
+   func exe {
+     out = {a4.exe(in[3],a3.co,dec).out,
+           a3.exe(in[2],a2.co,dec).out,
+           a2.exe(in[1],a1.co,dec).out,
+           a1.exe(in[0],ci,dec).out};
+     co = a4.co;
+     }
+}
+
+module inc8 {
+   inc4 a1,a2;
+
+   func up {
+     out = {a2.exe(in[7:4],a1.co,0b0).out,
+           a1.exe(in[3:0],ci,0b0).out};
+     co = a2.co;
+     }
+   func down {
+     out = {a2.exe(in[7:4],a1.co,0b1).out,
+           a1.exe(in[3:0],ci,0b1).out};
+     co = a2.co;
+     }
+}
+
+
+module alu80 {
+    cpa8     cp8;
+
+    func do_add {
+		out = cp8.exe(in1, in2, 0b0).out;
+		c = cp8.co; a=cp8.ca;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_adc {
+		out = cp8.exe(in1, in2, ci).out;
+		c = cp8.co; a=cp8.ca;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_sub {
+		out = cp8.exe(in1, ~in2, 0b1).out;
+		c = ~cp8.co; a=~cp8.ca;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_sbc {
+		out = cp8.exe(in1, ~in2, ~ci).out;
+		c = ~cp8.co; a=~cp8.ca;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_and {
+		out = in1 & in2;
+		c = 0b0; a=0b0;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_xor {
+		out = in1 ^ in2;
+		c = 0b0; a=0b0;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_or {
+		out = in1 | in2;
+		c = 0b0; a=0b0;
+		s = out[7]; z = ~| out; p = ~^ out; 
+		}
+    func do_cmp {
+		out = in1;
+		cp8.exe(in1, ~in2, 0b1);
+		c = ~cp8.co; a=~cp8.ca;
+		s = cp8.out[7]; z = ~| cp8.out; p = ~^ cp8.out; 
+		}
+}
+
+
+module my80x {
+    timer    tmr;
+    io_sft   iosft;
+    my80core      cpu;
+
+  /* func extint cpu.extint();*/
+    if (tmr.irq) cpu.extint();
+    func cpu.ack tmr.ack();
+    func cpu.memory_read {
+             cpu.data = datai;
+             adrs = cpu.adrs;
+             memory_read();
+             }
+    func cpu.io_read {
+                 any{
+                  adrs[7:0] == 0x01 :{
+                                  cpu.data = joypad1 ;
+                                  /* cpu.data = data ; */
+                                  /* io_read(); */
+                                  }
+                  adrs[7:0] == 0x02 :{
+                                  cpu.data = joypad2 ;
+                                  }
+                  adrs[7:0] == 0x03 :{
+                                  cpu.data = iosft.read(adrs[7:0]).datao;
+                                  }
+                 }
+             adrs = cpu.adrs;
+             /*io_read();*/
+             }
+    func cpu.memory_write {
+             datao = cpu.datao;
+             adrs = cpu.adrs;
+             memory_write();
+             }
+    func cpu.io_write {
+             datao = cpu.datao;
+             adrs = cpu.adrs;
+             iosft.write(adrs[7:0],cpu.datao) ;
+             /*io_write();*/
+             }
+}
+
+module my80core {
+    func_self start, flagchk,
+	      dec1op, incop, incsp, incpc, loop1, lospl, lopcl,
+              decsp, decpc;
+    func_self dmov,dalu,dinr,ddad,dinx,dpop,dpush,dldax,dstax,dretc,drst,
+        dalum,dret,dxthl,dpchl,dsphl,dxchg,ddi,dei,dnop;
+    func_self dmvi,dalui,din,dout,dcc,dcall,djmp,djc,dlxi,dlda,
+        dlhld,dshld,dsta;
+    func_self fetch2, fetch3, ifetch, S1, S2, S3, S4;
+
+    reg      pch[8],pcl[8]; /* program counter */
+    reg      sph[8],spl[8];
+    reg      a[8],f[8],b[8],c[8],d[8],e[8],h[8],l[8];
+    reg      tc, imask, op0[8], op1[8], op2[8];
+    reg      st0=0;
+    reg      st1,st2 ;
+    reg      int_state=0; /*int condition*/
+    
+    inc8     inc ;
+    alu80     alu ;
+    wire   lo[8], flg, rs[3], rg[3], v[8] ;
+
+    func_self setreg(rs,v);
+    func_self getreg(rg);
+    func_self setrx(rs,v);
+    func_self getrx(rg);
+
+    proc_name intt();
+    proc_name ift(pch,pcl) ;
+    reg  run[3]=0;
+    proc_name ex(run);
+/* Common operations for every stages must be described here */
+    {
+	st0 := 0b1;
+	st1 := st0;
+	st2 := st1;
+	if ((st2 == 0b0) & (st1 == 0b1)) start();
+     }
+
+    func extint intt();
+    func start {
+    /* start funcion fetch */
+	ift(0x00,0x00);
+	imask := 0b1;
+        }
+
+    func loop1 lo = op1;
+    func lospl lo = spl;
+    func lopcl lo = pcl;
+
+    func setreg any {
+	rs == B: b:=v;
+	rs == C: c:=v;
+	rs == D: d:=v;
+	rs == E: e:=v;
+	rs == H: h:=v;
+	rs == L: l:=v;
+	rs == F: f:=v;
+	rs == A: a:=v;
+	}
+    func getreg any {
+	rg == B: lo = b;
+	rg == C: lo = c;
+	rg == D: lo = d;
+	rg == E: lo = e;
+	rg == H: lo = h;
+	rg == L: lo = l;
+	rg == F: lo = f;
+	rg == A: lo = a;
+	}
+    func setrx any {
+	rs == B: b:=v;
+	rs == C: c:=v;
+	rs == D: d:=v;
+	rs == E: e:=v;
+	rs == H: h:=v;
+	rs == L: l:=v;
+	rs == SPH: sph:=v;
+	rs == SPL: spl:=v;
+	}
+    func getrx any {
+	rg == B: lo = b;
+	rg == C: lo = c;
+	rg == D: lo = d;
+	rg == E: lo = e;
+	rg == H: lo = h;
+	rg == L: lo = l;
+	rg == SPH: lo = sph;
+	rg == SPL: lo = spl;
+	}
+    func flagchk any {
+	op0[5:3] == 0b000: flg = ~f[6];
+	op0[5:3] == 0b001: flg = f[6];
+	op0[5:3] == 0b010: flg = ~f[0];
+	op0[5:3] == 0b011: flg = f[0];
+	op0[5:3] == 0b100: flg = ~f[2];
+	op0[5:3] == 0b101: flg = f[2];
+	op0[5:3] == 0b110: flg = ~f[7];
+	op0[5:3] == 0b111: flg = f[7];
+	}
+    func dec1op any {
+	(op0[7:6] == 0b01):  dmov(); 
+	(op0[7:6] == 0b10):  dalu(); 
+	({op0[7:6],op0[2:1]} == 0b0010):  dinr(); 
+	({op0[7:6],op0[3:0]} == 0b001001):  ddad(); 
+	({op0[7:6],op0[2:0]} == 0b00011):  dinx(); 
+	({op0[7:6],op0[3:0]} == 0b110001):  dpop(); 
+	({op0[7:6],op0[3:0]} == 0b110101):  dpush(); 
+	({op0[7:5],op0[3:0]} == 0b0001010):  dldax(); 
+	({op0[7:5],op0[3:0]} == 0b0000010):  dstax(); 
+	({op0[7:6],op0[2:0]} == 0b11000):  dretc(); 
+	({op0[7:6],op0[2:0]} == 0b11111):  drst(); 
+	({op0[7:6],op0[2:0]} == 0b00111):  dalum(); 
+	(op0 == 0xc9):  dret(); 
+	(op0 == 0xe3):  dxthl(); 
+	(op0 == 0xe9):  dpchl(); 
+	(op0 == 0xf9):  dsphl(); 
+	(op0 == 0xeb):  dxchg(); 
+	(op0 == 0xf3):  ddi(); 
+	(op0 == 0xfb):  dei(); 
+	(op0 == 0x00):  dnop(); 
+	({op0[7:6],op0[2:0]} == 0b00110):  dmvi(); 
+	({op0[7:6],op0[2:0]} == 0b11110):  dalui(); 
+	(op0 == 0xdb):  din(); 
+	(op0 == 0xd3):  dout(); 
+	({op0[7:6],op0[2:0]} == 0b11100):  dcc(); 
+	({op0[7:6],op0[2:0]} == 0b11010):  djc(); 
+	({op0[7:6],op0[3:0]} == 0b000001):  dlxi(); 
+	(op0 == 0xcd):  dcall(); 
+	(op0 == 0xc3):  djmp(); 
+	(op0 == 0x3a):  dlda(); 
+	(op0 == 0x2a):  dlhld(); 
+	(op0 == 0x22):  dshld(); 
+	(op0 == 0x32):  dsta(); 
+	}
+#define OP2OP1 0b00
+#define HL     0b01
+#define SP     0b10
+#define PC     0b11
+    func incop {
+		op1:=alu.do_add(loop1().lo,0x01).out;
+		op2:=inc.up(op2,alu.c).out;}
+    func incsp {
+		spl:=alu.do_add(lospl().lo,0x01).out;
+		sph:=inc.up(sph,alu.c).out;}
+    func incpc {
+		pcl:=alu.do_add(lopcl().lo,0x01).out;
+		pch:=inc.up(pch,alu.c).out;}
+    func decsp {
+		spl:=alu.do_sub(lospl().lo,0x01).out;
+		sph:=inc.down(sph,alu.c).out;}
+    func decpc {
+		pcl:=alu.do_sub(lopcl().lo,0x01).out;
+		pch:=inc.down(pch,alu.c).out;}
+
+
+    func dmov any {
+     ex&&(run==0): { /* MOV, HLT */
+       any {
+		op0[5:0] == 0b110110: {
+			decpc();
+			ifetch();
+			}
+		else: any {
+			(op0[2:0] == M): {
+				op1 := memory_read({h,l}).data;
+				S3();
+				}
+			else: {
+				op1 := getreg(op0[2:0]).lo;
+				S3();
+				}
+			}
+		}
+	}
+      ex&&(run==3):
+       any {
+	op0[5:3] == M: {
+		memory_write({h,l},op1);
+		ifetch();
+		}
+	else: {
+		setreg(op0[5:3],op1);
+		ifetch();
+		}
+	}
+	}
+    func dalu any {
+     ex&&(run==0): any { /* ALU */
+       (op0[2:0] == M): {
+		op1 := memory_read({h,l}).data;
+		S3();
+		}
+	else: {
+		op1 := getreg(op0[2:0]).lo;
+		S3();
+		}
+	}
+     ex&&(run==3): {
+        any {
+        op0[5:3] == 0b000: alu.do_add(getreg(A).lo, op1);
+        op0[5:3] == 0b001: alu.do_adc(getreg(A).lo, op1, f[0]);
+        op0[5:3] == 0b010: alu.do_sub(getreg(A).lo, op1);
+        op0[5:3] == 0b011: alu.do_sbc(getreg(A).lo, op1, f[0]);
+        op0[5:3] == 0b100: alu.do_and(getreg(A).lo, op1);
+        op0[5:3] == 0b101: alu.do_xor(getreg(A).lo, op1);
+        op0[5:3] == 0b110: alu.do_or(getreg(A).lo, op1);
+        op0[5:3] == 0b111: alu.do_cmp(getreg(A).lo, op1);
+        }
+	setreg(A, alu.out);
+	f:={alu.s,alu.z,0b0,alu.a,0b0,alu.p,0b0,alu.c};
+	ifetch();
+       }
+     }
+    func dinr any {
+     ex&&(run==0): any { /* INR,DCR */
+	(op0[5:3] == M): {
+		op1 := memory_read({h,l}).data;
+		S1();
+		}
+	else: {
+                any {
+		   ~op0[0]: alu.do_add(getreg(op0[5:3]).lo, 0x01);
+		    op0[0]: alu.do_sub(getreg(op0[5:3]).lo, 0x01);
+                     }
+		setreg(op0[5:3], alu.out);
+		f:={alu.s,alu.z,0b0,alu.a,0b0,alu.p,0b0,f[0]};
+		ifetch();
+		}
+	}
+      ex&&(run==1): {
+        any {
+         ~op0[0]: alu.do_add(loop1().lo, 0x01);
+          op0[0]: alu.do_sub(loop1().lo, 0x01);
+          }
+	op1 := alu.out;
+	f:={alu.s,alu.z,0b0,alu.a,0b0,alu.p,0b0,f[0]};
+	S2();
+        }
+      ex&&(run==2): {
+	memory_write({h,l}, op1);
+	ifetch();
+        }
+      }
+    func ddad any {
+      ex&&(run==0): { /* DAD */
+	setrx(L, alu.do_add(getrx({op0[5:4],0b1}).lo, l).out);
+	tc := alu.c;
+	S1();
+	}
+      ex&&(run==1): {
+        setrx(H,alu.do_adc(getrx({op0[5:4],0b0}).lo, h, tc).out);
+        f:={f[7:1],alu.c};
+        ifetch();
+        }
+       }
+    func dinx any {
+      ex&&(run==0): { /* INX,DCX */
+       any {
+	 ~op0[3]: alu.do_add(getrx({op0[5:4],0b1}).lo, 0x01);
+	  op0[3]: alu.do_sub(getrx({op0[5:4],0b1}).lo, 0x01);
+          }
+	setrx({op0[5:4],0b1}, alu.out);
+	tc := alu.c;
+	S1();
+	}
+      ex&&(run==1): {
+       any {
+         ~op0[3]: alu.do_adc(getrx({op0[5:4],0b0}).lo, 0x00, tc);
+          op0[3]: alu.do_sbc(getrx({op0[5:4],0b0}).lo, 0x00, tc);
+         }
+       setrx({op0[5:4],0b0}, alu.out);
+       ifetch();
+       }
+     }
+    func dpop any {
+      ex&&(run==0): { /* POP */
+	setreg({op0[5:4],(~(op0[5] & op0[4]))}, memory_read({sph,spl}).data);
+	incsp();
+	S1();
+	}
+      ex&&(run==1): {
+        setreg({op0[5:4],(op0[5] & op0[4])}, memory_read({sph,spl}).data);
+        incsp();
+        ifetch();
+        }
+	}
+    func dpush any {
+      ex&&(run==0): { /* PUSH */
+	decsp();
+	S1();
+	}
+      ex&&(run==1): {
+        memory_write({sph,spl}, getreg({op0[5:4],(op0[5] & op0[4])}).lo);
+	S2();
+        }
+      ex&&(run==2): {
+        decsp();
+        S3();
+        }
+      ex&&(run==3): {
+        memory_write({sph,spl}, getreg({op0[5:4],(~(op0[5] & op0[4]))}).lo);
+        ifetch();
+        }
+	}
+    func dldax { /* LDAX */
+	any {
+	 ~op0[4]: setreg(A,memory_read({b,c}).data);
+	  else:   setreg(A,memory_read({d,e}).data);
+	 }
+	ifetch();
+	}
+    func dstax { /* STAX */
+	any {
+	 ~op0[4]: memory_write({b,c},a);
+	  else:   memory_write({d,e},a);
+	 }
+	ifetch();
+	}
+    func dretc any {
+      ex&&(run==0): any { /* RETC */
+	flagchk().flg : dret();
+	else: ifetch();
+	}
+      ex&&(run==1): dret();
+      }
+    func dret any {
+      ex&&(run==0): {
+        pcl := memory_read({sph,spl}).data;
+	incsp();
+        S1();
+	}
+      ex&&(run==1): {
+        pch := memory_read({sph,spl}).data;
+        incsp();
+        ifetch();
+	}
+      }
+    func drst any {
+      ex&&(run==0): {
+	op1 := {0b00,op0[5:3],0b000};
+	op2 := 0x00;
+	decsp();
+	S3();
+        }
+      else: dcall();
+	}
+    func dalum any {
+      ex&&(run==0): { /* ALU MISC */
+	any {
+		op0[5:3] == 0b000: { /* RLC */
+			setreg(A,{a[6:0],a[7]});
+			f:={f[7:1],a[7]};
+			ifetch();
+			}
+		op0[5:3] == 0b001: { /* RRC */
+			setreg(A,{a[0],a[7:1]});
+			f:={f[7:1],a[0]};
+			ifetch();
+			}
+		op0[5:3] == 0b010: { /* RAL */
+			setreg(A,{a[6:0],f[0]});
+			f:={f[7:1],a[7]};
+			ifetch();
+			}
+		op0[5:3] == 0b011: { /* RAR */
+			setreg(A,{f[0],a[7:1]});
+			f:={f[7:1],a[0]};
+			ifetch();
+			}
+		op0[5:3] == 0b100: { /* DAA */
+			if(a[3] & (a[2] | a[1]) | f[4]) {
+				setreg(A,alu.do_add(getreg(A).lo, 0x06).out);
+				f:={alu.s,alu.z,0b0,alu.a,0b0,alu.p,0b0,alu.c};
+				}
+			S1();
+			}
+		op0[5:3] == 0b101: { /* CMA */
+			setreg(A,~a);
+			ifetch();
+			}
+		op0[5:3] == 0b110: { /* STC */
+			f:={f[7:1],0b1};
+			ifetch();
+			}
+		op0[5:3] == 0b111: { /* CMC */
+			f:={f[7:1],~f[0]};
+			ifetch();
+			}
+		}
+	    }
+      ex&&(run==1): {
+       if(a[7] & (a[6] | a[5]) | f[0]) {
+	    setreg(A,alu.do_add(getreg(A).lo, 0x60).out);
+	    f:={alu.s,alu.z,0b0,alu.a,0b0,alu.p,0b0,alu.c};
+	    }
+       ifetch();
+       }
+      }
+    func dxthl any {
+      ex&&(run==0): { /* XTHL */
+	op1:=memory_read({sph,spl}).data;
+	S1();
+	}
+      ex&&(run==1): {
+        memory_write({sph,spl}, l);
+        setreg(L,op1);
+        incsp();
+        S2();
+        }
+      ex&&(run==2): {
+        op1:=memory_read({sph,spl}).data;
+        S3();
+        }
+      ex&&(run==3): {
+        setreg(H, op1);
+        memory_write({sph,spl}, h);
+        decsp();
+        ifetch();
+        }
+     }
+    func dpchl {
+	pch := h;
+        pcl := l;
+        ifetch();
+	}
+    func dsphl any {
+      ex&&(run==0): { /* SPHL */
+	setrx(SPH, getreg(H).lo);
+	S1();
+	}
+      ex&&(run==1): {
+	setrx(SPL, getreg(L).lo);
+        ifetch();
+	}
+	}
+    func dxchg any {
+      ex&&(run==0): { /* XCHG */
+	op1 := getreg(H).lo;
+	S1();
+	}
+      ex&&(run==1): {
+	setreg(H, getreg(D).lo);
+	S2();
+	}
+      ex&&(run==2): {
+	setreg(D, op1);
+	op1 := getreg(L).lo;
+	S3();
+	}
+      ex&&(run==3): {
+	setreg(L, getreg(E).lo);
+	S4();
+	}
+      ex&&(run==4): {
+	setreg(E, op1);
+        ifetch();
+	}
+	}
+    func ddi {
+	imask := 0b1;
+        ifetch();
+	}
+    func dei {
+	imask := 0b0;
+        ifetch();
+	}
+    func dnop {
+        ifetch();
+	}
+    func dmvi any {
+      ex&&(run==0): { /* MVI */
+        fetch2();
+	S3();
+	}
+      else: dmov();
+	}
+    func dalui any {
+      ex&&(run==0): { /* ALU */
+        fetch2();
+	S3();
+	}
+      else: dalu();
+	}
+    func din any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): { /* IN */
+		setreg(A,io_read({0x00,op1}).data);
+		ifetch();
+		}
+	}
+    func dout any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): { /* OUT */
+		io_write({0x00,op1},a);
+		ifetch();
+		}
+	}
+    func dcc any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): any { /* CC */
+		flagchk().flg: dcall();
+		else: ifetch();
+		}
+      else: dcall();
+	}
+    func dcall any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): { /* CALL */
+		decsp();
+		S3();
+		}
+      ex&&(run==3): {
+         memory_write({sph,spl}, pch);
+         decsp();
+         S4();
+         }
+      ex&&(run==4): {
+         memory_write({sph,spl}, pcl);
+         djmp();
+         }
+	}
+    func djmp any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      else: { /* JMP */
+	pcl := op1;
+        pch := op2;
+        ifetch();
+	}
+      }
+    func djc any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): { /* JC */
+		if(flagchk().flg) djmp();
+		else ifetch();
+		}
+	}
+    func dlxi any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); 
+   		setrx({op0[5:4],0b1}, op1);
+		}
+      ex&&(run==2): { /* LXI */
+   		setrx({op0[5:4],0b0}, op2);
+		ifetch();
+		}
+	}
+    func dlda any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): { /* LDA */
+		setreg(A,memory_read({op2,op1}).data);
+		ifetch();
+		}
+	}
+    func dlhld any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): { /* LHLD */
+		setreg(L,memory_read({op2,op1}).data);
+		incop();
+		S3();
+		}
+      ex&&(run==3): {
+        setreg(H,memory_read({op2,op1}).data);
+	ifetch();
+        }
+      }
+    func dshld any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): { /* SHLD */
+	 	memory_write({op2,op1},l);
+		incop();
+		S3();
+		}
+      ex&&(run==3): {
+        memory_write({op2,op1}, h);
+	ifetch();
+        }
+	}
+    func dsta any {
+      ex&&(run==0): {fetch2(); S1(); }
+      ex&&(run==1): {fetch3(); S2(); }
+      ex&&(run==2): { /* STA */
+	memory_write({op2,op1},a);
+	ifetch();
+	}
+	}
+    func fetch2 { /* 2 or 3bytes op */
+	op1 := memory_read({pch,pcl}).data;
+	incpc();
+        }
+    func fetch3 { /* 3bytes op */
+	op2 := memory_read({pch,pcl}).data;
+	incpc();
+        }
+ proc intt {
+        finish;
+        }
+
+ proc ift {
+  any {
+	~imask & intt& ~int_state: {
+		imask := 0b1 ;
+		op0 := 0xcf ;
+		int_state := ~int_state ;
+		ack() ;
+		ex(0) ;
+		}
+	~imask & intt& int_state: {
+		imask := 0b1 ;
+		op0 := 0xd7 ;
+		int_state := ~int_state ;
+		ack() ;
+		ex(0) ;
+		}
+	imask | ~intt:
+		{
+		op0 := memory_read({pch,pcl}).data;
+		incpc();
+		ex(0);
+		}
+  } /* any */
+ }
+
+ proc ex {
+  {
+    dec1op();
+    any {
+     S1: ex(1);
+     S2: ex(2);
+     S3: ex(3);
+     S4: ex(4);
+     ifetch: ift();
+     else: finish;
+   }
+  }
+ }
+} /* module */
+
