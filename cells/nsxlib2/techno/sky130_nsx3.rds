@@ -220,6 +220,7 @@ table mbk_to_rds_via
     rds_cont        0.170  all\
     rds_alu1        0.410  all\
     rds_activ       0.400  drc\
+    rds_nimp        0.430  all\
     rds_ntie        0.400  ext
 
 # licon.7 0.170+0.120*2
@@ -228,6 +229,7 @@ table mbk_to_rds_via
     rds_cont        0.170  all\
     rds_alu1        0.410  all\
     rds_activ       0.400  drc\
+    rds_pimp        0.430  all\
     rds_ptie        0.400  ext
 
 # licon.5c
@@ -287,8 +289,8 @@ table mbk_to_rds_turnvia
 # mbk_name rds_name dwr mode
 # -------------------------------------------------------------------
   cont_turn1 rds_alu1    0.050 all
-  cont_turn2 rds_alu1    0.050 all
-  cont_turn3 rds_alu1    0.050 all
+  cont_turn2 rds_alu2    0.050 all
+  cont_turn3 rds_alu3    0.050 all
 end
 
 table lynx_bulk_implicit
