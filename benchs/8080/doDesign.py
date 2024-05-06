@@ -25,14 +25,27 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #setTraceLevel( 550 )
-        Breakpoint.setStopLevel( 100 )
+#        Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'my80core', CRL.Catalog.State.Logical )
         af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
         ioPadsSpec = []
-        ioPinsSpec = []
+        m1pitch=l(10)
+        m2pitch=l(20)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'  , 10*m1pitch, 10*m1pitch,  8)
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'  , 15*m1pitch, 10*m1pitch,  8)
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'   , 10*m1pitch, 10*m1pitch, 16)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'm_clock'     , 100*m2pitch,       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'p_reset'     , 110*m2pitch,       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'extint'     , 120*m2pitch,       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'ack'      , 130*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'memory_read'     , 100*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'memory_write'     , 110*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_read'     , 120*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_write'     , 130*m2pitch,       0 ,  1)
+                         ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
@@ -49,7 +62,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize =  ( l( 1000*50.0), l( 1000*50.0) )
+        conf.coreSize =  ( l( 100*50.0), l( 100*50.0) )
         conf.editor = editor
         blockBuilder = Block( conf )
         cell.setTerminalNetlist( False )
