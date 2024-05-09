@@ -11,7 +11,7 @@ def setupSky130nsx ( useNsxlib=False, checkToolkit=None, cellsTop=None ):
     from   coriolis        import CRL 
     from   coriolis.helpers import overlay, l, u, n
     from   coriolis.designflow.yosys    import Yosys
-    import techno.symbolic.sky130nsx
+    from   techno.symbolic.sky130nsx import technology
 
     Where( checkToolkit )
     if cellsTop is None:
@@ -37,7 +37,7 @@ def setupSky130nsx ( useNsxlib=False, checkToolkit=None, cellsTop=None ):
         cfg.anabatic.edgeLenght          = 24
         cfg.anabatic.edgeWidth           = 8
         if useNsxlib:
-            cfg.anabatic.routingGauge    = 'msxlib4'
+            cfg.anabatic.routingGauge    = 'nsxlib2'
             cfg.anabatic.topRoutingLayer = 'METAL4'
         cfg.katana.termSatReservedLocal  = 6 
         cfg.katana.termSatThreshold      = 9 
@@ -57,7 +57,7 @@ def setupSky130nsx ( useNsxlib=False, checkToolkit=None, cellsTop=None ):
             print( '        "{}"'.format(sxlib.as_posix()) )
 
     Yosys.setLiberty( liberty )
-    ShellEnv.RDS_TECHNO_NAME = (Where.checkToolkit / 'etc' / 'sky130nsx3.rds').as_posix()
+    ShellEnv.RDS_TECHNO_NAME = (sxlib / 'techno' / 'sky130_nsx3.rds').as_posix()
 
     path = None
     for pathVar in [ 'PATH', 'path' ]:

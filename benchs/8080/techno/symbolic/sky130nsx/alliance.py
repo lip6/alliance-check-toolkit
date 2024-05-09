@@ -32,7 +32,7 @@ cellsTop = allianceTop+'/cells'
 af       = AllianceFramework.get()
 env      = af.getEnvironment()
 
-env.setSCALE_X        ( 100 )
+env.setSCALE_X        ( 50 )
 env.setCATALOG        ( 'CATAL' )
 env.setIN_LO          ( 'vst'   )
 env.setIN_PH          ( 'ap'    )
