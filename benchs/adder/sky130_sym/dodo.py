@@ -75,4 +75,5 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow import pnrcheck
 
-pnrcheck.mkRuleSet( globals(), 'adder', pnrcheck.UseClockTree )
+#pnrcheck.mkRuleSet( globals(), 'adder', pnrcheck.UseClockTree )
+pnrcheck.mkRuleSet( globals(), 'adder')
