@@ -45,7 +45,8 @@ end
 
 table gds_layer
 # -------------------------------------------------------------------
-# rds_name     gds_number
+# rds_name     gds_number gds_datatype
+# This version is incompatible with oriinal Alliance for 2nd number
 # -------------------------------------------------------------------
   rds_nwell    64     20
   rds_pwell    64     44
@@ -56,13 +57,13 @@ table gds_layer
   rds_ndif     93     44
   rds_pimp     94     20
   rds_nimp     93     44
-  rds_poly     66     20 
-  rds_alu1     67     20 
-  rds_alu2     68     20 
-  rds_alu3     69     20 
-  rds_alu4     70     20 
-  rds_alu5     71     20 
-  rds_alu6     72     20 
+  rds_poly     66     20
+  rds_alu1     67     20
+  rds_alu2     68     20
+  rds_alu3     69     20
+  rds_alu4     70     20
+  rds_alu5     71     20
+  rds_alu6     72     20
   rds_cont     66     44
   rds_via1     67     44
   rds_via2     68     44
@@ -154,7 +155,7 @@ table mbk_to_rds_segment
   nwell   rds_nwell  vw    0.460   0.280  .0  all
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
-  pwell   rds_pwell  vw    0.460   0.280  .0  all
+#  pwell   rds_pwell  vw    0.460   0.280  .0  all
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
   ndif    rds_activ  vw    0.0     0.0    .0  all\
@@ -170,8 +171,8 @@ table mbk_to_rds_segment
           rds_nwell  vw    0.460   0.510  .0  all
                                                                                                                   
   ptie    rds_ptie   vw    0.145  -0.130  .0  all\
-          rds_pimp   vw    0.270   0.120  .0  all\
-          rds_pwell  vw    0.460   0.510  .0  all
+          rds_pimp   vw    0.270   0.120  .0  all
+#          rds_pwell  vw    0.460   0.510  .0  all
                                                                                                                   
   ntrans  rds_poly   vw    0.13   -0.02   .0  all\
           rds_activ  vw    0.0     0.48   .0  drc\
@@ -361,7 +362,7 @@ table s2r_oversize_denotch
 # rds_name oversized_value_for_denotching
 # -------------------------------------------------------------------
   rds_nwell     0.635
-  rds_pwell     0.635
+#  rds_pwell     0.635
   rds_poly      0.100
   rds_alu1      0.080
   rds_alu2      0.080
@@ -380,7 +381,7 @@ table s2r_bloc_ring_width
 # rds_name ring_width_to_copy_up
 # -------------------------------------------------------------------
   rds_nwell   0. # [ RD_NWEL ]
-  rds_pwell   0. # [ RD_PWEL ]
+#  rds_pwell   0. # [ RD_PWEL ]
   rds_poly    0. # [ RD_POLY ]
   rds_alu1    0. # [ RD_ALU1 ]
   rds_alu2    0. # [ RD_ALU2 ]
@@ -399,7 +400,7 @@ table s2r_minimum_layer_width
 # rds_name  min_layer_width_to_keep
 # -------------------------------------------------------------------
   rds_nwell     0.840
-  rds_pwell     0.840
+#  rds_pwell     0.840
   rds_poly      0.150
   rds_alu1      0.170
   rds_alu2      0.170
@@ -418,7 +419,7 @@ table s2r_post_treat
 # rds_name  s2r_must_treat_or_not  second_layer_whenever_scotch
 # -------------------------------------------------------------------
   rds_nwell        treat null
-  rds_pwell        treat null
+#  rds_pwell        treat null
   rds_poly         treat null
   rds_activ        treat null
   rds_ntie         treat rds_pimp
