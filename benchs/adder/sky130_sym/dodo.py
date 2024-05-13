@@ -36,9 +36,8 @@ def setupSky130nsx ( useNsxlib=False, checkToolkit=None, cellsTop=None ):
         cfg.etesian.aspectRatio          = 1.0 
         cfg.anabatic.edgeLenght          = 24
         cfg.anabatic.edgeWidth           = 8
-        if useNsxlib:
-            cfg.anabatic.routingGauge    = 'nsxlib2'
-            cfg.anabatic.topRoutingLayer = 'METAL4'
+        cfg.anabatic.routingGauge    = 'nsxlib2'
+        cfg.anabatic.topRoutingLayer = 'METAL4'
         cfg.katana.termSatReservedLocal  = 6 
         cfg.katana.termSatThreshold      = 9 
 

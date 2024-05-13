@@ -27,7 +27,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.etesian.spaceMargin         = 0.10
     cfg.etesian.aspectRatio         = 1.0
     cfg.etesian.densityVariation    = 0.10
-    #cfg.etesian.bloat               = 'nsxlib'
+    cfg.etesian.bloat               = 'nsxlib2'
     cfg.anabatic.topRoutingLayer    = 'METAL5'
     cfg.katana.eventsLimit          = 1000000
     #cfg.katana.hTracksReservedMin   = 2
@@ -36,7 +36,7 @@ with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
     cfg.katana.vTracksReservedLocal = 5
     cfg.katana.termSatReservedLocal = 6
     cfg.katana.termSatThreshold     = 9
-    #cfg.clockTree.minimumSide       = l(1000)
+    cfg.clockTree.minimumSide       = l(500)
     cfg.block.spareSide             = l(1000)
     Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
     af  = CRL.AllianceFramework.get()

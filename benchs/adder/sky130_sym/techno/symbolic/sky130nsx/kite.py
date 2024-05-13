@@ -26,7 +26,7 @@ from ...common import kite
 
 
 p = Cfg.getParamDouble    ( 'lefImport.minTerminalWidth'      ).setDouble    ( 0.0      )
-p = Cfg.getParamString    ( 'katabatic.routingGauge'          ).setString    ( 'sxlib'  ) 
+p = Cfg.getParamString    ( 'katabatic.routingGauge'          ).setString    ( 'nsxlib2'  ) 
 p = Cfg.getParamInt       ( "katabatic.globalLengthThreshold" ).setInt       ( 1450     )
 p = Cfg.getParamPercentage( "katabatic.saturateRatio"         ).setPercentage( 80       ) 
 p = Cfg.getParamInt       ( "katabatic.saturateRp"            ).setInt       ( 8        )
