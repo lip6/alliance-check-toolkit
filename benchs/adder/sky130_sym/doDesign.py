@@ -51,7 +51,8 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree = False
-        conf.coreSize =  ( l( 1000.0), l( 1000.0) )
+        conf.coreSize =  ( l( 600.0), l( 600.0) )
+#        conf.coreSize =  ( l( 1000.0), l( 1000.0) )
         conf.editor = editor
         blockBuilder = Block( conf )
         cell.setTerminalNetlist( False )
