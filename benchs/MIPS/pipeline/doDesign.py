@@ -27,12 +27,13 @@ def scriptMain ( **kw ):
         cfg.misc.verboseLevel2          = True
         #cfg.misc.minTraceLevel          = 110
         #cfg.misc.maxTraceLevel          = 120
-        cfg.katana.searchHalo           = 1
-        cfg.katana.eventsLimit          = 1000000
+        cfg.anabatic.globalIterations   = 15
         cfg.anabatic.topRoutingLayer    = 'METAL5'
+        cfg.katana.searchHalo           = 2
+        cfg.katana.eventsLimit          = 1000000
         cfg.katana.hTracksReservedLocal = 5 
         cfg.katana.vTracksReservedLocal = 6 
-        cfg.katana.hTracksReservedMin   = 1 
+        cfg.katana.hTracksReservedMin   = 2 
         cfg.katana.vTracksReservedMin   = 4 
     
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
@@ -61,8 +62,9 @@ def scriptMain ( **kw ):
     katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
     katana.runNegociate         ( Katana.Flags.NoFlags )
     katana.finalizeLayout()
+    success = katana.isDetailedRoutingSuccess()
     katana.destroy()
     cell.setName( cell.getName()+'_r' )
     rsave( cell, CRL.Catalog.State.Logical|CRL.Catalog.State.Physical )
   
-    return cell
+    return success
