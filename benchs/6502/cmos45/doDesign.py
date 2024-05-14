@@ -18,6 +18,7 @@ af = CRL.AllianceFramework.get()
 
 def scriptMain ( **kw ):
     """The mandatory function that Coriolis CGT/Unicorn will look for."""
+    DbU.setStringMode( DbU.StringModeSymbolic )
     global af
 
     rvalue = True
