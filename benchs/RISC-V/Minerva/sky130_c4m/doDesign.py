@@ -53,10 +53,10 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.spaceMargin         = 0.10
         conf.cfg.anabatic.globalIterations   = 20
        #conf.cfg.katana.longWireUpReserve1   = 3.0
-       #conf.cfg.katana.hTracksReservedLocal = 25
-       #conf.cfg.katana.vTracksReservedLocal = 20
-       #conf.cfg.katana.hTracksReservedMin   = 15
-       #conf.cfg.katana.vTracksReservedMin   = 10
+        conf.cfg.katana.hTracksReservedMin   = 15
+        conf.cfg.katana.hTracksReservedLocal = 25
+        conf.cfg.katana.vTracksReservedMin   = 9
+        conf.cfg.katana.vTracksReservedLocal = 20
         conf.cfg.katana.dumpMeasures         = True
        #conf.cfg.katana.longWireUpReserve1   = 2.0
         conf.cfg.harness.path                = harnessProjectDir + '/user_project_wrapper.def'
