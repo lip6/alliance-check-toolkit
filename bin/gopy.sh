@@ -177,11 +177,11 @@
    echo "${hline}"
    echo "${header}"
    echo "${hline}"
-  #timedRunSet 1 &
-  #timedRunSet 2 &
-  #timedRunSet 3 &
+   timedRunSet 1 &
+   timedRunSet 2 &
+   timedRunSet 3 &
    timedRunSet 4 &
-  #timedRunSet 5 &
+   timedRunSet 5 &
    wait
    echo "${hline}"
    echo ""
