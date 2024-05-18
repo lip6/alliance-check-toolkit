@@ -50,7 +50,7 @@ def setArmRtlRules ():
 rtlRules, rtlFiles = setArmRtlRules()
 pnrcheck.mkRuleSet( globals()
                   , 'arm_core'
-                  , pnrcheck.NoSynthesis|pnrcheck.UseClockTree|pnrcheck.IsChip
+                  , pnrcheck.NoSynthesis|pnrcheck.NoGDS|pnrcheck.UseClockTree|pnrcheck.IsChip
                   , extraRtlDepends=rtlRules
                   , extrasClean=rtlFiles
                   )

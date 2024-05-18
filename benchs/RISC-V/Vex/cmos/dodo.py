@@ -7,4 +7,4 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow import pnrcheck
 
-pnrcheck.mkRuleSet( globals(), 'VexRiscv' )
+pnrcheck.mkRuleSet( globals(), 'VexRiscv', flags=pnrcheck.NoGDS )

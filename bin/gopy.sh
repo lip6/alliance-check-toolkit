@@ -107,9 +107,9 @@
    setId="$1"
    benchCount=1
 
-   benchLog="`pwd`/doit-gopy-${setId}.log"
-   failedTag="`pwd`/doit-gopy.failed"
-   rm -f "${benchLog}"
+   benchLog="`pwd`/runset-${setId}.log"
+   failedTag="`pwd`/runset-${setId}.failed"
+   rm -f "${benchLog}" "${failedTag}"
    benchsSetName="benchsSet${setId}"
    for bench in ${!benchsSetName}; do
      rules="${benchRules[$bench]}"
@@ -136,10 +136,7 @@
        if [ $? -ne 0 ]; then
          success="false"
          printf "${statusLine}\n" $setId $benchCount "<${bench}>" "${rule}" "`tail -n 1 time.txt`" "FAILED"
-         if [ "${onGithub}" = "true" ]; then
-           touch ${failedTag}
-           exit 0	   
-         fi
+         touch ${failedTag}
          if [ "${mode}" = "stopOnFailure" ]; then
            echo ""
            echo ""
@@ -164,11 +161,13 @@
 
  timedRunSet () {
    setId="$1"
+   rvalue=0
    timeSet="time-set-${setId}.txt"
    /usr/bin/time -f '%E' -o ${timeSet} ../bin/gopy.sh --run-set=${setId}
+   if [ $? -ne 0 ]; then rvalue=1; fi
    printf "         **Benchs set %u completed** %27s\n" "${setId}" "`tail -n 1 ${timeSet}`"
    rm -f ${timeSet}
-   exit 0
+   exit $rvalue
  }
 
 
@@ -185,6 +184,11 @@
    wait
    echo "${hline}"
    echo ""
+   if [ -e "`pwd`/runset-1.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-2.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-3.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-4.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-5.failed" ]; then exit 1; fi
  else
    runSet ${runSetId}
  fi
