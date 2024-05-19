@@ -349,10 +349,15 @@ table lynx_graph
   rds_cont   rds_pdif   rds_ndif   rds_poly  rds_alu1  rds_cont
   rds_alu1   rds_cont   rds_via1   rds_ref   rds_alu1  
   rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
+  RDS_VIA1  RDS_ALU1 RDS_ALU2 RDS_VIA1
+  RDS_VIA2  RDS_ALU2 RDS_ALU3 RDS_VIA2
+  RDS_VIA3  RDS_ALU3 RDS_ALU4 RDS_VIA3
+  RDS_VIA4  RDS_ALU4 RDS_ALU5 RDS_VIA4
+  RDS_VIA5  RDS_ALU5 RDS_ALU6 RDS_VIA5
   rds_alu2   rds_via1   rds_via2   rds_alu2 
-  rds_alu3   rds_via2   rds_alu3
-  rds_alu4   rds_via3   rds_alu4
-  rds_alu5   rds_via4   rds_alu5
+  rds_alu3   rds_via2   rds_via3   rds_alu3
+  rds_alu4   rds_via3   rds_via4   rds_alu4
+  rds_alu5   rds_via4   rds_via5   rds_alu5
 end
 
 table s2r_oversize_denotch
