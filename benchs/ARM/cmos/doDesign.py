@@ -249,7 +249,7 @@ def scriptMain ( **kw ):
         conf.bRows               = 2
         conf.chipConf.name       = 'chip'
         conf.chipConf.ioPadGauge = 'pxlib'
-        conf.coreSize            = ( l( 6100.0), l( 6100.0) )
+        conf.coreSize            = ( l( 6100.0), l( 6150.0) )
         conf.chipSize            = ( l(10300.0), l(10300.0) )
         conf.coreToChipClass     = CoreToChip
         conf.useHTree( 'ck' )
