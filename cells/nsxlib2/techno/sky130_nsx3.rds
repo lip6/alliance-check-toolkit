@@ -298,12 +298,22 @@ table mbk_to_rds_bigvia_hole
 # -------------------------------------------------------------------
 # mbk_via_name  rds_hole_name side step mode
 # -------------------------------------------------------------------
+CONT_VIA   RDS_VIA1 0.17 0.34 ALL
+CONT_VIA2  RDS_VIA2 0.15 0.32 ALL
+CONT_VIA3  RDS_VIA3 0.20 0.40 ALL
+CONT_VIA4  RDS_VIA4 0.20 0.40 ALL   # should be more than 4
+CONT_VIA5  RDS_VIA5 0.80 1.60 ALL   # should be more than 4
 end
 
 table mbk_to_rds_bigvia_metal
 # -------------------------------------------------------------------
 # mbk_via_name  rds_name  dwr overlap  mode
 # -------------------------------------------------------------------
+CONT_VIA  RDS_ALU1 0.0 0.330 ALL RDS_ALU2 0.0 0.330 ALL
+CONT_VIA2 RDS_ALU2 0.0 0.370 ALL RDS_ALU3 0.0 0.370 ALL
+CONT_VIA3 RDS_ALU3 0.0 0.370 ALL RDS_ALU4 0.0 0.370 ALL
+CONT_VIA4 RDS_ALU4 0.0 0.5 ALL RDS_ALU5 0.0 0.380 ALL
+CONT_VIA5 RDS_ALU5 0.0 0.5 ALL RDS_ALU6 0.0 0.8 ALL
 end
 
 table mbk_to_rds_turnvia
@@ -352,9 +362,14 @@ table lynx_graph
   rds_alu1   rds_cont   rds_via1   rds_ref   rds_alu1  
   rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
   rds_alu2   rds_via1   rds_via2   rds_alu2 
-  rds_alu3   rds_via2   rds_alu3
-  rds_alu4   rds_via3   rds_alu4
-  rds_alu5   rds_via4   rds_alu5
+  rds_alu3   rds_via2   rds_via3   rds_alu3
+  rds_alu4   rds_via3   rds_via4   rds_alu4
+  rds_alu5   rds_via4   rds_via5   rds_alu5
+  RDS_VIA1  RDS_ALU1 RDS_ALU2 RDS_VIA1
+  RDS_VIA2  RDS_ALU2 RDS_ALU3 RDS_VIA2
+  RDS_VIA3  RDS_ALU3 RDS_ALU4 RDS_VIA3
+  RDS_VIA4  RDS_ALU4 RDS_ALU5 RDS_VIA4
+  RDS_VIA5  RDS_ALU5 RDS_ALU6 RDS_VIA5
 end
 
 table s2r_oversize_denotch
