@@ -410,7 +410,7 @@ def _loadDevices ():
 
 
 def _setup_techno ( coriolisTechDir ):
-    ShellEnv.RDS_TECHNO_NAME   = (coriolisTechDir / 'sky130_nsx2' / 'sky130_nsx2.rds').as_posix()
+    ShellEnv.RDS_TECHNO_NAME   = (coriolisTechDir / 'sky130_nsx2' / 'sky130_nsx3.rds').as_posix()
     ShellEnv.GRAAL_TECHNO_NAME = (coriolisTechDir / 'sky130_nsx2' / 'symbolic.graal' ).as_posix()
     ShellEnv.DREAL_TECHNO_NAME = (coriolisTechDir / 'sky130_nsx2' / 'symbolic.dreal' ).as_posix()
 
