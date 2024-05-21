@@ -1,4 +1,5 @@
 #!/bin/sh
+source ./env.sh
 doit clean_flow
 doit b2v
 doit layout 2>&1 | tee layout.log
