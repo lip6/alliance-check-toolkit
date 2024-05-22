@@ -1,8 +1,8 @@
 import pathlib
 from coriolis.designflow.technos import setupSky130_nsx2
-checkToolkit=pathlib.Path('../../..')
-setupSky130_nsx2( checkToolkit)
 
+checkToolkit=pathlib.Path('../../..')
+setupSky130_nsx2( checkToolkit )
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.pnr      import PnR
