@@ -25,7 +25,7 @@ def scriptMain ( **kw ):
     global af
     rvalue = True
     try:
-       #setTraceLevel( 540 )
+       #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
@@ -118,21 +118,13 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        conf.cfg.etesian.spaceMargin         = 0.02
-        conf.cfg.anabatic.searchHalo         = 2
-        conf.cfg.anabatic.globalIterations   = 20
-        conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        conf.cfg.katana.hTracksReservedLocal = 6
-        conf.cfg.katana.vTracksReservedLocal = 3
-        conf.cfg.katana.hTracksReservedMin   = 3
-        conf.cfg.katana.vTracksReservedMin   = 1
-        conf.cfg.katana.trackFill            = 0
+        conf.cfg.etesian.spaceMargin         = 0.05
+       #conf.cfg.katana.hTracksReservedLocal = 6
+       #conf.cfg.katana.vTracksReservedLocal = 3
+       #conf.cfg.katana.hTracksReservedMin   = 3
+       #conf.cfg.katana.vTracksReservedMin   = 1
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
-        conf.cfg.block.spareSide             = u(7*12)
-        conf.cfg.chip.minPadSpacing          = u(1.46)
-        conf.cfg.chip.supplyRailWidth        = u(20.0)
-        conf.cfg.chip.supplyRailPitch        = u(40.0)
         if buildChip:
             conf.cfg.harness.path            = harnessProjectDir + '/user_project_wrapper.def'
         conf.editor              = editor
@@ -142,7 +134,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u( 27*12.0), u( 27*12.0) )
+        conf.coreSize            = ( u( 33*10.0), u( 34*10.0) )
         conf.chipSize            = ( u(  2020.0), u(  2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:

@@ -1,0 +1,10 @@
+declare adder {
+input a[8],b[8];
+output f[8];
+}
+
+module adder {
+reg r[8]=0;
+ r:=a&b;
+ f=r;
+}

@@ -179,20 +179,15 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.anabatic.searchHalo         = 3
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        ao68000Conf.cfg.katana.hTracksReservedLocal = 6
-        ao68000Conf.cfg.katana.vTracksReservedLocal = 9
-        ao68000Conf.cfg.katana.hTracksReservedMin   = 3
-        ao68000Conf.cfg.katana.vTracksReservedMin   = 6
-        ao68000Conf.cfg.katana.trackFill            = 0
+       #ao68000Conf.cfg.katana.hTracksReservedLocal = 6
+       #ao68000Conf.cfg.katana.vTracksReservedLocal = 9
+       #ao68000Conf.cfg.katana.hTracksReservedMin   = 3
+       #ao68000Conf.cfg.katana.vTracksReservedMin   = 6
+       #ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
         ao68000Conf.cfg.katana.dumpMeasures         = False
-        ao68000Conf.cfg.block.spareSide             = u(7*12)
-       #ao68000Conf.cfg.chip.padCoreSide            = 'North'
-       #ao68000Conf.cfg.chip.use45corners           = False
+        ao68000Conf.cfg.block.spareSide             = u(8*10)
         ao68000Conf.cfg.chip.useAbstractPads        = False
-        ao68000Conf.cfg.chip.minPadSpacing          = u(1.46)
-        ao68000Conf.cfg.chip.supplyRailWidth        = u(8.0)
-        ao68000Conf.cfg.chip.supplyRailPitch        = u(8.0)
         ao68000Conf.editor              = editor
         ao68000Conf.useSpares           = True
         ao68000Conf.useClockTree        = True
@@ -205,7 +200,7 @@ def scriptMain ( **kw ):
         ao68000Conf.useHTree( 'clk_i', Spares.HEAVY_LEAF_LOAD )
         ao68000Conf.useHTree( 'reset_n' )
         if buildChip:
-            ao68000Conf.coreSize = ( u(110*12.0          ), u(100*12.0          ) )
+            ao68000Conf.coreSize = ( u(110*10.0          ), u(100*10.0          ) )
             ao68000Conf.chipSize = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
             chipBuilder = Chip( ao68000Conf )
             chipBuilder.doChipNetlist()

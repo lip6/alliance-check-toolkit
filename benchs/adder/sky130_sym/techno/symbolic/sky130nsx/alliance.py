@@ -32,7 +32,7 @@ cellsTop = allianceTop+'/cells'
 af       = AllianceFramework.get()
 env      = af.getEnvironment()
 
-env.setSCALE_X        ( 100 )
+env.setSCALE_X        ( 50 )
 env.setCATALOG        ( 'CATAL' )
 env.setIN_LO          ( 'vst'   )
 env.setIN_PH          ( 'ap'    )
@@ -46,5 +46,5 @@ env.setPad            ( '.*_mpx$'          )
 env.setRegister       ( 'sff.*' )
 
 env.setWORKING_LIBRARY( '.' )
-env.addSYSTEM_LIBRARY ( library=cellsTop+'/nsxlib', mode=Environment.Append )
-env.addSYSTEM_LIBRARY ( library=cellsTop+'/mpxlib', mode=Environment.Append )
+env.addSYSTEM_LIBRARY ( library=cellsTop+'/nsxlib2', mode=Environment.Append )
+env.addSYSTEM_LIBRARY ( library=cellsTop+'/niolib', mode=Environment.Append )

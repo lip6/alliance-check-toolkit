@@ -18,6 +18,7 @@ af = CRL.AllianceFramework.get()
 
 def scriptMain ( **kw ):
     """The mandatory function that Coriolis CGT/Unicorn will look for."""
+    DbU.setStringMode( DbU.StringModeSymbolic )
     global af
 
     rvalue = True
@@ -30,10 +31,10 @@ def scriptMain ( **kw ):
         if editor: editor.setCell( cell ) 
 
         # ioPinsSpec, for peripheral pin placement as a standalone block.
-        ioPinsSpec = [ (IoPin.SOUTH, 'adrs({})' , l(  20.0), l(100.0), 16)
-                     , (IoPin.EAST , 'data({})' , l(  60.0), l(100.0),  8)
-                     , (IoPin.EAST , 'datao({})', l(  80.0), l(100.0),  8)
-                     , (IoPin.WEST , 'debug({})', l(  50.0), l(100.0), 16)
+        ioPinsSpec = [ (IoPin.SOUTH, 'adrs({})' , l(  20.0), l(120.0), 16)
+                     , (IoPin.EAST , 'data({})' , l(  60.0), l(120.0),  8)
+                     , (IoPin.EAST , 'datao({})', l(  80.0), l(120.0),  8)
+                     , (IoPin.WEST , 'debug({})', l(  50.0), l(120.0), 16)
                      , (IoPin.EAST , 'debug(0)' , l(  50.0),       0 ,  1)
                      , (IoPin.NORTH, 'irq'      , l( 200.0),       0 ,  1)
                     #, (IoPin.NORTH, 'm_clock'  , l( 300.0),       0 ,  1)

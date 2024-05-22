@@ -1,0 +1,112 @@
+TARGET=adder
+CHIP=chip
+MARGIN=2
+BOOMOPT=
+BOOGOPT=
+LOONOPT=
+NSL2VHOPT= -vasy -O2 -sync_res
+TOOLTOP=../../../
+IOC=addr
+#export MBK_TARGET_LIB=$(ALLIANCE_TOP)/cells/sxlib
+#export MBK_CATA_LIB=.:$(MBK_TARGET_LIB):$(ALLIANCE_TOP)/cells/pxlib
+export MBK_TARGET_LIB=$(TOOLTOP)cells/nsxlib2
+#export MBK_CATA_LIB=.:$(MBK_TARGET_LIB):$(TOOLTOP)/cells/niolib
+export MBK_WORK_LIB=.
+export MBK_IN_LO=vst
+export MBK_OUT_LO=vst
+export RDS_IN=cif
+export RDS_OUT=cif
+
+export MBK_X_GRID=10
+export MBK_Y_GRID=10
+export MBK_Y_SLICE=100
+export MBK_WIDTH_VSS=14
+export MBK_WIDTH_VDD=14
+export MBK_TRACK_WIDTH_ALU1=3
+export MBK_TRACK_WIDTH_ALU2=4
+export MBK_TRACK_WIDTH_ALU3=4
+export MBK_TRACK_WIDTH_ALU4=4
+export MBK_TRACK_WIDTH_ALU5=4
+export MBK_TRACK_WIDTH_ALU6=4
+export MBK_TRACK_WIDTH_ALU7=4
+export MBK_TRACK_WIDTH_ALU8=0
+export MBK_TRACK_SPACING_ALU1=3
+export MBK_TRACK_SPACING_ALU2=3
+export MBK_TRACK_SPACING_ALU3=3
+export MBK_TRACK_SPACING_ALU4=4
+export MBK_TRACK_SPACING_ALU5=4
+export MBK_TRACK_SPACING_ALU6=4
+export MBK_TRACK_SPACING_ALU7=4
+export MBK_TRACK_SPACING_ALU8=0
+export RING_EXTENSION_ALU2=0
+
+
+all: .check
+
+$(TARGET).vhd:$(TARGET).nsl Makefile.alliance
+	nsl2vh $(TARGET).nsl $(NSL2VHOPT)
+	sed 's/\r//g' $(TARGET).vhdl > $(TARGET).vhd
+
+$(TARGET).vbe:$(TARGET).vhd
+	vasy -a -p -o -I vhd $(TARGET).vhd
+
+$(TARGET).vst:$(TARGET).vbe
+	boom $(BOOMOPT) $(TARGET) $(TARGET)
+	boog $(BOOGOPT) $(TARGET)
+
+$(TARGET).xsc:$(TARGET).vst
+	loon $(LOONOPT) $(TARGET) $(TARGET)_loon
+
+.place:$(TARGET).xsc 
+	ocp -margin $(MARGIN) -ioc $(IOC) -ring $(TARGET)_loon $(TARGET)_ocp
+	touch .place
+
+$(TARGET).ap:.place
+	nero -p $(TARGET)_ocp $(TARGET)_loon $(TARGET)_nero
+
+$(TARGET).sp:$(TARGET).ap
+	MBK_SPI_MODEL=$(ALLIANCE_TOP)/spimodel.cfg  \
+	MBK_OUT_LO=sp \
+	cougar -ar -ac -t $(TARGET)
+
+$(TARGET)_cougar.vst: $(TARGET).ap
+	cougar -w $(TARGET)_nero $(TARGET)_cougar
+
+.check: $(TARGET)_cougar.vst
+	lvx vst vst $(TARGET)_cougar $(TARGET)_loon
+
+$(CHIP).ap:$(TARGET).ap
+	ring $(CHIP) $(CHIP)
+
+$(CHIP).cif:$(CHIP).ap
+	s2r -v -r $(CHIP)
+
+dreal:$(CHIP).cif
+	dreal -l $(CHIP)
+
+graal:$(TARGET).ap
+	graal -l $(TARGET)
+
+l2p:
+	l2p -color $(TARGET)
+
+clean:
+	#-rm -f $(TARGET).vhdl
+	#-rm -f $(TARGET).vhd
+	-rm -f $(TARGET).vst
+	-rm -f $(TARGET)_cougar.vst
+	-rm -f $(TARGET)_loon.vst
+	-rm -f $(TARGET).xsc
+	-rm -f $(TARGET)_loon.xsc
+	-rm -f $(TARGET).ap
+	-rm -f $(TARGET)_loon.ap
+	-rm -f $(TARGET)_ocp.ap
+	-rm -f $(TARGET)_nero.ap
+	-rm -f $(TARGET).ap
+	-rm -f $(TARGET).sp
+	-rm -f $(TARGET).vbe
+	-rm -f $(CHIP).cif
+	-rm -f $(CHIP).ps
+	-rm -f $(CHIP).ap
+	-rm -f alldata.dat
+	-rm -f .place

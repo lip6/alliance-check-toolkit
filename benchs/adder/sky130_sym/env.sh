@@ -1,0 +1,9 @@
+source ~/venv/bin/activate
+source /opt/alliance/etc/profile.d/alc_env.sh
+export TOOLKIT_TOP=~/lip6/alliance-check-toolkit
+export CORIOLIS_TOP=~/venv/lib/python3.11/site-packages
+export RDS_TECHNO_NAME=$TOOLKIT_TOP/cells/nsxlib2/techno/sky130_nsx3.rds
+export MBK_TARGET_LIB=$TOOLKIT_TOP/cells/nsxlib2
+export MBK_CATA_LIB=.:$TOOLKIT_TOP/cells/nsxlib2:$TOOLKIT_TOP/cells/niolib
+export MBK_OUT_LO=al
+export RDS_OUT=gds

@@ -29,6 +29,7 @@ def scriptMain ( **kw ):
         cfg.misc.minTraceLevel           = 1590
         cfg.misc.maxTraceLevel           = 1600
         cfg.etesian.graphics             = 3
+    DbU.setStringMode( DbU.StringModeSymbolic )
 
     global af
     rvalue = True
@@ -234,8 +235,8 @@ def scriptMain ( **kw ):
         conf.cfg.block.spareSide              = l(350)
         conf.cfg.spares.maxSink               = 30
         conf.cfg.anabatic.topRoutingLayer     = 'METAL5'
-        conf.cfg.katana.hTracksReservedLocal  = 13
-        conf.cfg.katana.vTracksReservedLocal  = 12
+        conf.cfg.katana.hTracksReservedLocal  = 14
+        conf.cfg.katana.vTracksReservedLocal  = 13
         conf.cfg.katana.terminalReservedLocal = 10
         conf.cfg.katana.hTracksReservedMin    = 8
         conf.cfg.katana.vTracksReservedMin    = 7
@@ -248,7 +249,7 @@ def scriptMain ( **kw ):
         conf.bRows               = 2
         conf.chipConf.name       = 'chip'
         conf.chipConf.ioPadGauge = 'pxlib'
-        conf.coreSize            = ( l( 6100.0), l( 6100.0) )
+        conf.coreSize            = ( l( 6100.0), l( 6150.0) )
         conf.chipSize            = ( l(10300.0), l(10300.0) )
         conf.coreToChipClass     = CoreToChip
         conf.useHTree( 'ck' )

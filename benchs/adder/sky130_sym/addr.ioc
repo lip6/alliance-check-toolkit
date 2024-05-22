@@ -1,0 +1,36 @@
+TOP ( # IOs are ordered from left to right
+          (IOPIN p_reset.0 );
+          (IOPIN m_clock.0 );
+       )
+LEFT ( # IOs are ordered from left to right
+          (IOPIN a(0).0 );
+          (IOPIN a(1).0 );
+          (IOPIN a(2).0 );
+          (IOPIN a(3).0 );
+          (IOPIN a(4).0 );
+          (IOPIN a(5).0 );
+          (IOPIN a(6).0 );
+          (IOPIN a(7).0 );
+          (IOPIN b(0).0 );
+          (IOPIN b(1).0 );
+          (IOPIN b(2).0 );
+          (IOPIN b(3).0 );
+          (IOPIN b(4).0 );
+          (IOPIN b(5).0 );
+          (IOPIN b(6).0 );
+          (IOPIN b(7).0 );
+       )
+RIGHT ( # IOs are ordered from left to right
+          (IOPIN f(0).0 );
+          (IOPIN f(1).0 );
+          (IOPIN f(2).0 );
+          (IOPIN f(3).0 );
+          (IOPIN f(4).0 );
+          (IOPIN f(5).0 );
+          (IOPIN f(6).0 );
+          (IOPIN f(7).0 );
+       )
+BOTTOM ( # IOs are ordered from left to right
+          (IOPIN vdd.0 );
+          (IOPIN vss.0 );
+       )

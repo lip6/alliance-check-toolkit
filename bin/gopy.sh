@@ -6,11 +6,13 @@
    echo $string
  }
 
+ runSetId="not_set"
  onGithub="false"
  while [ $# -gt 0 ]; do
    case $1 in
      --github-runner) echo "Github/runner mode..";
                       onGithub="true";;
+     --run-set=*)     runSetId=`getString $1`;;
    esac
    shift
  done
@@ -49,43 +51,43 @@
  benchRules["RISC-V/Minerva/sky130_c4m"]="gds"
  benchRules["DCT/lvl0"]="layout"
 
- benchs=""
- benchs="${benchs} adder/cmos"
- benchs="${benchs} adder/cmos45"
- benchs="${benchs} AM2901/standart_cells/cmos"
-#benchs="${benchs} AM2901/datapath/cmos"
- benchs="${benchs} 6502/cmos"
- benchs="${benchs} 6502/cmos45"
- benchs="${benchs} arlet6502/cmos"
-#benchs="${benchs} arlet6502/cmos350"
- benchs="${benchs} MIPS/microprogrammed"
- benchs="${benchs} MIPS/pipeline"
- benchs="${benchs} snx/cmos"
- benchs="${benchs} snx/cmos45"
- benchs="${benchs} RISC-V/Vex/cmos"
-#benchs="${benchs} RISC-V/Vex/cmos45"
- benchs="${benchs} ARM/cmos"
- benchs="${benchs} RingOscillator"
-#benchs="${benchs} nmigen/ALU16"
- benchs="${benchs} DCT/lvl0"
+ benchsSet1=""
+ benchsSet1="${benchsSet1} adder/cmos"
+ benchsSet1="${benchsSet1} adder/cmos45"
+ benchsSet1="${benchsSet1} AM2901/standart_cells/cmos"
+#benchsSet1="${benchsSet1} AM2901/datapath/cmos"
+ benchsSet1="${benchsSet1} 6502/cmos"
+ benchsSet1="${benchsSet1} 6502/cmos45"
+ benchsSet1="${benchsSet1} arlet6502/cmos"
+#benchsSet1="${benchsSet1} arlet6502/cmos350"
+ benchsSet2="${benchsSet2} MIPS/microprogrammed"
+ benchsSet2="${benchsSet2} MIPS/pipeline"
+#benchsSet1="${benchsSet1} snx/cmos"
+ benchsSet1="${benchsSet1} snx/cmos45"
+ benchsSet2="${benchsSet2} RISC-V/Vex/cmos"
+#benchsSet1="${benchsSet1} RISC-V/Vex/cmos45"
+ benchsSet3="${benchsSet3} ARM/cmos"
+ benchsSet1="${benchsSet1} RingOscillator"
+#benchsSet1="${benchsSet1} nmigen/ALU16"
+ benchsSet1="${benchsSet1} DCT/lvl0"
 
  if [ -e "../../gf180mcu-pdk" ]; then
-   benchs="${benchs} arlet6502/gf180mcu_c4m"
+   benchsSet1="${benchsSet1} arlet6502/gf180mcu_c4m"
  fi
  if [ -e "../pdkmaster/C4M.Sky130" ]; then
-   benchs="${benchs} arlet6502/sky130_c4m"
-   benchs="${benchs} ao68000/sky130_c4m"
-   benchs="${benchs} RISC-V/Minerva/sky130_c4m"
+   benchsSet1="${benchsSet1} arlet6502/sky130_c4m"
+   benchsSet1="${benchsSet1} ao68000/sky130_c4m"
+   benchsSet4="${benchsSet4} RISC-V/Minerva/sky130_c4m"
  fi
  if [ -e "/dsk/l1/jpc/crypted/soc/techno/etc/coriolis2/NDA/node180/tsmc_c018" ]; then
-   benchs="${benchs} adder/tsmc_c180"
-   benchs="${benchs} arlet6502/tsmc_c018"
-   benchs="${benchs} ao68000/tsmc_c018"
+   benchsSet1="${benchsSet1} adder/tsmc_c180"
+   benchsSet1="${benchsSet1} arlet6502/tsmc_c018"
+   benchsSet3="${benchsSet3} ao68000/tsmc_c018"
  fi
  if [ -e "../../libre-soc/c4m-pdk-freepdk45" ]; then
-   benchs="${benchs} adder/freepdk45_c4m"
-   benchs="${benchs} arlet6502/freepdk45_c4m"
-   benchs="${benchs} ao68000/freepdk45_c4m"
+   benchsSet1="${benchsSet1} adder/freepdk45_c4m"
+   benchsSet1="${benchsSet1} arlet6502/freepdk45_c4m"
+   benchsSet5="${benchsSet5} ao68000/freepdk45_c4m"
  fi
 
  crlenv="`pwd`/../bin/crlenv.py"
@@ -94,49 +96,101 @@
    echo "        (${crlenv})"
    exit 1
  fi
+#mode="stopOnFailure"
+ mode="ignoreFailure"
+# hline="+---+----+--------------------------------+------------+----------+-----------+"
+#header="|Set| No |             bench              |    Rule    |  Runtime |  Status   |"
+  hline="===  ==  ==============================  ==========  ==========  ==========="
+ header="Set  No  Bench                           Rule           Runtime  Status     "
 
- mode="stopOnFailure"
-#mode="ignoreFailure"
- benchLog="`pwd`/doit-gopy.log"
- failedTag="`pwd`/doit-gopy.failed"
- rm -f "${benchLog}"
- for bench in ${benchs}; do
-   rules="${benchRules[$bench]}"
-     
-   echo -e "\n\n\n\n" >> ${benchLog}
-   echo "=============================================================================" >> ${benchLog}
-   echo "Running bench <${bench}> with rules \"${rules}\""                              >> ${benchLog}
-   echo "=============================================================================" >> ${benchLog}
-   echo -n "Running bench <${bench}> with rules \"${rules}\" ..."
+ runSet () {
+   setId="$1"
+   benchCount=1
 
-   if [ ! -d "${bench}" ]; then
-     echo ""
-     echo "[WARNING] No bench directory \"${bench}\", skipped."
-     continue
-   fi
+   benchLog="`pwd`/runset-${setId}.log"
+   failedTag="`pwd`/runset-${setId}.failed"
+   rm -f "${benchLog}" "${failedTag}"
+   benchsSetName="benchsSet${setId}"
+   for bench in ${!benchsSetName}; do
+     rules="${benchRules[$bench]}"
+       
+     echo -e "\n\n\n\n" >> ${benchLog}
+     echo "=============================================================================" >> ${benchLog}
+     echo "Running bench <${bench}> with rules \"${rules}\""                              >> ${benchLog}
+     echo "=============================================================================" >> ${benchLog}
 
-   result="success."
-   pushd ${bench} > /dev/null
-   ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
-   for rule in ${rules}; do
-     ${crlenv} -- doit ${rule} >> ${benchLog} 2>&1
-     if [ $? -ne 0 ]; then
-       result="\"${rule}\" failed."
-       if [ "${onGithub}" = "true" ]; then
-         touch ${failedTag}
-         exit 0	   
-       fi
-       if [ "${mode}" = "stopOnFailure" ]; then
-         echo ""
-         echo ""
-         echo "[ERROR] gopy.sh: bench <${bench}> has failed."
-         exit 1
-       fi
-       break
+    #statusLine="| %u | %2u | %-30s | %-10s | %10s | %-7s |"
+     statusLine="%3u  %2u  %-30s  %-10s  %10s  %-7s "
+  
+     if [ ! -d "${bench}" ]; then
+       echo ""
+       echo "[WARNING] No bench directory \"${bench}\", skipped."
+       continue
      fi
+  
+     success="true"
+     pushd ${bench} > /dev/null
+     ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
+     for rule in ${rules}; do
+       /usr/bin/time -f '%E' -o time.txt ${crlenv} -- doit ${rule} >> ${benchLog} 2>&1
+       if [ $? -ne 0 ]; then
+         success="false"
+         printf "${statusLine}\n" $setId $benchCount "<${bench}>" "${rule}" "`tail -n 1 time.txt`" "FAILED"
+         touch ${failedTag}
+         if [ "${mode}" = "stopOnFailure" ]; then
+           echo ""
+           echo ""
+           echo "[ERROR] gopy.sh: bench <${bench}> has failed."
+           exit 1
+         fi
+         break
+       fi
+     done
+     ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
+     if [ "${success}" = "true" ]; then
+       printf "${statusLine}\n" $setId $benchCount "<${bench}>" "${rule}" "`tail -n 1 time.txt`" "success"
+     fi
+     popd > /dev/null
+     benchCount=`expr ${benchCount} + 1`
    done
-   ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
-   echo " ${result}"
-   popd > /dev/null
- done
+  #echo "${hline}"
+  #echo "|       | Benchs set ${setId} completed         |                                   |"
+  #echo "${hline}"
+ }
+
+
+ timedRunSet () {
+   setId="$1"
+   rvalue=0
+   timeSet="time-set-${setId}.txt"
+   /usr/bin/time -f '%E' -o ${timeSet} ../bin/gopy.sh --run-set=${setId}
+   if [ $? -ne 0 ]; then rvalue=1; fi
+   printf "         **Benchs set %u completed** %27s\n" "${setId}" "`tail -n 1 ${timeSet}`"
+   rm -f ${timeSet}
+   exit $rvalue
+ }
+
+
+ if [ "${runSetId}" = "not_set" ]; then
+   echo ""
+   echo "${hline}"
+   echo "${header}"
+   echo "${hline}"
+   timedRunSet 1 &
+   timedRunSet 2 &
+   timedRunSet 3 &
+   timedRunSet 4 &
+   timedRunSet 5 &
+   wait
+   echo "${hline}"
+   echo ""
+   if [ -e "`pwd`/runset-1.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-2.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-3.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-4.failed" ]; then exit 1; fi
+   if [ -e "`pwd`/runset-5.failed" ]; then exit 1; fi
+ else
+   runSet ${runSetId}
+ fi
+ 
  exit 0

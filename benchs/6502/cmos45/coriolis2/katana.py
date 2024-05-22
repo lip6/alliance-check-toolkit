@@ -11,3 +11,4 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n800' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n813' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_12494_n459' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n676' ) )

@@ -18,3 +18,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'debug(8)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'debug(10)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'debug(11)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'datao(2)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n1288' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n406' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n403' ) )

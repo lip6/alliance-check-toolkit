@@ -58,8 +58,9 @@ def scriptMain ( **kw ):
     katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
     katana.runNegociate         ( Katana.Flags.NoFlags )
     katana.finalizeLayout()
+    success = katana.isDetailedRoutingSuccess()
     katana.destroy()
     cell.setName( cell.getName()+'_r' )
     rsave( cell, CRL.Catalog.State.Logical|CRL.Catalog.State.Physical )
   
-    return cell
+    return success

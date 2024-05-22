@@ -40,35 +40,25 @@ def scriptMain ( **kw ):
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
+        env = af.getEnvironment()
+        env.setCLOCK( '^clk' )
         conf = ChipConf( cell, ioPins=[], ioPads=[] ) 
        #conf.cfg.misc.minTraceLevel          = 145
        #conf.cfg.misc.maxTraceLevel          = 146
         conf.cfg.misc.verboseLevel1          = True
         conf.cfg.misc.verboseLevel2          = True
        #conf.cfg.etesian.bloat               = 'Flexlib'
-        conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.10
-        conf.cfg.etesian.antennaGateMaxWL    = u(400.0)
-        conf.cfg.etesian.antennaDiodeMaxWL   = u(800.0)
-        conf.cfg.anabatic.saturateRatio      = 0.90
-        conf.cfg.anabatic.saturateRp         = 12
-        conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.globalIterations   = 20
-        conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        conf.cfg.katana.longWireUpReserve1   = 3.0
-        conf.cfg.katana.hTracksReservedLocal = 25
-        conf.cfg.katana.vTracksReservedLocal = 20
+       #conf.cfg.katana.longWireUpReserve1   = 3.0
         conf.cfg.katana.hTracksReservedMin   = 15
-        conf.cfg.katana.vTracksReservedMin   = 10
-        conf.cfg.katana.trackFill            = 0
-        conf.cfg.katana.runRealignStage      = True
+        conf.cfg.katana.hTracksReservedLocal = 25
+        conf.cfg.katana.vTracksReservedMin   = 9
+        conf.cfg.katana.vTracksReservedLocal = 20
         conf.cfg.katana.dumpMeasures         = True
        #conf.cfg.katana.longWireUpReserve1   = 2.0
-        conf.cfg.block.spareSide             = u(8*10)
-        conf.cfg.chip.supplyRailWidth        = u(20.0)
-        conf.cfg.chip.supplyRailPitch        = u(40.0)
         conf.cfg.harness.path                = harnessProjectDir + '/user_project_wrapper.def'
         conf.editor              = editor
         conf.useSpares           = True
@@ -76,7 +66,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u(220*10.0), u(220*10.0) )
+        conf.coreSize            = ( u(210*10.0), u(210*10.0) )
        #conf.chipSize            = ( u(  2020.0), u(  2060.0) )
         conf.coreToChipClass     = CoreToChip
         conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
