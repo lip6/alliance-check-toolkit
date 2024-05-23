@@ -1,6 +1,6 @@
-# 20230301
+# 20240522
 # ---------------------------------------------------------------------------
-# For SkyWater130
+# For IHP SG13G2 by Naohiko Shimizu
 # ---------------------------------------------------------------------------
 
 
@@ -46,7 +46,7 @@ end
 table gds_layer
 # -------------------------------------------------------------------
 # rds_name     gds_number gds_datatype
-# This version is incompatible with oriinal Alliance for 2nd number
+# IHP uses only 0 gds_datatype for drawing
 # -------------------------------------------------------------------
   rds_nwell    31     0
   rds_pwell    46     0
@@ -78,32 +78,35 @@ table lynx_resistor
 # -------------------------------------------------------------------
 # rds_name square_resistor(ohm/square) # typical values
 # -------------------------------------------------------------------
-  rds_poly    48
-  rds_alu1    13
-  rds_alu2    0.125
-  rds_alu3    0.125
-  rds_alu4    0.047
-  rds_alu5    0.047
-  rds_alu6    0.029
+# Poly resistor is differ from N-doped to P-doped. 7 ohm is for N-doped.
+# P-doped poly is 260 ohm
+
+  rds_poly    7
+  rds_alu1    0.115
+  rds_alu2    0.088
+  rds_alu3    0.088
+  rds_alu4    0.088
+  rds_alu5    0.088
+  rds_alu6    0.018
   rds_cont    15
-  rds_via1    152
-  rds_via2    4.5
-  rds_via3    3.4
-  rds_via4    3.4
-  rds_via5    0.38
+  rds_via1    9
+  rds_via2    9
+  rds_via3    9
+  rds_via4    9
+  rds_via5    2.2
 end
 
 table lynx_capa
 # -------------------------------------------------------------------
 # rds_name area_capa(pif/um^2) peri_capa(pif/um)
 # -------------------------------------------------------------------
-  rds_poly  25.2e-6  51.8e-6  # Ca max POLY_NWELL 2Cf0 max POLY_NWELL 
-  rds_alu1   2.6e-5   8.5e-5  # Ca max M1_NWELL   2Cf0 max M1_NWELL
-  rds_alu2   1.6e-5   7.9e-5  # Ca max M2_NWELL   2Cf0 max M2_NWELL
-  rds_alu3   8.0e-6   6.8e-5  # Ca max M3_NWELL   2Cf0 max M3_NWELL
-  rds_alu4   6.0e-6   6.0e-5  # Ca max M4_NWELL   2Cf0 max M4_NWELL
-  rds_alu5   6.0e-6   6.0e-5  # hyp
-  rds_alu6   6.0e-6   6.0e-5
+  rds_poly  35.3e-3  51.8e-6  # Ca max POLY_NWELL 2Cf0 max POLY_NWELL 
+  rds_alu1   5.9e-5   8.5e-5  # Ca max M1_NWELL   2Cf0 max M1_NWELL
+  rds_alu2   6.8e-5   7.9e-5  # Ca max M2_NWELL   2Cf0 max M2_NWELL
+  rds_alu3   6.8e-5   6.8e-5  # Ca max M3_NWELL   2Cf0 max M3_NWELL
+  rds_alu4   6.8e-5   6.0e-5  # Ca max M4_NWELL   2Cf0 max M4_NWELL
+  rds_alu5   6.8e-5   6.0e-5  # hyp
+  rds_alu6   4.2e-5   6.0e-5
 end
 
 table lynx_capa_poly
@@ -188,13 +191,13 @@ table mbk_to_rds_segment
                                                                                                                   
   poly    rds_poly   vw    0.0    -0.020  .0  all
 
-  alu1    rds_alu1   vw    0.01    0.030   .0  all
-  calu1   rds_alu1   vw    0.01    0.030   .0  all
-  talu1   rds_talu1  vw    0.01    0.030   .0  all
+  alu1    rds_alu1   vw    0.01    0.0     .0  all
+  calu1   rds_alu1   vw    0.01    0.0     .0  all
+  talu1   rds_talu1  vw    0.01    0.0     .0  all
 
-  alu2    rds_alu2   vw    0.11    0.02    .0  all
-  calu2   rds_alu2   vw    0.11    0.02    .0  all
-  talu2   rds_talu2  vw    0.11    0.02    .0  all
+  alu2    rds_alu2   vw    0.11    0.0     .0  all
+  calu2   rds_alu2   vw    0.11    0.0     .0  all
+  talu2   rds_talu2  vw    0.11    0.0     .0  all
 
   alu3    rds_alu3   vw    0.11    0.0    .0  all
   calu3   rds_alu3   vw    0.11    0.0    .0  all
@@ -231,7 +234,7 @@ table mbk_to_rds_via
 # licon.7 0.170+0.120*2
   cont_body_n \
     rds_cont        0.160  all\
-    rds_alu1        0.320  all\
+    rds_alu1        0.300  all\
 #    rds_nimp        0.430  all\
     rds_ntie        0.300  ext
 
@@ -239,21 +242,21 @@ table mbk_to_rds_via
 # difftap.5
   cont_body_p \
     rds_cont        0.160  all\
-    rds_alu1        0.320  all\
+    rds_alu1        0.300  all\
     rds_pimp        0.340  all\
     rds_ptie        0.300  ext
 
 # licon.5c
   cont_dif_n  \
     rds_cont        0.160  all\
-    rds_alu1        0.320  all\
+    rds_alu1        0.300  all\
     rds_activ       0.300  drc\
     rds_ndif        0.420  ext
 
 # licon.5c
   cont_dif_p  \
     rds_cont        0.160  all\
-    rds_alu1        0.320  all\
+    rds_alu1        0.300  all\
     rds_activ       0.300  drc\
     rds_pimp        0.340  all\
     rds_pdif        0.420  ext
@@ -262,7 +265,7 @@ table mbk_to_rds_via
   cont_poly  \
     rds_cont        0.160  all\
     rds_poly        0.300  all\
-    rds_alu1        0.320  all
+    rds_alu1        0.300  all
 
 
 
