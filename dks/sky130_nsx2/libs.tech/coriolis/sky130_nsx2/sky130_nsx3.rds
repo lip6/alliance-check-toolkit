@@ -45,7 +45,7 @@ end
 
 table gds_layer
 # -------------------------------------------------------------------
-# rds_name     gds_number gds_datatype
+# rds_name     gds_number gds_datatype gds_pin_layer gds_pin_datatype
 # This version is incompatible with oriinal Alliance for 2nd number
 # -------------------------------------------------------------------
   rds_nwell    64     20
@@ -58,12 +58,12 @@ table gds_layer
   rds_pimp     94     20
   rds_nimp     93     44
   rds_poly     66     20
-  rds_alu1     67     20
-  rds_alu2     68     20
-  rds_alu3     69     20
-  rds_alu4     70     20
-  rds_alu5     71     20
-  rds_alu6     72     20
+  rds_alu1     67     20	67	16
+  rds_alu2     68     20	68	16
+  rds_alu3     69     20	69	16
+  rds_alu4     70     20	70	16
+  rds_alu5     71     20	71	16
+  rds_alu6     72     20	72	16
   rds_cont     66     44
   rds_via1     67     44
   rds_via2     68     44
