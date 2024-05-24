@@ -58,12 +58,12 @@ table gds_layer
   rds_pimp     14     0
   rds_nimp     7      0
   rds_poly     5      0
-  rds_alu1     8      0
-  rds_alu2     10     0
-  rds_alu3     30     0
-  rds_alu4     50     0
-  rds_alu5     67     0
-  rds_alu6     126    0
+  rds_alu1     8      0		8	2
+  rds_alu2     10     0		10	2
+  rds_alu3     30     0		30	2
+  rds_alu4     50     0		50	2
+  rds_alu5     67     0		67	2
+  rds_alu6     126    0		126	2
   rds_cont     6      0
   rds_via1     19     0
   rds_via2     29     0
@@ -71,7 +71,7 @@ table gds_layer
   rds_via4     66     0
   rds_via5     125    0
 #  rds_poly2    95     20
-  rds_cpas     36     0
+  rds_cpas     9     0
 end
 
 table lynx_resistor
