@@ -18,17 +18,18 @@ from   coriolis.plugins.chip.chip           import Chip
 
 af = CRL.AllianceFramework.get()
 
+CoreName = 'my80core'
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
-    global af
+    global af, CoreName
     DbU.setStringMode( DbU.StringModeSymbolic )
     rvalue = True
     try:
        #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'my80core', CRL.Catalog.State.Logical )
+        cell = af.getCell( CoreName, CRL.Catalog.State.Logical )
         af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
