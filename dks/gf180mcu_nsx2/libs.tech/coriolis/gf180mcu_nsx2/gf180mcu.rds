@@ -60,7 +60,7 @@ table gds_layer
   rds_poly     30     0		30     10
   rds_alu1     34     0		34     10
   rds_alu2     36     0		36     10
-  rds_alu3     38     0		38     10
+  rds_alu3     42     0		42     10
   rds_alu4     46     0		46     10
   rds_alu5     81     0		81     10
   rds_alu6     53     0		53     10
@@ -273,7 +273,7 @@ table mbk_to_rds_via
 # m1.5
   cont_via    \
     rds_via1        0.260  all\
-    rds_alu1        0.220  all\
+    rds_alu1        0.260  all\
     rds_alu2        0.380  all
 
 # via.1b
@@ -281,7 +281,7 @@ table mbk_to_rds_via
 # m2.5
   cont_via2   \
     rds_via2        0.260  all\
-    rds_alu2        0.220  all\
+    rds_alu2        0.380  all\
     rds_alu3        0.380  all
 
 # via.1b
@@ -289,17 +289,17 @@ table mbk_to_rds_via
 # m2.5
   cont_via3   \
     rds_via3        0.260  all\
-    rds_alu3        0.220  all\
+    rds_alu3        0.380  all\
     rds_alu4        0.380  all
 
   cont_via4   \
     rds_via4        0.260  all\
-    rds_alu4        0.220  all\
+    rds_alu4        0.380  all\
     rds_alu5        0.380  all
 
   cont_via5   \
     rds_via5        0.260  all\
-    rds_alu5        0.220  all\
+    rds_alu5        0.380  all\
     rds_alu6        0.380  all
 end
 

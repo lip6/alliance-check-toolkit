@@ -46,7 +46,7 @@ def setupGf180mcu_nsx2 ( checkToolkit=None ):
     Where( checkToolkit )
     ShellEnv().export()
 
-    pdkDir          = Where.checkToolkit / 'dks' / 'gf180muc_nsx2' / 'libs.tech'
+    pdkDir          = Where.checkToolkit / 'dks' / 'gf180mcu_nsx2' / 'libs.tech'
     coriolisTechDir = pdkDir / 'coriolis'
     if not pdkDir.is_dir():
         print( '[ERROR] technos.setupGf180mcu_nsx2(): PDK directory do *not* exists:' )
@@ -55,7 +55,7 @@ def setupGf180mcu_nsx2 ( checkToolkit=None ):
 
     cellsTop  = Where.checkToolkit / 'cells'
     liberty   = cellsTop / 'nsxlib2' / 'nsxlib2.lib'
-#    kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
+#    kdrcRules = pdkDir / 'klayout' / 'drc' / 'gf180mcu.drc'
 
     from coriolis          import Cfg 
     from coriolis          import Viewer
@@ -63,7 +63,7 @@ def setupGf180mcu_nsx2 ( checkToolkit=None ):
     from coriolis.helpers   import overlay, l, u, n
     from coriolis.designflow.yosys      import Yosys
     from coriolis.designflow.klayout    import DRC
-    from gf180muc_nsx2 import techno, nsxlib2
+    from gf180mcu_nsx2 import techno, nsxlib2
     techno.setup( coriolisTechDir )
     nsxlib2.setup( cellsTop )
     
