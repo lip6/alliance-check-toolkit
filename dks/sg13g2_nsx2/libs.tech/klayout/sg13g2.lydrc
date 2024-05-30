@@ -54,9 +54,9 @@ elsif $report
 else
   report("SG13G2 DRC runset", File.join(File.dirname(RBA::CellView::active.filename), "sg13g2_drc.txt"))
 end
-if $input.dbu != 0.001
-    puts "WARNING: Layout dbu value (" + $input.dbu.to_s + " ) deviates from rule file dbu value (0.001). This will scale the layout and may not be intended."
-end
+#if $input.dbu != 0.001
+#    puts "WARNING: Layout dbu value (" + $input.dbu.to_s + " ) deviates from rule file dbu value (0.001). This will scale the layout and may not be intended."
+#end
 #report("design rules: sg13g2 | layout cell: " + active_cellname, "sg13g2.lyrdb")
 
 deep
