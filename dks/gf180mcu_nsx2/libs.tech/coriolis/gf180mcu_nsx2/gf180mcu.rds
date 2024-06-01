@@ -70,7 +70,8 @@ table gds_layer
   rds_via3     40     0
   rds_via4     41     0
   rds_via5     82     0
-  rds_cpas     9     0
+  rds_cpas      9     0
+# use Poly2 as Deep NWELL
   rds_poly2    12     0
 end
 
@@ -154,6 +155,7 @@ table mbk_to_rds_segment
 # ----------------------------------------------------------------------------------
 # mbk_name     rds_name1 dlr dwr offset mode     rds_name2 dlr dwr offset mode
 # ----------------------------------------------------------------------------------
+  poly2    rds_poly2 vw    0.00    0.00   .0     all
 
   nwell   rds_nwell  vw    0.02   -0.08    .180   all\
           rds_pwell  vw    0.02  -1.65     5.875  all \
@@ -273,7 +275,7 @@ table mbk_to_rds_via
 # m1.5
   cont_via    \
     rds_via1        0.260  all\
-    rds_alu1        0.260  all\
+    rds_alu1        0.380  all\
     rds_alu2        0.380  all
 
 # via.1b
@@ -307,12 +309,30 @@ table mbk_to_rds_bigvia_hole
 # -------------------------------------------------------------------
 # mbk_via_name  rds_hole_name side step mode
 # -------------------------------------------------------------------
+CONT_DIF_P   RDS_CONT  0.22   0.50 ALL
+CONT_DIF_N   RDS_CONT  0.22   0.50 ALL
+CONT_BODY_P  RDS_CONT  0.22   0.50 ALL
+CONT_BODY_N  RDS_CONT  0.22   0.50 ALL
+CONT_VIA     RDS_VIA1  0.26   0.62 ALL
+CONT_VIA2    RDS_VIA2  0.26   0.62 ALL
+CONT_VIA3    RDS_VIA3  0.26   0.62 ALL
+CONT_VIA4    RDS_VIA4  0.26   0.62 ALL
+CONT_VIA5    RDS_VIA5  0.26   0.62 ALL
 end
 
 table mbk_to_rds_bigvia_metal
 # -------------------------------------------------------------------
 # mbk_via_name  rds_name  dwr overlap  mode
 # -------------------------------------------------------------------
+CONT_DIF_P   RDS_ALU1   0.12   0.0 ALL
+CONT_DIF_N   RDS_ALU1   0.12   0.0 ALL
+CONT_BODY_P  RDS_ALU1   0.12   0.0 ALL
+CONT_BODY_N  RDS_ALU1   0.12   0.0 ALL
+CONT_VIA     RDS_ALU2   0.12   0.0 ALL
+CONT_VIA2    RDS_ALU3   0.12   0.0 ALL
+CONT_VIA3    RDS_ALU4   0.12   0.0 ALL
+CONT_VIA4    RDS_ALU5   0.12   0.0 ALL
+CONT_VIA5    RDS_ALU6   0.12   0.0 ALL
 end
 
 table mbk_to_rds_turnvia

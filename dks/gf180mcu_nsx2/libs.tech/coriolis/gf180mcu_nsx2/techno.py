@@ -413,6 +413,7 @@ def _setup_techno ( coriolisTechDir ):
     DbU.setPolygonStep         ( DbU.fromGrid( 1.0 ))
     DbU.setStringMode          ( DbU.StringModePhysical, DbU.UnitPowerMicro )
 
+    createBL( tech, 'poly2'        , BasicLayer.Material.other   , size=u(1.7), spacing=u(2.5),              gds2Layer= 31, gds2DataType= 0 )
     createBL( tech, 'nwm'          , BasicLayer.Material.nWell   , size=u(0.62), spacing=u(0.62),              gds2Layer= 31, gds2DataType= 0 )
     createBL( tech, 'nsdm'         , BasicLayer.Material.nImplant, size=u(0.31), spacing=u(0.31), area=0.25,  gds2Layer= 7, gds2DataType= 0 )
     createBL( tech, 'psdm'         , BasicLayer.Material.pImplant, size=u(0.31), spacing=u(0.31), area=0.25,  gds2Layer= 14, gds2DataType= 0 )
