@@ -35,6 +35,7 @@ def setup ():
     tech.addLayerAlias( 'capm'    ,  'metcapdum' )
     tech.addLayerAlias( 'M5'      ,  'metbot'    )
 
+    dnWell    = tech.getBasicLayer( 'poly2'     )
     nWell     = tech.getBasicLayer( 'nwm'     )
     active    = tech.getBasicLayer( 'activ' )
     poly      = tech.getBasicLayer( 'poly'    )
@@ -60,6 +61,7 @@ def setup ():
     blockage6 = tech.getBasicLayer( 'blockage6' )
 
     # Composite/Symbolic layers.
+    POLY2       = RegularLayer   .create( tech, 'POLY2'      , dnWell    )
     NWELL       = RegularLayer   .create( tech, 'NWELL'      , nWell    )
    #PWELL       = RegularLayer   .create( tech, 'PWELL'      , pWell    )
     NTIE        = DiffusionLayer .create( tech, 'NTIE'       , nImplant , active, nWell)
