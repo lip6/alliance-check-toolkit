@@ -1,0 +1,31 @@
+declare rom256 {
+    input      datai[8] ;
+    output     datao[8] ;
+    input      adr[8] ;
+    func_in  rd(adr);
+    func_in  wt(adr,datai);
+}
+
+declare ram4k {
+    input      datai[8] ;
+    output     datao[8] ;
+    input      adr[12] ;
+    func_in  rd(adr);
+    func_in  wt(adr,datai);
+}
+
+module rom256 {
+    mem mc[256][8];
+
+	_readmemh("woz.mem",mc);
+
+    func rd datao = mc[adr];
+    func wt mc[adr] := datai;
+}
+
+module ram4k {
+    mem ram[4096][8]={0};
+
+    func rd datao = ram[adr];
+    func wt ram[adr] := datai;
+}

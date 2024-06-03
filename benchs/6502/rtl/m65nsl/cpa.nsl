@@ -1,0 +1,91 @@
+
+declare cpa8 {
+   input in1[8], in2[8], ci, df;
+   output out[8], co;
+   func_in add(in1,in2,ci,df):out;
+   func_in sub(in1,in2,ci,df):out;
+}
+
+declare decadj {
+	input in[5],sub;
+	output out[5];
+	func_in adj(in,sub):out;
+}
+
+module decadj {
+	func adj {
+		wire tmp[4];
+		if((sub^in[4]) | (in[3]&in[2]) | (in[3]&in[1])) {
+			tmp = in[3:0] + if(sub) 10 else 6;
+			out = {~sub, tmp};
+		}
+		else {
+			out = in;
+		}
+}
+}
+
+
+module cpa8 {
+   wire h1[5],h2[5],l1[5],l2[5], ct;
+   decadj hi,lo;
+   func add {
+	l1 = 5'(in1[3:0]) + 5'(in2[3:0]) + 5'(ci);
+	h1 = 5'(in1[7:4]) + 5'(in2[7:4]) + 5'(ct);
+	if(df) {
+		out={hi.adj(h1,0)[3:0],lo.adj(l1,0)[3:0]};
+		ct=lo.out[4];
+		co=hi.out[4];
+	}
+	else {
+		out={h1[3:0],l1[3:0]};
+		ct=l1[4];
+		co=h1[4];
+	}
+     }
+   func sub {
+	l1 = 5'(in1[3:0]) + 5'(~in2[3:0]) + 5'(ci);
+	h1 = 5'(in1[7:4]) + 5'(~in2[7:4]) + 5'(ct);
+	if(df) {
+		out={hi.adj(h1,1)[3:0],lo.adj(l1,1)[3:0]};
+		ct=lo.out[4];
+		co=hi.out[4];
+	}
+	else {
+		out={h1[3:0],l1[3:0]};
+		ct=l1[4];
+		co=h1[4];
+	}
+     }
+}
+
+#ifdef DEBUGCPA
+declare cpatest simulation {}
+module cpatest {
+cpa8 dut;
+	reg a[4],b[4],c[4],d[4];
+	wire i[8],j[8];
+	i={a,c};
+	j={b,d};
+	_init {
+		for(a:=0;a<10;a++) {
+		for(b:=0;b<10;b++) {
+		for(c:=0;c<10;c++) {
+		for(d:=0;d<10;d++) {
+			_display("");
+			{
+				dut.add(i,j,0,1);
+				_display("%x %x %x %x", i, j, dut.co, dut.out);
+				}
+			{
+				dut.sub(i,j,1,1);
+				_display("%x %x %x %x", i, j, dut.co, dut.out);
+				}
+			}
+		}
+		}
+		}
+	_finish();
+	}
+}
+#endif
