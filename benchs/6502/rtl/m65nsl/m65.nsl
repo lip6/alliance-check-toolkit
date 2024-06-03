@@ -1,0 +1,875 @@
+/*
+
+  Simple 65 Processor (m65) V2.0
+
+  (C)Copyright by Naohiko Shimizu, 2001-2011.
+  All rights are reserved.
+
+  Contact information:
+  Naohiko Shimizu, Ph.D
+  email: naohiko.shimizu@gmail.com
+  URL: http://www.ip-arch.jp/
+
+  Update informations:
+
+    12-May-2011:  Rewrite to NSL set version to 2.0, SHMZ
+    17-Oct-2008:  SBC borrow corrupted, SHMZ
+    17-May-2002:  dbc eliminate unused operation, SHMZ
+    16-May-2002:  dasl, dbc tune up, ex stage simplify for less gates, SHMZ
+    13-May-2002:  NMI cannot take in some case, SHMZ
+    13-May-2002:  Rename DECIMALMODE to ~NODEC, SYNCWRITE to EWRITE, SHMZ
+    13-May-2002:  CMP uses SBC logic, decimal flag corrected, SHMZ
+    13-May-2002:  RTI does not initiate IF, SHMZ
+    13-May-2002:  BRK decode move to IF stage, SHMZ
+    11-May-2002:  ADC carry when rdy is low, SHMZ
+    11-May-2002:  RTS page boundary, SYNCWRITE added, SHMZ
+    01-May-2002:  Generated from the My80
+******************************************/
+
+#include "model.h"
+#include "alu65.nsl"
+#include "inc16.nsl"
+
+#define  S0 0b000001
+#define  S1 0b000010
+#define  S2 0b000100
+#define  S3 0b001000
+#define  S4 0b010000
+#define  S5 0b100000
+
+declare m65 {
+    input      data[8] ;
+    output     datao[8] ;
+    output     adrs[16] ;
+    output     debug[16];
+    func_in    irq, nmi, rdy, start;
+    func_out   rd,wt;
+    func_out   sync;
+}
+
+
+module m65 {
+
+    func_self s1,s2,s3,s4,s5;
+    func_self ifrun, pf, write, read;
+    func_self decop, ea;
+    func_self dasl, dbit,
+              dclc, dcmp,
+              dcpx, ddec, dmisc, 
+              djmp, djsr, dlda, dldx, dnop, dora,
+              dphp, dplp, drti, drts, 
+              dsta, dstx, 
+              dbc; 
+    func_self mimp, mimm, mzpx, mzpxi, mzpiy,
+              mabs, maby, rmw;
+    func_self nif0, nif1, nif2;
+
+    reg  fn=0, fv=0, fd=0, fz=0, fc=0;
+    reg  fi=1;
+
+    reg  swt, nm1=0;
+    reg  tc;
+
+    wire psr[8], psri[8], taken;
+    wire ALU1[8], ABLin[8];
+    wire dbo[8], dbi[8], opc[8];
+ 
+    reg RY[8], RX[8], RS[8]=0xff, RA[8], PCL[8], DL[8], OP[8];
+    reg rABH[8], rABL[8];
+
+    reg PCH[8];
+
+    alu65 alu;
+    inc16 incr;
+
+    func_self setpsr(psri);
+
+    proc_name ift_run();
+    proc_name do_nmi();
+    proc_name do_irq();
+    proc_name do_brk();
+    proc_name do_res();
+    proc_name int_req();
+
+    reg ex_st[6];
+    reg dbgreg[16];
+    reg rdflg=0;
+    reg	dbg_datai[8];
+    proc_name ex(ex_st); 
+
+/* Common operations for every stages must be described here */
+    {
+        swt := EWRITE & write;
+        if(swt&EWRITE)  {
+              wt();
+              datao = dbo;
+             }
+        psr = {fn, fv, 0b1, 0b1, fd, fi, fz, fc};
+        adrs = {(rABH&HIMASK), rABL}; 
+	debug = {PCH,PCL};
+        opc = OP;
+     }
+     dbg_datai:=data;          
+    func read   {dbi = data; rd(); }
+    func write  {
+          if(~EWRITE)  {
+              wt();
+              datao = dbo;
+             }
+         }
+    func irq if(~int_req & ~fi ) {do_irq();int_req();}
+    func nmi if(~int_req & ~nm1) {do_nmi();int_req();}
+
+    func setpsr  {
+       fn := psri[7];
+       fv := psri[6];
+       fd := psri[3];
+       fi := psri[2];
+       fz := psri[1];
+       fc := psri[0];
+     }
+    func start  {
+    /* start reset requense */
+	rdflg:=1; do_res(); int_req();
+    }
+
+    func decop any {
+        (opc[4:2] == 0b000) : mzpxi();
+        (opc[4:2] == 0b010) : mimm();
+        (opc[4:2] == 0b011) : mabs();
+        (opc[4:2] == 0b100) : mzpiy();
+        (opc[3:2] ==  0b01) : mzpx();
+        (opc[4:3] == 0b11 ) : maby();
+	({opc[7],opc[1:0]} ==  0b001):      dora(); 
+	({opc[7:5],opc[1:0]} ==  0b10001):  dsta(); 
+	({opc[7:5],opc[1:0]} ==  0b10101):  dlda(); 
+	({opc[7:6],opc[1:0]} ==  0b1101) :  dcmp(); 
+	({opc[7],opc[2:0]} == 0b0110):      dasl(); 
+	({opc[7:6],opc[2:0]} == 0b11110):  ddec(); 
+	({opc[7:5],opc[2:0]} == 0b001100):  dbit(); 
+	({opc[7:5],opc[2],opc[0]} == 0b10010):  dstx(); 
+	({opc[7:5],opc[2],opc[0]} == 0b10110):  dldx(); 
+	({opc[7:6],opc[2:0]} == 0b11100):   dcpx(); 
+	({opc[7:2],opc[0]} == 0b1010000):    {dldx();  mimm();}
+	({opc[7:6],opc[4:0]} == 0b1100000):  {dcpx();  mimm();}
+	({opc[7],opc[4:0]} == 0b001010):     {dasl(); mimp();}
+	({opc[7],opc[4:0]} == 0b011000):    dclc(); 
+	({opc[7],opc[3:2],opc[0]} == 0b1100):  dmisc(); 
+
+	(opc[4:0] == 0b10000):  dbc(); 
+	({opc[7:6],opc[4:0]} == 0b0101100):  djmp(); 
+	(opc == 0x20):  djsr(); 
+	(opc == 0x40):  drti(); 
+	(opc == 0x60):  drts(); 
+	({opc[7],opc[5:0]} == 0b0001000):  dphp(); 
+	({opc[7],opc[5:0]} == 0b0101000):  dplp(); 
+/*	(opc == 0x89):   {dbit();  mimm();} */
+	}
+
+ func drts any {
+    ex_st[0]:  {
+      rABH := (0x01 & HIMASK);
+      rABL := alu.inc(RS).out;
+      RS := alu.out;
+      s1();
+     }
+    ex_st[1]:  {
+      read(); DL := dbi;
+      if(RDY)  {
+        rABL := alu.inc(RS).out;
+        RS := alu.out;
+        s2();
+       }
+      }
+    ex_st[2]:  {
+      read();
+      if(RDY)  {
+        DL := dbi;
+        PCL := alu.inc(DL).out;
+        rABL := alu.out;
+        PCH := (dbi & HIMASK);
+        rABH := (dbi & HIMASK);
+        if(~alu.c) ifrun();
+        if(alu.c) s3();
+       }
+     }
+    ex_st[3]:  {
+      PCH := (alu.inc(DL).out & HIMASK);
+      rABH := (alu.out & HIMASK);
+      ifrun();
+     }
+   }
+ func drti any {
+    ex_st[0]:  {
+      RS :=alu.inc(RS).out;
+      rABH := (0x01 & HIMASK);
+      rABL := alu.out;
+      s1();
+     }
+    ex_st[1]:  {
+      read(); setpsr(dbi);
+      if(RDY)  {
+        rABL := alu.inc(RS).out;
+        RS := alu.out;
+        s2();
+       }
+      }
+    ex_st[2]:  {
+      read();
+      if(RDY)  {
+        DL := dbi;
+        rABL := alu.inc(RS).out;
+        RS := alu.out;
+        s3();
+       }
+      }
+    ex_st[3]:  {
+      read();
+      if(RDY)  {
+        rABH := (dbi & HIMASK);
+        rABL := DL;
+        PCH  := (dbi & HIMASK);
+        PCL  := DL;
+        ifrun();
+       }
+     }
+   }
+ func dplp any {
+    ex_st[0]:  {
+      RS :=alu.inc(RS).out;
+      rABH := (0x01 & HIMASK);
+      rABL := alu.out;
+      s1();
+     }
+    ex_st[1]:  {
+      read();
+      any {
+        ~opc[6]: setpsr(dbi);
+         opc[6]: { RA := alu.thr(dbi).out; fn := alu.s; fz := alu.z; }
+        }
+      if(RDY)  {
+        nif0(); ifrun();
+        }
+     }
+   }
+ func dphp any {
+    ex_st[0]:  {
+      RS :=alu.dec2(RS).out;
+      rABH := (0x01 & HIMASK);
+      rABL := RS;
+            s1();
+      if(EWRITE) write();
+     }
+    ex_st[1]:  {
+      if(~EWRITE) write();
+      any {
+      ~opc[6]: dbo = psr;
+       opc[6]: dbo = RA;
+      }
+      nif0(); ifrun();
+     }
+   }
+ func djsr any {
+    ex_st[0]:  {
+      read(); DL := dbi;
+      if(RDY)  {
+        RS := alu.dec2(RS).out;
+        rABH := (0x01 & HIMASK);
+        rABL := RS;
+        s1();
+        }
+       }
+    ex_st[1]:  {
+       s2();
+       incr.ci=0b1;
+       PCH := (incr.out[15:8] & HIMASK);
+       PCL := incr.dox({PCH,PCL}).out[7:0];
+      if(EWRITE) write();
+       }
+    ex_st[2]:  {
+      write();
+      dbo = PCH;
+      RS := alu.dec2(RS).out;
+      rABH := (0x01 & HIMASK);
+      rABL := RS;
+      s3();
+     }
+    ex_st[3]:  {
+      if(~EWRITE) write();
+      dbo = PCL;
+      nif0();
+      s4();
+     }
+    ex_st[4]:  {
+      read();
+      if(RDY)  {
+        rABL := DL;
+        rABH := (dbi & HIMASK);
+        PCL  := DL;
+        PCH  := (dbi & HIMASK);
+        ifrun();
+       }
+      }
+   }
+ func djmp any {
+    ex_st[0]:  {
+      read(); DL := dbi;
+      if(RDY)  {
+         nif1();
+         s1();
+        }
+      }
+    ex_st[1]:  {
+      read();
+      if(RDY)  {
+        PCL  := DL;
+        PCH  := (dbi & HIMASK);
+        rABL := DL;
+        rABH := (dbi & HIMASK);
+        any {
+        ~opc[5]:  {ifrun();}
+         opc[5]: s2();
+         }
+        }
+      }
+    ex_st[2]:  {
+      read();
+      if(RDY)  {
+        DL := dbi;
+        if(JUMPWRAP)
+          nif1();
+        else
+          rABL := alu.inc(rABL).out;
+        s3();
+        }
+      }
+    ex_st[3]:  {
+      read();
+      if(RDY)  {
+        rABL := DL;
+        rABH := (dbi & HIMASK);
+        PCL  := DL;
+        PCH  := (dbi & HIMASK);
+        ifrun();
+       }
+      }
+     }
+  func dclc   {
+    nif0(); ifrun();
+    any {
+      opc[6] == 0b0: fc := opc[5];
+      opc[6] == 0b1: fi := opc[5];
+    }
+   }
+  func dmisc   {
+     nif0(); ifrun();
+     any {
+      {opc[6:4],opc[1]} == 0b0000:
+         {
+          RY := alu.dec(RY).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b0001:
+         {
+          RA := alu.thr(RX).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b0010:
+         {
+          RA :=  alu.thr(RY).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b0011:
+         {
+          RS := alu.thr(RX).out;
+          }
+      {opc[6:4],opc[1]} == 0b0100:
+         {
+          RY := alu.thr(RA).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b0101:
+         {
+          RX := alu.thr(RA).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b0110:  {fv := 0b0; DNOPCALL}
+      {opc[6:4],opc[1]} == 0b0111:
+         {
+          RX := alu.thr(RS).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b1000:
+         {
+          RY := alu.inc(RY).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b1001:
+         {
+          RX := alu.dec(RX).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b1010:  {fd := 0b0; DNOPCALL }
+      {opc[6:4],opc[1]} == 0b1011: ;
+      {opc[6:4],opc[1]} == 0b1100:
+         {
+          RX := alu.inc(RX).out;
+          fz := alu.z; fn := alu.s;
+          }
+      {opc[6:4],opc[1]} == 0b1101: DNOPCALL
+      {opc[6:4],opc[1]} == 0b1110:  {fd := 0b1; DNOPCALL }
+      {opc[6:4],opc[1]} == 0b1111: ;
+       }
+     }
+
+ func nif0  {
+     rABH := (incr.out[15:8] & HIMASK);
+     rABL := incr.thr({PCH,PCL}).out[7:0];
+     }
+ func nif1  {
+     rABH := (incr.out[15:8] & HIMASK);
+     rABL := incr.dox({PCH,PCL}).out[7:0];
+     PCH  := (incr.out[15:8] & HIMASK);
+     PCL  := incr.out[7:0];
+      }
+
+ func nif2  {
+     PCH := (incr.out[15:8] & HIMASK);
+     PCL := incr.dox({PCH,PCL}).out[7:0];
+      }
+
+ func pf  {
+     nif1();
+     ifrun(); 
+    }
+
+ func ea any {
+   mzpxi: any {
+    ex_st[0]:  {
+      read();
+      if(RDY)  {
+         DL := dbi;
+         rABH := (0x00 & HIMASK);
+         rABL := alu.adc(RX,dbi,0b0).out;
+         s1();
+       }
+      }
+    ex_st[1]:  {
+      read();
+      if(RDY)  {
+         DL := dbi;
+         rABL := alu.adc(RX,DL,0b1).out;
+         s2();
+       }
+       }
+    ex_st[2]:  {
+       read();
+      if(RDY)  {
+        rABH := (dbi & HIMASK);
+        rABL := DL;
+        s4();
+       }
+      }
+     }
+   mabs: any {
+    ex_st[0]:  {
+      read();
+      if(RDY)  {
+        DL := dbi;
+        nif1();
+        s1();
+        }
+      }
+    ex_st[1]:  {
+       read();
+      if(RDY)  {
+        rABH := (dbi & HIMASK);
+        rABL := DL;
+        s4();
+       }
+       }
+     }
+   mzpiy: any {
+    ex_st[0]:  {
+       read();
+      if(RDY)  {
+        DL := dbi;
+        rABH := (0x00 & HIMASK);
+        rABL := dbi;
+        s1();
+       }
+       }
+    ex_st[1]:  {
+       read();
+      if(RDY)  {
+        DL := dbi;
+        rABH := (0x00 & HIMASK);
+        rABL := alu.inc(DL).out;
+        s2();
+       }
+       }
+    ex_st[2]:  {
+       read();
+      if(RDY)  {
+        DL := dbi;
+        rABH := (dbi & HIMASK);
+        rABL := alu.adc(RY,DL,0b0).out;
+       any {
+         ~alu.c:  s4(); 
+          alu.c:  s3(); 
+         }
+       }
+       }
+    ex_st[3]:  {
+       rABH := (alu.inc(DL).out & HIMASK);
+       s4();
+       }
+     }
+   mzpx: any {
+    ex_st[0]:  {
+      read();
+      if(RDY)  {
+        any {
+         opc[4] & (~dldx&~dstx | ~opc[1]): { rABL :=  alu.adc(RX,dbi,0b0).out; }
+         opc[4] & (dldx | dstx) & opc[1]:  { rABL :=  alu.adc(RY,dbi,0b0).out; }
+        ~opc[4]:  { rABL := alu.thr(dbi).out; }
+         }
+        rABH := (0x00 & HIMASK);
+        s4();
+       }
+       }
+     }
+   maby: any {
+    ex_st[0]: mabs();
+    ex_st[1]:  {
+      read();
+      tc := alu.c;
+      if(RDY)  {
+        DL := dbi;
+        rABH := (dbi & HIMASK);
+        any {
+         ~opc[2] | dldx&opc[1]: rABL := alu.adc(RY,DL,0b0).out;
+          opc[2] & (~dldx|~opc[1]): rABL := alu.adc(RX,DL,0b0).out;
+          }
+       any {
+        ~alu.c: s4();
+         alu.c: s2();
+        }
+       }
+      }
+    ex_st[2]:  {
+       rABH := (alu.incc(DL,tc).out & HIMASK);
+       s4();
+       }
+     }
+  }
+
+ func dora any {
+     mimm | ex_st[4]:  {
+      if(fd&~NODEC) alu.df();
+      read();
+      any {
+        opc[6:5] == 0b00: alu.do_or(RA,dbi);
+        opc[6:5] == 0b01: alu.do_and(RA,dbi);
+        opc[6:5] == 0b10: alu.eor(RA,dbi);
+        opc[6:5] == 0b11: alu.adc(RA,dbi,fc|dcmp|dcpx);
+        }
+      if(RDY)  {
+          fz := alu.z; fn := alu.s;
+          if(opc[6:5] == 0b11)  { fc := alu.c; fv := alu.v;}
+          RA := alu.out;
+          pf();
+        }
+      }
+     else: ea();
+   }
+ func dbit any {
+     mimm | ex_st[4]:  {
+      read();
+      if(RDY)  {
+         alu.bita(RA,dbi);
+         fz := alu.z; fn := alu.s; fv := alu.v;
+         pf();
+	 }
+      }
+     else: ea();
+   }
+ func dsta any {
+     EWRITE & ex_st[4]:  { write(); s5();}
+     (~EWRITE & ex_st[4])|ex_st[5]:  {
+      if(~EWRITE) write();
+      dbo = alu.thr(RA).out;
+      pf();
+      }
+     else: ea();
+   }
+ func dstx any {
+     EWRITE & ex_st[4]:  { write(); s5();}
+     (~EWRITE & ex_st[4])|ex_st[5]:  {
+        any {
+          opc[1]: dbo = alu.thr(RX).out;
+         ~opc[1]: dbo = alu.thr(RY).out;
+          }
+        if(~EWRITE) write();
+        pf(); 
+      }
+     else: ea();
+   }
+
+ func dlda any {
+     mimm | ex_st[4]:  {
+      read();
+      if(RDY)  {
+          fz := alu.z; fn := alu.s;
+          RA := alu.thr(dbi).out;
+          pf();
+        }
+      }
+     else: ea();
+   }
+ func dcmp any {
+     mimm | ex_st[4]:  {
+      read();
+      if(RDY)  {
+        alu.sbc(RA,dbi,~opc[5]|fc); 
+        if(opc[5])  {
+          RA := alu.out; 
+          fv := alu.v;
+          if(fd&~NODEC) alu.df();
+          }
+        fz := alu.z; fn := alu.s; fc:=alu.c;
+        pf();
+        }
+      }
+     else: ea();
+   }
+ func dcpx any {
+     mimm | ex_st[4]:  {
+      read();
+      if(RDY)  {
+        any {
+          opc[5]: alu.sbc(RX,dbi,0b1); 
+         ~opc[5]: alu.sbc(RY,dbi,0b1); 
+          }
+        fz := alu.z; fn := alu.s;
+        fc:=alu.c;
+        pf();
+        }
+      }
+     else: ea();
+   }
+ func dldx any {
+     mimm | ex_st[4]:  {
+      fz := alu.z; fn := alu.s;
+      read();
+      if(RDY)  {
+        any {
+          opc[1]: RX := alu.thr(dbi).out;
+         ~opc[1]: RY := alu.thr(dbi).out; 
+          }
+        pf();
+        }
+      }
+     else: ea();
+  }
+/* Read/Modify/Write operations. mimp -] implied, S4,S5 -] memory */
+ func rmw  {
+   any {
+     mimp:  {
+      ALU1 = RA; RA := alu.out; ifrun();
+      }
+     ex_st[4]:  {
+      read();
+      if(RDY)  {
+        DL := dbi;
+        s5();
+        if(EWRITE) write();
+        }
+       }
+     ex_st[5]:  {
+      ALU1 = DL; dbo = alu.out;
+      if(~EWRITE) write();
+      pf();
+      }
+    }
+   }
+ func dasl any {
+     mimp|ex_st[5]:  {
+        rmw();
+        any {
+          opc[6:5] == 0b00: alu.asl(ALU1);
+          opc[6:5] == 0b01: alu.rol(ALU1,fc);
+          opc[6:5] == 0b10: alu.lsr(ALU1);
+          opc[6:5] == 0b11: alu.ror(ALU1,fc);
+          }
+        fz := alu.z; fn := alu.s; fc := alu.c;
+      }
+     ex_st[4]: rmw();
+     else: ea();
+   }
+ func ddec any {
+     ex_st[4]: rmw();
+     ex_st[5]:  {
+        rmw();
+        any {
+         ~opc[5]: alu.dec(ALU1);
+          opc[5]: alu.inc(ALU1);
+          }
+        fz := alu.z; fn := alu.s;
+      }
+     else: ea();
+   }
+
+ func dbc any {
+   ex_st[0]:  {
+    taken = 
+         ((opc[7:5] == 0b000) & ~fn) |
+         ((opc[7:5] == 0b001) &  fn) |
+         ((opc[7:5] == 0b010) & ~fv) |
+         ((opc[7:5] == 0b011) &  fv) |
+         ((opc[7:5] == 0b100) & ~fc) |
+         ((opc[7:5] == 0b101) &  fc) |
+         ((opc[7:5] == 0b110) & ~fz) |
+         ((opc[7:5] == 0b111) &  fz) ;
+    read();
+    any {
+      ~taken: pf();
+       taken:  {
+         if(RDY)  {
+           rABL := alu.adc(PCL,dbi,0b1).out;
+           PCL  := alu.out;
+           any {
+             ~alu.c^data[7]: ifrun();
+              alu.c^data[7]: 
+                any {
+                   ~data[7]:s1();
+                    data[7]:s2();
+                 }
+             }
+           }
+         }
+       }
+     }
+    ex_st[1]:  {
+       ;
+       PCH := (alu.inc(PCH).out & HIMASK);
+       rABH := (alu.out & HIMASK);
+       ifrun();
+       }
+    ex_st[2]:  {
+       PCH := (alu.dec(PCH).out & HIMASK);
+       rABH := (alu.out & HIMASK);
+       ifrun();
+       }
+ }
+
+
+ proc ift_run {
+  any {
+     ~int_req:
+	 {
+           if(~nmi) nm1 := 0b0;
+           sync();
+           read(); alu.thr(dbi);
+           OP := dbi;     /* [PCH,PCL] -] opc */
+	   if(RDY)  {
+            nif1();
+            any {
+             ~alu.z: ex(S0); 
+              alu.z: {do_brk();int_req();} 
+             }
+           }
+	}
+  } /* any */
+  }
+
+proc int_req {
+  state_name st0,st1,st2,st3,st4,st5,st6;
+  state st0 any {
+     do_res: goto st4;
+     do_brk:  nif2();
+     (ift_run & (do_irq|do_nmi))|(do_brk):  {
+        if(do_nmi) nm1 := 0b1;
+        rABH := (0x01 & HIMASK);
+	rABL := RS;
+        if(EWRITE) write();
+	goto st1;
+	}
+  }
+  state st1 {
+        write();
+        dbo = PCH;
+        rABL := alu.dec2(RS).out; 
+        RS   := alu.out;
+	goto st2;
+      }
+  state st2 {
+        write();
+        dbo = PCL;
+        rABL := alu.dec2(RS).out;
+        RS := alu.out;
+	goto st3;
+      }
+  state st3 {
+        if(~EWRITE) write();
+        dbo = psr&{0b111,~(do_irq|do_nmi),0b1111};
+        rABL := alu.dec2(RS).out;
+        RS := alu.out;
+	goto st4;
+      }
+  state st4 {
+        alt {
+            do_res:        ABLin = 0xfc;
+            do_brk:        ABLin = 0xfe;
+            do_nmi:        ABLin = 0xfa;
+            do_irq:        ABLin = 0xfe;
+         }
+        rABH := (0xff & HIMASK);
+	rABL := ABLin;
+        PCH  := (0xff & HIMASK);
+	PCL := ABLin;
+	dbgreg:={PCH,PCL};
+	goto st5;
+      }
+  state st5 {
+        read();
+        if(RDY) {
+          DL := dbi;
+          nif1();
+	  goto st6;
+         }
+      }
+  state st6 {
+        read();
+	if(RDY)  {
+        PCH := (dbi & HIMASK);
+	PCL := DL;
+        rABH := (dbi & HIMASK);
+	rABL := DL;
+	fi := 0b1;
+	goto st0;
+        ift_run();
+        alt {
+            do_res:        do_res.finish();
+            do_brk:        do_brk.finish();
+            do_nmi:        do_nmi.finish();
+            do_irq:        do_irq.finish();
+         }
+	}
+     }
+ }
+
+ proc ex {
+    decop();
+    any {
+     s1: ex(S1);
+     s2: ex(S2);
+     s3: ex(S3);
+     s4: ex(S4);
+     s5: ex(S5);
+     ifrun: ift_run();
+     else: finish;
+   }
+ }
+} /* module */
+

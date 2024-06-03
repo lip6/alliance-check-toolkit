@@ -1,0 +1,61 @@
+#include "m65.nsl"
+#include "mem.nsl"
+
+declare ap1 simulation {}
+
+module ap1 {
+
+ rom256 rom;
+ ram4k  ram;
+ m65    cpu;
+ mem	in_data[256][8];
+ reg	in_index[8] = 0;
+
+
+ _readmemh("in_data.mem",in_data);
+
+
+  _init {
+	_delay(3);
+	cpu.start();
+	_delay(100);
+	cpu.irq();
+	cpu.irq();
+	cpu.irq();
+	cpu.irq();
+	_delay(200);
+	_finish();
+	_delay(2000);
+	_finish();
+
+// for testing IRQ/NMI use follows
+	_delay(100);
+	cpu.irq();
+	_delay(100);
+	cpu.nmi();
+	}
+
+ cpu.rdy();
+
+
+ func cpu.rd any {
+	cpu.adrs[15:12] == 0x0: cpu.data = ram.rd(cpu.adrs[11:0]).datao;
+	cpu.adrs[15:8] == 0xff: cpu.data = rom.rd(cpu.adrs[7:0]).datao;
+	cpu.adrs == 0xd010: /* keyboard data */
+	        {
+		   cpu.data = 0x80 | in_data[in_index];
+		   in_index++;
+		}
+	cpu.adrs == 0xd011: /* keyboard status */
+		cpu.data = 0x80;
+	cpu.adrs == 0xd012: /* display status */
+		cpu.data = 0x00;
+	}
+ func cpu.wt any {
+	cpu.adrs[15:12] == 0x0: ram.wt(cpu.adrs[11:0],cpu.datao);
+	cpu.adrs[15:8] == 0xff: rom.wt(cpu.adrs[7:0],cpu.datao);
+	cpu.adrs == 0xd012: /* display status */
+		_display("==> %x:%c", cpu.datao&0x7f,cpu.datao&0x7f);
+	}
+}
+

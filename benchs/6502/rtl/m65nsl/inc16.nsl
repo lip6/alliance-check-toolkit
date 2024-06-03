@@ -1,0 +1,20 @@
+declare inc16 {
+   input in[16],ci;
+   output out[16], co;
+   func_in dox(in) : out;
+   func_in thr(in) : out;
+}
+
+module inc16 {
+   wire res[17];
+   func dox {
+     res = 17'in + 1;
+     out = res[15:0];
+     co = res[16];
+     }
+   func thr {
+     out = in;
+     co = 0b0;
+     }
+}
+

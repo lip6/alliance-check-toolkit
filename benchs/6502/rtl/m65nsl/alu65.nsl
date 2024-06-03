@@ -1,0 +1,113 @@
+#include "cpa.nsl"
+
+declare alu65 {
+    input    in1[8] ;
+    input    in2[8] ;
+    input    ci ;
+    func_in  df ;
+    output   out[8] ;
+    func_out s,v,z,c;
+    func_in adc(in1,in2,ci);
+    func_in sbc(in1,in2,ci);
+    func_in do_and(in1,in2);
+    func_in bita(in1,in2);
+    func_in do_or (in1,in2);
+    func_in eor(in1,in2);
+    func_in inc(in1);
+    func_in dec(in1);
+    func_in dec2(in2);
+    func_in incc(in1,ci);
+    func_in asl(in1);
+    func_in lsr(in1);
+    func_in ror(in1,ci);
+    func_in rol(in1,ci);
+    func_in thr(in1);
+}
+
+
+module alu65 {
+    cpa8     adder;
+    wire     out_in[8];
+    func_self  set_out();
+
+    func set_out {
+		if( out_in[7]) s(); if ( ~| out_in ) z(); 
+		out = out_in;
+    }
+
+    func adc  {
+		out_in = adder.add(in1, in2, ci, df);
+		if( adder.co ) c(); 
+                if( (~in1[7]&~in2[7]&out_in[7])|(in1[7]&in2[7]&~out_in[7]) ) v();
+		set_out();
+		}
+    func sbc {
+		out_in = adder.sub(in1, in2, ci, df);
+                if( (~in1[7]&in2[7]&adder.out[7])|(in1[7]&~in2[7]&~adder.out[7]) ) v();
+		if( adder.co ) c();
+		set_out();
+		}
+    func do_and {
+		out_in = in1 & in2;
+		set_out();
+		}
+    func bita {
+		out_in = in1 & in2;
+		out = out_in;
+		if ( in2[7]) s();
+		if ( ~| out_in ) z(); 
+                if ( in2[6]) v();
+		}
+    func eor {
+		out_in = in1 ^ in2;
+		set_out();
+		}
+    func do_or {
+		out_in = in1 | in2;
+		set_out();
+		}
+    func inc  {
+		out_in = adder.add(in1, 0x00, 0b1, 0b0);
+		if( adder.co ) c();
+		set_out();
+		}
+    func dec {
+		out_in = adder.sub(in1, 0x00, 0b0, 0b0);
+		if( adder.co ) c();
+		set_out();
+		}
+    func incc  {
+		out_in = adder.add(in1, 0x00, ci, 0b0);
+		if( adder.co ) c();
+		set_out();
+		}
+    func asl {
+		out_in = {in1[6:0],0b0};
+		if( in1[7] ) c(); 
+		set_out();
+		}
+    func lsr {
+		out_in = {0b0,in1[7:1]};
+		if( in1[0] ) c(); 
+		set_out();
+		}
+    func rol {
+		out_in = {in1[6:0],ci};
+		if( in1[7] ) c(); 
+		set_out();
+		}
+    func ror {
+		out_in = {ci,in1[7:1]};
+		if( in1[0] ) c(); 
+		set_out();
+		}
+    func thr {
+		out_in = in1;
+		set_out();
+		}
+    func dec2 {
+		out_in = adder.add(0xff, in2, 0b0, 0b0);
+		set_out();
+		}
+}
+

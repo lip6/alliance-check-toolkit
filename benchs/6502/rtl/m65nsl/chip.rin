@@ -1,0 +1,23 @@
+west ( 
+p_data0 p_data1 p_data2 p_data3
+p_vddi
+p_rd p_wt p_sync
+p_data4 p_data5 p_data6 p_data7
+ )
+north( 
+p_datao0 p_datao1 p_datao2 p_datao3
+p_ck p_vssi 
+p_preset
+p_datao4 p_datao5 p_datao6 p_datao7
+)
+east ( 
+p_adrs0 p_adrs1 p_adrs2 p_adrs3
+p_vdde
+p_adrs4 p_adrs5 p_adrs6 p_adrs7
+)
+south(
+p_adrs8 p_adrs9 p_adrs10 p_adrs11
+p_vsse 
+p_irq p_nmi p_start
+p_adrs12 p_adrs13 p_adrs14 p_adrs15
+)
