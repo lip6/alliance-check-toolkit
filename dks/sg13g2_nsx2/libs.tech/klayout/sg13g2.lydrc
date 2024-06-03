@@ -63,7 +63,7 @@ deep
 
 # Initial definitions of control flow variables
 conditional_enabled = {}
-conditional_enabled[:density] = true
+conditional_enabled[:density] = false
 conditional_enabled[:sanityRules] = true
 
 class DRC::DRCLayer
