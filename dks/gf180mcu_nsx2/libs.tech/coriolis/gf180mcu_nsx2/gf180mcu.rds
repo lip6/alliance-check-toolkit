@@ -237,7 +237,7 @@ table mbk_to_rds_via
     rds_cont        0.220  all\
     rds_alu1        0.340  all\
 #    rds_nimp        0.430  all\
-    rds_ntie        0.360  ext
+    rds_ntie        0.360  all
 
 # licon.7 0.170+0.120*2
 # difftap.5
@@ -245,7 +245,7 @@ table mbk_to_rds_via
     rds_cont        0.220  all\
     rds_alu1        0.340  all\
     rds_pimp        0.360  all\
-    rds_ptie        0.360  ext
+    rds_ptie        0.360  all
 
 # licon.5c
   cont_dif_n  \
@@ -324,15 +324,15 @@ table mbk_to_rds_bigvia_metal
 # -------------------------------------------------------------------
 # mbk_via_name  rds_name  dwr overlap  mode
 # -------------------------------------------------------------------
-CONT_DIF_P   RDS_ALU1   0.12   0.0 ALL
-CONT_DIF_N   RDS_ALU1   0.12   0.0 ALL
-CONT_BODY_P  RDS_ALU1   0.12   0.0 ALL
-CONT_BODY_N  RDS_ALU1   0.12   0.0 ALL
-CONT_VIA     RDS_ALU2   0.12   0.0 ALL
-CONT_VIA2    RDS_ALU3   0.12   0.0 ALL
-CONT_VIA3    RDS_ALU4   0.12   0.0 ALL
-CONT_VIA4    RDS_ALU5   0.12   0.0 ALL
-CONT_VIA5    RDS_ALU6   0.12   0.0 ALL
+CONT_DIF_P   RDS_ALU1   0.12   0.14 ALL
+CONT_DIF_N   RDS_ALU1   0.12   0.14 ALL
+CONT_BODY_P  RDS_ALU1   0.12   0.14 ALL
+CONT_BODY_N  RDS_ALU1   0.12   0.14 ALL
+CONT_VIA     RDS_ALU2   0.12   0.12 ALL
+CONT_VIA2    RDS_ALU3   0.12   0.12 ALL
+CONT_VIA3    RDS_ALU4   0.12   0.12 ALL
+CONT_VIA4    RDS_ALU5   0.12   0.12 ALL
+CONT_VIA5    RDS_ALU6   0.12   0.12 ALL
 end
 
 table mbk_to_rds_turnvia
