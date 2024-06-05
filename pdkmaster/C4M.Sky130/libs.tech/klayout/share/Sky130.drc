@@ -15,6 +15,11 @@ def space4width_check(layer, w, s)
     big.edges.separation(layer.edges, s)
 end
 
+def space4widthlength_check(layer, w, l, s)
+    big = layer.sized(-0.5*w).size(0.5*w)
+    big.edges.separation(layer.edges, s).with_length(l + 1.dbu, nil)
+end
+
 def oppenc_check(inner, outer, min, max)
     toosmall = outer.enclosing(inner, min).second_edges
 
@@ -43,7 +48,10 @@ def dens_check(output, input, min, max)
 end
 
 # Define layers
+dnm = input(64, 18)
 nwm = input(64, 20)
+hvtp = input(78, 44)
+lvtn = input(125, 44)
 nsdm = input(93, 44)
 psdm = input(94, 20)
 hvi = input(75, 20)
@@ -62,12 +70,14 @@ m1 = input(68, 20)
 m2_pin = input(69, 16)
 m2_block = input(100, 80)
 m2 = input(69, 20)
+capm = input(89, 44)
 m3_pin = input(70, 16)
 m3_block = input(100, 100)
 m3 = input(70, 20)
 m4_pin = input(71, 16)
 m4_block = input(100, 120)
 m4 = input(71, 20)
+cap2m = input(97, 44)
 m5_pin = input(72, 16)
 m5_block = input(100, 140)
 m5 = input(72, 20)
@@ -83,20 +93,27 @@ via = input(68, 44)
 via2 = input(69, 44)
 via3 = input(70, 44)
 via4 = input(71, 44)
-hvtp = input(78, 44)
-lvtn = input(125, 44)
 areaid_sc = input(81, 4)
 pad = input(76, 20)
-areaid_diode = input(81, 23)
 pnp = input(82, 44)
+areaid_diode = input(81, 23)
+polyres = input(66, 13)
 diffres = input(65, 13)
 npn = input(82, 20)
-polyres = input(66, 13)
 prBoundary = input(235, 4)
 
 # Grid check
+dnm.ongrid(0.005).output(
+    "dnm grid", "dnm grid: 0.005µm"
+)
 nwm.ongrid(0.005).output(
     "nwm grid", "nwm grid: 0.005µm"
+)
+hvtp.ongrid(0.005).output(
+    "hvtp grid", "hvtp grid: 0.005µm"
+)
+lvtn.ongrid(0.005).output(
+    "lvtn grid", "lvtn grid: 0.005µm"
 )
 nsdm.ongrid(0.005).output(
     "nsdm grid", "nsdm grid: 0.005µm"
@@ -152,6 +169,9 @@ m2_block.ongrid(0.005).output(
 m2.ongrid(0.005).output(
     "m2 grid", "m2 grid: 0.005µm"
 )
+capm.ongrid(0.005).output(
+    "capm grid", "capm grid: 0.005µm"
+)
 m3_pin.ongrid(0.005).output(
     "m3_pin grid", "m3_pin grid: 0.005µm"
 )
@@ -169,6 +189,9 @@ m4_block.ongrid(0.005).output(
 )
 m4.ongrid(0.005).output(
     "m4 grid", "m4 grid: 0.005µm"
+)
+cap2m.ongrid(0.005).output(
+    "cap2m grid", "cap2m grid: 0.005µm"
 )
 m5_pin.ongrid(0.005).output(
     "m5_pin grid", "m5_pin grid: 0.005µm"
@@ -215,32 +238,26 @@ via3.ongrid(0.005).output(
 via4.ongrid(0.005).output(
     "via4 grid", "via4 grid: 0.005µm"
 )
-hvtp.ongrid(0.005).output(
-    "hvtp grid", "hvtp grid: 0.005µm"
-)
-lvtn.ongrid(0.005).output(
-    "lvtn grid", "lvtn grid: 0.005µm"
-)
 areaid_sc.ongrid(0.005).output(
     "areaid_sc grid", "areaid_sc grid: 0.005µm"
 )
 pad.ongrid(0.005).output(
     "pad grid", "pad grid: 0.005µm"
 )
+pnp.ongrid(0.005).output(
+    "pnp grid", "pnp grid: 0.005µm"
+)
 areaid_diode.ongrid(0.005).output(
     "areaid_diode grid", "areaid_diode grid: 0.005µm"
 )
-pnp.ongrid(0.005).output(
-    "pnp grid", "pnp grid: 0.005µm"
+polyres.ongrid(0.005).output(
+    "polyres grid", "polyres grid: 0.005µm"
 )
 diffres.ongrid(0.005).output(
     "diffres grid", "diffres grid: 0.005µm"
 )
 npn.ongrid(0.005).output(
     "npn grid", "npn grid: 0.005µm"
-)
-polyres.ongrid(0.005).output(
-    "polyres grid", "polyres grid: 0.005µm"
 )
 prBoundary.ongrid(0.005).output(
     "prBoundary grid", "prBoundary grid: 0.005µm"
@@ -249,44 +266,66 @@ prBoundary.ongrid(0.005).output(
 # Derived layers
 # wafer.remove(nwm).alias(substrate:Sky130)
 substrate__Sky130 = (extent.sized(0.34)-nwm)
-# difftap.remove(join(poly,diffres)).alias(difftap__conn)
-difftap__conn = (difftap-(poly+diffres))
+# difftap.remove(join(diffres,poly)).alias(difftap__conn)
+difftap__conn = (difftap-(diffres+poly))
 # intersect(difftap__conn,nsdm).alias(difftap__conn:nsdm)
 difftap__conn__nsdm = (difftap__conn&nsdm)
 # intersect(difftap__conn,psdm).alias(difftap__conn:psdm)
 difftap__conn__psdm = (difftap__conn&psdm)
+# intersect(difftap__conn,lvtn).alias(difftap__conn:lvtn)
+difftap__conn__lvtn = (difftap__conn&lvtn)
+# intersect(difftap__conn,hvtp).alias(difftap__conn:hvtp)
+difftap__conn__hvtp = (difftap__conn&hvtp)
 # poly.remove(polyres).alias(poly__conn)
 poly__conn = (poly-polyres)
 # intersect(difftap,poly__conn,hvi).alias(gate:hvmosgate)
 gate__hvmosgate = (difftap&poly__conn&hvi)
-# intersect(difftap,poly__conn,wafer.remove(join(areaid_sc,hvi))).alias(gate:mosgate)
-gate__mosgate = (difftap&poly__conn&(extent.sized(0.34)-(areaid_sc+hvi)))
+# intersect(difftap,poly__conn,wafer.remove(join(hvi,areaid_sc))).alias(gate:mosgate)
+gate__mosgate = (difftap&poly__conn&(extent.sized(0.34)-(hvi+areaid_sc)))
 # intersect(difftap,poly__conn,areaid_sc,wafer.remove(hvi)).alias(gate:mosgate_sc)
 gate__mosgate_sc = (difftap&poly__conn&areaid_sc&(extent.sized(0.34)-hvi))
-# intersect(gate:mosgate,substrate:Sky130,nsdm).alias(gate:mosfet:nfet_01v8)
-gate__mosfet__nfet_01v8 = (gate__mosgate&substrate__Sky130&nsdm)
-# intersect(gate:mosgate,substrate:Sky130,nsdm,lvtn).alias(gate:mosfet:nfet_01v8_lvt)
-gate__mosfet__nfet_01v8_lvt = (gate__mosgate&substrate__Sky130&nsdm&lvtn)
-# intersect(gate:mosgate_sc,substrate:Sky130,nsdm).alias(gate:mosfet:nfet_01v8_sc)
-gate__mosfet__nfet_01v8_sc = (gate__mosgate_sc&substrate__Sky130&nsdm)
-# intersect(gate:hvmosgate,substrate:Sky130,nsdm).alias(gate:mosfet:nfet_g5v0d10v5)
-gate__mosfet__nfet_g5v0d10v5 = (gate__hvmosgate&substrate__Sky130&nsdm)
-# intersect(gate:mosgate,nwm,psdm).alias(gate:mosfet:pfet_01v8)
-gate__mosfet__pfet_01v8 = (gate__mosgate&nwm&psdm)
-# intersect(gate:mosgate,nwm,psdm,hvtp).alias(gate:mosfet:pfet_01v8_hvt)
-gate__mosfet__pfet_01v8_hvt = (gate__mosgate&nwm&psdm&hvtp)
-# intersect(gate:mosgate,nwm,psdm,lvtn).alias(gate:mosfet:pfet_01v8_lvt)
-gate__mosfet__pfet_01v8_lvt = (gate__mosgate&nwm&psdm&lvtn)
-# intersect(gate:hvmosgate,nwm,psdm).alias(gate:mosfet:pfet_g5v0d10v5)
-gate__mosfet__pfet_g5v0d10v5 = (gate__hvmosgate&nwm&psdm)
+# intersect(gate:mosgate,nsdm).remove(nwm).alias(gate:mosfet:nfet_01v8)
+gate__mosfet__nfet_01v8 = ((gate__mosgate&nsdm)-nwm)
+# intersect(gate:mosgate,nsdm,lvtn).remove(nwm).alias(gate:mosfet:nfet_01v8_lvt)
+gate__mosfet__nfet_01v8_lvt = ((gate__mosgate&nsdm&lvtn)-nwm)
+# intersect(gate:mosgate_sc,nsdm).remove(nwm).alias(gate:mosfet:nfet_01v8_sc)
+gate__mosfet__nfet_01v8_sc = ((gate__mosgate_sc&nsdm)-nwm)
+# intersect(gate:hvmosgate,nsdm).remove(nwm).alias(gate:mosfet:nfet_g5v0d10v5)
+gate__mosfet__nfet_g5v0d10v5 = ((gate__hvmosgate&nsdm)-nwm)
+# intersect(gate:mosgate,psdm,nwm).alias(gate:mosfet:pfet_01v8)
+gate__mosfet__pfet_01v8 = (gate__mosgate&psdm&nwm)
+# intersect(gate:mosgate,psdm,hvtp,nwm).alias(gate:mosfet:pfet_01v8_hvt)
+gate__mosfet__pfet_01v8_hvt = (gate__mosgate&psdm&hvtp&nwm)
+# intersect(gate:mosgate,psdm,lvtn,nwm).alias(gate:mosfet:pfet_01v8_lvt)
+gate__mosfet__pfet_01v8_lvt = (gate__mosgate&psdm&lvtn&nwm)
+# intersect(gate:hvmosgate,psdm,nwm).alias(gate:mosfet:pfet_g5v0d10v5)
+gate__mosfet__pfet_g5v0d10v5 = (gate__hvmosgate&psdm&nwm)
+# intersect(difftap,diffres,nsdm).alias(resistor:pdiff_res)
+resistor__pdiff_res = (difftap&diffres&nsdm)
+# intersect(diffres).alias(indicators:resistor:pdiff_res)
+indicators__resistor__pdiff_res = (diffres)
+# intersect(resistor:pdiff_res,indicators:resistor:pdiff_res).alias(body:resistor:pdiff_res)
+body__resistor__pdiff_res = (resistor__pdiff_res&indicators__resistor__pdiff_res)
+# intersect(difftap,diffres,nsdm).alias(resistor:ndiff_res)
+resistor__ndiff_res = (difftap&diffres&nsdm)
+# intersect(diffres).alias(indicators:resistor:ndiff_res)
+indicators__resistor__ndiff_res = (diffres)
+# intersect(resistor:ndiff_res,indicators:resistor:ndiff_res).alias(body:resistor:ndiff_res)
+body__resistor__ndiff_res = (resistor__ndiff_res&indicators__resistor__ndiff_res)
 # intersect(poly,polyres).alias(resistor:poly_res)
 resistor__poly_res = (poly&polyres)
-# intersect(difftap,diffres).alias(resistor:active_res)
-resistor__active_res = (difftap&diffres)
-# intersect(difftap,areaid_diode,psdm).alias(diode:pdiode)
-diode__pdiode = (difftap&areaid_diode&psdm)
+# intersect(polyres).alias(indicators:resistor:poly_res)
+indicators__resistor__poly_res = (polyres)
+# intersect(resistor:poly_res,indicators:resistor:poly_res).alias(body:resistor:poly_res)
+body__resistor__poly_res = (resistor__poly_res&indicators__resistor__poly_res)
+# capm.alias(mimcap:MIM_m3_capm)
+mimcap__MIM_m3_capm = capm
+# cap2m.alias(mimcap:MIM_m4_cap2m)
+mimcap__MIM_m4_cap2m = cap2m
 # intersect(difftap,areaid_diode,nsdm).alias(diode:ndiode)
 diode__ndiode = (difftap&areaid_diode&nsdm)
+# intersect(difftap,areaid_diode,psdm).alias(diode:pdiode)
+diode__pdiode = (difftap&areaid_diode&psdm)
 
 # Connectivity
 # connect(substrate:Sky130,wafer)
@@ -301,6 +340,10 @@ connect(difftap__conn__nsdm, nwm)
 connect(difftap__conn, difftap__conn__psdm)
 # connect(difftap__conn:psdm,substrate:Sky130)
 connect(difftap__conn__psdm, substrate__Sky130)
+# connect(difftap__conn,difftap__conn:lvtn)
+connect(difftap__conn, difftap__conn__lvtn)
+# connect(difftap__conn,difftap__conn:hvtp)
+connect(difftap__conn, difftap__conn__hvtp)
 # connect(poly,poly.pin)
 connect(poly, poly_pin)
 # connect(li,li.pin)
@@ -332,16 +375,34 @@ connect(via, m2)
 connect(m2, via2)
 # connect(via2,m3)
 connect(via2, m3)
-# connect(m3,via3)
+# connect((m3,capm),via3)
 connect(m3, via3)
+connect(capm, via3)
 # connect(via3,m4)
 connect(via3, m4)
-# connect(m4,via4)
+# connect((m4,cap2m),via4)
 connect(m4, via4)
+connect(cap2m, via4)
 # connect(via4,m5)
 connect(via4, m5)
 
 # DRC rules
+# dnm.width >= 3.0
+dnm.width(3.0).output(
+    "dnm width", "dnm minimum width: 3.0µm"
+)
+# dnm.space >= 6.3
+dnm.space(6.3).output(
+    "dnm space", "dnm minimum space: 6.3µm"
+)
+# intersect(dnm,nwm).width >= 1.03
+(dnm&nwm).width(1.03).output(
+    "(dnm&nwm) width", "(dnm&nwm) minimum width: 1.03µm"
+)
+# nwm.remove(dnm).width >= 0.4
+(nwm-dnm).width(0.4).output(
+    "(nwm-dnm) width", "(nwm-dnm) minimum width: 0.4µm"
+)
 # nwm.width >= 0.84
 nwm.width(0.84).output(
     "nwm width", "nwm minimum width: 0.84µm"
@@ -349,6 +410,30 @@ nwm.width(0.84).output(
 # nwm.space >= 1.27
 nwm.space(1.27).output(
     "nwm space", "nwm minimum space: 1.27µm"
+)
+# hvtp.width >= 0.38
+hvtp.width(0.38).output(
+    "hvtp width", "hvtp minimum width: 0.38µm"
+)
+# hvtp.space >= 0.38
+hvtp.space(0.38).output(
+    "hvtp space", "hvtp minimum space: 0.38µm"
+)
+# hvtp.area >= 0.265
+hvtp.with_area(nil, 0.265).output(
+    "hvtp area", "hvtp minimum area: 0.265µm"
+)
+# lvtn.width >= 0.38
+lvtn.width(0.38).output(
+    "lvtn width", "lvtn minimum width: 0.38µm"
+)
+# lvtn.space >= 0.38
+lvtn.space(0.38).output(
+    "lvtn space", "lvtn minimum space: 0.38µm"
+)
+# lvtn.area >= 0.265
+lvtn.with_area(nil, 0.265).output(
+    "lvtn area", "lvtn minimum area: 0.265µm"
 )
 # nsdm.width >= 0.38
 nsdm.width(0.38).output(
@@ -400,8 +485,28 @@ psdm.enclosing(difftap, 0.125).output(
     "psdm:difftap enclosure",
     "Minimum enclosure of psdm around difftap: 0.125µm"
 )
-# intersect(nsdm,psdm).area == 0.0
+# difftap.enclosed_by(lvtn) >= Enclosure(0.125)
+lvtn.enclosing(difftap, 0.125).output(
+    "lvtn:difftap enclosure",
+    "Minimum enclosure of lvtn around difftap: 0.125µm"
+)
+# difftap.enclosed_by(hvtp) >= Enclosure(0.125)
+hvtp.enclosing(difftap, 0.125).output(
+    "hvtp:difftap enclosure",
+    "Minimum enclosure of hvtp around difftap: 0.125µm"
+)
+# intersect(nsdm,psdm).area == 0
 (nsdm&psdm).output("(nsdm&psdm) empty")
+# intersect(nsdm,lvtn).area == 0
+(nsdm&lvtn).output("(nsdm&lvtn) empty")
+# intersect(nsdm,hvtp).area == 0
+(nsdm&hvtp).output("(nsdm&hvtp) empty")
+# intersect(psdm,lvtn).area == 0
+(psdm&lvtn).output("(psdm&lvtn) empty")
+# intersect(psdm,hvtp).area == 0
+(psdm&hvtp).output("(psdm&hvtp) empty")
+# intersect(lvtn,hvtp).area == 0
+(lvtn&hvtp).output("(lvtn&hvtp) empty")
 # difftap.enclosed_by(nwm) >= Enclosure(0.18)
 nwm.enclosing(difftap, 0.18).output(
     "nwm:difftap enclosure",
@@ -417,7 +522,7 @@ hvi.enclosing(difftap, 0.18).output(
     "hvi:difftap enclosure",
     "Minimum enclosure of hvi around difftap: 0.18µm"
 )
-# edge(difftap).interact_with(edge(nwm)).length == 0.0
+# edge(difftap).interact_with(edge(nwm)).length == 0
 difftap.edges.interacting(nwm.edges).output("difftap.edges.interacting(nwm.edges) empty")
 # poly.width >= 0.15
 poly.width(0.15).output(
@@ -469,6 +574,14 @@ space4width_check(m2, 1.5, 0.28).output(
     "m2 table spacing",
     "Minimum m2 spacing for 1.5µm width: 0.28µm"
 )
+# capm.width >= 1.0
+capm.width(1.0).output(
+    "capm width", "capm minimum width: 1.0µm"
+)
+# capm.space >= 0.84
+capm.space(0.84).output(
+    "capm space", "capm minimum space: 0.84µm"
+)
 # m3.width >= 0.3
 m3.width(0.3).output(
     "m3 width", "m3 minimum width: 0.3µm"
@@ -502,6 +615,14 @@ m4.with_area(nil, 0.24).output(
 space4width_check(m4, 1.5, 0.4).output(
     "m4 table spacing",
     "Minimum m4 spacing for 1.5µm width: 0.4µm"
+)
+# cap2m.width >= 1.0
+cap2m.width(1.0).output(
+    "cap2m width", "cap2m minimum width: 1.0µm"
+)
+# cap2m.space >= 0.84
+cap2m.space(0.84).output(
+    "cap2m space", "cap2m minimum space: 0.84µm"
 )
 # m5.width >= 1.6
 m5.width(1.6).output(
@@ -605,6 +726,11 @@ oppenc_check(via3, m3, 0.06, 0.09).output(
     "m3:via3 asymmetric enclosure",
     "Minimum enclosure of m3 around via3: 0.06µm minimum, 0.09µm opposite"
 )
+# via3.enclosed_by(capm) >= Enclosure((0.06,0.09))
+oppenc_check(via3, capm, 0.06, 0.09).output(
+    "capm:via3 asymmetric enclosure",
+    "Minimum enclosure of capm around via3: 0.06µm minimum, 0.09µm opposite"
+)
 # via3.enclosed_by(m4) >= Enclosure(0.065)
 m4.enclosing(via3, 0.065).output(
     "m4:via3 enclosure",
@@ -623,34 +749,15 @@ m4.enclosing(via4, 0.19).output(
     "m4:via4 enclosure",
     "Minimum enclosure of m4 around via4: 0.19µm"
 )
+# via4.enclosed_by(cap2m) >= Enclosure(0.19)
+cap2m.enclosing(via4, 0.19).output(
+    "cap2m:via4 enclosure",
+    "Minimum enclosure of cap2m around via4: 0.19µm"
+)
 # via4.enclosed_by(m5) >= Enclosure(0.31)
 m5.enclosing(via4, 0.31).output(
     "m5:via4 enclosure",
     "Minimum enclosure of m5 around via4: 0.31µm"
-)
-# hvtp.width >= 0.38
-hvtp.width(0.38).output(
-    "hvtp width", "hvtp minimum width: 0.38µm"
-)
-# hvtp.space >= 0.38
-hvtp.space(0.38).output(
-    "hvtp space", "hvtp minimum space: 0.38µm"
-)
-# hvtp.area >= 0.265
-hvtp.with_area(nil, 0.265).output(
-    "hvtp area", "hvtp minimum area: 0.265µm"
-)
-# lvtn.width >= 0.38
-lvtn.width(0.38).output(
-    "lvtn width", "lvtn minimum width: 0.38µm"
-)
-# lvtn.space >= 0.38
-lvtn.space(0.38).output(
-    "lvtn space", "lvtn minimum space: 0.38µm"
-)
-# lvtn.area >= 0.265
-lvtn.with_area(nil, 0.265).output(
-    "lvtn area", "lvtn minimum area: 0.265µm"
 )
 # intersect(edge(difftap),edge(gate:hvmosgate)).length >= 0.5
 (difftap.edges&gate__hvmosgate.edges).with_length(nil, 0.5).output(
@@ -785,41 +892,76 @@ m5.enclosing(pad, 1.0).output(
     "m5:pad enclosure",
     "Minimum enclosure of m5 around pad: 1.0µm"
 )
-# resistor:poly_res.width >= 0.33
-resistor__poly_res.width(0.33).output(
-    "resistor__poly_res width", "resistor__poly_res minimum width: 0.33µm"
+# intersect(edge(body:resistor:pdiff_res),edge(indicators:resistor:pdiff_res)).length >= 0.33
+(body__resistor__pdiff_res.edges&indicators__resistor__pdiff_res.edges).with_length(nil, 0.33).output(
+    "(body__resistor__pdiff_res.edges&indicators__resistor__pdiff_res.edges) length",
+    "Minimum length of (body__resistor__pdiff_res.edges&indicators__resistor__pdiff_res.edges): 0.33µm"
 )
-# poly.remove(polyres).width >= 0.005
-(poly-polyres).width(0.005).output(
-    "(poly-polyres) width", "(poly-polyres) minimum width: 0.005µm"
+# diffres.remove(difftap).width >= 0.005
+(diffres-difftap).width(0.005).output(
+    "(diffres-difftap) width", "(diffres-difftap) minimum width: 0.005µm"
 )
-# resistor:active_res.width >= 0.33
-resistor__active_res.width(0.33).output(
-    "resistor__active_res width", "resistor__active_res minimum width: 0.33µm"
+# resistor:pdiff_res.enclosed_by(nsdm) >= Enclosure(0.125)
+nsdm.enclosing(resistor__pdiff_res, 0.125).output(
+    "nsdm:resistor__pdiff_res enclosure",
+    "Minimum enclosure of nsdm around resistor__pdiff_res: 0.125µm"
 )
-# difftap.remove(diffres).width >= 0.005
-(difftap-diffres).width(0.005).output(
-    "(difftap-diffres) width", "(difftap-diffres) minimum width: 0.005µm"
+# intersect(edge(body:resistor:ndiff_res),edge(indicators:resistor:ndiff_res)).length >= 0.33
+(body__resistor__ndiff_res.edges&indicators__resistor__ndiff_res.edges).with_length(nil, 0.33).output(
+    "(body__resistor__ndiff_res.edges&indicators__resistor__ndiff_res.edges) length",
+    "Minimum length of (body__resistor__ndiff_res.edges&indicators__resistor__ndiff_res.edges): 0.33µm"
+)
+# diffres.remove(difftap).width >= 0.005
+(diffres-difftap).width(0.005).output(
+    "(diffres-difftap) width", "(diffres-difftap) minimum width: 0.005µm"
+)
+# resistor:ndiff_res.enclosed_by(nsdm) >= Enclosure(0.125)
+nsdm.enclosing(resistor__ndiff_res, 0.125).output(
+    "nsdm:resistor__ndiff_res enclosure",
+    "Minimum enclosure of nsdm around resistor__ndiff_res: 0.125µm"
+)
+# intersect(edge(body:resistor:poly_res),edge(indicators:resistor:poly_res)).length >= 0.33
+(body__resistor__poly_res.edges&indicators__resistor__poly_res.edges).with_length(nil, 0.33).output(
+    "(body__resistor__poly_res.edges&indicators__resistor__poly_res.edges) length",
+    "Minimum length of (body__resistor__poly_res.edges&indicators__resistor__poly_res.edges): 0.33µm"
+)
+# polyres.remove(poly).width >= 0.005
+(polyres-poly).width(0.005).output(
+    "(polyres-poly) width", "(polyres-poly) minimum width: 0.005µm"
 )
 # difftap.enclosed_by(areaid_diode) >= Enclosure(0.005)
 areaid_diode.enclosing(difftap, 0.005).output(
     "areaid_diode:difftap enclosure",
     "Minimum enclosure of areaid_diode around difftap: 0.005µm"
 )
+# diode:ndiode.enclosed_by(nsdm) >= Enclosure(0.125)
+nsdm.enclosing(diode__ndiode, 0.125).output(
+    "nsdm:diode__ndiode enclosure",
+    "Minimum enclosure of nsdm around diode__ndiode: 0.125µm"
+)
 # difftap.enclosed_by(areaid_diode) >= Enclosure(0.005)
 areaid_diode.enclosing(difftap, 0.005).output(
     "areaid_diode:difftap enclosure",
     "Minimum enclosure of areaid_diode around difftap: 0.005µm"
+)
+# diode:pdiode.enclosed_by(psdm) >= Enclosure(0.125)
+psdm.enclosing(diode__pdiode, 0.125).output(
+    "psdm:diode__pdiode enclosure",
+    "Minimum enclosure of psdm around diode__pdiode: 0.125µm"
 )
 # space(intersect(licon,poly),psdm) >= 0.11
 (licon&poly).separation(psdm, 0.11, square).output(
     "(licon&poly):psdm spacing",
     "Minimum spacing between (licon&poly) and psdm: 0.11µm"
 )
-# space(licon,difftap) >= 0.19
-licon.separation(difftap, 0.19, square).output(
-    "licon:difftap spacing",
-    "Minimum spacing between licon and difftap: 0.19µm"
+# space(difftap,hvi) >= 0.18
+difftap.separation(hvi, 0.18, square).output(
+    "difftap:hvi spacing",
+    "Minimum spacing between difftap and hvi: 0.18µm"
+)
+# join(intersect(difftap,hvi)).space >= 0.3
+((difftap&hvi)).space(0.3).output(
+    "((difftap&hvi)) space", "((difftap&hvi)) minimum space: 0.3µm"
 )
 # space(difftap,nwm) >= 0.34
 difftap.separation(nwm, 0.34, square).output(
@@ -831,12 +973,8 @@ difftap.separation(poly, 0.075, square).output(
     "difftap:poly spacing",
     "Minimum spacing between difftap and poly: 0.075µm"
 )
-# space(difftap,hvi) >= 0.18
-difftap.separation(hvi, 0.18, square).output(
-    "difftap:hvi spacing",
-    "Minimum spacing between difftap and hvi: 0.18µm"
-)
-# join(intersect(difftap,hvi)).space >= 0.3
-((difftap&hvi)).space(0.3).output(
-    "((difftap&hvi)) space", "((difftap&hvi)) minimum space: 0.3µm"
+# space(licon,difftap) >= 0.19
+licon.separation(difftap, 0.19, square).output(
+    "licon:difftap spacing",
+    "Minimum spacing between licon and difftap: 0.19µm"
 )

@@ -24,7 +24,9 @@
 .subckt  sky130_fd_pr__pnp_05v5_W0p68L0p68 Collector Base Emitter
 + 
 .param  mult = 1.0
+*(mismatch parameter sky130_fd_pr__pnp_05v5_W0p68L0p68__bf_slope)
 + sky130_fd_pr__pnp_05v5_W0p68L0p68__bf_mm = {(19.35*dkbfpp*0.0)}
+*(mismatch parameter sky130_fd_pr__pnp_05v5_W0p68L0p68__is_slope)
 + sky130_fd_pr__pnp_05v5_W0p68L0p68__is_mm = {(1.5075e-018*dkispp*0.0)}
 qsky130_fd_pr__pnp_05v5_W0p68L0p68 Collector Base Emitter Collector sky130_fd_pr__pnp_05v5_W0p68L0p68__model
 .model sky130_fd_pr__pnp_05v5_W0p68L0p68__model pnp level = 1.0
@@ -64,6 +66,10 @@ qsky130_fd_pr__pnp_05v5_W0p68L0p68 Collector Base Emitter Collector sky130_fd_pr
 * limitations under the License.
 
 * SKY130 Spice File.
+* statistics {
+*   mismatch {
+*   }
+* }
 .param sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_slope = 0.0
 .param sky130_fd_pr__pnp_05v5_W3p40L3p40__is_slope = 0.0
 .param sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_slope = 0.0
@@ -77,9 +83,9 @@ qsky130_fd_pr__pnp_05v5_W0p68L0p68 Collector Base Emitter Collector sky130_fd_pr
 .subckt  sky130_fd_pr__pnp_05v5_W3p40L3p40 Collector Base Emitter
 + 
 .param  mult = 1.0
-+ sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_mm = {(16.603*dkbfpp5x*0.0)}
-+ sky130_fd_pr__pnp_05v5_W3p40L3p40__is_mm = {(7.1190e-018*1.00*dkispp5x*0.0)}
-+ sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_mm = {(5*0.0)}
++ sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_mm = {(16.603*dkbfpp5x*sky130_fd_pr__pnp_05v5_W3p40L3p40__bf_slope*0.45/sqrt(mult))}
++ sky130_fd_pr__pnp_05v5_W3p40L3p40__is_mm = {(7.1190e-018*1.00*dkispp5x*sky130_fd_pr__pnp_05v5_W3p40L3p40__is_slope*0.13/sqrt(mult))}
++ sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_mm = {(5*sky130_fd_pr__pnp_05v5_W3p40L3p40__xti_slope/sqrt(mult))}
 qsky130_fd_pr__pnp_05v5_W3p40L3p40 Collector Base Emitter Collector sky130_fd_pr__pnp_05v5_W3p40L3p40__model
 .model sky130_fd_pr__pnp_05v5_W3p40L3p40__model pnp level = 1.0
 * General Parameters

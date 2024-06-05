@@ -1,0 +1,12 @@
+* and3_x1
+* and3_x1
+.subckt and3_x1 vdd vss q i0 i1 i2
+Mi0_nmos nq i0 _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.84um
+Mi0_pmos nq i0 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.84um
+Mi1_nmos _net0 i1 _net1 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.84um
+Mi1_pmos vdd i1 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.84um
+Mi2_nmos _net1 i2 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=0.84um
+Mi2_pmos nq i2 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=0.84um
+Mn_pd vss nq q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.735um
+Mq_pu vdd nq q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.295um
+.ends and3_x1

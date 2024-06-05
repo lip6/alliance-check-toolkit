@@ -1,11 +1,11 @@
 * GateDecode
-* nand2_x0
-.subckt nand2_x0 vdd vss nq i0 i1
-Mn0 vss i0 int0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
-Mp0 vdd i0 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
-Mn1 int0 i1 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.0um
-Mp1 nq i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
-.ends nand2_x0
+* nand2_x1
+.subckt nand2_x1 vdd vss nq i0 i1
+Mi0_nmos vss i0 _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.535um
+Mi0_pmos vdd i0 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.095um
+Mi1_nmos _net0 i1 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.535um
+Mi1_pmos nq i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.095um
+.ends nand2_x1
 * LevelUp
 .subckt LevelUp vdd iovdd vss i o
 Mn_i_inv i_n i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.46um
@@ -17,23 +17,28 @@ Mp_lvld lvld lvld_n iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=0.
 Mn_lvld_n_inv vss lvld_n o vss sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=2.4um
 Mp_lvld_n_inv iovdd lvld_n o iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=4.4um
 .ends LevelUp
-* nor2_x0
-.subckt nor2_x0 vdd vss nq i0 i1
-Mn0 vss i0 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
-Mp0 vdd i0 int0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
-Mn1 nq i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
-Mp1 int0 i1 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.0um
-.ends nor2_x0
+* nor2_x1
+.subckt nor2_x1 vdd vss nq i0 i1
+Mi0_nmos vss i0 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.535um
+Mi0_pmos vdd i0 _net0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.095um
+Mi1_nmos nq i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.535um
+Mi1_pmos _net0 i1 nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.095um
+.ends nor2_x1
 * inv_x1
 .subckt inv_x1 vdd vss i nq
-Mn vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.8um
-Mp vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.6um
+Mnmos vss i nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.535um
+Mpmos vdd i nq vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.095um
 .ends inv_x1
+* tie
+.subckt tie vdd vss
+
+.ends tie
 * GateDecode
-.subckt GateDecode vdd vss iovdd d de ngate pgate
-Xoe_inv vdd vss de de_n inv_x1
-Xngate_nor vdd vss ngate_core d de_n nor2_x0
+.subckt GateDecode vdd vss iovdd core en ngate pgate
+Xtieinst vdd vss tie
+Xen_inv vdd vss en en_n inv_x1
+Xngate_nor vdd vss ngate_core core en_n nor2_x1
 Xngate_levelup vdd iovdd vss ngate_core ngate LevelUp
-Xpgate_nand vdd vss pgate_core d de nand2_x0
+Xpgate_nand vdd vss pgate_core core en nand2_x1
 Xpgate_levelup vdd iovdd vss pgate_core pgate LevelUp
 .ends GateDecode
