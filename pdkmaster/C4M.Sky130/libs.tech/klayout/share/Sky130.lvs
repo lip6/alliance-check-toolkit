@@ -7,7 +7,10 @@ report_lvs(ENV["REPORT_FILE"])
 flat
 
 # Define layers
+dnm = input(64, 18)
 nwm = input(64, 20)
+hvtp = input(78, 44)
+lvtn = input(125, 44)
 nsdm = input(93, 44)
 psdm = input(94, 20)
 hvi = input(75, 20)
@@ -26,12 +29,14 @@ m1 = input(68, 20)
 m2_pin = input(69, 16)
 m2_block = input(100, 80)
 m2 = input(69, 20)
+capm = input(89, 44)
 m3_pin = input(70, 16)
 m3_block = input(100, 100)
 m3 = input(70, 20)
 m4_pin = input(71, 16)
 m4_block = input(100, 120)
 m4 = input(71, 20)
+cap2m = input(97, 44)
 m5_pin = input(72, 16)
 m5_block = input(100, 140)
 m5 = input(72, 20)
@@ -47,36 +52,45 @@ via = input(68, 44)
 via2 = input(69, 44)
 via3 = input(70, 44)
 via4 = input(71, 44)
-hvtp = input(78, 44)
-lvtn = input(125, 44)
 areaid_sc = input(81, 4)
 pad = input(76, 20)
-areaid_diode = input(81, 23)
 pnp = input(82, 44)
+areaid_diode = input(81, 23)
+polyres = input(66, 13)
 diffres = input(65, 13)
 npn = input(82, 20)
-polyres = input(66, 13)
 prBoundary = input(235, 4)
 substrate__Sky130 = (extent.sized(0.34)-nwm)
-difftap__conn = (difftap-(poly+diffres))
+difftap__conn = (difftap-(diffres+poly))
 difftap__conn__nsdm = (difftap__conn&nsdm)
 difftap__conn__psdm = (difftap__conn&psdm)
+difftap__conn__lvtn = (difftap__conn&lvtn)
+difftap__conn__hvtp = (difftap__conn&hvtp)
 poly__conn = (poly-polyres)
 gate__hvmosgate = (difftap&poly__conn&hvi)
-gate__mosgate = (difftap&poly__conn&(extent.sized(0.34)-(areaid_sc+hvi)))
+gate__mosgate = (difftap&poly__conn&(extent.sized(0.34)-(hvi+areaid_sc)))
 gate__mosgate_sc = (difftap&poly__conn&areaid_sc&(extent.sized(0.34)-hvi))
-gate__mosfet__nfet_01v8 = (gate__mosgate&substrate__Sky130&nsdm)
-gate__mosfet__nfet_01v8_lvt = (gate__mosgate&substrate__Sky130&nsdm&lvtn)
-gate__mosfet__nfet_01v8_sc = (gate__mosgate_sc&substrate__Sky130&nsdm)
-gate__mosfet__nfet_g5v0d10v5 = (gate__hvmosgate&substrate__Sky130&nsdm)
-gate__mosfet__pfet_01v8 = (gate__mosgate&nwm&psdm)
-gate__mosfet__pfet_01v8_hvt = (gate__mosgate&nwm&psdm&hvtp)
-gate__mosfet__pfet_01v8_lvt = (gate__mosgate&nwm&psdm&lvtn)
-gate__mosfet__pfet_g5v0d10v5 = (gate__hvmosgate&nwm&psdm)
+gate__mosfet__nfet_01v8 = ((gate__mosgate&nsdm)-nwm)
+gate__mosfet__nfet_01v8_lvt = ((gate__mosgate&nsdm&lvtn)-nwm)
+gate__mosfet__nfet_01v8_sc = ((gate__mosgate_sc&nsdm)-nwm)
+gate__mosfet__nfet_g5v0d10v5 = ((gate__hvmosgate&nsdm)-nwm)
+gate__mosfet__pfet_01v8 = (gate__mosgate&psdm&nwm)
+gate__mosfet__pfet_01v8_hvt = (gate__mosgate&psdm&hvtp&nwm)
+gate__mosfet__pfet_01v8_lvt = (gate__mosgate&psdm&lvtn&nwm)
+gate__mosfet__pfet_g5v0d10v5 = (gate__hvmosgate&psdm&nwm)
+resistor__pdiff_res = (difftap&diffres&nsdm)
+indicators__resistor__pdiff_res = (diffres)
+body__resistor__pdiff_res = (resistor__pdiff_res&indicators__resistor__pdiff_res)
+resistor__ndiff_res = (difftap&diffres&nsdm)
+indicators__resistor__ndiff_res = (diffres)
+body__resistor__ndiff_res = (resistor__ndiff_res&indicators__resistor__ndiff_res)
 resistor__poly_res = (poly&polyres)
-resistor__active_res = (difftap&diffres)
-diode__pdiode = (difftap&areaid_diode&psdm)
+indicators__resistor__poly_res = (polyres)
+body__resistor__poly_res = (resistor__poly_res&indicators__resistor__poly_res)
+mimcap__MIM_m3_capm = capm
+mimcap__MIM_m4_cap2m = cap2m
 diode__ndiode = (difftap&areaid_diode&nsdm)
+diode__pdiode = (difftap&areaid_diode&psdm)
 
 # Connectivity
 # connect(substrate:Sky130,wafer)
@@ -91,6 +105,10 @@ connect(difftap__conn__nsdm, nwm)
 connect(difftap__conn, difftap__conn__psdm)
 # connect(difftap__conn:psdm,substrate:Sky130)
 connect(difftap__conn__psdm, substrate__Sky130)
+# connect(difftap__conn,difftap__conn:lvtn)
+connect(difftap__conn, difftap__conn__lvtn)
+# connect(difftap__conn,difftap__conn:hvtp)
+connect(difftap__conn, difftap__conn__hvtp)
 # connect(poly,poly.pin)
 connect(poly, poly_pin)
 # connect(li,li.pin)
@@ -122,35 +140,42 @@ connect(via, m2)
 connect(m2, via2)
 # connect(via2,m3)
 connect(via2, m3)
-# connect(m3,via3)
+# connect((m3,capm),via3)
 connect(m3, via3)
+connect(capm, via3)
 # connect(via3,m4)
 connect(via3, m4)
-# connect(m4,via4)
+# connect((m4,cap2m),via4)
 connect(m4, via4)
+connect(cap2m, via4)
 # connect(via4,m5)
 connect(via4, m5)
 
 # Resistors
+# pdiff_res
+extract_devices(resistor("pdiff_res", 197.0), {
+    "R" => resistor__pdiff_res, "C" => difftap__conn,
+})
+same_device_classes("pdiff_res", "RES")
+# ndiff_res
+extract_devices(resistor("ndiff_res", 120.0), {
+    "R" => resistor__ndiff_res, "C" => difftap__conn,
+})
+same_device_classes("ndiff_res", "RES")
 # poly_res
 extract_devices(resistor("poly_res", 48.2), {
     "R" => resistor__poly_res, "C" => poly__conn,
 })
 same_device_classes("poly_res", "RES")
-# active_res
-extract_devices(resistor("active_res", 200.0), {
-    "R" => resistor__active_res, "C" => difftap__conn,
-})
-same_device_classes("active_res", "RES")
 
 # Diodes
-# pdiode
-extract_devices(diode("sky130_fd_pr__diode_pd2nw_05v5"), {
-    "P" => diode__pdiode, "N" => nwm, "tA" => difftap__conn
-})
 # ndiode
 extract_devices(diode("sky130_fd_pr__diode_pw2nd_05v5"), {
     "P" => substrate__Sky130, "N" => diode__ndiode, "tC" => difftap__conn
+})
+# pdiode
+extract_devices(diode("sky130_fd_pr__diode_pd2nw_05v5"), {
+    "P" => diode__pdiode, "N" => nwm, "tA" => difftap__conn
 })
 
 # Transistors

@@ -35,9 +35,12 @@ def _load():
 
     lib = Library.create(rootlib, 'MacroLib')
     new_cells = {
+        'NPN_05v5_W1u00L1u00': Cell.create(lib, 'NPN_05v5_W1u00L1u00'),
+        'NPN_05v5_W1u00L2u00': Cell.create(lib, 'NPN_05v5_W1u00L2u00'),
+        'PNP_05v5_W0u68L0u68': Cell.create(lib, 'PNP_05v5_W0u68L0u68'),
         'PNP_05v5_W3u40L3u40': Cell.create(lib, 'PNP_05v5_W3u40L3u40'),
     }
-    # Export failed for cell 'PNP_05v5_W3u40L3u40'
+    # Export failed for cell 'NPN_05v5_W1u00L1u00'# Export failed for cell 'NPN_05v5_W1u00L2u00'# Export failed for cell 'PNP_05v5_W0u68L0u68'# Export failed for cell 'PNP_05v5_W3u40L3u40'
     af.wrapLibrary(lib, 0)
 
     return lib
