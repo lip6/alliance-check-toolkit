@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import pathlib
 import traceback
 from   coriolis.Hurricane  import DbU, Breakpoint, Cell
 from   coriolis            import CRL
@@ -14,6 +15,15 @@ from   coriolis.plugins.block.spares        import Spares
 from   coriolis.plugins.core2chip.niolib    import CoreToChip
 from   coriolis.plugins.chip.configuration  import ChipConf
 from   coriolis.plugins.chip.chip           import Chip
+
+
+GuardRing = True
+
+checkToolkit=pathlib.Path('../../..')
+pdkDir          = checkToolkit / 'dks' / 'gf180mcu_nsx2' / 'libs.tech'
+coriolisTechDir = pdkDir / 'coriolis'
+sys.path.append( coriolisTechDir.as_posix() )
+from gf180mcu_nsx2.guardring import addGuardRing
 
 
 af = CRL.AllianceFramework.get()
@@ -69,6 +79,8 @@ def scriptMain ( **kw ):
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
         rvalue = blockBuilder.doPnR()
+        if GuardRing :
+            addGuardRing(cell)
         blockBuilder.save()
     except Exception as e:
         catch( e )
