@@ -161,31 +161,31 @@ table mbk_to_rds_segment
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
   ndif    rds_activ  vw    0.0     0.0    .0  all\
-          #rds_nimp   vw    0.125   0.250  .0  all\
-          rds_ndif   vw    0.0     0.0    .0  ext
+          rds_nimp   vw    0.0     0.0    .0  all\
+          rds_ndif   vw    0.0     0.0    .0  all
                                                                                                                   
   pdif    rds_activ  vw    0.0     0.0    .0  all\
-          #rds_pimp   vw    0.125   0.45   .0  all\
-          rds_pdif   vw    0.0     0.0    .0  ext
+          rds_pimp   vw    0.0     0.0    .0  all\
+          rds_pdif   vw    0.0     0.0    .0  all
                                                                                                                   
-  ntie    rds_ntie   vw    0.145   0.000  .0  all\
-          rds_nimp   vw    0.270   0.250  .0  all\
-          rds_nwell  vw    0.460   0.510  .0  all
+  ntie    rds_ntie   vw    0.145  -0.110  .0  all\
+          rds_nimp   vw    0.270   0.100  .0  all\
+          rds_nwell  vw    0.460   0.490  .0  all
                                                                                                                   
-  ptie    rds_ptie   vw    0.145   0.000  .0  all\
-          rds_pimp   vw    0.270   0.250  .0  all
+  ptie    rds_ptie   vw    0.145  -0.110  .0  all\
+          rds_pimp   vw    0.270   0.100  .0  all
 #          rds_pwell  vw    0.460   0.510  .0  all
                                                                                                                   
+                                                                                                                  
   ntrans  rds_poly   vw    0.13   -0.01   .0  all\
-          rds_activ  vw    0.0     0.50   .0  drc\
-          rds_ndif   lcw   0.0     0.25   -0.01 ext\
-          rds_ndif   rcw   0.0     0.25   -0.01 ext
+          rds_activ  vw    0.0     0.46   .0  drc\
+          rds_ndif   lcw   0.0     0.23  -0.01  ext\
+          rds_ndif   rcw   0.0     0.23  -0.01  ext
                                                                                                                   
   ptrans  rds_poly   vw    0.13   -0.01   .0  all\
-          rds_activ  vw    0.0     0.50   .0  drc\
-          #rds_pimp   vw    0.125   0.350  .0  all\
-          rds_pdif   lcw   0.0     0.25   -0.01 ext\
-          rds_pdif   rcw   0.0     0.25   -0.01 ext
+          rds_activ  vw    0.0     0.46   .0  drc\
+          rds_pdif   lcw   0.0     0.23  -0.01  ext\
+          rds_pdif   rcw   0.0     0.23  -0.01  ext
                                                                                                                   
   poly    rds_poly   vw    0.0    -0.01   .0  all
 
