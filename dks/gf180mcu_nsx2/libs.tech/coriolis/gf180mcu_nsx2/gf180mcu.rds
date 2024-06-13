@@ -192,9 +192,9 @@ table mbk_to_rds_segment
                                                                                                                   
   poly    rds_poly   vw    0.00    0.07   .0  all
 
-  alu1    rds_alu1   vw    0.0     0.0     .0  all
-  calu1   rds_alu1   vw    0.0     0.0     .0  all
-  talu1   rds_talu1  vw    0.0     0.0     .0  all
+  alu1    rds_alu1   vw    0.01    0.02    .0  all
+  calu1   rds_alu1   vw    0.01    0.02    .0  all
+  talu1   rds_talu1  vw    0.01    0.02    .0  all
 
   alu2    rds_alu2   vw    0.11    0.0     .0  all
   calu2   rds_alu2   vw    0.11    0.0     .0  all
@@ -223,8 +223,8 @@ table mbk_to_rds_reference
 # -------------------------------------------------------------------
 # mbk_name  rds_name  width
 # -------------------------------------------------------------------
-  ref_ref  rds_ref    0.330
-  ref_con  rds_ref    0.330
+  ref_ref  rds_ref    0.390
+  ref_con  rds_ref    0.390
 end
 
 table mbk_to_rds_via
@@ -235,7 +235,7 @@ table mbk_to_rds_via
 # licon.7 0.170+0.120*2
   cont_body_n \
     rds_cont        0.220  all\
-    rds_alu1        0.340  all\
+    rds_alu1        0.390  all\
 #    rds_nimp        0.430  all\
     rds_ntie        0.360  all
 
@@ -243,21 +243,21 @@ table mbk_to_rds_via
 # difftap.5
   cont_body_p \
     rds_cont        0.220  all\
-    rds_alu1        0.340  all\
+    rds_alu1        0.390  all\
     rds_pimp        0.360  all\
     rds_ptie        0.360  all
 
 # licon.5c
   cont_dif_n  \
     rds_cont        0.220  all\
-    rds_alu1        0.340  all\
+    rds_alu1        0.390  all\
     rds_activ       0.360  drc\
     rds_ndif        0.360  ext
 
 # licon.5c
   cont_dif_p  \
     rds_cont        0.220  all\
-    rds_alu1        0.340  all\
+    rds_alu1        0.390  all\
     rds_activ       0.360  drc\
     rds_pimp        0.360  all\
     rds_pdif        0.360  ext
@@ -266,7 +266,7 @@ table mbk_to_rds_via
   cont_poly  \
     rds_cont        0.220  all\
     rds_poly        0.360  all\
-    rds_alu1        0.340  all
+    rds_alu1        0.390  all
 
 
 
@@ -339,11 +339,11 @@ table mbk_to_rds_turnvia
 # -------------------------------------------------------------------
 # mbk_name rds_name dwr mode
 # -------------------------------------------------------------------
-  cont_turn1 rds_alu1    0.05 all
-  cont_turn2 rds_alu2    0.05 all
-  cont_turn3 rds_alu3    0.05 all
-  cont_turn4 rds_alu4    0.05 all
-  cont_turn5 rds_alu5    0.05 all
+  cont_turn1 rds_alu1    0.02 all
+  cont_turn2 rds_alu2    0.02 all
+  cont_turn3 rds_alu3    0.02 all
+  cont_turn4 rds_alu4    0.02 all
+  cont_turn5 rds_alu5    0.02 all
 end
 
 table lynx_bulk_implicit

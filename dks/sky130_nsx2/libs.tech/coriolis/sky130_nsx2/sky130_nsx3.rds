@@ -189,9 +189,9 @@ table mbk_to_rds_segment
                                                                                                                   
   poly    rds_poly   vw    0.0    -0.01   .0  all
 
-  alu1    rds_alu1   vw    0.00    0.01   .0  all
-  calu1   rds_alu1   vw    0.00    0.01   .0  all
-  talu1   rds_talu1  vw    0.00    0.01   .0  all
+  alu1    rds_alu1   vw    0.00    0.02   .0  all
+  calu1   rds_alu1   vw    0.00    0.02   .0  all
+  talu1   rds_talu1  vw    0.00    0.02   .0  all
 
   alu2    rds_alu2   vw    0.11    0.0    .0  all
   calu2   rds_alu2   vw    0.11    0.0    .0  all
@@ -323,11 +323,11 @@ table mbk_to_rds_turnvia
 # -------------------------------------------------------------------
 # mbk_name rds_name dwr mode
 # -------------------------------------------------------------------
-  cont_turn1 rds_alu1    0.05 all
-  cont_turn2 rds_alu2    0.05 all
-  cont_turn3 rds_alu3    0.05 all
-  cont_turn4 rds_alu4    0.05 all
-  cont_turn5 rds_alu5    0.05 all
+  cont_turn1 rds_alu1    0.02 all
+  cont_turn2 rds_alu2    0.02 all
+  cont_turn3 rds_alu3    0.02 all
+  cont_turn4 rds_alu4    0.02 all
+  cont_turn5 rds_alu5    0.02 all
 end
 
 table lynx_bulk_implicit
