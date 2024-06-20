@@ -153,19 +153,19 @@ table mbk_to_rds_segment
 # ----------------------------------------------------------------------------------
 
   nwell   rds_nwell  vw    0.460   0.280  .0  all\
-          rds_pimp   vw    0.0   -0.80     .320  all \
-          rds_nimp   vw    0.0   -1.80     4.150  all 
+          rds_pimp   vw    0.0   -0.80     .275  all \
+          rds_nimp   vw    0.0   -1.80     4.15  all 
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
 #  pwell   rds_pwell  vw    0.460   0.280  .0  all
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
   ndif    rds_activ  vw    0.0     0.0    .0  all\
-          rds_nimp   vw    0.0     0.0    .0  all\
+#          rds_nimp   vw    0.0     0.0    .0  all\
           rds_ndif   vw    0.0     0.0    .0  all
                                                                                                                   
   pdif    rds_activ  vw    0.0     0.0    .0  all\
-          rds_pimp   vw    0.0     0.0    .0  all\
+#          rds_pimp   vw    0.0     0.0    .0  all\
           rds_pdif   vw    0.0     0.0    .0  all
                                                                                                                   
   ntie    rds_ntie   vw    0.145  -0.110  .0  all\
