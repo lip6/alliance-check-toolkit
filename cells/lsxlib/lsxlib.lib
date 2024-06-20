@@ -19118,6 +19118,11 @@ library (lsxlib.lib) {
         pin (q) {
             direction : output ;
             capacitance : 9.03 ;
+            function : "IQ" ;
+            }
+            ff(IQ,IQN) {
+            next_state : "i";
+            clocked_on : "ck";
         }
     }
 
@@ -19175,6 +19180,11 @@ library (lsxlib.lib) {
         pin (q) {
             direction : output ;
             capacitance : 9.03 ;
+            function : "IQ" ;
+        }
+        ff(IQ,IQN) {
+            next_state : "(cmd & i1) + (!(cmd) & i0)";
+            clocked_on : "ck";
         }
     }
 
@@ -19256,7 +19266,13 @@ library (lsxlib.lib) {
         pin (q) {
             direction : output ;
             capacitance : 8.93 ;
+            function : "IQ" ;
+            }
+            ff(IQ,IQN) {
+                next_state : "(!(cmd0) & i0) | (cmd0 & cmd1 & i1) | (!(cmd1) + & i2))" ;
+                clocked_on : "ck" ;
         }
+
     }
 
     cell (xr2_x1) {
