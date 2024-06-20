@@ -1,5 +1,5 @@
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 /*
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
@@ -38,10 +38,10 @@ module decadj ( p_reset , m_clock , in , sub , out , adj );
     ((_net_5)?({(~sub),tmp}):5'b0);
 endmodule
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 /*
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
@@ -182,10 +182,10 @@ decadj hi (.m_clock(m_clock), .p_reset( p_reset), .adj(_hi_adj), .out(_hi_out), 
     (((_net_39|_net_21))?(_hi_out[4]):1'b0);
 endmodule
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 /*
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
@@ -340,10 +340,10 @@ cpa8 adder (.m_clock(m_clock), .p_reset( p_reset), .sub(_adder_sub), .add(_adder
    assign  c = (_net_69|(_net_67|(_net_65|(_net_63|(_net_61|(_net_60|(_net_59|(_net_52|_net_47))))))));
 endmodule
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 /*
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
@@ -375,10 +375,10 @@ module inc16 ( p_reset , m_clock , in , ci , out , co , dox , thr );
     ((dox)?(res[16]):1'b0);
 endmodule
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
 /*
  DO NOT USE ANY PART OF THIS FILE FOR COMMERCIAL PRODUCTS. 
@@ -2399,5 +2399,5 @@ else if ((_net_791)|(_net_784)|(_net_776)|(_net_773)|(_net_772)|((_net_774|_net_
 end
 endmodule
 
-/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Mon Jun  3 09:43:16 2024
+/*Produced by NSL Core(version=20230222), IP ARCH, Inc. Wed Jun 19 21:12:47 2024
  Licensed to :EVALUATION USER*/
