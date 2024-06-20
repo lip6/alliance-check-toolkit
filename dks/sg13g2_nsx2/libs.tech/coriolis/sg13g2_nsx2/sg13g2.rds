@@ -274,29 +274,29 @@ table mbk_to_rds_via
 # m1.5
   cont_via    \
     rds_via1        0.190  all\
-    rds_alu1        0.200  all\
-    rds_alu2        0.200  all
+    rds_alu1        0.300  all\
+    rds_alu2        0.380  all
 
 # via.1b
 # via.5b
 # m2.5
   cont_via2   \
     rds_via2        0.190  all\
-    rds_alu2        0.200  all\
-    rds_alu3        0.200  all
+    rds_alu2        0.380  all\
+    rds_alu3        0.380  all
 
 # via.1b
 # via.5b
 # m2.5
   cont_via3   \
     rds_via3        0.190  all\
-    rds_alu3        0.200  all\
-    rds_alu4        0.200  all
+    rds_alu3        0.380  all\
+    rds_alu4        0.380  all
 
   cont_via4   \
     rds_via4        0.190  all\
-    rds_alu4        0.200  all\
-    rds_alu5        0.200  all
+    rds_alu4        0.380  all\
+    rds_alu5        0.380  all
 end
 
 table mbk_to_rds_bigvia_hole
