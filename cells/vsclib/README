@@ -1,0 +1,21 @@
+# 9 track standard cell library with height of
+# 72 lambda and a pitch of 8 lambda. Lambda
+# values for different technologies are:
+
+# techno  lambda  snap grid
+# 0.35um  0.175   0.025
+# 0.25um  0.125   0.025
+# 0.18um  0.08    0.01
+# 0.13um  0.055   0.005
+# 0.09um  0.04    0.005
+
+# vsclib with ALU1 used for metal-1 requiring an
+# 8 lambda pitch and POLY2 for metal-1 requiring
+# a 7 lambda pitch. The 8 lambda pitch applies
+# only for ALU1-ALU1 separations.
+
+# TALU1 is used as an obstacle layer for ALU1,
+# but is currently ignored by the Alliance tools.
+
+# TALU8 is used as a drawn and named abutment
+# box.

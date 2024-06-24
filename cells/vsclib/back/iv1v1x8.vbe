@@ -1,0 +1,26 @@
+ENTITY iv1v1x8 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 4032;   
+  CONSTANT cin_a         : NATURAL := 19;     
+  CONSTANT rdown_a_z     : NATURAL := 340;    
+  CONSTANT rup_a_z       : NATURAL := 570;    
+  CONSTANT tphl_a_z      : NATURAL := 28;     
+  CONSTANT tplh_a_z      : NATURAL := 37;     
+  CONSTANT transistors   : NATURAL := 8       
+);
+PORT (
+  a	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END iv1v1x8;
+
+ARCHITECTURE behaviour_data_flow OF iv1v1x8 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on iv1v1x8"
+  SEVERITY WARNING;
+  z <= not (a) after 44 ps;
+END;

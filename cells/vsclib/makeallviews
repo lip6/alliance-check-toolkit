@@ -1,0 +1,222 @@
+#!/bin/bash
+#
+# script to create all cell views. Using Alliance version 20060509 and
+# Magic version 7.5.95 with Magic compiled with the TCL option
+#
+if test $# -eq 0
+then
+  echo "# Usage ./makeallviews cell_name (without AP extension). Please supply cell_name."
+  exit 1
+fi
+if test -f "$1.ap"
+then
+dir=$PWD
+lib=vsc
+
+echo "#"
+echo "# MAKING ALL VIEWS FOR CELL $1 in ${lib}lib" 1>&2
+echo "#"
+echo "# Write ${lib}lib013 CIF from Alliance"
+
+export DREAL_TECHNO_NAME=../../../alliance/etc/s013.dreal
+export GRAAL_TECHNO_NAME=../../../alliance/etc/s200.graal
+export RDS_TECHNO_NAME=../../../alliance/etc/vsc013.rds
+export MBK_CATA_LIB=.
+export MBK_TARGET_LIB=.
+#../../../alliance/bin/make_al $1
+RDS_IN=cif
+RDS_OUT=cif
+rm -f $1.cif
+../../../alliance/bin/s2r_any013 $1 >/dev/null
+s2r -p $1 >/dev/null
+../../../alliance/bin/touch_alliance_cif $1
+cp $1.cif ../../../alliance/cif/${lib}lib013
+../../../alliance/bin/grep_ref_boxes $1 ../../../magic/etc/${lib}lib/$1_${lib}013.ref
+grep '^4A' $1.cif > ../../../magic/etc/${lib}lib/$1_${lib}013.ab
+
+echo "# Write spice deck using ${lib}013 values"
+
+../../../alliance/bin/any013_make_spice $1 ${lib}lib
+grep subckt $1.spi > ../../../magic/etc/${lib}lib/$1.subckt
+cp $1.spi ../../../alliance/subckt/${lib}lib013
+
+echo "# Write ${lib}lib200 CIF from Alliance for Magic"
+
+export DREAL_TECHNO_NAME=../../../alliance/etc/s200.dreal
+export RDS_TECHNO_NAME=../../../alliance/etc/vsc200c.rds
+RDS_IN=cif
+RDS_OUT=cif
+rm -f $1.cif
+../../../alliance/bin/s2r_any200 $1 >/dev/null
+s2r -p $1 >/dev/null
+../../../alliance/bin/touch_alliance_cif $1
+cp $1.cif ../../../alliance/cif/${lib}lib200
+../../../alliance/bin/grep_ref_boxes $1 ../../../magic/etc/${lib}lib/$1_${lib}200.ref
+grep '^4A' $1.cif > ../../../magic/etc/${lib}lib/$1_${lib}200.ab
+
+../../../alliance/bin/make_magic_cif $1
+cp $1.cif ../../../magic/cells/${lib}lib
+
+rm -f $1.al
+rm -f $1.spi
+rm -f $1.cif
+rm -f $1.gds
+
+cd ../../../magic/cells/${lib}lib
+
+#
+# Script update 22-NOV-07 to run with Magic compiled with TCL. The
+# actual version of Magic being used is the 7.5.95 release.
+#
+# xhost + command needed for -noconsole option to be accepted
+#
+xhost + 1>/dev/null
+
+echo
+echo "# Read ${lib}lib200 CIF into Magic"
+magic -T../../../magic/etc/pharosc -dnull -noconsole <<EOF >/dev/null 2>&1
+;cif istyle pharosc200(1um-${lib}lib)
+;cif read $1.cif
+;load $1
+;cif ostyle pharosc200(1um-${lib}lib)
+;drc style pharosc200(1um-${lib}lib)
+;drc catchup
+;drc count total
+;cif ostyle pharosc013(55nm-${lib}lib)
+;drc style pharosc013(55nm-${lib}lib)
+;drc catchup
+;drc count total
+;save
+;quit
+EOF
+if [ "$(grep checkpaint $1.mag)" -o "$(grep error $1.mag)" != "" ]
+then
+  echo "#"
+  echo "# WARNING: Cell "$1" in ${lib}lib has DRC errors" 1>&2
+  echo "#"
+fi
+
+echo "# Write ${lib}lib200 CIF and GDS files from Magic"
+magic -T../../../magic/etc/pharosc -dnull -noconsole <<EOF >/dev/null 2>&1
+;load $1
+;cif ostyle pharosc200(1um-${lib}lib)
+;cif write $1
+;gds labels
+;gds write $1
+;quit
+EOF
+
+../../../alliance/bin/make_alliance_cif $1 ../../../alliance/cif/${lib}lib200/$1 ../../../magic/etc/${lib}lib/$1_${lib}200.ref
+cp $1.cif ../../../magic/cif/${lib}lib200
+cp $1.gds ../../../magic/gds/${lib}lib200
+
+echo "# Write ${lib}lib013 CIF and GDS files from Magic"
+magic -T../../../magic/etc/pharosc -dnull -noconsole <<EOF >/dev/null 2>&1
+;load $1
+;cif ostyle pharosc013(55nm-${lib}lib)
+;cif write $1
+;gds labels
+;gds write $1
+;quit
+EOF
+cp $1.cif $1.cif_013
+
+../../../alliance/bin/make_alliance_cif $1 ../../../alliance/cif/${lib}lib013/$1 ../../../magic/etc/${lib}lib/$1_${lib}013.ref
+cp $1.cif ../../../magic/cif/${lib}lib013
+#Make the gds from the cif instead of using Magic gds because of REF geometries
+#cp $1.gds ../../../magic/gds/${lib}lib013
+cd ../../../magic/cif/${lib}lib013
+export DREAL_TECHNO_NAME=../../../alliance/etc/s013.dreal
+export RDS_TECHNO_NAME=../../../alliance/etc/vsc013.rds
+export RDS_IN=cif
+export RDS_OUT=gds
+flatrds -t $1 $1 >/dev/null
+mv -f $1.gds ../../../magic/gds/${lib}lib013
+cd ../../../magic/cells/${lib}lib
+
+cp $1.cif_013 $1.cif
+cp vugrid.cif_013 vugrid.cif
+echo "# Extract 0.13um SPI file from Magic"
+magic -T../../../magic/etc/pharosc -dnull -noconsole <<EOF >/dev/null 2>&1
+;cif istyle pharosc013-55nm
+;cif read vugrid.cif
+;flatten -nolabels grid
+;cellname delete (UNNAMED)
+;cellname delete vugrid
+;cif read $1.cif
+;cellname delete (UNNAMED)
+;load $1
+;getcell grid child 0 0 parent 0 0
+;flatten temp
+;cellname delete $1
+;cellname rename temp $1
+;load $1
+# 1) Extract caps only to
+#    cell.ext
+;extract style pharosc013-55nm
+;extract do capacitance
+;extract do coupling
+;extract do adjust
+;extract do resistance
+;extract all
+# STEPS 2-4 FOR EXTRACTED RESISTANCES DON'T WORK
+# 2) Convert extracted file to sim format to
+#    cell.sim and cell.nodes
+#;ext2sim labels on
+#;ext2sim cthresh 0.001
+#;ext2sim rthresh 1
+#;ext2sim merge none
+#;ext2sim extresist off
+#;ext2sim -y 3
+#    cell.ext,sim and cell,ext.nodes
+#;ext2sim extresist on
+#;ext2sim -y 3
+# 3) Patch the extraction .ext files with detailed route resistance information
+#    cell.res.lump and cell.res.ext
+#;extresist tolerance 1000
+#;extresist simplify on
+#;extresist extout on
+#;extresist lumped on
+#;extresist all
+# 4) Convert to spice format
+#;ext2spice extresist on
+#;ext2spice resistor tee on
+#
+;ext2spice cthresh 0.001
+;ext2spice rthresh 1
+;ext2spice merge none
+;ext2spice -f spice3 -y 3 -d
+;quit
+EOF
+
+echo "# Convert Magic SPICE output to SPI subckt"
+../../../alliance/bin/spice2spi_013 $1 ${lib}lib >/dev/null
+cp $1.spi ../../../magic/subckt/${lib}lib013
+
+rm -f $1.cif*
+rm -f $1.gds
+rm -f $1.spice
+rm -f $1.spi
+rm -f $1.ext
+
+cd $dir
+
+echo "# Create wsclib files"
+cd ../wsclib
+./convert_vsc_wsc $1 >/dev/null
+./makeallviews $1
+cd $dir
+
+echo "# Create vtclib files"
+cd ../vtclib
+./convert_vsc_vtc $1 >/dev/null
+echo "# Create wtclib files"
+cd ../wtclib
+./convert_wsc_wtc $1 >/dev/null
+
+cd $dir
+
+else
+  echo "# Usage ./makeallviews cell_name (without AP extension). cell_name supplied does not exist."
+  exit 1
+fi

@@ -1,0 +1,56 @@
+ENTITY bsi2v2x1 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 8064;   
+  CONSTANT cin_s         : NATURAL := 11;     
+  CONSTANT cin_a1        : NATURAL := 5;      
+  CONSTANT cin_a0        : NATURAL := 4;      
+  CONSTANT rdown_s_z0    : NATURAL := 2830;   
+  CONSTANT rdown_s_z1    : NATURAL := 2830;   
+  CONSTANT rdown_a1_z0   : NATURAL := 2940;   
+  CONSTANT rdown_a0_z0   : NATURAL := 2940;   
+  CONSTANT rdown_a1_z1   : NATURAL := 2940;   
+  CONSTANT rdown_a0_z1   : NATURAL := 2940;   
+  CONSTANT rup_s_z0      : NATURAL := 3530;   
+  CONSTANT rup_s_z1      : NATURAL := 3530;   
+  CONSTANT rup_a1_z0     : NATURAL := 3590;   
+  CONSTANT rup_a0_z0     : NATURAL := 3700;   
+  CONSTANT rup_a1_z1     : NATURAL := 3580;   
+  CONSTANT rup_a0_z1     : NATURAL := 3700;   
+  CONSTANT tphh_s_z0     : NATURAL := 54;     
+  CONSTANT tphl_s_z0     : NATURAL := 43;     
+  CONSTANT tplh_s_z0     : NATURAL := 52;     
+  CONSTANT tpll_s_z0     : NATURAL := 64;     
+  CONSTANT tphh_s_z1     : NATURAL := 54;     
+  CONSTANT tphl_a1_z0    : NATURAL := 67;     
+  CONSTANT tphl_a0_z0    : NATURAL := 68;     
+  CONSTANT tphl_a1_z1    : NATURAL := 69;     
+  CONSTANT tphl_a0_z1    : NATURAL := 66;     
+  CONSTANT tplh_a1_z1    : NATURAL := 72;     
+  CONSTANT tplh_a0_z1    : NATURAL := 74;     
+  CONSTANT tplh_a1_z0    : NATURAL := 73;     
+  CONSTANT tplh_a0_z0    : NATURAL := 73;     
+  CONSTANT tpll_s_z1     : NATURAL := 64;     
+  CONSTANT tphl_s_z1     : NATURAL := 43;     
+  CONSTANT tplh_s_z1     : NATURAL := 52;     
+  CONSTANT transistors   : NATURAL := 14      
+);
+PORT (
+  s	 : in  BIT;
+  a1	 : in  BIT;
+  a0	 : in  BIT;
+  z0	 : out BIT;
+  z1	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END bsi2v2x1;
+
+ARCHITECTURE behaviour_data_flow OF bsi2v2x1 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on bsi2v2x1"
+  SEVERITY WARNING;
+  z1 <= not ((a1 and not s) or (a0 and s)) after 143 ps;
+  z0 <= not ((a0 and not s) or (a1 and s)) after 143 ps;
+END;

@@ -1,0 +1,26 @@
+ENTITY bf1v6x2 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 2304;   
+  CONSTANT cin_a         : NATURAL := 4;      
+  CONSTANT rdown_a_z     : NATURAL := 1920;   
+  CONSTANT rup_a_z       : NATURAL := 2200;   
+  CONSTANT tpll_a_z      : NATURAL := 81;     
+  CONSTANT tphh_a_z      : NATURAL := 68;     
+  CONSTANT transistors   : NATURAL := 4       
+);
+PORT (
+  a	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END bf1v6x2;
+
+ARCHITECTURE behaviour_data_flow OF bf1v6x2 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on bf1v6x2"
+  SEVERITY WARNING;
+  z <= a after 126 ps;
+END;

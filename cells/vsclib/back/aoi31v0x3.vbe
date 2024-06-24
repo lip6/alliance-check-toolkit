@@ -1,0 +1,44 @@
+ENTITY aoi31v0x3 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 10368;  
+  CONSTANT cin_b         : NATURAL := 12;     
+  CONSTANT cin_a1        : NATURAL := 15;     
+  CONSTANT cin_a2        : NATURAL := 15;     
+  CONSTANT cin_a3        : NATURAL := 15;     
+  CONSTANT rdown_b_z     : NATURAL := 1060;   
+  CONSTANT rdown_a1_z    : NATURAL := 970;    
+  CONSTANT rdown_a2_z    : NATURAL := 970;    
+  CONSTANT rdown_a3_z    : NATURAL := 970;    
+  CONSTANT rup_b_z       : NATURAL := 1170;   
+  CONSTANT rup_a1_z      : NATURAL := 1400;   
+  CONSTANT rup_a2_z      : NATURAL := 1400;   
+  CONSTANT rup_a3_z      : NATURAL := 1400;   
+  CONSTANT tphl_b_z      : NATURAL := 44;     
+  CONSTANT tphl_a1_z     : NATURAL := 57;     
+  CONSTANT tplh_a3_z     : NATURAL := 67;     
+  CONSTANT tphl_a2_z     : NATURAL := 55;     
+  CONSTANT tplh_a1_z     : NATURAL := 89;     
+  CONSTANT tplh_a2_z     : NATURAL := 79;     
+  CONSTANT tplh_b_z      : NATURAL := 47;     
+  CONSTANT tphl_a3_z     : NATURAL := 51;     
+  CONSTANT transistors   : NATURAL := 29      
+);
+PORT (
+  b	 : in  BIT;
+  a1	 : in  BIT;
+  a2	 : in  BIT;
+  a3	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END aoi31v0x3;
+
+ARCHITECTURE behaviour_data_flow OF aoi31v0x3 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on aoi31v0x3"
+  SEVERITY WARNING;
+  z <= not(b or ((a1 and a2) and a3)) after 90 ps;
+END;
