@@ -1,0 +1,8 @@
+ls -1 *.vbe | sed 's/\(.*\)\.vbe/\1 C/' > CATAL
+ls -1 rowend*.vbe | sed 's/\(.*\)\.vbe/\1 F/' >> CATAL
+ls -1 tie*.vbe | sed 's/\(.*\)\.vbe/\1 F/' >> CATAL
+ls -1 vfeed*.vbe | sed 's/\(.*\)\.vbe/\1 F/' >> CATAL
+
+sort -o CATAL CATAL
+
+ls -1 *.vbe | sed 's/\(.*\)\.vbe/\1 G/' > CATAL_MERGE

@@ -1,0 +1,42 @@
+ENTITY xnai21v0x05 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 5760;   
+  CONSTANT cin_a2        : NATURAL := 6;      
+  CONSTANT cin_a1        : NATURAL := 5;      
+  CONSTANT cin_b         : NATURAL := 4;      
+  CONSTANT rdown_a2_z    : NATURAL := 3440;   
+  CONSTANT rdown_a1_z    : NATURAL := 3650;   
+  CONSTANT rdown_b_z     : NATURAL := 3650;   
+  CONSTANT rup_a2_z      : NATURAL := 4420;   
+  CONSTANT rup_a1_z      : NATURAL := 4490;   
+  CONSTANT rup_b_z       : NATURAL := 4660;   
+  CONSTANT tplh_a1_z     : NATURAL := 77;     
+  CONSTANT tplh_b_z      : NATURAL := 90;     
+  CONSTANT tphl_a2_z     : NATURAL := 34;     
+  CONSTANT tplh_a2_z     : NATURAL := 102;    
+  CONSTANT tphh_a2_z     : NATURAL := 71;     
+  CONSTANT tphl_a1_z     : NATURAL := 72;     
+  CONSTANT tphl_b_z      : NATURAL := 70;     
+  CONSTANT tpll_a1_z     : NATURAL := 102;    
+  CONSTANT tpll_a2_z     : NATURAL := 110;    
+  CONSTANT tphh_a1_z     : NATURAL := 98;     
+  CONSTANT transistors   : NATURAL := 11      
+);
+PORT (
+  a2	 : in  BIT;
+  a1	 : in  BIT;
+  b	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END xnai21v0x05;
+
+ARCHITECTURE behaviour_data_flow OF xnai21v0x05 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on xnai21v0x05"
+  SEVERITY WARNING;
+  z <= not (b and not (a1 xor a2)) after 184 ps;
+END;

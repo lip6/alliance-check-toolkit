@@ -1,0 +1,32 @@
+ENTITY nd2v3x1 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 3456;   
+  CONSTANT cin_a         : NATURAL := 6;      
+  CONSTANT cin_b         : NATURAL := 6;      
+  CONSTANT rdown_a_z     : NATURAL := 1370;   
+  CONSTANT rdown_b_z     : NATURAL := 1410;   
+  CONSTANT rup_a_z       : NATURAL := 3480;   
+  CONSTANT rup_b_z       : NATURAL := 3500;   
+  CONSTANT tphl_a_z      : NATURAL := 25;     
+  CONSTANT tphl_b_z      : NATURAL := 24;     
+  CONSTANT tplh_b_z      : NATURAL := 48;     
+  CONSTANT tplh_a_z      : NATURAL := 61;     
+  CONSTANT transistors   : NATURAL := 6       
+);
+PORT (
+  a	 : in  BIT;
+  b	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END nd2v3x1;
+
+ARCHITECTURE behaviour_data_flow OF nd2v3x1 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on nd2v3x1"
+  SEVERITY WARNING;
+  z <= not ((a and b)) after 101 ps;
+END;

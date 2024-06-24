@@ -1,0 +1,40 @@
+ENTITY mxi2v2x05 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 4608;   
+  CONSTANT cin_s         : NATURAL := 5;      
+  CONSTANT cin_a0        : NATURAL := 3;      
+  CONSTANT cin_a1        : NATURAL := 3;      
+  CONSTANT rdown_s_z     : NATURAL := 4680;   
+  CONSTANT rdown_a0_z    : NATURAL := 5000;   
+  CONSTANT rdown_a1_z    : NATURAL := 4960;   
+  CONSTANT rup_s_z       : NATURAL := 6330;   
+  CONSTANT rup_a0_z      : NATURAL := 6390;   
+  CONSTANT rup_a1_z      : NATURAL := 6420;   
+  CONSTANT tphl_a0_z     : NATURAL := 59;     
+  CONSTANT tphl_a1_z     : NATURAL := 57;     
+  CONSTANT tphl_s_z      : NATURAL := 40;     
+  CONSTANT tplh_a0_z     : NATURAL := 65;     
+  CONSTANT tplh_a1_z     : NATURAL := 66;     
+  CONSTANT tplh_s_z      : NATURAL := 60;     
+  CONSTANT tphh_s_z      : NATURAL := 57;     
+  CONSTANT tpll_s_z      : NATURAL := 91;     
+  CONSTANT transistors   : NATURAL := 10      
+);
+PORT (
+  s	 : in  BIT;
+  a0	 : in  BIT;
+  a1	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END mxi2v2x05;
+
+ARCHITECTURE behaviour_data_flow OF mxi2v2x05 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on mxi2v2x05"
+  SEVERITY WARNING;
+  z <= (not a0 and not s) or (not a1 and s) after 203 ps;
+END;

@@ -1,0 +1,44 @@
+ENTITY xnr3v1x2 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 13248;  
+  CONSTANT cin_a         : NATURAL := 6;      
+  CONSTANT cin_b         : NATURAL := 8;      
+  CONSTANT cin_c         : NATURAL := 13;     
+  CONSTANT rdown_a_z     : NATURAL := 1340;   
+  CONSTANT rdown_b_z     : NATURAL := 1340;   
+  CONSTANT rdown_c_z     : NATURAL := 1260;   
+  CONSTANT rup_a_z       : NATURAL := 1830;   
+  CONSTANT rup_b_z       : NATURAL := 1830;   
+  CONSTANT rup_c_z       : NATURAL := 1740;   
+  CONSTANT tphl_a_z      : NATURAL := 190;    
+  CONSTANT tphh_a_z      : NATURAL := 189;    
+  CONSTANT tphl_b_z      : NATURAL := 193;    
+  CONSTANT tphh_b_z      : NATURAL := 192;    
+  CONSTANT tphl_c_z      : NATURAL := 34;     
+  CONSTANT tphh_c_z      : NATURAL := 59;     
+  CONSTANT tplh_c_z      : NATURAL := 82;     
+  CONSTANT tpll_c_z      : NATURAL := 87;     
+  CONSTANT tplh_b_z      : NATURAL := 153;    
+  CONSTANT tpll_b_z      : NATURAL := 153;    
+  CONSTANT tplh_a_z      : NATURAL := 179;    
+  CONSTANT tpll_a_z      : NATURAL := 180;    
+  CONSTANT transistors   : NATURAL := 27      
+);
+PORT (
+  a	 : in  BIT;
+  b	 : in  BIT;
+  c	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END xnr3v1x2;
+
+ARCHITECTURE behaviour_data_flow OF xnr3v1x2 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on xnr3v1x2"
+  SEVERITY WARNING;
+  z <= not ((a xor b) xor c) after 180 ps;
+END;

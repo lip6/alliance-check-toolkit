@@ -1,0 +1,44 @@
+ENTITY xooi21v0x05 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 5184;   
+  CONSTANT cin_b         : NATURAL := 6;      
+  CONSTANT cin_a1        : NATURAL := 4;      
+  CONSTANT cin_a2        : NATURAL := 4;      
+  CONSTANT rdown_b_z     : NATURAL := 3630;   
+  CONSTANT rdown_a1_z    : NATURAL := 4790;   
+  CONSTANT rdown_a2_z    : NATURAL := 4770;   
+  CONSTANT rup_b_z       : NATURAL := 6520;   
+  CONSTANT rup_a1_z      : NATURAL := 6350;   
+  CONSTANT rup_a2_z      : NATURAL := 6340;   
+  CONSTANT tplh_a1_z     : NATURAL := 97;     
+  CONSTANT tplh_a2_z     : NATURAL := 88;     
+  CONSTANT tphl_b_z      : NATURAL := 83;     
+  CONSTANT tplh_b_z      : NATURAL := 44;     
+  CONSTANT tphh_b_z      : NATURAL := 117;    
+  CONSTANT tphl_a1_z     : NATURAL := 97;     
+  CONSTANT tphl_a2_z     : NATURAL := 86;     
+  CONSTANT tpll_a1_z     : NATURAL := 132;    
+  CONSTANT tpll_a2_z     : NATURAL := 124;    
+  CONSTANT tpll_b_z      : NATURAL := 73;     
+  CONSTANT tphh_a1_z     : NATURAL := 132;    
+  CONSTANT tphh_a2_z     : NATURAL := 120;    
+  CONSTANT transistors   : NATURAL := 11      
+);
+PORT (
+  b	 : in  BIT;
+  a1	 : in  BIT;
+  a2	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END xooi21v0x05;
+
+ARCHITECTURE behaviour_data_flow OF xooi21v0x05 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on xooi21v0x05"
+  SEVERITY WARNING;
+  z <= not (b xor (a1 or a2)) after 234 ps;
+END;

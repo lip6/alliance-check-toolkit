@@ -1,0 +1,32 @@
+ENTITY nd2v0x6 IS
+GENERIC (
+  CONSTANT area          : NATURAL := 5184;   
+  CONSTANT cin_a         : NATURAL := 15;     
+  CONSTANT cin_b         : NATURAL := 15;     
+  CONSTANT rdown_a_z     : NATURAL := 610;    
+  CONSTANT rdown_b_z     : NATURAL := 610;    
+  CONSTANT rup_a_z       : NATURAL := 820;    
+  CONSTANT rup_b_z       : NATURAL := 820;    
+  CONSTANT tphl_a_z      : NATURAL := 32;     
+  CONSTANT tphl_b_z      : NATURAL := 34;     
+  CONSTANT tplh_b_z      : NATURAL := 43;     
+  CONSTANT tplh_a_z      : NATURAL := 50;     
+  CONSTANT transistors   : NATURAL := 12      
+);
+PORT (
+  a	 : in  BIT;
+  b	 : in  BIT;
+  z	 : out BIT;
+  vdd	 : in  BIT;
+  vss	 : in  BIT
+);
+END nd2v0x6;
+
+ARCHITECTURE behaviour_data_flow OF nd2v0x6 IS
+
+BEGIN
+  ASSERT ((vdd and not (vss)) = '1')
+  REPORT "power supply is missing on nd2v0x6"
+  SEVERITY WARNING;
+  z <= not ((a and b)) after 58 ps;
+END;
