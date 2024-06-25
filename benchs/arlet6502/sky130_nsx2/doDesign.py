@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     try:
         DbU.setStringMode( DbU.StringModeSymbolic )
        #setTraceLevel( 550 )
-       #Breakpoint.setStopLevel( 100 )
+       #Breakpoint.setStopLevel( 99 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
             harnessProjectDir = checkToolkitDir + '/cells/sky130'
@@ -121,8 +121,8 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.spaceMargin         = 0.05
        #conf.cfg.katana.hTracksReservedLocal = 6
        #conf.cfg.katana.vTracksReservedLocal = 3
-       #conf.cfg.katana.hTracksReservedMin   = 3
-       #conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.katana.hTracksReservedMin   = 3
+        conf.cfg.katana.vTracksReservedMin   = 3
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = False
         if buildChip:

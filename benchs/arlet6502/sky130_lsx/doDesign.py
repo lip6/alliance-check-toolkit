@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     try:
         DbU.setStringMode( DbU.StringModeSymbolic )
        #setTraceLevel( 550 )
-        Breakpoint.setStopLevel( 99 )
+       #Breakpoint.setStopLevel( 99 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
             harnessProjectDir = checkToolkitDir + '/cells/sky130'
