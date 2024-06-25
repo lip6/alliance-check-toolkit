@@ -80,7 +80,7 @@ def _routing():
 
     cg = CRL.CellGauge.create(
         'StdCellLib', 'm1',
-        u(0.5), u(6.0), u(0.76),
+        u(0.50), u(6.0), u(0.76),
     )
     af.addCellGauge(cg)
     af.setCellGauge('StdCellLib')
@@ -127,23 +127,23 @@ def _routing():
         cfg.anabatic.saturateRatio = 0.90
         cfg.anabatic.saturateRp = 10
         cfg.anabatic.topRoutingLayer = 'm4'
-        cfg.anabatic.edgeLength = 48
-        cfg.anabatic.edgeWidth = 8
+        cfg.anabatic.edgeLength = 24
+        cfg.anabatic.edgeWidth = 4
         cfg.anabatic.edgeCostH = 9.0
         cfg.anabatic.edgeCostK = -10.0
         cfg.anabatic.edgeHInc = 1.0
         cfg.anabatic.edgeHScaling = 1.0
-        cfg.anabatic.globalIterations = 10
+        cfg.anabatic.globalIterations = 20
         cfg.anabatic.globalIterations = [ 1, 100 ]
         cfg.anabatic.gcell.displayMode = 1
         cfg.anabatic.gcell.displayMode = (("Boundary", 1), ("Density", 2))
         cfg.anabatic.searchHalo = 2
         cfg.katana.trackFill = 0
         cfg.katana.runRealignStage = True
-        cfg.katana.hTracksReservedMin   = 10
+        cfg.katana.hTracksReservedMin   = 4
         cfg.katana.hTracksReservedLocal = 20
         cfg.katana.hTracksReservedLocal = [0, 30]
-        cfg.katana.vTracksReservedMin   = 8
+        cfg.katana.vTracksReservedMin   = 4
         cfg.katana.vTracksReservedLocal = 20
         cfg.katana.vTracksReservedLocal = [0, 30]
         cfg.katana.termSatReservedLocal = 8

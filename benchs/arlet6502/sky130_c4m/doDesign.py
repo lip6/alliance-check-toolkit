@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #setTraceLevel( 550 )
-       #Breakpoint.setStopLevel( 100 )
+       #Breakpoint.setStopLevel( 99 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
             harnessProjectDir = checkToolkitDir + '/cells/sky130'
@@ -95,7 +95,7 @@ def scriptMain ( **kw ):
             ioPadsSpec = [ ]
             ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  , 10*m1pitch, 10*m1pitch,  8)
                          , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , 15*m1pitch, 10*m1pitch,  8)
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   , 10*m1pitch, 10*m1pitch, 16)
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   , 20*m1pitch, 15*m1pitch, 16)
                          
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 100*m2pitch,       0 ,  1)
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , 110*m2pitch,       0 ,  1)
@@ -111,7 +111,7 @@ def scriptMain ( **kw ):
         conf.cfg.misc.info                   = False
         conf.cfg.misc.paranoid               = False
         conf.cfg.misc.bug                    = False
-        conf.cfg.misc.logMode                = False
+        conf.cfg.misc.logMode                = True
         conf.cfg.misc.verboseLevel1          = True
         conf.cfg.misc.verboseLevel2          = True
        #conf.cfg.etesian.bloat               = 'Flexlib'
@@ -119,11 +119,12 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.05
+        conf.cfg.anabatic.globalIterations   = 10
        #conf.cfg.katana.hTracksReservedLocal = 6
        #conf.cfg.katana.vTracksReservedLocal = 3
        #conf.cfg.katana.hTracksReservedMin   = 3
        #conf.cfg.katana.vTracksReservedMin   = 1
-        conf.cfg.katana.runRealignStage      = True
+        conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = True
         if buildChip:
             conf.cfg.harness.path            = harnessProjectDir + '/user_project_wrapper.def'
@@ -134,8 +135,8 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u( 32*6.0), u( 32*6.0) )
-        conf.chipSize            = ( u(  2020.0), u(  2060.0) )
+        conf.coreSize            = ( u(265*0.76), u( 32*6.0) )
+        conf.chipSize            = ( u(  2020.0), u( 2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
             conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
