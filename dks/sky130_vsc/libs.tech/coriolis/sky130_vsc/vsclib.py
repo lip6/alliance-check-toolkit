@@ -36,24 +36,24 @@ def _routing ():
                                 , RoutingLayerGauge.PinOnly         # layer usage
                                 , 0                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 0.0)                           # track offset from AB
+                                , l( 4.0)                           # track offset from AB
                                 , l( 8.0)                           # track pitch
-                                , l( 3.0)                           # wire width
-                                , l( 3.0)                           # perpandicular wire width
+                                , l( 4.0)                           # wire width
+                                , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 7.0) ))                        # obstacle dW
+                                , l( 4.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL2' )         # metal
                                 , dirM2                             # preferred routing direction
                                 , RoutingLayerGauge.Default         # layer usage
                                 , 1                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 0.0)                           # track offset from AB
+                                , l( 4.0)                           # track offset from AB
                                 , l( 8.0)                           # track pitch
                                 , l( 3.0)                           # wire width
                                 , l( 3.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 8.0) ))                        # obstacle dW
+                                , l( 5.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL3' )         # metal
                                 , dirM1                             # preferred routing direction
@@ -61,11 +61,11 @@ def _routing ():
                                 , 2                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
-                                , l(10.0)                           # track pitch
+                                , l( 8.0)                           # track pitch
                                 , l( 3.0)                           # wire width
                                 , l( 3.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 8.0) ))                        # obstacle dW
+                                , l( 5.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL4' )         # metal
                                 , dirM2                             # preferred routing direction
@@ -73,11 +73,11 @@ def _routing ():
                                 , 3                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
-                                , l(10.0)                           # track pitch
+                                , l( 8.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 8.0) ))                        # obstacle dW
+                                , l( 4.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL5' )         # metal
                                 , dirM1                             # preferred routing direction
@@ -85,11 +85,11 @@ def _routing ():
                                 , 4                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
-                                , l(10.0)                           # track pitch
+                                , l( 8.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 4.0)                           # VIA side
-                                , l( 8.0) ))                        # obstacle dW
+                                , l( 4.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL6' )         # metal
                                 , dirM2                             # preferred routing direction
@@ -97,19 +97,19 @@ def _routing ():
                                 , 5                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
-                                , l(15.0)                           # track pitch
+                                , l(16.0)                           # track pitch
                                 , l(12.0)                           # wire width
                                 , l(12.0)                           # perpandicular wire width
                                 , l( 4.0)                           # VIA side
-                                , l( 8.0 ) ))                       # obstacle dW
+                                , l( 4.0 ) ))                       # obstacle dW
     af.addRoutingGauge( rg )
     af.setRoutingGauge( 'vsclib' )
 
     cg = CellGauge.create( 'vsclib'
                          , 'METAL1'   # pin layer name.
-                         , l( 10.0)   # pitch.
-                         , l(100.0)   # cell slice height.
-                         , l( 10.0)   # cell slice step.
+                         , l( 8.0)   # pitch.
+                         , l( 72.0)   # cell slice height.
+                         , l( 8.0)   # cell slice step.
                          )
     af.addCellGauge( cg )
     af.setCellGauge( 'vsclib' )
@@ -183,10 +183,10 @@ def _routing ():
         cfg.katana.longGlobalRipupLimit = 5
         cfg.chip.padCoreSide = 'North'
         # Plugins setup
-        cfg.clockTree.minimumSide = l(100.0) * 6
+        cfg.clockTree.minimumSide = l(96.0) * 6
         cfg.clockTree.buffer = 'bf1v0x12'
         cfg.clockTree.placerEngine = 'Etesian'
-        cfg.block.spareSide = 10*l(100.0)
+        cfg.block.spareSide = 10*l(96.0)
         cfg.spares.buffer = 'bf1v0x12'
         cfg.spares.maxSinks = 31
 
@@ -200,14 +200,14 @@ def _loadNsxlib2 ( cellsTop ):
     """
     af  = AllianceFramework.get()
     env = af.getEnvironment()
-    env.setSCALE_X ( 50 )
+    env.setSCALE_X ( 100 )
     env.setCATALOG ( 'CATAL' )
     env.setPOWER   ( 'vdd'   )   
     env.setGROUND  ( 'vss'   )   
     env.setCLOCK   ( '^ck$|m_clock|^clk$' )
     env.setBLOCKAGE( 'blockage[Nn]et.*' )
     env.setPad     ( '.*_mpx$'          )
-    env.setRegister( 'sff.*' )
+    env.setRegister( 'df.*' )
     env.setWORKING_LIBRARY( '.' )
     env.addSYSTEM_LIBRARY ( library=(cellsTop / 'vsclib').as_posix(), mode=Environment.Append )
 

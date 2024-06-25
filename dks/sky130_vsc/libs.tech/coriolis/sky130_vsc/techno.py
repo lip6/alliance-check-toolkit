@@ -410,14 +410,14 @@ def _loadDevices ():
 
 
 def _setup_techno ( coriolisTechDir ):
-    ShellEnv.RDS_TECHNO_NAME   = (coriolisTechDir / 'sky130_nsx2' / 'sky130_nsx3.rds').as_posix()
-    ShellEnv.GRAAL_TECHNO_NAME = (coriolisTechDir / 'sky130_nsx2' / 'symbolic.graal' ).as_posix()
-    ShellEnv.DREAL_TECHNO_NAME = (coriolisTechDir / 'sky130_nsx2' / 'symbolic.dreal' ).as_posix()
+    ShellEnv.RDS_TECHNO_NAME   = (coriolisTechDir / 'sky130_vsc' / 'sky130_vsc.rds').as_posix()
+    ShellEnv.GRAAL_TECHNO_NAME = (coriolisTechDir / 'sky130_vsc' / 'symbolic.graal' ).as_posix()
+    ShellEnv.DREAL_TECHNO_NAME = (coriolisTechDir / 'sky130_vsc' / 'symbolic.dreal' ).as_posix()
 
     db = DataBase.getDB()
     CRL.System.get()
 
-    tech = Technology.create(db, 'Sky130_nsx2')
+    tech = Technology.create(db, 'Sky130_vsc')
 
     DbU.setPrecision( 2 )
     DbU.setPhysicalsPerGrid( 0.0025, DbU.UnitPowerMicro )
