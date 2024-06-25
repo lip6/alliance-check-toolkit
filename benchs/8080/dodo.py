@@ -75,4 +75,4 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow import pnrcheck
 
-pnrcheck.mkRuleSet( globals(), 'my80core', pnrcheck.UseClockTree )
+pnrcheck.mkRuleSet( globals(), 'my80core', pnrcheck.UseClockTree|pnrcheck.NoGDS )
