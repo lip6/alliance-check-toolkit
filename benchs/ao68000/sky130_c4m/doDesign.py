@@ -142,30 +142,32 @@ def scriptMain ( **kw ):
         ioPadsSpec += doIoPinVector( (IoPin.NORTH, None, 'dat_o_{}', 'dat_o({})', 'dat_o({})'), range(32) )
         ioPadsSpec += doIoPowerCap( IoPin.NORTH|IoPin.A_END )
         
-        m1pitch    = u(0.46*6)
+        m1pitch    = u(0.46)
         m2pitch    = u(0.51)
+        vspace     = m1pitch * 10
+        hspace     = m2pitch * 8
         # ioPinsSpec, for peripheral pin placement as a standalone block.
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'ack_i'    ,  10*m1pitch, 0, 1)
-                    #, (IoPin.WEST |IoPin.A_BEGIN, 'clk_i'    ,  20*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'err_i'    ,  30*m1pitch, 0, 1)
-                    #, (IoPin.WEST |IoPin.A_BEGIN, 'reset_n'  ,  40*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'rty_i'    ,  50*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'blk_o'    ,  60*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'blocked_o',  70*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'cyc_o'    ,  80*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'reset_o'  ,  90*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'rmw_o'    , 100*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'sgl_o'    , 110*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'stb_o'    , 120*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'we_o'     , 130*m1pitch, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'ipl_i({})', 140*m1pitch, 10*m1pitch, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'bte_o({})', 170*m1pitch, 10*m1pitch, 2 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'cti_o({})', 190*m1pitch, 10*m1pitch, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN,  'fc_o({})', 220*m1pitch, 10*m1pitch, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'sel_o({})', 260*m1pitch, 10*m1pitch, 4 )
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'dat_i({})', 10*m2pitch, 10*m2pitch, 32 )
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'adr_o({})', 10*m1pitch, 10*m1pitch, 32 )
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'dat_o({})', 10*m2pitch, 10*m2pitch, 32 )
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'ack_i'    ,  1*vspace, 0, 1)
+                    #, (IoPin.WEST |IoPin.A_BEGIN, 'clk_i'    ,  2*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'err_i'    ,  3*vspace, 0, 1)
+                    #, (IoPin.WEST |IoPin.A_BEGIN, 'reset_n'  ,  4*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'rty_i'    ,  5*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'blk_o'    ,  6*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'blocked_o',  7*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'cyc_o'    ,  8*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'reset_o'  ,  9*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'rmw_o'    , 10*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'sgl_o'    , 11*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'stb_o'    , 12*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'we_o'     , 13*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'ipl_i({})', 14*vspace, vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'bte_o({})', 17*vspace, vspace, 2 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'cti_o({})', 19*vspace, vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN,  'fc_o({})', 22*vspace, vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'sel_o({})', 26*vspace, vspace, 4 )
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'dat_i({})',    hspace, hspace, 32 )
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'adr_o({})',    vspace,  5*vspace, 32 )
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'dat_o({})',    hspace,  5*hspace, 32 )
                      ]
         ao68000Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         ao68000Conf.cfg.misc.logMode                = True
@@ -175,14 +177,14 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.etesian.densityVariation    = 0.05
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        ao68000Conf.cfg.etesian.spaceMargin         = 0.07
-        ao68000Conf.cfg.anabatic.searchHalo         = 3
+        ao68000Conf.cfg.etesian.spaceMargin         = 1.30
+        ao68000Conf.cfg.anabatic.searchHalo         = 1
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
        #ao68000Conf.cfg.katana.hTracksReservedLocal = 6
        #ao68000Conf.cfg.katana.vTracksReservedLocal = 9
-       #ao68000Conf.cfg.katana.hTracksReservedMin   = 3
-       #ao68000Conf.cfg.katana.vTracksReservedMin   = 6
+        ao68000Conf.cfg.katana.hTracksReservedMin   = 3
+        ao68000Conf.cfg.katana.vTracksReservedMin   = 4
        #ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
         ao68000Conf.cfg.katana.dumpMeasures         = False
