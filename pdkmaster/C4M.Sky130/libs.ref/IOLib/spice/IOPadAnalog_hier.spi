@@ -1,4 +1,16 @@
 * IOPadAnalog
+* GuardRing_N1270W450HTF
+.subckt GuardRing_N1270W450HTF conn
+
+.ends GuardRing_N1270W450HTF
+* GuardRing_P418W1550HFF
+.subckt GuardRing_P418W1550HFF conn
+
+.ends GuardRing_P418W1550HFF
+* GuardRing_P632W1550HFF
+.subckt GuardRing_P632W1550HFF conn
+
+.ends GuardRing_P632W1550HFF
 * GuardRing_N17368W8096HTF
 .subckt GuardRing_N17368W8096HTF conn
 
@@ -15,16 +27,19 @@
 .subckt GuardRing_N18000W4468HFF conn
 
 .ends GuardRing_N18000W4468HFF
+* GuardRing_N18000W13312HFF
+.subckt GuardRing_N18000W13312HFF conn
+
+.ends GuardRing_N18000W13312HFF
 * SecondaryProtection
 .subckt SecondaryProtection iovdd iovss pad core
 RR pad core 241.0
+Xguard1 iovss GuardRing_P632W1550HFF
 DDN iovss core sky130_fd_pr__diode_pw2nd_05v5 area=3.6875e-12 pj=13.68um
+Xguard2 iovss GuardRing_P418W1550HFF
 DDP core iovdd sky130_fd_pr__diode_pd2nw_05v5 area=3.6375000000000002e-12 pj=11.2um
+Xguard3 iovdd GuardRing_N1270W450HTF
 .ends SecondaryProtection
-* BulkConn_18000WUp
-.subckt BulkConn_18000WUp vdd vss iovdd iovss
-
-.ends BulkConn_18000WUp
 * Clamp_P12N0D
 .subckt Clamp_P12N0D iovss iovdd pad
 Mclamp_g0 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
@@ -41,7 +56,7 @@ Mclamp_g10 iovdd off pad iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.
 Mclamp_g11 pad off iovdd iovdd sky130_fd_pr__pfet_g5v0d10v5__model l=0.6um w=38.2um
 XOuterRing iovss GuardRing_P18000W8728HFF
 XInnerRing iovdd GuardRing_N17368W8096HTF
-RRoff iovdd off 5579.5151515152
+RRoff iovdd off 5502.103030303
 .ends Clamp_P12N0D
 * Clamp_N12N0D
 .subckt Clamp_N12N0D iovss iovdd pad
@@ -59,7 +74,7 @@ Mclamp_g10 iovss off pad iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.
 Mclamp_g11 pad off iovss iovss sky130_fd_pr__nfet_g5v0d10v5__model l=0.6um w=16.9um
 XOuterRing iovdd GuardRing_N18000W4468HFF
 XInnerRing iovss GuardRing_P17368W3836HFF
-RRoff iovss off 2468.4242424242
+RRoff iovss off 2391.0121212121
 .ends Clamp_N12N0D
 * Pad_15800W12000H
 .subckt Pad_15800W12000H pad
@@ -70,6 +85,6 @@ RRoff iovss off 2468.4242424242
 Xpad pad Pad_15800W12000H
 Xnclamp iovss iovdd pad Clamp_N12N0D
 Xpclamp iovss iovdd pad Clamp_P12N0D
-Xbulkconn vdd vss iovdd iovss BulkConn_18000WUp
 Xsecondprot iovdd iovss pad padres SecondaryProtection
+Xpad_guardring iovss GuardRing_N18000W13312HFF
 .ends IOPadAnalog

@@ -1,6 +1,5 @@
 * RCClampInverter
 .subckt RCClampInverter supply ground in out
-Xouterguard ground GuardRing_P18000W8728HFF
 Mcapmos0 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
 Mcapmos1 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
 Mcapmos2 ground in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=10.0um w=14.0um
@@ -13,7 +12,7 @@ Mnmos3 out in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
 Mnmos4 ground in out ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
 Mnmos5 out in ground ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
 Mnmos6 ground in out ground sky130_fd_pr__nfet_g5v0d10v5__model l=0.5um w=14.0um
-Xnmosguardring ground GuardRing_P12310W3968HFT
+Xnmosguardring ground GuardRing_P18000W3888HFT
 Mpmos0 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
 Mpmos1 out in supply supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um
 Mpmos2 supply in out supply sky130_fd_pr__pfet_g5v0d10v5__model l=0.5um w=7.0um

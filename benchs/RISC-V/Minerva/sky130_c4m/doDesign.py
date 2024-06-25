@@ -66,7 +66,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u(210*10.0), u(210*10.0) )
+        conf.coreSize            = ( u(210*6.0), u(210*6.0) )
        #conf.chipSize            = ( u(  2020.0), u(  2060.0) )
         conf.coreToChipClass     = CoreToChip
         conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )

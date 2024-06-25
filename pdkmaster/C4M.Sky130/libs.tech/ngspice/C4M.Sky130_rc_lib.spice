@@ -1,0 +1,32 @@
+* C4M.Sky130 rc lib file
+
+.lib tt
+.include "C4M.Sky130_rc_tt_params.spice"
+.include "C4M.Sky130_rc_common_params.spice"
+.include "C4M.Sky130_rc_model.spice"
+.include "C4M.Sky130_mim_model.spice"
+.endl tt
+.lib ll
+.include "C4M.Sky130_rc_ll_params.spice"
+.include "C4M.Sky130_rc_common_params.spice"
+.include "C4M.Sky130_rc_model.spice"
+.include "C4M.Sky130_mim_model.spice"
+.endl ll
+.lib hh
+.include "C4M.Sky130_rc_hh_params.spice"
+.include "C4M.Sky130_rc_common_params.spice"
+.include "C4M.Sky130_rc_model.spice"
+.include "C4M.Sky130_mim_model.spice"
+.endl hh
+.lib lh
+.include "C4M.Sky130_rc_lh_params.spice"
+.include "C4M.Sky130_rc_common_params.spice"
+.include "C4M.Sky130_rc_model.spice"
+.include "C4M.Sky130_mim_model.spice"
+.endl lh
+.lib hl
+.include "C4M.Sky130_rc_hl_params.spice"
+.include "C4M.Sky130_rc_common_params.spice"
+.include "C4M.Sky130_rc_model.spice"
+.include "C4M.Sky130_mim_model.spice"
+.endl hl

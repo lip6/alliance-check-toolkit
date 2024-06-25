@@ -1,0 +1,15 @@
+* mux2_x1
+.subckt mux2_x1 vdd vss i0 i1 cmd q
+Mcmd_inv_nmos cmd_n cmd vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mcmd_inv_pmos cmd_n cmd vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mi0_nmos vss i0 _net0 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mi0_pmos vdd i0 _net1 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mcmd_n_npass _net0 cmd_n _q_n vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mcmd_ppass _net1 cmd _q_n vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mcmd_npass _q_n cmd _net2 vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mcmd_n_ppass _q_n cmd_n _net3 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mi1_nmos _net2 i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mi1_pmos _net3 i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mq_n_inv_nmos vss _q_n q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.995um
+Mq_n_inv_pmos vdd _q_n q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.555um
+.ends mux2_x1

@@ -1,0 +1,9 @@
+* buf_x2
+.subckt buf_x2 vdd vss i q
+Mstage0_nmos _i_n i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
+Mstage0_pmos _i_n i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
+Mnmos[0] vss _i_n q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.995um
+Mpmos[0] vdd _i_n q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.555um
+Mnmos[1] q _i_n vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.995um
+Mpmos[1] q _i_n vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.555um
+.ends buf_x2

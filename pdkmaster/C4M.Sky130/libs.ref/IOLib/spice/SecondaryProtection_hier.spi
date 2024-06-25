@@ -1,7 +1,22 @@
 * SecondaryProtection
+* GuardRing_N1270W450HTF
+.subckt GuardRing_N1270W450HTF conn
+
+.ends GuardRing_N1270W450HTF
+* GuardRing_P418W1550HFF
+.subckt GuardRing_P418W1550HFF conn
+
+.ends GuardRing_P418W1550HFF
+* GuardRing_P632W1550HFF
+.subckt GuardRing_P632W1550HFF conn
+
+.ends GuardRing_P632W1550HFF
 * SecondaryProtection
 .subckt SecondaryProtection iovdd iovss pad core
 RR pad core 241.0
+Xguard1 iovss GuardRing_P632W1550HFF
 DDN iovss core sky130_fd_pr__diode_pw2nd_05v5 area=3.6875e-12 pj=13.68um
+Xguard2 iovss GuardRing_P418W1550HFF
 DDP core iovdd sky130_fd_pr__diode_pd2nw_05v5 area=3.6375000000000002e-12 pj=11.2um
+Xguard3 iovdd GuardRing_N1270W450HTF
 .ends SecondaryProtection
