@@ -7,6 +7,7 @@ from   coriolis            import CRL
 from   coriolis.Hurricane  import DbU, Breakpoint
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+loadUserSettings()
 from   coriolis            import plugins
 from   coriolis.plugins.block.block         import Block
 from   coriolis.plugins.block.configuration import IoPin, GaugeConf
@@ -14,18 +15,17 @@ from   coriolis.plugins.block.spares        import Spares
 from   coriolis.plugins.chip.configuration  import ChipConf
 from   coriolis.plugins.chip.chip           import Chip
 from   coriolis.plugins.core2chip.sky130    import CoreToChip
-
 af = CRL.AllianceFramework.get()
 
 
 
 def scriptMain ( **kw ):
+
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     global af
     rvalue = True
     try:
-        DbU.setStringMode( DbU.StringModeSymbolic )
-       #setTraceLevel( 550 )
+       #setTraceLevel( 540 )
        #Breakpoint.setStopLevel( 99 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
@@ -36,13 +36,13 @@ def scriptMain ( **kw ):
             sys.exit( 1 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
-        cellName = 'arlet6502'
+        cellName = 'picorv32'
         if buildChip:
             cellName += '_harness'
-        cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
+        cell = af.getCell( 'picorv32', CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
-            editor.setDbuMode( DbU.StringModeSymbolic )
+            editor.setDbuMode( DbU.StringModePhysical )
         if buildChip:
             ioPinsSpec = [ ]
             ioPadsSpec = [ (None, None, 'power_0'  , 'vccd1'      , 'vdd'    )
@@ -90,21 +90,41 @@ def scriptMain ( **kw ):
                          , (None, None, None       , 'io_in(36)'  , 'we'     )
                          ]
         else:
-            m1pitch    = l(5.0)  # a diviser par 2 pour lsx
-            m2pitch    = l(5.0)
+            m1pitch    = u(0.46)
+            m2pitch    = u(0.51)
+            vspace     = m2pitch * 16
+            hspace     = m1pitch * 13
             ioPadsSpec = [ ]
-            ioPinsSpec = [ (18, 'A({})' ,  525000, 525000, range(0,  9))
-                         , (17, 'A({})' ,  525000, 525000, range(9, 16))
-                         , (17, 'DI({})', 4200000, 525000, range(0,  2))
-                         , (20, 'DI({})',  480000, 480000, range(2,  8))
-                         , (20, 'DO({})', 3360000, 480000, range(0,  4))
-                         , (24, 'DO({})',  480000, 480000, range(4,  8))
-                         , (24, 'IRQ'   , 2400000,      0, range(0,  1))
-                         , (24, 'rdy'   , 2880000,      0, range(0,  1))
-                         , (24, 'clk'   , 3360000,      0, range(0,  1))
-                         , (24, 'NMI'   , 3840000,      0, range(0,  1))
-                         , (24, 'WE'    , 4320000,      0, range(0,  1))
-                         , (24, 'reset' , 4800000,      0, range(0,  1))]
+            ioPinsSpec = [ (18, 'trace_data({})'  ,     vspace, vspace, range(0, 36))
+                         , (18, 'mem_la_wdata({})',  38*vspace, vspace, range(0, 32))
+                         , (18, 'mem_la_addr({})' ,  70*vspace, vspace, range(0, 32))
+                         , (17, 'eoi({})'         ,     vspace, vspace, range(0, 32))
+                         , (17, 'mem_addr({})'    ,  33*vspace, vspace, range(0, 32))
+                         , (17, 'mem_wdata({})'   ,  65*vspace, vspace, range(0, 32))
+                         , (17, 'mem_rdata({})'   ,  97*vspace, vspace, range(0,  4))
+                         , (20, 'mem_rdata({})'   ,     hspace+5*m1pitch, hspace, range(4, 32))
+                         , (20, 'irq({})'         ,  33*hspace, hspace, range(0, 32))
+                         , (20, 'pcpi_insn({})'   ,  65*hspace, hspace, range(0, 32))
+                         , (20, 'pcpi_rs1({})'    ,  97*hspace, hspace, range(0,  8))
+                         , (24, 'pcpi_rs1({})'    ,     hspace, hspace, range(8, 32))
+                         , (24, 'pcpi_rd({})'     ,  33*hspace, hspace, range(0, 32))
+                         , (24, 'pcpi_rs2({})'    ,  97*hspace, hspace, range(8, 32))
+                         , (24, 'mem_wstrb({})'   , 121*hspace, hspace, range(0,  4))
+                         , (24, 'mem_la_wstrb({})', 125*hspace, hspace, range(0,  4))
+                         , (24, 'mem_la_write'    , 129*hspace, 0, range(0, 1))
+                         , (24, 'trap'            , 130*hspace, 0, range(0, 1))
+                         , (24, 'resetn'          , 131*hspace, 0, range(0, 1))
+                         , (24, 'mem_instr'       , 132*hspace, 0, range(0, 1))
+                         , (24, 'mem_valid'       , 133*hspace, 0, range(0, 1))
+                         , (24, 'mem_la_read'     , 134*hspace, 0, range(0, 1))
+                         , (24, 'pcpi_wr'         , 135*hspace, 0, range(0, 1))
+                         , (24, 'pcpi_wait'       , 136*hspace, 0, range(0, 1))
+                         , (24, 'trace_valid'     , 137*hspace, 0, range(0, 1))
+                         , (24, 'mem_ready'       , 138*hspace, 0, range(0, 1))
+                         , (24, 'clk'             , 139*hspace, 0, range(0, 1))
+                         , (24, 'pcpi_valid'      , 140*hspace, 0, range(0, 1))
+                         , (24, 'pcpi_ready'      , 141*hspace-7*m1pitch, 0, range(0, 1))]
+            #connectors placement in block design
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.misc.catchCore              = False
         conf.cfg.misc.minTraceLevel          = 12300
@@ -119,13 +139,21 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        conf.cfg.etesian.spaceMargin         = 0.05
-       #conf.cfg.katana.hTracksReservedLocal = 6
-       #conf.cfg.katana.vTracksReservedLocal = 3
-       #conf.cfg.katana.hTracksReservedMin   = 3
-       #conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.etesian.spaceMargin         = 0.02
+        conf.cfg.anabatic.searchHalo         = 2
+        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.topRoutingLayer    = 'm4'
+        conf.cfg.katana.hTracksReservedLocal = 6
+        conf.cfg.katana.vTracksReservedLocal = 3
+        conf.cfg.katana.hTracksReservedMin   = 3
+        conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
-        conf.cfg.katana.dumpMeasures         = False
+        conf.cfg.katana.dumpMeasures         = True
+        conf.cfg.block.spareSide             = u(7*12)
+        conf.cfg.chip.minPadSpacing          = u(1.46)
+        conf.cfg.chip.supplyRailWidth        = u(20.0)
+        conf.cfg.chip.supplyRailPitch        = u(40.0)
         if buildChip:
             conf.cfg.harness.path            = harnessProjectDir + '/user_project_wrapper.def'
         conf.editor              = editor
@@ -135,15 +163,15 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( 37*l(50.0), 37*l(50.0) )
-        conf.chipSize            = ( l(  1500.0), l(  1500.0) )
+        conf.coreSize            = ( u( 840.0), u( 840.0) )
+        conf.chipSize            = ( u(2020.0), u(2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
             conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
             conf.useHTree( 'io_in_from_pad(28)' )
         else:
             conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
-            conf.useHTree( 'reset' )
+            conf.useHTree( 'resetn' )
         #conf.useHTree( 'core.subckt_0_cpu.abc_11829_new_n340' )
         if buildChip:
             chipBuilder = Chip( conf )
