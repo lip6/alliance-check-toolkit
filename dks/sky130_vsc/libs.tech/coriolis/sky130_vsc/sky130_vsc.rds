@@ -168,12 +168,14 @@ table mbk_to_rds_segment
           rds_pimp   vw    0.275    0.25   .0  all\
           rds_pdif   vw    0.15     0.0    .0  all
                                                                                                                   
-  ntie    rds_ntie   vw    0.15    0.0    .0  all\
-          rds_nimp   vw    0.275   0.25   .0  all
+  ntie    rds_ntie   vw    0.10    0.0    .0  all\
+          rds_nimp   vw    0.0     0.05   .0  all
+#          rds_nimp   vw    0.275   0.25   .0  all
 #          rds_activ  vw    0.15    0.0    .0  all
                                                                                                                   
-  ptie    rds_ptie   vw    0.15    0.0    .0  all\
-          rds_pimp   vw    0.275   0.25   .0  all
+  ptie    rds_ptie   vw    0.10    0.0    .0  all\
+          rds_pimp   vw    0.0     0.05   .0  all
+#          rds_pimp   vw    0.275   0.25   .0  all
 #          rds_activ  vw    0.15    0.0    .0  all
 #          rds_pwell  vw    0.460   0.510  .0  all
                                                                                                                   
@@ -193,17 +195,17 @@ table mbk_to_rds_segment
                                                                                                                   
   poly    rds_poly   vw    0.075    0.0   .0  all
 
-  alu1    rds_alu1   vw    0.15    0.03 .0  all
-  calu1   rds_alu1   vw    0.15    0.03 .0  all
-  talu1   rds_talu1  vw    0.15    0.03 .0  all
+  alu1    rds_alu1   vw    0.125    0.03 .0  all
+  calu1   rds_alu1   vw    0.125    0.03 .0  all
+  talu1   rds_talu1  vw    0.125    0.03 .0  all
 
-  alu2    rds_alu2   vw    0.15    0.03   .0  all
-  calu2   rds_alu2   vw    0.15    0.03   .0  all
-  talu2   rds_talu2  vw    0.15    0.03   .0  all
+  alu2    rds_alu2   vw    0.125    0.03   .0  all
+  calu2   rds_alu2   vw    0.125    0.03   .0  all
+  talu2   rds_talu2  vw    0.125    0.03   .0  all
 
-  alu3    rds_alu3   vw    0.15    0.03   .0  all
-  calu3   rds_alu3   vw    0.15    0.03   .0  all
-  talu3   rds_talu3  vw    0.15    0.03   .0  all
+  alu3    rds_alu3   vw    0.125    0.03   .0  all
+  calu3   rds_alu3   vw    0.125    0.03   .0  all
+  talu3   rds_talu3  vw    0.125    0.03   .0  all
 
   alu4    rds_alu4   vw    0.15     0.0    .0  all
   calu4   rds_alu4   vw    0.15     0.0    .0  all
@@ -281,7 +283,7 @@ table mbk_to_rds_via
   cont_via    \
     rds_via1        0.170  all\
     rds_alu1        0.330  all\
-    rds_alu2        0.330  all
+    rds_alu2        0.350  all
 
 # via.1b
 # via.5b
