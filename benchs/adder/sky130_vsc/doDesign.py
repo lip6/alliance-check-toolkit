@@ -25,25 +25,25 @@ def scriptMain ( **kw ):
     DbU.setStringMode( DbU.StringModeSymbolic )
     rvalue = True
     try:
-       #setTraceLevel( 550 )
-       #Breakpoint.setStopLevel( 100 )
+        #setTraceLevel( 550 )
+        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'adder', CRL.Catalog.State.Logical )
-       #af.saveCell( cell, CRL.Catalog.State.Logical )
+        af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
         ioPadsSpec = []
-        m1pitch = l(10.0)
-        m2pitch = l(20.0)
+        m1pitch = l(8.0)
+        m2pitch = l(8.0)
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-        conf.cfg.block.spareSide             = l(1000)
-        conf.cfg.katana.hTracksReservedMin   = 6
-        conf.cfg.katana.vTracksReservedMin   = 5
-        conf.cfg.katana.hTracksReservedLocal = 10
-        conf.cfg.katana.vTracksReservedLocal = 7 
+        conf.cfg.block.spareSide             = l(800)
+        conf.cfg.katana.hTracksReservedMin   = 4
+        conf.cfg.katana.vTracksReservedMin   = 4
+        conf.cfg.katana.hTracksReservedLocal = 8
+        conf.cfg.katana.vTracksReservedLocal = 4 
         conf.cfg.katana.termSatReservedLocal = 6 
         conf.cfg.katana.termSatThreshold     = 9 
         conf.cfg.katana.trackFill            = 0
@@ -52,7 +52,7 @@ def scriptMain ( **kw ):
         conf.useSpares = False
         conf.useHFNS   = False
         conf.useHTree  = False
-        conf.coreSize  = ( l( 700.0), l( 500.0) )
+        conf.coreSize  = ( l( 800.0), l( 800.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
