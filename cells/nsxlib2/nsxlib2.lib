@@ -18861,6 +18861,7 @@ library (nsxlib2.lib) {
         pin (q) {
             direction : output ;
             capacitance : 9.84 ;
+            function : "IQ" ;
         }
         ff(IQ,IQN) {
             next_state : "i";
@@ -18899,6 +18900,7 @@ library (nsxlib2.lib) {
         pin (q) {
             direction : output ;
             capacitance : 9.01 ;
+            function : "IQ" ;
         }
         ff(IQ,IQN) {
             next_state : "i";
@@ -18960,6 +18962,7 @@ library (nsxlib2.lib) {
         pin (q) {
             direction : output ;
             capacitance : 8.93 ;
+            function : "IQ" ;
         }
         ff(IQ,IQN) {
             next_state : "(cmd & i1) + (!(cmd) & i0)";
