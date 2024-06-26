@@ -97,13 +97,13 @@ table lynx_capa
 # -------------------------------------------------------------------
 # rds_name area_capa(pif/um^2) peri_capa(pif/um)
 # -------------------------------------------------------------------
-  rds_poly  25.2e-6  51.8e-6  # Ca max POLY_NWELL 2Cf0 max POLY_NWELL 
-  rds_alu1   2.6e-5   8.5e-5  # Ca max M1_NWELL   2Cf0 max M1_NWELL
-  rds_alu2   1.6e-5   7.9e-5  # Ca max M2_NWELL   2Cf0 max M2_NWELL
-  rds_alu3   8.0e-6   6.8e-5  # Ca max M3_NWELL   2Cf0 max M3_NWELL
-  rds_alu4   6.0e-6   6.0e-5  # Ca max M4_NWELL   2Cf0 max M4_NWELL
-  rds_alu5   6.0e-6   6.0e-5  # hyp
-  rds_alu6   6.0e-6   6.0e-5
+  rds_poly  106.2e-6   55.3e-6  # Ca max POLY_NWELL 2Cf0 max POLY_NWELL 
+  rds_alu1   37.9e-6   40.7e-6  # Ca max M1_NWELL   2Cf0 max M1_NWELL
+  rds_alu2   25.8e-6   40.6e-6  # Ca max M2_NWELL   2Cf0 max M2_NWELL
+  rds_alu3   16.9e-6   37.8e-6  # Ca max M3_NWELL   2Cf0 max M3_NWELL
+  rds_alu4   12.4e-6   41.0e-6  # Ca max M4_NWELL   2Cf0 max M4_NWELL
+  rds_alu5    8.4e-6   36.7e-6  # hyp
+  rds_alu6    6.3e-6   38.9e-6
 end
 
 table lynx_capa_poly
@@ -161,11 +161,11 @@ table mbk_to_rds_segment
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
   ndif    rds_activ  vw    0.0     0.0    .0  all\
-#          rds_nimp   vw    0.0     0.0    .0  all\
+          rds_nimp   vw    0.0     0.0    .0  all\
           rds_ndif   vw    0.0     0.0    .0  all
                                                                                                                   
   pdif    rds_activ  vw    0.0     0.0    .0  all\
-#          rds_pimp   vw    0.0     0.0    .0  all\
+          rds_pimp   vw    0.0     0.0    .0  all\
           rds_pdif   vw    0.0     0.0    .0  all
                                                                                                                   
   ntie    rds_ntie   vw    0.145  -0.110  .0  all\
