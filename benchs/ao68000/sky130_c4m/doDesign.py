@@ -177,8 +177,8 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.etesian.densityVariation    = 0.05
         ao68000Conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        ao68000Conf.cfg.etesian.spaceMargin         = 1.30
-        ao68000Conf.cfg.anabatic.searchHalo         = 1
+        ao68000Conf.cfg.etesian.spaceMargin         = 1.40
+        ao68000Conf.cfg.anabatic.searchHalo         = 2
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
        #ao68000Conf.cfg.katana.hTracksReservedLocal = 6
