@@ -166,7 +166,7 @@ def scriptMain ( **kw ):
                      , (IoPin.WEST |IoPin.A_BEGIN,  'fc_o({})', 22*vspace, vspace, 3 )
                      , (IoPin.WEST |IoPin.A_BEGIN, 'sel_o({})', 26*vspace, vspace, 4 )
                      , (IoPin.SOUTH|IoPin.A_BEGIN, 'dat_i({})',    hspace, hspace, 32 )
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'adr_o({})',    vspace,  5*vspace, 32 )
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'adr_o({})',    vspace,  6*vspace, 32 )
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'dat_o({})',    hspace,  5*hspace, 32 )
                      ]
         ao68000Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
@@ -181,9 +181,9 @@ def scriptMain ( **kw ):
         ao68000Conf.cfg.anabatic.searchHalo         = 2
         ao68000Conf.cfg.anabatic.globalIterations   = 20
         ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
-       #ao68000Conf.cfg.katana.hTracksReservedLocal = 6
-       #ao68000Conf.cfg.katana.vTracksReservedLocal = 9
-        ao68000Conf.cfg.katana.hTracksReservedMin   = 3
+        ao68000Conf.cfg.katana.hTracksReservedLocal = 20
+        ao68000Conf.cfg.katana.vTracksReservedLocal = 20
+        ao68000Conf.cfg.katana.hTracksReservedMin   = 4
         ao68000Conf.cfg.katana.vTracksReservedMin   = 4
        #ao68000Conf.cfg.katana.trackFill            = 0
         ao68000Conf.cfg.katana.runRealignStage      = True
