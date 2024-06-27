@@ -8,8 +8,10 @@
 set target      [lindex $argv 0]  
 # model SPI file
 set spimodel    [lindex $argv 1]  
+# spice type
+set spitype     [lindex $argv 2]  
 # vdd voltage
-set vddvolt     [lindex $argv 2]  
+set vddvolt     [lindex $argv 3]  
 
 # General config
 avt_config avtLibraryDirs .
@@ -21,7 +23,7 @@ avt_config simVthHigh 0.8
 avt_config simVthLow 0.2
 avt_config simSlope 10e-12 
 
-avt_config simToolModel spice
+avt_config simToolModel $spitype
 avt_config tasGenerateDetailTimingFile yes
 avt_config avtVddName vdd
 avt_config avtVssName vss
