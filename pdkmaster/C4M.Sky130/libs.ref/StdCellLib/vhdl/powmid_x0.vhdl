@@ -1,1 +1,0 @@
--- no model for powmid_x0

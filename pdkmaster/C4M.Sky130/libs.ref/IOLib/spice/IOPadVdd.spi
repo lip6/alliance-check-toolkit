@@ -3,5 +3,5 @@
 Xpad vdd Pad_15800W12000H
 Xnclamp iovss iovdd vdd Clamp_N32N0D
 Xpclamp iovss iovdd vdd Clamp_P32N0D
-Xbulkconn vdd vss iovdd iovss BulkConn_18000WUp
+Xpad_guardring iovss GuardRing_N18000W13312HFF
 .ends IOPadVdd

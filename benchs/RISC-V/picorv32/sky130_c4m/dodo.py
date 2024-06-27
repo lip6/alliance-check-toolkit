@@ -1,7 +1,7 @@
 
 from coriolis.designflow.technos import setupSky130_c4m
 
-setupSky130_c4m( '../../..', '../../../pdkmaster/C4M.Sky130' )
+setupSky130_c4m( '../../../..', '../../../../pdkmaster/C4M.Sky130' )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 

@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #setTraceLevel( 540 )
-       #Breakpoint.setStopLevel( 99 )
+        Breakpoint.setStopLevel( 100 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
             harnessProjectDir = checkToolkitDir + '/cells/sky130'
@@ -92,8 +92,8 @@ def scriptMain ( **kw ):
         else:
             m1pitch    = u(0.46)
             m2pitch    = u(0.51)
-            vspace     = m2pitch * 16
-            hspace     = m1pitch * 13
+            vspace     = m2pitch * 10
+            hspace     = m1pitch * 9
             ioPadsSpec = [ ]
             ioPinsSpec = [ (18, 'trace_data({})'  ,     vspace, vspace, range(0, 36))
                          , (18, 'mem_la_wdata({})',  38*vspace, vspace, range(0, 32))
@@ -143,10 +143,10 @@ def scriptMain ( **kw ):
         conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.globalIterations   = 20
         conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        conf.cfg.katana.hTracksReservedLocal = 6
-        conf.cfg.katana.vTracksReservedLocal = 3
-        conf.cfg.katana.hTracksReservedMin   = 3
-        conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.katana.hTracksReservedLocal = 10
+        conf.cfg.katana.vTracksReservedLocal = 10
+        conf.cfg.katana.hTracksReservedMin   = 4
+        conf.cfg.katana.vTracksReservedMin   = 2
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
@@ -163,8 +163,8 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u( 840.0), u( 840.0) )
-        conf.chipSize            = ( u(2020.0), u(2060.0) )
+        conf.coreSize            = ( u( 790*0.76), u(100*6.0) )
+        conf.chipSize            = ( u(   2020.0), u( 2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
             conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
