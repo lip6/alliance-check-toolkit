@@ -163,7 +163,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u( 790*0.76), u(100*6.0) )
+        conf.coreSize            = ( u( 788*0.76), u(100*6.0) )
         conf.chipSize            = ( u(   2020.0), u( 2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
