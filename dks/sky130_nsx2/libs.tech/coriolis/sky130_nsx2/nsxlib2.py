@@ -151,7 +151,7 @@ def _routing ():
         cfg.anabatic.globalLengthThreshold = 30*l(100.0)
         cfg.anabatic.saturateRatio = 0.90
         cfg.anabatic.saturateRp = 10
-        cfg.anabatic.topRoutingLayer = 'METAL5'
+        cfg.anabatic.topRoutingLayer = 'METAL4'
         cfg.anabatic.edgeLength = 192
         cfg.anabatic.edgeWidth = 32
         cfg.anabatic.edgeCostH = 9.0
