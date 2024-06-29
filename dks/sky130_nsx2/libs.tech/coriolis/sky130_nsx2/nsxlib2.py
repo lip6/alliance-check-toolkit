@@ -73,7 +73,7 @@ def _routing ():
                                 , 3                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
-                                , l(10.0)                           # track pitch
+                                , l(20.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
@@ -85,7 +85,7 @@ def _routing ():
                                 , 4                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
-                                , l(10.0)                           # track pitch
+                                , l(20.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 4.0)                           # VIA side
@@ -151,7 +151,7 @@ def _routing ():
         cfg.anabatic.globalLengthThreshold = 30*l(100.0)
         cfg.anabatic.saturateRatio = 0.90
         cfg.anabatic.saturateRp = 10
-        cfg.anabatic.topRoutingLayer = 'METAL4'
+        cfg.anabatic.topRoutingLayer = 'METAL5'
         cfg.anabatic.edgeLength = 192
         cfg.anabatic.edgeWidth = 32
         cfg.anabatic.edgeCostH = 9.0

@@ -462,11 +462,17 @@ layer RDS_PIMP    0.380 ;
 layer RDS_ACTIV   0.420 ;
 layer RDS_CONT    0.170 ;
 layer RDS_POLY    0.150 ;
+layer RDS_VIA1    0.170 ;
+layer RDS_VIA2    0.170 ;
+layer RDS_VIA3    0.170 ;
+layer RDS_VIA4    0.170 ;
+layer RDS_VIA5    0.170 ;
 layer RDS_ALU1    0.140 ;
 layer RDS_ALU2    0.140 ;
 layer RDS_ALU3    0.140 ;
 layer RDS_ALU4    0.300 ;
 layer RDS_ALU5    0.300 ;
+layer RDS_ALU6    0.300 ;
 layer RDS_USER0   0.005 ;
 layer RDS_USER1   0.005 ;
 layer RDS_USER2   0.005 ;
@@ -604,33 +610,153 @@ define RDS_ACTI , RDS_CONT intersection -> cont_diff;
 
 undefine cont_diff;
 
-# check RDS_ALU1 shapes
-# ---------------------
-characterize RDS_ALU1 (
-  rule   40 : surface          min    0.060 ;
-  rule   41 : width          >=     0.170 ;
-  rule   42 : intersection_length   min    0.170 ;
-  rule   43 : notch            >=     0.170 ;
-);
-relation RDS_ALU1 , RDS_ALU1 (
-  rule   44 : spacing axial  min    0.170 ;
-);
-
 # check any_via layers, stacking are free
 # ---------------------------------------
 relation RDS_CONT , RDS_CONT (
-  rule   45 : spacing axial  >=     0.170 ;
+  rule   40 : spacing axial  >=     0.170 ;
 );
 
 characterize RDS_CONT (
-  rule   46 : width           =     0.170 ;
-  rule   47 : length          =     0.170 ;
+  rule   41 : width           =     0.170 ;
+  rule   42 : length          =     0.170 ;
 );
 
 # check RDS_POLY is distant from activ zone of transistor
 # -------------------------------------------------------
 relation RDS_POLY , RDS_ACTIV (
-  rule   48 : spacing axial  >=     0.075 ;
+  rule   43 : spacing axial  >=     0.075 ;
+);
+
+# check RDS_ALU1 shapes
+# ---------------------
+characterize RDS_ALU1 (
+  rule   44 : surface          min    0.060 ;
+  rule   45 : width          >=     0.170 ;
+  rule   46 : intersection_length   min    0.170 ;
+  rule   47 : notch            >=     0.170 ;
+);
+relation RDS_ALU1 , RDS_ALU1 (
+  rule   48 : spacing axial  min    0.170 ;
+);
+
+# check mcon layers, stacking are free
+# ---------------------------------------
+relation RDS_VIA1 , RDS_VIA1 (
+  rule   49 : spacing axial  >=     0.190 ;
+);
+
+characterize RDS_VIA1 (
+  rule   50 : width           =     0.170 ;
+  rule   51 : length          =     0.170 ;
+);
+
+
+# check RDS_ALU2 shapes
+# ---------------------
+characterize RDS_ALU2 (
+#  rule   52 : surface          min    0.085 ;
+  rule   53 : width          >=     0.140 ;
+  rule   54 : intersection_length   min    0.140 ;
+  rule   55 : notch            >=     0.140 ;
+);
+relation RDS_ALU2 , RDS_ALU2 (
+  rule   56 : spacing axial  min    0.140 ;
+);
+
+
+# check any_via layers, stacking are free
+# ---------------------------------------
+relation RDS_VIA2 , RDS_VIA2 (
+  rule   57 : spacing axial  >=     0.170 ;
+);
+
+characterize RDS_VIA2 (
+  rule   58 : width           =     0.150 ;
+  rule   59 : length          =     0.150 ;
+);
+
+
+# check RDS_ALU3 shapes
+# ---------------------
+characterize RDS_ALU3 (
+#  rule   60 : surface          min    0.070 ;
+  rule   61 : width          >=     0.140 ;
+  rule   62 : intersection_length   min    0.140 ;
+  rule   63 : notch            >=     0.140 ;
+);
+relation RDS_ALU3 , RDS_ALU3 (
+  rule   64 : spacing axial  min    0.140 ;
+);
+
+
+# check any_via layers, stacking are free
+# ---------------------------------------
+relation RDS_VIA3 , RDS_VIA3 (
+  rule   65 : spacing axial  >=     0.200 ;
+);
+
+characterize RDS_VIA3 (
+  rule   66 : width           =     0.200 ;
+  rule   67 : length          =     0.200 ;
+);
+# check RDS_ALU4 shapes
+# ---------------------
+characterize RDS_ALU4 (
+#  rule   68 : surface          min    0.240 ;
+  rule   69 : width          >=     0.300 ;
+  rule   70 : intersection_length   min    0.300 ;
+  rule   71 : notch            >=     0.300 ;
+);
+relation RDS_ALU4 , RDS_ALU4 (
+  rule   72 : spacing axial  min    0.300 ;
+);
+
+
+# check any_via layers, stacking are free
+# ---------------------------------------
+relation RDS_VIA4 , RDS_VIA4 (
+  rule   73 : spacing axial  >=     0.200 ;
+);
+
+characterize RDS_VIA4 (
+  rule   74 : width           =     0.200 ;
+  rule   75 : length          =     0.200 ;
+);
+
+# check RDS_ALU5 shapes
+# ---------------------
+characterize RDS_ALU5 (
+#  rule   76 : surface          min    0.240 ;
+  rule   77 : width          >=     0.300 ;
+  rule   78 : intersection_length   min    0.300 ;
+  rule   79 : notch            >=     0.300 ;
+);
+relation RDS_ALU5 , RDS_ALU5 (
+  rule   80 : spacing axial  min    0.300 ;
+);
+
+# check any_via layers, stacking are free
+# ---------------------------------------
+relation RDS_VIA5 , RDS_VIA5 (
+  rule   81 : spacing axial  >=     0.200 ;
+);
+
+characterize RDS_VIA5 (
+  rule   82 : width           =     0.200 ;
+  rule   83 : length          =     0.200 ;
+);
+
+
+# check RDS_ALU6 shapes
+# ---------------------
+characterize RDS_ALU6 (
+#  rule   84 : surface          min    0.240 ;
+  rule   85 : width          >=     0.300 ;
+  rule   86 : intersection_length   min    0.300 ;
+  rule   87 : notch            >=     0.300 ;
+);
+relation RDS_ALU6 , RDS_ALU6 (
+  rule   88 : spacing axial  min    0.300 ;
 );
 
 end rules
@@ -674,14 +800,54 @@ DRC_COMMENT
 37 (channel) Notch 0.210
 38 (channel) Manhatan distance min 0.210
 39 (cont_diff) Manhatan distance min 0.055
-40 (RDS_ALU1) Minimum area 0.060
-41 (RDS_ALU1) Minimum width 0.170
-42 (RDS_ALU1) Intersection length 0170420
-43 (RDS_ALU1) Notch 0.170
-44 (RDS_ALU1,RDS_ALU1) Manhatan distance min 0.170
-45 (RDS_CONT,RDS_CONT) Manhatan distance min 0.170
-46 (RDS_CONT) Width  0.170
-47 (RDS_CONT) Length 0.170
-48 (RDS_POLY,RDS_ACTIV) Manhatan distance min 0.075
+40 (RDS_CONT,RDS_CONT) Manhatan distance min 0.170
+41 (RDS_CONT) Width  0.170
+42 (RDS_CONT) Length 0.170
+43 (RDS_POLY,RDS_ACTIV) Manhatan distance min 0.075
+44 (RDS_ALU1) Minimum area 0.060
+45 (RDS_ALU1) Minimum width 0.170
+46 (RDS_ALU1) Intersection length 0.170
+47 (RDS_ALU1) Notch 0.170
+48 (RDS_ALU1,RDS_ALU1) Manhatan distance min 0.170
+49 (RDS_VIA1,RDS_VIA1) Manhatan distance mcon min 0.190
+50 (RDS_VIA1) mcon width 0.170
+51 (RDS_VIA1) mcon length 0.170
+52 (RDS_ALU2) Minimum area 0.083
+53 (RDS_ALU2) Minimum width 0.140
+54 (RDS_ALU2) Intersection length 0.140
+55 (RDS_ALU2) Notch 0.140
+56 (RDS_ALU2,RDS_ALU2) Manhatan distance min 0.140
+57 (RDS_VIA2,RDS_VIA2) Manhatan distance via min 0.170
+58 (RDS_VIA2) via width 0.150
+59 (RDS_VIA2) via length 0.150
+60 (RDS_ALU3) Minimum area 0.0676
+61 (RDS_ALU3) Minimum width 0.140
+62 (RDS_ALU3) Intersection length 0.140
+63 (RDS_ALU3) Notch 0.140
+64 (RDS_ALU3,RDS_ALU3) Manhatan distance min 0.140
+65 (RDS_VIA3,RDS_VIA3) Manhatan distance via min 0.200
+66 (RDS_VIA3) via width 0.200
+67 (RDS_VIA3) via length 0.200
+68 (RDS_ALU4) Minimum area 0.240
+69 (RDS_ALU4) Minimum width 0.300
+70 (RDS_ALU4) Intersection length 0.300
+71 (RDS_ALU4) Notch 0.300
+72 (RDS_ALU4,RDS_ALU4) Manhatan distance min 0.300
+73 (RDS_VIA4,RDS_VIA4) Manhatan distance via min 0.200
+74 (RDS_VIA4) via width 0.200
+75 (RDS_VIA4) via length 0.200
+76 (RDS_ALU5) Minimum area 0.240
+77 (RDS_ALU5) Minimum width 0.300
+78 (RDS_ALU5) Intersection length 0.300
+79 (RDS_ALU5) Notch 0.300
+80 (RDS_ALU5,RDS_ALU5) Manhatan distance min 0.300
+81 (RDS_VIA5,RDS_VIA5) Manhatan distance via min 0.200
+82 (RDS_VIA5) via width 0.200
+83 (RDS_VIA5) via length 0.200
+84 (RDS_ALU6) Minimum area 0.240
+85 (RDS_ALU6) Minimum width 0.300
+86 (RDS_ALU6) Intersection length 0.300
+87 (RDS_ALU6) Notch 0.300
+88 (RDS_ALU6,RDS_ALU6) Manhatan distance min 0.300
 END_DRC_COMMENT
 END_DRC_RULES
