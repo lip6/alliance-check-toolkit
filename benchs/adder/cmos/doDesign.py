@@ -85,7 +85,7 @@ def scriptMain ( **kw ):
         adderConf.cfg.etesian.bloat          = 'nsxlib'
         adderConf.cfg.etesian.densityVariation = 0.05
         adderConf.cfg.etesian.aspectRatio    = 1.0
-        adderConf.cfg.etesian.spaceMargin    = 0.05
+        adderConf.cfg.etesian.spaceMargin    = 0.07
         adderConf.cfg.block.spareSide        = l(350)
         adderConf.editor              = editor
         adderConf.useSpares           = True
@@ -96,8 +96,8 @@ def scriptMain ( **kw ):
         adderConf.chipConf.name       = 'chip'
         adderConf.chipConf.ioPadGauge = 'pxlib'
         adderConf.coreToChipClass     = CoreToChip
-        adderConf.coreSize            = ( l( 800), l( 800) )
-        adderConf.chipSize            = ( l(2116), l(2066) )
+        adderConf.coreSize            = ( l(1100), l(1000) )
+        adderConf.chipSize            = ( l(2166), l(2066) )
         adderConf.useHTree( 'm_clock' )
         if buildChip:
             chipBuilder = Chip( adderConf )
