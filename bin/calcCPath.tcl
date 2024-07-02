@@ -12,6 +12,8 @@ set spimodel    [lindex $argv 1]
 set spitype     [lindex $argv 2]  
 # vdd voltage
 set vddvolt     [lindex $argv 3]  
+# Clock signal
+set clksig      [lindex $argv 4]  
 
 # General config
 avt_config avtLibraryDirs .
@@ -71,10 +73,10 @@ puts "output load     : $cload"
 
 inf_SetFigureName $target
 
-create_clock -period 10000 -waveform {5000 0} m_clock
+create_clock -name ck -period 10000 -waveform {5000 0} $clksig
 
-set_input_delay -min 2000 -clock m_clock -clock_fall [all_inputs]
-set_input_delay -max 3000 -clock m_clock -clock_fall [all_inputs]
+set_input_delay -min 2000 -clock ck -clock_fall [all_inputs]
+set_input_delay -max 3000 -clock ck -clock_fall [all_inputs]
 
 # OCV
 #inf_DefinePathDelayMargin any "*" 1 1e-9 datapath
