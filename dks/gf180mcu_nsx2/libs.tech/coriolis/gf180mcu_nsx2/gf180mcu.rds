@@ -39,7 +39,7 @@ table cif_layer
   rds_via3     via2
   rds_via4     via3
   rds_via5     via4
-  rds_poly2    npc
+  rds_talu8    npc
   rds_cpas     pad
 end
 
@@ -71,8 +71,8 @@ table gds_layer
   rds_via4     41     0
   rds_via5     82     0
   rds_cpas      9     0
-# use Poly2 as Deep NWELL
-  rds_poly2    12     0
+# use talu8 as Deep NWELL
+  rds_talu8    12     0
 end
 
 table lynx_resistor
@@ -155,13 +155,12 @@ table mbk_to_rds_segment
 # ----------------------------------------------------------------------------------
 # mbk_name     rds_name1 dlr dwr offset mode     rds_name2 dlr dwr offset mode
 # ----------------------------------------------------------------------------------
-  poly2    rds_poly2 vw    0.00    0.00   .0     all
+  talu8    rds_talu8 vw    0.00    0.00   .0     all
 
   nwell   rds_nwell  vw    0.02   -0.08    .180   all\
           rds_pwell  vw    0.02  -1.65     5.875  all \
           rds_pimp   vw    0.0   -1.01     .420  all \
           rds_nimp   vw    0.0   -2.40     5.500  all 
-#          rds_poly2  vw    2.5    9.2      2.625  all
                                                                                                                   
 #  pwell   rds_pwell  vw    0.460   0.280  .0  all
 #          rds_pimp   vw    0.225   0.170  .0  all
