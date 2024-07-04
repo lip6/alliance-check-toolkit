@@ -15,7 +15,7 @@ class STA ( FlowTask ):
     ClockName           = 'm_clock'
     SpiceType           = 'hspice'
     SpiceTrModel        = 'scn6_deep.hsp'
-    MBK_CATA_LIB        = ShellEnv()['MBK_CATA_LIB']
+    MBK_CATA_LIB        = '.'
 
     @staticmethod
     def mkRule ( rule, targets, depends=[], flags=0 ):
