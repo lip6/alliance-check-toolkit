@@ -13,13 +13,14 @@ from coriolis.designflow.task         import ShellEnv
 
 checkToolkit=pathlib.Path('../../..')
 pdkDir          = checkToolkit / 'dks' / 'gf180mcu_nsx2' / 'libs.tech'
-coriolisTechDir = pdkDir / 'coriolis'
+coriolisTechDir = pdkDir / 'coriolis' / 'gf180mcu_nsx2'
 sys.path.append( coriolisTechDir.as_posix() )
-from gf180mcu_nsx2 import techno, nsxlib2, Gf180mcuSetup 
+import techno, nsxlib2, Gf180mcuSetup 
 
 pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
 sys.path.append( pdkCommonDir.as_posix() )
 from s2r import S2R
+from sta import STA
 import pnrcheck
 
 
@@ -35,6 +36,15 @@ import doDesign
 
 kdrcRules = pdkDir / 'klayout' / 'drc' /  'gf180mcu.drc'
 DRC.setDrcRules( kdrcRules )
+
+STA.VddSupply = 3.3
+STA.ClockName = 'm_clock'
+STA.SpiceType = 'hspice'
+STA.SpiceTrModel = 'sm141064.spi'
+STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )
+shellEnv = ShellEnv()
+shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
+shellEnv.export()
 
 pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
 
