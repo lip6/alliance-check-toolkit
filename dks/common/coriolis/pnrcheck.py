@@ -7,6 +7,7 @@ from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
 from coriolis.designflow.pnr      import PnR
 from s2r      import S2R
+from sta      import STA
 from coriolis.designflow.klayout  import DRC
 from coriolis.designflow.graal    import Graal
 from coriolis.designflow.dreal    import Dreal
@@ -50,6 +51,19 @@ def mkRuleSet ( callerGlobals, vlogDesignName, flags=0, extraRtlDepends=[], extr
     rtlDepends += extraRtlDepends
     rulePnR    = PnR     .mkRule( 'pnr', pnrTargets, rtlDepends, scriptMain )
     ruleCougar = Cougar.mkRule( 'cougar', routedName+'_r_ext.vst', [rulePnR], flags=Cougar.Verbose )
+    ruleCougarSpi = Cougar.mkRule( 'cougarSpi', routedName+'_ext.spi', [rulePnR], flags=Cougar.Transistor )
+    staTargets = [ routedName+'_ext.cpath.rep'
+                     , routedName+'_ext.cns'
+                     , routedName+'_ext.cnv'
+                     , routedName+'_ext.dtx'
+                     , routedName+'_ext.rcx'
+                     , routedName+'_ext.rep'
+                     , routedName+'_ext.slack.rep'
+                     , routedName+'_ext.stat'
+                     , routedName+'_ext.stm'
+                     , routedName+'_ext.sto'
+                     , routedName+'_ext.str' ]
+    ruleSta = STA.mkRule( 'sta', staTargets, [ruleCougarSpi] )
     ruleLvx    = Lvx   .mkRule( 'lvx'
                               , [ rulePnR.file_target(1)
                                 , ruleCougar.file_target(0) ]
@@ -67,7 +81,7 @@ def mkRuleSet ( callerGlobals, vlogDesignName, flags=0, extraRtlDepends=[], extr
 
     ruleClean  = Clean .mkRule( extrasClean )
 
-    for tag in [ 'Yosys', 'B2V', 'PnR', 'Cougar', 'Lvx', 'Druc', 'Cgt'
+    for tag in [ 'Yosys', 'B2V', 'PnR', 'Cougar', 'Lvx', 'Druc', 'Cgt', 'CougarSpi', 'Sta'
                , 'Layout', 'Gds', 'DRC', 'Graal', 'Dreal', 'Clean' ]:
         rule = 'rule' + tag
         if rule in locals():
