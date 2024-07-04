@@ -40,8 +40,6 @@ S2R.flags = S2R.PinLayer | S2R.DeleteSubConnectors | S2R.Verbose|S2R.NoReplaceBl
 
 DRC.setDrcRules( kdrcRules )
 
-pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
-
 STA.VddSupply = 1.8
 STA.ClockName = 'm_clock'
 STA.SpiceType = 'hspice'
@@ -50,3 +48,5 @@ STA.MBK_CATA_LIB = '.:'+str( checkToolkit / 'pdkmaster' / 'C4M.Sky130' / 'libs.t
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
 shellEnv.export()
+
+pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
