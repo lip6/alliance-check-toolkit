@@ -7,10 +7,12 @@ from   coriolis.designflow.task import FlowTask, ShellEnv
 CalcCPathBin = Path(os.path.dirname(__file__)) / '..' / '..' / '..' / 'bin' / 'calcCPath.tcl'
 
 
+
 class MissingTarget ( Exception ): pass
 
 class STA ( FlowTask ):
-
+    flags               = 0
+    Transistor          = 0x0001
     VddSupply           = 1.8
     ClockName           = 'm_clock'
     SpiceType           = 'hspice'
@@ -23,6 +25,7 @@ class STA ( FlowTask ):
 
     def __init__ ( self, rule, targets, depends, flags ):
         super().__init__( rule, targets, depends )
+
         self.flags      = flags
         self.inputFile  = self.file_depend(0)
         self.outputFile = self.targets[0]

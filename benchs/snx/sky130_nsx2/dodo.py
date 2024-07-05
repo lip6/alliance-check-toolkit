@@ -48,5 +48,6 @@ STA.MBK_CATA_LIB = '.:'+str( checkToolkit / 'pdkmaster' / 'C4M.Sky130' / 'libs.t
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
 shellEnv.export()
+STA.flags = STA.Transistor
 
 pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
