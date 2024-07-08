@@ -20,6 +20,7 @@ avt_config avtLibraryDirs .
 
 avt_config tasGenerateConeFile yes
 avt_config avtVerboseConeFile yes 
+avt_config yagSetResetDetection yes 
 
 avt_config simVthHigh 0.8
 avt_config simVthLow 0.2
