@@ -26,7 +26,7 @@ avt_LoadFile  sky130_fd_pr__nfet_01v8__mismatch.corner.spice spice
 # modified to include the model file sky130_fd_pr__nfet_01v8__tt.pm3.spice with full path
 # modified sky130_fd_pr__nfet_01v8__tt.pm3.spice to use level = 14
 # have to use local files (hiererchical)
-avt_LoadFile  techno/sky130_fd_pr__nfet_01v8__tt.corner.spice spice
+avt_LoadFile  sky130_fd_pr__nfet_01v8__tt.corner.spice spice
 
 # pfet_01v8_hvt
 avt_LoadFile  sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice spice

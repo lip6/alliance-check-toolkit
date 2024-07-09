@@ -14,7 +14,7 @@ avt_config simVthHigh 0.8
 avt_config simVthLow 0.2
 avt_config simSlope 10e-12
 
-avt_config simToolModel spice
+avt_config simToolModel hspice
 avt_config tasGenerateDetailTimingFile yes
 
 # Files of transistor model of the technology, that may require modifications
