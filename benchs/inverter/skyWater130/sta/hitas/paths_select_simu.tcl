@@ -10,7 +10,7 @@ set figname sky130_fd_sc_hd__inv_1_3
 avt_config avtSpiceString     "ngspice -b $"
 avt_config SimToolModel spice
 avt_config SimTool ngspice
-avt_config simTechnologyName /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice_hitas/C4M.Sky130_tt_model_hitas.spice
+avt_config simTechnologyName C4M.Sky130_tt_model_hitas.spice
 avt_config avtSpiceOutFile $.log
 
 ttv_DisplayActivateSimulation y

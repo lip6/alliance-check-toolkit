@@ -14,11 +14,11 @@ sky130_fd_sc_hd__inv_4_chain 10 inv_4_hitas with slope
 * BSIM4 transistor model parameters for ngspice
 *
 * nfet_01v8
-*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice
-*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__tt.corner.spice
+*.include sky130_fd_pr__nfet_01v8__mismatch.corner.spice
+*.include sky130_fd_pr__nfet_01v8__tt.corner.spice
 * pfet_01v8_hvt
-*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice
-*.include /users/soft/freepdks/src/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
+*.include sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice
+*.include sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
 
 *******************************
 
@@ -31,7 +31,7 @@ Vsupply evdd 0 DC 1.8
 ******************
 * circuit model
 * include circuit netlist
-.INCLUDE /users/cao/mariem/coriolis-2.x/src/alliance-check-toolkit/benchs/inverter/skyWater130/simu/ngspice/sky130_fd_sc_hd__inv_4_chain.spi
+.INCLUDE sky130_fd_sc_hd__inv_4_chain.spi
 *****************
 
 *****************
