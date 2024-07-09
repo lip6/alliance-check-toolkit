@@ -52,7 +52,7 @@ def mkRuleSet ( callerGlobals, vlogDesignName, flags=0, extraRtlDepends=[], extr
     rulePnR    = PnR     .mkRule( 'pnr', pnrTargets, rtlDepends, scriptMain )
     ruleCougar = Cougar.mkRule( 'cougar', routedName+'_r_ext.vst', [rulePnR], flags=Cougar.Verbose )
     if STA.flags & STA.Transistor:
-       cougarFlag = Cougar.Transistor
+       cougarFlag = Cougar.Transistor | Cougar.Verbose
     else:
        cougarFlag = 0
     ruleCougarSpi = Cougar.mkRule( 'cougarSpi', routedName+'_ext.spi', [rulePnR], cougarFlag )
