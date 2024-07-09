@@ -200,7 +200,7 @@ def _loadNsxlib2 ( cellsTop ):
     """
     af  = AllianceFramework.get()
     env = af.getEnvironment()
-    env.setSCALE_X ( 50 )
+    env.setSCALE_X ( 100 )
     env.setCATALOG ( 'CATAL' )
     env.setPOWER   ( 'vdd'   )   
     env.setGROUND  ( 'vss'   )   
