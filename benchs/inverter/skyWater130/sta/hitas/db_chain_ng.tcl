@@ -14,7 +14,7 @@ avt_config simVthHigh 0.8
 avt_config simVthLow 0.2
 avt_config simSlope 10e-12
 
-avt_config simToolModel spice
+avt_config simToolModel hspice
 avt_config tasGenerateDetailTimingFile yes
 
 # Files of transistor model of the technology, that may require modifications
@@ -33,7 +33,7 @@ avt_LoadFile  sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice spice
 # modified to include the model file sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice with full path 
 # modified sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice to use level = 14
 # have to use local files
-avt_LoadFile  /sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice spice
+avt_LoadFile  sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice spice
 
 # File decribing the netlist with power supply and temperature
 avt_LoadFile ./sky130_fd_sc_hd__inv_4_chain_hitas.spi spice
