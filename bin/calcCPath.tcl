@@ -25,6 +25,7 @@ avt_config yagSetResetDetection yes
 avt_config simVthHigh 0.8
 avt_config simVthLow 0.2
 avt_config simSlope 10e-12 
+avt_config simTemperature 25.0
 
 avt_config simToolModel $spitype
 avt_config tasGenerateDetailTimingFile yes
@@ -53,9 +54,9 @@ set date   [ttv_GetTimingFigureProperty $fig DATE]
 puts ""
 puts "Power supply: [ttv_GetTimingFigureProperty $fig DEF_SUPPLY]V"
 puts "Temperature: [ttv_GetTimingFigureProperty $fig TEMP] deg C"
-set sig [ttv_GetTimingSignal $fig out]
-set sign2 [ttv_GetTimingSignal $fig n2]
-set sign1 [ttv_GetTimingSignal $fig n1]
+#set sig [ttv_GetTimingSignal $fig out]
+#set sign2 [ttv_GetTimingSignal $fig n2]
+#set sign1 [ttv_GetTimingSignal $fig n1]
 
 puts ""
 #puts "out signal capacitance: [ttv_GetTimingSignalProperty $sig CAPA]F"
