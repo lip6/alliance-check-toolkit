@@ -27,7 +27,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
         #setTraceLevel( 550 )
-        #Breakpoint.setStopLevel( 100 )
+        Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( coreName, CRL.Catalog.State.Logical )
         af.saveCell( cell, CRL.Catalog.State.Logical )
@@ -48,7 +48,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.termSatReservedLocal = 6 
         conf.cfg.katana.termSatThreshold     = 9 
         conf.cfg.katana.trackFill            = 0
-        conf.cfg.katana.runRealignStage      = True
+        conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = False
         conf.useSpares = True
         conf.useHFNS   = False

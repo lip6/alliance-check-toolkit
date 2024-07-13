@@ -89,7 +89,7 @@ def scriptMain ( **kw ):
         adderConf.bRows               = 3
         adderConf.chipName            = 'chip'
         adderConf.chipConf.ioPadGauge = 'LibreSOCIO'
-        adderConf.coreSize            = ( u(  40.0), u(  40.0) )
+        adderConf.coreSize            = ( u(  60.0), u(  60.0) )
         adderConf.chipSize            = ( u( 700.0), u(1508.0) )
         adderConf.coreToChipClass     = CoreToChip
         adderConf.useHTree( 'm_clock_from_pad' )
