@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
         #setTraceLevel( 550 )
-        Breakpoint.setStopLevel( 100 )
+        #Breakpoint.setStopLevel( 99 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'adder', CRL.Catalog.State.Logical )
         af.saveCell( cell, CRL.Catalog.State.Logical )
@@ -52,7 +52,7 @@ def scriptMain ( **kw ):
         conf.useSpares = False
         conf.useHFNS   = False
         conf.useHTree  = False
-        #conf.coreSize  = ( l( 800.0), l( 800.0) )
+        conf.coreSize  = ( l(1224.0), l(1224.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )

@@ -30,7 +30,7 @@ def scriptMain ( **kw ):
         ioPinsSpec = [ (IoPin.SOUTH, 'adrs({})' , l(   5.0), l( 45.0), 16)
                      , (IoPin.EAST , 'data({})' , l(  25.0), l( 50.0),  8)
                      , (IoPin.EAST , 'datao({})', l(  40.0), l( 50.0),  8)
-                     , (IoPin.WEST , 'debug({})', l(  25.0), l( 30.0), 16)
+                     , (IoPin.WEST , 'debug({})', l(  30.0), l( 30.0), 16)
                      , (IoPin.EAST , 'debug(0)' , l(  30.0),       0 ,  1)
                      , (IoPin.NORTH, 'irq'      , l( 100.0),       0 ,  1)
                      , (IoPin.NORTH, 'm_clock'  , l( 150.0),       0 ,  1)

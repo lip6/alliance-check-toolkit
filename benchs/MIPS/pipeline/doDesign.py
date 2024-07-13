@@ -15,7 +15,7 @@ from   coriolis.plugins.rsave import rsave
 
 
 def scriptMain ( **kw ):
-    #Breakpoint.setStopLevel( 100 )
+    #Breakpoint.setStopLevel( 99 )
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         # Common settings for all runs.
         cfg.misc.catchCore              = False
@@ -61,6 +61,7 @@ def scriptMain ( **kw ):
     Breakpoint.stop( 100, 'Global routing has been loaded.' )
     katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
     katana.runNegociate         ( Katana.Flags.NoFlags )
+    Breakpoint.stop( 99, 'Detailed routing finished, before finalize layout.' )
     katana.finalizeLayout()
     success = katana.isDetailedRoutingSuccess()
     katana.destroy()
