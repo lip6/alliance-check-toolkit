@@ -2,7 +2,7 @@
 import sys
 import os.path
 from   coriolis                 import Cfg
-from   coriolis.Hurricane       import Technology, DataBase, DbU, Library, Layer,         \
+from   coriolis.Hurricane       import Technology, DataBase, DbU, Library, Layer, RegularLayer, \
                                        BasicLayer, Cell, Net, Horizontal, Vertical,       \
                                        Rectilinear, Box, Point, Instance, Transformation, \
                                        NetExternalComponents, Pad
@@ -12,6 +12,7 @@ from   coriolis.CRL             import AllianceFramework, Environment, Gds, LefI
 from   coriolis.helpers         import l, u, n, overlay, io, ndaTopDir
 from   coriolis.helpers.overlay import CfgCache, UpdateSession
 from   coriolis.Anabatic        import StyleFlags
+from coriolis.helpers.technology import createBL
 
 
 __all__ = [ "setup" ]
@@ -30,6 +31,13 @@ def _routing ():
     dirM2           = RoutingLayerGauge.Horizontal
     netBuilderStyle = 'HV,3RL+'
     routingStyle    = StyleFlags.HV
+
+    Nimp   = createBL( tech, 'Nimp' , BasicLayer.Material.blockage )
+    nimp   = RegularLayer.create( tech, 'BLOCKAGE7', Nimp )
+    tech.setSymbolicLayer( nimp      .getName() )
+    Pimp   = createBL( tech, 'Pimp' , BasicLayer.Material.blockage )
+    pimp   = RegularLayer.create( tech, 'BLOCKAGE8', Pimp )
+    tech.setSymbolicLayer( pimp      .getName() )
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL1' )         # metal
                                 , dirM1                             # preferred routing direction
@@ -60,20 +68,20 @@ def _routing ():
                                 , RoutingLayerGauge.Default         # layer usage
                                 , 2                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 0.0)                           # track offset from AB
-                                , l( 8.0)                           # track pitch
-                                , l( 3.0)                           # wire width
-                                , l( 3.0)                           # perpandicular wire width
+                                , l( 4.0)                           # track offset from AB
+                                , l( 16.0)                           # track pitch
+                                , l( 4.0)                           # wire width
+                                , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 5.0) ))                        # obstacle dW
+                                , l( 4.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL4' )         # metal
                                 , dirM2                             # preferred routing direction
                                 , RoutingLayerGauge.Default         # layer usage
                                 , 3                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 0.0)                           # track offset from AB
-                                , l( 8.0)                           # track pitch
+                                , l( 4.0)                           # track offset from AB
+                                , l( 16.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
@@ -84,19 +92,19 @@ def _routing ():
                                 , RoutingLayerGauge.Default         # layer usage
                                 , 4                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 0.0)                           # track offset from AB
-                                , l( 8.0)                           # track pitch
-                                , l( 4.0)                           # wire width
-                                , l( 4.0)                           # perpandicular wire width
+                                , l( 4.0)                           # track offset from AB
+                                , l( 16.0)                           # track pitch
+                                , l( 8.0)                           # wire width
+                                , l( 8.0)                           # perpandicular wire width
                                 , l( 4.0)                           # VIA side
-                                , l( 4.0) ))                        # obstacle dW
+                                , l( 8.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL6' )         # metal
                                 , dirM2                             # preferred routing direction
                                 , RoutingLayerGauge.PowerSupply     # layer usage
                                 , 5                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 0.0)                           # track offset from AB
+                                , l( 4.0)                           # track offset from AB
                                 , l(16.0)                           # track pitch
                                 , l(12.0)                           # wire width
                                 , l(12.0)                           # perpandicular wire width
