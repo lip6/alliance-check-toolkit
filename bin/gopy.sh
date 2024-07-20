@@ -100,8 +100,8 @@
  mode="ignoreFailure"
 # hline="+---+----+--------------------------------+------------+----------+-----------+"
 #header="|Set| No |             bench              |    Rule    |  Runtime |  Status   |"
-  hline="===  ==  ==============================  ==========  ==========  ==========="
- header="Set  No  Bench                           Rule           Runtime  Status     "
+  hline="===  ==  ==============================  ================  ==========  ==========="
+ header="Set  No  Bench                           Rule                 Runtime  Status     "
 
  runSet () {
    setId="$1"
@@ -120,7 +120,7 @@
      echo "=============================================================================" >> ${benchLog}
 
     #statusLine="| %u | %2u | %-30s | %-10s | %10s | %-7s |"
-     statusLine="%3u  %2u  %-30s  %-10s  %10s  %-7s "
+     statusLine="%3u  %2u  %-30s  %-16s  %10s  %-7s "
   
      if [ ! -d "${bench}" ]; then
        echo ""
@@ -137,6 +137,7 @@
          success="false"
          printf "${statusLine}\n" $setId $benchCount "<${bench}>" "${rule}" "`tail -n 1 time.txt`" "FAILED"
          touch ${failedTag}
+	 rm -f time.txt
          if [ "${mode}" = "stopOnFailure" ]; then
            echo ""
            echo ""
@@ -148,7 +149,12 @@
      done
      ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
      if [ "${success}" = "true" ]; then
-       printf "${statusLine}\n" $setId $benchCount "<${bench}>" "${rule}" "`tail -n 1 time.txt`" "success"
+       printf "${statusLine}\n" $setId       \
+                                $benchCount  \
+                                "<${bench}>" \
+				"`echo \"${rules}\" | sed 's/ /,/g'`" \
+				"`tail -n 1 time.txt`" \
+				"success"
      fi
      popd > /dev/null
      benchCount=`expr ${benchCount} + 1`
@@ -165,7 +171,7 @@
    timeSet="time-set-${setId}.txt"
    /usr/bin/time -f '%E' -o ${timeSet} ../bin/gopy.sh --run-set=${setId}
    if [ $? -ne 0 ]; then rvalue=1; fi
-   printf "         **Benchs set %u completed** %27s\n" "${setId}" "`tail -n 1 ${timeSet}`"
+   printf "         **Benchs set %u completed** %33s\n" "${setId}" "`tail -n 1 ${timeSet}`"
    rm -f ${timeSet}
    exit $rvalue
  }
