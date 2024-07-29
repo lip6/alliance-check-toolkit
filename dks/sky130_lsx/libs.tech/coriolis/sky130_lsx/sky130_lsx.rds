@@ -167,8 +167,8 @@ table mbk_to_rds_segment
                                                                                                                   
   ntrans  rds_poly   vw   -0.075   0.010  .0  all\
           rds_activ  vw   -0.210   0.560  .0  drc\
-          rds_ndif   lcw  -0.210   0.280    0.005 ext\
-          rds_ndif   rcw  -0.210   0.280    0.005 ext
+          rds_ndif   lcw  -0.210   0.280   0.005 ext\
+          rds_ndif   rcw  -0.210   0.280   0.005 ext
                                                                                                                   
   ptrans  rds_poly   vw   -0.075   0.010  .0  all\
           rds_activ  vw   -0.210   0.560  .0  drc\
@@ -279,6 +279,8 @@ table lynx_transistor
 # -------------------------------------------------------------------
 # mbk_name trans_name compostion
 # -------------------------------------------------------------------
+  NTRANS  NTRANS  C_X_N   RDS_POLY   RDS_NDIF  RDS_NDIF  RDS_PWELL
+  PTRANS  PTRANS  C_X_P   RDS_POLY   RDS_PDIF  RDS_PDIF  RDS_NWELL
 end
 
 table lynx_diffusion
