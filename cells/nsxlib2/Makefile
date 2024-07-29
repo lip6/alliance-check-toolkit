@@ -3,6 +3,7 @@
  PHYSICAL_SYNTHESIS = Alliance
          DESIGN_KIT = nsxlib2
 
+SPIMODEL=$(MBK_SPI_MODEL)
  include ./mk/dks.d/nsxlib2.mk
  include ./mk/design-flow.mk
  include ./mk/check-library.mk
