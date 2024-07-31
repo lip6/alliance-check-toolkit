@@ -11,7 +11,7 @@
 # -------------------------------------------------------------------
 
 define physical_grid      0.005
-define lambda             0.140
+define lambda             0.120
 
 table cif_layer
 # -------------------------------------------------------------------
@@ -145,49 +145,49 @@ table mbk_to_rds_segment
 # mbk_name     rds_name1 dlr dwr offset mode     rds_name2 dlr dwr offset mode
 # ----------------------------------------------------------------------------------
 
-  nwell   rds_nwell  vw    0.460   0.280  .0  all\
-          rds_pimp   vw    0.225   0.170  .0  all
+  nwell   rds_nwell  vw    0.420   0.360  .0  all\
+          rds_pimp   vw    0.185   0.250  .0  all
                                                                                                                   
-  pwell   rds_pwell  vw    0.460   0.280  .0  all\
-          rds_nimp   vw    0.225   0.170  .0  all
+  pwell   rds_pwell  vw    0.420   0.360  .0  all\
+          rds_nimp   vw    0.185   0.250  .0  all
                                                                                                                   
-  ndif    rds_activ  vw    0.070   0.000  .0  all\
-          rds_ndif   vw    0.070   0.000  .0  ext
+  ndif    rds_activ  vw    0.090   0.060  .0  all\
+          rds_ndif   vw    0.090   0.060  .0  ext
                                                                                                                   
-  pdif    rds_activ  vw    0.070   0.000  .0  all\
-          rds_pdif   vw    0.070   0.000  .0  ext
+  pdif    rds_activ  vw    0.090   0.060  .0  all\
+          rds_pdif   vw    0.090   0.060  .0  ext
                                                                                                                   
-  ntie    rds_activ  vw    0.145  -0.130  .0  all\
-          rds_ntie   vw    0.270   0.120  .0  all\
-          rds_nwell  vw    0.460   0.510  .0  all
+  ntie    rds_activ  vw    0.145  -0.070  .0  all\
+          rds_ntie   vw    0.270   0.180  .0  all\
+          rds_nwell  vw    0.420   0.530  .0  all
                                                                                                                   
-  ptie    rds_activ  vw    0.145  -0.130  .0  all\
-          rds_ptie   vw    0.270   0.120  .0  all\
-          rds_pwell  vw    0.460   0.510  .0  all
+  ptie    rds_activ  vw    0.145  -0.070  .0  all\
+          rds_ptie   vw    0.270   0.180  .0  all\
+          rds_pwell  vw    0.420   0.530  .0  all
                                                                                                                   
-  ntrans  rds_poly   vw   -0.075   0.010  .0  all\
-          rds_activ  vw   -0.210   0.560  .0  drc\
-          rds_ndif   lcw  -0.210   0.280   0.005 ext\
-          rds_ndif   rcw  -0.210   0.280   0.005 ext
+  ntrans  rds_poly   vw   -0.015   0.030  .0  all\
+          rds_activ  vw   -0.150   0.580  .0  drc\
+          rds_ndif   lcw  -0.150   0.290    0.015 ext\
+          rds_ndif   rcw  -0.150   0.290    0.015 ext
                                                                                                                   
-  ptrans  rds_poly   vw   -0.075   0.010  .0  all\
-          rds_activ  vw   -0.210   0.560  .0  drc\
-          rds_pdif   lcw  -0.210   0.280    0.005 ext\
-          rds_pdif   rcw  -0.210   0.280    0.005 ext
+  ptrans  rds_poly   vw   -0.015   0.030  .0  all\
+          rds_activ  vw   -0.150   0.580  .0  drc\
+          rds_pdif   lcw  -0.150   0.290    0.015 ext\
+          rds_pdif   rcw  -0.150   0.290    0.015 ext
                                                                                                                   
-  poly    rds_poly   vw    0.075   0.010  .0  all
+  poly    rds_poly   vw    0.075   0.030  .0  all
 
-  alu1    rds_alu1   vw    0.165   0.050  .0  all
-  calu1   rds_alu1   vw    0.165   0.050  .0  all
-  talu1   rds_talu1  vw    0.165   0.050  .0  all
+  alu1    rds_alu1   vw    0.165   0.090  .0  all
+  calu1   rds_alu1   vw    0.165   0.090  .0  all
+  talu1   rds_talu1  vw    0.165   0.090  .0  all
 
-  alu2    rds_alu2   vw    0.165   0.050  .0  all
-  calu2   rds_alu2   vw    0.165   0.050  .0  all
-  talu2   rds_talu2  vw    0.165   0.050  .0  all
+  alu2    rds_alu2   vw    0.165   0.090  .0  all
+  calu2   rds_alu2   vw    0.165   0.090  .0  all
+  talu2   rds_talu2  vw    0.165   0.090  .0  all
 
-  alu3    rds_alu3   vw    0.165   0.050  .0  all
-  calu3   rds_alu3   vw    0.165   0.050  .0  all
-  talu3   rds_talu3  vw    0.165   0.050  .0  all
+  alu3    rds_alu3   vw    0.165   0.090  .0  all
+  calu3   rds_alu3   vw    0.165   0.090  .0  all
+  talu3   rds_talu3  vw    0.165   0.090  .0  all
 end
 
 table mbk_to_rds_connector
@@ -234,7 +234,7 @@ table mbk_to_rds_via
 
   cont_poly   \
     rds_cont        0.170  all\
-    rds_poly        0.290  all\
+    rds_poly        0.330  all\
     rds_alu1        0.330  all
 
   cont_via    \
@@ -264,9 +264,10 @@ table mbk_to_rds_turnvia
 # -------------------------------------------------------------------
 # mbk_name rds_name dwr mode
 # -------------------------------------------------------------------
-  cont_turn1 rds_alu1    0.050 all
-  cont_turn2 rds_alu1    0.050 all
-  cont_turn3 rds_alu1    0.050 all
+  cont_turn1 rds_alu1    0.090 all
+  cont_turn2 rds_alu2    0.090 all
+  cont_turn3 rds_alu3    0.090 all
+  cont_turn8 rds_poly    0.090 all
 end
 
 table lynx_bulk_implicit
@@ -521,7 +522,7 @@ undefine channel;
 define RDS_ACTI , RDS_CONT intersection -> cont_diff;
 
   relation RDS_POLY , cont_diff (
-    regle   39 : distance axiale  >=     0.250 ;
+    regle   39 : distance axiale  >=     0.055 ;
   );
 
 undefine cont_diff;
