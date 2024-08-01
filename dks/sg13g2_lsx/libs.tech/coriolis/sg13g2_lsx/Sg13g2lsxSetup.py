@@ -6,7 +6,7 @@ from   pathlib import Path
 from   coriolis.designflow.task   import ShellEnv
 
 
-__all__ = [ 'Where', 'setupSky130_lsx' ]
+__all__ = [ 'Where', 'setupSg13g2_lsx ' ]
 
 
 class Where ( object ):
@@ -41,28 +41,29 @@ class Where ( object ):
             return '<Where coriolisTop=NOT_FOUND>'
         return '<Where coriolisTop="{}">'.format( Where.coriolisTop.as_posix() )
 
-def setupSky130_lsx ( checkToolkit=None ):
+
+def setupSg13g2_lsx ( checkToolkit=None ):
     Where( checkToolkit )
     ShellEnv().export()
 
-    pdkDir          = Where.checkToolkit / 'dks' / 'sky130_lsx' / 'libs.tech'
+    pdkDir          = Where.checkToolkit / 'dks' / 'sg13g2_lsx' / 'libs.tech'
     coriolisTechDir = pdkDir / 'coriolis'
     if not pdkDir.is_dir():
-        print( '[ERROR] technos.setupSky130_lsx(): PDK directory do *not* exists:' )
+        print( '[ERROR] technos.setupSg13g2_lsx(): PDK directory do *not* exists:' )
         print( '        "{}"'.format(techDir.as_posix()) )
     sys.path.append( coriolisTechDir.as_posix() )
 
     cellsTop  = Where.checkToolkit / 'cells'
     liberty   = cellsTop / 'lsxlib' / 'lsxlib.lib'
-    kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
+#    kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
 
     from coriolis          import Cfg 
     from coriolis          import Viewer
     from coriolis          import CRL 
     from coriolis.helpers   import overlay, l, u, n
-    from coriolis.desigflow.yosys      import Yosys
-    from coriolis.desigflow.klayout    import DRC
-    from sky130_lsx import techno, lsxlib
+    from coriolis.designflow.yosys      import Yosys
+    from coriolis.designflow.klayout    import DRC
+    from sg13g2_lsx import techno, lsxlib
     techno.setup( coriolisTechDir )
     lsxlib.setup( cellsTop )
     
@@ -82,7 +83,7 @@ def setupSky130_lsx ( checkToolkit=None ):
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
 
     Yosys.setLiberty( liberty )
-    DRC.setDrcRules( kdrcRules )
+#    DRC.setDrcRules( kdrcRules )
     ShellEnv.CHECK_TOOLKIT = Where.checkToolkit.as_posix()
 
     path = None
