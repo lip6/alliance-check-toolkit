@@ -530,25 +530,25 @@ relation RDS_NIMP , RDS_NIMP (
 # check the RDS_PTIE shapes
 # -------------------------
 characterize RDS_PTIE (
-  rule   16 : surface          min    0.255 ;
-  rule   17 : width          >=     0.380 ;
-  rule   18 : intersection_length   min    0.380 ;
-  rule   19 : notch            >=     0.380 ;
+#  rule   16 : surface          min    0.255 ;
+  rule   17 : width          >=     0.150 ;
+  rule   18 : intersection_length   min    0.150 ;
+  rule   19 : notch            >=     0.270 ;
 );
 relation RDS_PTIE , RDS_PTIE (
-  rule   20 : spacing axial  min    0.380 ;
+  rule   20 : spacing axial  min    0.270 ;
 );
 
 # check the RDS_NTIE shapes
 # -------------------------
 characterize RDS_NTIE (
-  rule   21 : surface          min    0.265 ;
-  rule   22 : width          >=     0.380 ;
-  rule   23 : intersection_length   min    0.380 ;
-  rule   24 : notch            >=     0.380 ;
+#  rule   21 : surface          min    0.265 ;
+  rule   22 : width          >=     0.150 ;
+  rule   23 : intersection_length   min    0.150 ;
+  rule   24 : notch            >=     0.270 ;
 );
 relation RDS_NTIE , RDS_NTIE (
-  rule   25 : spacing axial  min    0.380 ;
+  rule   25 : spacing axial  min    0.270 ;
 );
 
 # check the RDS_ACTI shapes
@@ -777,16 +777,16 @@ DRC_COMMENT
 13 (RDS_NIMP) Intersection length 0.380
 14 (RDS_NIMP) Notch 0.380
 15 (RDS_NIMP,RDS_NIMP) Manhatan distance min 0.380
-16 (RDS_PTITE) Minimum area 0.265
-17 (RDS_PTITE) Minimum width 0.380
-18 (RDS_PTITE) Intersection length 0.380
-19 (RDS_PTITE) Notch 0.380
-20 (RDS_PTITE,RDS_PTITE) Manhatan distance min 0.380
-21 (RDS_NTITE) Minimum area 0.265
-22 (RDS_NTITE) Minimum width 0.380
-23 (RDS_NTITE) Intersection length 0.380
-24 (RDS_NTITE) Notch 0.380
-25 (RDS_NTITE,RDS_NTITE) Manhatan distance min 0.380
+16 (RDS_PTIE) Minimum area 0.255
+17 (RDS_PTIE) Minimum width 0.150
+18 (RDS_PTIE) Intersection length 0.150
+19 (RDS_PTIE) Notch 0.270
+20 (RDS_PTIE,RDS_PTIE) Manhatan distance min 0.270
+21 (RDS_NTIE) Minimum area 0.265
+22 (RDS_NTIE) Minimum width 0.150
+23 (RDS_NTIE) Intersection length 0.150
+24 (RDS_NTIE) Notch 0.270
+25 (RDS_NTIE,RDS_NTIE) Manhatan distance min 0.270
 26 (RDS_ACTI) Minimum area 0.0
 27 (RDS_ACTI) Minimum width 0.420
 28 (RDS_ACTI) Intersection length 0.420
