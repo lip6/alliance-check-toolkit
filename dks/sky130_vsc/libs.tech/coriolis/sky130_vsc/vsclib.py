@@ -47,7 +47,7 @@ def _routing ():
                                 , l( 4.0)                           # track offset from AB
                                 , l( 8.0)                           # track pitch
                                 , l( 4.0)                           # wire width
-                                , l( 4.0)                           # perpandicular wire width
+                                , l( 3.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
                                 , l( 4.0) ))                        # obstacle dW
     rg.addLayerGauge(
@@ -58,10 +58,10 @@ def _routing ():
                                 , 0.0                               # density (deprecated)
                                 , l( 4.0)                           # track offset from AB
                                 , l( 8.0)                           # track pitch
-                                , l( 3.0)                           # wire width
-                                , l( 3.0)                           # perpandicular wire width
+                                , l( 4.0)                           # wire width
+                                , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 5.0) ))                        # obstacle dW
+                                , l( 6.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL3' )         # metal
                                 , dirM1                             # preferred routing direction
@@ -69,11 +69,11 @@ def _routing ():
                                 , 2                                 # depth
                                 , 0.0                               # density (deprecated)
                                 , l( 4.0)                           # track offset from AB
-                                , l( 16.0)                           # track pitch
+                                , l( 8.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 4.0) ))                        # obstacle dW
+                                , l( 6.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL4' )         # metal
                                 , dirM2                             # preferred routing direction
@@ -85,7 +85,7 @@ def _routing ():
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
-                                , l( 4.0) ))                        # obstacle dW
+                                , l( 6.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL5' )         # metal
                                 , dirM1                             # preferred routing direction
@@ -97,7 +97,7 @@ def _routing ():
                                 , l( 8.0)                           # wire width
                                 , l( 8.0)                           # perpandicular wire width
                                 , l( 4.0)                           # VIA side
-                                , l( 8.0) ))                        # obstacle dW
+                                , l( 6.0) ))                        # obstacle dW
     rg.addLayerGauge(
         RoutingLayerGauge.create( tech.getLayer( 'METAL6' )         # metal
                                 , dirM2                             # preferred routing direction
