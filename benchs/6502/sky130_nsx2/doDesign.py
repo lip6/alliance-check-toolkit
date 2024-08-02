@@ -35,21 +35,22 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         m1pitch=l(10)
         m2pitch=l(20)
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'    ,  10*m1pitch, 30*m1pitch,  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'   ,  20*m1pitch, 30*m1pitch,  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'    ,  10*m1pitch, 20*m1pitch, 16)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'm_clock'     , 100*m2pitch,          0 , 1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'p_reset'     , 110*m2pitch,          0 , 1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'extint'      , 120*m2pitch,          0 , 1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'ack'         , 130*m2pitch,          0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'memory_read' , 100*m2pitch,          0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'memory_write', 110*m2pitch,          0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_read'     , 120*m2pitch,          0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_write'    , 130*m2pitch,          0 , 1)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'    ,  70*m1pitch, 25*m1pitch,  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'   ,  80*m1pitch, 25*m1pitch,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'    ,  30*m1pitch, 20*m1pitch, 16)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'm_clock'     , 80*m2pitch,          0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'p_reset'     , 90*m2pitch,          0 , 1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'    , 100*m2pitch,       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'    , 110*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'rd'     , 20*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'wt'     , 40*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'start'  , 80*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'sync'   , 100*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'rdy'    , 120*m2pitch,       0 ,  1)
                      ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         #conf.cfg.etesian.aspectRatio         = 1.0
-        conf.cfg.etesian.spaceMargin         = 0.20
+        conf.cfg.etesian.spaceMargin         = 0.10
         #conf.cfg.etesian.densityVariation    = 0.05
         #conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.globalIterations   = 10

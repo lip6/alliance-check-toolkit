@@ -29,7 +29,7 @@ coriolisTechDir = pdkDir / 'coriolis' / 'sky130_nsx2'
 sys.path.append( coriolisTechDir.as_posix() )
 from sky130_nsx2 import techno, nsxlib2, Sky130nsx2Setup 
 
-kdrcRules = pdkDir / 'klayout' / 'core' / 'sky130A_mr.drc'
+kdrcRules = pdkDir / 'klayout' /  'sky130A.lydrc'
 
 pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
 sys.path.append( pdkCommonDir.as_posix() )
