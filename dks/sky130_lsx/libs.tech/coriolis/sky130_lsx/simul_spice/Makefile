@@ -7,7 +7,9 @@ C ?= inv_x4 inv_x4_chain a2_x2 sff1_x4
 
 all:
 	for c in $(C); do\
-		make CELL=$$c $$c/$$c.tt $$c/$$c.ss $$c/$$c.ff;\
+		make CELL=$$c $$c/$$c.tt ;\
+		make CELL=$$c $$c/$$c.ss ;\
+		make CELL=$$c $$c/$$c.ff ;\
 	done
 
 define NGSPICE 
