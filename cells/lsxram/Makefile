@@ -1,7 +1,7 @@
 # -*- explicit-buffer-name: "Makefile<alliance-check-toolkit/lsxlib>" -*-
 
  PHYSICAL_SYNTHESIS = Alliance
-         DESIGN_KIT = lsxlib
+         DESIGN_KIT = lsxram
              TECHNO = sg13g2
              TECHNO = sky130
             RDS_TOP = $(CELLS_TOP)/../dks/$(TECHNO)_lsx/libs.tech/coriolis/$(TECHNO)_lsx
@@ -9,13 +9,15 @@
  include ./mk/design-flow.mk
  include ./mk/check-library.mk
 
-characterize: lsxlib-dot-lib
+v1: ./check/invbuf2_x0.ok
+v2: ./check/n2oa2a22_x0.ok
+v3: ./check/nm2x2_x0.ok
+v4: ./check/ctrw2r2_x1.ok
+v5: ./check/sram2bw2r2.ok
 
-check-lib-test: ./check/inv_x2.ok
-
-# -----------------------------------------------------------------------------
-#  Interactive Commands
-# -----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------- 
+#  Interactive Commands  
+# ----------------------------------------------------------------------------- 
 
 Sgraal:
 	export RDS_TECHNO_NAME=$(RDS_TOP)/symbolic.rds;\

@@ -176,6 +176,7 @@ table mbk_to_rds_segment
           rds_pdif   rcw  -0.150   0.290    0.015 ext
                                                                                                                   
   poly    rds_poly   vw    0.075   0.030  .0  all
+  poly2   rds_poly   vw    0.075   0.090  .0  all
 
   alu1    rds_alu1   vw    0.165   0.090  .0  all
   calu1   rds_alu1   vw    0.165   0.090  .0  all
@@ -300,8 +301,11 @@ table lynx_graph
 # -------------------------------------------------------------------
   rds_ndif   rds_cont   rds_ndif
   rds_pdif   rds_cont   rds_pdif
-  rds_poly   rds_cont   rds_poly
-  rds_cont   rds_pdif   rds_ndif   rds_poly  rds_alu1  rds_cont
+  rds_poly   rds_cont   rds_poly2  rds_poly
+  rds_poly2  rds_cont   rds_poly   rds_poly2
+  rds_cont   rds_pdif   rds_ndif   rds_poly  rds_poly2  rds_alu1  rds_cont
+  rds_via1   rds_alu1   rds_alu2   rds_via1
+  rds_via2   rds_alu2   rds_alu3   rds_via2
   rds_alu1   rds_cont   rds_via1   rds_ref   rds_alu1  
   rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
   rds_alu2   rds_via1   rds_via2   rds_alu2 

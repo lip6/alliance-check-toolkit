@@ -40,28 +40,28 @@ END ctrw2r2_x1;
 ARCHITECTURE behaviour_data_flow OF ctrw2r2_x1 IS
 BEGIN
 
-        ck0  <= NOT(nck0);
-        ck1  <= NOT(nck1);
         nck0 <= NOT(ck0i);
+        ck0  <= NOT(nck0);
         nck1 <= NOT(ck1i);
+        ck1  <= NOT(nck1);
 
-        wt0  <= NOT(nwt0);
-        wz0  <= NOT(nwz0);
-        wd0  <= NOT(nwd0);
         nwt0 <= NOT(at0);
+        wt0  <= NOT(nwt0);
         nwz0 <= NOT(az0 AND nwt0);
+        wz0  <= NOT(nwz0);
         nwd0 <= NOT(nwt0 AND nwz0);
+        wd0  <= NOT(nwd0);
 
-        wt1  <= NOT(nwt1);
-        wz1  <= NOT(nwz1);
-        wd1  <= NOT(nwd1);
         nwt1 <= NOT(at1);
+        wt1  <= NOT(nwt1);
         nwz1 <= NOT(az1 AND nwt1);
+        wz1  <= NOT(nwz1);
         nwd1 <= NOT(nwt1 AND nwz1);
+        wd1  <= NOT(nwd1);
 
-        rx1  <= NOT(rx0);
         rx0  <= NOT(ax);
-        ry1  <= NOT(ry0);
+        rx1  <= NOT(rx0);
         ry0  <= NOT(ay);
+        ry1  <= NOT(ry0);
 
 END;

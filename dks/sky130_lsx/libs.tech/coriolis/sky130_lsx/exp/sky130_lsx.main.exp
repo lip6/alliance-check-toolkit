@@ -82,6 +82,7 @@ table mbk_to_rds_segment
           rds_pdif   rcw [ DL_TRAN_ACTI                           ] [ DW_TRAN_ACTI/2                              ]  [T_OFFSET] ext
                                                                                                                   
   poly    rds_poly   vw  [ DL_POLY                                ] [ DW_POLY                                     ]  .0  all
+  poly2   rds_poly   vw  [ DL_POLY                                ] [ DW_POLY_CONT                                ]  .0  all
 
   alu1    rds_alu1   vw  [ DL_ALU1                                ] [ DW_ALU1                                     ]  .0  all
   calu1   rds_alu1   vw  [ DL_ALU1                                ] [ DW_ALU1                                     ]  .0  all
@@ -206,8 +207,11 @@ table lynx_graph
 # -------------------------------------------------------------------
   rds_ndif   rds_cont   rds_ndif
   rds_pdif   rds_cont   rds_pdif
-  rds_poly   rds_cont   rds_poly
-  rds_cont   rds_pdif   rds_ndif   rds_poly  rds_alu1  rds_cont
+  rds_poly   rds_cont   rds_poly2  rds_poly
+  rds_poly2  rds_cont   rds_poly   rds_poly2
+  rds_cont   rds_pdif   rds_ndif   rds_poly  rds_poly2  rds_alu1  rds_cont
+  rds_via1   rds_alu1   rds_alu2   rds_via1
+  rds_via2   rds_alu2   rds_alu3   rds_via2
   rds_alu1   rds_cont   rds_via1   rds_ref   rds_alu1  
   rds_ref    rds_cont   rds_via1   rds_alu1  rds_ref
   rds_alu2   rds_via1   rds_via2   rds_alu2 
