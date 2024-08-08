@@ -1,4 +1,4 @@
-ENTITY nm2x2_x0 IS
+ENTITY sram_nmxr2_2x1 IS
 PORT (
     ax   : in BIT;	
     ix0  : in BIT;
@@ -13,9 +13,9 @@ PORT (
     vdd : in BIT;
     vss : in BIT
 );
-END nm2x2_x0;
+END sram_nmxr2_2x1;
 
-ARCHITECTURE behaviour_data_flow OF nm2x2_x0 IS
+ARCHITECTURE behaviour_data_flow OF sram_nmxr2_2x1 IS
 BEGIN
 
     nqx <= NOT( (ix1 AND ax) OR (ix0 AND NOT(ax)) );

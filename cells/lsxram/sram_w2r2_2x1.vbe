@@ -1,0 +1,47 @@
+ENTITY sram_w2r2_2x1 IS
+  PORT (
+  it    : in BIT;	
+  iz    : in BIT;	
+  at0   : in BIT;	
+  az0   : in BIT;	
+  at1   : in BIT;	
+  az1   : in BIT;	
+  ax    : in BIT;	
+  ay    : in BIT;	
+  nqx   : out BIT;	
+  nqy   : out BIT;
+  ck    : in BIT;	
+  vdd   : in BIT;
+  vss   : in BIT
+  );
+END sram_w2r2_2x1;
+
+ARCHITECTURE behaviour_data_flow OF sram_w2r2_2x1 IS
+
+  SIGNAL sff_an7 : REG_BIT REGISTER; -- sff0_m
+  SIGNAL v_36 : REG_BIT REGISTER; -- sff1_m
+  SIGNAL v_75 : REG_BIT REGISTER; -- sff0_s
+  SIGNAL v_46 : REG_BIT REGISTER; -- sff1_s
+
+BEGIN
+
+  masters : BLOCK (ck = '0')
+  BEGIN
+    sff_an7 <= GUARDED NOT (  (it   AND at0) 
+                        OR (iz   AND NOT(at0) AND az0) 
+                        OR (v_75 AND NOT(at0) AND NOT(az0))); 
+    v_36 <= GUARDED NOT (  (it   AND at1) 
+                        OR (iz   AND NOT(at1) AND az1) 
+                        OR (v_46 AND NOT(at1) AND NOT(az1))); 
+  END BLOCK masters;
+
+  slaves : BLOCK (ck = '1')
+  BEGIN
+    v_75 <= GUARDED NOT(sff_an7);
+    v_46 <= GUARDED NOT(v_36);
+  END BLOCK slaves;
+
+  nqy <= NOT ((v_46 AND ay) OR (v_75 AND NOT(ay)));
+  nqx <= NOT ((v_46 AND ax) OR (v_75 AND NOT(ax)));
+
+END;

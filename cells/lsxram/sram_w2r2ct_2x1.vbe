@@ -1,4 +1,4 @@
-ENTITY ctrw2r2_x1 IS
+ENTITY sram_w2r2ct_2x1 IS
 PORT (
           ck0i : in BIT;
           ck1i : in BIT;
@@ -35,9 +35,9 @@ PORT (
           vdd  : in BIT;
           vss  : in BIT
   );
-END ctrw2r2_x1;
+END sram_w2r2ct_2x1 ;
 
-ARCHITECTURE behaviour_data_flow OF ctrw2r2_x1 IS
+ARCHITECTURE behaviour_data_flow OF sram_w2r2ct_2x1  IS
 BEGIN
 
         nck0 <= NOT(ck0i);

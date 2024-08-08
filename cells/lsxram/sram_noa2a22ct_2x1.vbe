@@ -1,4 +1,4 @@
-ENTITY invbuf2_x0 IS
+ENTITY sram_noa2a22ct_2x1 IS
 PORT(
   ax	: IN BIT;
   ay	: IN BIT;
@@ -9,9 +9,9 @@ PORT(
   vdd	: IN BIT;
   vss	: IN BIT
 );
-END invbuf2_x0;
+END sram_noa2a22ct_2x1;
 
-ARCHITECTURE VBE OF invbuf2_x0 IS
+ARCHITECTURE VBE OF sram_noa2a22ct_2x1 IS
 
 BEGIN
 
