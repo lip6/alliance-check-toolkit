@@ -1,0 +1,11 @@
+declare adder {
+input a[2],b[2];
+output f[2];
+}
+
+module adder {
+reg r1[2]=0;
+
+ r1:=a+b;
+ f=r1;
+}
