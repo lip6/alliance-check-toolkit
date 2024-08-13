@@ -18,6 +18,8 @@ from   coriolis.plugins.chip.chip           import Chip
 
 af = CRL.AllianceFramework.get()
 
+CoreName = 'adder'
+
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
@@ -28,7 +30,7 @@ def scriptMain ( **kw ):
        #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'adder', CRL.Catalog.State.Logical )
+        cell = af.getCell( CoreName, CRL.Catalog.State.Logical )
        #af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 

@@ -17,13 +17,18 @@ coriolisTechDir = pdkDir / 'coriolis'
 sys.path.append( coriolisTechDir.as_posix() )
 from scmos2m1u_nsx2 import techno, nsxlib2, Scmos2m1uSetup 
 
+pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
+sys.path.append( pdkCommonDir.as_posix() )
+from s2r import S2R
+from scr import SCR
+from sta import STA
+import pnrcheck
 Scmos2m1uSetup.setupScmos2m1u_nsx2( checkToolkit )
 print("RDS=",ShellEnv.RDS_TECHNO_NAME)
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 PnR.textMode  = True
-
-from doDesign  import scriptMain
+import doDesign
 
 
 
@@ -32,7 +37,7 @@ kdrcRules = pdkDir / 'klayout' /  'drc' / 'drc_SCMOS.lydrc'
 DRC.setDrcRules( kdrcRules )
 
 #pnrcheck.mkRuleSet( globals(), 'adder', pnrcheck.UseClockTree )
-pnrcheck.mkRuleSet( globals(), 'adder')
+pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.ChannelRoute)
 #ruleGds = S2R.mkRule( 'gds', 'adder_r.gds', 'adder_r.ap'
 #                    , flags=S2R.Verbose|S2R.NoReplaceBlackboxes )
 #ruleDRC = DRC.mkRule( 'drc', 'adder_r.gds' )
