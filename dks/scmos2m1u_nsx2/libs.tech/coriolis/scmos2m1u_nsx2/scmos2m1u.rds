@@ -37,39 +37,39 @@ TABLE MBK_TO_RDS_SEGMENT
 
   NDIF     RDS_NDIF   VW  0.00  0.0   0.0  ALL \
            RDS_ACTIV  VW  0.00  0.0   0.0  DRC \
-           RDS_NIMP   VW  0.00  0.00  0.0  DRC 
+           RDS_NIMP   VW  1.00  2.00  0.0  DRC 
   PDIF     RDS_PDIF   VW  0.00  0.0   0.0  ALL \
            RDS_ACTIV  VW  0.00  0.0   0.0  DRC \
-           RDS_PIMP   VW  0.00  0.00  0.0  DRC
+           RDS_PIMP   VW  1.00  2.00  0.0  DRC
 
   NTIE     RDS_NTIE   VW  0.00     0.00  0.0  EXT \
            RDS_NTIE   VW  0.00     0.00  0.0  DRC \
            RDS_ACTIV  VW  0.00     0.00  0.0  DRC \
-           RDS_NIMP   VW  0.00     0.00  0.0  DRC 
+           RDS_NIMP   VW  1.00     2.00  0.0  DRC 
   PTIE     RDS_PTIE   VW  0.00     0.00  0.0  EXT \
            RDS_PTIE   VW  0.00     0.00  0.0  DRC \
            RDS_ACTIV  VW  0.00     0.00  0.0  DRC \
-           RDS_PIMP   VW  0.00     0.00  0.0  DRC 
+           RDS_PIMP   VW  1.00     2.00  0.0  DRC 
 
 # The GATE layer is the poly which makes the
 # transistor. It is used to measure the ENDCAP
 # value.
-  NTRANS   RDS_POLY   VW  1.25  0.00  0.0  ALL \
+  NTRANS   RDS_POLY   VW  1.00  0.00  0.0  ALL \
            RDS_GATE   VW  0.00  0.00  0.0  DRC \
            RDS_NDIF  LCW  0.00  2.00  0.0  EXT \
            RDS_NDIF  RCW  0.00  2.00  0.0  EXT \
            RDS_NDIF   VW  0.00  4.00  0.0  DRC \
            RDS_ACTIV  VW  0.00  4.00  0.0  ALL \
-           RDS_NIMP   VW  0.00  4.00  0.0  DRC \
-           RDS_NIMP   VW  0.00  4.00  0.0  DRC 
-  PTRANS   RDS_POLY   VW  1.25  0.00  0.0  ALL \
+           RDS_NIMP   VW  1.00  6.00  0.0  DRC \
+           RDS_NIMP   VW  1.00  6.00  0.0  DRC 
+  PTRANS   RDS_POLY   VW  1.00  0.00  0.0  ALL \
            RDS_GATE   VW  0.00  0.00  0.0  DRC \
            RDS_PDIF  LCW  0.00  2.00  0.0  EXT \
            RDS_PDIF  RCW  0.00  2.00  0.0  EXT \
            RDS_PDIF   VW  0.00  4.00  0.0  DRC \
            RDS_ACTIV  VW  0.00  4.00  0.0  ALL \
-           RDS_PIMP   VW  0.00  4.00  0.0  ALL \
-           RDS_PIMP   VW  0.00  4.00  0.0  DRC 
+           RDS_PIMP   VW  1.00  6.00  0.0  ALL \
+           RDS_PIMP   VW  1.00  6.00  0.0  DRC 
   POLY     RDS_POLY   VW  0.00  0.00  0.0  ALL
 
 
@@ -138,26 +138,26 @@ TABLE MBK_TO_RDS_VIA
 	RDS_CONT  1.00 ALL\
 	RDS_ALU1  2.00 ALL\
 	RDS_ACTIV 2.00 DRC\
-	RDS_PIMP  2.00 DRC
+	RDS_PIMP  4.00 DRC
   CONT_BODY_N\
 	RDS_NTIE  2.00 DRC\
 	RDS_NTIE  2.00 EXT\
 	RDS_CONT  1.00 ALL\
 	RDS_ALU1  2.00 ALL\
 	RDS_ACTIV 2.00 DRC\
-	RDS_NIMP  2.00 DRC
+	RDS_NIMP  4.00 DRC
   CONT_DIF_N\
 	RDS_NDIF  2.00 ALL\
 	RDS_CONT  1.00 ALL\
 	RDS_ALU1  2.00 ALL\
 	RDS_ACTIV 2.00 DRC\
-	RDS_NIMP  2.00 DRC
+	RDS_NIMP  4.00 DRC
   CONT_DIF_P\
 	RDS_PDIF  2.00 ALL\
 	RDS_CONT  1.00 ALL\
 	RDS_ALU1  2.00 ALL\
 	RDS_ACTIV 2.00 DRC\
-	RDS_PIMP  2.00 DRC
+	RDS_PIMP  4.00 DRC
   CONT_POLY\
 	RDS_POLY  2.00 ALL\
 	RDS_CONT  1.00 ALL\
