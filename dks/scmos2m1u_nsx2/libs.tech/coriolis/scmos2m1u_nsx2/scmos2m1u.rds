@@ -33,14 +33,15 @@ DEFINE  LAMBDA         0.5
 TABLE MBK_TO_RDS_SEGMENT
 
   PWELL    RDS_PWELL  VW  0.00  0.0  0.0  ALL 
-  NWELL    RDS_NWELL  VW  0.00  0.0  0.0  ALL
 
-  NDIF     RDS_NDIF   VW  0.00  0.0   0.0  ALL \
-           RDS_ACTIV  VW  0.00  0.0   0.0  DRC \
-           RDS_NIMP   VW  1.00  2.00  0.0  DRC 
-  PDIF     RDS_PDIF   VW  0.00  0.0   0.0  ALL \
-           RDS_ACTIV  VW  0.00  0.0   0.0  DRC \
-           RDS_PIMP   VW  1.00  2.00  0.0  DRC
+  NWELL    RDS_NWELL  VW  0.00  0.0  0.0  ALL \
+           RDS_PIMP   VW  0.00  -5.0  2.0  ALL  \
+           RDS_NIMP   VW  0.00  -10.0  25.5  ALL
+
+  NDIF     RDS_NDIF   VW  -1.00  0.0   0.0  ALL \
+           RDS_ACTIV  VW  -1.00  0.0   0.0  DRC 
+  PDIF     RDS_PDIF   VW  -1.00  0.0   0.0  ALL \
+           RDS_ACTIV  VW  -1.00  0.0   0.0  DRC 
 
   NTIE     RDS_NTIE   VW  0.00     0.00  0.0  EXT \
            RDS_NTIE   VW  0.00     0.00  0.0  DRC \
@@ -54,22 +55,19 @@ TABLE MBK_TO_RDS_SEGMENT
 # The GATE layer is the poly which makes the
 # transistor. It is used to measure the ENDCAP
 # value.
-  NTRANS   RDS_POLY   VW  1.00  0.00  0.0  ALL \
-           RDS_GATE   VW  0.00  0.00  0.0  DRC \
-           RDS_NDIF  LCW  0.00  2.00  0.0  EXT \
-           RDS_NDIF  RCW  0.00  2.00  0.0  EXT \
-           RDS_NDIF   VW  0.00  4.00  0.0  DRC \
-           RDS_ACTIV  VW  0.00  4.00  0.0  ALL \
-           RDS_NIMP   VW  1.00  6.00  0.0  DRC \
-           RDS_NIMP   VW  1.00  6.00  0.0  DRC 
-  PTRANS   RDS_POLY   VW  1.00  0.00  0.0  ALL \
-           RDS_GATE   VW  0.00  0.00  0.0  DRC \
-           RDS_PDIF  LCW  0.00  2.00  0.0  EXT \
-           RDS_PDIF  RCW  0.00  2.00  0.0  EXT \
-           RDS_PDIF   VW  0.00  4.00  0.0  DRC \
-           RDS_ACTIV  VW  0.00  4.00  0.0  ALL \
-           RDS_PIMP   VW  1.00  6.00  0.0  ALL \
-           RDS_PIMP   VW  1.00  6.00  0.0  DRC 
+  NTRANS   RDS_POLY   VW  0.25  0.00  0.0  ALL \
+           RDS_GATE   VW  0.25  0.00  0.0  DRC \
+           RDS_NDIF  LCW  -1.00  2.00  0.0  EXT \
+           RDS_NDIF  RCW  -1.00  2.00  0.0  EXT \
+           RDS_NDIF   VW  -1.00  4.00  0.0  DRC \
+           RDS_ACTIV  VW  -1.00  4.00  0.0  ALL 
+  PTRANS   RDS_POLY   VW  0.25  0.00  0.0  ALL \
+           RDS_GATE   VW  0.25  0.00  0.0  DRC \
+           RDS_PDIF  LCW  -1.00  2.00  0.0  EXT \
+           RDS_PDIF  RCW  -1.00  2.00  0.0  EXT \
+           RDS_PDIF   VW  -1.00  4.00  0.0  DRC \
+           RDS_ACTIV  VW  -1.00  4.00  0.0  ALL 
+
   POLY     RDS_POLY   VW  0.00  0.00  0.0  ALL
 
 
