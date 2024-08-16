@@ -29,8 +29,8 @@ if $input
   end
 end
 
-if $output
-  report("SCMOS DRC runset", $output)
+if $report
+  report("SCMOS DRC runset", $report)
 else
   report("SCMOS DRC runset", "SCMOS_DRC.lyrdb")
 end
@@ -468,6 +468,7 @@ GATE = PL &amp; AA
 info("DRC section")
 
 ### Deep NWell
+if SUBM || DEEP
 DNW.ongrid(0.5*LAMBDA).output("DNW_offgrid", "Offgrid vertex on DNW")
 DNW.with_angle(0 .. 45).output("DNW_angle", "Non 45 degree angle DNW")
 DNW.edges.and(PW).output("DNW_PW","DNW cannot cross PWell")
@@ -478,6 +479,7 @@ DNW.enclosing(NW, R31_4, euclidian).output("31.4 DNW_enc_NW", "31.4 : Min. DNW e
 DNW.separation(NW, R31_5, euclidian).output("31.5 DNW_sep_NW", "31.5 : Min. DNW separation NWell : #{R31_5}um")
 DNW.not(NW).enclosing(NP, R31_6, euclidian).output("31.6 DNW_enc_NP", "31.6 : Min. PW in DNW enclosing N+ : #{R31_6}um")
 DNW.separation(NP, R31_7, euclidian).output("31.7 DNW_sep_NP", "31.7 : Min. DNW separation N+ : #{R31_7}um")
+end
 
 ### Nwell / Pwell
 NW.ongrid(0.5*LAMBDA).output("NW_offgrid", "Offgrid vertex on NWell")

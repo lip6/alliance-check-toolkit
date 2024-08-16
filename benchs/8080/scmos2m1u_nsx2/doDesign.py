@@ -18,7 +18,7 @@ from   coriolis.plugins.chip.chip           import Chip
 
 af = CRL.AllianceFramework.get()
 
-CoreName = 'adder'
+CoreName = 'my80core'
 
 
 def scriptMain ( **kw ):
@@ -54,7 +54,7 @@ def scriptMain ( **kw ):
         conf.useSpares = False
         conf.useHFNS   = False
         conf.useHTree  = False
-        conf.coreSize  = ( l( 700.0), l( 700.0) )
+        #conf.coreSize  = ( l( 700.0), l( 700.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
