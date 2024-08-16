@@ -379,7 +379,7 @@ TABLE S2R_MINIMUM_LAYER_WIDTH
   RDS_NTIE    3 # LSX 2 -> 3
   RDS_PTIE    3 # LSX 2 -> 3
   RDS_POLY    1
-  RDS_POLY2   1
+  RDS_POLY2   2 # LSX POLY2 used to fill potential notch (same width of CONT_POLY)
   RDS_TPOLY   1
   RDS_CONT    1
   RDS_ALU1    2 # LSX 1 -> 2
@@ -450,7 +450,7 @@ TABLE CIF_LAYER
   RDS_NTIE     LNTIE
   RDS_PTIE     LPTIE
   RDS_POLY     LPOLY
-  RDS_POLY2    LPOLY2
+  RDS_POLY2    LPOLY    # LSX poly2 is here poly
   RDS_TPOLY    LTPOLY
   RDS_CONT     LCONT
   RDS_ALU1     LALU1
@@ -488,7 +488,7 @@ TABLE GDS_LAYER
   RDS_NTIE     5
   RDS_PTIE     6
   RDS_POLY     7
-  RDS_POLY2    8
+  RDS_POLY2    7    # LSX poly2 is here poly
   RDS_TPOLY    9
   RDS_CONT    10
   RDS_ALU1    11	11
@@ -536,7 +536,7 @@ layer RDS_VIA3 1.;
 layer RDS_VIA4 1.;
 layer RDS_VIA5 1.;
 layer RDS_POLY 1.;
-layer RDS_POLY2 1.;
+layer RDS_POLY2 2.;     # LSX 1 -> 2
 layer RDS_ALU1 2.;      # LSX 1 -> 2
 layer RDS_ALU2 2.;
 layer RDS_ALU3 2.;
@@ -816,28 +816,31 @@ caracterise RDS_VIA5 (
   regle 93 : longueur <= 1. ;
 );
 
+
 # Check the POLY2 shapes
 #-----------------------
 caracterise RDS_POLY2 (
-  regle 94 : largeur >= 1. ;
-  regle 95 : longueur_inter min 1. ;
-  regle 96 : notch >= 5. ;
+  regle 94 : largeur >= 2. ; # LSX 1 -> 2
+  regle 95 : longueur_inter min 2. ;
+  regle 96 : notch >= 2.5 ;  # LSX 5 -> 2.5
 );
 relation RDS_POLY2 , RDS_POLY2 (
-  regle 97 : distance axiale min 5. ;
+  regle 97 : distance axiale min 2.5 ;  # LSX 5 -> 2.5
 );
 
+# LSX : These rules are meaningless since POLY2 is POLY here
+#
 # Check RDS_POLY2 is really included inside RDS_POLY1
 #----------------------------------------------------
-relation RDS_POLY , RDS_POLY2 (
-  regle 98 : distance axiale < 0.;
-  regle 99 : enveloppe inferieure min 5. ;
-  regle 100 : marge longueur_inter < 0. ;
-  regle 101 : croix longueur_inter < 0. ;
-  regle 102 : intersection longueur_inter < 0. ;
-  regle 103 : extension longueur_inter < 0. ;
-  regle 104 : inclusion longueur_inter < 0. ;
-);
+#relation RDS_POLY , RDS_POLY2 (
+#  regle 98 : distance axiale < 0.;
+#  regle 99 : enveloppe inferieure min 5. ;
+#  regle 100 : marge longueur_inter < 0. ;
+#  regle 101 : croix longueur_inter < 0. ;
+#  regle 102 : intersection longueur_inter < 0. ;
+#  regle 103 : extension longueur_inter < 0. ;
+#  regle 104 : inclusion longueur_inter < 0. ;
+#);
 
 
 fin regles
@@ -935,10 +938,10 @@ DRC_COMMENT
 91 (RDS_VIA4) maximum length 1. 
 92 (RDS_VIA5) minimum width 1. 
 93 (RDS_VIA5) maximum length 1. 
-94 (RDS_POLY2) minimum width 1. 
+94 (RDS_POLY2) minimum width 2. 
 95 (RDS_POLY2) minimum width 1. 
-96 (RDS_POLY2) Manhatan distance min 5. 
-97 (RDS_POLY2,POLY2) Manhatan distance min 5. 
+96 (RDS_POLY2) Manhatan distance min 2.5
+97 (RDS_POLY2,POLY2) Manhatan distance min 2.5 
 98 (RDS_POLY,RDS_POLY2) POLY2 must be enclosed by POLY of 5. 
 99 (RDS_POLY,RDS_POLY2) POLY2 must be enclosed by POLY of 5. 
 100 (RDS_POLY,RDS_POLY2) POLY2 must be enclosed by POLY of 5. 

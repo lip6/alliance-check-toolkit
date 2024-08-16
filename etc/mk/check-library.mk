@@ -35,14 +35,22 @@ cell-check-proof-sffw2r2_x1:
 cell-check-proof-%: ./%.vbe ./check/%.vhd
 	  $(CELL_CHECK_DIR); sed -i -e '/ck.delayed/d' -e 's/linkage/in/' $*.vhd
 	  $(CELL_CHECK_DIR); $(VASY) -I vhd -o -a $* $*_ext
-	  $(CELL_CHECK_DIR); $(PROOF) -d $* $*_ext
+	  $(CELL_CHECK_DIR); $(BOOM) -j $*_ext $*_opt
+	  $(CELL_CHECK_DIR); $(PROOF) -d $* $*_opt
 
 ./check/%.vhd: ./check/%.spi
 	 $(CELL_CHECK_DIR); $(YAGLE_CELL) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $*
 
 ./check/%.spi: %.ap
-	 $(CELL_CHECK_DIR); $(COUGAR_spice) -ar -ac -t $*
+	 $(CELL_CHECK_DIR); $(FLATPH) -t $* $*_flat
+	 $(CELL_CHECK_DIR); sed "s/[^,]*\(,[A-Z]*,.*TRANS\)/*\1/" $*_flat.ap |\
+						sed "s/$*_flat/$*_rename/" |\
+						sed "s/ff\([0-9]*\)\.\([ms][01]\)/ff\2 \1/" \
+						> $*_rename.ap
+	 $(CELL_CHECK_DIR); $(COUGAR_spice) -ar -ac -t $*_rename $*
 
 %-dot-lib: check-lib $(foreach cell,$(wildcard *.ap),$(patsubst %.ap,./check/%.spi,$(cell)))
 	 $(CELL_CHECK_DIR); $(YAGLE_LIB) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $*
 	 mv -f ./check/$*.lib $*.lib.new
+
+

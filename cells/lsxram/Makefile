@@ -9,27 +9,29 @@
  include ./mk/design-flow.mk
  include ./mk/check-library.mk
 
-v1: ./check/invbuf2_x0.ok
-v2: ./check/n2oa2a22_x0.ok
-v3: ./check/nm2x2_x0.ok
-v4: ./check/ctrw2r2_x1.ok
-v5: ./check/sram2bw2r2.ok
+all: v1 v2 v3 v4 v5 v6
+v1: check/sram_noa2a22_2x1.ok   
+v2: check/sram_noa2a22ct_2x1.ok 
+v3: check/sram_w2r2nff_2x1.ok      
+v4: check/sram_w2r2nffct_2x1.ok    
+v5: check/sram_w2inv.ok    
+v6: check/sram_w2dec4.ok    
 
 # ----------------------------------------------------------------------------- 
 #  Interactive Commands  
 # ----------------------------------------------------------------------------- 
 
-Sgraal:
+s Sgraal:
 	export RDS_TECHNO_NAME=$(RDS_TOP)/symbolic.rds;\
 	export GRAAL_TECHNO_NAME=$(RDS_TOP)/symbolic.graal;\
 	graal -l $(C)
 
-Rgraal:
+r Rgraal:
 	export RDS_TECHNO_NAME=$(RDS_TOP)/$(TECHNO)_lsx.rds;\
 	export GRAAL_TECHNO_NAME=$(RDS_TOP)/symbolic.graal;\
 	graal -l $(C)
 
-Dreal:
+d Dreal:
 	export RDS_TECHNO_NAME=$(RDS_TOP)/$(TECHNO)_lsx.rds;\
 	export RDS_OUT=cif;\
 	export RDS_IN=cif;\
@@ -37,4 +39,4 @@ Dreal:
 	dreal -l $(C);\
 	rm $(C).cif
 
-check-clean: ; rm -f ./check/*
+c check-clean: ; rm -f ./check/*

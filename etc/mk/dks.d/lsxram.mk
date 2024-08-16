@@ -5,5 +5,5 @@
              SPI_FORMAT = hspice
  export      CELLS_TOP  = $(CHECK_TOOLKIT)/cells
  export MBK_TARGET_LIB  = ${CELLS_TOP}/lsxram
- export   MBK_CATA_LIB  = $(MBK_TARGET_LIB)
+ export   MBK_CATA_LIB  = $(MBK_TARGET_LIB):..
  export   LIBERTY_FILE  = $(CELLS_TOP)/lsxram/lsxram.lib
