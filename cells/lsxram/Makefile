@@ -10,10 +10,10 @@
  include ./mk/check-library.mk
 
 all: v1 v2 v3 v4 v5 v6
-v1: check/sram_noa2a22_2x1.ok   
-v2: check/sram_noa2a22ct_2x1.ok 
-v3: check/sram_w2r2nff_2x1.ok      
-v4: check/sram_w2r2nffct_2x1.ok    
+v1: check/sram_noa2a22.ok   
+v2: check/sram_noa2a22ct.ok 
+v3: check/sram_w2r2nff.ok      
+v4: check/sram_w2r2nffct.ok    
 v5: check/sram_w2inv.ok    
 v6: check/sram_w2dec4.ok    
 

@@ -1,4 +1,4 @@
-ENTITY sram_noa2a22_2x1 IS
+ENTITY sram_noa2a22 IS
 PORT (
     rx0 : in BIT;
     rx1 : in BIT;
@@ -15,9 +15,9 @@ PORT (
     vdd : in BIT;
     vss : in BIT
 );
-END sram_noa2a22_2x1;
+END sram_noa2a22;
 
-ARCHITECTURE behaviour_data_flow OF sram_noa2a22_2x1 IS
+ARCHITECTURE behaviour_data_flow OF sram_noa2a22 IS
 
 BEGIN
 	lnqx0 : BLOCK ((ix0 AND rx0) OR (ix1 AND rx1))
