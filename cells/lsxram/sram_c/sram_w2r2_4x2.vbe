@@ -1,0 +1,109 @@
+ENTITY sram_w2r2_4x2 IS
+PORT (
+
+    at : in bit_vector(2 DOWNTO 0) ;	
+    az : in bit_vector(2 DOWNTO 0) ;	
+    ax : in bit_vector(2 DOWNTO 0) ;	
+    ay : in bit_vector(2 DOWNTO 0) ;	
+    wt : in BIT;	
+    wz : in BIT;	
+    
+    it : in bit_vector(1 DOWNTO 0) ;	
+    iz : in bit_vector(1 DOWNTO 0) ;	
+    
+    nqx : out bit_vector(1 DOWNTO 0) ; 
+    nqy : out bit_vector(1 DOWNTO 0) ; 
+    
+    ck : in BIT;	
+    
+    vdd : in BIT;	
+    vss : in BIT	
+);
+END sram_w2r2_4x2;
+
+ARCHITECTURE behaviour_data_flow OF sram_w2r2_4x2 IS
+
+    SIGNAL w0_w1_nff_0_m0 : REG_BIT REGISTER;
+    SIGNAL w0_w1_nff_0_m1 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_0_m0 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_0_m1 : REG_BIT REGISTER;
+
+    SIGNAL w0_w1_nff_0_s0 : REG_BIT REGISTER;
+    SIGNAL w0_w1_nff_0_s1 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_0_s0 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_0_s1 : REG_BIT REGISTER;
+
+    SIGNAL w0_w1_nff_1_m0 : REG_BIT REGISTER;
+    SIGNAL w0_w1_nff_1_m1 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_1_m0 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_1_m1 : REG_BIT REGISTER;
+
+    SIGNAL w0_w1_nff_1_s0 : REG_BIT REGISTER;
+    SIGNAL w0_w1_nff_1_s1 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_1_s0 : REG_BIT REGISTER;
+    SIGNAL w2_w3_nff_1_s1 : REG_BIT REGISTER;
+
+BEGIN
+    
+    Masters : BLOCK (NOT(ck))
+    BEGIN
+        w0_w1_nff_0_m0 <= GUARDED NOT(it(0)) when (wt AND at = "111")
+                        else NOT(iz(0)) when (wz AND az = "111")
+                        else NOT(w0_w1_nff_0_s0);
+        w0_w1_nff_0_m1 <= GUARDED NOT(it(0)) when (wt AND at = "110")
+                        else NOT(iz(0)) when (wz AND az = "110")
+                        else NOT(w0_w1_nff_0_s1);
+        w2_w3_nff_0_m0 <= GUARDED NOT(it(0)) when (wt AND at = "101")
+                        else NOT(iz(0)) when (wz AND az = "101")
+                        else NOT(w2_w3_nff_0_s0);
+        w2_w3_nff_0_m1 <= GUARDED NOT(it(0)) when (wt AND at = "100")
+                        else NOT(iz(0)) when (wz AND az = "100")
+                        else NOT(w2_w3_nff_0_s1);
+
+        w0_w1_nff_1_m0 <= GUARDED NOT(it(1)) when (wt AND at = "111")
+                        else NOT(iz(1)) when (wz AND az = "111")
+                        else NOT(w0_w1_nff_0_s0);
+        w0_w1_nff_1_m1 <= GUARDED NOT(it(1)) when (wt AND at = "110")
+                        else NOT(iz(1)) when (wz AND az = "110")
+                        else NOT(w0_w1_nff_0_s1);
+        w2_w3_nff_1_m0 <= GUARDED NOT(it(1)) when (wt AND at = "101")
+                        else NOT(iz(1)) when (wz AND az = "101")
+                        else NOT(w2_w3_nff_0_s0);
+        w2_w3_nff_1_m1 <= GUARDED NOT(it(1)) when (wt AND at = "100")
+                        else NOT(iz(1)) when (wz AND az = "100")
+                        else NOT(w2_w3_nff_0_s1);
+    END BLOCK Masters;
+    
+    Slaves : BLOCK (ck)
+    BEGIN
+        w0_w1_nff_0_s0 <= GUARDED NOT(w0_w1_nff_0_m0);
+        w0_w1_nff_0_s1 <= GUARDED NOT(w0_w1_nff_0_m1);
+        w2_w3_nff_0_s0 <= GUARDED NOT(w2_w3_nff_0_m0);
+        w2_w3_nff_0_s1 <= GUARDED NOT(w2_w3_nff_0_m1);
+        w0_w1_nff_1_s0 <= GUARDED NOT(w0_w1_nff_1_m0);
+        w0_w1_nff_1_s1 <= GUARDED NOT(w0_w1_nff_1_m1);
+        w2_w3_nff_1_s0 <= GUARDED NOT(w2_w3_nff_1_m0);
+        w2_w3_nff_1_s1 <= GUARDED NOT(w2_w3_nff_1_m1);
+    END BLOCK Slaves;
+    
+    nqy(0) <=   w0_w1_nff_0_s0 when (ay(1 downto 0) = b"00")
+           else w0_w1_nff_0_s1 when (ay(1 downto 0) = b"01")
+           else w2_w3_nff_0_s0 when (ay(1 downto 0) = b"10")
+           else w2_w3_nff_0_s1;
+    
+    nqx(0) <=   w0_w1_nff_0_s0 when (ax(1 downto 0) = b"00")
+           else w0_w1_nff_0_s1 when (ax(1 downto 0) = b"01")
+           else w2_w3_nff_0_s0 when (ax(1 downto 0) = b"10")
+           else w2_w3_nff_0_s1;
+
+    nqy(1) <=   w0_w1_nff_1_s0 when (ay(1 downto 0) = b"00")
+           else w0_w1_nff_1_s1 when (ay(1 downto 0) = b"01")
+           else w2_w3_nff_1_s0 when (ay(1 downto 0) = b"10")
+           else w2_w3_nff_1_s1;
+    
+    nqx(1) <=   w0_w1_nff_1_s0 when (ax(1 downto 0) = b"00")
+           else w0_w1_nff_1_s1 when (ax(1 downto 0) = b"01")
+           else w2_w3_nff_1_s0 when (ax(1 downto 0) = b"10")
+           else w2_w3_nff_1_s1;
+    
+END;
