@@ -35,7 +35,7 @@ cell-check-proof-sffw2r2_x1:
 cell-check-proof-%: ./%.vbe ./check/%.vhd
 	  $(CELL_CHECK_DIR); sed -i -e '/ck.delayed/d' -e 's/linkage/in/' $*.vhd
 	  $(CELL_CHECK_DIR); $(VASY) -I vhd -o -a $* $*_ext
-	  $(CELL_CHECK_DIR); $(BOOM) -j $*_ext $*_opt
+	  $(CELL_CHECK_DIR); $(BOOM) -l 3 -o $*_ext $*_opt
 	  $(CELL_CHECK_DIR); $(PROOF) -d $* $*_opt
 
 ./check/%.vhd: ./check/%.spi

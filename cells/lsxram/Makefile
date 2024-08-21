@@ -39,4 +39,4 @@ d Dreal:
 	dreal -l $(C);\
 	rm $(C).cif
 
-c check-clean: ; rm -f ./check/*
+c check-clean: clean ; rm -f ./check/*
