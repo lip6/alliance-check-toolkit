@@ -6,18 +6,29 @@
              TECHNO = sky130
             RDS_TOP = $(CELLS_TOP)/../dks/$(TECHNO)_lsx/libs.tech/coriolis/$(TECHNO)_lsx
 
+help:
+	@echo ""
+	@echo "Usage : make test W=<nb words> B=<nb of bits>"
+	@echo ""
+
  include ./mk/design-flow.mk
  include ./mk/check-library.mk
 
-v1: check/sram_w2r2_4x2.ok
+# Default SRAM geometry
+W ?= 4
+B  ?= 2
+
+test: 
+	make sram_w2r2_$(W)x$(B).ap
+	make check/sram_w2r2_$(W)x$(B).ok
 
 # ----------------------------------------------------------------------------- 
 #  Interactive Commands  
 # ----------------------------------------------------------------------------- 
 
-g1 sram_w2r2_4x2_w.ap : sram_w2r2.c
+g sram_w2r2_$(W)x$(B).ap : sram_w2r2.c
 	export ALLIANCE_TOP=$(HOME)/coriolis-2.x/release/install;\
-	genlib $< -e 4 2
+	genlib $< -e $(W) $(B)
 
 s Sgraal:
 	export RDS_TECHNO_NAME=$(RDS_TOP)/symbolic.rds;\

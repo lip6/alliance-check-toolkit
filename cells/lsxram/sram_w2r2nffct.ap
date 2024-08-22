@@ -1,6 +1,8 @@
 V ALLIANCE : 6
-H sram_w2r2nffct,P,21/ 8/2024,100
+H sram_w2r2nffct,P,22/ 8/2024,100
 A 0,0,21000,5000
+R 11500,2100,ref_ref,ry1
+R 9000,2100,ref_ref,rx1
 R 8000,1100,ref_ref,wt_0
 R 11000,2100,ref_ref,ay1
 R 10000,2100,ref_ref,ax1
@@ -33,9 +35,7 @@ R 0,5000,ref_ref,vdd0
 R 21000,5000,ref_ref,vdd1
 R 1800,1600,ref_ref,ck0
 R 2300,1600,ref_ref,nck0
-R 9000,1600,ref_ref,rx1
 R 9500,1600,ref_ref,rx0
-R 11500,1600,ref_ref,ry1
 R 12000,1600,ref_ref,ry0
 R 18700,1600,ref_ref,nck1
 R 19200,1600,ref_ref,ck1

@@ -42,6 +42,16 @@ char *inttostr(int entier)
     return namealloc(str);
 }
 
+char *bin(int n, int size) {
+    char *str = alloca(size+1);
+    str[size] = 0;
+    for (int i = size - 1; i >= 0; i--) {
+        str[i] = (n & 1) ? '1' : '0'; 
+        n >>= 1; 
+    }
+    return namealloc(str);    
+}
+
 char *str(char *fmt, ...)
 {
     va_list ap;
@@ -135,8 +145,8 @@ void PHSEG_AX0AY0_DT(char * cell, char * port[], size_t nbp)
     for (int p = 0; p < nbp; p++ ) {                                // foreach input port
         for (int w = 0; w < NBW ; w += 2) {                     // foreach word
             char *iname = str("w%d_w%d_%s", w, w+1, cell);
+            char *ref1 = str("a%s1", port[p]); 
             char *ref0 = str("a%s0", port[p]);
-            char *ref1 = str("a%s1", port[p]);
             x0 = GENLIB_GET_REF_X(iname,ref0);
             y0 = GENLIB_GET_REF_Y(iname,ref0);
             x1 = GENLIB_GET_REF_X(iname,ref1);
@@ -237,13 +247,13 @@ void PHSEG_AZ1AT1_DT(char * cell, char * port[], size_t nbp, int nbr)
             GENLIB_PHSEG(CALU2, 2, pname, xmin, y12i, xmax, y12i);
             break;
         case 4:
-            GENLIB_PHSEG(CALU2, 2, pname, xmin, y23i, x23i, y23i);
-            GENLIB_PHSEG(ALU2, 2, "", x23q, y23q, xmax, y23q);
+            GENLIB_PHSEG(CALU2, 2, pname, xmax, y23i, x23i, y23i);
+            GENLIB_PHSEG(ALU2, 2, "", x23q, y23q, xmin, y23q);
             break;
         case 8:
-            GENLIB_PHSEG(CALU2, 2, pname, xmin, y23i, x23i, y23i);
-            GENLIB_PHSEG(ALU2, 2, "", x23q, y23q, x67i, y23q);
-            GENLIB_PHSEG(ALU2, 2, "", x67q, y23q, xmax, y23q);
+            GENLIB_PHSEG(ALU2, 2, "", xmin, y23i, x23q, y23i);
+            GENLIB_PHSEG(ALU2, 2, "", x23i, y23q, x67q, y23q);
+            GENLIB_PHSEG(CALU2, 2, pname, x67i, y23q, xmax, y23q);
             break;
         }
     }
@@ -293,8 +303,8 @@ void PHSEG_AZ2AT2_DT(char * cell, char * port[], size_t nbp, int nbr)
         if (NBW < 8) {
             GENLIB_PHSEG(CALU2, 2, pname, xmin, y12i, xmax, y12i);
         } else {
-            GENLIB_PHSEG(CALU2, 2, pname, xmin, y45i, x45i, y45i);
-            GENLIB_PHSEG(ALU2, 2, "", x45q, y45q, xmax, y45q);
+            GENLIB_PHSEG(ALU2, 2, "", xmin, y45q, x45q, y45q);
+            GENLIB_PHSEG(CALU2, 2, pname, x45i, y45i, xmax, y45i);
         }
     }
 }
@@ -544,16 +554,20 @@ void RouteMem(char *iname)
     PHSEG_DP (iname, "nff", "cff", "wt0",  "wt0",  YFIRST);
     PHSEG_DP (iname, "nff", "cff", "nwd0", "nwd0", YFIRST);
     PHSEG_DP (iname, "nff", "cff", "wd0",  "wd0",  YFIRST);
-    PHSEG_DP (iname, "nff", "cff", "rx1",  "rx1",  YFIRST);
-    PHSEG_DP (iname, "nff", "cff", "rx0",  "rx0",  YFIRST);
-    PHSEG_DP (iname, "nff", "cff", "ry1",  "ry1",  YFIRST);
-    PHSEG_DP (iname, "nff", "cff", "ry0",  "ry0",  YFIRST);
     PHSEG_DP (iname, "nff", "cff", "wd1",  "wd1",  YFIRST);
     PHSEG_DP (iname, "nff", "cff", "nwd1", "nwd1", YFIRST);
     PHSEG_DP (iname, "nff", "cff", "nwz0", "nwz0", XFIRST);
     PHSEG_DP (iname, "nff", "cff", "wz0",  "wz0",  YFIRST);
     PHSEG_DP (iname, "nff", "cff", "nwz1", "nwz1", XFIRST);
     PHSEG_DP (iname, "nff", "cff", "wz1",  "wz1",  YFIRST);
+
+    // words are missnamed 0 is 1, and 0 is 0
+    // I do not want to change the layout, thus it is simpler to change the addr routing
+
+    PHSEG_DP (iname, "nff", "cff", "rx1",  "rx0",  YFIRST);
+    PHSEG_DP (iname, "nff", "cff", "rx0",  "rx1",  YFIRST);
+    PHSEG_DP (iname, "nff", "cff", "ry1",  "ry0",  YFIRST);
+    PHSEG_DP (iname, "nff", "cff", "ry0",  "ry1",  YFIRST);
 
     if (NBW > 2) {
         PHSEG_CT (iname, "cff", "dec", "wt_0", "wt_0", 2); 
@@ -640,6 +654,104 @@ void RouteSupply(void)
 // Create Figure
 //--------------------------------------------------------------------------------------------------
 
+void create_vbe(void) 
+{
+    FILE * vbe = fopen (str("sram_w2r2_%dx%d.vbe", NBW, NBB), "w");
+
+    int s = (NBW==2) ? 6 : (NBW==4) ? 4 : 0 ;
+    int logNBW = (NBW==2) ? 1 : (NBW==4) ? 2 : 3 ;
+
+    fprintf(vbe,
+    "ENTITY sram_w2r2_%dx%d IS\n"
+    "PORT (\n"
+    "\n"
+    "    at : in bit_vector(2 DOWNTO 0) ;\n"
+    "    az : in bit_vector(2 DOWNTO 0) ;\n"
+    "    ax : in bit_vector(2 DOWNTO 0) ;\n"
+    "    ay : in bit_vector(2 DOWNTO 0) ;\n"
+    "    wt : in BIT;\n"
+    "    wz : in BIT;\n"
+    "\n"
+    "    it : in bit_vector(%d DOWNTO 0) ;\n"
+    "    iz : in bit_vector(%d DOWNTO 0) ;\n"
+    "\n"
+    "    nqx : out bit_vector(%d DOWNTO 0) ;\n"
+    "    nqy : out bit_vector(%d DOWNTO 0) ;\n"
+    "\n"
+    "    ck : in BIT;\n"
+    "\n"
+    "    vdd : in BIT;\n"
+    "    vss : in BIT\n"
+    ");\n"
+    "END sram_w2r2_%dx%d;\n"
+    "\n"
+    "ARCHITECTURE behaviour_data_flow OF sram_w2r2_%dx%d IS\n"
+    "\n" 
+    ,NBW,NBB,NBB-1,NBB-1,NBB-1,NBB-1,NBW,NBB,NBW,NBB);
+    
+    for (int w = 0; w < NBW; w++) 
+    fprintf(vbe, 
+    "    SIGNAL w%dm, w%ds : REG_VECTOR(%d DOWNTO 0) REGISTER;\n", w, w, NBB-1);
+
+    fprintf(vbe, 
+    "\n"
+    "BEGIN\n"
+    "\n"
+    "    Masters : BLOCK (NOT(ck))\n"
+    "    BEGIN\n"
+    );
+
+    for (int w = 0; w < NBW; w++) 
+    fprintf(vbe, 
+    "        w%dm <= GUARDED NOT(it) when (wt AND at = \"%s\") else NOT(iz) when (wz AND az = \"%s\") else NOT(w%ds);\n"
+    , w, bin(s+w,3), bin(s+w,3), w);
+
+    fprintf(vbe, 
+    "    END BLOCK Masters;\n"
+    "\n"
+    "    Slaves : BLOCK (ck)\n"
+    "    BEGIN\n"
+    );
+
+    for (int w = 0; w < NBW; w++) 
+    fprintf(vbe, 
+    "        w%ds <= GUARDED NOT(w%dm);\n"
+    , w, w);
+
+    fprintf(vbe, 
+    "    END BLOCK Slaves;\n"
+    "\n"
+    "    nqx <=   w0s when (ax(%d downto 0) = \"%s\")\n"
+    , logNBW-1, bin(0,logNBW));
+
+    for (int w = 1; w < NBW-1; w++) 
+    fprintf(vbe, 
+    "        else w%ds when (ax(%d downto 0) = \"%s\")\n"
+    , w, logNBW-1, bin(w,logNBW));
+
+    fprintf(vbe, 
+    "        else w%ds;\n"
+    "\n"
+    , NBW-1);
+ 
+    fprintf(vbe, 
+    "    nqy <=   w0s when (ay(%d downto 0) = \"%s\")\n"
+    , logNBW-1, bin(0,logNBW));
+
+    for (int w = 1; w < NBW-1; w++) 
+    fprintf(vbe, 
+    "        else w%ds when (ay(%d downto 0) = \"%s\")\n"
+    , w, logNBW-1, bin(w,logNBW));
+
+    fprintf(vbe, 
+    "        else w%ds;\n"
+    "\n"
+    , NBW-1);
+
+    fprintf(vbe, 
+    "END;\n");
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -650,10 +762,13 @@ int main(int argc, char *argv[])
 
     NBW = atoi(argv[1]);
     NBB = atoi(argv[2]);
+
     int sym = SYM_Y;
 
     if (!in(NBW,3,2,4,8)) usage(argv[0]);
     if (!in(NBB,5,2,4,8,16,32)) usage(argv[0]);
+
+    create_vbe();
 
 //- Create Figure
 
