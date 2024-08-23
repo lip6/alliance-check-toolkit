@@ -46,14 +46,14 @@ BEGIN
         w3s <= GUARDED NOT(w3m);
     END BLOCK Slaves;
 
-    nqx <=   w0s when (ax(1 downto 0) = "00")
-        else w1s when (ax(1 downto 0) = "01")
-        else w2s when (ax(1 downto 0) = "10")
-        else w3s;
+    nqx <=    w0s when (ax(1 downto 0) = "00")
+        else  w1s when (ax(1 downto 0) = "01")
+        else  w2s when (ax(1 downto 0) = "10")
+        else  w3s;
 
-    nqy <=   w0s when (ay(1 downto 0) = "00")
-        else w1s when (ay(1 downto 0) = "01")
-        else w2s when (ay(1 downto 0) = "10")
-        else w3s;
+    nqy <=    w0s when (ay(1 downto 0) = "00")
+        else  w1s when (ay(1 downto 0) = "01")
+        else  w2s when (ay(1 downto 0) = "10")
+        else  w3s;
 
 END;

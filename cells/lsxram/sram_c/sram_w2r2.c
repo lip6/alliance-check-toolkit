@@ -123,9 +123,9 @@ void PHSEG_AXAY_DT(char * cell, char * port[], size_t nbp)
     long xmin = GENLIB_GET_REF_X(iname1,"vss0");
     long xmax = GENLIB_GET_REF_X(iname2,"vss1");
     for (int p = 0; p < nbp; p++ ) {                                // foreach input port
-        char *iname = str("mx_12_%s", cell);
-        char *ref1 = str("a%s1", port[p]);
-        char *ref2 = str("a%s2", port[p]);
+        char *iname = str("w%d_w%d_%s", 0, 1, cell);
+        char *ref1 = str("a%s10", port[p]);
+        char *ref2 = str("a%s20", port[p]);
         long y1 = GENLIB_GET_REF_Y(iname,ref1);
         long y2 = GENLIB_GET_REF_Y(iname,ref2);
         char * pname1 = str("a%s[1]", port[p]);
@@ -439,8 +439,7 @@ void RouteDT()
     PHSEG_AZ1AT1_DT  ("dec", in_port, sizeof(in_port)/sizeof(char*), 2); 
     PHSEG_AZ2AT2_DT  ("dec", in_port, sizeof(in_port)/sizeof(char*), 2); 
     PHSEG_AX0AY0_DT  ("cff", out_port, sizeof(in_port)/sizeof(char*)); 
-    if (NBW > 2)
-        PHSEG_AXAY_DT  ("coa", out_port, sizeof(in_port)/sizeof(char*)); 
+    PHSEG_AXAY_DT  ("cff", out_port, sizeof(in_port)/sizeof(char*)); 
     PHSEG_WE_DT  ("cff", in_port, sizeof(in_port)/sizeof(char*), 2); 
     PHSEG_IN_DT  ("nff", in_port, sizeof(in_port)/sizeof(char*), 2); 
     PHSEG_OUT_DT ("nff", "noa", out_port, sizeof(out_port)/sizeof(char*)); 
@@ -569,7 +568,7 @@ void RouteMem(char *iname)
     PHSEG_DP (iname, "nff", "cff", "ry1",  "ry0",  YFIRST);
     PHSEG_DP (iname, "nff", "cff", "ry0",  "ry1",  YFIRST);
 
-    if (NBW > 2) {
+    //if (NBW > 2) {
         PHSEG_CT (iname, "cff", "dec", "wt_0", "wt_0", 2); 
         PHSEG_CT (iname, "cff", "dec", "wt_1", "wt_1", 2); 
         PHSEG_CT (iname, "cff", "dec", "wz_0", "wz_0", 2); 
@@ -579,7 +578,7 @@ void RouteMem(char *iname)
         PHSEG_CT (iname, "cff", "dec", "at1",  "at1",  1); 
         PHSEG_CT (iname, "cff", "dec", "az0",  "az0",  1); 
         PHSEG_CT (iname, "cff", "dec", "az1",  "az1",  1); 
-    }
+   // }
 }
 
 void RouteMux(char *iname, int ref)
@@ -721,32 +720,32 @@ void create_vbe(void)
     fprintf(vbe, 
     "    END BLOCK Slaves;\n"
     "\n"
-    "    nqx <=   w0s when (ax(%d downto 0) = \"%s\")\n"
-    , logNBW-1, bin(0,logNBW));
+    "    nqx <=   %s w0s when (ax(%d downto 0) = \"%s\")\n"
+    , (NBW == 4) ? "" : "NOT", logNBW-1, bin(0,logNBW));
 
     for (int w = 1; w < NBW-1; w++) 
     fprintf(vbe, 
-    "        else w%ds when (ax(%d downto 0) = \"%s\")\n"
-    , w, logNBW-1, bin(w,logNBW));
+    "        else %s w%ds when (ax(%d downto 0) = \"%s\")\n"
+    , (NBW == 4) ? "" : "NOT", w, logNBW-1, bin(w,logNBW));
 
     fprintf(vbe, 
-    "        else w%ds;\n"
+    "        else %s w%ds;\n"
     "\n"
-    , NBW-1);
+    , (NBW == 4) ? "" : "NOT", NBW-1);
  
     fprintf(vbe, 
-    "    nqy <=   w0s when (ay(%d downto 0) = \"%s\")\n"
-    , logNBW-1, bin(0,logNBW));
+    "    nqy <=   %s w0s when (ay(%d downto 0) = \"%s\")\n"
+    , (NBW == 4) ? "" : "NOT", logNBW-1, bin(0,logNBW));
 
     for (int w = 1; w < NBW-1; w++) 
     fprintf(vbe, 
-    "        else w%ds when (ay(%d downto 0) = \"%s\")\n"
-    , w, logNBW-1, bin(w,logNBW));
+    "        else %s w%ds when (ay(%d downto 0) = \"%s\")\n"
+    ,  (NBW == 4) ? "" : "NOT", w, logNBW-1, bin(w,logNBW));
 
     fprintf(vbe, 
-    "        else w%ds;\n"
+    "        else %s w%ds;\n"
     "\n"
-    , NBW-1);
+    , (NBW == 4) ? "" : "NOT", NBW-1);
 
     fprintf(vbe, 
     "END;\n");
