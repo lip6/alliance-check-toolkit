@@ -6,7 +6,7 @@
 *	.include cmos_models.inc
 **********************************************************************
 
-.MODEL nmos NMOS   LEVEL=3        TOX=1.8E-8       LD=0.08U 
+.MODEL nmos NMOS   LEVEL=8        TOX=1.8E-8       LD=0.08U 
 +                  UO=500         VMAX=2.0E5       PHI=0.6        
 +                  GAMMA=0.5      NSUB=2.5E16      VTO=0.8 
 +                  NFS=8.2E11     CGSO=2.5E-10     CGBO=2.5E-10 
@@ -17,7 +17,7 @@
 +                  ETA=0.05       KAPPA=0.007      THETA=0.06
 +                  XJ=2.7E-7        DELTA=0.7
 
-.MODEL pmos PMOS   LEVEL=3        TOX=1.8E-8       LD=0.08U 
+.MODEL pmos PMOS   LEVEL=8        TOX=1.8E-8       LD=0.08U 
 +                  UO=165         VMAX=2.7E5       PHI=0.80        
 +                  GAMMA=0.75     NSUB=5.5E16      VTO=-0.9 
 +                  NFS=7.6E11     CGSO=2.5E-10     CGBO=2.75E-10 

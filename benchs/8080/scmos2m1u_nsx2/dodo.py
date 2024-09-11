@@ -13,9 +13,9 @@ from coriolis.designflow.task         import ShellEnv
 
 checkToolkit=pathlib.Path('../../..')
 pdkDir          = checkToolkit / 'dks' / 'scmos2m1u_nsx2' / 'libs.tech'
-coriolisTechDir = pdkDir / 'coriolis'
+coriolisTechDir = pdkDir / 'coriolis' / 'scmos2m1u_nsx2' 
 sys.path.append( coriolisTechDir.as_posix() )
-from scmos2m1u_nsx2 import techno, nsxlib2, Scmos2m1uSetup 
+import techno, nsxlib2, Scmos2m1uSetup 
 
 pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
 sys.path.append( pdkCommonDir.as_posix() )
@@ -25,7 +25,6 @@ from sta import STA
 import pnrcheck
 Scmos2m1uSetup.setupScmos2m1u_nsx2( checkToolkit )
 print("RDS=",ShellEnv.RDS_TECHNO_NAME)
-print("CATA_LIB=",ShellEnv.MBK_CATA_LIB)
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 PnR.textMode  = True
@@ -33,6 +32,15 @@ import doDesign
 
 SCR.RandSeed = 1
 SCR.MBK_CATA_LIB = ShellEnv.MBK_CATA_LIB
+STA.VddSupply = 5.0
+STA.ClockName = 'm_clock'
+STA.SpiceType = 'spice'
+STA.SpiceTrModel = 'p8_cmos_models.inc'
+STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )
+shellEnv = ShellEnv()
+shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
+shellEnv.export()
+STA.flags = STA.Transistor
 
 
 kdrcRules = pdkDir / 'klayout' /  'drc' / 'drc_SCMOS.lydrc'
