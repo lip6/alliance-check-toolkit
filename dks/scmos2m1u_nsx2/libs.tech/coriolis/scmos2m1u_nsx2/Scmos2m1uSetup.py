@@ -35,6 +35,7 @@ class Where ( object ):
         if not Where.cellsTop and Where.allianceTop:
             Where.cellsTop = Where.allianceTop / 'cells'
         ShellEnv.ALLIANCE_TOP = Where.allianceTop.as_posix()
+        ShellEnv.MBK_CATA_LIB = '.:' + (Where.cellsTop / 'nsxlib2' ).as_posix()
 
     def __repr__ ( self ):
         if not Where.coriolisTop:

@@ -25,12 +25,14 @@ from sta import STA
 import pnrcheck
 Scmos2m1uSetup.setupScmos2m1u_nsx2( checkToolkit )
 print("RDS=",ShellEnv.RDS_TECHNO_NAME)
+print("CATA_LIB=",ShellEnv.MBK_CATA_LIB)
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 PnR.textMode  = True
 import doDesign
 
 SCR.RandSeed = 1
+SCR.MBK_CATA_LIB = ShellEnv.MBK_CATA_LIB
 
 
 kdrcRules = pdkDir / 'klayout' /  'drc' / 'drc_SCMOS.lydrc'

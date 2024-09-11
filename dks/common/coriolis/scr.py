@@ -23,6 +23,7 @@ class SCR ( FlowTask ):
     Channel_str         = 'c'
     RandSeed            = 0x0040
     RandSeed_value      = 0
+    MBK_CATA_LIB        = '.'
 
     @staticmethod
     def mkRule ( rule, targets, depends=[], flags=0 ):
@@ -54,6 +55,9 @@ class SCR ( FlowTask ):
     def doTask ( self ):
         from coriolis.CRL        import AllianceFramework
         from coriolis.helpers.io import ErrorMessage
+        shellEnv = ShellEnv()
+        shellEnv[ 'MBK_CATA_LIB'   ] = self.MBK_CATA_LIB
+        shellEnv.export()
 
         state = subprocess.run( self.command )
         if state.returncode:
