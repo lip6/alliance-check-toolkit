@@ -30,8 +30,8 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 PnR.textMode  = True
 import doDesign
 
-
-
+SCR.RandSeed = 1
+SCR.MBK_CATA_LIB = ShellEnv.MBK_CATA_LIB
 
 kdrcRules = pdkDir / 'klayout' /  'drc' / 'drc_SCMOS.lydrc'
 DRC.setDrcRules( kdrcRules )
