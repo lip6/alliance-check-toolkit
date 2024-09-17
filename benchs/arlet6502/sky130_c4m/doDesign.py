@@ -139,8 +139,8 @@ def scriptMain ( **kw ):
         conf.chipSize            = ( u(  2020.0), u( 2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
-            conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
-            conf.useHTree( 'io_in_from_pad(28)' )
+            conf.useHTree( 'io_in_from_pad(37)', Spares.HEAVY_LEAF_LOAD )
+            conf.useHTree( 'io_in_from_pad(35)' )
         else:
             conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
             conf.useHTree( 'reset' )
