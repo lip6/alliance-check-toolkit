@@ -39,6 +39,7 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        conf.cfg.tramontana.instancesPerWindows = 10000
         conf.cfg.etesian.spaceMargin         = 0.10
         conf.cfg.etesian.aspectRatio         = 1.00
         conf.cfg.etesian.densityVariation    = 0.05

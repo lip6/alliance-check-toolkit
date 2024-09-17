@@ -388,6 +388,13 @@ def _setup_techno():
         gds2Layer=235, gds2DataType=4,
     )
 
+    # ContactLayers
+    # X<>licon<>li
+    createVia(
+        tech, 'poly_licon_li', 'poly', 'licon', 'li',
+        u(0.17),
+    )
+
     # ViaLayers
     # li<>mcon<>m1
     createVia(

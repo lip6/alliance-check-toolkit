@@ -99,6 +99,7 @@ def scriptMain ( **kw ):
                      #, (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*l(50.0),      0 ,  1)
                      ]
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        arlet6502Conf.cfg.tramontana.mergeSupplies    = True
         arlet6502Conf.cfg.etesian.bloat               = 'disabled'
         #arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
         arlet6502Conf.cfg.etesian.densityVariation    = 0.05
