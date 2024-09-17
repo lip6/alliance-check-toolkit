@@ -14,7 +14,7 @@ from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.clean    import Clean
 PnR.textMode = True
 
-from doDesign  import scriptMain
+from doDesign import scriptMain
 
 buildChip = True
 if buildChip:

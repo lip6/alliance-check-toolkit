@@ -28,7 +28,7 @@ def scriptMain ( **kw ):
         cfg.misc.bug                    = False
         cfg.misc.logMode                = False
         cfg.misc.verboseLevel1          = True
-        cfg.misc.verboseLevel2          = True
+        cfg.misc.verboseLevel2          = False
         cfg.misc.minTraceLevel          = 16000
         cfg.misc.maxTraceLevel          = 17000
 
