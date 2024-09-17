@@ -21,8 +21,9 @@ git clone https://github.com/lip6/alliance-check-toolkit.git
 
 # Install Alliance and Coriolis
 cd coriolis
-bootstrap/allianceInstaller.sh
-make install
+git submodule update --init
+make -f Makefile.LIP6 install intall_alliance
+make -f Makefile.LIP6 install_docs
 ```
 
 
@@ -32,9 +33,7 @@ As an example, you can look at the Arlet6502 design in `benchs/arlet6502/cmos`. 
 
 You can build it with:
 ``` bash
-# Source Coriolis (adapt to your build path)
-eval `~/coriolis-2.x/Linux.x86_64/Release.Shared/install/etc/coriolis2/coriolisEnv.py`
-
+./bin/crlenv bash
 cd benchs/arlet6502/cmos
 # Cleaning step
 doit clean_flow
@@ -42,7 +41,7 @@ doit clean_flow
 doit yosys
 doit pnr
 # You can just run this one, as it depends on the others
-doit lvx
+crlenv doit lvx
 ```
 
 It's often nicer to use the viewer and see your design:
@@ -52,5 +51,3 @@ doit cgt
 # Write "doDesign"
 # Enjoy
 ```
-
-
