@@ -40,7 +40,7 @@ def scriptMain ( **kw ):
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arm_core', CRL.Catalog.State.Logical )
         if cell is None:
-            print( ErrorMessage( 2, 'doDesign.scriptMain(): Unable to load cell "{}".'.format('adder') ))
+            print( ErrorMessage( 2, 'doDesign.scriptMain(): Unable to load cell "{}".'.format('arm_core') ))
             sys.exit( 1 )
         cell.uniquify( 100 )
         if editor: editor.setCell( cell ) 
