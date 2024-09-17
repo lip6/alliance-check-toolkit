@@ -22,7 +22,7 @@ git clone https://github.com/lip6/alliance-check-toolkit.git
 # Install Alliance and Coriolis
 cd coriolis
 git submodule update --init
-make -f Makefile.LIP6 install intall_alliance
+make -f Makefile.LIP6 install install_alliance
 make -f Makefile.LIP6 install_docs
 ```
 
