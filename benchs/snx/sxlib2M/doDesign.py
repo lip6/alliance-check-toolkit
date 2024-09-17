@@ -3,18 +3,17 @@
 import sys
 import os
 import traceback
-import Cfg
-import helpers
-helpers.loadUserSettings()
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import trace, overlay, l, u, n
-import plugins
-from   Hurricane  import DbU, Breakpoint
-import Viewer
-import CRL
-import Etesian
-import Anabatic
-import Katana
+from coriolis            import Cfg
+from coriolis            import helpers
+from coriolis.helpers.io import ErrorMessage, WarningMessage
+from coriolis.helpers    import trace, overlay, l, u, n
+from coriolis            import plugins
+from coriolis.Hurricane  import DbU, Breakpoint
+from coriolis            import Viewer
+from coriolis            import CRL
+from coriolis            import Etesian
+from coriolis            import Anabatic
+from coriolis            import Katana
 
 
 af = CRL.AllianceFramework.get()
