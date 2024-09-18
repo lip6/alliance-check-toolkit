@@ -16,7 +16,7 @@ from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
 PnR.textMode  = True
 
-from comparator_oceane import scriptMain
+from comparator_buffer_oceane import scriptMain
 
 rulePnR   = PnR  .mkRule( 'pnr'  , [], [], scriptMain )
 ruleCgt   = PnR  .mkRule( 'cgt' )
