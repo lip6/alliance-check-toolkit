@@ -1,19 +1,80 @@
-#!avt_shell
+#!/usr/bin/env avt_shell
 
 #############################################################
 # Timing Database Generation                                #
 #############################################################
 
-# target cell name
-set target      [lindex $argv 0]  
-# model SPI file
-set spimodel    [lindex $argv 1]  
-# spice type
-set spitype     [lindex $argv 2]  
-# vdd voltage
-set vddvolt     [lindex $argv 3]  
-# Clock signal
-set clksig      [lindex $argv 4]  
+set VthHigh 0.8
+set VthLow  0.2
+set Slop    10e-12
+set Temperature 25.0
+set VddName  vdd
+set VssName  vss
+
+set idx 0
+if {$argc == 0} {
+    puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssName vss_name -Temperature temperature"
+    puts "if you need multiple spice models, put your models as a list \" model1 model2 ..\" it will feed to avt_LoadFile in the order"
+    exit 1
+}
+while {$idx < $argc} {
+  set flag [lindex $argv $idx]
+  incr idx
+  switch -exact -- $flag {
+  -Target -
+  -t  {
+     if {$idx < $argc} {
+     set target [lindex $argv $idx]
+     incr idx
+   } }
+  -SpiceModel -
+  -m  {
+     if {$idx < $argc} {
+     set spimodel [lindex $argv $idx]
+     incr idx
+   } }
+  -SpiceType -
+  -p  {
+     if {$idx < $argc} {
+     set spitype [lindex $argv $idx]
+     incr idx
+   } }
+  -VddVoltage -
+  -v  {
+     if {$idx < $argc} {
+     set vddvolt [lindex $argv $idx]
+     incr idx
+   } }
+  -ClockSignal -
+  -c  {
+     if {$idx < $argc} {
+     set clksig [lindex $argv $idx]
+     incr idx
+   } }
+  -VddName -
+  -V  {
+     if {$idx < $argc} {
+     set VddName [lindex $argv $idx]
+     incr idx
+   } }
+  -VssName -
+  -S  {
+     if {$idx < $argc} {
+     set VssName [lindex $argv $idx]
+     incr idx
+   } }
+  -Temperature -
+  -T  {
+     if {$idx < $argc} {
+     set Temperature [lindex $argv $idx]
+     incr idx
+   } }
+  default {
+    puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssNmae vss_name -Temperature temperature"
+    exit 1
+    }
+ }
+}
 
 # General config
 avt_config avtLibraryDirs .
@@ -22,21 +83,23 @@ avt_config tasGenerateConeFile yes
 avt_config avtVerboseConeFile yes 
 avt_config yagSetResetDetection yes 
 
-avt_config simVthHigh 0.8
-avt_config simVthLow 0.2
-avt_config simSlope 10e-12 
-avt_config simTemperature 25.0
+avt_config simVthHigh $VthHigh
+avt_config simVthLow $VthLow
+avt_config simSlope $Slop
+avt_config simTemperature $Temperature
 
 avt_config simToolModel $spitype
 avt_config tasGenerateDetailTimingFile yes
-avt_config avtVddName vdd
-avt_config avtVssName vss
+avt_config avtVddName $VddName
+avt_config avtVssName $VssName
 avt_config simPowerSupply $vddvolt
 
 # Files of transistor model of the technology, that may require modifications
 #
 # nfet_01v8
-avt_LoadFile $spimodel spice
+foreach i $spimodel {
+	avt_LoadFile $i spice
+}
 avt_LoadFile $target.spi spice
 
 # File decribing the netlist with power supply and temperature
