@@ -18,6 +18,9 @@ class STA ( FlowTask ):
     SpiceType           = 'hspice'
     SpiceTrModel        = 'scn6_deep.hsp'
     MBK_CATA_LIB        = '.'
+    VddName             = 'vdd'
+    VssName             = 'vss'
+    Temperature         = 25.0
 
     @staticmethod
     def mkRule ( rule, targets, depends=[], flags=0 ):
@@ -29,7 +32,11 @@ class STA ( FlowTask ):
         self.flags      = flags
         self.inputFile  = self.file_depend(0)
         self.outputFile = self.targets[0]
-        self.command    = [ 'avt_shell' , str(CalcCPathBin ), self.inputFile.stem, self.SpiceTrModel, self.SpiceType, str(self.VddSupply), self.ClockName]
+        if isinstance(self.SpiceTrModel, list):
+          model = ' '.join(self.SpiceTrModel)
+        else:
+          model = self.SpiceTrModel
+        self.command    = [ 'avt_shell' , str(CalcCPathBin ), '-Target', self.inputFile.stem, '-SpiceModel', model,  '-SpiceType', self.SpiceType, '-VddVoltage', str(self.VddSupply), '-ClockSignal', self.ClockName, '-VddName', self.VddName, '-VssName', self.VssName, '-Temperature', str(self.Temperature)]
         self.addClean( self.targets )
 
     def __repr__ ( self ):
