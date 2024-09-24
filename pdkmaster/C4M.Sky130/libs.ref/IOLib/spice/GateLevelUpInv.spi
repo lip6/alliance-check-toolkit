@@ -1,5 +1,0 @@
-* GateLevelUpInv
-.subckt GateLevelUpInv vdd vss iovdd core ngate pgate
-Xngate_levelup vdd iovdd vss core ngate LevelUpInv
-Xpgate_levelup vdd iovdd vss core pgate LevelUpInv
-.ends GateLevelUpInv

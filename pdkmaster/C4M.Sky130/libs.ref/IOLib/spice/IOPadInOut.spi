@@ -1,9 +1,0 @@
-* IOPadInOut
-.subckt IOPadInOut vss vdd iovss iovdd p2c c2p c2p_en pad
-Xpad pad Pad_15800W12000H
-Xnclamp iovss iovdd pad ngate Clamp_N32N4D
-Xpclamp iovss iovdd pad pgate Clamp_P32N4D
-Xgatedec vdd vss iovdd c2p c2p_en ngate pgate GateDecode
-Xleveldown vdd vss iovdd iovss pad p2c LevelDown
-Xpad_guardring iovss GuardRing_N18000W13312HFF
-.ends IOPadInOut
