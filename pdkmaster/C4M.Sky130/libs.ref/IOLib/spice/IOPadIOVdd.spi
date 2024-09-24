@@ -1,8 +1,0 @@
-* IOPadIOVdd
-.subckt IOPadIOVdd vss vdd iovss iovdd
-Xpad iovdd Pad_15800W12000H
-Xnclamp iovss iovdd iovdd ngate Clamp_N32N32D
-Xrcres iovdd res_cap RCClampResistor
-Xrcinv iovdd iovss res_cap ngate RCClampInverter
-Xpad_guard iovss GuardRing_N18000W13312HFF
-.ends IOPadIOVdd

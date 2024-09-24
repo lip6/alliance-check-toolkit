@@ -1,8 +1,0 @@
-* IOPadIn
-.subckt IOPadIn vss vdd iovss iovdd p2c pad
-Xpad pad Pad_15800W12000H
-Xnclamp iovss iovdd pad Clamp_N32N0D
-Xpclamp iovss iovdd pad Clamp_P32N0D
-Xleveldown vdd vss iovdd iovss pad p2c LevelDown
-Xpad_guardring iovss GuardRing_N18000W13312HFF
-.ends IOPadIn

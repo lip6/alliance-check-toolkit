@@ -1,9 +1,0 @@
-* SecondaryProtection
-.subckt SecondaryProtection iovdd iovss pad core
-RR pad core 241.0Ohm sky130_fd_pr__res_generic_po l=5.0um w=1.0um
-Xguard1 iovss GuardRing_P632W1550HFF
-DDN iovss core sky130_fd_pr__diode_pw2nd_05v5 area=3.6875e-12 pj=13.68um
-Xguard2 iovss GuardRing_P418W1550HFF
-DDP core iovdd sky130_fd_pr__diode_pd2nw_05v5 area=3.6375000000000002e-12 pj=11.2um
-Xguard3 iovdd GuardRing_N1270W450HTF
-.ends SecondaryProtection

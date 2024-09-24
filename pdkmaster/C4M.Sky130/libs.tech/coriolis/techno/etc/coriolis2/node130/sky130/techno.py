@@ -41,14 +41,14 @@ analogTechnologyTable = (
     ('minArea', 'psdm', 0.265, Area, ''),
     ('minWidth', 'hvi', 0.6, Length, ''),
     ('minSpacing', 'hvi', 0.7, Length, ''),
+    ('minWidth', 'poly', 0.15, Length, ''),
+    ('minSpacing', 'poly', 0.21, Length, ''),
     ('minWidth', 'difftap', 0.15, Length, ''),
     ('minSpacing', 'difftap', 0.27, Length, ''),
     ('minEnclosure', 'nwm', 'difftap', (0.18, 0.18), Length|Asymmetric, ''),
     ('minSpacing', 'nwm', 'difftap',  (0.34, 0.34), Length|Asymmetric, ''),
     # TODO for difftap:
     #    allow_in_substrate, implant_abut, allow_contactless_implant, allow_well_crossing
-    ('minWidth', 'poly', 0.15, Length, ''),
-    ('minSpacing', 'poly', 0.21, Length, ''),
     ('minWidth', 'li', 0.17, Length, ''),
     ('minSpacing', 'li', 0.17, Length, ''),
     ('minWidth', 'm1', 0.14, Length, ''),
@@ -62,11 +62,11 @@ analogTechnologyTable = (
     ('minArea', 'm3', 0.24, Area, ''),
     ('minWidth', 'capm', 1.0, Length, ''),
     ('minSpacing', 'capm', 0.84, Length, ''),
-    ('minWidth', 'cap2m', 1.0, Length, ''),
-    ('minSpacing', 'cap2m', 0.84, Length, ''),
     ('minWidth', 'm4', 0.3, Length, ''),
     ('minSpacing', 'm4', 0.3, Length, ''),
     ('minArea', 'm4', 0.24, Area, ''),
+    ('minWidth', 'cap2m', 1.0, Length, ''),
+    ('minSpacing', 'cap2m', 0.84, Length, ''),
     ('minWidth', 'm5', 1.6, Length, ''),
     ('minSpacing', 'm5', 1.6, Length, ''),
     ('minArea', 'm5', 4.0, Area, ''),
@@ -133,30 +133,31 @@ analogTechnologyTable = (
     # ('minWidth', 'poly_res', 0.33, Length, ''),
     # ('minSpacing', 'poly_res', 0.21, Length, ''),
     # ('minEnclosure', 'polyres', 'poly', 0.005, Length|Asymmetric, ''),
-    # ('minWidth', 'pdiff_res', 0.33, Length, ''),
-    # ('minSpacing', 'pdiff_res', 0.27, Length, ''),
-    # ('minEnclosure', 'diffres', 'difftap', 0.005, Length|Asymmetric, ''),
     # ('minWidth', 'ndiff_res', 0.33, Length, ''),
     # ('minSpacing', 'ndiff_res', 0.27, Length, ''),
+    # ('minEnclosure', 'diffres', 'difftap', 0.005, Length|Asymmetric, ''),
+    # ('minWidth', 'pdiff_res', 0.33, Length, ''),
+    # ('minSpacing', 'pdiff_res', 0.27, Length, ''),
     # ('minEnclosure', 'diffres', 'difftap', 0.005, Length|Asymmetric, ''),
     # ('minWidth', 'MIM_m3_capm', 1.0, Length, ''),
     # TODO: MIMCapacitor rules
     # ('minWidth', 'MIM_m4_cap2m', 1.0, Length, ''),
     # TODO: MIMCapacitor rules
-    # ('minWidth', 'ndiode', 0.15, Length, ''),
-    # ('minEnclosure', 'areaid_diode', 'difftap', (0.005, 0.005), Length|Asymmetric, ''),
     # ('minWidth', 'pdiode', 0.15, Length, ''),
     # ('minEnclosure', 'areaid_diode', 'difftap', (0.005, 0.005), Length|Asymmetric, ''),
+    # ('minWidth', 'ndiode', 0.15, Length, ''),
+    # ('minEnclosure', 'areaid_diode', 'difftap', (0.005, 0.005), Length|Asymmetric, ''),
     # Not implemented: Bipolar 'npn_05v5_w1u00l2u00'
-    # Not implemented: Bipolar 'npn_05v5_w1u00l1u00'
     # Not implemented: Bipolar 'pnp_05v5_w3u40l3u40'
+    # Not implemented: Bipolar 'npn_05v5_w1u00l1u00'
     # Not implemented: Bipolar 'pnp_05v5_w0u68l0u68'
-    ('minSpacing', 'difftap', 'hvi', 0.18, Length|Asymmetric, ''),
     ('minSpacing', 'licon', 'difftap', 0.19, Length|Asymmetric, ''),
-    # ('minSpacing', 'intersect(difftap,hvi)', 0.3, Length, ''),
+    # ('minWidth', 'inside(difftap,hvi)', '0.29', Length, ''),
+    # ('minSpacing', 'inside(difftap,hvi)', 0.3, Length, ''),
+    # ('minSpacing', 'inside(difftap,(hvi,nsdm))', 'inside(difftap,(hvi,psdm))', 0.37, Length|Asymmetric, ''),
     ('minSpacing', 'difftap', 'poly', 0.075, Length|Asymmetric, ''),
-    ('minSpacing', 'difftap', 'nwm', 0.34, Length|Asymmetric, ''),
-    # ('minSpacing', 'intersect(licon,poly)', 'psdm', 0.11, Length|Asymmetric, ''),
+    ('minSpacing', 'difftap', 'hvi', 0.18, Length|Asymmetric, ''),
+    # ('minSpacing', 'inside(licon,poly)', 'psdm', 0.11, Length|Asymmetric, ''),
 )
 
 def _setup_techno():
@@ -204,20 +205,20 @@ def _setup_techno():
         gds2Layer=75, gds2DataType=20,
     )
     createBL(
-        tech, 'difftap.pin', BasicLayer.Material.other,
-        gds2Layer=65, gds2DataType=16,
-    )
-    createBL(
-        tech, 'difftap.block', BasicLayer.Material.blockage,
-        gds2Layer=100, gds2DataType=10,
-    )
-    createBL(
         tech, 'poly.pin', BasicLayer.Material.other,
         gds2Layer=66, gds2DataType=16,
     )
     createBL(
         tech, 'poly.block', BasicLayer.Material.blockage,
         gds2Layer=100, gds2DataType=20,
+    )
+    createBL(
+        tech, 'difftap.pin', BasicLayer.Material.other,
+        gds2Layer=65, gds2DataType=16,
+    )
+    createBL(
+        tech, 'difftap.block', BasicLayer.Material.blockage,
+        gds2Layer=100, gds2DataType=10,
     )
     createBL(
         tech, 'li.pin', BasicLayer.Material.other,
@@ -364,35 +365,28 @@ def _setup_techno():
         size=u(40.0), spacing=u(1.27), gds2Layer=76, gds2DataType=20,
     )
     createBL(
-        tech, 'npn', BasicLayer.Material.other,
-        gds2Layer=82, gds2DataType=20,
-    )
-    createBL(
-        tech, 'areaid_diode', BasicLayer.Material.other,
-        gds2Layer=81, gds2DataType=23,
+        tech, 'diffres', BasicLayer.Material.other,
+        gds2Layer=65, gds2DataType=13,
     )
     createBL(
         tech, 'polyres', BasicLayer.Material.other,
         gds2Layer=66, gds2DataType=13,
     )
     createBL(
-        tech, 'diffres', BasicLayer.Material.other,
-        gds2Layer=65, gds2DataType=13,
+        tech, 'npn', BasicLayer.Material.other,
+        gds2Layer=82, gds2DataType=20,
     )
     createBL(
         tech, 'pnp', BasicLayer.Material.other,
         gds2Layer=82, gds2DataType=44,
     )
     createBL(
+        tech, 'areaid_diode', BasicLayer.Material.other,
+        gds2Layer=81, gds2DataType=23,
+    )
+    createBL(
         tech, 'prBoundary', BasicLayer.Material.other,
         gds2Layer=235, gds2DataType=4,
-    )
-
-    # ContactLayers
-    # X<>licon<>li
-    createVia(
-        tech, 'poly_licon_li', 'poly', 'licon', 'li',
-        u(0.17),
     )
 
     # ViaLayers
@@ -433,11 +427,11 @@ def _setup_techno():
     )
 
     # Blockages
-    tech.getLayer('difftap').setBlockageLayer(
-        tech.getLayer('difftap.block')
-    )
     tech.getLayer('poly').setBlockageLayer(
         tech.getLayer('poly.block')
+    )
+    tech.getLayer('difftap').setBlockageLayer(
+        tech.getLayer('difftap.block')
     )
     tech.getLayer('li').setBlockageLayer(
         tech.getLayer('li.block')
@@ -501,8 +495,8 @@ def _setup_techno():
 
     # Resistors
     # ResistorLayer.create(tech, 'poly_res', 'poly', 'polyres')
-    # ResistorLayer.create(tech, 'pdiff_res', 'difftap', 'diffres')
     # ResistorLayer.create(tech, 'ndiff_res', 'difftap', 'diffres')
+    # ResistorLayer.create(tech, 'pdiff_res', 'difftap', 'diffres')
 
     # Capacitors
     # MIMCAP 'MIM_m3_capm': 'MIMTop(name=capm)' over 'MetalWire(name=m3)'# MIMCAP 'MIM_m4_cap2m': 'MIMTop(name=cap2m)' over 'MetalWire(name=m4)'
@@ -520,7 +514,7 @@ def _setup_techno():
     # TransistorLayer.create(tech, 'pfet_g5v0d10v5', 'hvmosgate', 'psdm', 'nwm')
 
     # Bipolars
-    # Not implemented: Bipolar 'npn_05v5_w1u00l2u00'# Not implemented: Bipolar 'npn_05v5_w1u00l1u00'# Not implemented: Bipolar 'pnp_05v5_w3u40l3u40'# Not implemented: Bipolar 'pnp_05v5_w0u68l0u68'
+    # Not implemented: Bipolar 'npn_05v5_w1u00l2u00'# Not implemented: Bipolar 'pnp_05v5_w3u40l3u40'# Not implemented: Bipolar 'npn_05v5_w1u00l1u00'# Not implemented: Bipolar 'pnp_05v5_w0u68l0u68'
 def _setup_display():
     # ----------------------------------------------------------------------
     # Style: Alliance.Classic [black]
@@ -571,9 +565,9 @@ def _setup_display():
     style.addDrawingStyle(group='Routing Layers', name='m3', color=toRGB('Green'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
     style.addDrawingStyle(group='Routing Layers', name='m3.pin', color=toRGB('Green'), pattern=toHexa('poids4.8'), border=2, threshold=threshold)
     style.addDrawingStyle(group='Routing Layers', name='capm', color=toRGB('Yellow'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
-    style.addDrawingStyle(group='Routing Layers', name='cap2m', color=toRGB('Violet'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
-    style.addDrawingStyle(group='Routing Layers', name='m4', color=toRGB('Red'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
-    style.addDrawingStyle(group='Routing Layers', name='m4.pin', color=toRGB('Red'), pattern=toHexa('poids4.8'), border=2, threshold=threshold)
+    style.addDrawingStyle(group='Routing Layers', name='m4', color=toRGB('Violet'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
+    style.addDrawingStyle(group='Routing Layers', name='m4.pin', color=toRGB('Violet'), pattern=toHexa('poids4.8'), border=2, threshold=threshold)
+    style.addDrawingStyle(group='Routing Layers', name='cap2m', color=toRGB('Red'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
     style.addDrawingStyle(group='Routing Layers', name='m5', color=toRGB('Blue'), pattern=toHexa('poids4.8'), border=1, threshold=threshold)
     style.addDrawingStyle(group='Routing Layers', name='m5.pin', color=toRGB('Blue'), pattern=toHexa('poids4.8'), border=2, threshold=threshold)
 
@@ -587,8 +581,8 @@ def _setup_display():
     style.addDrawingStyle(group='Cuts (VIA holes', name='pad', color=toRGB('Red'), threshold=threshold)
 
     # Blockages.
-    style.addDrawingStyle(group='Blockages', name='difftap.block', color=toRGB('Blue'), pattern=toHexa('slash.8'), border=4, threshold=threshold)
-    style.addDrawingStyle(group='Blockages', name='poly.block', color=toRGB('Aqua'), pattern=toHexa('poids4.8'), border=4, threshold=threshold)
+    style.addDrawingStyle(group='Blockages', name='poly.block', color=toRGB('Blue'), pattern=toHexa('slash.8'), border=4, threshold=threshold)
+    style.addDrawingStyle(group='Blockages', name='difftap.block', color=toRGB('Aqua'), pattern=toHexa('poids4.8'), border=4, threshold=threshold)
     style.addDrawingStyle(group='Blockages', name='li.block', color=toRGB('LightPink'), pattern=toHexa('poids4.8'), border=4, threshold=threshold)
     style.addDrawingStyle(group='Blockages', name='m1.block', color=toRGB('Green'), pattern=toHexa('poids4.8'), border=4, threshold=threshold)
     style.addDrawingStyle(group='Blockages', name='m2.block', color=toRGB('Yellow'), pattern=toHexa('poids4.8'), border=4, threshold=threshold)

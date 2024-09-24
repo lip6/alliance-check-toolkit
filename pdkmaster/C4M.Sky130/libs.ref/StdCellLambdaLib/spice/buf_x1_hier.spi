@@ -1,8 +1,0 @@
-* buf_x1
-* buf_x1
-.subckt buf_x1 vdd vss i q
-Mstage0_nmos _i_n i vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
-Mstage0_pmos _i_n i vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
-Mnmos vss _i_n q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=2.995um
-Mpmos vdd _i_n q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=3.555um
-.ends buf_x1

@@ -1,9 +1,0 @@
-* or2_x1
-.subckt or2_x1 vdd vss q i0 i1
-Mi0_nmos vss i0 nq vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
-Mi0_pmos nq i0 _net0 vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
-Mi1_nmos nq i1 vss vss sky130_fd_pr__nfet_01v8__model l=0.15um w=1.0um
-Mi1_pmos _net0 i1 vdd vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=2.0um
-Mn_pd vss nq q vss sky130_fd_pr__nfet_01v8__model l=0.15um w=3.535um
-Mq_pu vdd nq q vdd sky130_fd_pr__pfet_01v8__model l=0.15um w=4.095um
-.ends or2_x1
