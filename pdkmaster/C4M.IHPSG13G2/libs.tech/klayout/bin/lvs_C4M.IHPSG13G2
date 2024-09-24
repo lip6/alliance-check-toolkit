@@ -1,0 +1,14 @@
+#!/bin/sh
+d=`dirname $0`
+deck=`realpath $d/../share/C4M.IHPSG13G2.lvs`
+
+if [ $# -eq 3  ]; then
+    export SOURCE_FILE=`realpath $1` CELL_NAME= SPICE_FILE=`realpath $2` REPORT_FILE=`realpath $3`
+elif [ $# -eq 4  ]; then
+    export SOURCE_FILE=`realpath $1` CELL_NAME="$2" SPICE_FILE=`realpath $3` REPORT_FILE=`realpath $4`
+else
+    echo "Usage `basename $0` input_gds [cell_name] input_spice report"
+    exit 20
+fi
+
+klayout -b -r ${deck}

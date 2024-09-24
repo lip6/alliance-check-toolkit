@@ -1,0 +1,63 @@
+* All corners file
+
+* lvmos
+.lib lvmos_tt
+.lib "cornerMOSlv.lib" mos_tt
+.endl
+
+.lib lvmos_ff
+.lib "cornerMOSlv.lib" mos_ff
+.endl
+
+.lib lvmos_ss
+.lib "cornerMOSlv.lib" mos_ss
+.endl
+
+.lib lvmos_fs
+.lib "cornerMOSlv.lib" mos_fs
+.endl
+
+.lib lvmos_sf
+.lib "cornerMOSlv.lib" mos_sf
+.endl
+
+* hvmos
+.lib hvmos_tt
+.lib "cornerMOShv.lib" mos_tt
+.endl
+
+.lib hvmos_ff
+.lib "cornerMOShv.lib" mos_ff
+.endl
+
+.lib hvmos_ss
+.lib "cornerMOShv.lib" mos_ss
+.endl
+
+.lib hvmos_fs
+.lib "cornerMOShv.lib" mos_fs
+.endl
+
+.lib hvmos_sf
+.lib "cornerMOShv.lib" mos_sf
+.endl
+
+* resistors
+.lib res_typ
+.lib "cornerRES.lib" res_typ
+.endl
+
+* resistors
+.lib res_bcs
+.lib "cornerRES.lib" res_bcs
+.endl
+
+* resistors
+.lib res_wcs
+.lib "cornerRES.lib" res_wcs
+.endl
+
+* diodes
+.lib dio
+.include "diodes.lib"
+.endl

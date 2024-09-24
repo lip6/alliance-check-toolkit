@@ -1,0 +1,856 @@
+/************************************************************************/
+/*                                                                      */
+/*  Avertec Release v3.4p5 (64 bits on Linux 6.7.12+bpo-amd64)          */
+/*  [AVT_only] host: fsdev                                              */
+/*  [AVT_only] arch: x86_64                                             */
+/*  [AVT_only] path: /opt/tasyag-3.4p5/bin/avt_shell                    */
+/*  argv:                                                               */
+/*                                                                      */
+/*  User: verhaegs                                                      */
+/*  Generation date Tue Sep 24 13:51:02 2024                            */
+/*                                                                      */
+/*  liberty data flow `StdCell3V3Lib_slow`                              */
+/*                                                                      */
+/************************************************************************/
+
+
+
+library (StdCell3V3Lib_slow) {
+
+    technology (cmos) ;
+    date                          : "Tue Sep 24 13:51:02 2024" ;
+    delay_model                   : table_lookup ;
+    nom_voltage                   : 2.97 ;
+    nom_temperature               : 85.0 ;
+    nom_process                   : 1.0 ;
+    slew_derate_from_library      : 1.0 ;
+    default_fanout_load           : 1000.0 ;
+    default_inout_pin_cap         : 1000.0 ;
+    default_input_pin_cap         : 1000.0 ;
+    default_output_pin_cap        : 0.0 ;
+    voltage_unit                  : "1V" ;
+    time_unit                     : "1ps" ;
+    capacitive_load_unit            (1,ff) ;
+    pulling_resistance_unit       : "1ohm" ;
+    current_unit                  : "1mA" ;
+    leakage_power_unit            : "1uW" ;
+    default_cell_leakage_power    : 0.0 ;
+    input_threshold_pct_rise      : 50.0 ;
+    input_threshold_pct_fall      : 50.0 ;
+    output_threshold_pct_rise     : 50.0 ;
+    output_threshold_pct_fall     : 50.0 ;
+    slew_lower_threshold_pct_fall : 20.0 ;
+    slew_upper_threshold_pct_fall : 80.0 ;
+    slew_lower_threshold_pct_rise : 20.0 ;
+    slew_upper_threshold_pct_rise : 80.0 ;
+
+
+
+
+
+    cell (fill) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_poly) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (fill_w2) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_w2) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_diff_w2) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_poly_w2) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (fill_w4) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_w4) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_diff_w4) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (tie_poly_w4) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (diode_w1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (zero_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (zero) {
+            function : "0" ;
+            direction : output ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (one_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (one) {
+            function : "1" ;
+            direction : output ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (zeroone_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (zero) {
+            function : "0" ;
+            direction : output ;
+            capacitance : 0.00 ;
+        }
+        pin (one) {
+            function : "1" ;
+            direction : output ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (decap_w0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+    }
+
+    cell (inv_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (inv_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (inv_x2) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (inv_x4) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (buf_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (buf_x2) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (buf_x4) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nand2_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nand2_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nand3_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nand3_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nand4_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i3) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nand4_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i3) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (and2_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (and3_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (and4_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i3) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nor2_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nor2_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nor3_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nor3_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nor4_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i3) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nor4_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i3) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (or2_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (or3_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (or4_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i3) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (mux2_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (cmd) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (and21nor_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (and21nor_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (or21nand_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (or21nand_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (i2) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (xor2_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nexor2_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i1) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i0) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nsnrlatch_x0) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nrst) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nset) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (nsnrlatch_x1) {
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nq) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nrst) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (nset) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (dff_x1) {
+        ff (IQ,IQN) {
+            next_state : "i" ;
+            clocked_on : "clk" ;
+        }
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (q) {
+            function : "IQ" ;
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (clk) {
+            clock : true ;
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+    cell (dffnr_x1) {
+        ff (IQ,IQN) {
+            next_state : "i" ;
+            clocked_on : "clk" ;
+            clear : "nrst'" ;
+        }
+        area : 0.0 ;
+        cell_leakage_power : 0 ;
+        pin (nrst) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (q) {
+            function : "IQ" ;
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (clk) {
+            clock : true ;
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+        pin (i) {
+            direction : input ;
+            capacitance : 0.00 ;
+        }
+    }
+
+}
