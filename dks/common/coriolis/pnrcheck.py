@@ -58,7 +58,7 @@ def mkRuleSet ( callerGlobals, vlogDesignName, flags=0, extraRtlDepends=[], extr
     if SCR.Iterations_value != 0:
         scrFlag = scrFlag |  SCR.Iterations
     if SCR.RandSeed_value != 0:
-        scrFlag = scrFlag |  SCR.RandSeed_value
+        scrFlag = scrFlag |  SCR.RandSeed
     if flags & ChannelRoute:
 	    rulePnR    = SCR.mkRule( 'scr', scrTargets,  rtlDepends, scrFlag )
     else:
