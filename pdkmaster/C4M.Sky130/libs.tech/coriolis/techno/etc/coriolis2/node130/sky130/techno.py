@@ -625,10 +625,10 @@ def _setup_display():
 def setup():
     _setup_techno()
     _setup_display()
-    loadAnalogTechno(analogTechnologyTable, __file__)
+    #loadAnalogTechno(analogTechnologyTable, __file__)
     try:
         from .techno_fix import fix
-    except:
+    except ModuleNotFoundError:
         pass
     else:
         fix()
