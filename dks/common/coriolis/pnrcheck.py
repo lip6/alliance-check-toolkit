@@ -54,7 +54,7 @@ def mkRuleSet ( callerGlobals, vlogDesignName, flags=0, extraRtlDepends=[], extr
     scrTargets = [ routedName+'.ap'
                      , routedName+'.vst' 
                      , routedName+'.spi' ]
-    scrFlag = SCR.Route | SCR.Place | SCR.Iterations | SCR.RandSeed
+    scrFlag = SCR.Route | SCR.Place
     if SCR.Iterations_value != 0:
         scrFlag = scrFlag |  SCR.Iterations
     if SCR.RandSeed_value != 0:
