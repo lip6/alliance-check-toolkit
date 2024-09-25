@@ -23,6 +23,8 @@ class SCR ( FlowTask ):
     Channel_str         = 'c'
     RandSeed            = 0x0040
     RandSeed_value      = 0
+    MaxRetry            = 0x0080
+    MaxRetry_value      = 0
     MBK_CATA_LIB        = '.'
 
     @staticmethod
@@ -42,6 +44,7 @@ class SCR ( FlowTask ):
         if flags & SCR.SupplyNumber: self.command.extend( ['-a' ,str(SCR.Supply_value)])
         if flags & SCR.ChannelName:  self.command.extend( ['-c' ,SCR.Channel_str ])
         if flags & SCR.RandSeed   :  self.command.extend( ['-s' ,str(SCR.RandSeed_value) ])
+        if flags & SCR.MaxRetry   :  self.command.extend( ['-M' ,str(SCR.MaxRetry_value) ])
         self.command   += [ '-o',  self.outputFile.stem, self.inputFile.stem ]
         self.commandvst    = [ 'x2y' ]
         self.commandvst.extend( ['vst','vst', self.inputFile.stem, self.outputFile.stem] )
