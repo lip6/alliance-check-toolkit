@@ -18,6 +18,7 @@ from   coriolis.plugins.core2chip.sky130    import CoreToChip
 
 af = CRL.AllianceFramework.get()
 
+CoreName = 'Arlet6502'
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
@@ -36,7 +37,7 @@ def scriptMain ( **kw ):
             sys.exit( 1 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
-        cellName = 'arlet6502'
+        cellName = 'Arlet6502'
         if buildChip:
             cellName += '_harness'
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
@@ -93,16 +94,16 @@ def scriptMain ( **kw ):
             m1pitch    = l(10.0)
             m2pitch    = l(10.0)
             ioPadsSpec = [ ]
-            ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  , 10*m1pitch, 10*m1pitch,  8)
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , 15*m1pitch, 10*m1pitch,  8)
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   , 10*m1pitch, 10*m1pitch, 16)
+            ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  , 20*m1pitch, 20*m1pitch,  8)
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , 30*m1pitch, 20*m1pitch,  8)
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   , 30*m1pitch, 20*m1pitch, 16)
                          
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 100*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , 110*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'     , 120*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'rdy'     , 130*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , 140*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 150*m2pitch,       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , 140*m2pitch,       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'     , 160*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'rdy'     , 100*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'we'      , 120*m2pitch,       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'reset'   , 140*m2pitch,       0 ,  1)
                          ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.misc.catchCore              = False
@@ -118,7 +119,8 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        conf.cfg.etesian.spaceMargin         = 0.05
+        conf.cfg.etesian.spaceMargin         = 0.70
+        conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
        #conf.cfg.katana.hTracksReservedLocal = 6
        #conf.cfg.katana.vTracksReservedLocal = 3
         conf.cfg.katana.hTracksReservedMin   = 3
@@ -134,8 +136,8 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( 36*l(100.0), 36*l(100.0) )
-        conf.chipSize            = ( l(  3000.0), l(  3000.0) )
+        #conf.coreSize            = ( 36*l(100.0), 36*l(100.0) )
+        #conf.chipSize            = ( l(  6500.0), l(  5500.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
             conf.useHTree( 'io_in_from_pad(0)', Spares.HEAVY_LEAF_LOAD )
