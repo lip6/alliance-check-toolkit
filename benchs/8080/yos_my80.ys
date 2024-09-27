@@ -1,8 +1,0 @@
-read -sv my80x.v
-synth -top my80core
-
-# mapping to target cells
-dfflibmap -liberty ../../cells/nsxlib2/nsxlib2.lib
-abc -liberty ../../cells/nsxlib2/nsxlib2.lib
-write_blif my80core.blif
-clean
