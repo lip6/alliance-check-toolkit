@@ -29,7 +29,7 @@ coriolisTechDir = pdkDir / 'coriolis' / 'sky130_nsx2'
 sys.path.append( coriolisTechDir.as_posix() )
 from sky130_nsx2 import techno, nsxlib2, Sky130nsx2Setup 
 
-kdrcRules = pdkDir / 'klayout' /  'sky130A.lydrc'
+kdrcRules = pdkDir / 'klayout' / 'sky130A.lydrc'
 
 pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
 sys.path.append( pdkCommonDir.as_posix() )
@@ -43,8 +43,9 @@ DRC.setDrcRules( kdrcRules )
 STA.VddSupply = 1.8
 STA.ClockName = 'm_clock'
 STA.SpiceType = 'hspice'
-STA.SpiceTrModel = 'C4M.Sky130_logic_tt_model.spice'
-STA.MBK_CATA_LIB = '.:'+str( checkToolkit / 'pdkmaster' / 'C4M.Sky130' / 'libs.tech' / 'ngspice' )
+STA.SpiceTrModel = 'sky130_fd_pr__nfet_01v8__mismatch.corner.spice sky130_fd_pr__nfet_01v8__tt.pm3.spice sky130_fd_pr__nfet_01v8__tt.corner.spice sky130_fd_pr__pfet_01v8__mismatch.corner.spice sky130_fd_pr__pfet_01v8__tt.pm3.spice sky130_fd_pr__pfet_01v8__tt.corner.spice  parameters/lod.spice '
+STA.MBK_CATA_LIB = '.:'+str( pdkDir / 'skywater-pdk-libs-sky130_fd_pr' / 'models') + ':' + str( pdkDir / 'skywater-pdk-libs-sky130_fd_pr' / 'cells' / 'pfet_01v8') + ':' + str( pdkDir / 'skywater-pdk-libs-sky130_fd_pr' / 'cells' / 'nfet_01v8')
+print ('CATALIB=',STA.MBK_CATA_LIB)
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
 shellEnv.export()
