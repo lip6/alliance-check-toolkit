@@ -1,0 +1,2678 @@
+* Coriolis Structural SPICE Driver
+* Generated on Sep 30, 2024, 15:05
+* Cell/Subckt "mac_cts_r".
+* 
+* INTERF vss
+* INTERF vdd
+* INTERF reset
+* INTERF multiplier[3]
+* INTERF multiplier[2]
+* INTERF multiplier[1]
+* INTERF multiplier[0]
+* INTERF multiplicand[3]
+* INTERF multiplicand[2]
+* INTERF multiplicand[1]
+* INTERF multiplicand[0]
+* INTERF clk
+* INTERF accumulator_out[7]
+* INTERF accumulator_out[6]
+* INTERF accumulator_out[5]
+* INTERF accumulator_out[4]
+* INTERF accumulator_out[3]
+* INTERF accumulator_out[2]
+* INTERF accumulator_out[1]
+* INTERF accumulator_out[0]
+
+* Terminal models (aka standard cells) used througout all the hierarchy.
+.include decap_w0.spi
+.include tie.spi
+.include nand2_x0.spi
+.include and2_x1.spi
+.include nor2_x0.spi
+.include and4_x1.spi
+.include inv_x0.spi
+.include xor2_x0.spi
+.include nexor2_x0.spi
+.include or21nand_x0.spi
+.include or2_x1.spi
+.include and21nor_x0.spi
+.include diode_w1.spi
+.include mux2_x1.spi
+.include dff_x1.spi
+.include buf_x4.spi
+.include nand4_x0.spi
+
+* Non-terminal models (part of the user's design hierarchy).
+
+.subckt mac_cts_r 0 1 3 12 13 14 15 16 17 18 19 23 25 26 27 28 29 30 31 32
+* NET     0 = vss
+* NET     1 = vdd
+* NET     2 = reset_root_0
+* NET     3 = reset
+* NET     4 = partial_product[7]
+* NET     5 = partial_product[6]
+* NET     6 = partial_product[5]
+* NET     7 = partial_product[4]
+* NET     8 = partial_product[3]
+* NET     9 = partial_product[2]
+* NET    10 = partial_product[1]
+* NET    11 = partial_product[0]
+* NET    12 = multiplier[3]
+* NET    13 = multiplier[2]
+* NET    14 = multiplier[1]
+* NET    15 = multiplier[0]
+* NET    16 = multiplicand[3]
+* NET    17 = multiplicand[2]
+* NET    18 = multiplicand[1]
+* NET    19 = multiplicand[0]
+* NET    20 = clk_root_2
+* NET    21 = clk_root_1
+* NET    22 = clk_root_0
+* NET    23 = clk
+* NET    24 = blockagenet
+* NET    25 = accumulator_out[7]
+* NET    26 = accumulator_out[6]
+* NET    27 = accumulator_out[5]
+* NET    28 = accumulator_out[4]
+* NET    29 = accumulator_out[3]
+* NET    30 = accumulator_out[2]
+* NET    31 = accumulator_out[1]
+* NET    32 = accumulator_out[0]
+* NET    33 = abc_567_new_n99
+* NET    34 = abc_567_new_n98
+* NET    35 = abc_567_new_n97
+* NET    36 = abc_567_new_n96
+* NET    37 = abc_567_new_n94
+* NET    38 = abc_567_new_n93
+* NET    39 = abc_567_new_n92
+* NET    40 = abc_567_new_n91
+* NET    41 = abc_567_new_n90
+* NET    42 = abc_567_new_n89
+* NET    43 = abc_567_new_n88
+* NET    44 = abc_567_new_n87
+* NET    45 = abc_567_new_n86
+* NET    46 = abc_567_new_n85
+* NET    47 = abc_567_new_n84
+* NET    48 = abc_567_new_n83
+* NET    49 = abc_567_new_n82
+* NET    50 = abc_567_new_n81
+* NET    51 = abc_567_new_n80
+* NET    52 = abc_567_new_n79
+* NET    53 = abc_567_new_n78
+* NET    54 = abc_567_new_n77
+* NET    55 = abc_567_new_n76
+* NET    56 = abc_567_new_n75
+* NET    57 = abc_567_new_n74
+* NET    58 = abc_567_new_n73
+* NET    59 = abc_567_new_n72
+* NET    60 = abc_567_new_n71
+* NET    61 = abc_567_new_n70
+* NET    62 = abc_567_new_n69
+* NET    63 = abc_567_new_n68
+* NET    64 = abc_567_new_n66
+* NET    65 = abc_567_new_n65
+* NET    66 = abc_567_new_n64
+* NET    67 = abc_567_new_n63
+* NET    68 = abc_567_new_n62
+* NET    69 = abc_567_new_n61
+* NET    70 = abc_567_new_n60
+* NET    71 = abc_567_new_n59
+* NET    72 = abc_567_new_n58
+* NET    73 = abc_567_new_n57
+* NET    74 = abc_567_new_n56
+* NET    75 = abc_567_new_n55
+* NET    76 = abc_567_new_n54
+* NET    77 = abc_567_new_n52
+* NET    78 = abc_567_new_n51
+* NET    79 = abc_567_new_n50
+* NET    80 = abc_567_new_n49
+* NET    81 = abc_567_new_n48
+* NET    82 = abc_567_new_n46
+* NET    83 = abc_567_new_n45
+* NET    84 = abc_567_new_n44
+* NET    85 = abc_567_new_n43
+* NET    86 = abc_567_new_n42
+* NET    87 = abc_567_new_n187
+* NET    88 = abc_567_new_n186
+* NET    89 = abc_567_new_n185
+* NET    90 = abc_567_new_n183
+* NET    91 = abc_567_new_n182
+* NET    92 = abc_567_new_n181
+* NET    93 = abc_567_new_n180
+* NET    94 = abc_567_new_n179
+* NET    95 = abc_567_new_n177
+* NET    96 = abc_567_new_n176
+* NET    97 = abc_567_new_n175
+* NET    98 = abc_567_new_n174
+* NET    99 = abc_567_new_n173
+* NET   100 = abc_567_new_n171
+* NET   101 = abc_567_new_n170
+* NET   102 = abc_567_new_n169
+* NET   103 = abc_567_new_n168
+* NET   104 = abc_567_new_n167
+* NET   105 = abc_567_new_n165
+* NET   106 = abc_567_new_n164
+* NET   107 = abc_567_new_n163
+* NET   108 = abc_567_new_n162
+* NET   109 = abc_567_new_n161
+* NET   110 = abc_567_new_n159
+* NET   111 = abc_567_new_n158
+* NET   112 = abc_567_new_n157
+* NET   113 = abc_567_new_n156
+* NET   114 = abc_567_new_n155
+* NET   115 = abc_567_new_n153
+* NET   116 = abc_567_new_n152
+* NET   117 = abc_567_new_n151
+* NET   118 = abc_567_new_n150
+* NET   119 = abc_567_new_n148
+* NET   120 = abc_567_new_n147
+* NET   121 = abc_567_new_n145
+* NET   122 = abc_567_new_n143
+* NET   123 = abc_567_new_n142
+* NET   124 = abc_567_new_n141
+* NET   125 = abc_567_new_n140
+* NET   126 = abc_567_new_n139
+* NET   127 = abc_567_new_n138
+* NET   128 = abc_567_new_n137
+* NET   129 = abc_567_new_n136
+* NET   130 = abc_567_new_n135
+* NET   131 = abc_567_new_n134
+* NET   132 = abc_567_new_n132
+* NET   133 = abc_567_new_n131
+* NET   134 = abc_567_new_n130
+* NET   135 = abc_567_new_n129
+* NET   136 = abc_567_new_n128
+* NET   137 = abc_567_new_n127
+* NET   138 = abc_567_new_n126
+* NET   139 = abc_567_new_n125
+* NET   140 = abc_567_new_n124
+* NET   141 = abc_567_new_n123
+* NET   142 = abc_567_new_n122
+* NET   143 = abc_567_new_n121
+* NET   144 = abc_567_new_n119
+* NET   145 = abc_567_new_n118
+* NET   146 = abc_567_new_n117
+* NET   147 = abc_567_new_n116
+* NET   148 = abc_567_new_n115
+* NET   149 = abc_567_new_n114
+* NET   150 = abc_567_new_n113
+* NET   151 = abc_567_new_n112
+* NET   152 = abc_567_new_n111
+* NET   153 = abc_567_new_n110
+* NET   154 = abc_567_new_n109
+* NET   155 = abc_567_new_n108
+* NET   156 = abc_567_new_n107
+* NET   157 = abc_567_new_n106
+* NET   158 = abc_567_new_n105
+* NET   159 = abc_567_new_n104
+* NET   160 = abc_567_new_n103
+* NET   161 = abc_567_new_n102
+* NET   162 = abc_567_new_n101
+* NET   163 = abc_567_new_n100
+* NET   164 = abc_567_auto_rtlil_cc_2608_MuxGate_566
+* NET   165 = abc_567_auto_rtlil_cc_2608_MuxGate_564
+* NET   166 = abc_567_auto_rtlil_cc_2608_MuxGate_562
+* NET   167 = abc_567_auto_rtlil_cc_2608_MuxGate_560
+* NET   168 = abc_567_auto_rtlil_cc_2608_MuxGate_558
+* NET   169 = abc_567_auto_rtlil_cc_2608_MuxGate_556
+* NET   170 = abc_567_auto_rtlil_cc_2608_MuxGate_554
+* NET   171 = abc_567_auto_rtlil_cc_2608_MuxGate_552
+* NET   172 = abc_567_auto_rtlil_cc_2608_MuxGate_550
+* NET   173 = abc_567_auto_rtlil_cc_2608_MuxGate_548
+* NET   174 = abc_567_auto_rtlil_cc_2608_MuxGate_546
+* NET   175 = abc_567_auto_rtlil_cc_2608_MuxGate_544
+* NET   176 = abc_567_auto_rtlil_cc_2608_MuxGate_542
+* NET   177 = abc_567_auto_rtlil_cc_2608_MuxGate_540
+* NET   178 = abc_567_auto_rtlil_cc_2608_MuxGate_538
+* NET   179 = abc_567_auto_rtlil_cc_2608_MuxGate_536
+
+xfeed_1859 1 0 decap_w0
+xfeed_1858 1 0 decap_w0
+xfeed_1857 1 0 decap_w0
+xfeed_1856 1 0 decap_w0
+xfeed_1855 1 0 decap_w0
+xfeed_1854 1 0 decap_w0
+xfeed_1853 1 0 decap_w0
+xfeed_1852 1 0 tie
+xfeed_1851 1 0 decap_w0
+xfeed_1850 1 0 decap_w0
+xfeed_409 1 0 decap_w0
+xfeed_408 1 0 decap_w0
+xfeed_407 1 0 decap_w0
+xfeed_406 1 0 decap_w0
+xfeed_405 1 0 decap_w0
+xfeed_404 1 0 decap_w0
+xfeed_403 1 0 decap_w0
+xfeed_402 1 0 tie
+xfeed_401 1 0 decap_w0
+xfeed_400 1 0 decap_w0
+xfeed_369 1 0 decap_w0
+xfeed_368 1 0 decap_w0
+xfeed_367 1 0 decap_w0
+xfeed_366 1 0 decap_w0
+xfeed_365 1 0 decap_w0
+xfeed_364 1 0 decap_w0
+xfeed_363 1 0 decap_w0
+xfeed_362 1 0 decap_w0
+xfeed_361 1 0 decap_w0
+xfeed_360 1 0 decap_w0
+xfeed_1909 1 0 decap_w0
+xfeed_1908 1 0 decap_w0
+xfeed_1907 1 0 decap_w0
+xfeed_1906 1 0 decap_w0
+xfeed_1905 1 0 decap_w0
+xfeed_1904 1 0 decap_w0
+xfeed_1903 1 0 decap_w0
+xfeed_1902 1 0 decap_w0
+xfeed_1901 1 0 decap_w0
+xfeed_1900 1 0 decap_w0
+xfeed_1869 1 0 decap_w0
+xfeed_1868 1 0 decap_w0
+xfeed_1867 1 0 decap_w0
+xfeed_1866 1 0 decap_w0
+xfeed_1865 1 0 decap_w0
+xfeed_1864 1 0 decap_w0
+xfeed_1863 1 0 decap_w0
+xfeed_1862 1 0 tie
+xfeed_1861 1 0 decap_w0
+xfeed_1860 1 0 decap_w0
+xfeed_419 1 0 decap_w0
+xfeed_418 1 0 decap_w0
+xfeed_417 1 0 decap_w0
+xfeed_416 1 0 decap_w0
+xfeed_415 1 0 decap_w0
+xfeed_414 1 0 decap_w0
+xfeed_413 1 0 decap_w0
+xfeed_412 1 0 decap_w0
+xfeed_411 1 0 decap_w0
+xfeed_410 1 0 decap_w0
+xfeed_379 1 0 decap_w0
+xfeed_378 1 0 decap_w0
+xfeed_377 1 0 decap_w0
+xfeed_376 1 0 decap_w0
+xfeed_375 1 0 decap_w0
+xfeed_374 1 0 decap_w0
+xfeed_373 1 0 decap_w0
+xfeed_372 1 0 decap_w0
+xfeed_371 1 0 decap_w0
+xfeed_370 1 0 decap_w0
+xsubckt_34_nand2_x0 1 0 55 57 59 nand2_x0
+xfeed_1919 1 0 decap_w0
+xfeed_1918 1 0 decap_w0
+xfeed_1917 1 0 decap_w0
+xfeed_1916 1 0 decap_w0
+xfeed_1915 1 0 decap_w0
+xfeed_1914 1 0 decap_w0
+xfeed_1913 1 0 decap_w0
+xfeed_1912 1 0 decap_w0
+xfeed_1911 1 0 decap_w0
+xfeed_1910 1 0 decap_w0
+xfeed_1879 1 0 decap_w0
+xfeed_1878 1 0 decap_w0
+xfeed_1877 1 0 decap_w0
+xfeed_1876 1 0 decap_w0
+xfeed_1875 1 0 decap_w0
+xfeed_1874 1 0 decap_w0
+xfeed_1873 1 0 decap_w0
+xfeed_1872 1 0 decap_w0
+xfeed_1871 1 0 decap_w0
+xfeed_1870 1 0 decap_w0
+xfeed_429 1 0 decap_w0
+xfeed_428 1 0 decap_w0
+xfeed_427 1 0 decap_w0
+xfeed_426 1 0 decap_w0
+xfeed_425 1 0 decap_w0
+xfeed_424 1 0 decap_w0
+xfeed_423 1 0 decap_w0
+xfeed_422 1 0 decap_w0
+xfeed_421 1 0 tie
+xfeed_420 1 0 decap_w0
+xfeed_389 1 0 decap_w0
+xfeed_388 1 0 decap_w0
+xfeed_387 1 0 decap_w0
+xfeed_386 1 0 decap_w0
+xfeed_385 1 0 decap_w0
+xfeed_384 1 0 decap_w0
+xfeed_383 1 0 decap_w0
+xfeed_382 1 0 decap_w0
+xfeed_381 1 0 decap_w0
+xfeed_380 1 0 tie
+xsubckt_84_and2_x1 1 0 138 139 157 and2_x1
+xsubckt_45_and2_x1 1 0 44 47 62 and2_x1
+xfeed_1929 1 0 decap_w0
+xfeed_1928 1 0 decap_w0
+xfeed_1927 1 0 decap_w0
+xfeed_1926 1 0 decap_w0
+xfeed_1925 1 0 decap_w0
+xfeed_1924 1 0 decap_w0
+xfeed_1923 1 0 decap_w0
+xfeed_1922 1 0 decap_w0
+xfeed_1921 1 0 decap_w0
+xfeed_1920 1 0 decap_w0
+xfeed_1889 1 0 decap_w0
+xfeed_1888 1 0 decap_w0
+xfeed_1887 1 0 decap_w0
+xfeed_1886 1 0 decap_w0
+xfeed_1885 1 0 decap_w0
+xfeed_1884 1 0 decap_w0
+xfeed_1883 1 0 tie
+xfeed_1882 1 0 decap_w0
+xfeed_1881 1 0 decap_w0
+xfeed_1880 1 0 decap_w0
+xfeed_439 1 0 decap_w0
+xfeed_438 1 0 decap_w0
+xfeed_437 1 0 decap_w0
+xfeed_436 1 0 decap_w0
+xfeed_435 1 0 decap_w0
+xfeed_434 1 0 decap_w0
+xfeed_433 1 0 decap_w0
+xfeed_432 1 0 decap_w0
+xfeed_431 1 0 decap_w0
+xfeed_430 1 0 decap_w0
+xfeed_399 1 0 decap_w0
+xfeed_398 1 0 decap_w0
+xfeed_397 1 0 decap_w0
+xfeed_396 1 0 decap_w0
+xfeed_395 1 0 decap_w0
+xfeed_394 1 0 tie
+xfeed_393 1 0 decap_w0
+xfeed_392 1 0 decap_w0
+xfeed_390 1 0 decap_w0
+xfeed_1939 1 0 decap_w0
+xfeed_1938 1 0 decap_w0
+xfeed_1937 1 0 decap_w0
+xfeed_1936 1 0 decap_w0
+xfeed_1935 1 0 decap_w0
+xfeed_1934 1 0 decap_w0
+xfeed_1933 1 0 decap_w0
+xfeed_1932 1 0 decap_w0
+xfeed_1931 1 0 decap_w0
+xfeed_1930 1 0 decap_w0
+xfeed_1899 1 0 decap_w0
+xfeed_1898 1 0 decap_w0
+xfeed_1897 1 0 decap_w0
+xfeed_1896 1 0 decap_w0
+xfeed_1895 1 0 decap_w0
+xfeed_1894 1 0 decap_w0
+xfeed_1893 1 0 decap_w0
+xfeed_1892 1 0 decap_w0
+xfeed_1891 1 0 decap_w0
+xfeed_1890 1 0 decap_w0
+xfeed_449 1 0 decap_w0
+xfeed_448 1 0 decap_w0
+xfeed_447 1 0 decap_w0
+xfeed_446 1 0 decap_w0
+xfeed_445 1 0 decap_w0
+xfeed_444 1 0 decap_w0
+xfeed_443 1 0 decap_w0
+xfeed_442 1 0 decap_w0
+xfeed_441 1 0 decap_w0
+xfeed_440 1 0 decap_w0
+xfeed_1949 1 0 decap_w0
+xfeed_1948 1 0 decap_w0
+xfeed_1947 1 0 decap_w0
+xfeed_1946 1 0 decap_w0
+xfeed_1945 1 0 decap_w0
+xfeed_1944 1 0 decap_w0
+xfeed_1943 1 0 decap_w0
+xfeed_1942 1 0 decap_w0
+xfeed_1941 1 0 decap_w0
+xfeed_1940 1 0 decap_w0
+xfeed_459 1 0 decap_w0
+xfeed_458 1 0 decap_w0
+xfeed_457 1 0 decap_w0
+xfeed_456 1 0 decap_w0
+xfeed_455 1 0 decap_w0
+xfeed_454 1 0 decap_w0
+xfeed_453 1 0 decap_w0
+xfeed_452 1 0 decap_w0
+xfeed_451 1 0 decap_w0
+xfeed_450 1 0 decap_w0
+xfeed_1959 1 0 decap_w0
+xfeed_1958 1 0 decap_w0
+xfeed_1957 1 0 decap_w0
+xfeed_1956 1 0 decap_w0
+xfeed_1955 1 0 decap_w0
+xfeed_1954 1 0 decap_w0
+xfeed_1953 1 0 tie
+xfeed_1952 1 0 decap_w0
+xfeed_1951 1 0 decap_w0
+xfeed_1950 1 0 decap_w0
+xfeed_469 1 0 decap_w0
+xfeed_468 1 0 decap_w0
+xfeed_467 1 0 decap_w0
+xfeed_466 1 0 decap_w0
+xfeed_465 1 0 decap_w0
+xfeed_464 1 0 decap_w0
+xfeed_463 1 0 decap_w0
+xfeed_462 1 0 decap_w0
+xfeed_461 1 0 decap_w0
+xfeed_460 1 0 decap_w0
+xsubckt_118_nor2_x0 1 0 169 110 2 nor2_x0
+xfeed_500 1 0 decap_w0
+xfeed_501 1 0 decap_w0
+xfeed_502 1 0 decap_w0
+xfeed_503 1 0 decap_w0
+xfeed_504 1 0 decap_w0
+xfeed_505 1 0 decap_w0
+xfeed_506 1 0 tie
+xfeed_507 1 0 decap_w0
+xfeed_508 1 0 decap_w0
+xfeed_509 1 0 decap_w0
+xfeed_1969 1 0 decap_w0
+xfeed_1968 1 0 decap_w0
+xfeed_1967 1 0 decap_w0
+xfeed_1966 1 0 decap_w0
+xfeed_1965 1 0 decap_w0
+xfeed_1964 1 0 decap_w0
+xfeed_1963 1 0 tie
+xfeed_1962 1 0 decap_w0
+xfeed_1961 1 0 decap_w0
+xfeed_1960 1 0 decap_w0
+xsubckt_17_and4_x1 1 0 71 13 18 14 19 and4_x1
+xfeed_470 1 0 decap_w0
+xfeed_471 1 0 decap_w0
+xfeed_472 1 0 decap_w0
+xfeed_473 1 0 decap_w0
+xfeed_474 1 0 decap_w0
+xfeed_475 1 0 decap_w0
+xfeed_476 1 0 decap_w0
+xfeed_477 1 0 decap_w0
+xfeed_478 1 0 decap_w0
+xfeed_479 1 0 decap_w0
+xfeed_510 1 0 decap_w0
+xfeed_511 1 0 decap_w0
+xfeed_512 1 0 decap_w0
+xfeed_513 1 0 decap_w0
+xfeed_514 1 0 decap_w0
+xfeed_515 1 0 decap_w0
+xfeed_516 1 0 decap_w0
+xfeed_517 1 0 decap_w0
+xfeed_518 1 0 decap_w0
+xfeed_519 1 0 tie
+xfeed_1979 1 0 decap_w0
+xfeed_1978 1 0 decap_w0
+xfeed_1977 1 0 tie
+xfeed_1976 1 0 decap_w0
+xfeed_1975 1 0 decap_w0
+xfeed_1974 1 0 decap_w0
+xfeed_1973 1 0 decap_w0
+xfeed_1972 1 0 decap_w0
+xfeed_1971 1 0 decap_w0
+xfeed_1970 1 0 decap_w0
+xfeed_480 1 0 tie
+xfeed_481 1 0 decap_w0
+xfeed_482 1 0 decap_w0
+xfeed_483 1 0 decap_w0
+xfeed_484 1 0 decap_w0
+xfeed_485 1 0 decap_w0
+xfeed_486 1 0 decap_w0
+xfeed_487 1 0 decap_w0
+xfeed_488 1 0 decap_w0
+xfeed_489 1 0 decap_w0
+xfeed_520 1 0 decap_w0
+xfeed_521 1 0 decap_w0
+xfeed_522 1 0 decap_w0
+xfeed_523 1 0 decap_w0
+xfeed_524 1 0 decap_w0
+xfeed_525 1 0 decap_w0
+xfeed_526 1 0 decap_w0
+xfeed_527 1 0 decap_w0
+xfeed_528 1 0 decap_w0
+xfeed_529 1 0 decap_w0
+xsubckt_3_inv_x0 1 0 2 83 inv_x0
+xsubckt_2_inv_x0 1 0 16 84 inv_x0
+xsubckt_1_inv_x0 1 0 12 85 inv_x0
+xsubckt_0_inv_x0 1 0 4 86 inv_x0
+xfeed_1989 1 0 decap_w0
+xfeed_1988 1 0 decap_w0
+xfeed_1987 1 0 tie
+xfeed_1986 1 0 decap_w0
+xfeed_1985 1 0 decap_w0
+xfeed_1984 1 0 decap_w0
+xfeed_1983 1 0 decap_w0
+xfeed_1982 1 0 decap_w0
+xfeed_1981 1 0 decap_w0
+xfeed_1980 1 0 decap_w0
+xfeed_490 1 0 decap_w0
+xfeed_491 1 0 decap_w0
+xfeed_492 1 0 decap_w0
+xfeed_493 1 0 decap_w0
+xfeed_494 1 0 decap_w0
+xfeed_495 1 0 decap_w0
+xfeed_496 1 0 decap_w0
+xfeed_497 1 0 decap_w0
+xfeed_498 1 0 decap_w0
+xfeed_499 1 0 decap_w0
+xfeed_530 1 0 decap_w0
+xfeed_531 1 0 decap_w0
+xfeed_532 1 0 decap_w0
+xfeed_533 1 0 decap_w0
+xfeed_534 1 0 decap_w0
+xfeed_535 1 0 decap_w0
+xfeed_536 1 0 decap_w0
+xfeed_537 1 0 decap_w0
+xfeed_538 1 0 decap_w0
+xfeed_539 1 0 decap_w0
+xfeed_1999 1 0 decap_w0
+xfeed_1998 1 0 decap_w0
+xfeed_1997 1 0 decap_w0
+xfeed_1996 1 0 decap_w0
+xfeed_1995 1 0 decap_w0
+xfeed_1994 1 0 decap_w0
+xfeed_1993 1 0 decap_w0
+xfeed_1992 1 0 decap_w0
+xfeed_1991 1 0 decap_w0
+xfeed_1990 1 0 decap_w0
+xfeed_540 1 0 decap_w0
+xfeed_541 1 0 decap_w0
+xfeed_542 1 0 decap_w0
+xfeed_543 1 0 decap_w0
+xfeed_544 1 0 decap_w0
+xfeed_545 1 0 decap_w0
+xfeed_546 1 0 decap_w0
+xfeed_547 1 0 decap_w0
+xfeed_548 1 0 decap_w0
+xfeed_549 1 0 decap_w0
+xsubckt_142_nor2_x0 1 0 165 90 2 nor2_x0
+xfeed_550 1 0 decap_w0
+xfeed_551 1 0 decap_w0
+xfeed_552 1 0 decap_w0
+xfeed_553 1 0 decap_w0
+xfeed_554 1 0 decap_w0
+xfeed_555 1 0 decap_w0
+xfeed_556 1 0 tie
+xfeed_557 1 0 decap_w0
+xfeed_558 1 0 decap_w0
+xfeed_559 1 0 decap_w0
+xsubckt_134_xor2_x0 1 0 6 27 96 xor2_x0
+xfeed_560 1 0 decap_w0
+xfeed_561 1 0 decap_w0
+xfeed_562 1 0 decap_w0
+xfeed_563 1 0 decap_w0
+xfeed_564 1 0 decap_w0
+xfeed_565 1 0 decap_w0
+xfeed_566 1 0 decap_w0
+xfeed_567 1 0 decap_w0
+xfeed_568 1 0 decap_w0
+xfeed_569 1 0 decap_w0
+xfeed_600 1 0 decap_w0
+xfeed_601 1 0 decap_w0
+xfeed_602 1 0 decap_w0
+xfeed_603 1 0 decap_w0
+xfeed_604 1 0 decap_w0
+xfeed_605 1 0 decap_w0
+xfeed_606 1 0 decap_w0
+xfeed_607 1 0 decap_w0
+xfeed_608 1 0 decap_w0
+xfeed_609 1 0 decap_w0
+xfeed_570 1 0 decap_w0
+xfeed_571 1 0 decap_w0
+xfeed_572 1 0 decap_w0
+xfeed_573 1 0 decap_w0
+xfeed_574 1 0 decap_w0
+xfeed_575 1 0 decap_w0
+xfeed_576 1 0 decap_w0
+xfeed_610 1 0 decap_w0
+xfeed_611 1 0 decap_w0
+xfeed_612 1 0 decap_w0
+xfeed_613 1 0 decap_w0
+xfeed_614 1 0 decap_w0
+xfeed_615 1 0 decap_w0
+xfeed_616 1 0 decap_w0
+xfeed_617 1 0 tie
+xfeed_618 1 0 decap_w0
+xfeed_619 1 0 decap_w0
+xfeed_577 1 0 decap_w0
+xfeed_578 1 0 decap_w0
+xfeed_579 1 0 decap_w0
+xfeed_580 1 0 decap_w0
+xfeed_581 1 0 decap_w0
+xfeed_582 1 0 decap_w0
+xfeed_583 1 0 decap_w0
+xfeed_620 1 0 decap_w0
+xfeed_621 1 0 decap_w0
+xfeed_622 1 0 decap_w0
+xfeed_623 1 0 decap_w0
+xfeed_624 1 0 decap_w0
+xfeed_625 1 0 decap_w0
+xfeed_626 1 0 decap_w0
+xfeed_627 1 0 tie
+xfeed_628 1 0 decap_w0
+xfeed_629 1 0 decap_w0
+xsubckt_68_nand2_x0 1 0 153 156 161 nand2_x0
+xfeed_584 1 0 decap_w0
+xfeed_585 1 0 decap_w0
+xfeed_586 1 0 decap_w0
+xfeed_587 1 0 decap_w0
+xfeed_588 1 0 decap_w0
+xfeed_589 1 0 decap_w0
+xfeed_590 1 0 decap_w0
+xfeed_630 1 0 decap_w0
+xfeed_631 1 0 decap_w0
+xfeed_632 1 0 decap_w0
+xfeed_633 1 0 decap_w0
+xfeed_634 1 0 decap_w0
+xfeed_635 1 0 decap_w0
+xfeed_636 1 0 decap_w0
+xfeed_637 1 0 decap_w0
+xfeed_638 1 0 decap_w0
+xfeed_639 1 0 decap_w0
+xfeed_591 1 0 decap_w0
+xfeed_592 1 0 decap_w0
+xfeed_593 1 0 decap_w0
+xfeed_594 1 0 decap_w0
+xfeed_595 1 0 decap_w0
+xfeed_596 1 0 decap_w0
+xfeed_597 1 0 decap_w0
+xfeed_598 1 0 tie
+xfeed_599 1 0 decap_w0
+xfeed_640 1 0 decap_w0
+xfeed_641 1 0 decap_w0
+xfeed_642 1 0 decap_w0
+xfeed_643 1 0 decap_w0
+xfeed_644 1 0 decap_w0
+xfeed_645 1 0 decap_w0
+xfeed_646 1 0 decap_w0
+xfeed_647 1 0 decap_w0
+xfeed_648 1 0 decap_w0
+xfeed_649 1 0 decap_w0
+xfeed_650 1 0 decap_w0
+xfeed_651 1 0 decap_w0
+xfeed_652 1 0 decap_w0
+xfeed_653 1 0 decap_w0
+xfeed_654 1 0 decap_w0
+xfeed_655 1 0 decap_w0
+xfeed_656 1 0 decap_w0
+xfeed_657 1 0 decap_w0
+xfeed_658 1 0 decap_w0
+xfeed_659 1 0 decap_w0
+xsubckt_10_nexor2_x0 1 0 80 81 77 nexor2_x0
+xfeed_660 1 0 decap_w0
+xfeed_700 1 0 decap_w0
+xfeed_701 1 0 decap_w0
+xfeed_702 1 0 tie
+xfeed_703 1 0 decap_w0
+xfeed_704 1 0 decap_w0
+xfeed_705 1 0 decap_w0
+xfeed_706 1 0 decap_w0
+xfeed_707 1 0 decap_w0
+xfeed_708 1 0 decap_w0
+xfeed_709 1 0 decap_w0
+xsubckt_31_and2_x1 1 0 58 12 19 and2_x1
+xfeed_661 1 0 decap_w0
+xfeed_662 1 0 tie
+xfeed_663 1 0 decap_w0
+xfeed_664 1 0 decap_w0
+xfeed_665 1 0 decap_w0
+xfeed_666 1 0 decap_w0
+xfeed_667 1 0 decap_w0
+xfeed_668 1 0 decap_w0
+xfeed_669 1 0 decap_w0
+xfeed_710 1 0 decap_w0
+xfeed_711 1 0 decap_w0
+xfeed_712 1 0 tie
+xfeed_713 1 0 decap_w0
+xfeed_714 1 0 decap_w0
+xfeed_715 1 0 decap_w0
+xfeed_716 1 0 decap_w0
+xsubckt_22_nexor2_x0 1 0 67 75 66 nexor2_x0
+xfeed_670 1 0 decap_w0
+xfeed_671 1 0 decap_w0
+xfeed_672 1 0 decap_w0
+xfeed_673 1 0 decap_w0
+xfeed_674 1 0 decap_w0
+xfeed_675 1 0 decap_w0
+xfeed_676 1 0 decap_w0
+xfeed_677 1 0 decap_w0
+xfeed_678 1 0 decap_w0
+xfeed_679 1 0 decap_w0
+xfeed_717 1 0 decap_w0
+xfeed_718 1 0 decap_w0
+xfeed_719 1 0 decap_w0
+xfeed_720 1 0 decap_w0
+xfeed_721 1 0 decap_w0
+xfeed_722 1 0 decap_w0
+xfeed_723 1 0 decap_w0
+xsubckt_60_or21nand_x0 1 0 161 56 49 53 or21nand_x0
+xfeed_680 1 0 decap_w0
+xfeed_681 1 0 decap_w0
+xfeed_682 1 0 decap_w0
+xfeed_683 1 0 decap_w0
+xfeed_684 1 0 decap_w0
+xfeed_685 1 0 decap_w0
+xfeed_686 1 0 decap_w0
+xfeed_687 1 0 decap_w0
+xfeed_688 1 0 decap_w0
+xfeed_689 1 0 decap_w0
+xfeed_724 1 0 decap_w0
+xfeed_725 1 0 decap_w0
+xfeed_726 1 0 decap_w0
+xfeed_727 1 0 decap_w0
+xfeed_728 1 0 decap_w0
+xfeed_729 1 0 decap_w0
+xfeed_730 1 0 decap_w0
+xfeed_690 1 0 decap_w0
+xfeed_691 1 0 decap_w0
+xfeed_692 1 0 decap_w0
+xfeed_693 1 0 decap_w0
+xfeed_694 1 0 decap_w0
+xfeed_695 1 0 decap_w0
+xfeed_696 1 0 decap_w0
+xfeed_697 1 0 decap_w0
+xfeed_698 1 0 decap_w0
+xfeed_699 1 0 decap_w0
+xfeed_731 1 0 decap_w0
+xfeed_732 1 0 decap_w0
+xfeed_733 1 0 decap_w0
+xfeed_734 1 0 decap_w0
+xfeed_735 1 0 decap_w0
+xfeed_736 1 0 decap_w0
+xfeed_737 1 0 decap_w0
+xfeed_738 1 0 decap_w0
+xfeed_739 1 0 decap_w0
+xfeed_740 1 0 decap_w0
+xfeed_741 1 0 decap_w0
+xfeed_742 1 0 decap_w0
+xfeed_743 1 0 decap_w0
+xfeed_744 1 0 decap_w0
+xfeed_745 1 0 decap_w0
+xfeed_746 1 0 decap_w0
+xfeed_747 1 0 decap_w0
+xfeed_748 1 0 decap_w0
+xfeed_749 1 0 decap_w0
+xsubckt_37_nexor2_x0 1 0 58 59 52 nexor2_x0
+xsubckt_85_nexor2_x0 1 0 138 140 137 nexor2_x0
+xsubckt_56_or21nand_x0 1 0 34 40 44 45 or21nand_x0
+xfeed_750 1 0 decap_w0
+xfeed_751 1 0 decap_w0
+xfeed_752 1 0 decap_w0
+xfeed_753 1 0 decap_w0
+xfeed_754 1 0 decap_w0
+xfeed_755 1 0 decap_w0
+xfeed_756 1 0 decap_w0
+xfeed_757 1 0 decap_w0
+xfeed_758 1 0 decap_w0
+xfeed_759 1 0 decap_w0
+xsubckt_12_and2_x1 1 0 76 17 15 and2_x1
+xsubckt_51_and2_x1 1 0 38 39 65 and2_x1
+xfeed_800 1 0 decap_w0
+xsubckt_86_and2_x1 1 0 136 137 141 and2_x1
+xfeed_760 1 0 decap_w0
+xfeed_761 1 0 decap_w0
+xfeed_762 1 0 decap_w0
+xfeed_763 1 0 decap_w0
+xfeed_764 1 0 decap_w0
+xfeed_765 1 0 decap_w0
+xfeed_766 1 0 decap_w0
+xfeed_767 1 0 decap_w0
+xfeed_768 1 0 decap_w0
+xfeed_769 1 0 decap_w0
+xfeed_801 1 0 decap_w0
+xfeed_802 1 0 decap_w0
+xfeed_803 1 0 decap_w0
+xfeed_804 1 0 decap_w0
+xfeed_805 1 0 decap_w0
+xfeed_806 1 0 decap_w0
+xfeed_807 1 0 decap_w0
+xfeed_808 1 0 decap_w0
+xfeed_809 1 0 decap_w0
+xsubckt_136_and2_x1 1 0 166 95 83 and2_x1
+xsubckt_88_nexor2_x0 1 0 137 142 134 nexor2_x0
+xfeed_770 1 0 decap_w0
+xfeed_771 1 0 decap_w0
+xfeed_772 1 0 decap_w0
+xfeed_773 1 0 decap_w0
+xfeed_774 1 0 tie
+xfeed_775 1 0 decap_w0
+xfeed_776 1 0 decap_w0
+xfeed_777 1 0 decap_w0
+xfeed_778 1 0 decap_w0
+xfeed_779 1 0 decap_w0
+xfeed_810 1 0 decap_w0
+xfeed_811 1 0 decap_w0
+xfeed_812 1 0 decap_w0
+xfeed_813 1 0 decap_w0
+xfeed_814 1 0 decap_w0
+xfeed_815 1 0 decap_w0
+xfeed_816 1 0 decap_w0
+xfeed_817 1 0 decap_w0
+xfeed_818 1 0 decap_w0
+xfeed_819 1 0 tie
+xsubckt_102_or21nand_x0 1 0 173 125 123 122 or21nand_x0
+xfeed_780 1 0 decap_w0
+xfeed_781 1 0 decap_w0
+xfeed_782 1 0 decap_w0
+xfeed_783 1 0 decap_w0
+xfeed_784 1 0 decap_w0
+xfeed_785 1 0 decap_w0
+xfeed_786 1 0 decap_w0
+xfeed_787 1 0 decap_w0
+xfeed_788 1 0 decap_w0
+xfeed_789 1 0 decap_w0
+xfeed_820 1 0 decap_w0
+xfeed_821 1 0 decap_w0
+xfeed_822 1 0 decap_w0
+xfeed_823 1 0 decap_w0
+xfeed_824 1 0 decap_w0
+xfeed_825 1 0 decap_w0
+xfeed_826 1 0 decap_w0
+xfeed_827 1 0 decap_w0
+xfeed_828 1 0 decap_w0
+xfeed_829 1 0 decap_w0
+xsubckt_4_and2_x1 1 0 82 15 19 and2_x1
+xfeed_790 1 0 decap_w0
+xfeed_791 1 0 decap_w0
+xfeed_792 1 0 decap_w0
+xfeed_793 1 0 decap_w0
+xfeed_794 1 0 decap_w0
+xfeed_795 1 0 decap_w0
+xfeed_796 1 0 decap_w0
+xfeed_797 1 0 decap_w0
+xfeed_798 1 0 decap_w0
+xfeed_799 1 0 decap_w0
+xfeed_830 1 0 decap_w0
+xfeed_831 1 0 decap_w0
+xfeed_832 1 0 decap_w0
+xfeed_833 1 0 decap_w0
+xfeed_834 1 0 decap_w0
+xfeed_835 1 0 decap_w0
+xfeed_836 1 0 decap_w0
+xfeed_837 1 0 decap_w0
+xfeed_838 1 0 decap_w0
+xfeed_839 1 0 tie
+xsubckt_116_xor2_x0 1 0 9 30 111 xor2_x0
+xfeed_840 1 0 decap_w0
+xfeed_841 1 0 decap_w0
+xfeed_842 1 0 decap_w0
+xfeed_843 1 0 decap_w0
+xfeed_844 1 0 decap_w0
+xfeed_845 1 0 decap_w0
+xfeed_846 1 0 decap_w0
+xfeed_847 1 0 decap_w0
+xfeed_848 1 0 decap_w0
+xfeed_849 1 0 decap_w0
+xfeed_850 1 0 decap_w0
+xfeed_851 1 0 decap_w0
+xfeed_852 1 0 decap_w0
+xfeed_853 1 0 decap_w0
+xfeed_854 1 0 decap_w0
+xfeed_855 1 0 decap_w0
+xfeed_856 1 0 decap_w0
+xfeed_857 1 0 decap_w0
+xfeed_858 1 0 decap_w0
+xfeed_859 1 0 decap_w0
+xsubckt_67_and2_x1 1 0 154 156 161 and2_x1
+xfeed_860 1 0 decap_w0
+xfeed_861 1 0 decap_w0
+xfeed_862 1 0 decap_w0
+xfeed_863 1 0 decap_w0
+xfeed_864 1 0 tie
+xfeed_865 1 0 decap_w0
+xfeed_866 1 0 decap_w0
+xfeed_867 1 0 decap_w0
+xfeed_868 1 0 decap_w0
+xfeed_869 1 0 decap_w0
+xfeed_900 1 0 decap_w0
+xfeed_901 1 0 decap_w0
+xfeed_902 1 0 decap_w0
+xfeed_903 1 0 decap_w0
+xfeed_904 1 0 decap_w0
+xfeed_905 1 0 decap_w0
+xfeed_906 1 0 decap_w0
+xfeed_907 1 0 decap_w0
+xfeed_908 1 0 decap_w0
+xfeed_909 1 0 decap_w0
+xfeed_870 1 0 decap_w0
+xfeed_871 1 0 decap_w0
+xfeed_872 1 0 decap_w0
+xfeed_873 1 0 decap_w0
+xfeed_874 1 0 decap_w0
+xfeed_875 1 0 decap_w0
+xfeed_876 1 0 decap_w0
+xfeed_877 1 0 decap_w0
+xfeed_878 1 0 tie
+xfeed_879 1 0 decap_w0
+xfeed_910 1 0 decap_w0
+xfeed_911 1 0 decap_w0
+xfeed_912 1 0 decap_w0
+xfeed_913 1 0 decap_w0
+xfeed_914 1 0 decap_w0
+xfeed_915 1 0 decap_w0
+xfeed_916 1 0 decap_w0
+xfeed_917 1 0 decap_w0
+xfeed_918 1 0 decap_w0
+xfeed_919 1 0 decap_w0
+xfeed_880 1 0 decap_w0
+xfeed_881 1 0 decap_w0
+xfeed_882 1 0 decap_w0
+xfeed_883 1 0 decap_w0
+xfeed_884 1 0 decap_w0
+xfeed_885 1 0 decap_w0
+xfeed_886 1 0 decap_w0
+xfeed_887 1 0 decap_w0
+xfeed_888 1 0 decap_w0
+xfeed_889 1 0 decap_w0
+xfeed_920 1 0 decap_w0
+xfeed_921 1 0 decap_w0
+xfeed_922 1 0 decap_w0
+xfeed_923 1 0 decap_w0
+xfeed_924 1 0 decap_w0
+xfeed_925 1 0 decap_w0
+xfeed_926 1 0 tie
+xfeed_927 1 0 decap_w0
+xfeed_928 1 0 decap_w0
+xfeed_929 1 0 decap_w0
+xsubckt_140_xor2_x0 1 0 5 26 91 xor2_x0
+xsubckt_115_or2_x1 1 0 112 9 30 or2_x1
+xsubckt_40_nand2_x0 1 0 49 17 14 nand2_x0
+xfeed_890 1 0 decap_w0
+xfeed_891 1 0 decap_w0
+xfeed_892 1 0 decap_w0
+xfeed_893 1 0 decap_w0
+xfeed_894 1 0 tie
+xfeed_895 1 0 decap_w0
+xfeed_896 1 0 decap_w0
+xfeed_897 1 0 decap_w0
+xfeed_898 1 0 decap_w0
+xfeed_899 1 0 decap_w0
+xfeed_930 1 0 decap_w0
+xfeed_931 1 0 decap_w0
+xfeed_932 1 0 decap_w0
+xfeed_933 1 0 decap_w0
+xfeed_934 1 0 decap_w0
+xfeed_935 1 0 decap_w0
+xfeed_936 1 0 decap_w0
+xfeed_937 1 0 decap_w0
+xfeed_938 1 0 decap_w0
+xfeed_939 1 0 decap_w0
+xsubckt_100_or21nand_x0 1 0 123 126 131 83 or21nand_x0
+xsubckt_87_nand2_x0 1 0 135 137 141 nand2_x0
+xsubckt_59_and21nor_x0 1 0 162 55 50 54 and21nor_x0
+xfeed_940 1 0 decap_w0
+xfeed_941 1 0 decap_w0
+xfeed_942 1 0 decap_w0
+xfeed_943 1 0 decap_w0
+xfeed_944 1 0 decap_w0
+xfeed_945 1 0 decap_w0
+xfeed_946 1 0 decap_w0
+xfeed_947 1 0 decap_w0
+xfeed_948 1 0 decap_w0
+xfeed_949 1 0 decap_w0
+xsubckt_53_or21nand_x0 1 0 176 37 38 63 or21nand_x0
+xsubckt_70_nand2_x0 1 0 151 155 162 nand2_x0
+xfeed_950 1 0 decap_w0
+xfeed_951 1 0 decap_w0
+xfeed_952 1 0 decap_w0
+xfeed_953 1 0 decap_w0
+xfeed_954 1 0 decap_w0
+xfeed_955 1 0 decap_w0
+xfeed_956 1 0 tie
+xfeed_957 1 0 decap_w0
+xfeed_958 1 0 decap_w0
+xfeed_959 1 0 decap_w0
+xsubckt_48_and2_x1 1 0 41 16 15 and2_x1
+xfeed_960 1 0 decap_w0
+xfeed_961 1 0 decap_w0
+xfeed_962 1 0 decap_w0
+xfeed_963 1 0 decap_w0
+xfeed_964 1 0 decap_w0
+xfeed_965 1 0 decap_w0
+xfeed_966 1 0 tie
+xfeed_967 1 0 decap_w0
+xfeed_968 1 0 decap_w0
+xfeed_969 1 0 decap_w0
+xfeed_970 1 0 decap_w0
+xfeed_971 1 0 decap_w0
+xfeed_972 1 0 decap_w0
+xfeed_973 1 0 decap_w0
+xfeed_974 1 0 decap_w0
+xfeed_975 1 0 decap_w0
+xfeed_976 1 0 decap_w0
+xfeed_977 1 0 decap_w0
+xfeed_978 1 0 decap_w0
+xfeed_979 1 0 decap_w0
+xsubckt_132_nand2_x0 1 0 98 6 27 nand2_x0
+xfeed_980 1 0 decap_w0
+xfeed_981 1 0 decap_w0
+xfeed_982 1 0 decap_w0
+xfeed_983 1 0 decap_w0
+xfeed_984 1 0 decap_w0
+xfeed_985 1 0 decap_w0
+xfeed_986 1 0 decap_w0
+xfeed_987 1 0 decap_w0
+xfeed_988 1 0 decap_w0
+xfeed_989 1 0 tie
+xdiode_3 1 0 22 diode_w1
+xdiode_2 1 0 22 diode_w1
+xdiode_1 1 0 22 diode_w1
+xdiode_0 1 0 22 diode_w1
+xfeed_990 1 0 decap_w0
+xfeed_991 1 0 decap_w0
+xfeed_992 1 0 decap_w0
+xfeed_993 1 0 decap_w0
+xfeed_994 1 0 decap_w0
+xfeed_995 1 0 decap_w0
+xfeed_996 1 0 decap_w0
+xfeed_997 1 0 decap_w0
+xfeed_998 1 0 decap_w0
+xfeed_999 1 0 decap_w0
+xsubckt_145_nexor2_x0 1 0 88 89 87 nexor2_x0
+xsubckt_52_or21nand_x0 1 0 37 39 65 83 or21nand_x0
+xsubckt_33_and2_x1 1 0 56 57 59 and2_x1
+xsubckt_104_and21nor_x0 1 0 172 129 124 121 and21nor_x0
+xsubckt_29_and2_x1 1 0 60 13 18 and2_x1
+xfeed_10 1 0 decap_w0
+xfeed_11 1 0 decap_w0
+xfeed_13 1 0 decap_w0
+xfeed_14 1 0 decap_w0
+xfeed_15 1 0 tie
+xfeed_16 1 0 decap_w0
+xfeed_17 1 0 decap_w0
+xfeed_18 1 0 decap_w0
+xfeed_19 1 0 decap_w0
+xfeed_21 1 0 decap_w0
+xfeed_22 1 0 decap_w0
+xfeed_23 1 0 tie
+xfeed_24 1 0 decap_w0
+xfeed_25 1 0 decap_w0
+xfeed_26 1 0 decap_w0
+xfeed_27 1 0 decap_w0
+xfeed_28 1 0 decap_w0
+xfeed_29 1 0 decap_w0
+xsubckt_14_nand2_x0 1 0 74 18 14 nand2_x0
+xfeed_30 1 0 decap_w0
+xfeed_31 1 0 decap_w0
+xfeed_32 1 0 decap_w0
+xfeed_33 1 0 decap_w0
+xfeed_34 1 0 decap_w0
+xfeed_35 1 0 decap_w0
+xfeed_36 1 0 decap_w0
+xfeed_37 1 0 decap_w0
+xfeed_38 1 0 decap_w0
+xfeed_39 1 0 decap_w0
+xsubckt_44_nand2_x0 1 0 45 48 61 nand2_x0
+xfeed_40 1 0 tie
+xfeed_41 1 0 decap_w0
+xfeed_42 1 0 decap_w0
+xfeed_43 1 0 decap_w0
+xfeed_44 1 0 decap_w0
+xfeed_45 1 0 decap_w0
+xfeed_46 1 0 decap_w0
+xsubckt_127_or2_x1 1 0 102 7 28 or2_x1
+xfeed_47 1 0 tie
+xfeed_48 1 0 decap_w0
+xfeed_49 1 0 decap_w0
+xfeed_50 1 0 decap_w0
+xfeed_51 1 0 decap_w0
+xfeed_52 1 0 decap_w0
+xfeed_53 1 0 decap_w0
+xsubckt_95_or21nand_x0 1 0 128 85 84 157 or21nand_x0
+xfeed_54 1 0 decap_w0
+xfeed_55 1 0 decap_w0
+xfeed_56 1 0 decap_w0
+xfeed_57 1 0 decap_w0
+xfeed_58 1 0 decap_w0
+xfeed_59 1 0 decap_w0
+xsubckt_74_nand2_x0 1 0 147 149 34 nand2_x0
+xfeed_60 1 0 decap_w0
+xsubckt_103_and2_x1 1 0 121 2 86 and2_x1
+xfeed_61 1 0 decap_w0
+xfeed_62 1 0 decap_w0
+xfeed_63 1 0 decap_w0
+xfeed_64 1 0 decap_w0
+xfeed_65 1 0 decap_w0
+xfeed_66 1 0 decap_w0
+xfeed_67 1 0 decap_w0
+xfeed_68 1 0 decap_w0
+xfeed_69 1 0 decap_w0
+xsubckt_138_and2_x1 1 0 93 5 26 and2_x1
+xfeed_70 1 0 decap_w0
+xfeed_71 1 0 decap_w0
+xfeed_72 1 0 decap_w0
+xfeed_73 1 0 decap_w0
+xfeed_74 1 0 decap_w0
+xfeed_75 1 0 decap_w0
+xfeed_76 1 0 decap_w0
+xfeed_77 1 0 decap_w0
+xfeed_78 1 0 decap_w0
+xfeed_79 1 0 decap_w0
+xsubckt_16_nand2_x0 1 0 72 13 19 nand2_x0
+xfeed_80 1 0 decap_w0
+xfeed_81 1 0 decap_w0
+xfeed_82 1 0 decap_w0
+xfeed_83 1 0 decap_w0
+xfeed_84 1 0 decap_w0
+xfeed_85 1 0 decap_w0
+xfeed_86 1 0 decap_w0
+xfeed_87 1 0 decap_w0
+xfeed_88 1 0 decap_w0
+xfeed_89 1 0 decap_w0
+xsubckt_130_nor2_x0 1 0 167 100 2 nor2_x0
+xsubckt_122_xor2_x0 1 0 8 29 106 xor2_x0
+xfeed_90 1 0 decap_w0
+xfeed_91 1 0 decap_w0
+xfeed_92 1 0 decap_w0
+xfeed_93 1 0 decap_w0
+xfeed_94 1 0 decap_w0
+xfeed_95 1 0 decap_w0
+xfeed_96 1 0 decap_w0
+xfeed_97 1 0 decap_w0
+xfeed_98 1 0 decap_w0
+xfeed_99 1 0 decap_w0
+xsubckt_46_nand2_x0 1 0 43 47 62 nand2_x0
+xsubckt_55_and21nor_x0 1 0 35 41 43 46 and21nor_x0
+xsubckt_137_or21nand_x0 1 0 94 99 97 98 or21nand_x0
+xsubckt_73_and2_x1 1 0 148 149 34 and2_x1
+xsubckt_108_nand2_x0 1 0 118 10 31 nand2_x0
+xsubckt_99_and21nor_x0 1 0 124 127 130 2 and21nor_x0
+xsubckt_69_and2_x1 1 0 152 155 162 and2_x1
+xsubckt_25_mux2_x1 1 0 9 64 83 177 mux2_x1
+xsubckt_93_or21nand_x0 1 0 130 147 133 135 or21nand_x0
+xsubckt_149_dff_x1 1 0 177 22 9 dff_x1
+xsubckt_148_dff_x1 1 0 178 22 10 dff_x1
+xsubckt_147_dff_x1 1 0 179 22 11 dff_x1
+xspare_buffer_0 1 0 23 22 buf_x4
+xspare_buffer_1 1 0 21 buf_x4
+xspare_buffer_2 1 0 20 buf_x4
+xspare_buffer_3 1 0 3 2 buf_x4
+xsubckt_139_or2_x1 1 0 92 5 26 or2_x1
+xsubckt_15_and2_x1 1 0 73 13 19 and2_x1
+xsubckt_64_nand4_x0 1 0 157 12 17 13 18 nand4_x0
+xsubckt_94_nand4_x0 1 0 129 16 12 17 13 nand4_x0
+xsubckt_7_and2_x1 1 0 80 14 19 and2_x1
+xspare_feed_0 1 0 tie
+xspare_feed_1 1 0 tie
+xspare_feed_2 1 0 tie
+xspare_feed_3 1 0 tie
+xsubckt_36_nand4_x0 1 0 53 12 13 18 19 nand4_x0
+xsubckt_41_nexor2_x0 1 0 50 51 48 nexor2_x0
+xsubckt_50_nexor2_x0 1 0 41 42 39 nexor2_x0
+xsubckt_71_nexor2_x0 1 0 156 162 150 nexor2_x0
+xsubckt_143_and21nor_x0 1 0 89 94 92 93 and21nor_x0
+xsubckt_124_and2_x1 1 0 168 105 83 and2_x1
+xsubckt_150_dff_x1 1 0 176 22 8 dff_x1
+xsubckt_65_nexor2_x0 1 0 158 159 156 nexor2_x0
+xsubckt_156_dff_x1 1 0 170 22 31 dff_x1
+xsubckt_155_dff_x1 1 0 171 22 32 dff_x1
+xsubckt_154_dff_x1 1 0 172 22 4 dff_x1
+xsubckt_153_dff_x1 1 0 173 22 5 dff_x1
+xsubckt_152_dff_x1 1 0 174 22 6 dff_x1
+xsubckt_151_dff_x1 1 0 175 22 7 dff_x1
+xsubckt_47_nexor2_x0 1 0 48 61 42 nexor2_x0
+xsubckt_159_dff_x1 1 0 167 22 28 dff_x1
+xsubckt_158_dff_x1 1 0 168 22 29 dff_x1
+xsubckt_157_dff_x1 1 0 169 22 30 dff_x1
+xsubckt_38_nexor2_x0 1 0 58 60 51 nexor2_x0
+xsubckt_89_nexor2_x0 1 0 137 141 133 nexor2_x0
+xsubckt_11_mux2_x1 1 0 10 77 83 178 mux2_x1
+xfeed_1000 1 0 decap_w0
+xfeed_1001 1 0 decap_w0
+xfeed_1002 1 0 decap_w0
+xfeed_1003 1 0 decap_w0
+xfeed_1004 1 0 decap_w0
+xfeed_1005 1 0 decap_w0
+xfeed_1006 1 0 decap_w0
+xfeed_1007 1 0 decap_w0
+xfeed_1008 1 0 tie
+xfeed_1009 1 0 decap_w0
+xsubckt_20_nand2_x0 1 0 68 72 74 nand2_x0
+xfeed_1010 1 0 decap_w0
+xfeed_1011 1 0 decap_w0
+xfeed_1012 1 0 decap_w0
+xfeed_1013 1 0 decap_w0
+xfeed_1014 1 0 decap_w0
+xfeed_1015 1 0 decap_w0
+xfeed_1016 1 0 decap_w0
+xfeed_1017 1 0 decap_w0
+xfeed_1018 1 0 decap_w0
+xfeed_1019 1 0 decap_w0
+xfeed_1020 1 0 decap_w0
+xfeed_1021 1 0 decap_w0
+xfeed_1022 1 0 decap_w0
+xfeed_1023 1 0 decap_w0
+xfeed_1024 1 0 decap_w0
+xfeed_1025 1 0 tie
+xfeed_1026 1 0 decap_w0
+xfeed_1027 1 0 decap_w0
+xfeed_1028 1 0 decap_w0
+xfeed_1029 1 0 decap_w0
+xsubckt_160_dff_x1 1 0 166 22 27 dff_x1
+xsubckt_161_dff_x1 1 0 165 22 26 dff_x1
+xsubckt_162_dff_x1 1 0 164 22 25 dff_x1
+xfeed_1030 1 0 decap_w0
+xfeed_1031 1 0 decap_w0
+xfeed_1032 1 0 decap_w0
+xfeed_1033 1 0 decap_w0
+xfeed_1034 1 0 decap_w0
+xfeed_1035 1 0 decap_w0
+xfeed_1036 1 0 decap_w0
+xsubckt_97_nand2_x0 1 0 126 128 129 nand2_x0
+xfeed_1037 1 0 decap_w0
+xfeed_1038 1 0 decap_w0
+xfeed_1039 1 0 decap_w0
+xsubckt_144_xor2_x0 1 0 4 25 88 xor2_x0
+xfeed_1040 1 0 decap_w0
+xfeed_1041 1 0 decap_w0
+xfeed_1042 1 0 decap_w0
+xfeed_1043 1 0 tie
+xsubckt_109_nor2_x0 1 0 117 10 31 nor2_x0
+xfeed_1044 1 0 decap_w0
+xfeed_1045 1 0 decap_w0
+xfeed_1046 1 0 decap_w0
+xfeed_1047 1 0 decap_w0
+xfeed_1048 1 0 decap_w0
+xfeed_1049 1 0 decap_w0
+xfeed_1050 1 0 decap_w0
+xfeed_1051 1 0 decap_w0
+xfeed_1052 1 0 decap_w0
+xfeed_1053 1 0 tie
+xfeed_1054 1 0 decap_w0
+xfeed_1055 1 0 decap_w0
+xfeed_1056 1 0 decap_w0
+xfeed_1057 1 0 decap_w0
+xfeed_1058 1 0 decap_w0
+xfeed_1059 1 0 decap_w0
+xfeed_1100 1 0 decap_w0
+xfeed_1101 1 0 decap_w0
+xfeed_1102 1 0 decap_w0
+xfeed_1103 1 0 decap_w0
+xfeed_1104 1 0 decap_w0
+xfeed_1105 1 0 decap_w0
+xfeed_1106 1 0 decap_w0
+xfeed_1060 1 0 decap_w0
+xfeed_1061 1 0 decap_w0
+xfeed_1062 1 0 decap_w0
+xfeed_1063 1 0 tie
+xfeed_1064 1 0 decap_w0
+xfeed_1065 1 0 decap_w0
+xfeed_1066 1 0 decap_w0
+xfeed_1067 1 0 decap_w0
+xfeed_1068 1 0 decap_w0
+xfeed_1069 1 0 decap_w0
+xfeed_1107 1 0 decap_w0
+xfeed_1108 1 0 decap_w0
+xfeed_1109 1 0 decap_w0
+xfeed_1113 1 0 decap_w0
+xfeed_1112 1 0 decap_w0
+xfeed_1111 1 0 decap_w0
+xfeed_1110 1 0 tie
+xfeed_1119 1 0 decap_w0
+xfeed_1118 1 0 decap_w0
+xfeed_1117 1 0 decap_w0
+xfeed_1116 1 0 decap_w0
+xfeed_1115 1 0 decap_w0
+xfeed_1114 1 0 decap_w0
+xsubckt_92_and21nor_x0 1 0 131 148 134 136 and21nor_x0
+xfeed_1070 1 0 decap_w0
+xfeed_1071 1 0 decap_w0
+xfeed_1072 1 0 decap_w0
+xfeed_1073 1 0 decap_w0
+xfeed_1074 1 0 decap_w0
+xfeed_1075 1 0 decap_w0
+xfeed_1076 1 0 decap_w0
+xfeed_1077 1 0 tie
+xfeed_1078 1 0 decap_w0
+xfeed_1079 1 0 decap_w0
+xfeed_1120 1 0 decap_w0
+xfeed_1129 1 0 decap_w0
+xfeed_1128 1 0 decap_w0
+xfeed_1127 1 0 decap_w0
+xfeed_1126 1 0 tie
+xfeed_1125 1 0 decap_w0
+xfeed_1124 1 0 decap_w0
+xfeed_1123 1 0 decap_w0
+xfeed_1122 1 0 decap_w0
+xfeed_1121 1 0 decap_w0
+xfeed_1080 1 0 decap_w0
+xfeed_1081 1 0 decap_w0
+xfeed_1082 1 0 decap_w0
+xfeed_1083 1 0 decap_w0
+xfeed_1084 1 0 decap_w0
+xfeed_1085 1 0 decap_w0
+xfeed_1086 1 0 decap_w0
+xfeed_1087 1 0 decap_w0
+xfeed_1088 1 0 decap_w0
+xfeed_1089 1 0 decap_w0
+xsubckt_133_nor2_x0 1 0 97 6 27 nor2_x0
+xfeed_1139 1 0 decap_w0
+xfeed_1138 1 0 decap_w0
+xfeed_1137 1 0 decap_w0
+xfeed_1136 1 0 decap_w0
+xfeed_1135 1 0 decap_w0
+xfeed_1134 1 0 decap_w0
+xfeed_1133 1 0 decap_w0
+xfeed_1132 1 0 decap_w0
+xfeed_1131 1 0 decap_w0
+xfeed_1130 1 0 tie
+xfeed_1090 1 0 decap_w0
+xfeed_1091 1 0 decap_w0
+xfeed_1092 1 0 decap_w0
+xfeed_1093 1 0 decap_w0
+xfeed_1094 1 0 decap_w0
+xfeed_1095 1 0 decap_w0
+xfeed_1096 1 0 decap_w0
+xfeed_1097 1 0 decap_w0
+xfeed_1098 1 0 decap_w0
+xfeed_1099 1 0 tie
+xfeed_1149 1 0 decap_w0
+xfeed_1148 1 0 decap_w0
+xfeed_1147 1 0 decap_w0
+xfeed_1146 1 0 decap_w0
+xfeed_1145 1 0 decap_w0
+xfeed_1144 1 0 decap_w0
+xfeed_1143 1 0 decap_w0
+xfeed_1142 1 0 decap_w0
+xfeed_1141 1 0 decap_w0
+xfeed_1140 1 0 decap_w0
+xsubckt_82_nand2_x0 1 0 140 16 13 nand2_x0
+xfeed_1159 1 0 decap_w0
+xfeed_1158 1 0 decap_w0
+xfeed_1157 1 0 decap_w0
+xfeed_1156 1 0 decap_w0
+xfeed_1155 1 0 decap_w0
+xfeed_1154 1 0 decap_w0
+xfeed_1153 1 0 decap_w0
+xfeed_1152 1 0 decap_w0
+xfeed_1151 1 0 decap_w0
+xfeed_1150 1 0 decap_w0
+xsubckt_76_and2_x1 1 0 145 146 38 and2_x1
+xfeed_1209 1 0 decap_w0
+xfeed_1208 1 0 tie
+xfeed_1207 1 0 decap_w0
+xfeed_1206 1 0 decap_w0
+xfeed_1205 1 0 decap_w0
+xfeed_1204 1 0 decap_w0
+xfeed_1203 1 0 decap_w0
+xfeed_1202 1 0 decap_w0
+xfeed_1201 1 0 decap_w0
+xfeed_1200 1 0 decap_w0
+xfeed_1169 1 0 decap_w0
+xfeed_1168 1 0 decap_w0
+xfeed_1167 1 0 decap_w0
+xfeed_1166 1 0 decap_w0
+xfeed_1165 1 0 decap_w0
+xfeed_1164 1 0 decap_w0
+xfeed_1163 1 0 decap_w0
+xfeed_1162 1 0 decap_w0
+xfeed_1161 1 0 decap_w0
+xfeed_1160 1 0 decap_w0
+xsubckt_126_and2_x1 1 0 103 7 28 and2_x1
+xfeed_1219 1 0 decap_w0
+xfeed_1218 1 0 decap_w0
+xfeed_1217 1 0 decap_w0
+xfeed_1216 1 0 decap_w0
+xfeed_1215 1 0 decap_w0
+xfeed_1214 1 0 decap_w0
+xfeed_1213 1 0 tie
+xfeed_1212 1 0 decap_w0
+xfeed_1211 1 0 decap_w0
+xfeed_1210 1 0 decap_w0
+xfeed_1179 1 0 decap_w0
+xfeed_1178 1 0 decap_w0
+xfeed_1177 1 0 decap_w0
+xfeed_1176 1 0 decap_w0
+xfeed_1175 1 0 decap_w0
+xfeed_1174 1 0 decap_w0
+xfeed_1173 1 0 tie
+xfeed_1172 1 0 decap_w0
+xfeed_1171 1 0 decap_w0
+xfeed_1170 1 0 decap_w0
+xsubckt_125_or21nand_x0 1 0 104 109 107 108 or21nand_x0
+xsubckt_54_nand2_x0 1 0 36 2 7 nand2_x0
+xfeed_1229 1 0 decap_w0
+xfeed_1228 1 0 decap_w0
+xfeed_1227 1 0 decap_w0
+xfeed_1226 1 0 decap_w0
+xfeed_1225 1 0 decap_w0
+xfeed_1224 1 0 decap_w0
+xfeed_1223 1 0 decap_w0
+xfeed_1222 1 0 decap_w0
+xfeed_1221 1 0 decap_w0
+xfeed_1220 1 0 decap_w0
+xfeed_1189 1 0 decap_w0
+xfeed_1188 1 0 decap_w0
+xfeed_1187 1 0 decap_w0
+xfeed_1186 1 0 decap_w0
+xfeed_1185 1 0 decap_w0
+xfeed_1184 1 0 decap_w0
+xfeed_1183 1 0 decap_w0
+xfeed_1182 1 0 decap_w0
+xfeed_1181 1 0 decap_w0
+xfeed_1180 1 0 decap_w0
+xsubckt_78_or21nand_x0 1 0 175 144 145 36 or21nand_x0
+xsubckt_110_xor2_x0 1 0 10 31 116 xor2_x0
+xfeed_1239 1 0 decap_w0
+xfeed_1238 1 0 decap_w0
+xfeed_1237 1 0 decap_w0
+xfeed_1236 1 0 decap_w0
+xfeed_1235 1 0 decap_w0
+xfeed_1234 1 0 decap_w0
+xfeed_1233 1 0 decap_w0
+xfeed_1232 1 0 decap_w0
+xfeed_1231 1 0 decap_w0
+xfeed_1230 1 0 decap_w0
+xfeed_1199 1 0 decap_w0
+xfeed_1198 1 0 decap_w0
+xfeed_1197 1 0 decap_w0
+xfeed_1196 1 0 decap_w0
+xfeed_1195 1 0 decap_w0
+xfeed_1194 1 0 decap_w0
+xfeed_1193 1 0 decap_w0
+xfeed_1192 1 0 decap_w0
+xfeed_1191 1 0 decap_w0
+xfeed_1190 1 0 decap_w0
+xsubckt_106_xor2_x0 1 0 11 32 119 xor2_x0
+xsubckt_81_or21nand_x0 1 0 141 163 152 153 or21nand_x0
+xfeed_1249 1 0 decap_w0
+xfeed_1248 1 0 decap_w0
+xfeed_1247 1 0 decap_w0
+xfeed_1246 1 0 decap_w0
+xfeed_1245 1 0 decap_w0
+xfeed_1244 1 0 decap_w0
+xfeed_1243 1 0 tie
+xfeed_1242 1 0 decap_w0
+xfeed_1241 1 0 decap_w0
+xfeed_1240 1 0 decap_w0
+xsubckt_61_and2_x1 1 0 160 17 13 and2_x1
+xfeed_1259 1 0 decap_w0
+xfeed_1258 1 0 decap_w0
+xfeed_1257 1 0 decap_w0
+xfeed_1256 1 0 decap_w0
+xfeed_1255 1 0 decap_w0
+xfeed_1254 1 0 decap_w0
+xfeed_1253 1 0 decap_w0
+xfeed_1252 1 0 decap_w0
+xfeed_1251 1 0 decap_w0
+xfeed_1250 1 0 decap_w0
+xsubckt_96_and2_x1 1 0 127 128 129 and2_x1
+xsubckt_26_nand2_x0 1 0 63 2 8 nand2_x0
+xsubckt_57_and2_x1 1 0 33 16 14 and2_x1
+xsubckt_146_and2_x1 1 0 164 87 83 and2_x1
+xsubckt_107_and2_x1 1 0 171 119 83 and2_x1
+xfeed_1309 1 0 decap_w0
+xfeed_1308 1 0 decap_w0
+xfeed_1307 1 0 decap_w0
+xfeed_1306 1 0 decap_w0
+xfeed_1305 1 0 decap_w0
+xfeed_1304 1 0 decap_w0
+xfeed_1303 1 0 decap_w0
+xfeed_1302 1 0 decap_w0
+xfeed_1301 1 0 decap_w0
+xfeed_1300 1 0 decap_w0
+xfeed_1269 1 0 decap_w0
+xfeed_1268 1 0 decap_w0
+xfeed_1267 1 0 decap_w0
+xfeed_1266 1 0 decap_w0
+xfeed_1265 1 0 decap_w0
+xfeed_1264 1 0 decap_w0
+xfeed_1263 1 0 tie
+xfeed_1262 1 0 decap_w0
+xfeed_1261 1 0 decap_w0
+xfeed_1260 1 0 decap_w0
+xsubckt_91_mux2_x1 1 0 6 132 83 174 mux2_x1
+xsubckt_77_or21nand_x0 1 0 144 146 38 83 or21nand_x0
+xfeed_1319 1 0 decap_w0
+xfeed_1318 1 0 decap_w0
+xfeed_1317 1 0 decap_w0
+xfeed_1316 1 0 decap_w0
+xfeed_1315 1 0 decap_w0
+xfeed_1314 1 0 decap_w0
+xfeed_1313 1 0 tie
+xfeed_1312 1 0 decap_w0
+xfeed_1311 1 0 decap_w0
+xfeed_1310 1 0 decap_w0
+xfeed_1279 1 0 decap_w0
+xfeed_1278 1 0 decap_w0
+xfeed_1277 1 0 decap_w0
+xfeed_1276 1 0 decap_w0
+xfeed_1275 1 0 decap_w0
+xfeed_1274 1 0 decap_w0
+xfeed_1273 1 0 tie
+xfeed_1272 1 0 decap_w0
+xfeed_1271 1 0 decap_w0
+xfeed_1270 1 0 decap_w0
+xfeed_1329 1 0 decap_w0
+xfeed_1328 1 0 decap_w0
+xfeed_1327 1 0 decap_w0
+xfeed_1326 1 0 decap_w0
+xfeed_1325 1 0 decap_w0
+xfeed_1324 1 0 tie
+xfeed_1323 1 0 decap_w0
+xfeed_1322 1 0 decap_w0
+xfeed_1321 1 0 decap_w0
+xfeed_1320 1 0 decap_w0
+xfeed_1289 1 0 decap_w0
+xfeed_1288 1 0 decap_w0
+xfeed_1287 1 0 decap_w0
+xfeed_1286 1 0 decap_w0
+xfeed_1285 1 0 decap_w0
+xfeed_1284 1 0 tie
+xfeed_1283 1 0 decap_w0
+xfeed_1282 1 0 decap_w0
+xfeed_1281 1 0 decap_w0
+xfeed_1280 1 0 decap_w0
+xfeed_1339 1 0 decap_w0
+xfeed_1338 1 0 decap_w0
+xfeed_1337 1 0 decap_w0
+xfeed_1336 1 0 decap_w0
+xfeed_1335 1 0 decap_w0
+xfeed_1334 1 0 decap_w0
+xfeed_1333 1 0 decap_w0
+xfeed_1332 1 0 decap_w0
+xfeed_1331 1 0 decap_w0
+xfeed_1330 1 0 decap_w0
+xfeed_1299 1 0 decap_w0
+xfeed_1298 1 0 decap_w0
+xfeed_1297 1 0 decap_w0
+xfeed_1296 1 0 decap_w0
+xfeed_1295 1 0 decap_w0
+xfeed_1294 1 0 decap_w0
+xfeed_1293 1 0 decap_w0
+xfeed_1292 1 0 decap_w0
+xfeed_1291 1 0 decap_w0
+xfeed_1290 1 0 decap_w0
+xsubckt_5_mux2_x1 1 0 11 82 83 179 mux2_x1
+xfeed_1349 1 0 decap_w0
+xfeed_1348 1 0 decap_w0
+xfeed_1347 1 0 decap_w0
+xfeed_1346 1 0 decap_w0
+xfeed_1345 1 0 decap_w0
+xfeed_1344 1 0 decap_w0
+xfeed_1343 1 0 decap_w0
+xfeed_1342 1 0 decap_w0
+xfeed_1341 1 0 decap_w0
+xfeed_1340 1 0 decap_w0
+xsubckt_9_nand4_x0 1 0 78 18 14 15 19 nand4_x0
+xsubckt_28_or21nand_x0 1 0 61 75 69 70 or21nand_x0
+xfeed_1359 1 0 decap_w0
+xfeed_1358 1 0 decap_w0
+xfeed_1357 1 0 decap_w0
+xfeed_1356 1 0 decap_w0
+xfeed_1355 1 0 decap_w0
+xfeed_1354 1 0 decap_w0
+xfeed_1353 1 0 decap_w0
+xfeed_1352 1 0 decap_w0
+xfeed_1351 1 0 decap_w0
+xfeed_1350 1 0 decap_w0
+xsubckt_101_nand2_x0 1 0 122 2 5 nand2_x0
+xsubckt_6_nand2_x0 1 0 81 18 15 nand2_x0
+xfeed_1409 1 0 decap_w0
+xfeed_1408 1 0 decap_w0
+xfeed_1407 1 0 decap_w0
+xfeed_1406 1 0 decap_w0
+xfeed_1405 1 0 decap_w0
+xfeed_1404 1 0 decap_w0
+xfeed_1403 1 0 tie
+xfeed_1402 1 0 decap_w0
+xfeed_1401 1 0 decap_w0
+xfeed_1400 1 0 decap_w0
+xfeed_1369 1 0 decap_w0
+xfeed_1368 1 0 decap_w0
+xfeed_1367 1 0 decap_w0
+xfeed_1366 1 0 decap_w0
+xfeed_1365 1 0 decap_w0
+xfeed_1364 1 0 decap_w0
+xfeed_1363 1 0 decap_w0
+xfeed_1362 1 0 decap_w0
+xfeed_1361 1 0 decap_w0
+xfeed_1360 1 0 tie
+xsubckt_58_nand2_x0 1 0 163 16 14 nand2_x0
+xfeed_1419 1 0 decap_w0
+xfeed_1418 1 0 decap_w0
+xfeed_1417 1 0 decap_w0
+xfeed_1416 1 0 decap_w0
+xfeed_1415 1 0 decap_w0
+xfeed_1414 1 0 decap_w0
+xfeed_1413 1 0 decap_w0
+xfeed_1412 1 0 decap_w0
+xfeed_1411 1 0 decap_w0
+xfeed_1410 1 0 decap_w0
+xfeed_1379 1 0 decap_w0
+xfeed_1378 1 0 decap_w0
+xfeed_1377 1 0 decap_w0
+xfeed_1376 1 0 decap_w0
+xfeed_1375 1 0 decap_w0
+xfeed_1374 1 0 decap_w0
+xfeed_1373 1 0 decap_w0
+xfeed_1372 1 0 decap_w0
+xfeed_1371 1 0 decap_w0
+xfeed_1370 1 0 decap_w0
+xsubckt_131_and21nor_x0 1 0 99 104 102 103 and21nor_x0
+xfeed_1429 1 0 decap_w0
+xfeed_1428 1 0 decap_w0
+xfeed_1427 1 0 decap_w0
+xfeed_1426 1 0 decap_w0
+xfeed_1425 1 0 decap_w0
+xfeed_1424 1 0 decap_w0
+xfeed_1423 1 0 decap_w0
+xfeed_1422 1 0 tie
+xfeed_1421 1 0 decap_w0
+xfeed_1420 1 0 decap_w0
+xfeed_1389 1 0 decap_w0
+xfeed_1388 1 0 decap_w0
+xfeed_1387 1 0 decap_w0
+xfeed_1386 1 0 decap_w0
+xfeed_1385 1 0 decap_w0
+xfeed_1384 1 0 decap_w0
+xfeed_1383 1 0 decap_w0
+xfeed_1382 1 0 decap_w0
+xfeed_1381 1 0 decap_w0
+xfeed_1380 1 0 decap_w0
+xfeed_2009 1 0 decap_w0
+xfeed_2008 1 0 decap_w0
+xfeed_2007 1 0 decap_w0
+xfeed_2006 1 0 decap_w0
+xfeed_2005 1 0 decap_w0
+xfeed_2004 1 0 decap_w0
+xfeed_2003 1 0 decap_w0
+xfeed_2002 1 0 tie
+xfeed_2001 1 0 decap_w0
+xfeed_2000 1 0 decap_w0
+xfeed_1439 1 0 decap_w0
+xfeed_1438 1 0 decap_w0
+xfeed_1437 1 0 decap_w0
+xfeed_1436 1 0 decap_w0
+xfeed_1435 1 0 decap_w0
+xfeed_1434 1 0 decap_w0
+xfeed_1433 1 0 decap_w0
+xfeed_1432 1 0 decap_w0
+xfeed_1431 1 0 decap_w0
+xfeed_1430 1 0 decap_w0
+xfeed_1399 1 0 decap_w0
+xfeed_1398 1 0 decap_w0
+xfeed_1397 1 0 decap_w0
+xfeed_1396 1 0 decap_w0
+xfeed_1395 1 0 decap_w0
+xfeed_1394 1 0 decap_w0
+xfeed_1393 1 0 decap_w0
+xfeed_1392 1 0 decap_w0
+xfeed_1391 1 0 decap_w0
+xfeed_1390 1 0 decap_w0
+xsubckt_23_and2_x1 1 0 65 66 79 and2_x1
+xfeed_2019 1 0 decap_w0
+xfeed_2018 1 0 decap_w0
+xfeed_2017 1 0 decap_w0
+xfeed_2016 1 0 decap_w0
+xfeed_2015 1 0 decap_w0
+xfeed_2014 1 0 decap_w0
+xfeed_2013 1 0 decap_w0
+xfeed_2012 1 0 decap_w0
+xfeed_2011 1 0 decap_w0
+xfeed_2010 1 0 decap_w0
+xfeed_1449 1 0 decap_w0
+xfeed_1448 1 0 decap_w0
+xfeed_1447 1 0 decap_w0
+xfeed_1446 1 0 decap_w0
+xfeed_1445 1 0 decap_w0
+xfeed_1444 1 0 decap_w0
+xfeed_1443 1 0 decap_w0
+xfeed_1442 1 0 decap_w0
+xfeed_1441 1 0 decap_w0
+xfeed_1440 1 0 decap_w0
+xsubckt_112_and2_x1 1 0 170 115 83 and2_x1
+xsubckt_19_and2_x1 1 0 69 72 74 and2_x1
+xfeed_2029 1 0 decap_w0
+xfeed_2028 1 0 decap_w0
+xfeed_2027 1 0 decap_w0
+xfeed_2026 1 0 decap_w0
+xfeed_2025 1 0 decap_w0
+xfeed_2024 1 0 decap_w0
+xfeed_2023 1 0 decap_w0
+xfeed_2022 1 0 decap_w0
+xfeed_2021 1 0 decap_w0
+xfeed_2020 1 0 decap_w0
+xfeed_1459 1 0 decap_w0
+xfeed_1458 1 0 decap_w0
+xfeed_1457 1 0 decap_w0
+xfeed_1456 1 0 decap_w0
+xfeed_1455 1 0 decap_w0
+xfeed_1454 1 0 decap_w0
+xfeed_1453 1 0 decap_w0
+xfeed_1452 1 0 decap_w0
+xfeed_1451 1 0 tie
+xfeed_1450 1 0 decap_w0
+xsubckt_13_nand2_x0 1 0 75 17 15 nand2_x0
+xfeed_2039 1 0 decap_w0
+xfeed_2038 1 0 decap_w0
+xfeed_2037 1 0 decap_w0
+xfeed_2036 1 0 decap_w0
+xfeed_2035 1 0 decap_w0
+xfeed_2034 1 0 decap_w0
+xfeed_2033 1 0 decap_w0
+xfeed_2032 1 0 decap_w0
+xfeed_2031 1 0 decap_w0
+xfeed_2030 1 0 decap_w0
+xfeed_1509 1 0 decap_w0
+xfeed_1508 1 0 decap_w0
+xfeed_1507 1 0 decap_w0
+xfeed_1506 1 0 decap_w0
+xfeed_1505 1 0 decap_w0
+xfeed_1504 1 0 decap_w0
+xfeed_1503 1 0 decap_w0
+xfeed_1502 1 0 decap_w0
+xfeed_1501 1 0 decap_w0
+xfeed_1500 1 0 tie
+xfeed_1469 1 0 decap_w0
+xfeed_1468 1 0 decap_w0
+xfeed_1467 1 0 decap_w0
+xfeed_1466 1 0 decap_w0
+xfeed_1465 1 0 decap_w0
+xfeed_1464 1 0 decap_w0
+xfeed_1463 1 0 decap_w0
+xfeed_1462 1 0 decap_w0
+xfeed_1461 1 0 decap_w0
+xfeed_1460 1 0 decap_w0
+xsubckt_21_nexor2_x0 1 0 73 74 67 nexor2_x0
+xfeed_2049 1 0 decap_w0
+xfeed_2048 1 0 decap_w0
+xfeed_2047 1 0 decap_w0
+xfeed_2046 1 0 decap_w0
+xfeed_2045 1 0 decap_w0
+xfeed_2044 1 0 tie
+xfeed_2043 1 0 decap_w0
+xfeed_2042 1 0 decap_w0
+xfeed_2041 1 0 decap_w0
+xfeed_2040 1 0 decap_w0
+xfeed_1519 1 0 decap_w0
+xfeed_1518 1 0 decap_w0
+xfeed_1517 1 0 decap_w0
+xfeed_1516 1 0 decap_w0
+xfeed_1515 1 0 decap_w0
+xfeed_1514 1 0 decap_w0
+xfeed_1513 1 0 decap_w0
+xfeed_1512 1 0 decap_w0
+xfeed_1511 1 0 decap_w0
+xfeed_1510 1 0 tie
+xfeed_1479 1 0 decap_w0
+xfeed_1478 1 0 decap_w0
+xfeed_1477 1 0 decap_w0
+xfeed_1476 1 0 decap_w0
+xfeed_1475 1 0 decap_w0
+xfeed_1474 1 0 decap_w0
+xfeed_1473 1 0 decap_w0
+xfeed_1472 1 0 decap_w0
+xfeed_1471 1 0 decap_w0
+xfeed_1470 1 0 decap_w0
+xsubckt_90_nexor2_x0 1 0 134 143 132 nexor2_x0
+xsubckt_42_nexor2_x0 1 0 50 52 47 nexor2_x0
+xfeed_2059 1 0 decap_w0
+xfeed_2058 1 0 decap_w0
+xfeed_2057 1 0 decap_w0
+xfeed_2056 1 0 decap_w0
+xfeed_2055 1 0 tie
+xfeed_2054 1 0 decap_w0
+xfeed_2053 1 0 decap_w0
+xfeed_2052 1 0 decap_w0
+xfeed_2051 1 0 decap_w0
+xfeed_2050 1 0 decap_w0
+xfeed_1529 1 0 decap_w0
+xfeed_1528 1 0 decap_w0
+xfeed_1527 1 0 decap_w0
+xfeed_1526 1 0 decap_w0
+xfeed_1525 1 0 decap_w0
+xfeed_1524 1 0 decap_w0
+xfeed_1523 1 0 decap_w0
+xfeed_1522 1 0 decap_w0
+xfeed_1521 1 0 decap_w0
+xfeed_1520 1 0 decap_w0
+xfeed_1489 1 0 decap_w0
+xfeed_1488 1 0 decap_w0
+xfeed_1487 1 0 decap_w0
+xfeed_1486 1 0 decap_w0
+xfeed_1485 1 0 decap_w0
+xfeed_1484 1 0 decap_w0
+xfeed_1483 1 0 decap_w0
+xfeed_1482 1 0 decap_w0
+xfeed_1481 1 0 decap_w0
+xfeed_1480 1 0 decap_w0
+xsubckt_24_nexor2_x0 1 0 66 78 64 nexor2_x0
+xsubckt_72_nexor2_x0 1 0 150 163 149 nexor2_x0
+xfeed_2109 1 0 decap_w0
+xfeed_2108 1 0 decap_w0
+xfeed_2107 1 0 decap_w0
+xfeed_2106 1 0 decap_w0
+xfeed_2105 1 0 decap_w0
+xfeed_2104 1 0 decap_w0
+xfeed_2103 1 0 decap_w0
+xfeed_2102 1 0 decap_w0
+xfeed_2101 1 0 decap_w0
+xfeed_2100 1 0 decap_w0
+xfeed_2069 1 0 decap_w0
+xfeed_2068 1 0 decap_w0
+xfeed_2067 1 0 decap_w0
+xfeed_2066 1 0 decap_w0
+xfeed_2065 1 0 tie
+xfeed_2064 1 0 decap_w0
+xfeed_2063 1 0 decap_w0
+xfeed_2062 1 0 decap_w0
+xfeed_2061 1 0 decap_w0
+xfeed_2060 1 0 decap_w0
+xfeed_1539 1 0 decap_w0
+xfeed_1538 1 0 decap_w0
+xfeed_1537 1 0 decap_w0
+xfeed_1536 1 0 decap_w0
+xfeed_1535 1 0 decap_w0
+xfeed_1534 1 0 decap_w0
+xfeed_1533 1 0 decap_w0
+xfeed_1532 1 0 decap_w0
+xfeed_1531 1 0 decap_w0
+xfeed_1530 1 0 decap_w0
+xfeed_1499 1 0 decap_w0
+xfeed_1498 1 0 decap_w0
+xfeed_1497 1 0 decap_w0
+xfeed_1496 1 0 decap_w0
+xfeed_1495 1 0 decap_w0
+xfeed_1494 1 0 decap_w0
+xfeed_1493 1 0 decap_w0
+xfeed_1492 1 0 decap_w0
+xfeed_1491 1 0 decap_w0
+xfeed_1490 1 0 decap_w0
+xsubckt_43_and2_x1 1 0 46 48 61 and2_x1
+xsubckt_79_and21nor_x0 1 0 143 38 146 148 and21nor_x0
+xfeed_2119 1 0 decap_w0
+xfeed_2118 1 0 decap_w0
+xfeed_2117 1 0 decap_w0
+xfeed_2116 1 0 decap_w0
+xfeed_2115 1 0 decap_w0
+xfeed_2114 1 0 decap_w0
+xfeed_2113 1 0 decap_w0
+xfeed_2112 1 0 decap_w0
+xfeed_2111 1 0 decap_w0
+xfeed_2110 1 0 decap_w0
+xfeed_2079 1 0 decap_w0
+xfeed_2078 1 0 decap_w0
+xfeed_2077 1 0 decap_w0
+xfeed_2076 1 0 decap_w0
+xfeed_2075 1 0 decap_w0
+xfeed_2074 1 0 decap_w0
+xfeed_2073 1 0 decap_w0
+xfeed_2072 1 0 decap_w0
+xfeed_2071 1 0 decap_w0
+xfeed_2070 1 0 decap_w0
+xfeed_1549 1 0 decap_w0
+xfeed_1548 1 0 decap_w0
+xfeed_1547 1 0 decap_w0
+xfeed_1546 1 0 decap_w0
+xfeed_1545 1 0 decap_w0
+xfeed_1544 1 0 decap_w0
+xfeed_1543 1 0 decap_w0
+xfeed_1542 1 0 decap_w0
+xfeed_1541 1 0 decap_w0
+xfeed_1540 1 0 decap_w0
+xsubckt_105_nand2_x0 1 0 120 11 32 nand2_x0
+xsubckt_39_and2_x1 1 0 50 17 14 and2_x1
+xsubckt_18_nand4_x0 1 0 70 13 18 14 19 nand4_x0
+xsubckt_75_nexor2_x0 1 0 149 35 146 nexor2_x0
+xsubckt_66_nexor2_x0 1 0 158 160 155 nexor2_x0
+xfeed_2129 1 0 decap_w0
+xfeed_2128 1 0 decap_w0
+xfeed_2127 1 0 decap_w0
+xfeed_2126 1 0 decap_w0
+xfeed_2125 1 0 decap_w0
+xfeed_2124 1 0 decap_w0
+xfeed_2123 1 0 decap_w0
+xfeed_2122 1 0 decap_w0
+xfeed_2121 1 0 decap_w0
+xfeed_2120 1 0 decap_w0
+xfeed_2089 1 0 decap_w0
+xfeed_2088 1 0 decap_w0
+xfeed_2087 1 0 decap_w0
+xfeed_2086 1 0 decap_w0
+xfeed_2085 1 0 decap_w0
+xfeed_2084 1 0 decap_w0
+xfeed_2083 1 0 decap_w0
+xfeed_2082 1 0 decap_w0
+xfeed_2081 1 0 decap_w0
+xfeed_2080 1 0 decap_w0
+xfeed_1559 1 0 decap_w0
+xfeed_1558 1 0 decap_w0
+xfeed_1557 1 0 decap_w0
+xfeed_1556 1 0 decap_w0
+xfeed_1555 1 0 decap_w0
+xfeed_1554 1 0 decap_w0
+xfeed_1553 1 0 decap_w0
+xfeed_1552 1 0 decap_w0
+xfeed_1551 1 0 decap_w0
+xfeed_1550 1 0 decap_w0
+xfeed_100 1 0 decap_w0
+xfeed_101 1 0 decap_w0
+xfeed_102 1 0 decap_w0
+xfeed_103 1 0 decap_w0
+xfeed_104 1 0 decap_w0
+xfeed_105 1 0 decap_w0
+xfeed_106 1 0 decap_w0
+xfeed_107 1 0 decap_w0
+xfeed_109 1 0 decap_w0
+xfeed_2139 1 0 decap_w0
+xfeed_2138 1 0 tie
+xfeed_2137 1 0 decap_w0
+xfeed_2136 1 0 decap_w0
+xfeed_2135 1 0 decap_w0
+xfeed_2134 1 0 decap_w0
+xfeed_2133 1 0 decap_w0
+xfeed_2132 1 0 decap_w0
+xfeed_2131 1 0 decap_w0
+xfeed_2130 1 0 tie
+xfeed_2099 1 0 decap_w0
+xfeed_2098 1 0 decap_w0
+xfeed_2097 1 0 tie
+xfeed_2096 1 0 decap_w0
+xfeed_2095 1 0 decap_w0
+xfeed_2094 1 0 decap_w0
+xfeed_2093 1 0 decap_w0
+xfeed_2092 1 0 decap_w0
+xfeed_2091 1 0 decap_w0
+xfeed_2090 1 0 decap_w0
+xfeed_1609 1 0 decap_w0
+xfeed_1608 1 0 decap_w0
+xfeed_1607 1 0 decap_w0
+xfeed_1606 1 0 decap_w0
+xfeed_1605 1 0 decap_w0
+xfeed_1604 1 0 decap_w0
+xfeed_1603 1 0 decap_w0
+xfeed_1602 1 0 decap_w0
+xfeed_1601 1 0 decap_w0
+xfeed_1600 1 0 decap_w0
+xfeed_1569 1 0 decap_w0
+xfeed_1568 1 0 decap_w0
+xfeed_1567 1 0 decap_w0
+xfeed_1566 1 0 decap_w0
+xfeed_1565 1 0 decap_w0
+xfeed_1564 1 0 decap_w0
+xfeed_1563 1 0 decap_w0
+xfeed_1562 1 0 decap_w0
+xfeed_1561 1 0 decap_w0
+xfeed_1560 1 0 decap_w0
+xfeed_110 1 0 decap_w0
+xfeed_111 1 0 decap_w0
+xfeed_112 1 0 decap_w0
+xfeed_113 1 0 decap_w0
+xfeed_114 1 0 decap_w0
+xfeed_115 1 0 decap_w0
+xfeed_116 1 0 decap_w0
+xfeed_117 1 0 tie
+xfeed_118 1 0 decap_w0
+xfeed_119 1 0 decap_w0
+xfeed_2149 1 0 decap_w0
+xfeed_2148 1 0 decap_w0
+xfeed_2147 1 0 decap_w0
+xfeed_2146 1 0 decap_w0
+xfeed_2145 1 0 decap_w0
+xfeed_2144 1 0 decap_w0
+xfeed_2143 1 0 decap_w0
+xfeed_2142 1 0 decap_w0
+xfeed_2141 1 0 decap_w0
+xfeed_2140 1 0 decap_w0
+xfeed_1619 1 0 decap_w0
+xfeed_1618 1 0 decap_w0
+xfeed_1617 1 0 decap_w0
+xfeed_1616 1 0 decap_w0
+xfeed_1615 1 0 decap_w0
+xfeed_1614 1 0 decap_w0
+xfeed_1613 1 0 decap_w0
+xfeed_1612 1 0 decap_w0
+xfeed_1611 1 0 decap_w0
+xfeed_1610 1 0 tie
+xfeed_1579 1 0 decap_w0
+xfeed_1578 1 0 decap_w0
+xfeed_1577 1 0 decap_w0
+xfeed_1576 1 0 decap_w0
+xfeed_1575 1 0 decap_w0
+xfeed_1574 1 0 decap_w0
+xfeed_1573 1 0 decap_w0
+xfeed_1572 1 0 decap_w0
+xfeed_1571 1 0 decap_w0
+xfeed_1570 1 0 decap_w0
+xfeed_120 1 0 decap_w0
+xfeed_121 1 0 decap_w0
+xfeed_122 1 0 decap_w0
+xfeed_123 1 0 decap_w0
+xfeed_124 1 0 decap_w0
+xfeed_125 1 0 decap_w0
+xfeed_126 1 0 decap_w0
+xfeed_127 1 0 decap_w0
+xfeed_128 1 0 decap_w0
+xfeed_129 1 0 decap_w0
+xfeed_2159 1 0 decap_w0
+xfeed_2158 1 0 decap_w0
+xfeed_2157 1 0 decap_w0
+xfeed_2156 1 0 decap_w0
+xfeed_2155 1 0 tie
+xfeed_2154 1 0 decap_w0
+xfeed_2153 1 0 decap_w0
+xfeed_2152 1 0 decap_w0
+xfeed_2151 1 0 decap_w0
+xfeed_2150 1 0 decap_w0
+xfeed_1629 1 0 decap_w0
+xfeed_1628 1 0 tie
+xfeed_1627 1 0 decap_w0
+xfeed_1626 1 0 decap_w0
+xfeed_1625 1 0 decap_w0
+xfeed_1624 1 0 decap_w0
+xfeed_1623 1 0 decap_w0
+xfeed_1622 1 0 decap_w0
+xfeed_1621 1 0 decap_w0
+xfeed_1620 1 0 tie
+xfeed_1589 1 0 decap_w0
+xfeed_1588 1 0 decap_w0
+xfeed_1587 1 0 decap_w0
+xfeed_1586 1 0 tie
+xfeed_1585 1 0 decap_w0
+xfeed_1584 1 0 decap_w0
+xfeed_1583 1 0 decap_w0
+xfeed_1582 1 0 decap_w0
+xfeed_1581 1 0 decap_w0
+xfeed_1580 1 0 decap_w0
+xsubckt_63_and2_x1 1 0 158 12 18 and2_x1
+xfeed_130 1 0 decap_w0
+xfeed_131 1 0 decap_w0
+xfeed_132 1 0 decap_w0
+xfeed_133 1 0 decap_w0
+xfeed_134 1 0 tie
+xfeed_135 1 0 decap_w0
+xfeed_136 1 0 decap_w0
+xfeed_137 1 0 decap_w0
+xfeed_138 1 0 decap_w0
+xfeed_139 1 0 decap_w0
+xfeed_2209 1 0 decap_w0
+xfeed_2208 1 0 decap_w0
+xfeed_2207 1 0 decap_w0
+xfeed_2206 1 0 decap_w0
+xfeed_2205 1 0 decap_w0
+xfeed_2204 1 0 decap_w0
+xfeed_2203 1 0 decap_w0
+xfeed_2202 1 0 decap_w0
+xfeed_2201 1 0 decap_w0
+xfeed_2200 1 0 decap_w0
+xfeed_2169 1 0 decap_w0
+xfeed_2168 1 0 decap_w0
+xfeed_2167 1 0 decap_w0
+xfeed_2166 1 0 decap_w0
+xfeed_2165 1 0 decap_w0
+xfeed_2164 1 0 decap_w0
+xfeed_2163 1 0 decap_w0
+xfeed_2162 1 0 decap_w0
+xfeed_2161 1 0 decap_w0
+xfeed_2160 1 0 decap_w0
+xfeed_1639 1 0 decap_w0
+xfeed_1638 1 0 tie
+xfeed_1637 1 0 decap_w0
+xfeed_1636 1 0 decap_w0
+xfeed_1635 1 0 decap_w0
+xfeed_1634 1 0 decap_w0
+xfeed_1633 1 0 decap_w0
+xfeed_1632 1 0 decap_w0
+xfeed_1631 1 0 decap_w0
+xfeed_1630 1 0 decap_w0
+xfeed_1597 1 0 decap_w0
+xfeed_1596 1 0 decap_w0
+xfeed_1595 1 0 decap_w0
+xfeed_1594 1 0 tie
+xfeed_1593 1 0 decap_w0
+xfeed_1592 1 0 decap_w0
+xfeed_1591 1 0 decap_w0
+xfeed_1590 1 0 decap_w0
+xfeed_1599 1 0 decap_w0
+xfeed_1598 1 0 decap_w0
+xsubckt_98_and2_x1 1 0 125 126 131 and2_x1
+xfeed_140 1 0 decap_w0
+xfeed_141 1 0 decap_w0
+xfeed_142 1 0 decap_w0
+xfeed_143 1 0 decap_w0
+xfeed_144 1 0 decap_w0
+xfeed_145 1 0 decap_w0
+xfeed_146 1 0 decap_w0
+xfeed_147 1 0 decap_w0
+xfeed_148 1 0 decap_w0
+xfeed_149 1 0 decap_w0
+xfeed_2219 1 0 decap_w0
+xfeed_2218 1 0 decap_w0
+xfeed_2217 1 0 decap_w0
+xfeed_2216 1 0 decap_w0
+xfeed_2215 1 0 decap_w0
+xfeed_2214 1 0 decap_w0
+xfeed_2213 1 0 decap_w0
+xfeed_2212 1 0 decap_w0
+xfeed_2211 1 0 decap_w0
+xfeed_2210 1 0 decap_w0
+xfeed_2179 1 0 decap_w0
+xfeed_2178 1 0 decap_w0
+xfeed_2177 1 0 decap_w0
+xfeed_2176 1 0 decap_w0
+xfeed_2175 1 0 decap_w0
+xfeed_2174 1 0 decap_w0
+xfeed_2173 1 0 decap_w0
+xfeed_2172 1 0 decap_w0
+xfeed_2171 1 0 decap_w0
+xfeed_2170 1 0 decap_w0
+xfeed_1649 1 0 decap_w0
+xfeed_1648 1 0 decap_w0
+xfeed_1647 1 0 decap_w0
+xfeed_1646 1 0 decap_w0
+xfeed_1645 1 0 decap_w0
+xfeed_1644 1 0 decap_w0
+xfeed_1643 1 0 decap_w0
+xfeed_1642 1 0 decap_w0
+xfeed_1641 1 0 decap_w0
+xfeed_1640 1 0 decap_w0
+xfeed_159 1 0 decap_w0
+xfeed_158 1 0 decap_w0
+xfeed_157 1 0 decap_w0
+xfeed_156 1 0 decap_w0
+xfeed_155 1 0 decap_w0
+xfeed_154 1 0 decap_w0
+xfeed_153 1 0 decap_w0
+xfeed_152 1 0 decap_w0
+xfeed_151 1 0 decap_w0
+xfeed_150 1 0 decap_w0
+xfeed_2229 1 0 decap_w0
+xfeed_2228 1 0 decap_w0
+xfeed_2227 1 0 decap_w0
+xfeed_2226 1 0 decap_w0
+xfeed_2225 1 0 decap_w0
+xfeed_2224 1 0 decap_w0
+xfeed_2223 1 0 decap_w0
+xfeed_2222 1 0 decap_w0
+xfeed_2221 1 0 decap_w0
+xfeed_2220 1 0 tie
+xfeed_2189 1 0 decap_w0
+xfeed_2188 1 0 decap_w0
+xfeed_2187 1 0 decap_w0
+xfeed_2186 1 0 decap_w0
+xfeed_2185 1 0 decap_w0
+xfeed_2184 1 0 decap_w0
+xfeed_2183 1 0 decap_w0
+xfeed_2182 1 0 decap_w0
+xfeed_2181 1 0 decap_w0
+xfeed_2180 1 0 decap_w0
+xfeed_1659 1 0 decap_w0
+xfeed_1658 1 0 decap_w0
+xfeed_1657 1 0 decap_w0
+xfeed_1656 1 0 decap_w0
+xfeed_1655 1 0 decap_w0
+xfeed_1654 1 0 decap_w0
+xfeed_1653 1 0 decap_w0
+xfeed_1652 1 0 decap_w0
+xfeed_1651 1 0 decap_w0
+xfeed_1650 1 0 decap_w0
+xfeed_209 1 0 decap_w0
+xfeed_208 1 0 decap_w0
+xfeed_207 1 0 decap_w0
+xfeed_206 1 0 decap_w0
+xfeed_205 1 0 decap_w0
+xfeed_204 1 0 decap_w0
+xfeed_203 1 0 decap_w0
+xfeed_202 1 0 decap_w0
+xfeed_201 1 0 decap_w0
+xfeed_200 1 0 decap_w0
+xfeed_169 1 0 decap_w0
+xfeed_168 1 0 decap_w0
+xfeed_167 1 0 decap_w0
+xfeed_166 1 0 decap_w0
+xfeed_165 1 0 tie
+xfeed_164 1 0 decap_w0
+xfeed_163 1 0 decap_w0
+xfeed_162 1 0 decap_w0
+xfeed_161 1 0 decap_w0
+xfeed_160 1 0 decap_w0
+xfeed_2239 1 0 decap_w0
+xfeed_2238 1 0 decap_w0
+xfeed_2237 1 0 decap_w0
+xfeed_2236 1 0 decap_w0
+xfeed_2235 1 0 tie
+xfeed_2234 1 0 decap_w0
+xfeed_2233 1 0 decap_w0
+xfeed_2232 1 0 decap_w0
+xfeed_2231 1 0 decap_w0
+xfeed_2230 1 0 decap_w0
+xfeed_2199 1 0 decap_w0
+xfeed_2198 1 0 decap_w0
+xfeed_2197 1 0 decap_w0
+xfeed_2196 1 0 decap_w0
+xfeed_2195 1 0 decap_w0
+xfeed_2194 1 0 decap_w0
+xfeed_2193 1 0 decap_w0
+xfeed_2192 1 0 decap_w0
+xfeed_2191 1 0 decap_w0
+xfeed_2190 1 0 decap_w0
+xfeed_1709 1 0 decap_w0
+xfeed_1708 1 0 decap_w0
+xfeed_1707 1 0 decap_w0
+xfeed_1706 1 0 decap_w0
+xfeed_1705 1 0 decap_w0
+xfeed_1704 1 0 decap_w0
+xfeed_1703 1 0 decap_w0
+xfeed_1702 1 0 tie
+xfeed_1701 1 0 decap_w0
+xfeed_1700 1 0 decap_w0
+xfeed_1667 1 0 decap_w0
+xfeed_1666 1 0 decap_w0
+xfeed_1665 1 0 decap_w0
+xfeed_1664 1 0 decap_w0
+xfeed_1663 1 0 decap_w0
+xfeed_1662 1 0 decap_w0
+xfeed_1661 1 0 decap_w0
+xfeed_1660 1 0 decap_w0
+xfeed_1669 1 0 decap_w0
+xfeed_1668 1 0 decap_w0
+xfeed_219 1 0 decap_w0
+xfeed_218 1 0 decap_w0
+xfeed_217 1 0 decap_w0
+xfeed_216 1 0 decap_w0
+xfeed_215 1 0 decap_w0
+xfeed_214 1 0 decap_w0
+xfeed_213 1 0 decap_w0
+xfeed_212 1 0 decap_w0
+xfeed_211 1 0 decap_w0
+xfeed_210 1 0 decap_w0
+xfeed_179 1 0 decap_w0
+xfeed_178 1 0 decap_w0
+xfeed_177 1 0 decap_w0
+xfeed_176 1 0 decap_w0
+xfeed_175 1 0 decap_w0
+xfeed_174 1 0 decap_w0
+xfeed_173 1 0 decap_w0
+xfeed_172 1 0 decap_w0
+xfeed_171 1 0 decap_w0
+xfeed_170 1 0 decap_w0
+xfeed_2249 1 0 decap_w0
+xfeed_2248 1 0 decap_w0
+xfeed_2247 1 0 decap_w0
+xfeed_2246 1 0 decap_w0
+xfeed_2245 1 0 decap_w0
+xfeed_2244 1 0 decap_w0
+xfeed_2243 1 0 decap_w0
+xfeed_2242 1 0 tie
+xfeed_2241 1 0 decap_w0
+xfeed_2240 1 0 decap_w0
+xfeed_1719 1 0 decap_w0
+xfeed_1718 1 0 decap_w0
+xfeed_1717 1 0 decap_w0
+xfeed_1716 1 0 decap_w0
+xfeed_1715 1 0 decap_w0
+xfeed_1714 1 0 decap_w0
+xfeed_1713 1 0 decap_w0
+xfeed_1712 1 0 tie
+xfeed_1711 1 0 decap_w0
+xfeed_1710 1 0 decap_w0
+xfeed_1674 1 0 decap_w0
+xfeed_1673 1 0 decap_w0
+xfeed_1672 1 0 decap_w0
+xfeed_1671 1 0 decap_w0
+xfeed_1670 1 0 decap_w0
+xsubckt_128_xor2_x0 1 0 7 28 101 xor2_x0
+xsubckt_120_nand2_x0 1 0 108 8 29 nand2_x0
+xsubckt_80_and21nor_x0 1 0 142 33 151 154 and21nor_x0
+xfeed_1679 1 0 decap_w0
+xfeed_1678 1 0 decap_w0
+xfeed_1677 1 0 decap_w0
+xfeed_1676 1 0 decap_w0
+xfeed_1675 1 0 decap_w0
+xfeed_229 1 0 decap_w0
+xfeed_228 1 0 decap_w0
+xfeed_227 1 0 decap_w0
+xfeed_226 1 0 decap_w0
+xfeed_225 1 0 decap_w0
+xfeed_224 1 0 decap_w0
+xfeed_223 1 0 decap_w0
+xfeed_222 1 0 decap_w0
+xfeed_221 1 0 tie
+xfeed_220 1 0 decap_w0
+xfeed_189 1 0 decap_w0
+xfeed_188 1 0 decap_w0
+xfeed_187 1 0 decap_w0
+xfeed_186 1 0 decap_w0
+xfeed_185 1 0 decap_w0
+xfeed_184 1 0 decap_w0
+xfeed_183 1 0 decap_w0
+xfeed_182 1 0 tie
+xfeed_181 1 0 decap_w0
+xfeed_180 1 0 decap_w0
+xsubckt_35_and4_x1 1 0 54 12 13 18 19 and4_x1
+xfeed_2259 1 0 decap_w0
+xfeed_2258 1 0 decap_w0
+xfeed_2257 1 0 decap_w0
+xfeed_2256 1 0 decap_w0
+xfeed_2255 1 0 decap_w0
+xfeed_2254 1 0 decap_w0
+xfeed_2253 1 0 decap_w0
+xfeed_2252 1 0 decap_w0
+xfeed_2251 1 0 decap_w0
+xfeed_2250 1 0 decap_w0
+xfeed_1729 1 0 decap_w0
+xfeed_1728 1 0 decap_w0
+xfeed_1727 1 0 decap_w0
+xfeed_1726 1 0 decap_w0
+xfeed_1725 1 0 decap_w0
+xfeed_1724 1 0 tie
+xfeed_1723 1 0 decap_w0
+xfeed_1722 1 0 decap_w0
+xfeed_1721 1 0 decap_w0
+xfeed_1720 1 0 decap_w0
+xfeed_1681 1 0 decap_w0
+xfeed_1680 1 0 decap_w0
+xsubckt_30_nand2_x0 1 0 59 13 18 nand2_x0
+xfeed_1689 1 0 decap_w0
+xfeed_1688 1 0 decap_w0
+xfeed_1687 1 0 decap_w0
+xfeed_1686 1 0 decap_w0
+xfeed_1685 1 0 decap_w0
+xfeed_1684 1 0 decap_w0
+xfeed_1683 1 0 decap_w0
+xfeed_1682 1 0 tie
+xfeed_239 1 0 decap_w0
+xfeed_238 1 0 decap_w0
+xfeed_237 1 0 decap_w0
+xfeed_236 1 0 decap_w0
+xfeed_235 1 0 decap_w0
+xfeed_234 1 0 decap_w0
+xfeed_233 1 0 decap_w0
+xfeed_232 1 0 decap_w0
+xfeed_231 1 0 decap_w0
+xfeed_230 1 0 decap_w0
+xfeed_199 1 0 decap_w0
+xfeed_198 1 0 decap_w0
+xfeed_197 1 0 decap_w0
+xfeed_196 1 0 decap_w0
+xfeed_195 1 0 decap_w0
+xfeed_194 1 0 decap_w0
+xfeed_193 1 0 decap_w0
+xfeed_192 1 0 decap_w0
+xfeed_191 1 0 decap_w0
+xfeed_190 1 0 decap_w0
+xsubckt_83_and2_x1 1 0 139 12 17 and2_x1
+xfeed_2269 1 0 decap_w0
+xfeed_2268 1 0 decap_w0
+xfeed_2267 1 0 decap_w0
+xfeed_2266 1 0 decap_w0
+xfeed_2265 1 0 decap_w0
+xfeed_2264 1 0 decap_w0
+xfeed_2263 1 0 decap_w0
+xfeed_2262 1 0 decap_w0
+xfeed_2261 1 0 decap_w0
+xfeed_2260 1 0 decap_w0
+xfeed_1737 1 0 decap_w0
+xfeed_1736 1 0 tie
+xfeed_1735 1 0 decap_w0
+xfeed_1734 1 0 decap_w0
+xfeed_1733 1 0 decap_w0
+xfeed_1732 1 0 decap_w0
+xfeed_1731 1 0 decap_w0
+xfeed_1730 1 0 decap_w0
+xfeed_1739 1 0 decap_w0
+xfeed_1738 1 0 decap_w0
+xfeed_1699 1 0 decap_w0
+xfeed_1698 1 0 decap_w0
+xfeed_1697 1 0 decap_w0
+xfeed_1696 1 0 decap_w0
+xfeed_1695 1 0 decap_w0
+xfeed_1694 1 0 decap_w0
+xfeed_1693 1 0 decap_w0
+xfeed_1692 1 0 tie
+xfeed_1691 1 0 decap_w0
+xfeed_1690 1 0 decap_w0
+xfeed_249 1 0 decap_w0
+xfeed_248 1 0 decap_w0
+xfeed_247 1 0 decap_w0
+xfeed_246 1 0 decap_w0
+xfeed_245 1 0 decap_w0
+xfeed_244 1 0 decap_w0
+xfeed_243 1 0 decap_w0
+xfeed_242 1 0 decap_w0
+xfeed_241 1 0 decap_w0
+xfeed_240 1 0 decap_w0
+xfeed_0 1 0 decap_w0
+xfeed_2277 1 0 tie
+xfeed_2276 1 0 tie
+xfeed_2275 1 0 tie
+xfeed_2274 1 0 tie
+xfeed_2273 1 0 decap_w0
+xfeed_2272 1 0 decap_w0
+xfeed_2271 1 0 decap_w0
+xfeed_2270 1 0 decap_w0
+xfeed_1744 1 0 decap_w0
+xfeed_1743 1 0 decap_w0
+xfeed_1742 1 0 decap_w0
+xfeed_1741 1 0 decap_w0
+xfeed_1740 1 0 decap_w0
+xfeed_1 1 0 decap_w0
+xfeed_2 1 0 decap_w0
+xfeed_3 1 0 decap_w0
+xfeed_4 1 0 decap_w0
+xfeed_5 1 0 decap_w0
+xfeed_6 1 0 decap_w0
+xfeed_7 1 0 decap_w0
+xfeed_8 1 0 decap_w0
+xfeed_9 1 0 decap_w0
+xfeed_1749 1 0 decap_w0
+xfeed_1748 1 0 decap_w0
+xfeed_1747 1 0 decap_w0
+xfeed_1746 1 0 decap_w0
+xfeed_1745 1 0 decap_w0
+xfeed_259 1 0 decap_w0
+xfeed_258 1 0 decap_w0
+xfeed_257 1 0 decap_w0
+xfeed_256 1 0 decap_w0
+xfeed_255 1 0 decap_w0
+xfeed_254 1 0 tie
+xfeed_253 1 0 decap_w0
+xfeed_252 1 0 decap_w0
+xfeed_251 1 0 decap_w0
+xfeed_250 1 0 decap_w0
+xfeed_1751 1 0 decap_w0
+xfeed_1750 1 0 decap_w0
+xsubckt_119_and21nor_x0 1 0 109 114 112 113 and21nor_x0
+xfeed_1759 1 0 decap_w0
+xfeed_1758 1 0 decap_w0
+xfeed_1757 1 0 decap_w0
+xfeed_1756 1 0 decap_w0
+xfeed_1755 1 0 decap_w0
+xfeed_1754 1 0 decap_w0
+xfeed_1753 1 0 decap_w0
+xfeed_1752 1 0 decap_w0
+xfeed_309 1 0 decap_w0
+xfeed_308 1 0 decap_w0
+xfeed_307 1 0 decap_w0
+xfeed_306 1 0 decap_w0
+xfeed_305 1 0 decap_w0
+xfeed_304 1 0 decap_w0
+xfeed_303 1 0 decap_w0
+xfeed_302 1 0 decap_w0
+xfeed_301 1 0 decap_w0
+xfeed_300 1 0 decap_w0
+xfeed_269 1 0 decap_w0
+xfeed_268 1 0 decap_w0
+xfeed_267 1 0 decap_w0
+xfeed_266 1 0 decap_w0
+xfeed_265 1 0 decap_w0
+xfeed_264 1 0 decap_w0
+xfeed_263 1 0 decap_w0
+xfeed_262 1 0 decap_w0
+xfeed_261 1 0 decap_w0
+xfeed_260 1 0 decap_w0
+xsubckt_121_nor2_x0 1 0 107 8 29 nor2_x0
+xsubckt_111_nexor2_x0 1 0 116 120 115 nexor2_x0
+xfeed_1807 1 0 decap_w0
+xfeed_1806 1 0 decap_w0
+xfeed_1805 1 0 decap_w0
+xfeed_1804 1 0 decap_w0
+xfeed_1803 1 0 decap_w0
+xfeed_1802 1 0 decap_w0
+xfeed_1801 1 0 decap_w0
+xfeed_1800 1 0 decap_w0
+xsubckt_141_nexor2_x0 1 0 91 94 90 nexor2_x0
+xsubckt_49_nand2_x0 1 0 40 16 15 nand2_x0
+xfeed_1809 1 0 decap_w0
+xfeed_1808 1 0 decap_w0
+xfeed_1769 1 0 decap_w0
+xfeed_1768 1 0 decap_w0
+xfeed_1767 1 0 decap_w0
+xfeed_1766 1 0 decap_w0
+xfeed_1765 1 0 tie
+xfeed_1764 1 0 decap_w0
+xfeed_1763 1 0 decap_w0
+xfeed_1762 1 0 decap_w0
+xfeed_1761 1 0 decap_w0
+xfeed_1760 1 0 decap_w0
+xfeed_319 1 0 decap_w0
+xfeed_318 1 0 decap_w0
+xfeed_317 1 0 decap_w0
+xfeed_316 1 0 decap_w0
+xfeed_315 1 0 decap_w0
+xfeed_314 1 0 decap_w0
+xfeed_313 1 0 decap_w0
+xfeed_312 1 0 decap_w0
+xfeed_311 1 0 decap_w0
+xfeed_310 1 0 decap_w0
+xfeed_279 1 0 decap_w0
+xfeed_278 1 0 decap_w0
+xfeed_277 1 0 decap_w0
+xfeed_276 1 0 decap_w0
+xfeed_275 1 0 decap_w0
+xfeed_274 1 0 decap_w0
+xfeed_273 1 0 decap_w0
+xfeed_272 1 0 tie
+xfeed_271 1 0 decap_w0
+xfeed_270 1 0 decap_w0
+xsubckt_113_or21nand_x0 1 0 114 120 117 118 or21nand_x0
+xfeed_1814 1 0 decap_w0
+xfeed_1813 1 0 decap_w0
+xfeed_1812 1 0 decap_w0
+xfeed_1811 1 0 tie
+xfeed_1810 1 0 decap_w0
+xsubckt_123_nexor2_x0 1 0 106 109 105 nexor2_x0
+xfeed_1819 1 0 decap_w0
+xfeed_1818 1 0 decap_w0
+xfeed_1817 1 0 decap_w0
+xfeed_1816 1 0 decap_w0
+xfeed_1815 1 0 decap_w0
+xfeed_1779 1 0 decap_w0
+xfeed_1778 1 0 decap_w0
+xfeed_1777 1 0 decap_w0
+xfeed_1776 1 0 decap_w0
+xfeed_1775 1 0 tie
+xfeed_1774 1 0 decap_w0
+xfeed_1773 1 0 decap_w0
+xfeed_1772 1 0 decap_w0
+xfeed_1771 1 0 decap_w0
+xfeed_1770 1 0 decap_w0
+xfeed_329 1 0 decap_w0
+xfeed_328 1 0 decap_w0
+xfeed_327 1 0 decap_w0
+xfeed_326 1 0 decap_w0
+xfeed_325 1 0 decap_w0
+xfeed_324 1 0 decap_w0
+xfeed_323 1 0 decap_w0
+xfeed_322 1 0 decap_w0
+xfeed_321 1 0 decap_w0
+xfeed_320 1 0 decap_w0
+xfeed_289 1 0 decap_w0
+xfeed_288 1 0 decap_w0
+xfeed_287 1 0 decap_w0
+xfeed_286 1 0 decap_w0
+xfeed_285 1 0 decap_w0
+xfeed_284 1 0 decap_w0
+xfeed_283 1 0 decap_w0
+xfeed_282 1 0 decap_w0
+xfeed_281 1 0 decap_w0
+xfeed_280 1 0 decap_w0
+xsubckt_32_nand2_x0 1 0 57 12 19 nand2_x0
+xfeed_1821 1 0 decap_w0
+xfeed_1820 1 0 decap_w0
+xsubckt_27_and21nor_x0 1 0 62 76 68 71 and21nor_x0
+xfeed_1829 1 0 decap_w0
+xfeed_1828 1 0 decap_w0
+xfeed_1827 1 0 decap_w0
+xfeed_1826 1 0 decap_w0
+xfeed_1825 1 0 decap_w0
+xfeed_1824 1 0 decap_w0
+xfeed_1823 1 0 decap_w0
+xfeed_1822 1 0 decap_w0
+xfeed_1789 1 0 decap_w0
+xfeed_1788 1 0 decap_w0
+xfeed_1787 1 0 decap_w0
+xfeed_1786 1 0 decap_w0
+xfeed_1785 1 0 decap_w0
+xfeed_1784 1 0 decap_w0
+xfeed_1783 1 0 decap_w0
+xfeed_1782 1 0 decap_w0
+xfeed_1781 1 0 decap_w0
+xfeed_1780 1 0 decap_w0
+xfeed_339 1 0 decap_w0
+xfeed_338 1 0 decap_w0
+xfeed_337 1 0 decap_w0
+xfeed_336 1 0 decap_w0
+xfeed_335 1 0 decap_w0
+xfeed_334 1 0 decap_w0
+xfeed_333 1 0 decap_w0
+xfeed_332 1 0 decap_w0
+xfeed_331 1 0 decap_w0
+xfeed_330 1 0 decap_w0
+xfeed_299 1 0 decap_w0
+xfeed_298 1 0 decap_w0
+xfeed_297 1 0 decap_w0
+xfeed_296 1 0 decap_w0
+xfeed_295 1 0 decap_w0
+xfeed_294 1 0 decap_w0
+xfeed_293 1 0 decap_w0
+xfeed_292 1 0 decap_w0
+xfeed_291 1 0 decap_w0
+xfeed_290 1 0 decap_w0
+xsubckt_135_nexor2_x0 1 0 96 99 95 nexor2_x0
+xsubckt_114_and2_x1 1 0 113 9 30 and2_x1
+xsubckt_117_nexor2_x0 1 0 111 114 110 nexor2_x0
+xfeed_1839 1 0 decap_w0
+xfeed_1838 1 0 decap_w0
+xfeed_1837 1 0 decap_w0
+xfeed_1836 1 0 decap_w0
+xfeed_1835 1 0 decap_w0
+xfeed_1834 1 0 decap_w0
+xfeed_1833 1 0 decap_w0
+xfeed_1832 1 0 decap_w0
+xfeed_1831 1 0 decap_w0
+xfeed_1830 1 0 decap_w0
+xfeed_1799 1 0 decap_w0
+xfeed_1798 1 0 decap_w0
+xfeed_1797 1 0 decap_w0
+xfeed_1796 1 0 decap_w0
+xfeed_1795 1 0 decap_w0
+xfeed_1794 1 0 decap_w0
+xfeed_1793 1 0 decap_w0
+xfeed_1792 1 0 decap_w0
+xfeed_1791 1 0 decap_w0
+xfeed_1790 1 0 decap_w0
+xfeed_349 1 0 decap_w0
+xfeed_348 1 0 decap_w0
+xfeed_347 1 0 decap_w0
+xfeed_346 1 0 decap_w0
+xfeed_345 1 0 decap_w0
+xfeed_344 1 0 decap_w0
+xfeed_343 1 0 decap_w0
+xfeed_342 1 0 decap_w0
+xfeed_341 1 0 decap_w0
+xfeed_340 1 0 decap_w0
+xsubckt_62_nand2_x0 1 0 159 17 13 nand2_x0
+xfeed_1849 1 0 decap_w0
+xfeed_1848 1 0 decap_w0
+xfeed_1847 1 0 decap_w0
+xfeed_1846 1 0 decap_w0
+xfeed_1845 1 0 decap_w0
+xfeed_1844 1 0 decap_w0
+xfeed_1843 1 0 decap_w0
+xfeed_1842 1 0 decap_w0
+xfeed_1841 1 0 decap_w0
+xfeed_1840 1 0 decap_w0
+xfeed_359 1 0 decap_w0
+xfeed_358 1 0 decap_w0
+xfeed_357 1 0 decap_w0
+xfeed_356 1 0 decap_w0
+xfeed_355 1 0 tie
+xfeed_354 1 0 decap_w0
+xfeed_353 1 0 decap_w0
+xfeed_352 1 0 decap_w0
+xfeed_351 1 0 decap_w0
+xfeed_350 1 0 decap_w0
+xsubckt_8_and4_x1 1 0 79 18 14 15 19 and4_x1
+xsubckt_129_nexor2_x0 1 0 101 104 100 nexor2_x0
+.ends mac_cts_r

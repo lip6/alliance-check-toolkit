@@ -1,0 +1,17 @@
+*
+* sky130_fd_sc_hd__inv_1_3.spi
+* 
+
+* one inverter for instantiation
+* sky130_fd_sc_hd__inv_1
+*.subckt sky130_fd_sc_hd__inv_1 A VGND VNB VPB VPWR Y
+
+.INCLUDE sky130_fd_sc_hd__inv_1.spice
+
+.subckt sky130_fd_sc_hd__inv_1_3 in out vdd gnd
+Xa in gnd gnd vdd vdd n1   sky130_fd_sc_hd__inv_1
+Xb n1 gnd gnd vdd vdd n2   sky130_fd_sc_hd__inv_1
+Xc n2 gnd gnd vdd vdd out  sky130_fd_sc_hd__inv_1
+.ends sky130_fd_sc_hd__inv_1_3
+
+

@@ -1,0 +1,31 @@
+*
+* 
+
+*****************
+
+.TEMP 25
+
+******************
+* BSIM4 transistor model parameters for ngspice
+*.lib /users/soft/analogdesign/scalable/techno/sky130_models_20220217/C4M.Sky130_all_lib.spice logic_tt 
+
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+*gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include circuit netlist
+.include arlet6502_cts_r.spi
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt inv_x2 vdd vss i nq
+
+Xc evss evdd 87 307 2138 2142 2143 2298 2299 2300 2301 2302 2303 2304 2305 2306 2307 2308 2309 2310 2311 2312 2313 2314 2315 2316 2317 2318 2319 2320 2321 2322 2323 2324 2325 2326 2327 2328 2329 2330 arlet6502_cts_r
+.end
+

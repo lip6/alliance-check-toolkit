@@ -1,0 +1,58 @@
+#  
+#  Avertec Release v3.4p5 (64 bits on Linux 3.10.0-1160.108.1.el7.x86_64)
+#  [AVT_only] host: bip
+#  [AVT_only] arch: x86_64
+#  [AVT_only] path: /users/outil/tasyag/Linux.el7_64/install/bin/avt_shell
+#  argv: ../../../../../../bin/calcCPath.tcl -Target picorv32_m_ext -SpiceModel ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__mismatch.corner.spice    ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__tt.pm3.spice ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__tt.corner.spice     ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice  ../../../../../inverter/skyWater130/sta/techno/skylibm/library.spice  -SpiceType hspice -VddVoltage 1.8 -ClockSignal clk -VddName VPWR -VssName VGND -Temperature 25 
+#  
+#  User: aoudrhiri
+#  Generation date Wed Sep 25 16:07:39 2024
+#  
+#  Statistic file : picorv32_m_ext.stat
+#  
+
+Number of devices for circuit picorv32_m_ext
+net                        :    166
+  net with RC description  :    165
+R devices                  :      0
+C devices                  :    165
+NMOS devices               :    463
+PMOS devices               :    467
+diode devices              :      0
+
+No devices ignored during parse of picorv32_m_ext.spi
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/skylibm/library.spice
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__tt.corner.spice
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__tt.pm3.spice
+
+No devices ignored during parse of ../../../../../inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__mismatch.corner.spice
+
+VDD signal(s)                  : 1 
+VDD connector(s)               : 0 
+VSS signal(s)                  : 2 
+VSS connector(s)               : 0 
+Transistors as diodes          : 0 
+Transistors as capacitances    : 0 
+Transistors as resistances     : 2 
+Transistors blocked            : 188 
+Transistors paired             : 483 
+Transistors unconnected        : 0 
+Connector orientation conflicts : 3 
+------------------------------------------------------------
+640 unused transistors
+------------------------------------------------------------
+1 latches
+2 signal which drive nothing
+5 potentially tristate signals
+------------------------------------------------------------
+CMOS DUAL cones : 48
+Total cones : 102

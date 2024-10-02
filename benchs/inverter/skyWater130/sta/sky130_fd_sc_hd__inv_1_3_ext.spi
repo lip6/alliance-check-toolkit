@@ -1,0 +1,39 @@
+*  
+*  Avertec Release v3.4p5 (64 bits on Linux 3.10.0-1160.108.1.el7.x86_64)
+*  [AVT_only] host: bip
+*  [AVT_only] arch: x86_64
+*  [AVT_only] path: /users/outil/tasyag/Linux.el7_64/install/bin/avt_shell
+*  argv: ./paths_select_simu.tcl 
+*  
+*  User: aoudrhiri
+*  Generation date Wed Sep 25 12:36:13 2024
+*  
+*  Spice description of sky130_fd_sc_hd__inv_1_3_ext
+*  
+
+
+.subckt sky130_fd_sc_hd__inv_1_3_ext out in 
+* |CONDIR out OUT, in IN
+Mc_0_sky130_fd_pr__nfet_01v8 gnd n2 out gnd sky130_fd_pr__nfet_01v8__model 
++ L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+Mc_1_sky130_fd_pr__pfet_01v8_hvt vdd n2 out vdd 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Ma_0_sky130_fd_pr__nfet_01v8 gnd in n1 gnd sky130_fd_pr__nfet_01v8__model 
++ L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+Ma_1_sky130_fd_pr__pfet_01v8_hvt vdd in n1 vdd 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mb_0_sky130_fd_pr__nfet_01v8 gnd n1 n2 gnd sky130_fd_pr__nfet_01v8__model 
++ L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+Mb_1_sky130_fd_pr__pfet_01v8_hvt vdd n1 n2 vdd 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Ct27 n2 0 0
+Ct20 n1 0 0
+Ct14 in 0 0
+Ct12 out 0 0
+Ct9 gnd 0 0
+Ct4 vdd 0 0
+.ends sky130_fd_sc_hd__inv_1_3_ext
+

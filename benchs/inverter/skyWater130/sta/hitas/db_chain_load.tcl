@@ -20,20 +20,20 @@ avt_config tasGenerateDetailTimingFile yes
 # Files of transistor model of the technology, that may require modifications
 #
 # nfet_01v8
-avt_LoadFile  sky130_fd_pr__nfet_01v8__mismatch.corner.spice spice
-#avt_LoadFile  sky130_fd_pr__nfet_01v8__tt.corner.spice spice
+avt_LoadFile   ./techno/sky130_fd_pr__nfet_01v8__mismatch.corner.spice spice
+avt_LoadFile   ./techno/sky130_fd_pr__nfet_01v8__tt.corner.spice spice
+avt_LoadFile   ./techno/sky130_fd_pr__nfet_01v8__tt.pm3.spice spice
 # modified to include the model file sky130_fd_pr__nfet_01v8__tt.pm3.spice with full path
 # modified sky130_fd_pr__nfet_01v8__tt.pm3.spice to use level = 14
 # have to use local files
-avt_LoadFile  sky130_fd_pr__nfet_01v8__tt.corner.spice spice
 
 # pfet_01v8_hvt
-avt_LoadFile  sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice spice
-#avt_LoadFile  sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice spice
+avt_LoadFile   ./techno/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice spice
+avt_LoadFile   ./techno/sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice spice
+avt_LoadFile   ./techno/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice spice
 # modified to include the model file sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice with full path 
 # modified sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice to use level = 14
 # have to use local files
-avt_LoadFile  sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice spice
 
 # File decribing the netlist with power supply and temperature
 avt_LoadFile ./inv_4_chain_load_hitas.spi spice

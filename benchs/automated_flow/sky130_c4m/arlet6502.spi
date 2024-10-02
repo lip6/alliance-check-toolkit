@@ -1,0 +1,4010 @@
+* Coriolis Structural SPICE Driver
+* Generated on Sep 25, 2024, 13:05
+* Cell/Subckt "arlet6502".
+* 
+* INTERF vss
+* INTERF vdd
+* INTERF reset
+* INTERF clk
+* INTERF WE
+* INTERF RDY
+* INTERF NMI
+* INTERF IRQ
+* INTERF DO[7]
+* INTERF DO[6]
+* INTERF DO[5]
+* INTERF DO[4]
+* INTERF DO[3]
+* INTERF DO[2]
+* INTERF DO[1]
+* INTERF DO[0]
+* INTERF DI[7]
+* INTERF DI[6]
+* INTERF DI[5]
+* INTERF DI[4]
+* INTERF DI[3]
+* INTERF DI[2]
+* INTERF DI[1]
+* INTERF DI[0]
+* INTERF A[9]
+* INTERF A[8]
+* INTERF A[7]
+* INTERF A[6]
+* INTERF A[5]
+* INTERF A[4]
+* INTERF A[3]
+* INTERF A[2]
+* INTERF A[15]
+* INTERF A[14]
+* INTERF A[13]
+* INTERF A[12]
+* INTERF A[11]
+* INTERF A[10]
+* INTERF A[1]
+* INTERF A[0]
+
+* Terminal models (aka standard cells) used througout all the hierarchy.
+.include mux2_x1.spi
+.include and2_x1.spi
+.include or2_x1.spi
+.include nand2_x0.spi
+.include or21nand_x0.spi
+.include nand4_x0.spi
+.include and21nor_x0.spi
+.include or3_x1.spi
+.include and4_x1.spi
+.include nand3_x0.spi
+.include and3_x1.spi
+.include nexor2_x0.spi
+.include dff_x1.spi
+.include nor3_x0.spi
+.include nor4_x0.spi
+.include inv_x0.spi
+.include nor2_x0.spi
+.include xor2_x0.spi
+.include or4_x1.spi
+
+* Non-terminal models (part of the user's design hierarchy).
+
+.subckt arlet6502 0 1 2 9 1790 1791 1792 1944 1945 1946 1947 1948 1949 1950 1951 1952 1953 1954 1955 1956 1957 1958 1959 1960 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 1971 1972 1973 1974 1975 1976
+* NET     0 = vss
+* NET     1 = vdd
+* NET     2 = reset
+* NET     3 = flatten_MOS6502_auto_fsm_map_cc_288_map_fsm_1405_Y[5]
+* NET     4 = flatten_MOS6502_auto_fsm_map_cc_288_map_fsm_1405_Y[4]
+* NET     5 = flatten_MOS6502_auto_fsm_map_cc_288_map_fsm_1405_Y[3]
+* NET     6 = flatten_MOS6502_auto_fsm_map_cc_288_map_fsm_1405_Y[2]
+* NET     7 = flatten_MOS6502_auto_fsm_map_cc_288_map_fsm_1405_Y[1]
+* NET     8 = flatten_MOS6502_auto_fsm_map_cc_288_map_fsm_1405_Y[0]
+* NET     9 = clk
+* NET    10 = abc_11867_new_n999
+* NET    11 = abc_11867_new_n998
+* NET    12 = abc_11867_new_n997
+* NET    13 = abc_11867_new_n996
+* NET    14 = abc_11867_new_n995
+* NET    15 = abc_11867_new_n994
+* NET    16 = abc_11867_new_n993
+* NET    17 = abc_11867_new_n992
+* NET    18 = abc_11867_new_n991
+* NET    19 = abc_11867_new_n990
+* NET    20 = abc_11867_new_n988
+* NET    21 = abc_11867_new_n987
+* NET    22 = abc_11867_new_n986
+* NET    23 = abc_11867_new_n985
+* NET    24 = abc_11867_new_n984
+* NET    25 = abc_11867_new_n983
+* NET    26 = abc_11867_new_n982
+* NET    27 = abc_11867_new_n981
+* NET    28 = abc_11867_new_n980
+* NET    29 = abc_11867_new_n979
+* NET    30 = abc_11867_new_n977
+* NET    31 = abc_11867_new_n976
+* NET    32 = abc_11867_new_n975
+* NET    33 = abc_11867_new_n974
+* NET    34 = abc_11867_new_n973
+* NET    35 = abc_11867_new_n972
+* NET    36 = abc_11867_new_n971
+* NET    37 = abc_11867_new_n970
+* NET    38 = abc_11867_new_n969
+* NET    39 = abc_11867_new_n968
+* NET    40 = abc_11867_new_n967
+* NET    41 = abc_11867_new_n966
+* NET    42 = abc_11867_new_n965
+* NET    43 = abc_11867_new_n964
+* NET    44 = abc_11867_new_n963
+* NET    45 = abc_11867_new_n962
+* NET    46 = abc_11867_new_n961
+* NET    47 = abc_11867_new_n959
+* NET    48 = abc_11867_new_n958
+* NET    49 = abc_11867_new_n957
+* NET    50 = abc_11867_new_n956
+* NET    51 = abc_11867_new_n955
+* NET    52 = abc_11867_new_n954
+* NET    53 = abc_11867_new_n953
+* NET    54 = abc_11867_new_n952
+* NET    55 = abc_11867_new_n951
+* NET    56 = abc_11867_new_n950
+* NET    57 = abc_11867_new_n949
+* NET    58 = abc_11867_new_n948
+* NET    59 = abc_11867_new_n946
+* NET    60 = abc_11867_new_n945
+* NET    61 = abc_11867_new_n944
+* NET    62 = abc_11867_new_n943
+* NET    63 = abc_11867_new_n942
+* NET    64 = abc_11867_new_n941
+* NET    65 = abc_11867_new_n940
+* NET    66 = abc_11867_new_n939
+* NET    67 = abc_11867_new_n938
+* NET    68 = abc_11867_new_n937
+* NET    69 = abc_11867_new_n936
+* NET    70 = abc_11867_new_n935
+* NET    71 = abc_11867_new_n933
+* NET    72 = abc_11867_new_n932
+* NET    73 = abc_11867_new_n931
+* NET    74 = abc_11867_new_n930
+* NET    75 = abc_11867_new_n929
+* NET    76 = abc_11867_new_n928
+* NET    77 = abc_11867_new_n927
+* NET    78 = abc_11867_new_n926
+* NET    79 = abc_11867_new_n925
+* NET    80 = abc_11867_new_n924
+* NET    81 = abc_11867_new_n923
+* NET    82 = abc_11867_new_n922
+* NET    83 = abc_11867_new_n920
+* NET    84 = abc_11867_new_n919
+* NET    85 = abc_11867_new_n918
+* NET    86 = abc_11867_new_n917
+* NET    87 = abc_11867_new_n916
+* NET    88 = abc_11867_new_n915
+* NET    89 = abc_11867_new_n914
+* NET    90 = abc_11867_new_n913
+* NET    91 = abc_11867_new_n912
+* NET    92 = abc_11867_new_n911
+* NET    93 = abc_11867_new_n910
+* NET    94 = abc_11867_new_n909
+* NET    95 = abc_11867_new_n908
+* NET    96 = abc_11867_new_n907
+* NET    97 = abc_11867_new_n906
+* NET    98 = abc_11867_new_n905
+* NET    99 = abc_11867_new_n904
+* NET   100 = abc_11867_new_n903
+* NET   101 = abc_11867_new_n902
+* NET   102 = abc_11867_new_n901
+* NET   103 = abc_11867_new_n900
+* NET   104 = abc_11867_new_n899
+* NET   105 = abc_11867_new_n898
+* NET   106 = abc_11867_new_n897
+* NET   107 = abc_11867_new_n896
+* NET   108 = abc_11867_new_n895
+* NET   109 = abc_11867_new_n894
+* NET   110 = abc_11867_new_n893
+* NET   111 = abc_11867_new_n892
+* NET   112 = abc_11867_new_n891
+* NET   113 = abc_11867_new_n890
+* NET   114 = abc_11867_new_n889
+* NET   115 = abc_11867_new_n888
+* NET   116 = abc_11867_new_n887
+* NET   117 = abc_11867_new_n886
+* NET   118 = abc_11867_new_n885
+* NET   119 = abc_11867_new_n884
+* NET   120 = abc_11867_new_n883
+* NET   121 = abc_11867_new_n882
+* NET   122 = abc_11867_new_n881
+* NET   123 = abc_11867_new_n880
+* NET   124 = abc_11867_new_n879
+* NET   125 = abc_11867_new_n878
+* NET   126 = abc_11867_new_n876
+* NET   127 = abc_11867_new_n875
+* NET   128 = abc_11867_new_n874
+* NET   129 = abc_11867_new_n873
+* NET   130 = abc_11867_new_n872
+* NET   131 = abc_11867_new_n871
+* NET   132 = abc_11867_new_n870
+* NET   133 = abc_11867_new_n869
+* NET   134 = abc_11867_new_n868
+* NET   135 = abc_11867_new_n867
+* NET   136 = abc_11867_new_n866
+* NET   137 = abc_11867_new_n865
+* NET   138 = abc_11867_new_n863
+* NET   139 = abc_11867_new_n862
+* NET   140 = abc_11867_new_n861
+* NET   141 = abc_11867_new_n860
+* NET   142 = abc_11867_new_n859
+* NET   143 = abc_11867_new_n858
+* NET   144 = abc_11867_new_n857
+* NET   145 = abc_11867_new_n856
+* NET   146 = abc_11867_new_n855
+* NET   147 = abc_11867_new_n854
+* NET   148 = abc_11867_new_n853
+* NET   149 = abc_11867_new_n851
+* NET   150 = abc_11867_new_n850
+* NET   151 = abc_11867_new_n849
+* NET   152 = abc_11867_new_n848
+* NET   153 = abc_11867_new_n847
+* NET   154 = abc_11867_new_n846
+* NET   155 = abc_11867_new_n845
+* NET   156 = abc_11867_new_n844
+* NET   157 = abc_11867_new_n843
+* NET   158 = abc_11867_new_n841
+* NET   159 = abc_11867_new_n840
+* NET   160 = abc_11867_new_n839
+* NET   161 = abc_11867_new_n838
+* NET   162 = abc_11867_new_n837
+* NET   163 = abc_11867_new_n836
+* NET   164 = abc_11867_new_n835
+* NET   165 = abc_11867_new_n834
+* NET   166 = abc_11867_new_n833
+* NET   167 = abc_11867_new_n832
+* NET   168 = abc_11867_new_n831
+* NET   169 = abc_11867_new_n830
+* NET   170 = abc_11867_new_n829
+* NET   171 = abc_11867_new_n828
+* NET   172 = abc_11867_new_n827
+* NET   173 = abc_11867_new_n826
+* NET   174 = abc_11867_new_n825
+* NET   175 = abc_11867_new_n824
+* NET   176 = abc_11867_new_n823
+* NET   177 = abc_11867_new_n822
+* NET   178 = abc_11867_new_n821
+* NET   179 = abc_11867_new_n820
+* NET   180 = abc_11867_new_n819
+* NET   181 = abc_11867_new_n818
+* NET   182 = abc_11867_new_n817
+* NET   183 = abc_11867_new_n816
+* NET   184 = abc_11867_new_n815
+* NET   185 = abc_11867_new_n814
+* NET   186 = abc_11867_new_n813
+* NET   187 = abc_11867_new_n811
+* NET   188 = abc_11867_new_n810
+* NET   189 = abc_11867_new_n809
+* NET   190 = abc_11867_new_n808
+* NET   191 = abc_11867_new_n807
+* NET   192 = abc_11867_new_n806
+* NET   193 = abc_11867_new_n805
+* NET   194 = abc_11867_new_n804
+* NET   195 = abc_11867_new_n803
+* NET   196 = abc_11867_new_n802
+* NET   197 = abc_11867_new_n801
+* NET   198 = abc_11867_new_n800
+* NET   199 = abc_11867_new_n799
+* NET   200 = abc_11867_new_n798
+* NET   201 = abc_11867_new_n797
+* NET   202 = abc_11867_new_n796
+* NET   203 = abc_11867_new_n795
+* NET   204 = abc_11867_new_n794
+* NET   205 = abc_11867_new_n793
+* NET   206 = abc_11867_new_n792
+* NET   207 = abc_11867_new_n791
+* NET   208 = abc_11867_new_n790
+* NET   209 = abc_11867_new_n789
+* NET   210 = abc_11867_new_n788
+* NET   211 = abc_11867_new_n787
+* NET   212 = abc_11867_new_n786
+* NET   213 = abc_11867_new_n785
+* NET   214 = abc_11867_new_n784
+* NET   215 = abc_11867_new_n783
+* NET   216 = abc_11867_new_n782
+* NET   217 = abc_11867_new_n781
+* NET   218 = abc_11867_new_n780
+* NET   219 = abc_11867_new_n779
+* NET   220 = abc_11867_new_n778
+* NET   221 = abc_11867_new_n777
+* NET   222 = abc_11867_new_n776
+* NET   223 = abc_11867_new_n775
+* NET   224 = abc_11867_new_n774
+* NET   225 = abc_11867_new_n773
+* NET   226 = abc_11867_new_n772
+* NET   227 = abc_11867_new_n771
+* NET   228 = abc_11867_new_n770
+* NET   229 = abc_11867_new_n769
+* NET   230 = abc_11867_new_n768
+* NET   231 = abc_11867_new_n767
+* NET   232 = abc_11867_new_n766
+* NET   233 = abc_11867_new_n765
+* NET   234 = abc_11867_new_n764
+* NET   235 = abc_11867_new_n763
+* NET   236 = abc_11867_new_n762
+* NET   237 = abc_11867_new_n761
+* NET   238 = abc_11867_new_n760
+* NET   239 = abc_11867_new_n759
+* NET   240 = abc_11867_new_n758
+* NET   241 = abc_11867_new_n757
+* NET   242 = abc_11867_new_n756
+* NET   243 = abc_11867_new_n754
+* NET   244 = abc_11867_new_n753
+* NET   245 = abc_11867_new_n752
+* NET   246 = abc_11867_new_n751
+* NET   247 = abc_11867_new_n750
+* NET   248 = abc_11867_new_n749
+* NET   249 = abc_11867_new_n748
+* NET   250 = abc_11867_new_n747
+* NET   251 = abc_11867_new_n746
+* NET   252 = abc_11867_new_n745
+* NET   253 = abc_11867_new_n744
+* NET   254 = abc_11867_new_n743
+* NET   255 = abc_11867_new_n742
+* NET   256 = abc_11867_new_n741
+* NET   257 = abc_11867_new_n740
+* NET   258 = abc_11867_new_n739
+* NET   259 = abc_11867_new_n738
+* NET   260 = abc_11867_new_n737
+* NET   261 = abc_11867_new_n736
+* NET   262 = abc_11867_new_n735
+* NET   263 = abc_11867_new_n734
+* NET   264 = abc_11867_new_n733
+* NET   265 = abc_11867_new_n732
+* NET   266 = abc_11867_new_n731
+* NET   267 = abc_11867_new_n730
+* NET   268 = abc_11867_new_n729
+* NET   269 = abc_11867_new_n728
+* NET   270 = abc_11867_new_n727
+* NET   271 = abc_11867_new_n726
+* NET   272 = abc_11867_new_n725
+* NET   273 = abc_11867_new_n724
+* NET   274 = abc_11867_new_n723
+* NET   275 = abc_11867_new_n722
+* NET   276 = abc_11867_new_n721
+* NET   277 = abc_11867_new_n720
+* NET   278 = abc_11867_new_n719
+* NET   279 = abc_11867_new_n718
+* NET   280 = abc_11867_new_n717
+* NET   281 = abc_11867_new_n716
+* NET   282 = abc_11867_new_n715
+* NET   283 = abc_11867_new_n714
+* NET   284 = abc_11867_new_n713
+* NET   285 = abc_11867_new_n712
+* NET   286 = abc_11867_new_n711
+* NET   287 = abc_11867_new_n710
+* NET   288 = abc_11867_new_n709
+* NET   289 = abc_11867_new_n708
+* NET   290 = abc_11867_new_n707
+* NET   291 = abc_11867_new_n706
+* NET   292 = abc_11867_new_n705
+* NET   293 = abc_11867_new_n704
+* NET   294 = abc_11867_new_n703
+* NET   295 = abc_11867_new_n702
+* NET   296 = abc_11867_new_n701
+* NET   297 = abc_11867_new_n700
+* NET   298 = abc_11867_new_n699
+* NET   299 = abc_11867_new_n698
+* NET   300 = abc_11867_new_n697
+* NET   301 = abc_11867_new_n696
+* NET   302 = abc_11867_new_n695
+* NET   303 = abc_11867_new_n694
+* NET   304 = abc_11867_new_n693
+* NET   305 = abc_11867_new_n692
+* NET   306 = abc_11867_new_n691
+* NET   307 = abc_11867_new_n690
+* NET   308 = abc_11867_new_n689
+* NET   309 = abc_11867_new_n688
+* NET   310 = abc_11867_new_n687
+* NET   311 = abc_11867_new_n686
+* NET   312 = abc_11867_new_n685
+* NET   313 = abc_11867_new_n683
+* NET   314 = abc_11867_new_n682
+* NET   315 = abc_11867_new_n681
+* NET   316 = abc_11867_new_n680
+* NET   317 = abc_11867_new_n679
+* NET   318 = abc_11867_new_n678
+* NET   319 = abc_11867_new_n677
+* NET   320 = abc_11867_new_n676
+* NET   321 = abc_11867_new_n675
+* NET   322 = abc_11867_new_n674
+* NET   323 = abc_11867_new_n673
+* NET   324 = abc_11867_new_n672
+* NET   325 = abc_11867_new_n671
+* NET   326 = abc_11867_new_n670
+* NET   327 = abc_11867_new_n669
+* NET   328 = abc_11867_new_n668
+* NET   329 = abc_11867_new_n667
+* NET   330 = abc_11867_new_n666
+* NET   331 = abc_11867_new_n665
+* NET   332 = abc_11867_new_n664
+* NET   333 = abc_11867_new_n663
+* NET   334 = abc_11867_new_n662
+* NET   335 = abc_11867_new_n661
+* NET   336 = abc_11867_new_n660
+* NET   337 = abc_11867_new_n659
+* NET   338 = abc_11867_new_n658
+* NET   339 = abc_11867_new_n657
+* NET   340 = abc_11867_new_n656
+* NET   341 = abc_11867_new_n655
+* NET   342 = abc_11867_new_n654
+* NET   343 = abc_11867_new_n653
+* NET   344 = abc_11867_new_n652
+* NET   345 = abc_11867_new_n651
+* NET   346 = abc_11867_new_n650
+* NET   347 = abc_11867_new_n649
+* NET   348 = abc_11867_new_n648
+* NET   349 = abc_11867_new_n647
+* NET   350 = abc_11867_new_n646
+* NET   351 = abc_11867_new_n645
+* NET   352 = abc_11867_new_n644
+* NET   353 = abc_11867_new_n643
+* NET   354 = abc_11867_new_n642
+* NET   355 = abc_11867_new_n641
+* NET   356 = abc_11867_new_n640
+* NET   357 = abc_11867_new_n639
+* NET   358 = abc_11867_new_n638
+* NET   359 = abc_11867_new_n637
+* NET   360 = abc_11867_new_n636
+* NET   361 = abc_11867_new_n635
+* NET   362 = abc_11867_new_n634
+* NET   363 = abc_11867_new_n633
+* NET   364 = abc_11867_new_n632
+* NET   365 = abc_11867_new_n631
+* NET   366 = abc_11867_new_n630
+* NET   367 = abc_11867_new_n629
+* NET   368 = abc_11867_new_n628
+* NET   369 = abc_11867_new_n627
+* NET   370 = abc_11867_new_n626
+* NET   371 = abc_11867_new_n625
+* NET   372 = abc_11867_new_n624
+* NET   373 = abc_11867_new_n623
+* NET   374 = abc_11867_new_n622
+* NET   375 = abc_11867_new_n621
+* NET   376 = abc_11867_new_n620
+* NET   377 = abc_11867_new_n619
+* NET   378 = abc_11867_new_n618
+* NET   379 = abc_11867_new_n617
+* NET   380 = abc_11867_new_n616
+* NET   381 = abc_11867_new_n615
+* NET   382 = abc_11867_new_n614
+* NET   383 = abc_11867_new_n613
+* NET   384 = abc_11867_new_n612
+* NET   385 = abc_11867_new_n611
+* NET   386 = abc_11867_new_n610
+* NET   387 = abc_11867_new_n609
+* NET   388 = abc_11867_new_n608
+* NET   389 = abc_11867_new_n607
+* NET   390 = abc_11867_new_n606
+* NET   391 = abc_11867_new_n605
+* NET   392 = abc_11867_new_n604
+* NET   393 = abc_11867_new_n603
+* NET   394 = abc_11867_new_n602
+* NET   395 = abc_11867_new_n601
+* NET   396 = abc_11867_new_n600
+* NET   397 = abc_11867_new_n599
+* NET   398 = abc_11867_new_n598
+* NET   399 = abc_11867_new_n597
+* NET   400 = abc_11867_new_n596
+* NET   401 = abc_11867_new_n595
+* NET   402 = abc_11867_new_n594
+* NET   403 = abc_11867_new_n593
+* NET   404 = abc_11867_new_n592
+* NET   405 = abc_11867_new_n591
+* NET   406 = abc_11867_new_n590
+* NET   407 = abc_11867_new_n589
+* NET   408 = abc_11867_new_n588
+* NET   409 = abc_11867_new_n587
+* NET   410 = abc_11867_new_n586
+* NET   411 = abc_11867_new_n585
+* NET   412 = abc_11867_new_n584
+* NET   413 = abc_11867_new_n583
+* NET   414 = abc_11867_new_n582
+* NET   415 = abc_11867_new_n581
+* NET   416 = abc_11867_new_n580
+* NET   417 = abc_11867_new_n579
+* NET   418 = abc_11867_new_n578
+* NET   419 = abc_11867_new_n577
+* NET   420 = abc_11867_new_n576
+* NET   421 = abc_11867_new_n575
+* NET   422 = abc_11867_new_n574
+* NET   423 = abc_11867_new_n573
+* NET   424 = abc_11867_new_n572
+* NET   425 = abc_11867_new_n571
+* NET   426 = abc_11867_new_n570
+* NET   427 = abc_11867_new_n569
+* NET   428 = abc_11867_new_n568
+* NET   429 = abc_11867_new_n567
+* NET   430 = abc_11867_new_n566
+* NET   431 = abc_11867_new_n565
+* NET   432 = abc_11867_new_n564
+* NET   433 = abc_11867_new_n563
+* NET   434 = abc_11867_new_n562
+* NET   435 = abc_11867_new_n561
+* NET   436 = abc_11867_new_n560
+* NET   437 = abc_11867_new_n559
+* NET   438 = abc_11867_new_n558
+* NET   439 = abc_11867_new_n557
+* NET   440 = abc_11867_new_n556
+* NET   441 = abc_11867_new_n555
+* NET   442 = abc_11867_new_n554
+* NET   443 = abc_11867_new_n553
+* NET   444 = abc_11867_new_n552
+* NET   445 = abc_11867_new_n551
+* NET   446 = abc_11867_new_n550
+* NET   447 = abc_11867_new_n549
+* NET   448 = abc_11867_new_n548
+* NET   449 = abc_11867_new_n547
+* NET   450 = abc_11867_new_n546
+* NET   451 = abc_11867_new_n545
+* NET   452 = abc_11867_new_n544
+* NET   453 = abc_11867_new_n543
+* NET   454 = abc_11867_new_n542
+* NET   455 = abc_11867_new_n541
+* NET   456 = abc_11867_new_n540
+* NET   457 = abc_11867_new_n539
+* NET   458 = abc_11867_new_n538
+* NET   459 = abc_11867_new_n537
+* NET   460 = abc_11867_new_n536
+* NET   461 = abc_11867_new_n535
+* NET   462 = abc_11867_new_n534
+* NET   463 = abc_11867_new_n533
+* NET   464 = abc_11867_new_n532
+* NET   465 = abc_11867_new_n531
+* NET   466 = abc_11867_new_n530
+* NET   467 = abc_11867_new_n529
+* NET   468 = abc_11867_new_n528
+* NET   469 = abc_11867_new_n527
+* NET   470 = abc_11867_new_n526
+* NET   471 = abc_11867_new_n525
+* NET   472 = abc_11867_new_n524
+* NET   473 = abc_11867_new_n523
+* NET   474 = abc_11867_new_n522
+* NET   475 = abc_11867_new_n521
+* NET   476 = abc_11867_new_n520
+* NET   477 = abc_11867_new_n519
+* NET   478 = abc_11867_new_n518
+* NET   479 = abc_11867_new_n517
+* NET   480 = abc_11867_new_n516
+* NET   481 = abc_11867_new_n515
+* NET   482 = abc_11867_new_n514
+* NET   483 = abc_11867_new_n513
+* NET   484 = abc_11867_new_n512
+* NET   485 = abc_11867_new_n511
+* NET   486 = abc_11867_new_n510
+* NET   487 = abc_11867_new_n509
+* NET   488 = abc_11867_new_n508
+* NET   489 = abc_11867_new_n507
+* NET   490 = abc_11867_new_n506
+* NET   491 = abc_11867_new_n505
+* NET   492 = abc_11867_new_n504
+* NET   493 = abc_11867_new_n503
+* NET   494 = abc_11867_new_n502
+* NET   495 = abc_11867_new_n501
+* NET   496 = abc_11867_new_n500
+* NET   497 = abc_11867_new_n499
+* NET   498 = abc_11867_new_n498
+* NET   499 = abc_11867_new_n497
+* NET   500 = abc_11867_new_n496
+* NET   501 = abc_11867_new_n495
+* NET   502 = abc_11867_new_n494
+* NET   503 = abc_11867_new_n493
+* NET   504 = abc_11867_new_n492
+* NET   505 = abc_11867_new_n491
+* NET   506 = abc_11867_new_n490
+* NET   507 = abc_11867_new_n489
+* NET   508 = abc_11867_new_n488
+* NET   509 = abc_11867_new_n487
+* NET   510 = abc_11867_new_n486
+* NET   511 = abc_11867_new_n485
+* NET   512 = abc_11867_new_n484
+* NET   513 = abc_11867_new_n483
+* NET   514 = abc_11867_new_n482
+* NET   515 = abc_11867_new_n481
+* NET   516 = abc_11867_new_n480
+* NET   517 = abc_11867_new_n479
+* NET   518 = abc_11867_new_n478
+* NET   519 = abc_11867_new_n477
+* NET   520 = abc_11867_new_n476
+* NET   521 = abc_11867_new_n475
+* NET   522 = abc_11867_new_n474
+* NET   523 = abc_11867_new_n473
+* NET   524 = abc_11867_new_n472
+* NET   525 = abc_11867_new_n471
+* NET   526 = abc_11867_new_n470
+* NET   527 = abc_11867_new_n469
+* NET   528 = abc_11867_new_n468
+* NET   529 = abc_11867_new_n467
+* NET   530 = abc_11867_new_n466
+* NET   531 = abc_11867_new_n465
+* NET   532 = abc_11867_new_n464
+* NET   533 = abc_11867_new_n463
+* NET   534 = abc_11867_new_n462
+* NET   535 = abc_11867_new_n461
+* NET   536 = abc_11867_new_n460
+* NET   537 = abc_11867_new_n459
+* NET   538 = abc_11867_new_n458
+* NET   539 = abc_11867_new_n457
+* NET   540 = abc_11867_new_n456
+* NET   541 = abc_11867_new_n455
+* NET   542 = abc_11867_new_n454
+* NET   543 = abc_11867_new_n453
+* NET   544 = abc_11867_new_n452
+* NET   545 = abc_11867_new_n451
+* NET   546 = abc_11867_new_n450
+* NET   547 = abc_11867_new_n449
+* NET   548 = abc_11867_new_n448
+* NET   549 = abc_11867_new_n447
+* NET   550 = abc_11867_new_n446
+* NET   551 = abc_11867_new_n445
+* NET   552 = abc_11867_new_n444
+* NET   553 = abc_11867_new_n443
+* NET   554 = abc_11867_new_n442
+* NET   555 = abc_11867_new_n441
+* NET   556 = abc_11867_new_n440
+* NET   557 = abc_11867_new_n439
+* NET   558 = abc_11867_new_n438
+* NET   559 = abc_11867_new_n437
+* NET   560 = abc_11867_new_n436
+* NET   561 = abc_11867_new_n435
+* NET   562 = abc_11867_new_n434
+* NET   563 = abc_11867_new_n433
+* NET   564 = abc_11867_new_n432
+* NET   565 = abc_11867_new_n431
+* NET   566 = abc_11867_new_n430
+* NET   567 = abc_11867_new_n429
+* NET   568 = abc_11867_new_n428
+* NET   569 = abc_11867_new_n427
+* NET   570 = abc_11867_new_n426
+* NET   571 = abc_11867_new_n425
+* NET   572 = abc_11867_new_n423
+* NET   573 = abc_11867_new_n421
+* NET   574 = abc_11867_new_n419
+* NET   575 = abc_11867_new_n417
+* NET   576 = abc_11867_new_n415
+* NET   577 = abc_11867_new_n413
+* NET   578 = abc_11867_new_n411
+* NET   579 = abc_11867_new_n409
+* NET   580 = abc_11867_new_n408
+* NET   581 = abc_11867_new_n407
+* NET   582 = abc_11867_new_n406
+* NET   583 = abc_11867_new_n405
+* NET   584 = abc_11867_new_n404
+* NET   585 = abc_11867_new_n403
+* NET   586 = abc_11867_new_n402
+* NET   587 = abc_11867_new_n401
+* NET   588 = abc_11867_new_n400
+* NET   589 = abc_11867_new_n399
+* NET   590 = abc_11867_new_n398
+* NET   591 = abc_11867_new_n397
+* NET   592 = abc_11867_new_n396
+* NET   593 = abc_11867_new_n395
+* NET   594 = abc_11867_new_n394
+* NET   595 = abc_11867_new_n393
+* NET   596 = abc_11867_new_n392
+* NET   597 = abc_11867_new_n391
+* NET   598 = abc_11867_new_n390
+* NET   599 = abc_11867_new_n389
+* NET   600 = abc_11867_new_n388
+* NET   601 = abc_11867_new_n387
+* NET   602 = abc_11867_new_n386
+* NET   603 = abc_11867_new_n385
+* NET   604 = abc_11867_new_n384
+* NET   605 = abc_11867_new_n383
+* NET   606 = abc_11867_new_n382
+* NET   607 = abc_11867_new_n381
+* NET   608 = abc_11867_new_n380
+* NET   609 = abc_11867_new_n379
+* NET   610 = abc_11867_new_n378
+* NET   611 = abc_11867_new_n377
+* NET   612 = abc_11867_new_n376
+* NET   613 = abc_11867_new_n375
+* NET   614 = abc_11867_new_n374
+* NET   615 = abc_11867_new_n373
+* NET   616 = abc_11867_new_n372
+* NET   617 = abc_11867_new_n371
+* NET   618 = abc_11867_new_n370
+* NET   619 = abc_11867_new_n369
+* NET   620 = abc_11867_new_n368
+* NET   621 = abc_11867_new_n367
+* NET   622 = abc_11867_new_n366
+* NET   623 = abc_11867_new_n365
+* NET   624 = abc_11867_new_n364
+* NET   625 = abc_11867_new_n363
+* NET   626 = abc_11867_new_n362
+* NET   627 = abc_11867_new_n361
+* NET   628 = abc_11867_new_n360
+* NET   629 = abc_11867_new_n359
+* NET   630 = abc_11867_new_n358
+* NET   631 = abc_11867_new_n357
+* NET   632 = abc_11867_new_n356
+* NET   633 = abc_11867_new_n355
+* NET   634 = abc_11867_new_n354
+* NET   635 = abc_11867_new_n353
+* NET   636 = abc_11867_new_n352
+* NET   637 = abc_11867_new_n351
+* NET   638 = abc_11867_new_n350
+* NET   639 = abc_11867_new_n349
+* NET   640 = abc_11867_new_n348
+* NET   641 = abc_11867_new_n347
+* NET   642 = abc_11867_new_n346
+* NET   643 = abc_11867_new_n345
+* NET   644 = abc_11867_new_n344
+* NET   645 = abc_11867_new_n343
+* NET   646 = abc_11867_new_n342
+* NET   647 = abc_11867_new_n341
+* NET   648 = abc_11867_new_n340
+* NET   649 = abc_11867_new_n339
+* NET   650 = abc_11867_new_n338
+* NET   651 = abc_11867_new_n337
+* NET   652 = abc_11867_new_n336
+* NET   653 = abc_11867_new_n335
+* NET   654 = abc_11867_new_n334
+* NET   655 = abc_11867_new_n333
+* NET   656 = abc_11867_new_n332
+* NET   657 = abc_11867_new_n331
+* NET   658 = abc_11867_new_n330
+* NET   659 = abc_11867_new_n329
+* NET   660 = abc_11867_new_n328
+* NET   661 = abc_11867_new_n327
+* NET   662 = abc_11867_new_n326
+* NET   663 = abc_11867_new_n325
+* NET   664 = abc_11867_new_n324
+* NET   665 = abc_11867_new_n323
+* NET   666 = abc_11867_new_n2135
+* NET   667 = abc_11867_new_n2134
+* NET   668 = abc_11867_new_n2133
+* NET   669 = abc_11867_new_n2128
+* NET   670 = abc_11867_new_n2127
+* NET   671 = abc_11867_new_n2126
+* NET   672 = abc_11867_new_n2124
+* NET   673 = abc_11867_new_n2123
+* NET   674 = abc_11867_new_n2122
+* NET   675 = abc_11867_new_n2121
+* NET   676 = abc_11867_new_n2120
+* NET   677 = abc_11867_new_n2119
+* NET   678 = abc_11867_new_n2118
+* NET   679 = abc_11867_new_n2117
+* NET   680 = abc_11867_new_n2116
+* NET   681 = abc_11867_new_n2115
+* NET   682 = abc_11867_new_n2114
+* NET   683 = abc_11867_new_n2113
+* NET   684 = abc_11867_new_n2112
+* NET   685 = abc_11867_new_n2111
+* NET   686 = abc_11867_new_n2110
+* NET   687 = abc_11867_new_n2109
+* NET   688 = abc_11867_new_n2108
+* NET   689 = abc_11867_new_n2107
+* NET   690 = abc_11867_new_n2106
+* NET   691 = abc_11867_new_n2105
+* NET   692 = abc_11867_new_n2104
+* NET   693 = abc_11867_new_n2103
+* NET   694 = abc_11867_new_n2102
+* NET   695 = abc_11867_new_n2101
+* NET   696 = abc_11867_new_n2100
+* NET   697 = abc_11867_new_n2099
+* NET   698 = abc_11867_new_n2098
+* NET   699 = abc_11867_new_n2097
+* NET   700 = abc_11867_new_n2096
+* NET   701 = abc_11867_new_n2095
+* NET   702 = abc_11867_new_n2094
+* NET   703 = abc_11867_new_n2093
+* NET   704 = abc_11867_new_n2092
+* NET   705 = abc_11867_new_n2091
+* NET   706 = abc_11867_new_n2090
+* NET   707 = abc_11867_new_n2089
+* NET   708 = abc_11867_new_n2088
+* NET   709 = abc_11867_new_n2087
+* NET   710 = abc_11867_new_n2086
+* NET   711 = abc_11867_new_n2085
+* NET   712 = abc_11867_new_n2084
+* NET   713 = abc_11867_new_n2083
+* NET   714 = abc_11867_new_n2082
+* NET   715 = abc_11867_new_n2081
+* NET   716 = abc_11867_new_n2080
+* NET   717 = abc_11867_new_n2079
+* NET   718 = abc_11867_new_n2078
+* NET   719 = abc_11867_new_n2077
+* NET   720 = abc_11867_new_n2076
+* NET   721 = abc_11867_new_n2075
+* NET   722 = abc_11867_new_n2074
+* NET   723 = abc_11867_new_n2073
+* NET   724 = abc_11867_new_n2072
+* NET   725 = abc_11867_new_n2071
+* NET   726 = abc_11867_new_n2070
+* NET   727 = abc_11867_new_n2069
+* NET   728 = abc_11867_new_n2068
+* NET   729 = abc_11867_new_n2067
+* NET   730 = abc_11867_new_n2066
+* NET   731 = abc_11867_new_n2065
+* NET   732 = abc_11867_new_n2064
+* NET   733 = abc_11867_new_n2063
+* NET   734 = abc_11867_new_n2062
+* NET   735 = abc_11867_new_n2061
+* NET   736 = abc_11867_new_n2060
+* NET   737 = abc_11867_new_n2059
+* NET   738 = abc_11867_new_n2058
+* NET   739 = abc_11867_new_n2057
+* NET   740 = abc_11867_new_n2056
+* NET   741 = abc_11867_new_n2055
+* NET   742 = abc_11867_new_n2054
+* NET   743 = abc_11867_new_n2053
+* NET   744 = abc_11867_new_n2052
+* NET   745 = abc_11867_new_n2051
+* NET   746 = abc_11867_new_n2050
+* NET   747 = abc_11867_new_n2049
+* NET   748 = abc_11867_new_n2048
+* NET   749 = abc_11867_new_n2047
+* NET   750 = abc_11867_new_n2046
+* NET   751 = abc_11867_new_n2045
+* NET   752 = abc_11867_new_n2044
+* NET   753 = abc_11867_new_n2043
+* NET   754 = abc_11867_new_n2042
+* NET   755 = abc_11867_new_n2041
+* NET   756 = abc_11867_new_n2040
+* NET   757 = abc_11867_new_n2039
+* NET   758 = abc_11867_new_n2038
+* NET   759 = abc_11867_new_n2037
+* NET   760 = abc_11867_new_n2036
+* NET   761 = abc_11867_new_n2035
+* NET   762 = abc_11867_new_n2034
+* NET   763 = abc_11867_new_n2033
+* NET   764 = abc_11867_new_n2032
+* NET   765 = abc_11867_new_n2031
+* NET   766 = abc_11867_new_n2030
+* NET   767 = abc_11867_new_n2029
+* NET   768 = abc_11867_new_n2028
+* NET   769 = abc_11867_new_n2027
+* NET   770 = abc_11867_new_n2026
+* NET   771 = abc_11867_new_n2025
+* NET   772 = abc_11867_new_n2024
+* NET   773 = abc_11867_new_n2023
+* NET   774 = abc_11867_new_n2022
+* NET   775 = abc_11867_new_n2021
+* NET   776 = abc_11867_new_n2020
+* NET   777 = abc_11867_new_n2019
+* NET   778 = abc_11867_new_n2018
+* NET   779 = abc_11867_new_n2017
+* NET   780 = abc_11867_new_n2016
+* NET   781 = abc_11867_new_n2015
+* NET   782 = abc_11867_new_n2014
+* NET   783 = abc_11867_new_n2013
+* NET   784 = abc_11867_new_n2012
+* NET   785 = abc_11867_new_n2011
+* NET   786 = abc_11867_new_n2010
+* NET   787 = abc_11867_new_n2009
+* NET   788 = abc_11867_new_n2008
+* NET   789 = abc_11867_new_n2007
+* NET   790 = abc_11867_new_n2006
+* NET   791 = abc_11867_new_n2005
+* NET   792 = abc_11867_new_n2004
+* NET   793 = abc_11867_new_n2003
+* NET   794 = abc_11867_new_n2002
+* NET   795 = abc_11867_new_n2001
+* NET   796 = abc_11867_new_n2000
+* NET   797 = abc_11867_new_n1999
+* NET   798 = abc_11867_new_n1998
+* NET   799 = abc_11867_new_n1997
+* NET   800 = abc_11867_new_n1996
+* NET   801 = abc_11867_new_n1995
+* NET   802 = abc_11867_new_n1994
+* NET   803 = abc_11867_new_n1993
+* NET   804 = abc_11867_new_n1992
+* NET   805 = abc_11867_new_n1991
+* NET   806 = abc_11867_new_n1990
+* NET   807 = abc_11867_new_n1989
+* NET   808 = abc_11867_new_n1988
+* NET   809 = abc_11867_new_n1987
+* NET   810 = abc_11867_new_n1986
+* NET   811 = abc_11867_new_n1985
+* NET   812 = abc_11867_new_n1984
+* NET   813 = abc_11867_new_n1983
+* NET   814 = abc_11867_new_n1982
+* NET   815 = abc_11867_new_n1981
+* NET   816 = abc_11867_new_n1980
+* NET   817 = abc_11867_new_n1979
+* NET   818 = abc_11867_new_n1978
+* NET   819 = abc_11867_new_n1977
+* NET   820 = abc_11867_new_n1976
+* NET   821 = abc_11867_new_n1975
+* NET   822 = abc_11867_new_n1974
+* NET   823 = abc_11867_new_n1973
+* NET   824 = abc_11867_new_n1972
+* NET   825 = abc_11867_new_n1971
+* NET   826 = abc_11867_new_n1970
+* NET   827 = abc_11867_new_n1969
+* NET   828 = abc_11867_new_n1968
+* NET   829 = abc_11867_new_n1967
+* NET   830 = abc_11867_new_n1966
+* NET   831 = abc_11867_new_n1965
+* NET   832 = abc_11867_new_n1964
+* NET   833 = abc_11867_new_n1963
+* NET   834 = abc_11867_new_n1962
+* NET   835 = abc_11867_new_n1961
+* NET   836 = abc_11867_new_n1960
+* NET   837 = abc_11867_new_n1959
+* NET   838 = abc_11867_new_n1958
+* NET   839 = abc_11867_new_n1957
+* NET   840 = abc_11867_new_n1956
+* NET   841 = abc_11867_new_n1955
+* NET   842 = abc_11867_new_n1954
+* NET   843 = abc_11867_new_n1953
+* NET   844 = abc_11867_new_n1952
+* NET   845 = abc_11867_new_n1951
+* NET   846 = abc_11867_new_n1950
+* NET   847 = abc_11867_new_n1949
+* NET   848 = abc_11867_new_n1948
+* NET   849 = abc_11867_new_n1947
+* NET   850 = abc_11867_new_n1946
+* NET   851 = abc_11867_new_n1945
+* NET   852 = abc_11867_new_n1944
+* NET   853 = abc_11867_new_n1943
+* NET   854 = abc_11867_new_n1942
+* NET   855 = abc_11867_new_n1941
+* NET   856 = abc_11867_new_n1940
+* NET   857 = abc_11867_new_n1939
+* NET   858 = abc_11867_new_n1938
+* NET   859 = abc_11867_new_n1937
+* NET   860 = abc_11867_new_n1936
+* NET   861 = abc_11867_new_n1935
+* NET   862 = abc_11867_new_n1934
+* NET   863 = abc_11867_new_n1933
+* NET   864 = abc_11867_new_n1932
+* NET   865 = abc_11867_new_n1931
+* NET   866 = abc_11867_new_n1930
+* NET   867 = abc_11867_new_n1929
+* NET   868 = abc_11867_new_n1928
+* NET   869 = abc_11867_new_n1927
+* NET   870 = abc_11867_new_n1926
+* NET   871 = abc_11867_new_n1925
+* NET   872 = abc_11867_new_n1924
+* NET   873 = abc_11867_new_n1923
+* NET   874 = abc_11867_new_n1922
+* NET   875 = abc_11867_new_n1921
+* NET   876 = abc_11867_new_n1920
+* NET   877 = abc_11867_new_n1919
+* NET   878 = abc_11867_new_n1918
+* NET   879 = abc_11867_new_n1917
+* NET   880 = abc_11867_new_n1916
+* NET   881 = abc_11867_new_n1915
+* NET   882 = abc_11867_new_n1914
+* NET   883 = abc_11867_new_n1913
+* NET   884 = abc_11867_new_n1912
+* NET   885 = abc_11867_new_n1911
+* NET   886 = abc_11867_new_n1910
+* NET   887 = abc_11867_new_n1909
+* NET   888 = abc_11867_new_n1908
+* NET   889 = abc_11867_new_n1907
+* NET   890 = abc_11867_new_n1906
+* NET   891 = abc_11867_new_n1905
+* NET   892 = abc_11867_new_n1904
+* NET   893 = abc_11867_new_n1903
+* NET   894 = abc_11867_new_n1902
+* NET   895 = abc_11867_new_n1901
+* NET   896 = abc_11867_new_n1900
+* NET   897 = abc_11867_new_n1899
+* NET   898 = abc_11867_new_n1898
+* NET   899 = abc_11867_new_n1897
+* NET   900 = abc_11867_new_n1896
+* NET   901 = abc_11867_new_n1895
+* NET   902 = abc_11867_new_n1894
+* NET   903 = abc_11867_new_n1893
+* NET   904 = abc_11867_new_n1892
+* NET   905 = abc_11867_new_n1891
+* NET   906 = abc_11867_new_n1890
+* NET   907 = abc_11867_new_n1889
+* NET   908 = abc_11867_new_n1888
+* NET   909 = abc_11867_new_n1887
+* NET   910 = abc_11867_new_n1886
+* NET   911 = abc_11867_new_n1885
+* NET   912 = abc_11867_new_n1884
+* NET   913 = abc_11867_new_n1883
+* NET   914 = abc_11867_new_n1882
+* NET   915 = abc_11867_new_n1881
+* NET   916 = abc_11867_new_n1880
+* NET   917 = abc_11867_new_n1879
+* NET   918 = abc_11867_new_n1878
+* NET   919 = abc_11867_new_n1877
+* NET   920 = abc_11867_new_n1876
+* NET   921 = abc_11867_new_n1875
+* NET   922 = abc_11867_new_n1874
+* NET   923 = abc_11867_new_n1873
+* NET   924 = abc_11867_new_n1872
+* NET   925 = abc_11867_new_n1871
+* NET   926 = abc_11867_new_n1870
+* NET   927 = abc_11867_new_n1869
+* NET   928 = abc_11867_new_n1868
+* NET   929 = abc_11867_new_n1867
+* NET   930 = abc_11867_new_n1866
+* NET   931 = abc_11867_new_n1865
+* NET   932 = abc_11867_new_n1864
+* NET   933 = abc_11867_new_n1863
+* NET   934 = abc_11867_new_n1862
+* NET   935 = abc_11867_new_n1861
+* NET   936 = abc_11867_new_n1860
+* NET   937 = abc_11867_new_n1859
+* NET   938 = abc_11867_new_n1858
+* NET   939 = abc_11867_new_n1857
+* NET   940 = abc_11867_new_n1856
+* NET   941 = abc_11867_new_n1854
+* NET   942 = abc_11867_new_n1853
+* NET   943 = abc_11867_new_n1852
+* NET   944 = abc_11867_new_n1851
+* NET   945 = abc_11867_new_n1850
+* NET   946 = abc_11867_new_n1849
+* NET   947 = abc_11867_new_n1848
+* NET   948 = abc_11867_new_n1847
+* NET   949 = abc_11867_new_n1846
+* NET   950 = abc_11867_new_n1845
+* NET   951 = abc_11867_new_n1844
+* NET   952 = abc_11867_new_n1843
+* NET   953 = abc_11867_new_n1842
+* NET   954 = abc_11867_new_n1841
+* NET   955 = abc_11867_new_n1840
+* NET   956 = abc_11867_new_n1839
+* NET   957 = abc_11867_new_n1838
+* NET   958 = abc_11867_new_n1837
+* NET   959 = abc_11867_new_n1836
+* NET   960 = abc_11867_new_n1835
+* NET   961 = abc_11867_new_n1834
+* NET   962 = abc_11867_new_n1833
+* NET   963 = abc_11867_new_n1832
+* NET   964 = abc_11867_new_n1831
+* NET   965 = abc_11867_new_n1830
+* NET   966 = abc_11867_new_n1829
+* NET   967 = abc_11867_new_n1828
+* NET   968 = abc_11867_new_n1827
+* NET   969 = abc_11867_new_n1826
+* NET   970 = abc_11867_new_n1825
+* NET   971 = abc_11867_new_n1824
+* NET   972 = abc_11867_new_n1823
+* NET   973 = abc_11867_new_n1822
+* NET   974 = abc_11867_new_n1821
+* NET   975 = abc_11867_new_n1820
+* NET   976 = abc_11867_new_n1819
+* NET   977 = abc_11867_new_n1818
+* NET   978 = abc_11867_new_n1817
+* NET   979 = abc_11867_new_n1816
+* NET   980 = abc_11867_new_n1815
+* NET   981 = abc_11867_new_n1814
+* NET   982 = abc_11867_new_n1813
+* NET   983 = abc_11867_new_n1812
+* NET   984 = abc_11867_new_n1811
+* NET   985 = abc_11867_new_n1810
+* NET   986 = abc_11867_new_n1809
+* NET   987 = abc_11867_new_n1808
+* NET   988 = abc_11867_new_n1807
+* NET   989 = abc_11867_new_n1806
+* NET   990 = abc_11867_new_n1805
+* NET   991 = abc_11867_new_n1804
+* NET   992 = abc_11867_new_n1803
+* NET   993 = abc_11867_new_n1802
+* NET   994 = abc_11867_new_n1801
+* NET   995 = abc_11867_new_n1800
+* NET   996 = abc_11867_new_n1799
+* NET   997 = abc_11867_new_n1798
+* NET   998 = abc_11867_new_n1797
+* NET   999 = abc_11867_new_n1796
+* NET  1000 = abc_11867_new_n1795
+* NET  1001 = abc_11867_new_n1794
+* NET  1002 = abc_11867_new_n1793
+* NET  1003 = abc_11867_new_n1792
+* NET  1004 = abc_11867_new_n1791
+* NET  1005 = abc_11867_new_n1790
+* NET  1006 = abc_11867_new_n1789
+* NET  1007 = abc_11867_new_n1788
+* NET  1008 = abc_11867_new_n1787
+* NET  1009 = abc_11867_new_n1786
+* NET  1010 = abc_11867_new_n1785
+* NET  1011 = abc_11867_new_n1784
+* NET  1012 = abc_11867_new_n1783
+* NET  1013 = abc_11867_new_n1782
+* NET  1014 = abc_11867_new_n1781
+* NET  1015 = abc_11867_new_n1780
+* NET  1016 = abc_11867_new_n1779
+* NET  1017 = abc_11867_new_n1778
+* NET  1018 = abc_11867_new_n1777
+* NET  1019 = abc_11867_new_n1776
+* NET  1020 = abc_11867_new_n1775
+* NET  1021 = abc_11867_new_n1773
+* NET  1022 = abc_11867_new_n1772
+* NET  1023 = abc_11867_new_n1771
+* NET  1024 = abc_11867_new_n1770
+* NET  1025 = abc_11867_new_n1769
+* NET  1026 = abc_11867_new_n1768
+* NET  1027 = abc_11867_new_n1767
+* NET  1028 = abc_11867_new_n1766
+* NET  1029 = abc_11867_new_n1765
+* NET  1030 = abc_11867_new_n1764
+* NET  1031 = abc_11867_new_n1763
+* NET  1032 = abc_11867_new_n1761
+* NET  1033 = abc_11867_new_n1760
+* NET  1034 = abc_11867_new_n1759
+* NET  1035 = abc_11867_new_n1758
+* NET  1036 = abc_11867_new_n1757
+* NET  1037 = abc_11867_new_n1756
+* NET  1038 = abc_11867_new_n1755
+* NET  1039 = abc_11867_new_n1754
+* NET  1040 = abc_11867_new_n1753
+* NET  1041 = abc_11867_new_n1752
+* NET  1042 = abc_11867_new_n1751
+* NET  1043 = abc_11867_new_n1749
+* NET  1044 = abc_11867_new_n1748
+* NET  1045 = abc_11867_new_n1747
+* NET  1046 = abc_11867_new_n1746
+* NET  1047 = abc_11867_new_n1745
+* NET  1048 = abc_11867_new_n1744
+* NET  1049 = abc_11867_new_n1743
+* NET  1050 = abc_11867_new_n1742
+* NET  1051 = abc_11867_new_n1741
+* NET  1052 = abc_11867_new_n1740
+* NET  1053 = abc_11867_new_n1739
+* NET  1054 = abc_11867_new_n1738
+* NET  1055 = abc_11867_new_n1737
+* NET  1056 = abc_11867_new_n1735
+* NET  1057 = abc_11867_new_n1734
+* NET  1058 = abc_11867_new_n1733
+* NET  1059 = abc_11867_new_n1732
+* NET  1060 = abc_11867_new_n1731
+* NET  1061 = abc_11867_new_n1730
+* NET  1062 = abc_11867_new_n1729
+* NET  1063 = abc_11867_new_n1728
+* NET  1064 = abc_11867_new_n1727
+* NET  1065 = abc_11867_new_n1726
+* NET  1066 = abc_11867_new_n1725
+* NET  1067 = abc_11867_new_n1724
+* NET  1068 = abc_11867_new_n1723
+* NET  1069 = abc_11867_new_n1721
+* NET  1070 = abc_11867_new_n1720
+* NET  1071 = abc_11867_new_n1719
+* NET  1072 = abc_11867_new_n1718
+* NET  1073 = abc_11867_new_n1717
+* NET  1074 = abc_11867_new_n1716
+* NET  1075 = abc_11867_new_n1715
+* NET  1076 = abc_11867_new_n1714
+* NET  1077 = abc_11867_new_n1713
+* NET  1078 = abc_11867_new_n1712
+* NET  1079 = abc_11867_new_n1711
+* NET  1080 = abc_11867_new_n1710
+* NET  1081 = abc_11867_new_n1708
+* NET  1082 = abc_11867_new_n1707
+* NET  1083 = abc_11867_new_n1706
+* NET  1084 = abc_11867_new_n1705
+* NET  1085 = abc_11867_new_n1704
+* NET  1086 = abc_11867_new_n1703
+* NET  1087 = abc_11867_new_n1702
+* NET  1088 = abc_11867_new_n1701
+* NET  1089 = abc_11867_new_n1700
+* NET  1090 = abc_11867_new_n1699
+* NET  1091 = abc_11867_new_n1698
+* NET  1092 = abc_11867_new_n1697
+* NET  1093 = abc_11867_new_n1696
+* NET  1094 = abc_11867_new_n1694
+* NET  1095 = abc_11867_new_n1693
+* NET  1096 = abc_11867_new_n1692
+* NET  1097 = abc_11867_new_n1691
+* NET  1098 = abc_11867_new_n1690
+* NET  1099 = abc_11867_new_n1689
+* NET  1100 = abc_11867_new_n1688
+* NET  1101 = abc_11867_new_n1687
+* NET  1102 = abc_11867_new_n1686
+* NET  1103 = abc_11867_new_n1685
+* NET  1104 = abc_11867_new_n1684
+* NET  1105 = abc_11867_new_n1683
+* NET  1106 = abc_11867_new_n1682
+* NET  1107 = abc_11867_new_n1680
+* NET  1108 = abc_11867_new_n1679
+* NET  1109 = abc_11867_new_n1678
+* NET  1110 = abc_11867_new_n1677
+* NET  1111 = abc_11867_new_n1676
+* NET  1112 = abc_11867_new_n1675
+* NET  1113 = abc_11867_new_n1674
+* NET  1114 = abc_11867_new_n1673
+* NET  1115 = abc_11867_new_n1672
+* NET  1116 = abc_11867_new_n1671
+* NET  1117 = abc_11867_new_n1670
+* NET  1118 = abc_11867_new_n1669
+* NET  1119 = abc_11867_new_n1667
+* NET  1120 = abc_11867_new_n1666
+* NET  1121 = abc_11867_new_n1665
+* NET  1122 = abc_11867_new_n1664
+* NET  1123 = abc_11867_new_n1663
+* NET  1124 = abc_11867_new_n1662
+* NET  1125 = abc_11867_new_n1661
+* NET  1126 = abc_11867_new_n1660
+* NET  1127 = abc_11867_new_n1659
+* NET  1128 = abc_11867_new_n1658
+* NET  1129 = abc_11867_new_n1657
+* NET  1130 = abc_11867_new_n1655
+* NET  1131 = abc_11867_new_n1654
+* NET  1132 = abc_11867_new_n1653
+* NET  1133 = abc_11867_new_n1652
+* NET  1134 = abc_11867_new_n1651
+* NET  1135 = abc_11867_new_n1650
+* NET  1136 = abc_11867_new_n1649
+* NET  1137 = abc_11867_new_n1648
+* NET  1138 = abc_11867_new_n1647
+* NET  1139 = abc_11867_new_n1645
+* NET  1140 = abc_11867_new_n1644
+* NET  1141 = abc_11867_new_n1643
+* NET  1142 = abc_11867_new_n1642
+* NET  1143 = abc_11867_new_n1641
+* NET  1144 = abc_11867_new_n1640
+* NET  1145 = abc_11867_new_n1639
+* NET  1146 = abc_11867_new_n1638
+* NET  1147 = abc_11867_new_n1637
+* NET  1148 = abc_11867_new_n1635
+* NET  1149 = abc_11867_new_n1634
+* NET  1150 = abc_11867_new_n1633
+* NET  1151 = abc_11867_new_n1632
+* NET  1152 = abc_11867_new_n1631
+* NET  1153 = abc_11867_new_n1630
+* NET  1154 = abc_11867_new_n1629
+* NET  1155 = abc_11867_new_n1628
+* NET  1156 = abc_11867_new_n1627
+* NET  1157 = abc_11867_new_n1626
+* NET  1158 = abc_11867_new_n1624
+* NET  1159 = abc_11867_new_n1623
+* NET  1160 = abc_11867_new_n1622
+* NET  1161 = abc_11867_new_n1621
+* NET  1162 = abc_11867_new_n1620
+* NET  1163 = abc_11867_new_n1619
+* NET  1164 = abc_11867_new_n1618
+* NET  1165 = abc_11867_new_n1617
+* NET  1166 = abc_11867_new_n1616
+* NET  1167 = abc_11867_new_n1614
+* NET  1168 = abc_11867_new_n1613
+* NET  1169 = abc_11867_new_n1612
+* NET  1170 = abc_11867_new_n1611
+* NET  1171 = abc_11867_new_n1610
+* NET  1172 = abc_11867_new_n1609
+* NET  1173 = abc_11867_new_n1608
+* NET  1174 = abc_11867_new_n1607
+* NET  1175 = abc_11867_new_n1606
+* NET  1176 = abc_11867_new_n1605
+* NET  1177 = abc_11867_new_n1603
+* NET  1178 = abc_11867_new_n1602
+* NET  1179 = abc_11867_new_n1601
+* NET  1180 = abc_11867_new_n1600
+* NET  1181 = abc_11867_new_n1599
+* NET  1182 = abc_11867_new_n1598
+* NET  1183 = abc_11867_new_n1597
+* NET  1184 = abc_11867_new_n1596
+* NET  1185 = abc_11867_new_n1595
+* NET  1186 = abc_11867_new_n1593
+* NET  1187 = abc_11867_new_n1592
+* NET  1188 = abc_11867_new_n1591
+* NET  1189 = abc_11867_new_n1590
+* NET  1190 = abc_11867_new_n1589
+* NET  1191 = abc_11867_new_n1588
+* NET  1192 = abc_11867_new_n1587
+* NET  1193 = abc_11867_new_n1586
+* NET  1194 = abc_11867_new_n1585
+* NET  1195 = abc_11867_new_n1584
+* NET  1196 = abc_11867_new_n1583
+* NET  1197 = abc_11867_new_n1582
+* NET  1198 = abc_11867_new_n1581
+* NET  1199 = abc_11867_new_n1580
+* NET  1200 = abc_11867_new_n1579
+* NET  1201 = abc_11867_new_n1578
+* NET  1202 = abc_11867_new_n1577
+* NET  1203 = abc_11867_new_n1576
+* NET  1204 = abc_11867_new_n1575
+* NET  1205 = abc_11867_new_n1574
+* NET  1206 = abc_11867_new_n1573
+* NET  1207 = abc_11867_new_n1572
+* NET  1208 = abc_11867_new_n1571
+* NET  1209 = abc_11867_new_n1570
+* NET  1210 = abc_11867_new_n1553
+* NET  1211 = abc_11867_new_n1552
+* NET  1212 = abc_11867_new_n1551
+* NET  1213 = abc_11867_new_n1550
+* NET  1214 = abc_11867_new_n1549
+* NET  1215 = abc_11867_new_n1548
+* NET  1216 = abc_11867_new_n1547
+* NET  1217 = abc_11867_new_n1546
+* NET  1218 = abc_11867_new_n1545
+* NET  1219 = abc_11867_new_n1544
+* NET  1220 = abc_11867_new_n1543
+* NET  1221 = abc_11867_new_n1542
+* NET  1222 = abc_11867_new_n1541
+* NET  1223 = abc_11867_new_n1540
+* NET  1224 = abc_11867_new_n1539
+* NET  1225 = abc_11867_new_n1538
+* NET  1226 = abc_11867_new_n1537
+* NET  1227 = abc_11867_new_n1536
+* NET  1228 = abc_11867_new_n1535
+* NET  1229 = abc_11867_new_n1534
+* NET  1230 = abc_11867_new_n1533
+* NET  1231 = abc_11867_new_n1532
+* NET  1232 = abc_11867_new_n1531
+* NET  1233 = abc_11867_new_n1530
+* NET  1234 = abc_11867_new_n1529
+* NET  1235 = abc_11867_new_n1528
+* NET  1236 = abc_11867_new_n1527
+* NET  1237 = abc_11867_new_n1526
+* NET  1238 = abc_11867_new_n1525
+* NET  1239 = abc_11867_new_n1524
+* NET  1240 = abc_11867_new_n1523
+* NET  1241 = abc_11867_new_n1522
+* NET  1242 = abc_11867_new_n1521
+* NET  1243 = abc_11867_new_n1520
+* NET  1244 = abc_11867_new_n1519
+* NET  1245 = abc_11867_new_n1518
+* NET  1246 = abc_11867_new_n1517
+* NET  1247 = abc_11867_new_n1516
+* NET  1248 = abc_11867_new_n1515
+* NET  1249 = abc_11867_new_n1514
+* NET  1250 = abc_11867_new_n1513
+* NET  1251 = abc_11867_new_n1512
+* NET  1252 = abc_11867_new_n1511
+* NET  1253 = abc_11867_new_n1510
+* NET  1254 = abc_11867_new_n1509
+* NET  1255 = abc_11867_new_n1508
+* NET  1256 = abc_11867_new_n1507
+* NET  1257 = abc_11867_new_n1504
+* NET  1258 = abc_11867_new_n1503
+* NET  1259 = abc_11867_new_n1502
+* NET  1260 = abc_11867_new_n1501
+* NET  1261 = abc_11867_new_n1500
+* NET  1262 = abc_11867_new_n1499
+* NET  1263 = abc_11867_new_n1498
+* NET  1264 = abc_11867_new_n1497
+* NET  1265 = abc_11867_new_n1496
+* NET  1266 = abc_11867_new_n1495
+* NET  1267 = abc_11867_new_n1494
+* NET  1268 = abc_11867_new_n1493
+* NET  1269 = abc_11867_new_n1492
+* NET  1270 = abc_11867_new_n1491
+* NET  1271 = abc_11867_new_n1489
+* NET  1272 = abc_11867_new_n1488
+* NET  1273 = abc_11867_new_n1487
+* NET  1274 = abc_11867_new_n1486
+* NET  1275 = abc_11867_new_n1485
+* NET  1276 = abc_11867_new_n1484
+* NET  1277 = abc_11867_new_n1483
+* NET  1278 = abc_11867_new_n1482
+* NET  1279 = abc_11867_new_n1481
+* NET  1280 = abc_11867_new_n1479
+* NET  1281 = abc_11867_new_n1478
+* NET  1282 = abc_11867_new_n1477
+* NET  1283 = abc_11867_new_n1476
+* NET  1284 = abc_11867_new_n1475
+* NET  1285 = abc_11867_new_n1474
+* NET  1286 = abc_11867_new_n1473
+* NET  1287 = abc_11867_new_n1471
+* NET  1288 = abc_11867_new_n1470
+* NET  1289 = abc_11867_new_n1469
+* NET  1290 = abc_11867_new_n1468
+* NET  1291 = abc_11867_new_n1467
+* NET  1292 = abc_11867_new_n1465
+* NET  1293 = abc_11867_new_n1464
+* NET  1294 = abc_11867_new_n1463
+* NET  1295 = abc_11867_new_n1462
+* NET  1296 = abc_11867_new_n1461
+* NET  1297 = abc_11867_new_n1460
+* NET  1298 = abc_11867_new_n1459
+* NET  1299 = abc_11867_new_n1458
+* NET  1300 = abc_11867_new_n1457
+* NET  1301 = abc_11867_new_n1455
+* NET  1302 = abc_11867_new_n1454
+* NET  1303 = abc_11867_new_n1453
+* NET  1304 = abc_11867_new_n1452
+* NET  1305 = abc_11867_new_n1451
+* NET  1306 = abc_11867_new_n1450
+* NET  1307 = abc_11867_new_n1449
+* NET  1308 = abc_11867_new_n1448
+* NET  1309 = abc_11867_new_n1447
+* NET  1310 = abc_11867_new_n1446
+* NET  1311 = abc_11867_new_n1445
+* NET  1312 = abc_11867_new_n1444
+* NET  1313 = abc_11867_new_n1443
+* NET  1314 = abc_11867_new_n1434
+* NET  1315 = abc_11867_new_n1432
+* NET  1316 = abc_11867_new_n1431
+* NET  1317 = abc_11867_new_n1430
+* NET  1318 = abc_11867_new_n1429
+* NET  1319 = abc_11867_new_n1428
+* NET  1320 = abc_11867_new_n1426
+* NET  1321 = abc_11867_new_n1425
+* NET  1322 = abc_11867_new_n1424
+* NET  1323 = abc_11867_new_n1423
+* NET  1324 = abc_11867_new_n1422
+* NET  1325 = abc_11867_new_n1421
+* NET  1326 = abc_11867_new_n1420
+* NET  1327 = abc_11867_new_n1419
+* NET  1328 = abc_11867_new_n1418
+* NET  1329 = abc_11867_new_n1417
+* NET  1330 = abc_11867_new_n1416
+* NET  1331 = abc_11867_new_n1415
+* NET  1332 = abc_11867_new_n1414
+* NET  1333 = abc_11867_new_n1413
+* NET  1334 = abc_11867_new_n1410
+* NET  1335 = abc_11867_new_n1409
+* NET  1336 = abc_11867_new_n1408
+* NET  1337 = abc_11867_new_n1407
+* NET  1338 = abc_11867_new_n1406
+* NET  1339 = abc_11867_new_n1404
+* NET  1340 = abc_11867_new_n1403
+* NET  1341 = abc_11867_new_n1402
+* NET  1342 = abc_11867_new_n1401
+* NET  1343 = abc_11867_new_n1400
+* NET  1344 = abc_11867_new_n1399
+* NET  1345 = abc_11867_new_n1397
+* NET  1346 = abc_11867_new_n1396
+* NET  1347 = abc_11867_new_n1395
+* NET  1348 = abc_11867_new_n1394
+* NET  1349 = abc_11867_new_n1393
+* NET  1350 = abc_11867_new_n1392
+* NET  1351 = abc_11867_new_n1391
+* NET  1352 = abc_11867_new_n1390
+* NET  1353 = abc_11867_new_n1389
+* NET  1354 = abc_11867_new_n1387
+* NET  1355 = abc_11867_new_n1386
+* NET  1356 = abc_11867_new_n1385
+* NET  1357 = abc_11867_new_n1384
+* NET  1358 = abc_11867_new_n1383
+* NET  1359 = abc_11867_new_n1382
+* NET  1360 = abc_11867_new_n1381
+* NET  1361 = abc_11867_new_n1380
+* NET  1362 = abc_11867_new_n1378
+* NET  1363 = abc_11867_new_n1377
+* NET  1364 = abc_11867_new_n1376
+* NET  1365 = abc_11867_new_n1374
+* NET  1366 = abc_11867_new_n1373
+* NET  1367 = abc_11867_new_n1372
+* NET  1368 = abc_11867_new_n1371
+* NET  1369 = abc_11867_new_n1369
+* NET  1370 = abc_11867_new_n1368
+* NET  1371 = abc_11867_new_n1366
+* NET  1372 = abc_11867_new_n1365
+* NET  1373 = abc_11867_new_n1363
+* NET  1374 = abc_11867_new_n1362
+* NET  1375 = abc_11867_new_n1361
+* NET  1376 = abc_11867_new_n1358
+* NET  1377 = abc_11867_new_n1357
+* NET  1378 = abc_11867_new_n1356
+* NET  1379 = abc_11867_new_n1355
+* NET  1380 = abc_11867_new_n1353
+* NET  1381 = abc_11867_new_n1352
+* NET  1382 = abc_11867_new_n1351
+* NET  1383 = abc_11867_new_n1350
+* NET  1384 = abc_11867_new_n1349
+* NET  1385 = abc_11867_new_n1348
+* NET  1386 = abc_11867_new_n1347
+* NET  1387 = abc_11867_new_n1345
+* NET  1388 = abc_11867_new_n1344
+* NET  1389 = abc_11867_new_n1341
+* NET  1390 = abc_11867_new_n1340
+* NET  1391 = abc_11867_new_n1339
+* NET  1392 = abc_11867_new_n1338
+* NET  1393 = abc_11867_new_n1337
+* NET  1394 = abc_11867_new_n1334
+* NET  1395 = abc_11867_new_n1333
+* NET  1396 = abc_11867_new_n1332
+* NET  1397 = abc_11867_new_n1331
+* NET  1398 = abc_11867_new_n1330
+* NET  1399 = abc_11867_new_n1329
+* NET  1400 = abc_11867_new_n1328
+* NET  1401 = abc_11867_new_n1327
+* NET  1402 = abc_11867_new_n1326
+* NET  1403 = abc_11867_new_n1325
+* NET  1404 = abc_11867_new_n1324
+* NET  1405 = abc_11867_new_n1323
+* NET  1406 = abc_11867_new_n1322
+* NET  1407 = abc_11867_new_n1321
+* NET  1408 = abc_11867_new_n1320
+* NET  1409 = abc_11867_new_n1319
+* NET  1410 = abc_11867_new_n1317
+* NET  1411 = abc_11867_new_n1316
+* NET  1412 = abc_11867_new_n1315
+* NET  1413 = abc_11867_new_n1314
+* NET  1414 = abc_11867_new_n1313
+* NET  1415 = abc_11867_new_n1311
+* NET  1416 = abc_11867_new_n1310
+* NET  1417 = abc_11867_new_n1309
+* NET  1418 = abc_11867_new_n1308
+* NET  1419 = abc_11867_new_n1307
+* NET  1420 = abc_11867_new_n1306
+* NET  1421 = abc_11867_new_n1305
+* NET  1422 = abc_11867_new_n1304
+* NET  1423 = abc_11867_new_n1303
+* NET  1424 = abc_11867_new_n1302
+* NET  1425 = abc_11867_new_n1301
+* NET  1426 = abc_11867_new_n1299
+* NET  1427 = abc_11867_new_n1298
+* NET  1428 = abc_11867_new_n1297
+* NET  1429 = abc_11867_new_n1295
+* NET  1430 = abc_11867_new_n1294
+* NET  1431 = abc_11867_new_n1293
+* NET  1432 = abc_11867_new_n1292
+* NET  1433 = abc_11867_new_n1290
+* NET  1434 = abc_11867_new_n1289
+* NET  1435 = abc_11867_new_n1287
+* NET  1436 = abc_11867_new_n1286
+* NET  1437 = abc_11867_new_n1284
+* NET  1438 = abc_11867_new_n1282
+* NET  1439 = abc_11867_new_n1281
+* NET  1440 = abc_11867_new_n1280
+* NET  1441 = abc_11867_new_n1278
+* NET  1442 = abc_11867_new_n1277
+* NET  1443 = abc_11867_new_n1276
+* NET  1444 = abc_11867_new_n1275
+* NET  1445 = abc_11867_new_n1273
+* NET  1446 = abc_11867_new_n1272
+* NET  1447 = abc_11867_new_n1271
+* NET  1448 = abc_11867_new_n1269
+* NET  1449 = abc_11867_new_n1267
+* NET  1450 = abc_11867_new_n1266
+* NET  1451 = abc_11867_new_n1265
+* NET  1452 = abc_11867_new_n1264
+* NET  1453 = abc_11867_new_n1259
+* NET  1454 = abc_11867_new_n1250
+* NET  1455 = abc_11867_new_n1241
+* NET  1456 = abc_11867_new_n1232
+* NET  1457 = abc_11867_new_n1230
+* NET  1458 = abc_11867_new_n1229
+* NET  1459 = abc_11867_new_n1228
+* NET  1460 = abc_11867_new_n1227
+* NET  1461 = abc_11867_new_n1226
+* NET  1462 = abc_11867_new_n1224
+* NET  1463 = abc_11867_new_n1223
+* NET  1464 = abc_11867_new_n1222
+* NET  1465 = abc_11867_new_n1221
+* NET  1466 = abc_11867_new_n1220
+* NET  1467 = abc_11867_new_n1219
+* NET  1468 = abc_11867_new_n1218
+* NET  1469 = abc_11867_new_n1216
+* NET  1470 = abc_11867_new_n1215
+* NET  1471 = abc_11867_new_n1214
+* NET  1472 = abc_11867_new_n1213
+* NET  1473 = abc_11867_new_n1212
+* NET  1474 = abc_11867_new_n1211
+* NET  1475 = abc_11867_new_n1209
+* NET  1476 = abc_11867_new_n1207
+* NET  1477 = abc_11867_new_n1206
+* NET  1478 = abc_11867_new_n1205
+* NET  1479 = abc_11867_new_n1204
+* NET  1480 = abc_11867_new_n1203
+* NET  1481 = abc_11867_new_n1201
+* NET  1482 = abc_11867_new_n1200
+* NET  1483 = abc_11867_new_n1199
+* NET  1484 = abc_11867_new_n1198
+* NET  1485 = abc_11867_new_n1197
+* NET  1486 = abc_11867_new_n1196
+* NET  1487 = abc_11867_new_n1195
+* NET  1488 = abc_11867_new_n1193
+* NET  1489 = abc_11867_new_n1192
+* NET  1490 = abc_11867_new_n1191
+* NET  1491 = abc_11867_new_n1190
+* NET  1492 = abc_11867_new_n1189
+* NET  1493 = abc_11867_new_n1188
+* NET  1494 = abc_11867_new_n1186
+* NET  1495 = abc_11867_new_n1185
+* NET  1496 = abc_11867_new_n1184
+* NET  1497 = abc_11867_new_n1183
+* NET  1498 = abc_11867_new_n1182
+* NET  1499 = abc_11867_new_n1181
+* NET  1500 = abc_11867_new_n1180
+* NET  1501 = abc_11867_new_n1179
+* NET  1502 = abc_11867_new_n1176
+* NET  1503 = abc_11867_new_n1175
+* NET  1504 = abc_11867_new_n1174
+* NET  1505 = abc_11867_new_n1173
+* NET  1506 = abc_11867_new_n1172
+* NET  1507 = abc_11867_new_n1171
+* NET  1508 = abc_11867_new_n1170
+* NET  1509 = abc_11867_new_n1168
+* NET  1510 = abc_11867_new_n1167
+* NET  1511 = abc_11867_new_n1166
+* NET  1512 = abc_11867_new_n1165
+* NET  1513 = abc_11867_new_n1164
+* NET  1514 = abc_11867_new_n1163
+* NET  1515 = abc_11867_new_n1162
+* NET  1516 = abc_11867_new_n1160
+* NET  1517 = abc_11867_new_n1159
+* NET  1518 = abc_11867_new_n1158
+* NET  1519 = abc_11867_new_n1157
+* NET  1520 = abc_11867_new_n1156
+* NET  1521 = abc_11867_new_n1155
+* NET  1522 = abc_11867_new_n1154
+* NET  1523 = abc_11867_new_n1152
+* NET  1524 = abc_11867_new_n1151
+* NET  1525 = abc_11867_new_n1150
+* NET  1526 = abc_11867_new_n1149
+* NET  1527 = abc_11867_new_n1148
+* NET  1528 = abc_11867_new_n1147
+* NET  1529 = abc_11867_new_n1146
+* NET  1530 = abc_11867_new_n1144
+* NET  1531 = abc_11867_new_n1143
+* NET  1532 = abc_11867_new_n1142
+* NET  1533 = abc_11867_new_n1141
+* NET  1534 = abc_11867_new_n1140
+* NET  1535 = abc_11867_new_n1139
+* NET  1536 = abc_11867_new_n1138
+* NET  1537 = abc_11867_new_n1136
+* NET  1538 = abc_11867_new_n1135
+* NET  1539 = abc_11867_new_n1134
+* NET  1540 = abc_11867_new_n1133
+* NET  1541 = abc_11867_new_n1132
+* NET  1542 = abc_11867_new_n1131
+* NET  1543 = abc_11867_new_n1130
+* NET  1544 = abc_11867_new_n1128
+* NET  1545 = abc_11867_new_n1127
+* NET  1546 = abc_11867_new_n1126
+* NET  1547 = abc_11867_new_n1125
+* NET  1548 = abc_11867_new_n1124
+* NET  1549 = abc_11867_new_n1123
+* NET  1550 = abc_11867_new_n1122
+* NET  1551 = abc_11867_new_n1120
+* NET  1552 = abc_11867_new_n1119
+* NET  1553 = abc_11867_new_n1118
+* NET  1554 = abc_11867_new_n1117
+* NET  1555 = abc_11867_new_n1116
+* NET  1556 = abc_11867_new_n1115
+* NET  1557 = abc_11867_new_n1114
+* NET  1558 = abc_11867_new_n1113
+* NET  1559 = abc_11867_new_n1112
+* NET  1560 = abc_11867_new_n1110
+* NET  1561 = abc_11867_new_n1109
+* NET  1562 = abc_11867_new_n1108
+* NET  1563 = abc_11867_new_n1107
+* NET  1564 = abc_11867_new_n1106
+* NET  1565 = abc_11867_new_n1105
+* NET  1566 = abc_11867_new_n1104
+* NET  1567 = abc_11867_new_n1102
+* NET  1568 = abc_11867_new_n1101
+* NET  1569 = abc_11867_new_n1100
+* NET  1570 = abc_11867_new_n1099
+* NET  1571 = abc_11867_new_n1098
+* NET  1572 = abc_11867_new_n1097
+* NET  1573 = abc_11867_new_n1096
+* NET  1574 = abc_11867_new_n1094
+* NET  1575 = abc_11867_new_n1093
+* NET  1576 = abc_11867_new_n1092
+* NET  1577 = abc_11867_new_n1091
+* NET  1578 = abc_11867_new_n1090
+* NET  1579 = abc_11867_new_n1089
+* NET  1580 = abc_11867_new_n1088
+* NET  1581 = abc_11867_new_n1086
+* NET  1582 = abc_11867_new_n1085
+* NET  1583 = abc_11867_new_n1084
+* NET  1584 = abc_11867_new_n1083
+* NET  1585 = abc_11867_new_n1082
+* NET  1586 = abc_11867_new_n1081
+* NET  1587 = abc_11867_new_n1080
+* NET  1588 = abc_11867_new_n1078
+* NET  1589 = abc_11867_new_n1077
+* NET  1590 = abc_11867_new_n1076
+* NET  1591 = abc_11867_new_n1075
+* NET  1592 = abc_11867_new_n1074
+* NET  1593 = abc_11867_new_n1073
+* NET  1594 = abc_11867_new_n1072
+* NET  1595 = abc_11867_new_n1070
+* NET  1596 = abc_11867_new_n1069
+* NET  1597 = abc_11867_new_n1068
+* NET  1598 = abc_11867_new_n1067
+* NET  1599 = abc_11867_new_n1066
+* NET  1600 = abc_11867_new_n1065
+* NET  1601 = abc_11867_new_n1064
+* NET  1602 = abc_11867_new_n1062
+* NET  1603 = abc_11867_new_n1061
+* NET  1604 = abc_11867_new_n1060
+* NET  1605 = abc_11867_new_n1059
+* NET  1606 = abc_11867_new_n1058
+* NET  1607 = abc_11867_new_n1057
+* NET  1608 = abc_11867_new_n1056
+* NET  1609 = abc_11867_new_n1054
+* NET  1610 = abc_11867_new_n1053
+* NET  1611 = abc_11867_new_n1052
+* NET  1612 = abc_11867_new_n1051
+* NET  1613 = abc_11867_new_n1050
+* NET  1614 = abc_11867_new_n1049
+* NET  1615 = abc_11867_new_n1048
+* NET  1616 = abc_11867_new_n1047
+* NET  1617 = abc_11867_new_n1046
+* NET  1618 = abc_11867_new_n1045
+* NET  1619 = abc_11867_new_n1044
+* NET  1620 = abc_11867_new_n1043
+* NET  1621 = abc_11867_new_n1042
+* NET  1622 = abc_11867_new_n1041
+* NET  1623 = abc_11867_new_n1040
+* NET  1624 = abc_11867_new_n1039
+* NET  1625 = abc_11867_new_n1038
+* NET  1626 = abc_11867_new_n1037
+* NET  1627 = abc_11867_new_n1036
+* NET  1628 = abc_11867_new_n1035
+* NET  1629 = abc_11867_new_n1034
+* NET  1630 = abc_11867_new_n1033
+* NET  1631 = abc_11867_new_n1032
+* NET  1632 = abc_11867_new_n1031
+* NET  1633 = abc_11867_new_n1030
+* NET  1634 = abc_11867_new_n1029
+* NET  1635 = abc_11867_new_n1028
+* NET  1636 = abc_11867_new_n1027
+* NET  1637 = abc_11867_new_n1026
+* NET  1638 = abc_11867_new_n1025
+* NET  1639 = abc_11867_new_n1024
+* NET  1640 = abc_11867_new_n1023
+* NET  1641 = abc_11867_new_n1022
+* NET  1642 = abc_11867_new_n1021
+* NET  1643 = abc_11867_new_n1020
+* NET  1644 = abc_11867_new_n1019
+* NET  1645 = abc_11867_new_n1018
+* NET  1646 = abc_11867_new_n1016
+* NET  1647 = abc_11867_new_n1015
+* NET  1648 = abc_11867_new_n1014
+* NET  1649 = abc_11867_new_n1013
+* NET  1650 = abc_11867_new_n1012
+* NET  1651 = abc_11867_new_n1011
+* NET  1652 = abc_11867_new_n1010
+* NET  1653 = abc_11867_new_n1009
+* NET  1654 = abc_11867_new_n1008
+* NET  1655 = abc_11867_new_n1007
+* NET  1656 = abc_11867_new_n1006
+* NET  1657 = abc_11867_new_n1005
+* NET  1658 = abc_11867_new_n1004
+* NET  1659 = abc_11867_new_n1003
+* NET  1660 = abc_11867_new_n1002
+* NET  1661 = abc_11867_new_n1000
+* NET  1662 = abc_11867_flatten_MOS6502_0_adj_bcd_0_0
+* NET  1663 = abc_11867_auto_rtlil_cc_2608_MuxGate_11866
+* NET  1664 = abc_11867_auto_rtlil_cc_2608_MuxGate_11864
+* NET  1665 = abc_11867_auto_rtlil_cc_2608_MuxGate_11862
+* NET  1666 = abc_11867_auto_rtlil_cc_2608_MuxGate_11860
+* NET  1667 = abc_11867_auto_rtlil_cc_2608_MuxGate_11858
+* NET  1668 = abc_11867_auto_rtlil_cc_2608_MuxGate_11856
+* NET  1669 = abc_11867_auto_rtlil_cc_2608_MuxGate_11854
+* NET  1670 = abc_11867_auto_rtlil_cc_2608_MuxGate_11852
+* NET  1671 = abc_11867_auto_rtlil_cc_2608_MuxGate_11850
+* NET  1672 = abc_11867_auto_rtlil_cc_2608_MuxGate_11848
+* NET  1673 = abc_11867_auto_rtlil_cc_2608_MuxGate_11846
+* NET  1674 = abc_11867_auto_rtlil_cc_2608_MuxGate_11844
+* NET  1675 = abc_11867_auto_rtlil_cc_2608_MuxGate_11842
+* NET  1676 = abc_11867_auto_rtlil_cc_2608_MuxGate_11840
+* NET  1677 = abc_11867_auto_rtlil_cc_2608_MuxGate_11838
+* NET  1678 = abc_11867_auto_rtlil_cc_2608_MuxGate_11836
+* NET  1679 = abc_11867_auto_rtlil_cc_2608_MuxGate_11834
+* NET  1680 = abc_11867_auto_rtlil_cc_2608_MuxGate_11832
+* NET  1681 = abc_11867_auto_rtlil_cc_2608_MuxGate_11830
+* NET  1682 = abc_11867_auto_rtlil_cc_2608_MuxGate_11828
+* NET  1683 = abc_11867_auto_rtlil_cc_2608_MuxGate_11826
+* NET  1684 = abc_11867_auto_rtlil_cc_2608_MuxGate_11824
+* NET  1685 = abc_11867_auto_rtlil_cc_2608_MuxGate_11822
+* NET  1686 = abc_11867_auto_rtlil_cc_2608_MuxGate_11820
+* NET  1687 = abc_11867_auto_rtlil_cc_2608_MuxGate_11818
+* NET  1688 = abc_11867_auto_rtlil_cc_2608_MuxGate_11816
+* NET  1689 = abc_11867_auto_rtlil_cc_2608_MuxGate_11814
+* NET  1690 = abc_11867_auto_rtlil_cc_2608_MuxGate_11812
+* NET  1691 = abc_11867_auto_rtlil_cc_2608_MuxGate_11810
+* NET  1692 = abc_11867_auto_rtlil_cc_2608_MuxGate_11808
+* NET  1693 = abc_11867_auto_rtlil_cc_2608_MuxGate_11806
+* NET  1694 = abc_11867_auto_rtlil_cc_2608_MuxGate_11804
+* NET  1695 = abc_11867_auto_rtlil_cc_2608_MuxGate_11802
+* NET  1696 = abc_11867_auto_rtlil_cc_2608_MuxGate_11800
+* NET  1697 = abc_11867_auto_rtlil_cc_2608_MuxGate_11798
+* NET  1698 = abc_11867_auto_rtlil_cc_2608_MuxGate_11796
+* NET  1699 = abc_11867_auto_rtlil_cc_2608_MuxGate_11794
+* NET  1700 = abc_11867_auto_rtlil_cc_2608_MuxGate_11792
+* NET  1701 = abc_11867_auto_rtlil_cc_2608_MuxGate_11790
+* NET  1702 = abc_11867_auto_rtlil_cc_2608_MuxGate_11788
+* NET  1703 = abc_11867_auto_rtlil_cc_2608_MuxGate_11786
+* NET  1704 = abc_11867_auto_rtlil_cc_2608_MuxGate_11784
+* NET  1705 = abc_11867_auto_rtlil_cc_2608_MuxGate_11782
+* NET  1706 = abc_11867_auto_rtlil_cc_2608_MuxGate_11780
+* NET  1707 = abc_11867_auto_rtlil_cc_2608_MuxGate_11778
+* NET  1708 = abc_11867_auto_rtlil_cc_2608_MuxGate_11776
+* NET  1709 = abc_11867_auto_rtlil_cc_2608_MuxGate_11774
+* NET  1710 = abc_11867_auto_rtlil_cc_2608_MuxGate_11772
+* NET  1711 = abc_11867_auto_rtlil_cc_2608_MuxGate_11770
+* NET  1712 = abc_11867_auto_rtlil_cc_2608_MuxGate_11768
+* NET  1713 = abc_11867_auto_rtlil_cc_2608_MuxGate_11764
+* NET  1714 = abc_11867_auto_rtlil_cc_2608_MuxGate_11762
+* NET  1715 = abc_11867_auto_rtlil_cc_2608_MuxGate_11760
+* NET  1716 = abc_11867_auto_rtlil_cc_2608_MuxGate_11758
+* NET  1717 = abc_11867_auto_rtlil_cc_2608_MuxGate_11756
+* NET  1718 = abc_11867_auto_rtlil_cc_2608_MuxGate_11754
+* NET  1719 = abc_11867_auto_rtlil_cc_2608_MuxGate_11752
+* NET  1720 = abc_11867_auto_rtlil_cc_2608_MuxGate_11750
+* NET  1721 = abc_11867_auto_rtlil_cc_2608_MuxGate_11748
+* NET  1722 = abc_11867_auto_rtlil_cc_2608_MuxGate_11746
+* NET  1723 = abc_11867_auto_rtlil_cc_2608_MuxGate_11742
+* NET  1724 = abc_11867_auto_rtlil_cc_2608_MuxGate_11740
+* NET  1725 = abc_11867_auto_rtlil_cc_2608_MuxGate_11736
+* NET  1726 = abc_11867_auto_rtlil_cc_2608_MuxGate_11734
+* NET  1727 = abc_11867_auto_rtlil_cc_2608_MuxGate_11732
+* NET  1728 = abc_11867_auto_rtlil_cc_2608_MuxGate_11730
+* NET  1729 = abc_11867_auto_rtlil_cc_2608_MuxGate_11728
+* NET  1730 = abc_11867_auto_rtlil_cc_2608_MuxGate_11726
+* NET  1731 = abc_11867_auto_rtlil_cc_2608_MuxGate_11724
+* NET  1732 = abc_11867_auto_rtlil_cc_2608_MuxGate_11722
+* NET  1733 = abc_11867_auto_rtlil_cc_2608_MuxGate_11720
+* NET  1734 = abc_11867_auto_rtlil_cc_2608_MuxGate_11718
+* NET  1735 = abc_11867_auto_rtlil_cc_2608_MuxGate_11716
+* NET  1736 = abc_11867_auto_rtlil_cc_2608_MuxGate_11714
+* NET  1737 = abc_11867_auto_rtlil_cc_2608_MuxGate_11710
+* NET  1738 = abc_11867_auto_rtlil_cc_2608_MuxGate_11708
+* NET  1739 = abc_11867_auto_rtlil_cc_2608_MuxGate_11706
+* NET  1740 = abc_11867_auto_rtlil_cc_2608_MuxGate_11704
+* NET  1741 = abc_11867_auto_rtlil_cc_2608_MuxGate_11702
+* NET  1742 = abc_11867_auto_rtlil_cc_2608_MuxGate_11700
+* NET  1743 = abc_11867_auto_rtlil_cc_2608_MuxGate_11698
+* NET  1744 = abc_11867_auto_rtlil_cc_2608_MuxGate_11696
+* NET  1745 = abc_11867_auto_rtlil_cc_2608_MuxGate_11694
+* NET  1746 = abc_11867_auto_rtlil_cc_2608_MuxGate_11692
+* NET  1747 = abc_11867_auto_rtlil_cc_2608_MuxGate_11690
+* NET  1748 = abc_11867_auto_rtlil_cc_2608_MuxGate_11688
+* NET  1749 = abc_11867_auto_rtlil_cc_2608_MuxGate_11686
+* NET  1750 = abc_11867_auto_rtlil_cc_2608_MuxGate_11684
+* NET  1751 = abc_11867_auto_rtlil_cc_2608_MuxGate_11682
+* NET  1752 = abc_11867_auto_rtlil_cc_2608_MuxGate_11680
+* NET  1753 = abc_11867_auto_rtlil_cc_2608_MuxGate_11678
+* NET  1754 = abc_11867_auto_rtlil_cc_2608_MuxGate_11676
+* NET  1755 = abc_11867_auto_rtlil_cc_2608_MuxGate_11674
+* NET  1756 = abc_11867_auto_rtlil_cc_2608_MuxGate_11672
+* NET  1757 = abc_11867_auto_rtlil_cc_2608_MuxGate_11670
+* NET  1758 = abc_11867_auto_rtlil_cc_2608_MuxGate_11666
+* NET  1759 = abc_11867_auto_rtlil_cc_2608_MuxGate_11664
+* NET  1760 = abc_11867_auto_rtlil_cc_2608_MuxGate_11662
+* NET  1761 = abc_11867_auto_rtlil_cc_2608_MuxGate_11660
+* NET  1762 = abc_11867_auto_rtlil_cc_2608_MuxGate_11658
+* NET  1763 = abc_11867_auto_rtlil_cc_2608_MuxGate_11656
+* NET  1764 = abc_11867_auto_rtlil_cc_2608_MuxGate_11654
+* NET  1765 = abc_11867_auto_rtlil_cc_2608_MuxGate_11652
+* NET  1766 = abc_11867_auto_rtlil_cc_2608_MuxGate_11650
+* NET  1767 = abc_11867_auto_rtlil_cc_2608_MuxGate_11648
+* NET  1768 = abc_11867_auto_rtlil_cc_2608_MuxGate_11646
+* NET  1769 = abc_11867_auto_rtlil_cc_2608_MuxGate_11644
+* NET  1770 = abc_11867_auto_rtlil_cc_2608_MuxGate_11642
+* NET  1771 = abc_11867_auto_rtlil_cc_2608_MuxGate_11640
+* NET  1772 = abc_11867_auto_rtlil_cc_2608_MuxGate_11638
+* NET  1773 = abc_11867_auto_rtlil_cc_2608_MuxGate_11636
+* NET  1774 = abc_11867_auto_rtlil_cc_2608_MuxGate_11634
+* NET  1775 = abc_11867_auto_rtlil_cc_2608_MuxGate_11632
+* NET  1776 = abc_11867_auto_rtlil_cc_2608_MuxGate_11630
+* NET  1777 = abc_11867_auto_rtlil_cc_2608_MuxGate_11628
+* NET  1778 = abc_11867_auto_rtlil_cc_2608_MuxGate_11626
+* NET  1779 = abc_11867_auto_rtlil_cc_2608_MuxGate_11624
+* NET  1780 = abc_11867_auto_rtlil_cc_2608_MuxGate_11622
+* NET  1781 = abc_11867_auto_rtlil_cc_2608_MuxGate_11620
+* NET  1782 = abc_11867_auto_rtlil_cc_2608_MuxGate_11618
+* NET  1783 = abc_11867_auto_rtlil_cc_2608_MuxGate_11616
+* NET  1784 = abc_11867_auto_rtlil_cc_2608_MuxGate_11614
+* NET  1785 = abc_11867_auto_rtlil_cc_2608_MuxGate_11612
+* NET  1786 = abc_11867_auto_rtlil_cc_2608_MuxGate_11610
+* NET  1787 = abc_11867_auto_rtlil_cc_2608_MuxGate_11608
+* NET  1788 = abc_11867_auto_rtlil_cc_2608_MuxGate_11606
+* NET  1789 = abc_11867_auto_rtlil_cc_2608_MuxGate_11604
+* NET  1790 = WE
+* NET  1791 = RDY
+* NET  1792 = NMI
+* NET  1793 = MOS6502_write_back
+* NET  1794 = MOS6502_store
+* NET  1795 = MOS6502_state[5]
+* NET  1796 = MOS6502_state[4]
+* NET  1797 = MOS6502_state[3]
+* NET  1798 = MOS6502_state[2]
+* NET  1799 = MOS6502_state[1]
+* NET  1800 = MOS6502_state[0]
+* NET  1801 = MOS6502_src_reg[1]
+* NET  1802 = MOS6502_src_reg[0]
+* NET  1803 = MOS6502_shift_right
+* NET  1804 = MOS6502_shift
+* NET  1805 = MOS6502_sei
+* NET  1806 = MOS6502_sed
+* NET  1807 = MOS6502_sec
+* NET  1808 = MOS6502_rotate
+* NET  1809 = MOS6502_res
+* NET  1810 = MOS6502_plp
+* NET  1811 = MOS6502_php
+* NET  1812 = MOS6502_op[3]
+* NET  1813 = MOS6502_op[2]
+* NET  1814 = MOS6502_op[1]
+* NET  1815 = MOS6502_op[0]
+* NET  1816 = MOS6502_load_reg
+* NET  1817 = MOS6502_load_only
+* NET  1818 = MOS6502_index_y
+* NET  1819 = MOS6502_inc
+* NET  1820 = MOS6502_dst_reg[1]
+* NET  1821 = MOS6502_dst_reg[0]
+* NET  1822 = MOS6502_cond_code[2]
+* NET  1823 = MOS6502_cond_code[1]
+* NET  1824 = MOS6502_cond_code[0]
+* NET  1825 = MOS6502_compare
+* NET  1826 = MOS6502_clv
+* NET  1827 = MOS6502_cli
+* NET  1828 = MOS6502_cld
+* NET  1829 = MOS6502_clc
+* NET  1830 = MOS6502_bit_ins
+* NET  1831 = MOS6502_backwards
+* NET  1832 = MOS6502_adj_bcd
+* NET  1833 = MOS6502_adc_sbc
+* NET  1834 = MOS6502_adc_bcd
+* NET  1835 = MOS6502_Z
+* NET  1836 = MOS6502_V
+* NET  1837 = MOS6502_PC[9]
+* NET  1838 = MOS6502_PC[8]
+* NET  1839 = MOS6502_PC[7]
+* NET  1840 = MOS6502_PC[6]
+* NET  1841 = MOS6502_PC[5]
+* NET  1842 = MOS6502_PC[4]
+* NET  1843 = MOS6502_PC[3]
+* NET  1844 = MOS6502_PC[2]
+* NET  1845 = MOS6502_PC[15]
+* NET  1846 = MOS6502_PC[14]
+* NET  1847 = MOS6502_PC[13]
+* NET  1848 = MOS6502_PC[12]
+* NET  1849 = MOS6502_PC[11]
+* NET  1850 = MOS6502_PC[10]
+* NET  1851 = MOS6502_PC[1]
+* NET  1852 = MOS6502_PC[0]
+* NET  1853 = MOS6502_NMI_edge
+* NET  1854 = MOS6502_NMI_1
+* NET  1855 = MOS6502_N
+* NET  1856 = MOS6502_IRHOLD_valid
+* NET  1857 = MOS6502_IRHOLD[7]
+* NET  1858 = MOS6502_IRHOLD[6]
+* NET  1859 = MOS6502_IRHOLD[5]
+* NET  1860 = MOS6502_IRHOLD[4]
+* NET  1861 = MOS6502_IRHOLD[3]
+* NET  1862 = MOS6502_IRHOLD[2]
+* NET  1863 = MOS6502_IRHOLD[1]
+* NET  1864 = MOS6502_IRHOLD[0]
+* NET  1865 = MOS6502_I
+* NET  1866 = MOS6502_DIMUX[7]
+* NET  1867 = MOS6502_DIMUX[6]
+* NET  1868 = MOS6502_DIMUX[5]
+* NET  1869 = MOS6502_DIMUX[4]
+* NET  1870 = MOS6502_DIMUX[3]
+* NET  1871 = MOS6502_DIMUX[2]
+* NET  1872 = MOS6502_DIMUX[1]
+* NET  1873 = MOS6502_DIMUX[0]
+* NET  1874 = MOS6502_DIHOLD[7]
+* NET  1875 = MOS6502_DIHOLD[6]
+* NET  1876 = MOS6502_DIHOLD[5]
+* NET  1877 = MOS6502_DIHOLD[4]
+* NET  1878 = MOS6502_DIHOLD[3]
+* NET  1879 = MOS6502_DIHOLD[2]
+* NET  1880 = MOS6502_DIHOLD[1]
+* NET  1881 = MOS6502_DIHOLD[0]
+* NET  1882 = MOS6502_D
+* NET  1883 = MOS6502_C
+* NET  1884 = MOS6502_AXYS_3_7
+* NET  1885 = MOS6502_AXYS_3_6
+* NET  1886 = MOS6502_AXYS_3_5
+* NET  1887 = MOS6502_AXYS_3_4
+* NET  1888 = MOS6502_AXYS_3_3
+* NET  1889 = MOS6502_AXYS_3_2
+* NET  1890 = MOS6502_AXYS_3_1
+* NET  1891 = MOS6502_AXYS_3_0
+* NET  1892 = MOS6502_AXYS_2_7
+* NET  1893 = MOS6502_AXYS_2_6
+* NET  1894 = MOS6502_AXYS_2_5
+* NET  1895 = MOS6502_AXYS_2_4
+* NET  1896 = MOS6502_AXYS_2_3
+* NET  1897 = MOS6502_AXYS_2_2
+* NET  1898 = MOS6502_AXYS_2_1
+* NET  1899 = MOS6502_AXYS_2_0
+* NET  1900 = MOS6502_AXYS_1_7
+* NET  1901 = MOS6502_AXYS_1_6
+* NET  1902 = MOS6502_AXYS_1_5
+* NET  1903 = MOS6502_AXYS_1_4
+* NET  1904 = MOS6502_AXYS_1_3
+* NET  1905 = MOS6502_AXYS_1_2
+* NET  1906 = MOS6502_AXYS_1_1
+* NET  1907 = MOS6502_AXYS_1_0
+* NET  1908 = MOS6502_AXYS_0_7
+* NET  1909 = MOS6502_AXYS_0_6
+* NET  1910 = MOS6502_AXYS_0_5
+* NET  1911 = MOS6502_AXYS_0_4
+* NET  1912 = MOS6502_AXYS_0_3
+* NET  1913 = MOS6502_AXYS_0_2
+* NET  1914 = MOS6502_AXYS_0_1
+* NET  1915 = MOS6502_AXYS_0_0
+* NET  1916 = MOS6502_ALU_OUT[7]
+* NET  1917 = MOS6502_ALU_OUT[6]
+* NET  1918 = MOS6502_ALU_OUT[5]
+* NET  1919 = MOS6502_ALU_OUT[4]
+* NET  1920 = MOS6502_ALU_OUT[3]
+* NET  1921 = MOS6502_ALU_OUT[2]
+* NET  1922 = MOS6502_ALU_OUT[1]
+* NET  1923 = MOS6502_ALU_OUT[0]
+* NET  1924 = MOS6502_ALU_HC
+* NET  1925 = MOS6502_ALU_CO
+* NET  1926 = MOS6502_ALU_BI7
+* NET  1927 = MOS6502_ALU_AI7
+* NET  1928 = MOS6502_ABL[7]
+* NET  1929 = MOS6502_ABL[6]
+* NET  1930 = MOS6502_ABL[5]
+* NET  1931 = MOS6502_ABL[4]
+* NET  1932 = MOS6502_ABL[3]
+* NET  1933 = MOS6502_ABL[2]
+* NET  1934 = MOS6502_ABL[1]
+* NET  1935 = MOS6502_ABL[0]
+* NET  1936 = MOS6502_ABH[7]
+* NET  1937 = MOS6502_ABH[6]
+* NET  1938 = MOS6502_ABH[5]
+* NET  1939 = MOS6502_ABH[4]
+* NET  1940 = MOS6502_ABH[3]
+* NET  1941 = MOS6502_ABH[2]
+* NET  1942 = MOS6502_ABH[1]
+* NET  1943 = MOS6502_ABH[0]
+* NET  1944 = IRQ
+* NET  1945 = DO[7]
+* NET  1946 = DO[6]
+* NET  1947 = DO[5]
+* NET  1948 = DO[4]
+* NET  1949 = DO[3]
+* NET  1950 = DO[2]
+* NET  1951 = DO[1]
+* NET  1952 = DO[0]
+* NET  1953 = DI[7]
+* NET  1954 = DI[6]
+* NET  1955 = DI[5]
+* NET  1956 = DI[4]
+* NET  1957 = DI[3]
+* NET  1958 = DI[2]
+* NET  1959 = DI[1]
+* NET  1960 = DI[0]
+* NET  1961 = A[9]
+* NET  1962 = A[8]
+* NET  1963 = A[7]
+* NET  1964 = A[6]
+* NET  1965 = A[5]
+* NET  1966 = A[4]
+* NET  1967 = A[3]
+* NET  1968 = A[2]
+* NET  1969 = A[15]
+* NET  1970 = A[14]
+* NET  1971 = A[13]
+* NET  1972 = A[12]
+* NET  1973 = A[11]
+* NET  1974 = A[10]
+* NET  1975 = A[1]
+* NET  1976 = A[0]
+
+xsubckt_1701_mux2_x1 0 1 772 979 981 776 mux2_x1
+xsubckt_1653_and2_x1 0 1 820 823 821 and2_x1
+xsubckt_433_or2_x1 0 1 242 570 387 or2_x1
+xsubckt_822_or2_x1 0 1 1973 1536 1530 or2_x1
+xsubckt_932_mux2_x1 0 1 1761 1895 1475 1454 mux2_x1
+xsubckt_1035_nand2_x0 0 1 1376 1393 1377 nand2_x0
+xsubckt_1627_or21nand_x0 0 1 846 1532 992 576 or21nand_x0
+xsubckt_1501_nand4_x0 0 1 971 1866 1004 974 973 nand4_x0
+xsubckt_1320_or2_x1 0 1 1141 1149 1142 or2_x1
+xsubckt_1283_and21nor_x0 0 1 1175 636 403 1193 and21nor_x0
+xsubckt_418_and21nor_x0 0 1 256 557 534 284 and21nor_x0
+xsubckt_124_nand2_x0 0 1 549 563 551 nand2_x0
+xsubckt_175_or3_x1 0 1 498 1793 1925 1794 or3_x1
+xsubckt_295_and4_x1 0 1 378 386 382 380 379 and4_x1
+xsubckt_780_or2_x1 0 1 1964 1568 1567 or2_x1
+xsubckt_928_mux2_x1 0 1 1765 1899 1494 1454 mux2_x1
+xsubckt_1784_and21nor_x0 0 1 689 916 913 910 and21nor_x0
+xsubckt_1716_or2_x1 0 1 757 579 992 or2_x1
+xsubckt_1329_or2_x1 0 1 1133 1137 1134 or2_x1
+xsubckt_557_or21nand_x0 0 1 123 372 519 523 or21nand_x0
+xsubckt_247_nand4_x0 0 1 426 595 1796 486 474 nand4_x0
+xsubckt_868_nand3_x0 0 1 1490 1922 1832 1493 nand3_x0
+xsubckt_1068_nand4_x0 0 1 1351 555 542 538 447 nand4_x0
+xsubckt_1079_and21nor_x0 0 1 1341 1398 1342 453 and21nor_x0
+xsubckt_1727_or21nand_x0 0 1 746 981 753 751 or21nand_x0
+xsubckt_1725_nand2_x0 0 1 748 752 750 nand2_x0
+xsubckt_1596_and2_x1 0 1 877 880 878 and2_x1
+xsubckt_424_nand2_x0 0 1 250 519 385 nand2_x0
+xsubckt_156_or21nand_x0 0 1 517 520 519 523 or21nand_x0
+xsubckt_125_and4_x1 0 1 548 563 556 553 552 and4_x1
+xsubckt_788_or2_x1 0 1 1963 1566 1560 or2_x1
+xsubckt_1073_and2_x1 0 1 1346 1452 1407 and2_x1
+xsubckt_1160_mux2_x1 0 1 1277 1278 578 409 mux2_x1
+xsubckt_1644_mux2_x1 0 1 829 835 830 843 mux2_x1
+xsubckt_1335_and21nor_x0 0 1 1128 631 403 1193 and21nor_x0
+xsubckt_1289_or2_x1 0 1 1169 1175 1170 or2_x1
+xsubckt_521_and4_x1 0 1 156 464 461 436 435 and4_x1
+xsubckt_334_nand2_x0 0 1 339 519 343 nand2_x0
+xsubckt_851_nand3_x0 0 1 1504 1936 569 413 nand3_x0
+xsubckt_1014_nand3_x0 0 1 1393 548 527 238 nand3_x0
+xsubckt_1679_mux2_x1 0 1 794 843 796 1018 mux2_x1
+xsubckt_1668_nand4_x0 0 1 805 1871 1004 974 973 nand4_x0
+xsubckt_1478_and3_x1 0 1 994 420 136 1639 and3_x1
+xsubckt_1404_nand3_x0 0 1 1064 1939 565 562 nand3_x0
+xsubckt_1364_and4_x1 0 1 1101 360 1546 1103 1102 and4_x1
+xsubckt_108_and3_x1 0 1 565 569 567 566 and3_x1
+xsubckt_696_and2_x1 0 1 1644 456 123 and2_x1
+xsubckt_900_nexor2_x0 0 1 1463 1471 1464 nexor2_x0
+xsubckt_991_and4_x1 0 1 1413 543 537 447 442 and4_x1
+xsubckt_1117_mux2_x1 0 1 1716 1868 1859 1314 mux2_x1
+xsubckt_1156_mux2_x1 0 1 1280 1866 1916 1284 mux2_x1
+xsubckt_1578_nand4_x0 0 1 895 1868 1004 974 973 nand4_x0
+xsubckt_1574_or21nand_x0 0 1 899 902 998 25 or21nand_x0
+xsubckt_111_or21nand_x0 0 1 562 661 613 1865 or21nand_x0
+xsubckt_169_and2_x1 0 1 504 1799 1800 and2_x1
+xsubckt_757_or21nand_x0 0 1 1587 1642 41 44 or21nand_x0
+xsubckt_1587_mux2_x1 0 1 886 887 892 899 mux2_x1
+xsubckt_621_and21nor_x0 0 1 61 636 374 335 and21nor_x0
+xsubckt_577_nand4_x0 0 1 103 1802 120 119 114 nand4_x0
+xsubckt_364_nand2_x0 0 1 310 557 527 nand2_x0
+xsubckt_1921_dff_x1 0 1 1932 1703 9 dff_x1
+xsubckt_1920_dff_x1 0 1 1933 1704 9 dff_x1
+xsubckt_1651_and3_x1 0 1 822 947 840 838 and3_x1
+xsubckt_613_nand3_x0 0 1 69 1889 109 102 nand3_x0
+xsubckt_174_nor3_x0 0 1 499 1793 1925 1794 nor3_x0
+xsubckt_320_and3_x1 0 1 353 555 549 453 and3_x1
+xsubckt_754_nand2_x0 0 1 1589 1591 1590 nand2_x0
+xsubckt_760_or21nand_x0 0 1 1584 1931 1618 1616 or21nand_x0
+xsubckt_856_and4_x1 0 1 1501 659 569 567 566 and4_x1
+xsubckt_918_and2_x1 0 1 1455 100 1496 and2_x1
+xsubckt_996_and2_x1 0 1 1409 620 1451 and2_x1
+xsubckt_1255_and3_x1 0 1 1201 209 1205 1202 and3_x1
+xsubckt_1273_or21nand_x0 0 1 1184 1851 404 1192 or21nand_x0
+xsubckt_1927_dff_x1 0 1 1942 1697 9 dff_x1
+xsubckt_1926_dff_x1 0 1 1943 1698 9 dff_x1
+xsubckt_1925_dff_x1 0 1 1928 1699 9 dff_x1
+xsubckt_1924_dff_x1 0 1 1929 1700 9 dff_x1
+xsubckt_1923_dff_x1 0 1 1930 1701 9 dff_x1
+xsubckt_1922_dff_x1 0 1 1931 1702 9 dff_x1
+xsubckt_1774_or21nand_x0 0 1 699 702 703 711 or21nand_x0
+xsubckt_1395_nand2_x0 0 1 1072 1079 1074 nand2_x0
+xsubckt_280_and4_x1 0 1 393 1795 594 511 504 and4_x1
+xsubckt_1929_dff_x1 0 1 1940 1695 9 dff_x1
+xsubckt_1928_dff_x1 0 1 1941 1696 9 dff_x1
+xsubckt_1884_dff_x1 0 1 1793 1731 9 dff_x1
+xsubckt_1883_dff_x1 0 1 1817 1732 9 dff_x1
+xsubckt_1882_dff_x1 0 1 1819 1733 9 dff_x1
+xsubckt_1881_dff_x1 0 1 1833 1734 9 dff_x1
+xsubckt_1880_dff_x1 0 1 1804 1735 9 dff_x1
+xsubckt_1809_mux2_x1 0 1 1669 1920 712 655 mux2_x1
+xsubckt_1735_and21nor_x0 0 1 738 947 749 949 and21nor_x0
+xsubckt_394_nand2_x0 0 1 280 454 282 nand2_x0
+xsubckt_202_and4_x1 0 1 471 1795 594 567 566 and4_x1
+xsubckt_316_and3_x1 0 1 357 368 365 358 and3_x1
+xsubckt_712_and3_x1 0 1 1628 420 387 324 and3_x1
+xsubckt_725_and4_x1 0 1 1615 1643 1623 1619 1617 and4_x1
+xsubckt_839_and3_x1 0 1 1515 1846 1625 1615 and3_x1
+xsubckt_913_mux2_x1 0 1 1778 1476 1912 1456 mux2_x1
+xsubckt_1010_and4_x1 0 1 1395 1407 1404 1400 1396 and4_x1
+xsubckt_1150_and2_x1 0 1 1286 656 1501 and2_x1
+xsubckt_1889_dff_x1 0 1 1821 1726 9 dff_x1
+xsubckt_1888_dff_x1 0 1 1801 1727 9 dff_x1
+xsubckt_1887_dff_x1 0 1 1802 1728 9 dff_x1
+xsubckt_1886_dff_x1 0 1 1818 1729 9 dff_x1
+xsubckt_1885_dff_x1 0 1 1794 1730 9 dff_x1
+xsubckt_1594_and3_x1 0 1 879 947 897 895 and3_x1
+xsubckt_960_or21nand_x0 0 1 1749 1440 1438 1446 or21nand_x0
+xsubckt_1111_and2_x1 0 1 1314 654 1316 and2_x1
+xsubckt_1221_nor4_x0 0 1 1219 457 124 1629 1220 nor4_x0
+xsubckt_1669_and2_x1 0 1 804 806 805 and2_x1
+xsubckt_1464_nand3_x0 0 1 1008 502 494 401 nand3_x0
+xsubckt_594_or2_x1 0 1 86 617 137 or2_x1
+xsubckt_906_nexor2_x0 0 1 1458 1461 1459 nexor2_x0
+xsubckt_1032_and3_x1 0 1 1379 550 542 538 and3_x1
+xsubckt_1107_and2_x1 0 1 1317 1791 1318 and2_x1
+xsubckt_1146_and2_x1 0 1 1289 1311 1290 and2_x1
+xsubckt_1233_mux2_x1 0 1 1704 1968 1933 1210 mux2_x1
+xsubckt_1481_or2_x1 0 1 991 572 992 or2_x1
+xsubckt_1284_nand3_x0 0 1 1174 1933 565 562 nand3_x0
+xsubckt_629_and4_x1 0 1 54 58 57 56 55 and4_x1
+xsubckt_580_and4_x1 0 1 100 112 110 105 104 and4_x1
+xsubckt_285_and2_x1 0 1 388 391 389 and2_x1
+xsubckt_769_and2_x1 0 1 1576 1578 1577 and2_x1
+xsubckt_1106_nand3_x0 0 1 1318 564 425 355 nand3_x0
+xsubckt_1180_mux2_x1 0 1 1258 1259 1873 409 mux2_x1
+xsubckt_1247_nand2_x0 0 1 1209 655 1852 nand2_x0
+xsubckt_1779_and21nor_x0 0 1 694 884 881 878 and21nor_x0
+xsubckt_1637_nand2_x0 0 1 836 840 838 nand2_x0
+xsubckt_549_nand4_x0 0 1 130 599 1800 1796 511 nand4_x0
+xsubckt_322_nand4_x0 0 1 351 548 527 453 446 nand4_x0
+xsubckt_681_and2_x1 0 1 1658 1660 1659 and2_x1
+xsubckt_708_or21nand_x0 0 1 1632 346 519 523 or21nand_x0
+xsubckt_717_and21nor_x0 0 1 1623 485 385 523 and21nor_x0
+xsubckt_980_nand4_x0 0 1 1423 542 538 527 442 nand4_x0
+xsubckt_1028_and3_x1 0 1 1382 543 537 1421 and3_x1
+xsubckt_1141_mux2_x1 0 1 1293 1294 1871 409 mux2_x1
+xsubckt_1682_and21nor_x0 0 1 791 792 795 952 and21nor_x0
+xsubckt_1457_nand2_x0 0 1 1015 639 467 nand2_x0
+xsubckt_611_or21nand_x0 0 1 1951 71 78 131 or21nand_x0
+xsubckt_537_and4_x1 0 1 141 429 388 144 142 and4_x1
+xsubckt_154_and2_x1 0 1 519 1795 594 and2_x1
+xsubckt_1176_mux2_x1 0 1 1262 1265 409 1268 mux2_x1
+xsubckt_1407_and2_x1 0 1 1061 1067 1062 and2_x1
+xsubckt_1367_nand2_x0 0 1 1098 1105 1100 nand2_x0
+xsubckt_1316_nand3_x0 0 1 1145 1930 565 562 nand3_x0
+xsubckt_115_and2_x1 0 1 558 563 559 and2_x1
+xsubckt_4_inv_x0 0 1 661 1853 inv_x0
+xsubckt_3_inv_x0 0 1 662 1882 inv_x0
+xsubckt_2_inv_x0 0 1 663 1809 inv_x0
+xsubckt_1_inv_x0 0 1 664 1856 inv_x0
+xsubckt_0_inv_x0 0 1 665 1865 inv_x0
+xsubckt_1782_and21nor_x0 0 1 691 876 695 693 and21nor_x0
+xsubckt_1393_and2_x1 0 1 1074 1078 1075 and2_x1
+xsubckt_493_nand3_x0 0 1 183 519 474 343 nand3_x0
+xsubckt_445_and4_x1 0 1 230 533 525 438 231 and4_x1
+xsubckt_9_inv_x0 0 1 656 1825 inv_x0
+xsubckt_8_inv_x0 0 1 657 1793 inv_x0
+xsubckt_7_inv_x0 0 1 658 1804 inv_x0
+xsubckt_6_inv_x0 0 1 659 1810 inv_x0
+xsubckt_5_inv_x0 0 1 660 1829 inv_x0
+xsubckt_956_or21nand_x0 0 1 1750 1444 1441 1449 or21nand_x0
+xsubckt_1440_nand2_x0 0 1 1031 655 1845 nand2_x0
+xsubckt_1372_or21nand_x0 0 1 1681 1106 1096 1094 or21nand_x0
+xsubckt_796_nor2_x0 0 1 1552 1634 1553 nor2_x0
+xsubckt_981_and2_x1 0 1 1422 1426 1423 and2_x1
+xsubckt_1487_nand2_x0 0 1 985 995 988 nand2_x0
+xsubckt_392_and4_x1 0 1 282 453 446 440 285 and4_x1
+xsubckt_756_nand2_x0 0 1 1967 1594 1588 nand2_x0
+xsubckt_820_and21nor_x0 0 1 1531 627 512 1621 and21nor_x0
+xsubckt_1029_and21nor_x0 0 1 1381 662 563 529 and21nor_x0
+xsubckt_1632_and3_x1 0 1 841 1843 569 508 and3_x1
+xsubckt_1606_and4_x1 0 1 867 1869 1004 974 973 and4_x1
+xsubckt_1434_nor2_x0 0 1 1036 1041 1037 nor2_x0
+xsubckt_830_or2_x1 0 1 1972 1529 1523 or2_x1
+xsubckt_933_mux2_x1 0 1 1760 1894 1469 1454 mux2_x1
+xsubckt_966_nand2_x0 0 1 1434 1805 1451 nand2_x0
+xsubckt_1025_nand4_x0 0 1 1385 1791 1797 569 567 nand4_x0
+xsubckt_1277_and21nor_x0 0 1 1180 1181 1197 1922 and21nor_x0
+xsubckt_1581_and21nor_x0 0 1 892 980 897 895 and21nor_x0
+xsubckt_1572_or21nand_x0 0 1 901 904 994 645 or21nand_x0
+xsubckt_396_nand2_x0 0 1 278 478 279 nand2_x0
+xsubckt_128_nand2_x0 0 1 545 664 1873 nand2_x0
+xsubckt_198_or21nand_x0 0 1 475 571 524 476 or21nand_x0
+xsubckt_292_nand4_x0 0 1 381 1799 598 569 511 nand4_x0
+xsubckt_1076_nand3_x0 0 1 1344 528 441 1391 nand3_x0
+xsubckt_1689_and2_x1 0 1 784 1546 785 and2_x1
+xsubckt_1575_and3_x1 0 1 898 1841 569 508 and3_x1
+xsubckt_1466_nand3_x0 0 1 1006 1799 519 377 nand3_x0
+xsubckt_1368_or21nand_x0 0 1 1097 1099 1111 1120 or21nand_x0
+xsubckt_231_and2_x1 0 1 442 563 443 and2_x1
+xsubckt_283_and3_x1 0 1 390 1793 1791 654 and3_x1
+xsubckt_786_nand2_x0 0 1 1561 1563 1562 nand2_x0
+xsubckt_838_or2_x1 0 1 1971 1522 1516 or2_x1
+xsubckt_929_mux2_x1 0 1 1764 1898 1488 1454 mux2_x1
+xsubckt_999_nand4_x0 0 1 1406 550 542 538 447 nand4_x0
+xsubckt_1229_and21nor_x0 0 1 1211 491 1218 1212 and21nor_x0
+xsubckt_1523_and2_x1 0 1 949 957 953 and2_x1
+xsubckt_1286_nand3_x0 0 1 1172 569 372 1173 nand3_x0
+xsubckt_428_nand2_x0 0 1 246 248 247 nand2_x0
+xsubckt_10_inv_x0 0 1 655 1791 inv_x0
+xsubckt_11_inv_x0 0 1 654 2 inv_x0
+xsubckt_12_inv_x0 0 1 653 1828 inv_x0
+xsubckt_13_inv_x0 0 1 652 1923 inv_x0
+xsubckt_14_inv_x0 0 1 651 1922 inv_x0
+xsubckt_165_and4_x1 0 1 508 599 1800 597 1798 and4_x1
+xsubckt_279_and3_x1 0 1 394 429 418 395 and3_x1
+xsubckt_798_or2_x1 0 1 1962 1559 1551 or2_x1
+xsubckt_816_and21nor_x0 0 1 1535 576 1631 1630 and21nor_x0
+xsubckt_1087_and3_x1 0 1 1334 1407 1341 1335 and3_x1
+xsubckt_1688_or2_x1 0 1 785 578 992 or2_x1
+xsubckt_1645_mux2_x1 0 1 828 834 831 843 mux2_x1
+xsubckt_1412_nand2_x0 0 1 1056 1791 1059 nand2_x0
+xsubckt_1298_or2_x1 0 1 1161 1165 1162 or2_x1
+xsubckt_636_and3_x1 0 1 47 52 51 48 and3_x1
+xsubckt_561_and4_x1 0 1 119 456 425 250 125 and4_x1
+xsubckt_522_and4_x1 0 1 155 426 424 414 411 and4_x1
+xsubckt_338_nand2_x0 0 1 335 569 346 nand2_x0
+xsubckt_15_inv_x0 0 1 650 1834 inv_x0
+xsubckt_16_inv_x0 0 1 649 1924 inv_x0
+xsubckt_17_inv_x0 0 1 648 1921 inv_x0
+xsubckt_18_inv_x0 0 1 647 1920 inv_x0
+xsubckt_19_inv_x0 0 1 646 1919 inv_x0
+xsubckt_1069_nand2_x0 0 1 1350 1406 1351 nand2_x0
+xsubckt_1074_and2_x1 0 1 1345 1347 1346 and2_x1
+xsubckt_1145_nand4_x0 0 1 1290 569 567 566 1291 nand4_x0
+xsubckt_1802_nand2_x0 0 1 1673 940 672 nand2_x0
+xsubckt_1772_or21nand_x0 0 1 701 818 817 714 or21nand_x0
+xsubckt_248_nand2_x0 0 1 425 523 515 nand2_x0
+xsubckt_728_nand2_x0 0 1 1612 1873 1622 nand2_x0
+xsubckt_1157_mux2_x1 0 1 1710 1280 1855 1281 mux2_x1
+xsubckt_1171_nor3_x0 0 1 1267 1804 1833 1825 nor3_x0
+xsubckt_1722_and4_x1 0 1 751 1873 1004 974 973 and4_x1
+xsubckt_570_and2_x1 0 1 110 116 111 and2_x1
+xsubckt_548_nand2_x0 0 1 131 512 134 nand2_x0
+xsubckt_135_and2_x1 0 1 538 563 539 and2_x1
+xsubckt_1118_mux2_x1 0 1 1715 1867 1858 1314 mux2_x1
+xsubckt_1588_mux2_x1 0 1 885 888 891 899 mux2_x1
+xsubckt_1480_and21nor_x0 0 1 992 393 508 569 and21nor_x0
+xsubckt_606_or21nand_x0 0 1 75 1835 361 92 or21nand_x0
+xsubckt_585_nand3_x0 0 1 95 1891 109 102 nand3_x0
+xsubckt_491_and3_x1 0 1 185 523 474 343 and3_x1
+xsubckt_458_nand2_x0 0 1 217 293 281 nand2_x0
+xsubckt_407_nand3_x0 0 1 267 519 474 413 nand3_x0
+xsubckt_711_nand2_x0 0 1 1629 420 387 nand2_x0
+xsubckt_755_nor3_x0 0 1 1588 1593 1592 1589 nor3_x0
+xsubckt_869_nexor2_x0 0 1 1489 651 1492 nexor2_x0
+xsubckt_1065_mux2_x1 0 1 1728 1354 1802 1452 mux2_x1
+xsubckt_1442_nand2_x0 0 1 1029 1916 404 nand2_x0
+xsubckt_566_and2_x1 0 1 114 564 116 and2_x1
+xsubckt_400_and2_x1 0 1 274 276 275 and2_x1
+xsubckt_354_nand4_x0 0 1 319 1791 654 569 330 nand4_x0
+xsubckt_899_nexor2_x0 0 1 1464 643 1468 nexor2_x0
+xsubckt_1475_nand4_x0 0 1 997 1644 1236 1000 999 nand4_x0
+xsubckt_598_or21nand_x0 0 1 1952 83 94 131 or21nand_x0
+xsubckt_373_and4_x1 0 1 301 453 452 440 309 and4_x1
+xsubckt_997_and2_x1 0 1 1408 446 1439 and2_x1
+xsubckt_1256_and3_x1 0 1 1200 1208 1203 1201 and3_x1
+xsubckt_1262_nand2_x0 0 1 1194 360 1196 nand2_x0
+xsubckt_1934_dff_x1 0 1 1852 1690 9 dff_x1
+xsubckt_1933_dff_x1 0 1 1936 1691 9 dff_x1
+xsubckt_1932_dff_x1 0 1 1937 1692 9 dff_x1
+xsubckt_1931_dff_x1 0 1 1938 1693 9 dff_x1
+xsubckt_1930_dff_x1 0 1 1939 1694 9 dff_x1
+xsubckt_1814_mux2_x1 0 1 1667 1918 679 655 mux2_x1
+xsubckt_1777_and21nor_x0 0 1 696 850 699 698 and21nor_x0
+xsubckt_1742_nand2_x0 0 1 731 958 953 nand2_x0
+xsubckt_1399_nand2_x0 0 1 1679 1080 1069 nand2_x0
+xsubckt_578_nand2_x0 0 1 102 106 103 nand2_x0
+xsubckt_435_and2_x1 0 1 240 242 241 and2_x1
+xsubckt_162_nor2_x0 0 1 511 1797 1798 nor2_x0
+xsubckt_300_nand3_x0 0 1 373 523 474 376 nand3_x0
+xsubckt_1204_and2_x1 0 1 1236 118 1645 and2_x1
+xsubckt_1939_dff_x1 0 1 1841 1685 9 dff_x1
+xsubckt_1938_dff_x1 0 1 1842 1686 9 dff_x1
+xsubckt_1937_dff_x1 0 1 1843 1687 9 dff_x1
+xsubckt_1936_dff_x1 0 1 1844 1688 9 dff_x1
+xsubckt_1935_dff_x1 0 1 1851 1689 9 dff_x1
+xsubckt_1891_dff_x1 0 1 1809 1724 9 dff_x1
+xsubckt_1890_dff_x1 0 1 1820 1725 9 dff_x1
+xsubckt_1680_and21nor_x0 0 1 793 947 804 949 and21nor_x0
+xsubckt_1511_nand3_x0 0 1 961 1017 963 962 nand3_x0
+xsubckt_607_nor2_x0 0 1 74 616 137 nor2_x0
+xsubckt_317_and3_x1 0 1 356 388 378 357 and3_x1
+xsubckt_646_nor2_x0 0 1 38 1853 1944 nor2_x0
+xsubckt_741_nand2_x0 0 1 1601 65 1642 nand2_x0
+xsubckt_866_and2_x1 0 1 1492 1832 1493 and2_x1
+xsubckt_1122_or21nand_x0 0 1 1311 564 518 416 or21nand_x0
+xsubckt_1897_dff_x1 0 1 1876 1868 9 dff_x1
+xsubckt_1896_dff_x1 0 1 1877 1869 9 dff_x1
+xsubckt_1895_dff_x1 0 1 1878 1870 9 dff_x1
+xsubckt_1894_dff_x1 0 1 1879 1871 9 dff_x1
+xsubckt_1893_dff_x1 0 1 1880 1872 9 dff_x1
+xsubckt_1892_dff_x1 0 1 1881 1873 9 dff_x1
+xsubckt_1674_and2_x1 0 1 799 977 800 and2_x1
+xsubckt_1476_and21nor_x0 0 1 996 998 1654 1658 and21nor_x0
+xsubckt_1331_nand3_x0 0 1 1131 1149 1142 1133 nand3_x0
+xsubckt_600_nand3_x0 0 1 81 1890 109 102 nand3_x0
+xsubckt_251_or2_x1 0 1 422 570 423 or2_x1
+xsubckt_257_nand3_x0 0 1 416 597 1798 504 nand3_x0
+xsubckt_277_and4_x1 0 1 396 414 411 402 397 and4_x1
+xsubckt_294_nand4_x0 0 1 379 569 511 504 474 nand4_x0
+xsubckt_827_nand3_x0 0 1 1525 1939 569 413 nand3_x0
+xsubckt_914_mux2_x1 0 1 1777 1475 1911 1456 mux2_x1
+xsubckt_1011_and4_x1 0 1 1394 1452 1426 1423 1418 and4_x1
+xsubckt_1270_or3_x1 0 1 1186 655 1188 1187 or3_x1
+xsubckt_1899_dff_x1 0 1 1874 1866 9 dff_x1
+xsubckt_1898_dff_x1 0 1 1875 1867 9 dff_x1
+xsubckt_1721_nand3_x0 0 1 752 1852 569 508 nand3_x0
+xsubckt_471_nand2_x0 0 1 204 474 463 nand2_x0
+xsubckt_420_nand3_x0 0 1 254 569 474 372 nand3_x0
+xsubckt_397_or21nand_x0 0 1 277 363 345 522 or21nand_x0
+xsubckt_167_nand3_x0 0 1 506 597 523 521 nand3_x0
+xsubckt_647_nand3_x0 0 1 37 569 372 38 nand3_x0
+xsubckt_649_or2_x1 0 1 35 612 137 or2_x1
+xsubckt_774_and2_x1 0 1 1572 1917 1624 and2_x1
+xsubckt_1075_and21nor_x0 0 1 1727 1353 1345 1356 and21nor_x0
+xsubckt_1234_mux2_x1 0 1 1703 1967 1932 1210 mux2_x1
+xsubckt_1536_or2_x1 0 1 937 573 992 or2_x1
+xsubckt_1517_and3_x1 0 1 955 1831 569 413 and3_x1
+xsubckt_735_and2_x1 0 1 1606 1922 1624 and2_x1
+xsubckt_1414_nand2_x0 0 1 1055 655 1847 nand2_x0
+xsubckt_113_nand2_x0 0 1 560 664 1869 nand2_x0
+xsubckt_1324_nand2_x0 0 1 1138 655 1840 nand2_x0
+xsubckt_1311_and4_x1 0 1 1149 1178 1169 1161 1151 and4_x1
+xsubckt_605_or21nand_x0 0 1 76 1922 513 88 or21nand_x0
+xsubckt_109_nand3_x0 0 1 564 569 567 566 nand3_x0
+xsubckt_168_and3_x1 0 1 505 517 512 506 and3_x1
+xsubckt_859_and21nor_x0 0 1 1498 463 372 523 and21nor_x0
+xsubckt_1628_and21nor_x0 0 1 845 846 993 1920 and21nor_x0
+xsubckt_1570_or21nand_x0 0 1 903 1518 992 574 or21nand_x0
+xsubckt_1486_and2_x1 0 1 986 995 988 and2_x1
+xsubckt_590_and2_x1 0 1 90 360 91 and2_x1
+xsubckt_197_nand3_x0 0 1 476 505 492 477 nand3_x0
+xsubckt_512_and2_x1 0 1 164 313 165 and2_x1
+xsubckt_497_nand3_x0 0 1 179 483 474 330 nand3_x0
+xsubckt_196_or21nand_x0 0 1 477 657 487 479 or21nand_x0
+xsubckt_1003_nand3_x0 0 1 1402 453 285 1403 nand3_x0
+xsubckt_1054_nand2_x0 0 1 1363 1379 1364 nand2_x0
+xsubckt_1394_and2_x1 0 1 1073 1079 1074 and2_x1
+xsubckt_547_and2_x1 0 1 132 512 134 and2_x1
+xsubckt_452_or21nand_x0 0 1 223 224 227 283 or21nand_x0
+xsubckt_143_nand2_x0 0 1 530 664 1866 nand2_x0
+xsubckt_101_inv_x0 0 1 1866 572 inv_x0
+xsubckt_96_mux2_x1 0 1 574 601 600 655 mux2_x1
+xsubckt_180_nand3_x0 0 1 493 523 501 496 nand3_x0
+xsubckt_1391_nand3_x0 0 1 1076 1940 565 562 nand3_x0
+xsubckt_1354_nand2_x0 0 1 1110 1117 1112 nand2_x0
+xsubckt_1318_or21nand_x0 0 1 1143 1144 1198 645 or21nand_x0
+xsubckt_468_and3_x1 0 1 207 210 209 208 and3_x1
+xsubckt_176_nand4_x0 0 1 497 569 511 504 499 nand4_x0
+xsubckt_1127_xor2_x0 0 1 1306 1926 1927 xor2_x0
+xsubckt_1770_or21nand_x0 0 1 703 710 708 706 or21nand_x0
+xsubckt_380_and3_x1 0 1 294 543 537 452 and3_x1
+xsubckt_1174_nand2_x0 0 1 1264 1267 1266 nand2_x0
+xsubckt_1230_and21nor_x0 0 1 1210 655 1228 1211 and21nor_x0
+xsubckt_390_nand3_x0 0 1 284 563 556 551 nand3_x0
+xsubckt_349_nand3_x0 0 1 324 595 1796 330 nand3_x0
+xsubckt_104_nor2_x0 0 1 569 1795 1796 nor2_x0
+xsubckt_1033_nand3_x0 0 1 1378 550 542 538 nand3_x0
+xsubckt_1519_or3_x1 0 1 953 133 956 955 or3_x1
+xsubckt_1330_and21nor_x0 0 1 1132 1133 1142 1149 and21nor_x0
+xsubckt_105_or2_x1 0 1 568 1795 1796 or2_x1
+xsubckt_259_nand3_x0 0 1 414 523 474 417 nand3_x0
+xsubckt_934_mux2_x1 0 1 1759 1893 1462 1454 mux2_x1
+xsubckt_1666_or21nand_x0 0 1 807 810 998 66 or21nand_x0
+xsubckt_1527_and21nor_x0 0 1 945 947 949 970 and21nor_x0
+xsubckt_1340_or2_x1 0 1 1123 1128 1125 or2_x1
+xsubckt_245_and3_x1 0 1 428 595 1796 486 and3_x1
+xsubckt_794_and2_x1 0 1 1554 1557 1555 and2_x1
+xsubckt_846_or2_x1 0 1 1970 1515 1509 or2_x1
+xsubckt_1126_and21nor_x0 0 1 1307 1308 1312 1313 and21nor_x0
+xsubckt_1206_nand2_x0 0 1 1234 595 330 nand2_x0
+xsubckt_1633_nand3_x0 0 1 840 1843 569 508 nand3_x0
+xsubckt_1410_and3_x1 0 1 1058 1083 1072 1060 and3_x1
+xsubckt_1348_or2_x1 0 1 1116 579 1199 or2_x1
+xsubckt_332_nand3_x0 0 1 341 571 523 343 nand3_x0
+xsubckt_21_inv_x0 0 1 644 1925 inv_x0
+xsubckt_20_inv_x0 0 1 645 1918 inv_x0
+xsubckt_752_or21nand_x0 0 1 1591 1932 1618 1616 or21nand_x0
+xsubckt_1026_nand2_x0 0 1 1384 1834 1385 nand2_x0
+xsubckt_1053_and3_x1 0 1 1364 558 528 441 and3_x1
+xsubckt_1265_or21nand_x0 0 1 1191 1852 404 1192 or21nand_x0
+xsubckt_1419_and4_x1 0 1 1050 360 1518 1052 1051 and4_x1
+xsubckt_1339_nor2_x0 0 1 1124 1128 1125 nor2_x0
+xsubckt_328_nand4_x0 0 1 345 599 1800 1797 596 nand4_x0
+xsubckt_153_and3_x1 0 1 520 599 1800 566 and3_x1
+xsubckt_26_inv_x0 0 1 639 1817 inv_x0
+xsubckt_25_inv_x0 0 1 640 1824 inv_x0
+xsubckt_24_inv_x0 0 1 641 1827 inv_x0
+xsubckt_23_inv_x0 0 1 642 1916 inv_x0
+xsubckt_22_inv_x0 0 1 643 1917 inv_x0
+xsubckt_1063_nand3_x0 0 1 1355 548 238 1430 nand3_x0
+xsubckt_1806_nand2_x0 0 1 1672 671 669 nand2_x0
+xsubckt_1718_or21nand_x0 0 1 755 756 994 652 or21nand_x0
+xsubckt_1646_mux2_x1 0 1 827 870 829 1018 mux2_x1
+xsubckt_1363_nand3_x0 0 1 1102 1942 565 562 nand3_x0
+xsubckt_523_and4_x1 0 1 154 373 369 242 241 and4_x1
+xsubckt_147_or21nand_x0 0 1 526 563 551 544 or21nand_x0
+xsubckt_29_inv_x0 0 1 636 1844 inv_x0
+xsubckt_28_inv_x0 0 1 637 1851 inv_x0
+xsubckt_27_inv_x0 0 1 638 1808 inv_x0
+xsubckt_188_and3_x1 0 1 485 1795 594 486 and3_x1
+xsubckt_238_nand4_x0 0 1 435 571 523 500 496 nand4_x0
+xsubckt_289_nand3_x0 0 1 384 1799 598 511 nand3_x0
+xsubckt_683_nand2_x0 0 1 1656 1900 100 nand2_x0
+xsubckt_861_and21nor_x0 0 1 1496 655 1499 1497 and21nor_x0
+xsubckt_1172_nor3_x0 0 1 1266 1829 1810 1807 nor3_x0
+xsubckt_1630_and21nor_x0 0 1 843 844 997 53 and21nor_x0
+xsubckt_431_and4_x1 0 1 243 394 356 257 245 and4_x1
+xsubckt_679_nand3_x0 0 1 1660 1892 109 101 nand3_x0
+xsubckt_1119_mux2_x1 0 1 1714 1866 1857 1314 mux2_x1
+xsubckt_589_nand3_x0 0 1 91 1811 519 385 nand3_x0
+xsubckt_1589_mux2_x1 0 1 884 931 886 1018 mux2_x1
+xsubckt_528_and2_x1 0 1 149 295 150 and2_x1
+xsubckt_704_nor2_x0 0 1 1636 428 1637 nor2_x0
+xsubckt_1305_nand3_x0 0 1 1155 1931 565 562 nand3_x0
+xsubckt_488_and3_x1 0 1 187 432 261 188 and3_x1
+xsubckt_690_nor2_x0 0 1 1649 609 137 nor2_x0
+xsubckt_810_and3_x1 0 1 1540 1941 569 413 and3_x1
+xsubckt_897_and4_x1 0 1 1466 1832 1834 1925 1917 and4_x1
+xsubckt_1941_dff_x1 0 1 1839 1683 9 dff_x1
+xsubckt_1940_dff_x1 0 1 1840 1684 9 dff_x1
+xsubckt_1605_nand3_x0 0 1 868 1842 569 508 nand3_x0
+xsubckt_568_nand4_x0 0 1 112 1801 120 119 114 nand4_x0
+xsubckt_304_nand3_x0 0 1 369 571 523 372 nand3_x0
+xsubckt_651_nor2_x0 0 1 33 646 34 nor2_x0
+xsubckt_1218_and3_x1 0 1 1222 1226 1225 1223 and3_x1
+xsubckt_1257_and3_x1 0 1 1199 517 415 1632 and3_x1
+xsubckt_1947_dff_x1 0 1 1847 1677 9 dff_x1
+xsubckt_1946_dff_x1 0 1 1848 1678 9 dff_x1
+xsubckt_1945_dff_x1 0 1 1849 1679 9 dff_x1
+xsubckt_1944_dff_x1 0 1 1850 1680 9 dff_x1
+xsubckt_1943_dff_x1 0 1 1837 1681 9 dff_x1
+xsubckt_1942_dff_x1 0 1 1838 1682 9 dff_x1
+xsubckt_1815_mux2_x1 0 1 1666 1917 677 655 mux2_x1
+xsubckt_1500_and4_x1 0 1 972 1866 1004 974 973 and4_x1
+xsubckt_595_or21nand_x0 0 1 85 1852 375 336 or21nand_x0
+xsubckt_1264_or21nand_x0 0 1 1192 1206 1197 1194 or21nand_x0
+xsubckt_1949_dff_x1 0 1 1845 1675 9 dff_x1
+xsubckt_1948_dff_x1 0 1 1846 1676 9 dff_x1
+xsubckt_1636_and2_x1 0 1 837 840 838 and2_x1
+xsubckt_305_and2_x1 0 1 368 373 369 and2_x1
+xsubckt_655_nand2_x0 0 1 1948 40 30 nand2_x0
+xsubckt_714_and3_x1 0 1 1626 1631 1630 1627 and3_x1
+xsubckt_745_nand2_x0 0 1 1597 1871 1622 nand2_x0
+xsubckt_915_mux2_x1 0 1 1776 1469 1910 1456 mux2_x1
+xsubckt_1216_or21nand_x0 0 1 1224 376 519 523 or21nand_x0
+xsubckt_1279_and2_x1 0 1 1178 1187 1179 and2_x1
+xsubckt_1522_and3_x1 0 1 950 1001 961 952 and3_x1
+xsubckt_441_nor3_x0 0 1 234 353 256 236 nor3_x0
+xsubckt_787_or3_x1 0 1 1560 1565 1564 1561 or3_x1
+xsubckt_989_mux2_x1 0 1 1743 1415 1815 1452 mux2_x1
+xsubckt_1726_and21nor_x0 0 1 747 980 752 750 and21nor_x0
+xsubckt_1325_and21nor_x0 0 1 1137 632 403 1193 and21nor_x0
+xsubckt_385_nand2_x0 0 1 289 571 393 nand2_x0
+xsubckt_252_and2_x1 0 1 421 569 486 and2_x1
+xsubckt_812_and21nor_x0 0 1 1538 628 512 1621 and21nor_x0
+xsubckt_955_nand2_x0 0 1 1441 308 1443 nand2_x0
+xsubckt_1187_and2_x1 0 1 1253 470 1255 and2_x1
+xsubckt_1235_mux2_x1 0 1 1702 1966 1931 1210 mux2_x1
+xsubckt_1620_or21nand_x0 0 1 853 854 855 951 or21nand_x0
+xsubckt_1508_nand2_x0 0 1 964 977 965 nand2_x0
+xsubckt_411_and21nor_x0 0 1 263 264 268 269 and21nor_x0
+xsubckt_281_nand4_x0 0 1 392 1795 594 511 504 nand4_x0
+xsubckt_724_nand3_x0 0 1 1616 507 489 403 nand3_x0
+xsubckt_951_or21nand_x0 0 1 1751 1447 1445 1449 or21nand_x0
+xsubckt_988_nand4_x0 0 1 1415 447 1425 1422 1419 nand4_x0
+xsubckt_1579_and2_x1 0 1 894 897 895 and2_x1
+xsubckt_1351_and4_x1 0 1 1113 360 1558 1115 1114 and4_x1
+xsubckt_608_and21nor_x0 0 1 73 637 374 335 and21nor_x0
+xsubckt_160_and2_x1 0 1 513 519 515 and2_x1
+xsubckt_1072_and21nor_x0 0 1 1347 1348 1350 1431 and21nor_x0
+xsubckt_110_and21nor_x0 0 1 563 1853 1944 665 and21nor_x0
+xsubckt_195_and2_x1 0 1 478 488 480 and2_x1
+xsubckt_650_or21nand_x0 0 1 34 519 515 385 or21nand_x0
+xsubckt_1178_mux2_x1 0 1 1260 1923 660 1810 mux2_x1
+xsubckt_1269_and21nor_x0 0 1 1187 1200 1191 1189 and21nor_x0
+xsubckt_1275_nand3_x0 0 1 1182 663 569 372 nand3_x0
+xsubckt_1401_nand2_x0 0 1 1067 1848 1192 nand2_x0
+xsubckt_1664_or21nand_x0 0 1 809 812 994 648 or21nand_x0
+xsubckt_1369_and3_x1 0 1 1096 1121 1110 1098 and3_x1
+xsubckt_627_nand2_x0 0 1 56 1904 100 nand2_x0
+xsubckt_447_and4_x1 0 1 228 563 561 560 529 and4_x1
+xsubckt_808_and21nor_x0 0 1 1542 577 1631 1630 and21nor_x0
+xsubckt_1713_and2_x1 0 1 760 763 761 and2_x1
+xsubckt_1358_nand2_x0 0 1 1682 1118 1107 nand2_x0
+xsubckt_1317_and2_x1 0 1 1144 360 1145 and2_x1
+xsubckt_421_and2_x1 0 1 253 255 254 and2_x1
+xsubckt_805_or4_x1 0 1 1544 1549 1548 1547 1545 or4_x1
+xsubckt_947_or21nand_x0 0 1 1752 1448 1449 220 or21nand_x0
+xsubckt_1773_and21nor_x0 0 1 700 701 704 712 and21nor_x0
+xsubckt_1567_nor2_x0 0 1 906 25 998 nor2_x0
+xsubckt_1521_nand2_x0 0 1 951 958 954 nand2_x0
+xsubckt_495_and2_x1 0 1 181 183 182 and2_x1
+xsubckt_306_nand3_x0 0 1 367 519 474 376 nand3_x0
+xsubckt_1224_and21nor_x0 0 1 1216 421 417 519 and21nor_x0
+xsubckt_1695_nand3_x0 0 1 778 1851 569 508 nand3_x0
+xsubckt_417_and2_x1 0 1 257 260 258 and2_x1
+xsubckt_826_and3_x1 0 1 1526 1939 569 413 and3_x1
+xsubckt_377_and3_x1 0 1 297 523 515 474 and3_x1
+xsubckt_773_and3_x1 0 1 1573 1840 1625 1615 and3_x1
+xsubckt_935_mux2_x1 0 1 1758 1892 1457 1454 mux2_x1
+xsubckt_1071_and4_x1 0 1 1348 557 453 448 1439 and4_x1
+xsubckt_1704_mux2_x1 0 1 769 774 770 780 mux2_x1
+xsubckt_1641_nand2_x0 0 1 832 834 833 nand2_x0
+xsubckt_1388_nand2_x0 0 1 1079 1849 1192 nand2_x0
+xsubckt_567_nand2_x0 0 1 113 564 116 nand2_x0
+xsubckt_721_and2_x1 0 1 1619 512 1621 and2_x1
+xsubckt_734_and3_x1 0 1 1607 1851 1625 1615 and3_x1
+xsubckt_809_and2_x1 0 1 1541 1921 1616 and2_x1
+xsubckt_854_or2_x1 0 1 1969 1508 1502 or2_x1
+xsubckt_1564_and2_x1 0 1 909 912 910 and2_x1
+xsubckt_1424_and4_x1 0 1 1045 1083 1072 1060 1047 and4_x1
+xsubckt_616_and4_x1 0 1 66 70 69 68 67 and4_x1
+xsubckt_730_nand2_x0 0 1 1610 1612 1611 nand2_x0
+xsubckt_957_nand2_x0 0 1 1440 1828 1451 nand2_x0
+xsubckt_1067_and4_x1 0 1 1352 563 556 451 450 and4_x1
+xsubckt_1094_or3_x1 0 1 1329 547 237 1330 or3_x1
+xsubckt_1769_and21nor_x0 0 1 704 709 707 705 and21nor_x0
+xsubckt_1515_or21nand_x0 0 1 957 1812 467 1620 or21nand_x0
+xsubckt_1498_and4_x1 0 1 974 1256 1230 1224 1215 and4_x1
+xsubckt_1461_nand2_x0 0 1 1011 658 1819 nand2_x0
+xsubckt_1371_nand2_x0 0 1 1094 1791 1097 nand2_x0
+xsubckt_640_nand2_x0 0 1 44 46 45 nand2_x0
+xsubckt_343_nor4_x0 0 1 330 1799 1800 1797 1798 nor4_x0
+xsubckt_119_nand2_x0 0 1 554 563 556 nand2_x0
+xsubckt_33_inv_x0 0 1 632 1840 inv_x0
+xsubckt_32_inv_x0 0 1 633 1841 inv_x0
+xsubckt_31_inv_x0 0 1 634 1842 inv_x0
+xsubckt_30_inv_x0 0 1 635 1843 inv_x0
+xsubckt_246_nand3_x0 0 1 427 595 1796 486 nand3_x0
+xsubckt_1647_mux2_x1 0 1 826 871 828 1018 mux2_x1
+xsubckt_39_inv_x0 0 1 626 1939 inv_x0
+xsubckt_38_inv_x0 0 1 627 1940 inv_x0
+xsubckt_37_inv_x0 0 1 628 1941 inv_x0
+xsubckt_36_inv_x0 0 1 629 1942 inv_x0
+xsubckt_35_inv_x0 0 1 630 1943 inv_x0
+xsubckt_34_inv_x0 0 1 631 1839 inv_x0
+xsubckt_268_and2_x1 0 1 405 408 406 and2_x1
+xsubckt_664_and2_x1 0 1 21 24 22 and2_x1
+xsubckt_677_and3_x1 0 1 1661 14 13 10 and3_x1
+xsubckt_878_mux2_x1 0 1 1481 1482 1871 370 mux2_x1
+xsubckt_994_or21nand_x0 0 1 1410 1452 1417 1411 or21nand_x0
+xsubckt_1761_nexor2_x0 0 1 712 815 714 nexor2_x0
+xsubckt_593_or21nand_x0 0 1 87 1923 513 88 or21nand_x0
+xsubckt_511_and3_x1 0 1 165 298 261 166 and3_x1
+xsubckt_102_and2_x1 0 1 571 1791 654 and2_x1
+xsubckt_1667_nand3_x0 0 1 806 1844 569 508 nand3_x0
+xsubckt_1555_mux2_x1 0 1 918 919 924 931 mux2_x1
+xsubckt_1530_nand3_x0 0 1 942 975 971 947 nand3_x0
+xsubckt_1459_or21nand_x0 0 1 1013 1883 1016 1014 or21nand_x0
+xsubckt_1429_and2_x1 0 1 1041 1846 1192 and2_x1
+xsubckt_1403_nand2_x0 0 1 1065 1919 404 nand2_x0
+xsubckt_1380_and2_x1 0 1 1086 1092 1087 and2_x1
+xsubckt_507_and3_x1 0 1 169 173 172 170 and3_x1
+xsubckt_224_mux2_x1 0 1 449 1859 1868 1856 mux2_x1
+xsubckt_1058_or21nand_x0 0 1 1360 453 1408 1361 or21nand_x0
+xsubckt_1711_and3_x1 0 1 762 947 778 777 and3_x1
+xsubckt_1350_nand3_x0 0 1 1114 1943 565 562 nand3_x0
+xsubckt_1341_and2_x1 0 1 1122 1131 1124 and2_x1
+xsubckt_276_nand3_x0 0 1 397 569 413 398 nand3_x0
+xsubckt_670_nand2_x0 0 1 16 1909 97 nand2_x0
+xsubckt_1703_nand2_x0 0 1 770 977 772 nand2_x0
+xsubckt_1337_and2_x1 0 1 1126 360 1127 and2_x1
+xsubckt_490_nand2_x0 0 1 186 454 223 nand2_x0
+xsubckt_340_and4_x1 0 1 333 1797 596 569 567 and4_x1
+xsubckt_301_and4_x1 0 1 372 1799 598 1797 596 and4_x1
+xsubckt_850_and3_x1 0 1 1505 1936 569 413 and3_x1
+xsubckt_1158_or21nand_x0 0 1 1279 1283 1285 1830 or21nand_x0
+xsubckt_1223_and3_x1 0 1 1217 387 363 209 and3_x1
+xsubckt_1462_or21nand_x0 0 1 1010 1012 1011 1621 or21nand_x0
+xsubckt_222_nand2_x0 0 1 451 1856 1859 nand2_x0
+xsubckt_1080_nand3_x0 0 1 1340 548 238 1359 nand3_x0
+xsubckt_1954_dff_x1 0 1 1921 1670 9 dff_x1
+xsubckt_1953_dff_x1 0 1 1922 1671 9 dff_x1
+xsubckt_1952_dff_x1 0 1 1923 1672 9 dff_x1
+xsubckt_1951_dff_x1 0 1 1925 1673 9 dff_x1
+xsubckt_1950_dff_x1 0 1 1926 1674 9 dff_x1
+xsubckt_1816_mux2_x1 0 1 1665 1916 680 655 mux2_x1
+xsubckt_1729_and2_x1 0 1 744 977 745 and2_x1
+xsubckt_1654_and3_x1 0 1 819 827 823 821 and3_x1
+xsubckt_362_and3_x1 0 1 312 523 474 372 and3_x1
+xsubckt_132_nand2_x0 0 1 541 1856 1863 nand2_x0
+xsubckt_807_and3_x1 0 1 1543 1850 1625 1615 and3_x1
+xsubckt_833_and2_x1 0 1 1520 1918 1616 and2_x1
+xsubckt_920_mux2_x1 0 1 1772 1488 1906 1455 mux2_x1
+xsubckt_1267_and21nor_x0 0 1 1189 1190 1197 1923 and21nor_x0
+xsubckt_1959_dff_x1 0 1 1916 1665 9 dff_x1
+xsubckt_1958_dff_x1 0 1 1917 1666 9 dff_x1
+xsubckt_1957_dff_x1 0 1 1918 1667 9 dff_x1
+xsubckt_1956_dff_x1 0 1 1919 1668 9 dff_x1
+xsubckt_1955_dff_x1 0 1 1920 1669 9 dff_x1
+xsubckt_1794_nexor2_x0 0 1 679 696 692 nexor2_x0
+xsubckt_1602_and2_x1 0 1 871 874 872 and2_x1
+xsubckt_1571_and21nor_x0 0 1 902 903 993 1918 and21nor_x0
+xsubckt_609_nor2_x0 0 1 72 74 73 nor2_x0
+xsubckt_358_and3_x1 0 1 315 349 348 316 and3_x1
+xsubckt_179_nand2_x0 0 1 494 523 496 nand2_x0
+xsubckt_319_and3_x1 0 1 354 519 510 474 and3_x1
+xsubckt_659_nand2_x0 0 1 26 1910 97 nand2_x0
+xsubckt_749_nand2_x0 0 1 1594 53 1642 nand2_x0
+xsubckt_1091_and4_x1 0 1 1332 542 528 448 441 and4_x1
+xsubckt_1161_or21nand_x0 0 1 1276 659 518 416 or21nand_x0
+xsubckt_1200_or2_x1 0 1 1240 1243 1241 or2_x1
+xsubckt_1201_or2_x1 0 1 1239 1250 1240 or2_x1
+xsubckt_1776_nexor2_x0 0 1 697 856 851 nexor2_x0
+xsubckt_1671_and21nor_x0 0 1 802 980 806 805 and21nor_x0
+xsubckt_1662_or21nand_x0 0 1 811 1539 992 577 or21nand_x0
+xsubckt_1643_nand2_x0 0 1 830 977 832 nand2_x0
+xsubckt_1562_and3_x1 0 1 911 947 929 927 and3_x1
+xsubckt_149_and21nor_x0 0 1 524 564 533 525 and21nor_x0
+xsubckt_199_nor2_x0 0 1 474 1791 2 nor2_x0
+xsubckt_661_or2_x1 0 1 24 611 137 or2_x1
+xsubckt_663_or2_x1 0 1 22 645 34 or2_x1
+xsubckt_689_or21nand_x0 0 1 1650 1855 361 92 or21nand_x0
+xsubckt_715_and3_x1 0 1 1625 401 1635 1626 and3_x1
+xsubckt_916_mux2_x1 0 1 1775 1462 1909 1456 mux2_x1
+xsubckt_1022_nand3_x0 0 1 1387 1402 1401 1388 nand3_x0
+xsubckt_1240_mux2_x1 0 1 1697 1961 1942 1210 mux2_x1
+xsubckt_1767_nexor2_x0 0 1 706 719 715 nexor2_x0
+xsubckt_1687_or3_x1 0 1 786 794 791 790 or3_x1
+xsubckt_1597_and3_x1 0 1 876 884 880 878 and3_x1
+xsubckt_191_and4_x1 0 1 482 599 1800 511 483 and4_x1
+xsubckt_201_nand3_x0 0 1 472 520 519 474 nand3_x0
+xsubckt_732_nand2_x0 0 1 1976 1641 1609 nand2_x0
+xsubckt_789_and3_x1 0 1 1559 1838 1625 1615 and3_x1
+xsubckt_863_mux2_x1 0 1 1494 1873 1923 371 mux2_x1
+xsubckt_1188_and2_x1 0 1 1252 381 1256 and2_x1
+xsubckt_1236_mux2_x1 0 1 1701 1965 1930 1210 mux2_x1
+xsubckt_1771_and21nor_x0 0 1 702 819 816 713 and21nor_x0
+xsubckt_1758_nexor2_x0 0 1 715 794 788 nexor2_x0
+xsubckt_1470_and3_x1 0 1 1002 1009 1007 1003 and3_x1
+xsubckt_1463_nand2_x0 0 1 1009 638 1010 nand2_x0
+xsubckt_1444_and4_x1 0 1 1027 360 1504 1029 1028 and4_x1
+xsubckt_1405_and4_x1 0 1 1063 360 1525 1065 1064 and4_x1
+xsubckt_1322_nand3_x0 0 1 1139 1791 1141 1140 nand3_x0
+xsubckt_623_and3_x1 0 1 59 64 63 60 and3_x1
+xsubckt_187_and4_x1 0 1 486 1799 1800 1797 1798 and4_x1
+xsubckt_214_and2_x1 0 1 459 468 460 and2_x1
+xsubckt_299_nand2_x0 0 1 374 523 376 nand2_x0
+xsubckt_642_nand2_x0 0 1 42 1911 97 nand2_x0
+xsubckt_700_or21nand_x0 0 1 1640 519 413 376 or21nand_x0
+xsubckt_945_or21nand_x0 0 1 1753 1450 1449 306 or21nand_x0
+xsubckt_1061_and2_x1 0 1 1357 1397 1358 and2_x1
+xsubckt_1797_nexor2_x0 0 1 676 690 687 nexor2_x0
+xsubckt_1712_nand3_x0 0 1 761 947 778 777 nand3_x0
+xsubckt_1373_nand2_x0 0 1 1093 655 1850 nand2_x0
+xsubckt_638_nand3_x0 0 1 46 1895 109 101 nand3_x0
+xsubckt_583_and4_x1 0 1 97 112 110 106 103 and4_x1
+xsubckt_697_and3_x1 0 1 1643 456 123 1645 and3_x1
+xsubckt_1105_nand2_x0 0 1 1319 425 355 nand2_x0
+xsubckt_1183_mux2_x1 0 1 1707 1953 1831 1791 mux2_x1
+xsubckt_1453_and2_x1 0 1 1019 466 1621 and2_x1
+xsubckt_1313_or21nand_x0 0 1 1686 1157 1150 1148 or21nand_x0
+xsubckt_531_and3_x1 0 1 147 326 251 249 and3_x1
+xsubckt_644_or21nand_x0 0 1 40 132 44 41 or21nand_x0
+xsubckt_413_and4_x1 0 1 261 286 280 274 262 and4_x1
+xsubckt_368_nand3_x0 0 1 306 557 448 308 nand3_x0
+xsubckt_157_and2_x1 0 1 516 1799 598 and2_x1
+xsubckt_118_and2_x1 0 1 555 563 556 and2_x1
+xsubckt_282_nand2_x0 0 1 391 474 393 nand2_x0
+xsubckt_762_nand2_x0 0 1 1582 1584 1583 nand2_x0
+xsubckt_1048_nand4_x0 0 1 1368 563 551 546 545 nand4_x0
+xsubckt_1166_and21nor_x0 0 1 1271 1272 1277 512 and21nor_x0
+xsubckt_1179_mux2_x1 0 1 1259 1260 1925 1267 mux2_x1
+xsubckt_1413_or21nand_x0 0 1 1678 1068 1058 1056 or21nand_x0
+xsubckt_707_nand4_x0 0 1 1633 599 1800 595 511 nand4_x0
+xsubckt_744_or21nand_x0 0 1 1598 1933 1618 1616 or21nand_x0
+xsubckt_1013_mux2_x1 0 1 1740 1416 1812 1452 mux2_x1
+xsubckt_1619_and21nor_x0 0 1 854 947 865 949 and21nor_x0
+xsubckt_1561_or21nand_x0 0 1 912 914 915 951 or21nand_x0
+xsubckt_617_nand4_x0 0 1 65 70 69 68 67 nand4_x0
+xsubckt_321_and4_x1 0 1 352 548 527 453 446 and4_x1
+xsubckt_98_mux2_x1 0 1 573 603 602 655 mux2_x1
+xsubckt_668_nand3_x0 0 1 18 1885 109 102 nand3_x0
+xsubckt_813_or4_x1 0 1 1537 1542 1541 1540 1538 or4_x1
+xsubckt_958_and3_x1 0 1 1439 563 529 443 and3_x1
+xsubckt_1209_or21nand_x0 0 1 1231 1237 1232 1251 or21nand_x0
+xsubckt_1652_nand3_x0 0 1 821 947 840 838 nand3_x0
+xsubckt_395_and4_x1 0 1 279 571 517 512 506 and4_x1
+xsubckt_351_nand3_x0 0 1 322 523 510 474 nand3_x0
+xsubckt_688_or21nand_x0 0 1 1651 1916 513 88 or21nand_x0
+xsubckt_831_and3_x1 0 1 1522 1847 1625 1615 and3_x1
+xsubckt_1045_nand2_x0 0 1 1370 1793 1451 nand2_x0
+xsubckt_1121_and21nor_x0 0 1 1312 565 519 417 and21nor_x0
+xsubckt_1719_and21nor_x0 0 1 754 755 997 93 and21nor_x0
+xsubckt_633_nor2_x0 0 1 50 614 137 nor2_x0
+xsubckt_614_nand2_x0 0 1 68 1905 100 nand2_x0
+xsubckt_591_or21nand_x0 0 1 89 1883 361 92 or21nand_x0
+xsubckt_496_and2_x1 0 1 180 184 181 and2_x1
+xsubckt_398_nand3_x0 0 1 276 478 279 277 nand3_x0
+xsubckt_171_nand3_x0 0 1 502 569 511 504 nand3_x0
+xsubckt_791_and4_x1 0 1 1557 456 123 1645 1558 and4_x1
+xsubckt_940_mux2_x1 0 1 1754 1822 528 655 mux2_x1
+xsubckt_1125_and4_x1 0 1 1308 569 567 566 1309 and4_x1
+xsubckt_1226_and2_x1 0 1 1214 1216 1215 and2_x1
+xsubckt_1661_and2_x1 0 1 812 1539 813 and2_x1
+xsubckt_1658_nexor2_x0 0 1 815 826 820 nexor2_x0
+xsubckt_1622_and2_x1 0 1 851 853 852 and2_x1
+xsubckt_106_nor2_x0 0 1 567 1799 1800 nor2_x0
+xsubckt_901_mux2_x1 0 1 1462 1463 1867 370 mux2_x1
+xsubckt_1543_and3_x1 0 1 930 1840 569 508 and3_x1
+xsubckt_1409_or21nand_x0 0 1 1059 1061 1073 1082 or21nand_x0
+xsubckt_1402_or2_x1 0 1 1066 575 1199 or2_x1
+xsubckt_326_and2_x1 0 1 347 349 348 and2_x1
+xsubckt_660_and4_x1 0 1 25 29 28 27 26 and4_x1
+xsubckt_698_nand3_x0 0 1 1642 456 123 1645 nand3_x0
+xsubckt_849_and2_x1 0 1 1506 1916 1616 and2_x1
+xsubckt_1173_and2_x1 0 1 1265 1267 1266 and2_x1
+xsubckt_1705_mux2_x1 0 1 768 773 771 780 mux2_x1
+xsubckt_1361_or2_x1 0 1 1104 578 1199 or2_x1
+xsubckt_291_nand3_x0 0 1 382 571 523 385 nand3_x0
+xsubckt_1813_or21nand_x0 0 1 1668 668 667 666 or21nand_x0
+xsubckt_1465_nand2_x0 0 1 1007 1925 1008 nand2_x0
+xsubckt_630_nand4_x0 0 1 53 58 57 56 55 nand4_x0
+xsubckt_40_inv_x0 0 1 625 1938 inv_x0
+xsubckt_857_nand4_x0 0 1 1500 659 569 567 566 nand4_x0
+xsubckt_998_nand3_x0 0 1 1407 548 238 1408 nand3_x0
+xsubckt_1016_and3_x1 0 1 1391 563 551 449 and3_x1
+xsubckt_1165_and21nor_x0 0 1 1272 1273 1276 512 and21nor_x0
+xsubckt_1657_or21nand_x0 0 1 816 826 825 822 or21nand_x0
+xsubckt_1499_and4_x1 0 1 973 392 123 1645 1244 and4_x1
+xsubckt_1285_nand2_x0 0 1 1173 663 1853 nand2_x0
+xsubckt_564_and4_x1 0 1 116 423 387 381 328 and4_x1
+xsubckt_554_nand2_x0 0 1 1790 132 126 nand2_x0
+xsubckt_41_inv_x0 0 1 624 1937 inv_x0
+xsubckt_42_inv_x0 0 1 623 1936 inv_x0
+xsubckt_43_inv_x0 0 1 622 1815 inv_x0
+xsubckt_44_inv_x0 0 1 621 1814 inv_x0
+xsubckt_45_inv_x0 0 1 620 1813 inv_x0
+xsubckt_46_inv_x0 0 1 619 1812 inv_x0
+xsubckt_181_and2_x1 0 1 492 497 493 and2_x1
+xsubckt_879_mux2_x1 0 1 1787 1889 1481 1495 mux2_x1
+xsubckt_1675_nand2_x0 0 1 798 977 800 nand2_x0
+xsubckt_1624_nand3_x0 0 1 849 856 853 852 nand3_x0
+xsubckt_1560_or21nand_x0 0 1 913 946 925 948 or21nand_x0
+xsubckt_1473_and2_x1 0 1 999 1256 1015 and2_x1
+xsubckt_587_nand4_x0 0 1 93 99 98 96 95 nand4_x0
+xsubckt_525_and4_x1 0 1 152 386 382 344 341 and4_x1
+xsubckt_47_inv_x0 0 1 618 1811 inv_x0
+xsubckt_48_inv_x0 0 1 617 1838 inv_x0
+xsubckt_49_inv_x0 0 1 616 1837 inv_x0
+xsubckt_186_or21nand_x0 0 1 487 489 509 568 or21nand_x0
+xsubckt_803_nand3_x0 0 1 1546 1942 569 413 nand3_x0
+xsubckt_1195_nand2_x0 0 1 1245 1249 1248 nand2_x0
+xsubckt_1757_or21nand_x0 0 1 716 794 793 790 or21nand_x0
+xsubckt_1556_mux2_x1 0 1 917 920 923 931 mux2_x1
+xsubckt_1469_and2_x1 0 1 1003 1005 1004 and2_x1
+xsubckt_270_nand4_x0 0 1 403 597 1798 569 504 nand4_x0
+xsubckt_764_nand2_x0 0 1 1966 1587 1581 nand2_x0
+xsubckt_852_and21nor_x0 0 1 1503 623 512 1621 and21nor_x0
+xsubckt_891_nand3_x0 0 1 1471 1832 1918 1474 nand3_x0
+xsubckt_1709_or21nand_x0 0 1 764 946 775 948 or21nand_x0
+xsubckt_1495_nand2_x0 0 1 977 981 979 nand2_x0
+xsubckt_139_nand4_x0 0 1 534 555 549 543 537 nand4_x0
+xsubckt_804_and21nor_x0 0 1 1545 629 512 1621 and21nor_x0
+xsubckt_904_and3_x1 0 1 1460 1832 650 644 and3_x1
+xsubckt_982_and3_x1 0 1 1421 563 449 443 and3_x1
+xsubckt_584_nand2_x0 0 1 96 1915 97 nand2_x0
+xsubckt_890_and3_x1 0 1 1472 1832 1918 1474 and3_x1
+xsubckt_1000_nand2_x0 0 1 1405 535 1406 nand2_x0
+xsubckt_1760_or21nand_x0 0 1 713 786 719 717 or21nand_x0
+xsubckt_141_or21nand_x0 0 1 532 563 559 556 or21nand_x0
+xsubckt_226_nand2_x0 0 1 447 563 449 nand2_x0
+xsubckt_692_nor2_x0 0 1 1647 1649 1648 nor2_x0
+xsubckt_1084_nand3_x0 0 1 1337 548 453 1349 nand3_x0
+xsubckt_1211_and2_x1 0 1 1229 1632 1230 and2_x1
+xsubckt_1961_dff_x1 0 1 1927 1663 9 dff_x1
+xsubckt_1960_dff_x1 0 1 1924 1664 9 dff_x1
+xsubckt_347_and21nor_x0 0 1 326 327 474 482 and21nor_x0
+xsubckt_136_nand2_x0 0 1 537 563 539 nand2_x0
+xsubckt_129_mux2_x1 0 1 544 1864 1873 1856 mux2_x1
+xsubckt_653_nor2_x0 0 1 31 39 33 nor2_x0
+xsubckt_847_and3_x1 0 1 1508 1845 1625 1615 and3_x1
+xsubckt_1817_mux2_x1 0 1 1664 1924 699 655 mux2_x1
+xsubckt_1347_nand2_x0 0 1 1117 1838 1192 nand2_x0
+xsubckt_210_and4_x1 0 1 463 595 1796 567 566 and4_x1
+xsubckt_848_and21nor_x0 0 1 1507 572 1631 1630 and21nor_x0
+xsubckt_921_mux2_x1 0 1 1771 1481 1905 1455 mux2_x1
+xsubckt_1120_nand2_x0 0 1 1313 1830 467 nand2_x0
+xsubckt_1812_or21nand_x0 0 1 666 1791 700 697 or21nand_x0
+xsubckt_1723_nand4_x0 0 1 750 1873 1004 974 973 nand4_x0
+xsubckt_1665_and21nor_x0 0 1 808 809 997 65 and21nor_x0
+xsubckt_559_nand4_x0 0 1 121 1797 596 594 567 nand4_x0
+xsubckt_473_nand3_x0 0 1 202 571 519 376 nand3_x0
+xsubckt_206_and4_x1 0 1 467 599 1800 569 566 and4_x1
+xsubckt_917_mux2_x1 0 1 1774 1457 1908 1456 mux2_x1
+xsubckt_1241_mux2_x1 0 1 1696 1974 1941 1210 mux2_x1
+xsubckt_1684_nand3_x0 0 1 789 947 806 805 nand3_x0
+xsubckt_1506_nand3_x0 0 1 966 979 975 971 nand3_x0
+xsubckt_242_nand4_x0 0 1 431 1795 594 486 474 nand4_x0
+xsubckt_949_nand4_x0 0 1 1446 563 559 451 450 nand4_x0
+xsubckt_1077_nand2_x0 0 1 1343 557 549 nand2_x0
+xsubckt_1810_nand2_x0 0 1 668 655 1919 nand2_x0
+xsubckt_1568_or2_x1 0 1 905 574 992 or2_x1
+xsubckt_1326_nand3_x0 0 1 1136 1929 565 562 nand3_x0
+xsubckt_166_nand2_x0 0 1 507 523 508 nand2_x0
+xsubckt_215_and2_x1 0 1 458 475 459 and2_x1
+xsubckt_287_or2_x1 0 1 386 473 387 or2_x1
+xsubckt_777_and2_x1 0 1 1569 1571 1570 and2_x1
+xsubckt_864_mux2_x1 0 1 1789 1891 1494 1495 mux2_x1
+xsubckt_1062_and2_x1 0 1 1356 1360 1357 and2_x1
+xsubckt_1237_mux2_x1 0 1 1700 1964 1929 1210 mux2_x1
+xsubckt_556_nand2_x0 0 1 124 427 363 nand2_x0
+xsubckt_510_and4_x1 0 1 166 244 190 186 167 and4_x1
+xsubckt_695_and21nor_x0 0 1 1645 333 385 519 and21nor_x0
+xsubckt_1467_and3_x1 0 1 1005 456 383 1006 and3_x1
+xsubckt_1392_and4_x1 0 1 1075 360 1532 1077 1076 and4_x1
+xsubckt_1307_or21nand_x0 0 1 1153 1154 1198 646 or21nand_x0
+xsubckt_545_and4_x1 0 1 134 374 335 250 135 and4_x1
+xsubckt_123_and2_x1 0 1 550 563 551 and2_x1
+xsubckt_685_and2_x1 0 1 1654 1656 1655 and2_x1
+xsubckt_941_and4_x1 0 1 1452 1791 569 567 566 and4_x1
+xsubckt_946_nand2_x0 0 1 1448 1811 1451 nand2_x0
+xsubckt_983_nand3_x0 0 1 1420 563 449 443 nand3_x0
+xsubckt_1197_nand2_x0 0 1 1243 123 1244 nand2_x0
+xsubckt_1811_and2_x1 0 1 667 700 697 and2_x1
+xsubckt_1525_nor4_x0 0 1 947 133 958 956 955 nor4_x0
+xsubckt_1455_or21nand_x0 0 1 1017 1803 467 1620 or21nand_x0
+xsubckt_1450_nand2_x0 0 1 1021 1791 1023 nand2_x0
+xsubckt_1360_nand2_x0 0 1 1105 1837 1192 nand2_x0
+xsubckt_795_and21nor_x0 0 1 1553 579 1631 1630 and21nor_x0
+xsubckt_882_nexor2_x0 0 1 1478 647 1479 nexor2_x0
+xsubckt_903_and21nor_x0 0 1 1461 1466 1465 1472 and21nor_x0
+xsubckt_1210_or21nand_x0 0 1 1230 569 508 346 or21nand_x0
+xsubckt_625_nand3_x0 0 1 58 1896 109 101 nand3_x0
+xsubckt_453_and4_x1 0 1 222 453 440 309 285 and4_x1
+xsubckt_440_and3_x1 0 1 235 548 453 310 and3_x1
+xsubckt_1573_nor2_x0 0 1 900 906 901 nor2_x0
+xsubckt_1534_nor2_x0 0 1 939 959 941 nor2_x0
+xsubckt_739_nor3_x0 0 1 1602 1607 1606 1603 nor3_x0
+xsubckt_1049_mux2_x1 0 1 1367 538 549 543 mux2_x1
+xsubckt_1516_and21nor_x0 0 1 956 620 466 1621 and21nor_x0
+xsubckt_462_and2_x1 0 1 213 519 496 and2_x1
+xsubckt_355_nand3_x0 0 1 318 569 510 474 nand3_x0
+xsubckt_114_mux2_x1 0 1 559 1860 1869 1856 mux2_x1
+xsubckt_228_nand2_x0 0 1 445 1856 1858 nand2_x0
+xsubckt_273_xor2_x0 0 1 400 1925 1831 xor2_x0
+xsubckt_318_nand2_x0 0 1 355 519 510 nand2_x0
+xsubckt_821_or4_x1 0 1 1530 1535 1534 1533 1531 or4_x1
+xsubckt_835_nand3_x0 0 1 1518 1938 569 413 nand3_x0
+xsubckt_976_nand2_x0 0 1 1426 307 1428 nand2_x0
+xsubckt_1566_nand3_x0 0 1 907 916 912 910 nand3_x0
+xsubckt_1439_nand2_x0 0 1 1676 1042 1032 nand2_x0
+xsubckt_1425_nand4_x0 0 1 1044 1083 1072 1060 1047 nand4_x0
+xsubckt_1390_nand2_x0 0 1 1077 1920 404 nand2_x0
+xsubckt_604_nand4_x0 0 1 77 82 81 80 79 nand4_x0
+xsubckt_357_and4_x1 0 1 316 337 331 321 317 and4_x1
+xsubckt_265_nand3_x0 0 1 408 519 474 417 nand3_x0
+xsubckt_829_or4_x1 0 1 1523 1528 1527 1526 1524 or4_x1
+xsubckt_867_and3_x1 0 1 1491 1922 1832 1493 and3_x1
+xsubckt_1212_nand2_x0 0 1 1228 1239 1231 nand2_x0
+xsubckt_1263_and21nor_x0 0 1 1193 1207 1198 1195 and21nor_x0
+xsubckt_1819_dff_x1 0 1 1891 1789 9 dff_x1
+xsubckt_1755_or21nand_x0 0 1 718 758 724 722 or21nand_x0
+xsubckt_1510_or21nand_x0 0 1 962 964 987 996 or21nand_x0
+xsubckt_1349_nand2_x0 0 1 1115 1923 404 nand2_x0
+xsubckt_701_and3_x1 0 1 1639 409 360 1640 and3_x1
+xsubckt_876_nexor2_x0 0 1 1483 648 1487 nexor2_x0
+xsubckt_902_mux2_x1 0 1 1783 1885 1462 1495 mux2_x1
+xsubckt_1697_and2_x1 0 1 776 778 777 and2_x1
+xsubckt_1599_or21nand_x0 0 1 874 997 41 44 or21nand_x0
+xsubckt_889_and2_x1 0 1 1473 1832 1474 and2_x1
+xsubckt_1706_mux2_x1 0 1 767 807 769 1018 mux2_x1
+xsubckt_1635_nand4_x0 0 1 838 1870 1004 974 973 nand4_x0
+xsubckt_1610_or21nand_x0 0 1 863 981 869 867 or21nand_x0
+xsubckt_1422_nand2_x0 0 1 1047 1054 1049 nand2_x0
+xsubckt_1416_or2_x1 0 1 1053 574 1199 or2_x1
+xsubckt_1332_nand2_x0 0 1 1130 1791 1131 nand2_x0
+xsubckt_1315_and21nor_x0 0 1 1146 633 403 1193 and21nor_x0
+xsubckt_637_or21nand_x0 0 1 1949 47 54 131 or21nand_x0
+xsubckt_601_nand2_x0 0 1 80 1906 100 nand2_x0
+xsubckt_121_nand2_x0 0 1 552 664 1871 nand2_x0
+xsubckt_213_and3_x1 0 1 460 465 464 461 and3_x1
+xsubckt_258_nand2_x0 0 1 415 523 417 nand2_x0
+xsubckt_284_or21nand_x0 0 1 389 390 479 487 or21nand_x0
+xsubckt_937_mux2_x1 0 1 1757 363 1453 1853 mux2_x1
+xsubckt_992_nand4_x0 0 1 1412 543 537 447 442 nand4_x0
+xsubckt_1418_nand3_x0 0 1 1051 1938 565 562 nand3_x0
+xsubckt_1375_or2_x1 0 1 1091 577 1199 or2_x1
+xsubckt_738_nand2_x0 0 1 1603 1605 1604 nand2_x0
+xsubckt_884_mux2_x1 0 1 1476 1477 1870 370 mux2_x1
+xsubckt_888_nexor2_x0 0 1 1474 1834 1925 nexor2_x0
+xsubckt_1710_or21nand_x0 0 1 763 765 766 951 or21nand_x0
+xsubckt_530_and4_x1 0 1 148 290 289 267 266 and4_x1
+xsubckt_501_and21nor_x0 0 1 175 176 325 474 and21nor_x0
+xsubckt_459_nor3_x0 0 1 216 223 218 217 nor3_x0
+xsubckt_331_nand2_x0 0 1 342 523 343 nand2_x0
+xsubckt_50_inv_x0 0 1 615 1850 inv_x0
+xsubckt_51_inv_x0 0 1 614 1849 inv_x0
+xsubckt_52_inv_x0 0 1 613 1944 inv_x0
+xsubckt_53_inv_x0 0 1 612 1848 inv_x0
+xsubckt_526_and4_x1 0 1 151 321 156 155 152 and4_x1
+xsubckt_454_nand4_x0 0 1 221 453 440 309 285 nand4_x0
+xsubckt_151_nand2_x0 0 1 522 595 1796 nand2_x0
+xsubckt_54_inv_x0 0 1 611 1847 inv_x0
+xsubckt_55_inv_x0 0 1 610 1846 inv_x0
+xsubckt_56_inv_x0 0 1 609 1845 inv_x0
+xsubckt_57_inv_x0 0 1 608 1854 inv_x0
+xsubckt_58_inv_x0 0 1 607 1816 inv_x0
+xsubckt_59_inv_x0 0 1 606 1803 inv_x0
+xsubckt_230_mux2_x1 0 1 443 1858 1867 1856 mux2_x1
+xsubckt_948_nand2_x0 0 1 1447 1829 1451 nand2_x0
+xsubckt_1685_nor2_x0 0 1 788 791 790 nor2_x0
+xsubckt_1452_nand2_x0 0 1 1020 655 1926 nand2_x0
+xsubckt_1362_nand2_x0 0 1 1103 1922 404 nand2_x0
+xsubckt_237_nand3_x0 0 1 436 523 508 474 nand3_x0
+xsubckt_763_nor3_x0 0 1 1581 1586 1585 1582 nor3_x0
+xsubckt_768_nand2_x0 0 1 1577 1868 1622 nand2_x0
+xsubckt_858_nand2_x0 0 1 1499 1816 1501 nand2_x0
+xsubckt_1663_and21nor_x0 0 1 810 811 993 1921 and21nor_x0
+xsubckt_1557_mux2_x1 0 1 916 985 918 1018 mux2_x1
+xsubckt_1382_and2_x1 0 1 1084 1095 1086 and2_x1
+xsubckt_509_and3_x1 0 1 167 184 181 168 and3_x1
+xsubckt_451_nand2_x0 0 1 224 226 225 nand2_x0
+xsubckt_184_nand4_x0 0 1 489 597 1798 569 567 nand4_x0
+xsubckt_1272_nand2_x0 0 1 1185 655 1851 nand2_x0
+xsubckt_1611_nand3_x0 0 1 862 979 868 866 nand3_x0
+xsubckt_1182_nand2_x0 0 1 1708 1261 1257 nand2_x0
+xsubckt_1748_and3_x1 0 1 725 732 729 726 and3_x1
+xsubckt_1634_and4_x1 0 1 839 1870 1004 974 973 and4_x1
+xsubckt_1607_nand4_x0 0 1 866 1869 1004 974 973 nand4_x0
+xsubckt_1431_nand3_x0 0 1 1039 1937 565 562 nand3_x0
+xsubckt_482_and2_x1 0 1 193 490 474 and2_x1
+xsubckt_342_and4_x1 0 1 331 344 341 334 332 and4_x1
+xsubckt_134_mux2_x1 0 1 539 1863 1872 1856 mux2_x1
+xsubckt_271_nand2_x0 0 1 402 474 404 nand2_x0
+xsubckt_927_nand3_x0 0 1 1454 109 101 1496 nand3_x0
+xsubckt_964_nand4_x0 0 1 1435 558 527 447 442 nand4_x0
+xsubckt_1559_and21nor_x0 0 1 914 947 926 949 and21nor_x0
+xsubckt_571_nand2_x0 0 1 109 112 110 nand2_x0
+xsubckt_126_nand4_x0 0 1 547 563 556 553 552 nand4_x0
+xsubckt_267_nand3_x0 0 1 406 571 519 413 nand3_x0
+xsubckt_645_and21nor_x0 0 1 39 634 374 335 and21nor_x0
+xsubckt_1818_mux2_x1 0 1 1663 1927 985 655 mux2_x1
+xsubckt_1526_or4_x1 0 1 946 133 958 956 955 or4_x1
+xsubckt_303_nand2_x0 0 1 370 523 372 nand2_x0
+xsubckt_312_and2_x1 0 1 361 569 372 and2_x1
+xsubckt_657_nand3_x0 0 1 28 1886 109 102 nand3_x0
+xsubckt_784_or21nand_x0 0 1 1563 1928 1618 1616 or21nand_x0
+xsubckt_793_and21nor_x0 0 1 1555 1556 1616 1923 and21nor_x0
+xsubckt_922_mux2_x1 0 1 1770 1476 1904 1455 mux2_x1
+xsubckt_961_nand2_x0 0 1 1437 1806 1451 nand2_x0
+xsubckt_1577_and4_x1 0 1 896 1868 1004 974 973 and4_x1
+xsubckt_1551_nand3_x0 0 1 922 979 929 927 nand3_x0
+xsubckt_1297_or21nand_x0 0 1 1162 1163 1198 647 or21nand_x0
+xsubckt_391_nand2_x0 0 1 283 453 285 nand2_x0
+xsubckt_736_or21nand_x0 0 1 1605 1934 1618 1616 or21nand_x0
+xsubckt_1052_or21nand_x0 0 1 1730 1365 1366 1367 or21nand_x0
+xsubckt_1168_and3_x1 0 1 1270 1804 519 515 and3_x1
+xsubckt_1334_nand2_x0 0 1 1129 655 1839 nand2_x0
+xsubckt_603_and4_x1 0 1 78 82 81 80 79 and4_x1
+xsubckt_209_nand3_x0 0 1 464 523 520 474 nand3_x0
+xsubckt_293_or2_x1 0 1 380 570 381 or2_x1
+xsubckt_308_and2_x1 0 1 365 367 366 and2_x1
+xsubckt_743_and2_x1 0 1 1599 1921 1624 and2_x1
+xsubckt_1002_and3_x1 0 1 1403 557 528 442 and3_x1
+xsubckt_1155_and2_x1 0 1 1281 1285 1282 and2_x1
+xsubckt_1242_mux2_x1 0 1 1695 1973 1940 1210 mux2_x1
+xsubckt_1759_and21nor_x0 0 1 714 787 718 716 and21nor_x0
+xsubckt_1598_nand3_x0 0 1 875 884 880 878 nand3_x0
+xsubckt_1514_and21nor_x0 0 1 958 619 466 1621 and21nor_x0
+xsubckt_1512_and2_x1 0 1 960 1001 961 and2_x1
+xsubckt_1505_or21nand_x0 0 1 967 981 976 972 or21nand_x0
+xsubckt_492_and21nor_x0 0 1 184 185 222 454 and21nor_x0
+xsubckt_1673_mux2_x1 0 1 800 979 981 804 mux2_x1
+xsubckt_1547_and2_x1 0 1 926 929 927 and2_x1
+xsubckt_1472_and3_x1 0 1 1000 425 355 117 and3_x1
+xsubckt_550_and4_x1 0 1 129 599 1800 1796 511 and4_x1
+xsubckt_546_nand4_x0 0 1 133 374 335 250 135 nand4_x0
+xsubckt_460_nand3_x0 0 1 215 234 229 216 nand3_x0
+xsubckt_444_and21nor_x0 0 1 231 564 554 550 and21nor_x0
+xsubckt_419_nand3_x0 0 1 255 571 569 346 nand3_x0
+xsubckt_370_nand3_x0 0 1 304 453 452 307 nand3_x0
+xsubckt_216_and2_x1 0 1 457 519 508 and2_x1
+xsubckt_993_and21nor_x0 0 1 1411 528 237 1412 and21nor_x0
+xsubckt_1238_mux2_x1 0 1 1699 1963 1928 1210 mux2_x1
+xsubckt_1494_and2_x1 0 1 978 981 979 and2_x1
+xsubckt_1468_and3_x1 0 1 1004 425 407 1216 and3_x1
+xsubckt_1420_and2_x1 0 1 1049 1053 1050 and2_x1
+xsubckt_456_nand4_x0 0 1 219 453 452 446 308 nand4_x0
+xsubckt_329_nand3_x0 0 1 344 523 474 346 nand3_x0
+xsubckt_1009_nand4_x0 0 1 1396 548 453 441 1399 nand4_x0
+xsubckt_1050_nand4_x0 0 1 1366 528 447 441 1452 nand4_x0
+xsubckt_544_and21nor_x0 0 1 135 333 372 595 and21nor_x0
+xsubckt_1097_nand4_x0 0 1 1326 563 529 451 450 nand4_x0
+xsubckt_555_and2_x1 0 1 125 427 363 and2_x1
+xsubckt_800_and21nor_x0 0 1 1549 578 1631 1630 and21nor_x0
+xsubckt_1128_nexor2_x0 0 1 1305 1925 1306 nexor2_x0
+xsubckt_1196_or21nand_x0 0 1 1244 569 413 372 or21nand_x0
+xsubckt_576_nand4_x0 0 1 104 592 120 119 114 nand4_x0
+xsubckt_792_and21nor_x0 0 1 1556 630 512 1621 and21nor_x0
+xsubckt_1043_nand3_x0 0 1 1371 528 448 441 nand3_x0
+xsubckt_1219_nand4_x0 0 1 1221 1798 1795 594 504 nand4_x0
+xsubckt_1649_or21nand_x0 0 1 824 946 836 948 or21nand_x0
+xsubckt_1535_nor2_x0 0 1 938 15 998 nor2_x0
+xsubckt_612_nand3_x0 0 1 70 1897 109 101 nand3_x0
+xsubckt_476_and3_x1 0 1 199 202 201 200 and3_x1
+xsubckt_753_nand2_x0 0 1 1590 1870 1622 nand2_x0
+xsubckt_790_nand3_x0 0 1 1558 1943 569 413 nand3_x0
+xsubckt_872_and3_x1 0 1 1487 1832 1834 1924 and3_x1
+xsubckt_1039_nand4_x0 0 1 1374 542 538 1439 1391 nand4_x0
+xsubckt_1170_and4_x1 0 1 1268 657 569 567 566 and4_x1
+xsubckt_1258_and4_x1 0 1 1198 517 415 401 1632 and4_x1
+xsubckt_1825_dff_x1 0 1 1885 1783 9 dff_x1
+xsubckt_1824_dff_x1 0 1 1886 1784 9 dff_x1
+xsubckt_1823_dff_x1 0 1 1887 1785 9 dff_x1
+xsubckt_1822_dff_x1 0 1 1888 1786 9 dff_x1
+xsubckt_1821_dff_x1 0 1 1889 1787 9 dff_x1
+xsubckt_1820_dff_x1 0 1 1890 1788 9 dff_x1
+xsubckt_674_nor2_x0 0 1 12 610 137 nor2_x0
+xsubckt_837_or4_x1 0 1 1516 1521 1520 1519 1517 or4_x1
+xsubckt_1012_and21nor_x0 0 1 1741 1409 1395 1394 and21nor_x0
+xsubckt_1829_dff_x1 0 1 1798 6 9 dff_x1
+xsubckt_1828_dff_x1 0 1 1799 7 9 dff_x1
+xsubckt_1827_dff_x1 0 1 1800 8 9 dff_x1
+xsubckt_1826_dff_x1 0 1 1884 1782 9 dff_x1
+xsubckt_635_nor2_x0 0 1 48 50 49 nor2_x0
+xsubckt_432_nand3_x0 0 1 7 298 261 243 nand3_x0
+xsubckt_844_and21nor_x0 0 1 1510 624 512 1621 and21nor_x0
+xsubckt_855_and2_x1 0 1 1662 1882 1833 and2_x1
+xsubckt_1151_or21nand_x0 0 1 1285 1286 100 607 or21nand_x0
+xsubckt_140_or2_x1 0 1 533 558 534 or2_x1
+xsubckt_963_nand2_x0 0 1 1436 1827 1451 nand2_x0
+xsubckt_1101_and2_x1 0 1 1322 1325 1323 and2_x1
+xsubckt_1613_and21nor_x0 0 1 860 978 863 862 and21nor_x0
+xsubckt_1426_nand2_x0 0 1 1043 1791 1044 nand2_x0
+xsubckt_240_and2_x1 0 1 433 437 434 and2_x1
+xsubckt_938_mux2_x1 0 1 1756 1824 448 655 mux2_x1
+xsubckt_977_mux2_x1 0 1 1744 1427 1830 1452 mux2_x1
+xsubckt_1095_or21nand_x0 0 1 1328 1368 237 547 or21nand_x0
+xsubckt_1752_or21nand_x0 0 1 721 766 765 762 or21nand_x0
+xsubckt_1707_mux2_x1 0 1 766 808 768 1018 mux2_x1
+xsubckt_1448_or21nand_x0 0 1 1023 1025 1036 1044 or21nand_x0
+xsubckt_610_and3_x1 0 1 71 76 75 72 and3_x1
+xsubckt_552_nand3_x0 0 1 127 507 488 128 nand3_x0
+xsubckt_288_and3_x1 0 1 385 1799 598 511 and3_x1
+xsubckt_779_or21nand_x0 0 1 1567 1569 1643 15 or21nand_x0
+xsubckt_1047_or21nand_x0 0 1 1731 1370 1369 1378 or21nand_x0
+xsubckt_1615_mux2_x1 0 1 858 864 859 871 mux2_x1
+xsubckt_1308_nor2_x0 0 1 1152 1156 1153 nor2_x0
+xsubckt_599_nand3_x0 0 1 82 1898 109 101 nand3_x0
+xsubckt_404_nexor2_x0 0 1 270 640 271 nexor2_x0
+xsubckt_60_inv_x0 0 1 605 1874 inv_x0
+xsubckt_691_and21nor_x0 0 1 1648 631 374 335 and21nor_x0
+xsubckt_759_and2_x1 0 1 1585 1919 1624 and2_x1
+xsubckt_885_mux2_x1 0 1 1786 1888 1476 1495 mux2_x1
+xsubckt_1005_and2_x1 0 1 1400 1402 1401 and2_x1
+xsubckt_1083_and2_x1 0 1 1338 590 1451 and2_x1
+xsubckt_1583_nand3_x0 0 1 890 979 897 895 nand3_x0
+xsubckt_1389_or2_x1 0 1 1078 576 1199 or2_x1
+xsubckt_478_or21nand_x0 0 1 197 198 207 278 or21nand_x0
+xsubckt_61_inv_x0 0 1 604 1953 inv_x0
+xsubckt_62_inv_x0 0 1 603 1875 inv_x0
+xsubckt_63_inv_x0 0 1 602 1954 inv_x0
+xsubckt_64_inv_x0 0 1 601 1876 inv_x0
+xsubckt_65_inv_x0 0 1 600 1955 inv_x0
+xsubckt_66_inv_x0 0 1 599 1799 inv_x0
+xsubckt_1451_or21nand_x0 0 1 1675 1031 1022 1021 or21nand_x0
+xsubckt_1449_and3_x1 0 1 1022 1045 1035 1024 and3_x1
+xsubckt_592_and3_x1 0 1 88 618 519 385 and3_x1
+xsubckt_527_and4_x1 0 1 150 257 174 153 151 and4_x1
+xsubckt_514_and3_x1 0 1 162 337 331 253 and3_x1
+xsubckt_155_nand2_x0 0 1 518 1795 594 nand2_x0
+xsubckt_67_inv_x0 0 1 598 1800 inv_x0
+xsubckt_68_inv_x0 0 1 597 1797 inv_x0
+xsubckt_69_inv_x0 0 1 596 1798 inv_x0
+xsubckt_1108_and21nor_x0 0 1 1316 655 425 355 and21nor_x0
+xsubckt_1609_and21nor_x0 0 1 864 980 868 866 and21nor_x0
+xsubckt_588_and3_x1 0 1 92 1811 519 385 and3_x1
+xsubckt_582_nand3_x0 0 1 98 1899 109 101 nand3_x0
+xsubckt_455_nand2_x0 0 1 220 446 308 nand2_x0
+xsubckt_1225_nand3_x0 0 1 1215 597 521 519 nand3_x0
+xsubckt_1276_nand2_x0 0 1 1181 1183 1182 nand2_x0
+xsubckt_1714_and3_x1 0 1 759 767 763 761 and3_x1
+xsubckt_1558_mux2_x1 0 1 915 986 917 1018 mux2_x1
+xsubckt_536_and2_x1 0 1 142 171 143 and2_x1
+xsubckt_100_mux2_x1 0 1 572 605 604 655 mux2_x1
+xsubckt_314_nand3_x0 0 1 359 571 569 372 nand3_x0
+xsubckt_972_nand3_x0 0 1 1429 528 441 1443 nand3_x0
+xsubckt_1379_and2_x1 0 1 1087 1091 1088 and2_x1
+xsubckt_1356_and21nor_x0 0 1 1108 655 1120 1111 and21nor_x0
+xsubckt_620_nor2_x0 0 1 62 615 137 nor2_x0
+xsubckt_261_nand4_x0 0 1 412 1799 598 597 1798 nand4_x0
+xsubckt_678_or21nand_x0 0 1 1946 1661 15 131 or21nand_x0
+xsubckt_687_and21nor_x0 0 1 1652 131 1658 1654 and21nor_x0
+xsubckt_1096_nand2_x0 0 1 1327 1430 1328 nand2_x0
+xsubckt_1396_nand2_x0 0 1 1071 1083 1072 nand2_x0
+xsubckt_330_and3_x1 0 1 343 1797 596 567 and3_x1
+xsubckt_1252_and2_x1 0 1 1204 381 363 and2_x1
+xsubckt_1456_and21nor_x0 0 1 1016 638 466 1621 and21nor_x0
+xsubckt_1287_and2_x1 0 1 1171 1174 1172 and2_x1
+xsubckt_542_and21nor_x0 0 1 137 333 372 523 and21nor_x0
+xsubckt_434_nand3_x0 0 1 241 523 496 474 nand3_x0
+xsubckt_378_and4_x1 0 1 296 548 527 453 309 and4_x1
+xsubckt_801_and2_x1 0 1 1548 1922 1616 and2_x1
+xsubckt_1186_and4_x1 0 1 1254 489 342 329 121 and4_x1
+xsubckt_1248_and2_x1 0 1 1208 239 1632 and2_x1
+xsubckt_1731_mux2_x1 0 1 742 746 744 754 mux2_x1
+xsubckt_381_nand4_x0 0 1 293 557 543 537 452 nand4_x0
+xsubckt_203_nand4_x0 0 1 470 1795 594 567 566 nand4_x0
+xsubckt_217_nand2_x0 0 1 456 519 508 nand2_x0
+xsubckt_254_nand3_x0 0 1 419 569 486 474 nand3_x0
+xsubckt_875_nand2_x0 0 1 1484 648 1486 nand2_x0
+xsubckt_923_mux2_x1 0 1 1769 1475 1903 1455 mux2_x1
+xsubckt_1046_or21nand_x0 0 1 1369 1452 442 527 or21nand_x0
+xsubckt_1194_or21nand_x0 0 1 1246 423 412 522 or21nand_x0
+xsubckt_1625_or2_x1 0 1 848 576 992 or2_x1
+xsubckt_1565_and3_x1 0 1 908 916 912 910 and3_x1
+xsubckt_1428_nand2_x0 0 1 1042 655 1846 nand2_x0
+xsubckt_1302_or21nand_x0 0 1 1687 1166 1160 1158 or21nand_x0
+xsubckt_449_nexor2_x0 0 1 226 542 538 nexor2_x0
+xsubckt_387_and2_x1 0 1 287 292 288 and2_x1
+xsubckt_127_nand2_x0 0 1 546 1856 1864 nand2_x0
+xsubckt_164_nand3_x0 0 1 509 599 1800 511 nand3_x0
+xsubckt_783_and2_x1 0 1 1564 1916 1624 and2_x1
+xsubckt_785_nand2_x0 0 1 1562 1866 1622 nand2_x0
+xsubckt_870_mux2_x1 0 1 1488 1489 1872 370 mux2_x1
+xsubckt_919_mux2_x1 0 1 1773 1494 1907 1455 mux2_x1
+xsubckt_1243_mux2_x1 0 1 1694 1972 1939 1210 mux2_x1
+xsubckt_503_nand4_x0 0 1 173 1795 594 474 330 nand4_x0
+xsubckt_694_or2_x1 0 1 1945 1652 1646 or2_x1
+xsubckt_1021_nand2_x0 0 1 1388 528 1413 nand2_x0
+xsubckt_1042_and3_x1 0 1 1372 528 448 441 and3_x1
+xsubckt_1656_and21nor_x0 0 1 817 827 824 821 and21nor_x0
+xsubckt_665_and3_x1 0 1 20 90 23 21 and3_x1
+xsubckt_1239_mux2_x1 0 1 1698 1962 1943 1210 mux2_x1
+xsubckt_1550_or21nand_x0 0 1 923 981 930 928 or21nand_x0
+xsubckt_1548_nand2_x0 0 1 925 929 927 nand2_x0
+xsubckt_1421_and2_x1 0 1 1048 1054 1049 and2_x1
+xsubckt_1321_nand2_x0 0 1 1140 1149 1142 nand2_x0
+xsubckt_586_and4_x1 0 1 94 99 98 96 95 and4_x1
+xsubckt_480_or21nand_x0 0 1 195 454 236 235 or21nand_x0
+xsubckt_177_and3_x1 0 1 496 597 1798 567 and3_x1
+xsubckt_185_and21nor_x0 0 1 488 490 510 569 and21nor_x0
+xsubckt_652_and2_x1 0 1 32 36 35 and2_x1
+xsubckt_995_nand2_x0 0 1 1742 1414 1410 nand2_x0
+xsubckt_1112_mux2_x1 0 1 1721 1873 1864 1314 mux2_x1
+xsubckt_1756_and21nor_x0 0 1 717 795 792 789 and21nor_x0
+xsubckt_1747_or21nand_x0 0 1 726 740 738 735 or21nand_x0
+xsubckt_508_and4_x1 0 1 168 179 178 175 169 and4_x1
+xsubckt_648_and2_x1 0 1 36 91 37 and2_x1
+xsubckt_1147_mux2_x1 0 1 1288 653 1920 659 mux2_x1
+xsubckt_1708_and21nor_x0 0 1 765 947 776 949 and21nor_x0
+xsubckt_1650_or21nand_x0 0 1 823 825 826 951 or21nand_x0
+xsubckt_457_nand2_x0 0 1 218 221 219 nand2_x0
+xsubckt_1020_mux2_x1 0 1 1738 1424 1803 1452 mux2_x1
+xsubckt_1051_nand2_x0 0 1 1365 1794 1451 nand2_x0
+xsubckt_1278_nand2_x0 0 1 1179 1184 1180 nand2_x0
+xsubckt_1750_or21nand_x0 0 1 723 732 728 727 or21nand_x0
+xsubckt_517_and2_x1 0 1 159 458 160 and2_x1
+xsubckt_494_nand3_x0 0 1 182 571 519 417 nand3_x0
+xsubckt_477_and3_x1 0 1 198 206 203 199 and3_x1
+xsubckt_706_nand3_x0 0 1 1634 136 1639 1636 nand3_x0
+xsubckt_729_or21nand_x0 0 1 1611 1935 1618 1616 or21nand_x0
+xsubckt_1098_nand2_x0 0 1 1325 536 1326 nand2_x0
+xsubckt_1832_dff_x1 0 1 1795 3 9 dff_x1
+xsubckt_1831_dff_x1 0 1 1796 4 9 dff_x1
+xsubckt_1830_dff_x1 0 1 1797 5 9 dff_x1
+xsubckt_1301_or21nand_x0 0 1 1158 1791 1168 1161 or21nand_x0
+xsubckt_632_or21nand_x0 0 1 51 1882 361 92 or21nand_x0
+xsubckt_834_and3_x1 0 1 1519 1938 569 413 and3_x1
+xsubckt_845_or4_x1 0 1 1509 1514 1513 1512 1510 or4_x1
+xsubckt_909_and2_x1 0 1 1456 97 1496 and2_x1
+xsubckt_1837_dff_x1 0 1 1911 1777 9 dff_x1
+xsubckt_1836_dff_x1 0 1 1912 1778 9 dff_x1
+xsubckt_1835_dff_x1 0 1 1913 1779 9 dff_x1
+xsubckt_1834_dff_x1 0 1 1914 1780 9 dff_x1
+xsubckt_1833_dff_x1 0 1 1915 1781 9 dff_x1
+xsubckt_1717_and2_x1 0 1 756 1558 757 and2_x1
+xsubckt_1694_or21nand_x0 0 1 779 782 998 78 or21nand_x0
+xsubckt_1398_nand2_x0 0 1 1069 1071 1070 nand2_x0
+xsubckt_1384_nand4_x0 0 1 1082 1121 1110 1098 1085 nand4_x0
+xsubckt_499_and2_x1 0 1 177 179 178 and2_x1
+xsubckt_436_nand3_x0 0 1 239 569 413 399 nand3_x0
+xsubckt_359_and4_x1 0 1 314 394 356 350 315 and4_x1
+xsubckt_350_nand2_x0 0 1 323 571 325 nand2_x0
+xsubckt_1030_nand3_x0 0 1 1380 1421 1383 1381 nand3_x0
+xsubckt_1193_and3_x1 0 1 1247 1798 519 516 and3_x1
+xsubckt_1839_dff_x1 0 1 1909 1775 9 dff_x1
+xsubckt_1838_dff_x1 0 1 1910 1776 9 dff_x1
+xsubckt_1698_nand2_x0 0 1 775 778 777 nand2_x0
+xsubckt_740_nand2_x0 0 1 1975 1608 1602 nand2_x0
+xsubckt_742_and3_x1 0 1 1600 1844 1625 1615 and3_x1
+xsubckt_817_and2_x1 0 1 1534 1920 1616 and2_x1
+xsubckt_1381_nand2_x0 0 1 1085 1092 1087 nand2_x0
+xsubckt_1089_or21nand_x0 0 1 1724 654 565 663 or21nand_x0
+xsubckt_1189_and3_x1 0 1 1251 1254 1253 1252 and3_x1
+xsubckt_1254_and21nor_x0 0 1 1202 320 508 569 and21nor_x0
+xsubckt_1435_or2_x1 0 1 1035 1041 1037 or2_x1
+xsubckt_1432_and4_x1 0 1 1038 360 1511 1040 1039 and4_x1
+xsubckt_1377_nand3_x0 0 1 1089 1941 565 562 nand3_x0
+xsubckt_1345_or21nand_x0 0 1 1683 1129 1122 1119 or21nand_x0
+xsubckt_519_nand2_x0 0 1 5 163 158 nand2_x0
+xsubckt_939_mux2_x1 0 1 1755 1823 442 655 mux2_x1
+xsubckt_1762_nexor2_x0 0 1 711 814 714 nexor2_x0
+xsubckt_1503_nand2_x0 0 1 969 975 971 nand2_x0
+xsubckt_415_nand4_x0 0 1 259 558 543 537 452 nand4_x0
+xsubckt_325_nand4_x0 0 1 348 558 454 453 452 nand4_x0
+xsubckt_112_nand2_x0 0 1 561 1856 1860 nand2_x0
+xsubckt_290_nand2_x0 0 1 383 523 385 nand2_x0
+xsubckt_886_mux2_x1 0 1 1475 1869 1919 371 mux2_x1
+xsubckt_1060_nand3_x0 0 1 1358 548 453 1359 nand3_x0
+xsubckt_1198_and21nor_x0 0 1 1242 384 518 522 and21nor_x0
+xsubckt_1753_nexor2_x0 0 1 720 766 760 nexor2_x0
+xsubckt_1699_and21nor_x0 0 1 774 980 778 777 and21nor_x0
+xsubckt_1616_mux2_x1 0 1 857 863 860 871 mux2_x1
+xsubckt_1454_and21nor_x0 0 1 1018 606 466 1621 and21nor_x0
+xsubckt_1445_or21nand_x0 0 1 1026 1027 1199 572 or21nand_x0
+xsubckt_1441_and2_x1 0 1 1030 1845 1192 and2_x1
+xsubckt_1323_nand2_x0 0 1 1685 1147 1139 nand2_x0
+xsubckt_532_and4_x1 0 1 146 472 469 408 406 and4_x1
+xsubckt_448_nor2_x0 0 1 227 307 228 nor2_x0
+xsubckt_70_inv_x0 0 1 595 1795 inv_x0
+xsubckt_71_inv_x0 0 1 594 1796 inv_x0
+xsubckt_72_inv_x0 0 1 593 1805 inv_x0
+xsubckt_73_inv_x0 0 1 592 1802 inv_x0
+xsubckt_227_or21nand_x0 0 1 446 563 559 449 or21nand_x0
+xsubckt_235_nand4_x0 0 1 438 453 452 446 440 nand4_x0
+xsubckt_236_and21nor_x0 0 1 437 455 454 439 and21nor_x0
+xsubckt_1006_and2_x1 0 1 1399 528 446 and2_x1
+xsubckt_1092_or21nand_x0 0 1 1331 557 353 1332 or21nand_x0
+xsubckt_1132_mux2_x1 0 1 1301 1302 1867 565 mux2_x1
+xsubckt_1803_nand2_x0 0 1 671 655 1923 nand2_x0
+xsubckt_1792_nexor2_x0 0 1 681 960 941 nexor2_x0
+xsubckt_1593_or21nand_x0 0 1 880 882 883 951 or21nand_x0
+xsubckt_1497_nand3_x0 0 1 975 1839 569 508 nand3_x0
+xsubckt_158_and3_x1 0 1 515 1799 598 566 and3_x1
+xsubckt_145_and2_x1 0 1 528 563 529 and2_x1
+xsubckt_74_inv_x0 0 1 591 1801 inv_x0
+xsubckt_75_inv_x0 0 1 590 1820 inv_x0
+xsubckt_76_inv_x0 0 1 589 1881 inv_x0
+xsubckt_77_inv_x0 0 1 588 1960 inv_x0
+xsubckt_78_inv_x0 0 1 587 1880 inv_x0
+xsubckt_79_inv_x0 0 1 586 1959 inv_x0
+xsubckt_1167_mux2_x1 0 1 1709 1835 1271 1279 mux2_x1
+xsubckt_1310_and2_x1 0 1 1150 1159 1152 and2_x1
+xsubckt_408_nand3_x0 0 1 266 571 519 508 nand3_x0
+xsubckt_90_mux2_x1 0 1 577 585 584 655 mux2_x1
+xsubckt_1143_nand2_x0 0 1 1712 1295 1292 nand2_x0
+xsubckt_1192_or21nand_x0 0 1 1248 413 519 523 or21nand_x0
+xsubckt_1765_nexor2_x0 0 1 708 724 720 nexor2_x0
+xsubckt_1533_nand2_x0 0 1 940 655 1925 nand2_x0
+xsubckt_631_or21nand_x0 0 1 52 1920 513 88 or21nand_x0
+xsubckt_484_and21nor_x0 0 1 191 193 192 503 and21nor_x0
+xsubckt_142_nand2_x0 0 1 531 1856 1857 nand2_x0
+xsubckt_232_nand2_x0 0 1 441 563 443 nand2_x0
+xsubckt_1036_mux2_x1 0 1 1735 1376 1804 1452 mux2_x1
+xsubckt_1801_or21nand_x0 0 1 672 1791 674 673 or21nand_x0
+xsubckt_1702_and2_x1 0 1 771 977 772 and2_x1
+xsubckt_1306_and2_x1 0 1 1154 360 1155 and2_x1
+xsubckt_1292_or21nand_x0 0 1 1688 1176 1168 1167 or21nand_x0
+xsubckt_86_mux2_x1 0 1 579 589 588 655 mux2_x1
+xsubckt_1205_and4_x1 0 1 1235 489 342 212 122 and4_x1
+xsubckt_1795_nexor2_x0 0 1 678 695 692 nexor2_x0
+xsubckt_1786_nexor2_x0 0 1 687 915 909 nexor2_x0
+xsubckt_1489_or21nand_x0 0 1 983 564 509 568 or21nand_x0
+xsubckt_669_nand2_x0 0 1 17 1901 100 nand2_x0
+xsubckt_1253_and2_x1 0 1 1203 1206 1204 and2_x1
+xsubckt_1266_and3_x1 0 1 1190 1935 565 562 and3_x1
+xsubckt_1754_and21nor_x0 0 1 719 759 723 721 and21nor_x0
+xsubckt_1739_nand3_x0 0 1 734 947 752 750 nand3_x0
+xsubckt_1623_and3_x1 0 1 850 856 853 852 and3_x1
+xsubckt_565_nand4_x0 0 1 115 423 387 381 328 nand4_x0
+xsubckt_172_nor2_x0 0 1 501 1925 1794 nor2_x0
+xsubckt_815_and3_x1 0 1 1536 1849 1625 1615 and3_x1
+xsubckt_840_and21nor_x0 0 1 1514 573 1631 1630 and21nor_x0
+xsubckt_841_and2_x1 0 1 1513 1917 1616 and2_x1
+xsubckt_1214_and2_x1 0 1 1226 507 502 and2_x1
+xsubckt_1805_or3_x1 0 1 669 655 725 670 or3_x1
+xsubckt_1768_nexor2_x0 0 1 705 718 715 nexor2_x0
+xsubckt_475_nand4_x0 0 1 200 569 567 566 474 nand4_x0
+xsubckt_353_and2_x1 0 1 320 569 330 and2_x1
+xsubckt_207_nand4_x0 0 1 466 599 1800 569 566 nand4_x0
+xsubckt_723_and3_x1 0 1 1617 507 489 403 and3_x1
+xsubckt_924_mux2_x1 0 1 1768 1469 1902 1455 mux2_x1
+xsubckt_969_nand2_x0 0 1 1432 1826 1451 nand2_x0
+xsubckt_1169_nand3_x0 0 1 1269 1804 519 515 nand3_x0
+xsubckt_1249_and2_x1 0 1 1207 565 563 and2_x1
+xsubckt_1732_mux2_x1 0 1 741 747 743 754 mux2_x1
+xsubckt_1600_or21nand_x0 0 1 873 1525 992 575 or21nand_x0
+xsubckt_1492_or21nand_x0 0 1 980 982 1019 622 or21nand_x0
+xsubckt_401_mux2_x1 0 1 273 1835 1836 1822 mux2_x1
+xsubckt_388_and2_x1 0 1 286 295 287 and2_x1
+xsubckt_1728_mux2_x1 0 1 745 979 981 749 mux2_x1
+xsubckt_1592_or21nand_x0 0 1 881 946 893 948 or21nand_x0
+xsubckt_1293_nand2_x0 0 1 1166 655 1843 nand2_x0
+xsubckt_1288_or21nand_x0 0 1 1170 1171 1198 648 or21nand_x0
+xsubckt_699_nand2_x0 0 1 1641 93 1642 nand2_x0
+xsubckt_758_and3_x1 0 1 1586 1842 1625 1615 and3_x1
+xsubckt_775_or21nand_x0 0 1 1571 1929 1618 1616 or21nand_x0
+xsubckt_871_mux2_x1 0 1 1788 1890 1488 1495 mux2_x1
+xsubckt_952_nand2_x0 0 1 1444 1807 1451 nand2_x0
+xsubckt_1244_mux2_x1 0 1 1693 1971 1938 1210 mux2_x1
+xsubckt_1798_and21nor_x0 0 1 675 709 678 676 and21nor_x0
+xsubckt_1789_or21nand_x0 0 1 684 959 945 943 or21nand_x0
+xsubckt_1553_and21nor_x0 0 1 920 978 923 922 and21nor_x0
+xsubckt_204_nand2_x0 0 1 469 571 471 nand2_x0
+xsubckt_296_and2_x1 0 1 377 1797 596 and2_x1
+xsubckt_811_nand3_x0 0 1 1539 1941 569 413 nand3_x0
+xsubckt_1692_or21nand_x0 0 1 781 784 994 651 or21nand_x0
+xsubckt_1415_nand2_x0 0 1 1054 1847 1192 nand2_x0
+xsubckt_1397_and21nor_x0 0 1 1070 655 1082 1073 and21nor_x0
+xsubckt_130_and2_x1 0 1 543 563 544 and2_x1
+xsubckt_985_nand4_x0 0 1 1418 543 537 527 1420 nand4_x0
+xsubckt_1113_mux2_x1 0 1 1720 1872 1863 1314 mux2_x1
+xsubckt_1152_and21nor_x0 0 1 1284 565 519 515 and21nor_x0
+xsubckt_1291_or21nand_x0 0 1 1167 1791 1178 1169 or21nand_x0
+xsubckt_574_and3_x1 0 1 106 120 119 107 and3_x1
+xsubckt_541_nand3_x0 0 1 3 140 139 138 nand3_x0
+xsubckt_504_nand2_x0 0 1 172 571 428 nand2_x0
+xsubckt_682_nand2_x0 0 1 1657 1660 1659 nand2_x0
+xsubckt_836_and21nor_x0 0 1 1517 625 512 1621 and21nor_x0
+xsubckt_1148_mux2_x1 0 1 1287 1288 1870 409 mux2_x1
+xsubckt_310_nand4_x0 0 1 363 1797 596 569 504 nand4_x0
+xsubckt_1004_nand3_x0 0 1 1401 532 453 1439 nand3_x0
+xsubckt_1109_mux2_x1 0 1 1315 1319 1856 1317 mux2_x1
+xsubckt_1541_nor2_x0 0 1 932 938 933 nor2_x0
+xsubckt_1491_mux2_x1 0 1 981 983 622 1019 mux2_x1
+xsubckt_596_and2_x1 0 1 84 87 86 and2_x1
+xsubckt_978_nand3_x0 0 1 1425 542 538 308 nand3_x0
+xsubckt_979_and4_x1 0 1 1424 542 538 527 442 and4_x1
+xsubckt_1056_mux2_x1 0 1 1729 1362 1818 1452 mux2_x1
+xsubckt_1365_and2_x1 0 1 1100 1104 1101 and2_x1
+xsubckt_1355_nand2_x0 0 1 1109 1121 1110 nand2_x0
+xsubckt_1290_and3_x1 0 1 1168 1187 1179 1169 and3_x1
+xsubckt_518_and2_x1 0 1 158 196 159 and2_x1
+xsubckt_443_and3_x1 0 1 232 304 300 233 and3_x1
+xsubckt_430_and2_x1 0 1 244 257 245 and2_x1
+xsubckt_379_and21nor_x0 0 1 295 297 296 454 and21nor_x0
+xsubckt_1745_nand2_x0 0 1 728 731 730 nand2_x0
+xsubckt_1659_nexor2_x0 0 1 814 827 820 nexor2_x0
+xsubckt_1549_and21nor_x0 0 1 924 980 929 927 and21nor_x0
+xsubckt_1304_and21nor_x0 0 1 1156 634 403 1193 and21nor_x0
+xsubckt_1299_and4_x1 0 1 1160 1187 1179 1169 1161 and4_x1
+xsubckt_465_and2_x1 0 1 210 212 211 and2_x1
+xsubckt_117_mux2_x1 0 1 556 1861 1870 1856 mux2_x1
+xsubckt_1139_or21nand_x0 0 1 1295 1865 1300 1298 or21nand_x0
+xsubckt_1251_nand4_x0 0 1 1205 599 1800 594 566 nand4_x0
+xsubckt_1844_dff_x1 0 1 1904 1770 9 dff_x1
+xsubckt_1843_dff_x1 0 1 1905 1771 9 dff_x1
+xsubckt_1842_dff_x1 0 1 1906 1772 9 dff_x1
+xsubckt_1841_dff_x1 0 1 1907 1773 9 dff_x1
+xsubckt_1840_dff_x1 0 1 1908 1774 9 dff_x1
+xsubckt_1604_and3_x1 0 1 869 1842 569 508 and3_x1
+xsubckt_481_nand3_x0 0 1 194 519 496 474 nand3_x0
+xsubckt_479_and21nor_x0 0 1 196 197 214 571 and21nor_x0
+xsubckt_426_and2_x1 0 1 248 251 249 and2_x1
+xsubckt_200_or2_x1 0 1 473 1791 2 or2_x1
+xsubckt_676_nor2_x0 0 1 10 12 11 nor2_x0
+xsubckt_853_or4_x1 0 1 1502 1507 1506 1505 1503 or4_x1
+xsubckt_1085_nand2_x0 0 1 1336 238 1372 nand2_x0
+xsubckt_1208_and3_x1 0 1 1232 1255 1235 1233 and3_x1
+xsubckt_1849_dff_x1 0 1 1899 1765 9 dff_x1
+xsubckt_1848_dff_x1 0 1 1900 1766 9 dff_x1
+xsubckt_1847_dff_x1 0 1 1901 1767 9 dff_x1
+xsubckt_1846_dff_x1 0 1 1902 1768 9 dff_x1
+xsubckt_1845_dff_x1 0 1 1903 1769 9 dff_x1
+xsubckt_1788_or21nand_x0 0 1 685 907 691 689 or21nand_x0
+xsubckt_386_and3_x1 0 1 288 291 290 289 and3_x1
+xsubckt_233_and4_x1 0 1 440 563 531 530 443 and4_x1
+xsubckt_250_nand4_x0 0 1 423 1799 598 569 566 nand4_x0
+xsubckt_264_nand2_x0 0 1 409 519 417 nand2_x0
+xsubckt_782_and3_x1 0 1 1565 1839 1625 1615 and3_x1
+xsubckt_1626_and2_x1 0 1 847 1532 848 and2_x1
+xsubckt_1385_nand2_x0 0 1 1081 1791 1082 nand2_x0
+xsubckt_513_nand3_x0 0 1 163 240 196 164 nand3_x0
+xsubckt_1749_and21nor_x0 0 1 724 733 729 726 and21nor_x0
+xsubckt_1504_and21nor_x0 0 1 968 980 975 971 and21nor_x0
+xsubckt_474_nand2_x0 0 1 201 474 471 nand2_x0
+xsubckt_423_nand3_x0 0 1 251 571 519 510 nand3_x0
+xsubckt_1103_and21nor_x0 0 1 1320 1451 1327 1321 and21nor_x0
+xsubckt_1138_and2_x1 0 1 1296 1299 1297 and2_x1
+xsubckt_1154_nand3_x0 0 1 1282 409 1313 1284 nand3_x0
+xsubckt_1544_nand3_x0 0 1 929 1840 569 508 nand3_x0
+xsubckt_1507_nand2_x0 0 1 965 967 966 nand2_x0
+xsubckt_1447_or2_x1 0 1 1024 1030 1026 or2_x1
+xsubckt_333_nand3_x0 0 1 340 519 474 346 nand3_x0
+xsubckt_1064_nand3_x0 0 1 1354 1360 1357 1355 nand3_x0
+xsubckt_1191_nand4_x0 0 1 1249 1799 598 594 566 nand4_x0
+xsubckt_1617_mux2_x1 0 1 856 899 858 1018 mux2_x1
+xsubckt_1569_and2_x1 0 1 904 1518 905 and2_x1
+xsubckt_1417_nand2_x0 0 1 1052 1918 404 nand2_x0
+xsubckt_572_and4_x1 0 1 108 1821 569 567 566 and4_x1
+xsubckt_533_and4_x1 0 1 145 367 366 340 338 and4_x1
+xsubckt_150_and2_x1 0 1 523 595 1796 and2_x1
+xsubckt_137_and4_x1 0 1 536 563 544 541 540 and4_x1
+xsubckt_116_nand2_x0 0 1 557 563 559 nand2_x0
+xsubckt_80_inv_x0 0 1 585 1879 inv_x0
+xsubckt_163_and3_x1 0 1 510 599 1800 511 and3_x1
+xsubckt_887_mux2_x1 0 1 1785 1887 1475 1495 mux2_x1
+xsubckt_905_nexor2_x0 0 1 1459 642 1460 nexor2_x0
+xsubckt_987_nand4_x0 0 1 1416 1426 1425 1423 1418 nand4_x0
+xsubckt_1133_mux2_x1 0 1 1713 1301 1836 1307 mux2_x1
+xsubckt_85_inv_x0 0 1 580 1956 inv_x0
+xsubckt_84_inv_x0 0 1 581 1877 inv_x0
+xsubckt_83_inv_x0 0 1 582 1957 inv_x0
+xsubckt_82_inv_x0 0 1 583 1878 inv_x0
+xsubckt_81_inv_x0 0 1 584 1958 inv_x0
+xsubckt_673_or21nand_x0 0 1 13 1836 361 92 or21nand_x0
+xsubckt_684_nand2_x0 0 1 1655 1908 97 nand2_x0
+xsubckt_1100_nand2_x0 0 1 1323 1352 1324 nand2_x0
+xsubckt_1400_nand2_x0 0 1 1068 655 1848 nand2_x0
+xsubckt_634_and21nor_x0 0 1 49 635 374 335 and21nor_x0
+xsubckt_107_and2_x1 0 1 566 1797 1798 and2_x1
+xsubckt_89_inv_x0 0 1 1872 578 inv_x0
+xsubckt_87_inv_x0 0 1 1873 579 inv_x0
+xsubckt_731_nor3_x0 0 1 1609 1614 1613 1610 nor3_x0
+xsubckt_1041_mux2_x1 0 1 1733 1373 1819 1452 mux2_x1
+xsubckt_1274_nand3_x0 0 1 1183 1934 565 562 nand3_x0
+xsubckt_1804_and21nor_x0 0 1 670 729 726 732 and21nor_x0
+xsubckt_1720_and3_x1 0 1 753 1852 569 508 and3_x1
+xsubckt_702_nand4_x0 0 1 1638 1797 1795 594 567 nand4_x0
+xsubckt_843_nand3_x0 0 1 1511 1937 569 413 nand3_x0
+xsubckt_1700_nand2_x0 0 1 773 981 775 nand2_x0
+xsubckt_1648_and21nor_x0 0 1 825 947 837 949 and21nor_x0
+xsubckt_1639_or21nand_x0 0 1 834 981 841 839 or21nand_x0
+xsubckt_1357_nand2_x0 0 1 1107 1109 1108 nand2_x0
+xsubckt_1343_nand4_x0 0 1 1120 1149 1142 1133 1123 nand4_x0
+xsubckt_538_and2_x1 0 1 140 177 141 and2_x1
+xsubckt_450_and2_x1 0 1 225 557 285 and2_x1
+xsubckt_437_and4_x1 0 1 238 563 546 545 539 and4_x1
+xsubckt_146_nand2_x0 0 1 527 563 529 nand2_x0
+xsubckt_1037_mux2_x1 0 1 1734 1382 1833 1386 mux2_x1
+xsubckt_1130_nand2_x0 0 1 1303 1810 1917 nand2_x0
+xsubckt_1220_nand2_x0 0 1 1220 209 1221 nand2_x0
+xsubckt_1542_or21nand_x0 0 1 931 934 998 15 or21nand_x0
+xsubckt_1386_or21nand_x0 0 1 1680 1093 1084 1081 or21nand_x0
+xsubckt_622_nor2_x0 0 1 60 62 61 nor2_x0
+xsubckt_361_inv_x0 0 1 8 313 inv_x0
+xsubckt_1040_nand2_x0 0 1 1373 1375 1374 nand2_x0
+xsubckt_1690_or21nand_x0 0 1 783 1546 992 578 or21nand_x0
+xsubckt_1430_nand2_x0 0 1 1040 1917 404 nand2_x0
+xsubckt_1338_or21nand_x0 0 1 1125 1126 1198 642 or21nand_x0
+xsubckt_569_nand4_x0 0 1 111 1820 569 567 566 nand4_x0
+xsubckt_446_and2_x1 0 1 229 232 230 and2_x1
+xsubckt_1215_and2_x1 0 1 1225 466 392 and2_x1
+xsubckt_367_and3_x1 0 1 307 557 448 308 and3_x1
+xsubckt_266_nand2_x0 0 1 407 519 413 nand2_x0
+xsubckt_746_nand2_x0 0 1 1596 1598 1597 nand2_x0
+xsubckt_873_nand3_x0 0 1 1486 1832 1834 1924 nand3_x0
+xsubckt_959_nand4_x0 0 1 1438 548 453 1452 1439 nand4_x0
+xsubckt_973_or21nand_x0 0 1 1745 1432 1429 1449 or21nand_x0
+xsubckt_1733_mux2_x1 0 1 740 780 742 1018 mux2_x1
+xsubckt_1730_nand2_x0 0 1 743 977 745 nand2_x0
+xsubckt_1545_and4_x1 0 1 928 1867 1004 974 973 and4_x1
+xsubckt_1387_nand2_x0 0 1 1080 655 1849 nand2_x0
+xsubckt_1336_nand3_x0 0 1 1127 1928 565 562 nand3_x0
+xsubckt_402_mux2_x1 0 1 272 1883 1855 1822 mux2_x1
+xsubckt_315_and2_x1 0 1 358 362 359 and2_x1
+xsubckt_693_nand3_x0 0 1 1646 1651 1650 1647 nand3_x0
+xsubckt_925_mux2_x1 0 1 1767 1462 1901 1455 mux2_x1
+xsubckt_1250_nand2_x0 0 1 1206 565 563 nand2_x0
+xsubckt_1751_and21nor_x0 0 1 722 767 764 761 and21nor_x0
+xsubckt_425_nand3_x0 0 1 249 519 474 385 nand3_x0
+xsubckt_275_and3_x1 0 1 398 1791 654 400 and3_x1
+xsubckt_672_or21nand_x0 0 1 14 1917 513 88 or21nand_x0
+xsubckt_1057_and4_x1 0 1 1361 550 528 447 441 and4_x1
+xsubckt_1202_and21nor_x0 0 1 1238 522 514 384 and21nor_x0
+xsubckt_1538_or21nand_x0 0 1 935 1511 992 573 or21nand_x0
+xsubckt_1460_nand2_x0 0 1 1012 1825 467 nand2_x0
+xsubckt_335_nand3_x0 0 1 338 571 519 343 nand3_x0
+xsubckt_208_nand2_x0 0 1 465 474 467 nand2_x0
+xsubckt_892_nexor2_x0 0 1 1470 645 1473 nexor2_x0
+xsubckt_942_nand4_x0 0 1 1451 1791 569 567 566 nand4_x0
+xsubckt_1015_nand4_x0 0 1 1392 548 527 448 238 nand4_x0
+xsubckt_1245_mux2_x1 0 1 1692 1970 1937 1210 mux2_x1
+xsubckt_1676_mux2_x1 0 1 797 802 798 808 mux2_x1
+xsubckt_624_or21nand_x0 0 1 1950 59 66 131 or21nand_x0
+xsubckt_192_nand4_x0 0 1 481 599 1800 511 483 nand4_x0
+xsubckt_219_and2_x1 0 1 454 571 565 and2_x1
+xsubckt_776_nand2_x0 0 1 1570 1867 1622 nand2_x0
+xsubckt_781_and21nor_x0 0 1 1566 1643 1654 1658 and21nor_x0
+xsubckt_883_nexor2_x0 0 1 1477 1480 1478 nexor2_x0
+xsubckt_1066_and2_x1 0 1 1353 591 1451 and2_x1
+xsubckt_1137_or21nand_x0 0 1 1297 212 1501 1312 or21nand_x0
+xsubckt_1686_nor3_x0 0 1 787 794 791 790 nor3_x0
+xsubckt_1423_and2_x1 0 1 1046 1057 1048 and2_x1
+xsubckt_1294_and21nor_x0 0 1 1165 635 403 1193 and21nor_x0
+xsubckt_540_and3_x1 0 1 138 350 195 194 and3_x1
+xsubckt_429_and21nor_x0 0 1 245 246 256 454 and21nor_x0
+xsubckt_654_and2_x1 0 1 30 32 31 and2_x1
+xsubckt_686_nand2_x0 0 1 1653 1656 1655 nand2_x0
+xsubckt_865_nexor2_x0 0 1 1493 1834 1924 nexor2_x0
+xsubckt_1114_mux2_x1 0 1 1719 1871 1862 1314 mux2_x1
+xsubckt_1670_nand2_x0 0 1 803 806 805 nand2_x0
+xsubckt_1580_nand2_x0 0 1 893 897 895 nand2_x0
+xsubckt_562_and2_x1 0 1 118 381 328 and2_x1
+xsubckt_971_and3_x1 0 1 1430 528 441 1443 and3_x1
+xsubckt_984_and4_x1 0 1 1419 543 537 527 1420 and4_x1
+xsubckt_1008_nand3_x0 0 1 1397 548 453 1399 nand3_x0
+xsubckt_1124_nor3_x0 0 1 1309 1810 1833 1826 nor3_x0
+xsubckt_1135_nand4_x0 0 1 1299 641 593 519 496 nand4_x0
+xsubckt_1149_mux2_x1 0 1 1711 1287 1882 1289 mux2_x1
+xsubckt_1740_and3_x1 0 1 733 739 736 734 and3_x1
+xsubckt_1576_nand3_x0 0 1 897 1841 569 508 nand3_x0
+xsubckt_747_nor3_x0 0 1 1595 1600 1599 1596 nor3_x0
+xsubckt_1366_and2_x1 0 1 1099 1105 1100 and2_x1
+xsubckt_628_nand2_x0 0 1 55 1912 97 nand2_x0
+xsubckt_558_and2_x1 0 1 122 470 462 and2_x1
+xsubckt_483_and3_x1 0 1 192 1791 654 498 and3_x1
+xsubckt_122_mux2_x1 0 1 551 1862 1871 1856 mux2_x1
+xsubckt_877_nexor2_x0 0 1 1482 1490 1483 nexor2_x0
+xsubckt_1612_nand2_x0 0 1 861 863 862 nand2_x0
+xsubckt_1485_or21nand_x0 0 1 987 990 994 642 or21nand_x0
+xsubckt_1359_nand2_x0 0 1 1106 655 1837 nand2_x0
+xsubckt_1327_and2_x1 0 1 1135 360 1136 and2_x1
+xsubckt_311_nand2_x0 0 1 362 474 364 nand2_x0
+xsubckt_1093_and21nor_x0 0 1 1330 311 1439 446 and21nor_x0
+xsubckt_1213_and3_x1 0 1 1227 130 1632 1230 and3_x1
+xsubckt_1851_dff_x1 0 1 1897 1763 9 dff_x1
+xsubckt_1850_dff_x1 0 1 1898 1764 9 dff_x1
+xsubckt_1683_and3_x1 0 1 790 947 806 805 and3_x1
+xsubckt_365_and4_x1 0 1 309 563 561 560 449 and4_x1
+xsubckt_352_and3_x1 0 1 321 326 323 322 and3_x1
+xsubckt_131_nand2_x0 0 1 542 563 544 nand2_x0
+xsubckt_307_nand3_x0 0 1 366 571 519 372 nand3_x0
+xsubckt_1038_nand3_x0 0 1 1375 548 453 1403 nand3_x0
+xsubckt_1134_and4_x1 0 1 1300 641 593 519 496 and4_x1
+xsubckt_1857_dff_x1 0 1 1853 1757 9 dff_x1
+xsubckt_1856_dff_x1 0 1 1892 1758 9 dff_x1
+xsubckt_1855_dff_x1 0 1 1893 1759 9 dff_x1
+xsubckt_1854_dff_x1 0 1 1894 1760 9 dff_x1
+xsubckt_1853_dff_x1 0 1 1895 1761 9 dff_x1
+xsubckt_1852_dff_x1 0 1 1896 1762 9 dff_x1
+xsubckt_1446_nor2_x0 0 1 1025 1030 1026 nor2_x0
+xsubckt_193_nor2_x0 0 1 480 485 482 nor2_x0
+xsubckt_748_nand2_x0 0 1 1968 1601 1595 nand2_x0
+xsubckt_910_mux2_x1 0 1 1781 1494 1915 1456 mux2_x1
+xsubckt_1859_dff_x1 0 1 1824 1756 9 dff_x1
+xsubckt_1858_dff_x1 0 1 1854 1792 9 dff_x1
+xsubckt_348_and3_x1 0 1 325 595 1796 330 and3_x1
+xsubckt_234_and4_x1 0 1 439 453 452 446 440 and4_x1
+xsubckt_658_nand2_x0 0 1 27 1902 100 nand2_x0
+xsubckt_705_and3_x1 0 1 1635 136 1639 1636 and3_x1
+xsubckt_1104_or2_x1 0 1 1723 1333 1320 or2_x1
+xsubckt_464_nand4_x0 0 1 211 598 1795 594 511 nand4_x0
+xsubckt_341_nand2_x0 0 1 332 571 333 nand2_x0
+xsubckt_173_or2_x1 0 1 500 1925 1794 or2_x1
+xsubckt_256_and3_x1 0 1 417 597 1798 504 and3_x1
+xsubckt_269_and4_x1 0 1 404 597 1798 569 504 and4_x1
+xsubckt_771_or21nand_x0 0 1 1574 1576 1643 25 or21nand_x0
+xsubckt_968_or21nand_x0 0 1 1746 1434 1433 1449 or21nand_x0
+xsubckt_1785_or21nand_x0 0 1 688 915 914 911 or21nand_x0
+xsubckt_1552_nand2_x0 0 1 921 923 922 nand2_x0
+xsubckt_1540_or21nand_x0 0 1 933 936 994 643 or21nand_x0
+xsubckt_1411_nand3_x0 0 1 1057 1083 1072 1060 nand3_x0
+xsubckt_374_nand4_x0 0 1 300 453 452 440 309 nand4_x0
+xsubckt_161_nand2_x0 0 1 512 519 515 nand2_x0
+xsubckt_641_nand2_x0 0 1 43 1903 100 nand2_x0
+xsubckt_727_and2_x1 0 1 1613 1923 1624 and2_x1
+xsubckt_766_and2_x1 0 1 1579 1918 1624 and2_x1
+xsubckt_944_nand4_x0 0 1 1449 555 549 453 1452 nand4_x0
+xsubckt_1017_nand4_x0 0 1 1390 542 538 527 1391 nand4_x0
+xsubckt_1090_and2_x1 0 1 1333 1816 1451 and2_x1
+xsubckt_1199_or3_x1 0 1 1241 1247 1246 1242 or3_x1
+xsubckt_1746_and21nor_x0 0 1 727 739 737 734 and21nor_x0
+xsubckt_1737_or21nand_x0 0 1 736 738 740 951 or21nand_x0
+xsubckt_190_and2_x1 0 1 483 1795 1796 and2_x1
+xsubckt_239_and2_x1 0 1 434 436 435 and2_x1
+xsubckt_278_and2_x1 0 1 395 405 396 and2_x1
+xsubckt_880_and21nor_x0 0 1 1480 1485 1484 1491 and21nor_x0
+xsubckt_1086_and2_x1 0 1 1335 1337 1336 and2_x1
+xsubckt_1099_and3_x1 0 1 1324 528 526 441 and3_x1
+xsubckt_1621_nand3_x0 0 1 852 947 868 866 nand3_x0
+xsubckt_1618_mux2_x1 0 1 855 900 857 1018 mux2_x1
+xsubckt_1482_and2_x1 0 1 990 1504 991 and2_x1
+xsubckt_1342_and4_x1 0 1 1121 1149 1142 1133 1123 and4_x1
+xsubckt_1282_nand2_x0 0 1 1176 655 1844 nand2_x0
+xsubckt_560_and3_x1 0 1 120 123 122 121 and3_x1
+xsubckt_534_and4_x1 0 1 144 148 147 146 145 and4_x1
+xsubckt_461_nand2_x0 0 1 214 239 215 nand2_x0
+xsubckt_93_inv_x0 0 1 1870 576 inv_x0
+xsubckt_91_inv_x0 0 1 1871 577 inv_x0
+xsubckt_832_and21nor_x0 0 1 1521 574 1631 1630 and21nor_x0
+xsubckt_1672_nand2_x0 0 1 801 981 803 nand2_x0
+xsubckt_1601_and21nor_x0 0 1 872 873 993 1919 and21nor_x0
+xsubckt_619_or21nand_x0 0 1 63 1865 361 92 or21nand_x0
+xsubckt_103_nand2_x0 0 1 570 1791 654 nand2_x0
+xsubckt_99_inv_x0 0 1 1867 573 inv_x0
+xsubckt_97_inv_x0 0 1 1868 574 inv_x0
+xsubckt_95_inv_x0 0 1 1869 575 inv_x0
+xsubckt_1144_nor3_x0 0 1 1291 1810 1828 1806 nor3_x0
+xsubckt_1314_nand2_x0 0 1 1147 655 1841 nand2_x0
+xsubckt_1300_nand4_x0 0 1 1159 1187 1179 1169 1161 nand4_x0
+xsubckt_543_and2_x1 0 1 136 374 335 and2_x1
+xsubckt_92_mux2_x1 0 1 576 583 582 655 mux2_x1
+xsubckt_761_nand2_x0 0 1 1583 1869 1622 nand2_x0
+xsubckt_767_or21nand_x0 0 1 1578 1930 1618 1616 or21nand_x0
+xsubckt_898_nand2_x0 0 1 1465 643 1467 nand2_x0
+xsubckt_581_nand2_x0 0 1 99 1907 100 nand2_x0
+xsubckt_539_and2_x1 0 1 139 437 299 and2_x1
+xsubckt_375_and21nor_x0 0 1 299 302 301 454 and21nor_x0
+xsubckt_366_or21nand_x0 0 1 308 563 529 443 or21nand_x0
+xsubckt_667_nand3_x0 0 1 19 1893 109 101 nand3_x0
+xsubckt_1741_nand3_x0 0 1 732 739 736 734 nand3_x0
+xsubckt_1614_nand2_x0 0 1 859 977 861 nand2_x0
+xsubckt_412_and2_x1 0 1 262 265 263 and2_x1
+xsubckt_88_mux2_x1 0 1 578 587 586 655 mux2_x1
+xsubckt_313_nand2_x0 0 1 360 569 372 nand2_x0
+xsubckt_860_and3_x1 0 1 1497 125 1638 1498 and3_x1
+xsubckt_974_and2_x1 0 1 1428 550 453 and2_x1
+xsubckt_1207_and4_x1 0 1 1233 339 118 1645 1234 and4_x1
+xsubckt_1693_and21nor_x0 0 1 780 781 997 77 and21nor_x0
+xsubckt_1524_nand2_x0 0 1 948 957 953 nand2_x0
+xsubckt_486_and2_x1 0 1 189 394 347 and2_x1
+xsubckt_372_and3_x1 0 1 302 519 474 372 and3_x1
+xsubckt_346_and4_x1 0 1 327 1791 654 483 330 and4_x1
+xsubckt_133_nand2_x0 0 1 540 664 1872 nand2_x0
+xsubckt_221_or21nand_x0 0 1 452 563 556 551 or21nand_x0
+xsubckt_223_nand2_x0 0 1 450 664 1868 nand2_x0
+xsubckt_828_and21nor_x0 0 1 1524 626 512 1621 and21nor_x0
+xsubckt_895_and3_x1 0 1 1468 1832 1834 1925 and3_x1
+xsubckt_967_nand3_x0 0 1 1433 527 442 1443 nand3_x0
+xsubckt_1081_nand3_x0 0 1 1339 351 1341 1340 nand3_x0
+xsubckt_1268_and3_x1 0 1 1188 1200 1191 1189 and3_x1
+xsubckt_1471_nand3_x0 0 1 1001 1018 1013 1002 nand3_x0
+xsubckt_1344_nand2_x0 0 1 1119 1791 1120 nand2_x0
+xsubckt_703_and4_x1 0 1 1637 1797 1795 594 567 and4_x1
+xsubckt_930_mux2_x1 0 1 1763 1897 1481 1454 mux2_x1
+xsubckt_1102_and3_x1 0 1 1321 1331 1329 1322 and3_x1
+xsubckt_1736_or21nand_x0 0 1 737 946 748 948 or21nand_x0
+xsubckt_470_nand3_x0 0 1 205 571 523 376 nand3_x0
+xsubckt_241_and3_x1 0 1 432 475 459 433 and3_x1
+xsubckt_806_or2_x1 0 1 1961 1550 1544 or2_x1
+xsubckt_926_mux2_x1 0 1 1766 1457 1900 1455 mux2_x1
+xsubckt_1088_and21nor_x0 0 1 1725 1338 1334 1452 and21nor_x0
+xsubckt_1734_mux2_x1 0 1 739 779 741 1018 mux2_x1
+xsubckt_1608_and2_x1 0 1 865 868 866 and2_x1
+xsubckt_1520_and2_x1 0 1 952 958 954 and2_x1
+xsubckt_1309_or2_x1 0 1 1151 1156 1153 or2_x1
+xsubckt_466_nand4_x0 0 1 209 597 1798 595 504 nand4_x0
+xsubckt_403_mux2_x1 0 1 271 273 272 1823 mux2_x1
+xsubckt_253_nand2_x0 0 1 420 569 486 nand2_x0
+xsubckt_666_or21nand_x0 0 1 1947 20 25 131 or21nand_x0
+xsubckt_675_and21nor_x0 0 1 11 632 374 335 and21nor_x0
+xsubckt_751_and2_x1 0 1 1592 1920 1624 and2_x1
+xsubckt_799_and3_x1 0 1 1550 1837 1625 1615 and3_x1
+xsubckt_950_nand3_x0 0 1 1445 558 447 308 nand3_x0
+xsubckt_1554_nand2_x0 0 1 919 977 921 nand2_x0
+xsubckt_1529_and3_x1 0 1 943 975 971 947 and3_x1
+xsubckt_1483_or21nand_x0 0 1 989 1504 992 572 or21nand_x0
+xsubckt_618_or21nand_x0 0 1 64 1921 513 88 or21nand_x0
+xsubckt_339_nand3_x0 0 1 334 569 474 346 nand3_x0
+xsubckt_263_and2_x1 0 1 410 519 417 and2_x1
+xsubckt_643_nand2_x0 0 1 41 43 42 nand2_x0
+xsubckt_733_nand2_x0 0 1 1608 77 1642 nand2_x0
+xsubckt_819_nand3_x0 0 1 1532 1940 569 413 nand3_x0
+xsubckt_1159_and2_x1 0 1 1278 1810 651 and2_x1
+xsubckt_1246_mux2_x1 0 1 1691 1969 1936 1210 mux2_x1
+xsubckt_1374_nand2_x0 0 1 1092 1850 1192 nand2_x0
+xsubckt_553_nand2_x0 0 1 126 1794 127 nand2_x0
+xsubckt_159_nand3_x0 0 1 514 1799 598 566 nand3_x0
+xsubckt_249_nand3_x0 0 1 424 571 523 515 nand3_x0
+xsubckt_286_nand4_x0 0 1 387 595 1796 511 504 nand4_x0
+xsubckt_298_and2_x1 0 1 375 523 376 and2_x1
+xsubckt_680_nand3_x0 0 1 1659 1884 109 102 nand3_x0
+xsubckt_1129_nexor2_x0 0 1 1304 642 1305 nexor2_x0
+xsubckt_1764_nand2_x0 0 1 709 1834 467 nand2_x0
+xsubckt_1677_mux2_x1 0 1 796 801 799 808 mux2_x1
+xsubckt_639_nand3_x0 0 1 45 1887 109 102 nand3_x0
+xsubckt_515_and4_x1 0 1 161 429 418 357 162 and4_x1
+xsubckt_463_nand2_x0 0 1 212 519 496 nand2_x0
+xsubckt_718_or21nand_x0 0 1 1622 484 384 522 or21nand_x0
+xsubckt_943_nand2_x0 0 1 1450 1810 1451 nand2_x0
+xsubckt_1115_mux2_x1 0 1 1718 1870 1861 1314 mux2_x1
+xsubckt_502_and3_x1 0 1 174 179 178 175 and3_x1
+xsubckt_1584_nand2_x0 0 1 889 891 890 nand2_x0
+xsubckt_1443_nand3_x0 0 1 1028 1936 565 562 nand3_x0
+xsubckt_563_and2_x1 0 1 117 423 387 and2_x1
+xsubckt_524_and2_x1 0 1 153 203 154 and2_x1
+xsubckt_410_and3_x1 0 1 264 569 474 413 and3_x1
+xsubckt_220_or21nand_x0 0 1 453 563 544 539 or21nand_x0
+xsubckt_1023_mux2_x1 0 1 1737 1387 1825 1452 mux2_x1
+xsubckt_1493_mux2_x1 0 1 979 983 621 1019 mux2_x1
+xsubckt_1488_and21nor_x0 0 1 984 565 510 569 and21nor_x0
+xsubckt_138_nand4_x0 0 1 535 563 544 541 540 nand4_x0
+xsubckt_189_nand3_x0 0 1 484 1795 594 486 nand3_x0
+xsubckt_1902_dff_x1 0 1 1864 1721 9 dff_x1
+xsubckt_1901_dff_x1 0 1 1856 1722 9 dff_x1
+xsubckt_1900_dff_x1 0 1 1816 1723 9 dff_x1
+xsubckt_1783_or21nand_x0 0 1 690 875 696 694 or21nand_x0
+xsubckt_1763_and2_x1 0 1 710 1834 467 and2_x1
+xsubckt_442_nand3_x0 0 1 233 558 537 452 nand3_x0
+xsubckt_406_and3_x1 0 1 268 571 569 508 and3_x1
+xsubckt_1019_mux2_x1 0 1 1739 1389 1808 1452 mux2_x1
+xsubckt_1078_or21nand_x0 0 1 1342 1344 1343 1371 or21nand_x0
+xsubckt_1227_and4_x1 0 1 1213 128 1229 1217 1214 and4_x1
+xsubckt_1259_nand4_x0 0 1 1197 517 415 401 1632 nand4_x0
+xsubckt_1907_dff_x1 0 1 1859 1716 9 dff_x1
+xsubckt_1906_dff_x1 0 1 1860 1717 9 dff_x1
+xsubckt_1905_dff_x1 0 1 1861 1718 9 dff_x1
+xsubckt_1904_dff_x1 0 1 1862 1719 9 dff_x1
+xsubckt_1903_dff_x1 0 1 1863 1720 9 dff_x1
+xsubckt_1724_and2_x1 0 1 749 752 750 and2_x1
+xsubckt_1563_nand3_x0 0 1 910 947 929 927 nand3_x0
+xsubckt_489_nand3_x0 0 1 6 240 196 187 nand3_x0
+xsubckt_438_nand4_x0 0 1 237 563 546 545 539 nand4_x0
+xsubckt_327_and4_x1 0 1 346 599 1800 1797 596 and4_x1
+xsubckt_211_nand4_x0 0 1 462 595 1796 567 566 nand4_x0
+xsubckt_262_nand3_x0 0 1 411 571 523 413 nand3_x0
+xsubckt_802_and3_x1 0 1 1547 1942 569 413 and3_x1
+xsubckt_1909_dff_x1 0 1 1857 1714 9 dff_x1
+xsubckt_1908_dff_x1 0 1 1858 1715 9 dff_x1
+xsubckt_1864_dff_x1 0 1 1829 1751 9 dff_x1
+xsubckt_1863_dff_x1 0 1 1811 1752 9 dff_x1
+xsubckt_1862_dff_x1 0 1 1810 1753 9 dff_x1
+xsubckt_1861_dff_x1 0 1 1822 1754 9 dff_x1
+xsubckt_1860_dff_x1 0 1 1823 1755 9 dff_x1
+xsubckt_1807_mux2_x1 0 1 1671 1922 708 655 mux2_x1
+xsubckt_1436_nand2_x0 0 1 1034 1045 1035 nand2_x0
+xsubckt_1346_nand2_x0 0 1 1118 655 1838 nand2_x0
+xsubckt_615_nand2_x0 0 1 67 1913 97 nand2_x0
+xsubckt_399_nand3_x0 0 1 275 523 474 413 nand3_x0
+xsubckt_710_and3_x1 0 1 1630 502 494 415 and3_x1
+xsubckt_911_mux2_x1 0 1 1780 1488 1914 1456 mux2_x1
+xsubckt_1869_dff_x1 0 1 1805 1746 9 dff_x1
+xsubckt_1868_dff_x1 0 1 1827 1747 9 dff_x1
+xsubckt_1867_dff_x1 0 1 1806 1748 9 dff_x1
+xsubckt_1866_dff_x1 0 1 1828 1749 9 dff_x1
+xsubckt_1865_dff_x1 0 1 1807 1750 9 dff_x1
+xsubckt_551_nor2_x0 0 1 128 485 129 nor2_x0
+xsubckt_1591_and21nor_x0 0 1 882 947 894 949 and21nor_x0
+xsubckt_1582_or21nand_x0 0 1 891 981 898 896 or21nand_x0
+xsubckt_405_nexor2_x0 0 1 269 1824 271 nexor2_x0
+xsubckt_382_nand3_x0 0 1 292 557 454 294 nand3_x0
+xsubckt_345_nand2_x0 0 1 328 483 330 nand2_x0
+xsubckt_336_and2_x1 0 1 337 340 338 and2_x1
+xsubckt_862_nand3_x0 0 1 1495 109 102 1496 nand3_x0
+xsubckt_907_mux2_x1 0 1 1457 1458 1866 370 mux2_x1
+xsubckt_1231_mux2_x1 0 1 1706 1976 1935 1210 mux2_x1
+xsubckt_1474_and4_x1 0 1 998 1644 1236 1000 999 and4_x1
+xsubckt_182_and4_x1 0 1 491 599 1800 569 511 and4_x1
+xsubckt_218_and3_x1 0 1 455 519 508 474 and3_x1
+xsubckt_244_and2_x1 0 1 429 431 430 and2_x1
+xsubckt_893_mux2_x1 0 1 1469 1470 1868 370 mux2_x1
+xsubckt_1181_or21nand_x0 0 1 1257 1258 1263 1270 or21nand_x0
+xsubckt_1691_and21nor_x0 0 1 782 783 993 1922 and21nor_x0
+xsubckt_1376_nand2_x0 0 1 1090 1921 404 nand2_x0
+xsubckt_500_and4_x1 0 1 176 1791 654 569 486 and4_x1
+xsubckt_205_and2_x1 0 1 468 472 469 and2_x1
+xsubckt_1142_and21nor_x0 0 1 1292 364 1296 1293 and21nor_x0
+xsubckt_1162_nor4_x0 0 1 1275 1919 1918 1917 1916 nor4_x0
+xsubckt_1715_nand3_x0 0 1 758 767 763 761 nand3_x0
+xsubckt_1496_and3_x1 0 1 976 1839 569 508 and3_x1
+xsubckt_1281_or21nand_x0 0 1 1689 1185 1178 1177 or21nand_x0
+xsubckt_535_and4_x1 0 1 143 202 201 183 182 and4_x1
+xsubckt_414_nand3_x0 0 1 260 523 474 385 nand3_x0
+xsubckt_324_nand3_x0 0 1 349 569 508 474 nand3_x0
+xsubckt_152_and2_x1 0 1 521 599 1800 and2_x1
+xsubckt_720_or21nand_x0 0 1 1620 392 495 518 or21nand_x0
+xsubckt_965_or21nand_x0 0 1 1747 1436 1435 1449 or21nand_x0
+xsubckt_970_and4_x1 0 1 1431 563 529 445 444 and4_x1
+xsubckt_573_and21nor_x0 0 1 107 108 115 1818 and21nor_x0
+xsubckt_498_nand4_x0 0 1 178 558 554 550 454 nand4_x0
+xsubckt_1018_nand2_x0 0 1 1389 1392 1390 nand2_x0
+xsubckt_1055_nand3_x0 0 1 1362 534 259 1363 nand3_x0
+xsubckt_1743_and21nor_x0 0 1 730 1018 1013 1002 and21nor_x0
+xsubckt_1586_nand2_x0 0 1 887 977 889 nand2_x0
+xsubckt_1408_nand2_x0 0 1 1060 1067 1062 nand2_x0
+xsubckt_1378_and4_x1 0 1 1088 360 1539 1090 1089 and4_x1
+xsubckt_953_and3_x1 0 1 1443 563 559 449 and3_x1
+xsubckt_1082_mux2_x1 0 1 1726 1339 1821 1452 mux2_x1
+xsubckt_1800_nexor2_x0 0 1 673 683 682 nexor2_x0
+xsubckt_1539_and21nor_x0 0 1 934 935 993 1917 and21nor_x0
+xsubckt_1352_and2_x1 0 1 1112 1116 1113 and2_x1
+xsubckt_1333_or21nand_x0 0 1 1684 1138 1132 1130 or21nand_x0
+xsubckt_505_and2_x1 0 1 171 173 172 and2_x1
+xsubckt_1001_nand2_x0 0 1 1404 1439 1405 nand2_x0
+xsubckt_1228_nand2_x0 0 1 1212 1222 1213 nand2_x0
+xsubckt_1433_or21nand_x0 0 1 1037 1038 1199 573 or21nand_x0
+xsubckt_579_and2_x1 0 1 101 106 103 and2_x1
+xsubckt_439_and4_x1 0 1 236 555 549 542 538 and4_x1
+xsubckt_874_and4_x1 0 1 1485 1832 1834 1924 1921 and4_x1
+xsubckt_936_and2_x1 0 1 1453 1792 608 and2_x1
+xsubckt_975_and2_x1 0 1 1427 307 1428 and2_x1
+xsubckt_1260_and2_x1 0 1 1196 564 403 and2_x1
+xsubckt_1744_and2_x1 0 1 729 731 730 and2_x1
+xsubckt_1655_nand3_x0 0 1 818 827 823 821 nand3_x0
+xsubckt_487_and2_x1 0 1 188 190 189 and2_x1
+xsubckt_363_or21nand_x0 0 1 311 563 559 529 or21nand_x0
+xsubckt_1034_nand4_x0 0 1 1377 550 542 538 527 nand4_x0
+xsubckt_1787_and21nor_x0 0 1 686 908 690 688 and21nor_x0
+xsubckt_1778_or21nand_x0 0 1 695 849 700 697 or21nand_x0
+xsubckt_1438_nand2_x0 0 1 1032 1034 1033 nand2_x0
+xsubckt_409_and2_x1 0 1 265 267 266 and2_x1
+xsubckt_360_and2_x1 0 1 313 432 314 and2_x1
+xsubckt_818_and3_x1 0 1 1533 1940 569 413 and3_x1
+xsubckt_931_mux2_x1 0 1 1762 1896 1476 1454 mux2_x1
+xsubckt_1217_and2_x1 0 1 1223 517 1224 and2_x1
+xsubckt_1681_or21nand_x0 0 1 792 946 803 948 or21nand_x0
+xsubckt_1295_nand3_x0 0 1 1164 1932 565 562 nand3_x0
+xsubckt_422_or2_x1 0 1 252 473 381 or2_x1
+xsubckt_369_and3_x1 0 1 305 453 452 307 and3_x1
+xsubckt_255_and4_x1 0 1 418 426 424 422 419 and4_x1
+xsubckt_814_or2_x1 0 1 1974 1543 1537 or2_x1
+xsubckt_1031_nand2_x0 0 1 1736 1384 1380 nand2_x0
+xsubckt_1642_and21nor_x0 0 1 831 978 834 833 and21nor_x0
+xsubckt_1312_or2_x1 0 1 1148 655 1149 or2_x1
+xsubckt_384_nand3_x0 0 1 290 519 515 474 nand3_x0
+xsubckt_356_and2_x1 0 1 317 319 318 and2_x1
+xsubckt_120_nand2_x0 0 1 553 1856 1862 nand2_x0
+xsubckt_726_and3_x1 0 1 1614 1852 1625 1615 and3_x1
+xsubckt_765_and3_x1 0 1 1580 1841 1625 1615 and3_x1
+xsubckt_770_or2_x1 0 1 1575 1580 1579 or2_x1
+xsubckt_772_or2_x1 0 1 1965 1575 1574 or2_x1
+xsubckt_954_nand3_x0 0 1 1442 563 559 449 nand3_x0
+xsubckt_1024_and4_x1 0 1 1386 1791 1797 569 567 and4_x1
+xsubckt_1164_and2_x1 0 1 1273 1275 1274 and2_x1
+xsubckt_1280_or21nand_x0 0 1 1177 1791 1187 1179 or21nand_x0
+xsubckt_1790_and21nor_x0 0 1 683 939 685 684 and21nor_x0
+xsubckt_1660_or2_x1 0 1 813 577 992 or2_x1
+xsubckt_1595_nand3_x0 0 1 878 947 897 895 nand3_x0
+xsubckt_1477_or21nand_x0 0 1 995 997 1653 1657 or21nand_x0
+xsubckt_1319_or2_x1 0 1 1142 1146 1143 or2_x1
+xsubckt_383_or2_x1 0 1 291 473 423 or2_x1
+xsubckt_243_nand4_x0 0 1 430 557 554 550 454 nand4_x0
+xsubckt_713_and2_x1 0 1 1627 481 1628 and2_x1
+xsubckt_737_nand2_x0 0 1 1604 1872 1622 nand2_x0
+xsubckt_778_or2_x1 0 1 1568 1573 1572 or2_x1
+xsubckt_1059_and4_x1 0 1 1359 558 528 447 441 and4_x1
+xsubckt_520_and4_x1 0 1 157 303 280 274 184 and4_x1
+xsubckt_506_nand3_x0 0 1 170 569 474 330 nand3_x0
+xsubckt_225_and2_x1 0 1 448 563 449 and2_x1
+xsubckt_709_and2_x1 0 1 1631 1633 1632 and2_x1
+xsubckt_1007_and3_x1 0 1 1398 548 453 1399 and3_x1
+xsubckt_1678_mux2_x1 0 1 795 842 797 1018 mux2_x1
+xsubckt_416_nand3_x0 0 1 258 558 454 294 nand3_x0
+xsubckt_1185_and21nor_x0 0 1 1255 565 523 496 and21nor_x0
+xsubckt_1590_mux2_x1 0 1 883 932 885 1018 mux2_x1
+xsubckt_516_and4_x1 0 1 160 298 286 180 161 and4_x1
+xsubckt_1116_mux2_x1 0 1 1717 1869 1860 1314 mux2_x1
+xsubckt_626_nand3_x0 0 1 57 1888 109 102 nand3_x0
+xsubckt_716_nand3_x0 0 1 1624 401 1635 1626 nand3_x0
+xsubckt_986_and4_x1 0 1 1417 1426 1425 1423 1418 and4_x1
+xsubckt_1271_nand2_x0 0 1 1690 1209 1186 nand2_x0
+xsubckt_1638_and21nor_x0 0 1 835 980 840 838 and21nor_x0
+xsubckt_1629_or21nand_x0 0 1 844 847 994 647 or21nand_x0
+xsubckt_371_and21nor_x0 0 1 303 312 305 454 and21nor_x0
+xsubckt_1532_or21nand_x0 0 1 1674 1020 941 655 or21nand_x0
+xsubckt_1518_nor3_x0 0 1 954 133 956 955 nor3_x0
+xsubckt_485_and3_x1 0 1 190 195 194 191 and3_x1
+xsubckt_472_and2_x1 0 1 203 205 204 and2_x1
+xsubckt_323_and21nor_x0 0 1 350 354 352 454 and21nor_x0
+xsubckt_881_and3_x1 0 1 1479 1832 650 649 and3_x1
+xsubckt_1131_or21nand_x0 0 1 1302 1303 1304 1310 or21nand_x0
+xsubckt_1177_nand3_x0 0 1 1261 1883 1269 1262 nand3_x0
+xsubckt_1914_dff_x1 0 1 1835 1709 9 dff_x1
+xsubckt_1913_dff_x1 0 1 1855 1710 9 dff_x1
+xsubckt_1912_dff_x1 0 1 1882 1711 9 dff_x1
+xsubckt_1911_dff_x1 0 1 1865 1712 9 dff_x1
+xsubckt_1910_dff_x1 0 1 1836 1713 9 dff_x1
+xsubckt_1738_and3_x1 0 1 735 947 752 750 and3_x1
+xsubckt_1328_or21nand_x0 0 1 1134 1135 1198 643 or21nand_x0
+xsubckt_1303_nand2_x0 0 1 1157 655 1842 nand2_x0
+xsubckt_393_nand4_x0 0 1 281 453 446 440 285 nand4_x0
+xsubckt_229_nand2_x0 0 1 444 664 1867 nand2_x0
+xsubckt_274_nexor2_x0 0 1 399 1925 1831 nexor2_x0
+xsubckt_824_and21nor_x0 0 1 1528 575 1631 1630 and21nor_x0
+xsubckt_842_and3_x1 0 1 1512 1937 569 413 and3_x1
+xsubckt_1919_dff_x1 0 1 1934 1705 9 dff_x1
+xsubckt_1918_dff_x1 0 1 1935 1706 9 dff_x1
+xsubckt_1917_dff_x1 0 1 1831 1707 9 dff_x1
+xsubckt_1916_dff_x1 0 1 1832 1662 9 dff_x1
+xsubckt_1915_dff_x1 0 1 1883 1708 9 dff_x1
+xsubckt_1871_dff_x1 0 1 1830 1744 9 dff_x1
+xsubckt_1870_dff_x1 0 1 1826 1745 9 dff_x1
+xsubckt_1799_and2_x1 0 1 674 680 675 and2_x1
+xsubckt_1781_nexor2_x0 0 1 692 883 877 nexor2_x0
+xsubckt_1780_or21nand_x0 0 1 693 883 882 879 or21nand_x0
+xsubckt_656_nand3_x0 0 1 29 1894 109 101 nand3_x0
+xsubckt_797_nand2_x0 0 1 1551 1554 1552 nand2_x0
+xsubckt_1877_dff_x1 0 1 1803 1738 9 dff_x1
+xsubckt_1876_dff_x1 0 1 1808 1739 9 dff_x1
+xsubckt_1875_dff_x1 0 1 1812 1740 9 dff_x1
+xsubckt_1874_dff_x1 0 1 1813 1741 9 dff_x1
+xsubckt_1873_dff_x1 0 1 1814 1742 9 dff_x1
+xsubckt_1872_dff_x1 0 1 1815 1743 9 dff_x1
+xsubckt_1808_mux2_x1 0 1 1670 1921 706 655 mux2_x1
+xsubckt_1640_nand3_x0 0 1 833 979 840 838 nand3_x0
+xsubckt_1603_nand2_x0 0 1 870 874 872 nand2_x0
+xsubckt_1437_and21nor_x0 0 1 1033 655 1044 1036 and21nor_x0
+xsubckt_529_nand2_x0 0 1 4 157 149 nand2_x0
+xsubckt_389_and3_x1 0 1 285 563 556 551 and3_x1
+xsubckt_212_nand2_x0 0 1 461 571 463 nand2_x0
+xsubckt_302_and2_x1 0 1 371 523 372 and2_x1
+xsubckt_750_and3_x1 0 1 1593 1843 1625 1615 and3_x1
+xsubckt_825_and2_x1 0 1 1527 1919 1616 and2_x1
+xsubckt_912_mux2_x1 0 1 1779 1481 1913 1456 mux2_x1
+xsubckt_1110_and2_x1 0 1 1722 654 1315 and2_x1
+xsubckt_1879_dff_x1 0 1 1834 1736 9 dff_x1
+xsubckt_1878_dff_x1 0 1 1825 1737 9 dff_x1
+xsubckt_1585_and21nor_x0 0 1 888 978 891 890 and21nor_x0
+xsubckt_1513_nand2_x0 0 1 959 1001 961 nand2_x0
+xsubckt_602_nand2_x0 0 1 79 1914 97 nand2_x0
+xsubckt_376_and2_x1 0 1 298 303 299 and2_x1
+xsubckt_337_and2_x1 0 1 336 569 346 and2_x1
+xsubckt_662_or21nand_x0 0 1 23 1841 375 336 or21nand_x0
+xsubckt_671_and4_x1 0 1 15 19 18 17 16 and4_x1
+xsubckt_908_mux2_x1 0 1 1782 1884 1457 1495 mux2_x1
+xsubckt_1070_and3_x1 0 1 1349 557 448 1439 and3_x1
+xsubckt_1123_or2_x1 0 1 1310 1810 1826 or2_x1
+xsubckt_1232_mux2_x1 0 1 1705 1975 1934 1210 mux2_x1
+xsubckt_1793_nexor2_x0 0 1 680 686 681 nexor2_x0
+xsubckt_1791_nor2_x0 0 1 682 1017 754 nor2_x0
+xsubckt_1546_nand4_x0 0 1 927 1867 1004 974 973 nand4_x0
+xsubckt_1528_or21nand_x0 0 1 944 946 948 969 or21nand_x0
+xsubckt_1509_nand3_x0 0 1 963 995 988 968 nand3_x0
+xsubckt_1502_and2_x1 0 1 970 975 971 and2_x1
+xsubckt_1370_nand3_x0 0 1 1095 1121 1110 1098 nand3_x0
+xsubckt_183_and4_x1 0 1 490 597 1798 569 567 and4_x1
+xsubckt_194_or2_x1 0 1 479 485 482 or2_x1
+xsubckt_297_and3_x1 0 1 376 1797 596 504 and3_x1
+xsubckt_1184_and21nor_x0 0 1 1256 463 496 519 and21nor_x0
+xsubckt_1537_and2_x1 0 1 936 1511 937 and2_x1
+xsubckt_467_and21nor_x0 0 1 208 467 346 519 and21nor_x0
+xsubckt_170_and3_x1 0 1 503 569 511 504 and3_x1
+xsubckt_894_mux2_x1 0 1 1784 1886 1469 1495 mux2_x1
+xsubckt_1027_and3_x1 0 1 1383 543 537 1386 and3_x1
+xsubckt_1136_and21nor_x0 0 1 1298 213 1500 1311 and21nor_x0
+xsubckt_1140_mux2_x1 0 1 1294 641 1921 213 mux2_x1
+xsubckt_1153_nand2_x0 0 1 1283 409 1284 nand2_x0
+xsubckt_1203_nor3_x0 0 1 1237 1245 1243 1238 nor3_x0
+xsubckt_1775_nexor2_x0 0 1 698 855 851 nexor2_x0
+xsubckt_469_nand2_x0 0 1 206 270 268 nand2_x0
+xsubckt_990_nand2_x0 0 1 1414 1814 1451 nand2_x0
+xsubckt_1163_nor4_x0 0 1 1274 1923 1922 1921 1920 nor4_x0
+xsubckt_1190_nand3_x0 0 1 1250 1254 1253 1252 nand3_x0
+xsubckt_1766_nexor2_x0 0 1 707 723 720 nexor2_x0
+xsubckt_1531_or21nand_x0 0 1 941 942 944 950 or21nand_x0
+xsubckt_1490_nand3_x0 0 1 982 466 1621 984 nand3_x0
+xsubckt_1458_and3_x1 0 1 1014 658 639 467 and3_x1
+xsubckt_1383_and4_x1 0 1 1083 1121 1110 1098 1085 and4_x1
+xsubckt_722_nand2_x0 0 1 1618 512 1621 nand2_x0
+xsubckt_1175_mux2_x1 0 1 1263 1264 410 1268 mux2_x1
+xsubckt_1796_nexor2_x0 0 1 677 691 687 nexor2_x0
+xsubckt_1406_and2_x1 0 1 1062 1066 1063 and2_x1
+xsubckt_597_and3_x1 0 1 83 89 85 84 and3_x1
+xsubckt_148_nand3_x0 0 1 525 532 528 526 nand3_x0
+xsubckt_896_nand3_x0 0 1 1467 1832 1834 1925 nand3_x0
+xsubckt_1222_nand3_x0 0 1 1218 1227 1222 1219 nand3_x0
+xsubckt_1631_or21nand_x0 0 1 842 845 998 54 or21nand_x0
+xsubckt_1484_and21nor_x0 0 1 988 989 993 1916 and21nor_x0
+xsubckt_1353_and2_x1 0 1 1111 1117 1112 and2_x1
+xsubckt_575_nand4_x0 0 1 105 120 119 113 107 nand4_x0
+xsubckt_94_mux2_x1 0 1 575 581 580 655 mux2_x1
+xsubckt_962_or21nand_x0 0 1 1748 1437 1438 1442 or21nand_x0
+xsubckt_1044_mux2_x1 0 1 1732 1372 1817 1452 mux2_x1
+xsubckt_1427_or21nand_x0 0 1 1677 1055 1046 1043 or21nand_x0
+xsubckt_144_mux2_x1 0 1 529 1857 1866 1856 mux2_x1
+xsubckt_272_nand2_x0 0 1 401 569 413 nand2_x0
+xsubckt_1696_nand4_x0 0 1 777 1872 1004 974 973 nand4_x0
+xsubckt_427_and3_x1 0 1 247 255 254 252 and3_x1
+xsubckt_344_or4_x1 0 1 329 1799 1800 1797 1798 or4_x1
+xsubckt_719_and21nor_x0 0 1 1621 393 496 519 and21nor_x0
+xsubckt_823_and3_x1 0 1 1529 1848 1625 1615 and3_x1
+xsubckt_1261_and2_x1 0 1 1195 360 1196 and2_x1
+xsubckt_1479_nand3_x0 0 1 993 420 136 1639 nand3_x0
+xsubckt_1296_and2_x1 0 1 1163 360 1164 and2_x1
+xsubckt_178_nand3_x0 0 1 495 597 1798 567 nand3_x0
+xsubckt_260_and4_x1 0 1 413 1799 598 597 1798 and4_x1
+xsubckt_309_and4_x1 0 1 364 1797 596 569 504 and4_x1
+.ends arlet6502

@@ -1,0 +1,93 @@
+#  
+#  Avertec Release v3.4p5 (64 bits on Linux 3.10.0-1160.108.1.el7.x86_64)
+#  [AVT_only] host: bip
+#  [AVT_only] arch: x86_64
+#  [AVT_only] path: /users/outil/tasyag/Linux.el7_64/install/bin/avt_shell
+#  argv: ./hitas/report.tcl 
+#  
+#  User: aoudrhiri
+#  Generation date Mon Jul  8 16:37:51 2024
+#  
+#  Timing figure: m65_cts_r_ext   generated on Mon Jul  8 16:37:46 2024
+#                 supply: 1.8  temperature: 25
+#                 slope thresholds : 0.2 / 0.8
+#                 delay threshold : 0.5
+#  
+
+     Voltage :        1.8V
+     Temperature :    25 degree C
+
+      *** Path list (unit:[ns]) ***
+
+ Path     Start     Start      Path     Total      Data    Ending       Start                                                      
+           time     slope     delay     delay       lag     slope       From_node                       To_node                    
+___________________________________________________________________________________________________________________________________
+    1     0.000     0.148     5.598     5.598     0.000     0.045   (R) subckt_1580_sff1_x4.sff_s   (F) subckt_1641_sff1r_x4.sff_m 
+
+Node type Index:
+   (C) : Clock node          (L) : Latch node         (F) : Flip-flop node
+   (B) : Breakpoint node     (K) : Latch command node (S) : Output connector node
+   (SZ): Output HZ connector (N) : Precharge node
+
+      *** Path details (unit:[ns]) ***
+
+Path (1) : 
+
+        Delay                                                                                                                                 
+      Acc    Delta    R/F     Cap[pf]   Type   Node_Name                                  Net_Name                                     Line   
+   ___________________________________________________________________________________________________________________________________________
+     0.000   0.000 0.148 R      0.012    (L)   subckt_1580_sff1_x4.sff_s                  subckt_1580_sff1_x4.sff_s                           
+     0.118   0.118 0.085 F      0.081          op[1]                                      op[1]                                         inv   
+     0.815   0.697 0.912 R      0.075          abc_8311_new_n344                          abc_8311_new_n344                             nr4   
+     1.010   0.195 0.165 F      0.021          abc_8311_new_n374                          abc_8311_new_n374                             nd3   
+     1.096   0.086 0.066 R      0.008          2627                                       2627                                          nd2   
+     1.137   0.041 0.027 F      0.011          abc_8311_new_n376                          abc_8311_new_n376                             inv   
+     1.211   0.074 0.083 R      0.019          abc_8311_new_n379                          abc_8311_new_n379                             nd2   
+     1.539   0.328 0.376 F      0.144          abc_8311_new_n401                          abc_8311_new_n401                            <Dg>   
+     1.779   0.240 0.193 R      0.033          abc_8311_new_n464                          abc_8311_new_n464                             nd4   
+     1.874   0.096 0.078 F      0.011          2783                                       2783                                          nd4   
+     1.974   0.100 0.093 R      0.030          abc_8311_new_n504                          abc_8311_new_n504                             inv   
+     2.021   0.047 0.036 F      0.008          1901                                       1901                                          nd2   
+     2.132   0.111 0.132 R      0.049          abc_8311_new_n510                          abc_8311_new_n510                             inv   
+     2.494   0.362 0.404 F      0.102          abc_8311_new_n602                          abc_8311_new_n602                             nd3   
+     2.616   0.123 0.099 R      0.009          2315                                       2315                                         <Dg>   
+     2.692   0.076 0.054 F      0.026          abc_8311_new_n656                          abc_8311_new_n656                             inv   
+     2.743   0.050 0.041 R      0.006          2486                                       2486                                          inv   
+     2.812   0.070 0.062 F      0.021          abc_8311_new_n660                          abc_8311_new_n660                            ao22   
+     3.071   0.259 0.312 R      0.030          abc_8311_new_n726                          abc_8311_new_n726                            <Dg>   
+     3.138   0.067 0.055 F      0.009          1487                                       1487                                         <Dg>   
+     3.193   0.055 0.048 R      0.012          abc_8311_new_n807                          abc_8311_new_n807                             inv   
+     3.234   0.041 0.030 F      0.009          1148                                       1148                                         <Dg>   
+     3.287   0.053 0.045 R      0.011          abc_8311_new_n809                          abc_8311_new_n809                             inv   
+     3.334   0.047 0.035 F      0.009          939                                        939                                          <Dg>   
+     3.372   0.038 0.031 R      0.007          abc_8311_new_n810                          abc_8311_new_n810                             inv   
+     3.434   0.063 0.058 F      0.018          abc_8311_new_n831                          abc_8311_new_n831                            <Dg>   
+     3.539   0.104 0.102 R      0.022          abc_8311_new_n834                          abc_8311_new_n834                             nd3   
+     3.677   0.139 0.153 F      0.034          abc_8311_new_n885                          abc_8311_new_n885                             nd3   
+     3.792   0.115 0.091 R      0.011          213                                        213                                           nd3   
+     3.832   0.040 0.028 F      0.014          abc_8311_new_n949                          abc_8311_new_n949                             inv   
+     4.040   0.208 0.258 R      0.023          abc_8311_new_n1080                         abc_8311_new_n1080                           <Dg>   
+     4.146   0.106 0.082 F      0.014          abc_8311_new_n1094                         abc_8311_new_n1094                           ao22   
+     4.227   0.081 0.072 R      0.009          189                                        189                                          <Dg>   
+     4.288   0.061 0.042 F      0.018          abc_8311_new_n1095                         abc_8311_new_n1095                            inv   
+     4.332   0.044 0.036 R      0.008          463                                        463                                           nd2   
+     4.361   0.029 0.017 F      0.008          abc_8311_new_n1097                         abc_8311_new_n1097                            inv   
+     4.466   0.104 0.130 R      0.023          abc_8311_new_n1098                         abc_8311_new_n1098                           <Dg>   
+     4.530   0.064 0.046 F      0.009          570                                        570                                          <Dg>   
+     4.640   0.110 0.123 R      0.035          abc_8311_new_n1099                         abc_8311_new_n1099                            inv   
+     4.690   0.051 0.037 F      0.008          1170                                       1170                                          nd2   
+     4.761   0.070 0.073 R      0.025          abc_8311_new_n1155                         abc_8311_new_n1155                            inv   
+     4.804   0.043 0.028 F      0.006          955                                        955                                           inv   
+     4.900   0.096 0.110 R      0.020          abc_8311_new_n1156                         abc_8311_new_n1156                           ao22   
+     4.957   0.057 0.036 F      0.006          1311                                       1311                                          inv   
+     5.157   0.200 0.254 R      0.046          abc_8311_new_n1158                         abc_8311_new_n1158                           ao22   
+     5.203   0.047 0.037 F      0.004          2362                                       2362                                          inv   
+     5.283   0.079 0.081 R      0.007          2359                                       2359                                         ao22   
+     5.322   0.039 0.029 F      0.007          abc_8311_new_n1764                         abc_8311_new_n1764                            inv   
+     5.463   0.142 0.170 R      0.011          abc_8311_new_n1765                         abc_8311_new_n1765                           <Dg>   
+     5.517   0.053 0.041 F      0.007          abc_8311_auto_rtlil_cc_2693_muxgate_8310   abc_8311_auto_rtlil_cc_2693_muxgate_8310     <Dg>   
+     5.551   0.034 0.027 R      0.004          1962                                       1962                                          inv   
+     5.598   0.048 0.045 F      0.005    (L)   subckt_1641_sff1r_x4.sff_m                 subckt_1641_sff1r_x4.sff_m                 master   
+   ___________________________________________________________________________________________________________________________________________
+     5.598   5.598            (total)                                                                                                         
+

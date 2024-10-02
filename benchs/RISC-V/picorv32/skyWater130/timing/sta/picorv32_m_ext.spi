@@ -1,0 +1,2990 @@
+*  
+*  Avertec Release v3.4p5 (64 bits on Linux 3.10.0-1160.108.1.el7.x86_64)
+*  [AVT_only] host: bip
+*  [AVT_only] arch: x86_64
+*  [AVT_only] path: /users/outil/tasyag/Linux.el7_64/install/bin/avt_shell
+*  argv: ./paths_select_simu.tcl 
+*  
+*  User: aoudrhiri
+*  Generation date Fri Sep 27 18:08:52 2024
+*  
+*  Spice description of picorv32_m_ext
+*  
+
+
+.subckt picorv32_m_ext _15152__a_891_413 net237 _02756_ _02919_ _02910_ 
++ net213 net215 net218 net186 _02831_ _02818_ _02801_ _02807_ _02892_ _02886_ 
++ _02869_ _02884_ _15152__a_27_47 _15152__a_193_47 _02393_ _02871_ _02864_ 
++ _02855_ _02891_ _02458_ net119 net108 net97 net247 net211 net212 _02700_ 
++ _15218__a_27_47 _15218__a_193_47 _02630_ net125 net126 _02757_ _02912_ 
++ net216 net217 _02904_ _02902_ _02758_ _02873_ _02924_ _02922_ 
++ _15152__a_466_413 _02847_ _02846_ _02845_ _08241__a_27_297 _08240__a_27_297 
++ _15218__a_466_413 
+* |CONDIR _15152_.a_891_413 IN, net237 IN, _02756_ IN, _02919_ IN, _02910_ IN
+* |CONDIR net213 IN, net215 IN, net218 IN, net186 IN, _02831_ IN
+* |CONDIR _02818_ IN, _02801_ IN, _02807_ IN, _02892_ IN, _02886_ IN
+* |CONDIR _02869_ IN, _02884_ IN, _15152_.a_27_47 IN, _15152_.a_193_47 IN, _02393_ IN
+* |CONDIR _02871_ IN, _02864_ IN, _02855_ IN, _02891_ IN, _02458_ IN
+* |CONDIR net119 IN, net108 IN, net97 IN, net247 IN, net211 IN
+* |CONDIR net212 IN, _02700_ IN, _15218_.a_27_47 IN, _15218_.a_193_47 IN, _02630_ IN
+* |CONDIR net125 IN, net126 IN, _02757_ IN, _02912_ IN, net216 IN
+* |CONDIR net217 IN, _02904_ IN, _02902_ IN, _02758_ IN, _02873_ IN
+* |CONDIR _02924_ IN, _02922_ IN, _15152_.a_466_413 IN, _02847_ IN, _02846_ IN
+* |CONDIR _02845_ IN, _08241_.a_27_297 IN, _08240_.a_27_297 IN, _15218_.a_466_413 OUT
+Mdup_15218__17_sky130_fd_pr__nfet_01v8 VGND _15218__a_27_47 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mdup_15218__2_sky130_fd_pr__pfet_01v8_hvt VGND _15218__a_27_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Mdup_15218__15_sky130_fd_pr__nfet_01v8 VGND _15218__a_193_47 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mdup_15218__4_sky130_fd_pr__pfet_01v8_hvt VGND _15218__a_193_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08254__4_sky130_fd_pr__pfet_01v8_hvt VGND _02835_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08254__2_sky130_fd_pr__nfet_01v8 VGND _02835_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08325__2_sky130_fd_pr__nfet_01v8 VGND _02913_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08325__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02913_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08261__3_sky130_fd_pr__nfet_01v8 VPWR _02849_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08261__0_sky130_fd_pr__pfet_01v8_hvt VGND _02849_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08260__3_sky130_fd_pr__nfet_01v8 VGND _02849_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08260__0_sky130_fd_pr__pfet_01v8_hvt VGND _02849_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08270__4_sky130_fd_pr__pfet_01v8_hvt VPWR _02849_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08270__2_sky130_fd_pr__nfet_01v8 VPWR _02849_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__3_sky130_fd_pr__pfet_01v8_hvt VPWR net237 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__9_sky130_fd_pr__nfet_01v8 VPWR net237 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__2_sky130_fd_pr__pfet_01v8_hvt VGND net237 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__0_sky130_fd_pr__nfet_01v8 VGND net237 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mwire237_3_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net237 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.79U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Mwire237_0_sky130_fd_pr__nfet_01v8 VGND VGND net237 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.52U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08152__3_sky130_fd_pr__pfet_01v8_hvt _02756_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08152__9_sky130_fd_pr__nfet_01v8 VGND VGND _02756_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__6_sky130_fd_pr__pfet_01v8_hvt VGND _02756_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08162__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02756_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08162__1_sky130_fd_pr__nfet_01v8 VPWR _02756_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08161__5_sky130_fd_pr__pfet_01v8_hvt VGND _02756_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08161__0_sky130_fd_pr__nfet_01v8 VPWR _02756_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__11_sky130_fd_pr__nfet_01v8 VGND _02756_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__10_sky130_fd_pr__nfet_01v8 VGND _02756_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02756_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08152__7_sky130_fd_pr__nfet_01v8 _02756_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08152__0_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02756_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08316__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02906_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08316__5_sky130_fd_pr__nfet_01v8 VGND _02906_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08316__4_sky130_fd_pr__nfet_01v8 VGND _02906_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08316__1_sky130_fd_pr__pfet_01v8_hvt VGND _02906_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__8_sky130_fd_pr__pfet_01v8_hvt VGND _02914_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__2_sky130_fd_pr__nfet_01v8 VGND _02914_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08328__9_sky130_fd_pr__pfet_01v8_hvt VGND _02914_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08328__3_sky130_fd_pr__nfet_01v8 VGND _02914_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08281__2_sky130_fd_pr__nfet_01v8 VGND _02874_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08281__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02874_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08017__1_sky130_fd_pr__nfet_01v8 VGND _02609_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08017__0_sky130_fd_pr__pfet_01v8_hvt VGND _02609_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08031__8_sky130_fd_pr__pfet_01v8_hvt VGND _02609_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08031__0_sky130_fd_pr__nfet_01v8 VPWR _02609_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07994__2_sky130_fd_pr__nfet_01v8 VGND _02609_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07994__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02609_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08007__5_sky130_fd_pr__pfet_01v8_hvt VGND _02609_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08007__4_sky130_fd_pr__nfet_01v8 VPWR _02609_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__9_sky130_fd_pr__pfet_01v8_hvt VPWR _02919_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__7_sky130_fd_pr__nfet_01v8 VGND _02919_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08330__9_sky130_fd_pr__nfet_01v8 VGND VGND _02919_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08330__2_sky130_fd_pr__pfet_01v8_hvt _02919_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08330__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02919_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08320__3_sky130_fd_pr__nfet_01v8 VGND VGND _02910_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08320__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02910_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08320__0_sky130_fd_pr__pfet_01v8_hvt _02910_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__5_sky130_fd_pr__pfet_01v8_hvt VPWR _02910_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__4_sky130_fd_pr__nfet_01v8 VGND _02910_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08197__5_sky130_fd_pr__pfet_01v8_hvt VGND _02791_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08197__4_sky130_fd_pr__nfet_01v8 VPWR _02791_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08191__2_sky130_fd_pr__nfet_01v8 VGND _02791_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08191__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02791_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08229__4_sky130_fd_pr__pfet_01v8_hvt VPWR _02813_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08229__0_sky130_fd_pr__nfet_01v8 VPWR _02813_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mrebuffer24_3_sky130_fd_pr__pfet_01v8_hvt VPWR _02813_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.79U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Mrebuffer24_0_sky130_fd_pr__nfet_01v8 VGND _02813_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.52U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__8_sky130_fd_pr__nfet_01v8 VGND VGND net213 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__24_sky130_fd_pr__nfet_01v8 VGND VGND net213 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__20_sky130_fd_pr__nfet_01v8 net213 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__7_sky130_fd_pr__pfet_01v8_hvt net213 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net213 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__29_sky130_fd_pr__pfet_01v8_hvt net213 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__5_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__7_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__14_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__17_sky130_fd_pr__nfet_01v8 VPWR net213 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07789__2_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07789__3_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_12493__6_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12493__1_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput213_5_sky130_fd_pr__nfet_01v8 VPWR net213 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput213_1_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07789__1_sky130_fd_pr__pfet_01v8_hvt VPWR net213 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07789__0_sky130_fd_pr__nfet_01v8 VPWR net213 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08197__1_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08197__0_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__15_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__13_sky130_fd_pr__pfet_01v8_hvt VPWR net213 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__11_sky130_fd_pr__nfet_01v8 VPWR net213 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08192__0_sky130_fd_pr__pfet_01v8_hvt VPWR net213 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net213 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15168__2_sky130_fd_pr__nfet_01v8 net213 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08365__5_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08365__4_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07791__4_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07791__2_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08188__8_sky130_fd_pr__pfet_01v8_hvt VGND net213 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08188__2_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07790__2_sky130_fd_pr__nfet_01v8 VGND net213 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07790__1_sky130_fd_pr__pfet_01v8_hvt VPWR net213 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__8_sky130_fd_pr__nfet_01v8 VGND VGND net215 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__24_sky130_fd_pr__nfet_01v8 VGND VGND net215 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__20_sky130_fd_pr__nfet_01v8 net215 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__7_sky130_fd_pr__pfet_01v8_hvt net215 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net215 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__29_sky130_fd_pr__pfet_01v8_hvt net215 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput215_5_sky130_fd_pr__nfet_01v8 VPWR net215 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput215_1_sky130_fd_pr__pfet_01v8_hvt VGND net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07786__2_sky130_fd_pr__nfet_01v8 VGND net215 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07786__1_sky130_fd_pr__pfet_01v8_hvt VPWR net215 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07785__4_sky130_fd_pr__pfet_01v8_hvt VGND net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07785__2_sky130_fd_pr__nfet_01v8 VGND net215 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08198__8_sky130_fd_pr__nfet_01v8 VGND net215 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08198__7_sky130_fd_pr__pfet_01v8_hvt VGND net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08198__3_sky130_fd_pr__nfet_01v8 VPWR net215 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08198__0_sky130_fd_pr__pfet_01v8_hvt VPWR net215 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07781__3_sky130_fd_pr__nfet_01v8 VGND net215 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07781__0_sky130_fd_pr__pfet_01v8_hvt VGND net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net215 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15169__2_sky130_fd_pr__nfet_01v8 net215 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08367__5_sky130_fd_pr__nfet_01v8 VGND net215 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08367__4_sky130_fd_pr__pfet_01v8_hvt VGND net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12513__6_sky130_fd_pr__pfet_01v8_hvt VGND net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12513__1_sky130_fd_pr__nfet_01v8 VGND net215 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08093__3_sky130_fd_pr__nfet_01v8 VPWR _02657_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08093__0_sky130_fd_pr__pfet_01v8_hvt VGND _02657_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08057__5_sky130_fd_pr__pfet_01v8_hvt VGND _02657_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08057__4_sky130_fd_pr__nfet_01v8 VPWR _02657_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08068__9_sky130_fd_pr__pfet_01v8_hvt VGND _02657_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08068__7_sky130_fd_pr__nfet_01v8 VGND _02657_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08046__2_sky130_fd_pr__nfet_01v8 VGND _02657_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08046__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02657_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08285__13_sky130_fd_pr__nfet_01v8 VPWR _02876_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08285__7_sky130_fd_pr__pfet_01v8_hvt VGND _02876_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08294__4_sky130_fd_pr__nfet_01v8 VPWR _02876_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08294__3_sky130_fd_pr__pfet_01v8_hvt VGND _02876_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08306__8_sky130_fd_pr__pfet_01v8_hvt VGND _02894_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08306__2_sky130_fd_pr__nfet_01v8 VGND _02894_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__6_sky130_fd_pr__pfet_01v8_hvt _08240__a_27_297 _02836_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__17_sky130_fd_pr__nfet_01v8 _08240__a_27_297 _02836_ _08240__a_27_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+MnFct_08240__17_sky130_fd_pr__nfet_01v8 VGND VGND _08240__a_27_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__14_sky130_fd_pr__nfet_01v8 _08240__a_27_47 _02836_ _08240__a_27_297 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+MnFct_08240__14_sky130_fd_pr__nfet_01v8 _08240__a_27_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__0_sky130_fd_pr__pfet_01v8_hvt VPWR _02836_ _08240__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08250__8_sky130_fd_pr__nfet_01v8 VPWR _02837_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08250__2_sky130_fd_pr__pfet_01v8_hvt VPWR _02837_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08249__4_sky130_fd_pr__pfet_01v8_hvt VGND _02837_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08249__2_sky130_fd_pr__nfet_01v8 VGND _02837_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__4_sky130_fd_pr__pfet_01v8_hvt _08240__a_27_297 net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__9_sky130_fd_pr__nfet_01v8 VPWR net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__8_sky130_fd_pr__nfet_01v8 VGND VGND net218 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__24_sky130_fd_pr__nfet_01v8 VGND VGND net218 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__20_sky130_fd_pr__nfet_01v8 net218 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__7_sky130_fd_pr__pfet_01v8_hvt net218 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net218 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__29_sky130_fd_pr__pfet_01v8_hvt net218 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07804__6_sky130_fd_pr__pfet_01v8_hvt VPWR net218 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07804__1_sky130_fd_pr__nfet_01v8 VPWR net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net218 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15172__2_sky130_fd_pr__nfet_01v8 net218 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08373__5_sky130_fd_pr__nfet_01v8 VGND net218 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08373__4_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Moutput218_5_sky130_fd_pr__nfet_01v8 VPWR net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput218_1_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08246__6_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08246__5_sky130_fd_pr__nfet_01v8 VPWR net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08245__8_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08245__2_sky130_fd_pr__nfet_01v8 VGND net218 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08244__4_sky130_fd_pr__pfet_01v8_hvt VPWR net218 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08244__0_sky130_fd_pr__nfet_01v8 VPWR net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__7_sky130_fd_pr__nfet_01v8 VGND net218 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__2_sky130_fd_pr__pfet_01v8_hvt VPWR net218 _08240__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__7_sky130_fd_pr__nfet_01v8 VGND net218 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__5_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__3_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__1_sky130_fd_pr__nfet_01v8 VGND net218 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08254__3_sky130_fd_pr__nfet_01v8 VPWR net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08254__0_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12581__6_sky130_fd_pr__pfet_01v8_hvt VGND net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12581__1_sky130_fd_pr__nfet_01v8 VGND net218 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07882__2_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07882__3_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07982__8_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07982__2_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07895__4_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07895__2_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07894__2_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07894__1_sky130_fd_pr__pfet_01v8_hvt VPWR net251 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_13093__5_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_13093__4_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Moutput122_3_sky130_fd_pr__nfet_01v8 VPWR net251 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput122_2_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08349__2_sky130_fd_pr__nfet_01v8 VPWR net251 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08349__0_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07882__1_sky130_fd_pr__pfet_01v8_hvt VPWR net251 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07882__0_sky130_fd_pr__nfet_01v8 VPWR net251 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08365__6_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08365__1_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07985__8_sky130_fd_pr__nfet_01v8 VGND net251 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07985__7_sky130_fd_pr__pfet_01v8_hvt VGND net251 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07985__3_sky130_fd_pr__nfet_01v8 VPWR net251 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07985__0_sky130_fd_pr__pfet_01v8_hvt VPWR net251 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16080__1_sky130_fd_pr__nfet_01v8 VPWR net122 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16080__0_sky130_fd_pr__pfet_01v8_hvt VGND net122 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08303__2_sky130_fd_pr__nfet_01v8 VGND _02893_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08303__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02893_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__6_sky130_fd_pr__pfet_01v8_hvt _08241__a_27_297 _02837_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__17_sky130_fd_pr__nfet_01v8 _08241__a_27_297 _02837_ _08241__a_27_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+MnFct_08241__17_sky130_fd_pr__nfet_01v8 VGND VGND _08241__a_27_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__14_sky130_fd_pr__nfet_01v8 _08241__a_27_47 _02837_ _08241__a_27_297 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+MnFct_08241__14_sky130_fd_pr__nfet_01v8 _08241__a_27_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__0_sky130_fd_pr__pfet_01v8_hvt VPWR _02837_ _08241__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08243__8_sky130_fd_pr__nfet_01v8 VGND _02838_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08243__7_sky130_fd_pr__pfet_01v8_hvt VGND _02838_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08243__3_sky130_fd_pr__nfet_01v8 VPWR _02838_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08243__0_sky130_fd_pr__pfet_01v8_hvt VPWR _02838_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__8_sky130_fd_pr__nfet_01v8 VGND VGND net186 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__24_sky130_fd_pr__nfet_01v8 VGND VGND net186 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__20_sky130_fd_pr__nfet_01v8 net186 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__7_sky130_fd_pr__pfet_01v8_hvt net186 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net186 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__29_sky130_fd_pr__pfet_01v8_hvt net186 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__4_sky130_fd_pr__pfet_01v8_hvt _08241__a_27_297 net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__9_sky130_fd_pr__nfet_01v8 VPWR net186 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07661__3_sky130_fd_pr__pfet_01v8_hvt VPWR net186 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07661__5_sky130_fd_pr__nfet_01v8 VGND net186 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08250__4_sky130_fd_pr__nfet_01v8 VGND net186 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08250__3_sky130_fd_pr__pfet_01v8_hvt VGND net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07661__17_sky130_fd_pr__nfet_01v8 VPWR net186 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07661__1_sky130_fd_pr__pfet_01v8_hvt VGND net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08249__3_sky130_fd_pr__nfet_01v8 VPWR net186 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08249__0_sky130_fd_pr__pfet_01v8_hvt VGND net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Moutput186_3_sky130_fd_pr__nfet_01v8 VPWR net186 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput186_2_sky130_fd_pr__pfet_01v8_hvt VGND net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__7_sky130_fd_pr__nfet_01v8 VGND net186 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__2_sky130_fd_pr__pfet_01v8_hvt VPWR net186 _08241__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_09788__2_sky130_fd_pr__nfet_01v8 VGND net186 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_09788__1_sky130_fd_pr__pfet_01v8_hvt VPWR net186 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_09787__3_sky130_fd_pr__pfet_01v8_hvt VGND net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_09787__2_sky130_fd_pr__nfet_01v8 VGND net186 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net186 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_14434__2_sky130_fd_pr__nfet_01v8 net186 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__9_sky130_fd_pr__nfet_01v8 VGND net186 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__6_sky130_fd_pr__pfet_01v8_hvt VGND net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__4_sky130_fd_pr__pfet_01v8_hvt VPWR net186 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07775__0_sky130_fd_pr__nfet_01v8 VPWR net186 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08166__5_sky130_fd_pr__pfet_01v8_hvt VGND _02759_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08166__4_sky130_fd_pr__nfet_01v8 VPWR _02759_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08180__9_sky130_fd_pr__pfet_01v8_hvt VGND _02759_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08180__7_sky130_fd_pr__nfet_01v8 VGND _02759_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08156__2_sky130_fd_pr__nfet_01v8 VGND _02759_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08156__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02759_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08251__2_sky130_fd_pr__pfet_01v8_hvt VGND _02831_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08233__3_sky130_fd_pr__nfet_01v8 VGND VGND _02831_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08233__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02831_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08233__0_sky130_fd_pr__pfet_01v8_hvt _02831_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08242__4_sky130_fd_pr__pfet_01v8_hvt VPWR _02831_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08242__2_sky130_fd_pr__nfet_01v8 VPWR _02831_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08236__9_sky130_fd_pr__nfet_01v8 VGND _02831_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08236__6_sky130_fd_pr__pfet_01v8_hvt VGND _02831_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08236__4_sky130_fd_pr__pfet_01v8_hvt VPWR _02831_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08236__0_sky130_fd_pr__nfet_01v8 VPWR _02831_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08235__9_sky130_fd_pr__pfet_01v8_hvt VGND _02818_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08235__7_sky130_fd_pr__nfet_01v8 VGND _02818_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08222__3_sky130_fd_pr__nfet_01v8 VPWR _02818_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08222__0_sky130_fd_pr__pfet_01v8_hvt VGND _02818_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08221__3_sky130_fd_pr__nfet_01v8 VGND _02818_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08221__0_sky130_fd_pr__pfet_01v8_hvt VGND _02818_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08219__7_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02818_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08219__3_sky130_fd_pr__nfet_01v8 VGND VGND _02818_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08201__3_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02801_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08201__7_sky130_fd_pr__nfet_01v8 _02801_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08235__4_sky130_fd_pr__nfet_01v8 VGND _02801_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08235__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02801_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08210__3_sky130_fd_pr__nfet_01v8 VPWR _02801_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08210__0_sky130_fd_pr__pfet_01v8_hvt VGND _02801_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08209__3_sky130_fd_pr__nfet_01v8 VGND _02801_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08209__0_sky130_fd_pr__pfet_01v8_hvt VGND _02801_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08220__5_sky130_fd_pr__pfet_01v8_hvt VGND _02801_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08220__4_sky130_fd_pr__nfet_01v8 VGND _02801_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08201__2_sky130_fd_pr__nfet_01v8 VGND VGND _02801_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08201__1_sky130_fd_pr__pfet_01v8_hvt _02801_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08251__4_sky130_fd_pr__pfet_01v8_hvt _02847_ _02838_ _08251__a_109_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+MnFct_08251__4_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _08251__a_109_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08251__3_sky130_fd_pr__nfet_01v8 _02847_ _02838_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08251__1_sky130_fd_pr__nfet_01v8 VGND VGND _02847_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08251__0_sky130_fd_pr__nfet_01v8 _02847_ _02831_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08249__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02845_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08249__1_sky130_fd_pr__nfet_01v8 VGND VGND _02845_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08250__7_sky130_fd_pr__nfet_01v8 VGND VGND _02846_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08250__0_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02846_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__7_sky130_fd_pr__pfet_01v8_hvt VGND _02807_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__8_sky130_fd_pr__nfet_01v8 VGND _02807_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__5_sky130_fd_pr__nfet_01v8 VPWR _02807_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08208__4_sky130_fd_pr__pfet_01v8_hvt VGND _02807_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08207__3_sky130_fd_pr__nfet_01v8 VGND VGND _02807_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08207__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02807_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08207__0_sky130_fd_pr__pfet_01v8_hvt _02807_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08303__3_sky130_fd_pr__nfet_01v8 VGND _02892_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08303__0_sky130_fd_pr__pfet_01v8_hvt VGND _02892_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__9_sky130_fd_pr__nfet_01v8 VGND VGND _02892_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__2_sky130_fd_pr__pfet_01v8_hvt _02892_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08296__6_sky130_fd_pr__pfet_01v8_hvt VGND _02886_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08296__3_sky130_fd_pr__nfet_01v8 VPWR _02886_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08295__5_sky130_fd_pr__nfet_01v8 VGND _02886_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08295__0_sky130_fd_pr__pfet_01v8_hvt VGND _02886_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08293__3_sky130_fd_pr__pfet_01v8_hvt _02886_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08293__2_sky130_fd_pr__nfet_01v8 VGND VGND _02886_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08293__1_sky130_fd_pr__nfet_01v8 _02886_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08294__2_sky130_fd_pr__nfet_01v8 VGND _02869_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08294__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02869_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08275__3_sky130_fd_pr__nfet_01v8 VGND VGND _02869_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08275__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02869_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08275__0_sky130_fd_pr__pfet_01v8_hvt _02869_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08292__2_sky130_fd_pr__nfet_01v8 VGND _02884_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08292__3_sky130_fd_pr__pfet_01v8_hvt VGND _02884_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08292__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02884_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08292__0_sky130_fd_pr__nfet_01v8 VPWR _02884_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08291__3_sky130_fd_pr__nfet_01v8 VGND VGND _02884_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08291__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02884_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08291__0_sky130_fd_pr__pfet_01v8_hvt _02884_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__14_sky130_fd_pr__nfet_01v8 VPWR _15152__a_634_159 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__10_sky130_fd_pr__pfet_01v8_hvt VGND _15152__a_634_159 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15152__20_sky130_fd_pr__pfet_01v8_hvt VPWR _15152__a_27_47 _15152__a_193_47 
++ VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 
++ nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__19_sky130_fd_pr__pfet_01v8_hvt _15152__a_27_47 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15152__18_sky130_fd_pr__nfet_01v8 _15152__a_27_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__16_sky130_fd_pr__nfet_01v8 VGND _15152__a_27_47 _15152__a_193_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__17_sky130_fd_pr__nfet_01v8 _15152__a_381_47 _15152__a_27_47 
++ _15152__a_466_413 VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+MnFct_15152__17_sky130_fd_pr__nfet_01v8 _15152__a_381_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__15_sky130_fd_pr__nfet_01v8 _15152__a_466_413 _15152__a_193_47 
++ _15152__a_592_47 VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+MnFct_15152__15_sky130_fd_pr__nfet_01v8 VGND VGND _15152__a_592_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__4_sky130_fd_pr__pfet_01v8_hvt _15152__a_381_47 _15152__a_193_47 
++ _15152__a_466_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+MnFct_15152__4_sky130_fd_pr__pfet_01v8_hvt _15152__a_381_47 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15152__2_sky130_fd_pr__pfet_01v8_hvt _15152__a_466_413 _15152__a_27_47 
++ _15152__a_561_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+MnFct_15152__2_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _15152__a_561_413 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08333__3_sky130_fd_pr__nfet_01v8 _02922_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08333__1_sky130_fd_pr__pfet_01v8_hvt _02922_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08335__6_sky130_fd_pr__nfet_01v8 _02924_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08335__1_sky130_fd_pr__pfet_01v8_hvt _02924_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07774__4_sky130_fd_pr__nfet_01v8 VPWR _02393_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07774__3_sky130_fd_pr__pfet_01v8_hvt VGND _02393_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07773__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02393_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07773__1_sky130_fd_pr__nfet_01v8 VGND VGND _02393_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08281__3_sky130_fd_pr__nfet_01v8 VGND _02871_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08281__0_sky130_fd_pr__pfet_01v8_hvt VGND _02871_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08277__3_sky130_fd_pr__nfet_01v8 _08277__A_113_47 _02869_ _02871_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+MnFct_08277__3_sky130_fd_pr__nfet_01v8 _08277__A_113_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08277__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02871_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08277__0_sky130_fd_pr__pfet_01v8_hvt _02871_ _02869_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08279__3_sky130_fd_pr__nfet_01v8 VGND VGND _02873_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08279__1_sky130_fd_pr__pfet_01v8_hvt _02873_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.7U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08279__0_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02873_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08269__9_sky130_fd_pr__nfet_01v8 VGND VGND _02864_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08269__2_sky130_fd_pr__pfet_01v8_hvt _02864_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08269__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02864_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08271__8_sky130_fd_pr__nfet_01v8 VGND _02864_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08271__7_sky130_fd_pr__pfet_01v8_hvt VGND _02864_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08271__3_sky130_fd_pr__nfet_01v8 VPWR _02864_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08271__0_sky130_fd_pr__pfet_01v8_hvt VPWR _02864_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08261__4_sky130_fd_pr__pfet_01v8_hvt VGND _02855_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08261__2_sky130_fd_pr__nfet_01v8 VGND _02855_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08260__2_sky130_fd_pr__nfet_01v8 VGND _02855_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08260__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02855_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08259__3_sky130_fd_pr__nfet_01v8 VGND VGND _02855_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08259__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02855_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08259__0_sky130_fd_pr__pfet_01v8_hvt _02855_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08270__5_sky130_fd_pr__nfet_01v8 VGND _02855_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08270__0_sky130_fd_pr__pfet_01v8_hvt VGND _02855_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02891_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__5_sky130_fd_pr__nfet_01v8 VGND _02891_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__4_sky130_fd_pr__nfet_01v8 VGND _02891_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__1_sky130_fd_pr__pfet_01v8_hvt _08300__A_377_297 _02891_ _02892_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+MnFct_08300__1_sky130_fd_pr__pfet_01v8_hvt _08300__A_377_297 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08299__8_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02891_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08299__7_sky130_fd_pr__nfet_01v8 VGND VGND _02891_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08299__2_sky130_fd_pr__nfet_01v8 _02891_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07838__2_sky130_fd_pr__nfet_01v8 VGND VGND _02458_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07838__3_sky130_fd_pr__pfet_01v8_hvt _02458_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__8_sky130_fd_pr__nfet_01v8 VGND _02458_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__7_sky130_fd_pr__pfet_01v8_hvt VGND _02458_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__3_sky130_fd_pr__nfet_01v8 VPWR _02458_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08300__0_sky130_fd_pr__pfet_01v8_hvt VPWR _02458_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07839__5_sky130_fd_pr__nfet_01v8 VGND _02458_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07839__1_sky130_fd_pr__pfet_01v8_hvt VGND _02458_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07838__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02458_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07838__0_sky130_fd_pr__nfet_01v8 _02458_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15151__23_sky130_fd_pr__nfet_01v8 VGND VGND net119 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15151__11_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net119 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16079__1_sky130_fd_pr__nfet_01v8 VPWR net119 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16079__0_sky130_fd_pr__pfet_01v8_hvt VGND net119 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07889__3_sky130_fd_pr__nfet_01v8 VPWR net119 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07889__2_sky130_fd_pr__pfet_01v8_hvt VGND net119 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput119_3_sky130_fd_pr__nfet_01v8 VPWR net119 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput119_2_sky130_fd_pr__pfet_01v8_hvt VGND net119 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07969__8_sky130_fd_pr__nfet_01v8 VGND net119 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07969__7_sky130_fd_pr__pfet_01v8_hvt VGND net119 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07969__3_sky130_fd_pr__nfet_01v8 VPWR net119 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07969__0_sky130_fd_pr__pfet_01v8_hvt VPWR net119 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15150__23_sky130_fd_pr__nfet_01v8 VGND VGND net108 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15150__11_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net108 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16078__2_sky130_fd_pr__nfet_01v8 VPWR net108 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.52U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16078__1_sky130_fd_pr__pfet_01v8_hvt VGND net108 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.79U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07956__7_sky130_fd_pr__pfet_01v8_hvt VGND net108 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07956__0_sky130_fd_pr__nfet_01v8 VPWR net108 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07883__3_sky130_fd_pr__nfet_01v8 VPWR net108 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07883__2_sky130_fd_pr__pfet_01v8_hvt VGND net108 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput108_3_sky130_fd_pr__nfet_01v8 VPWR net108 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput108_2_sky130_fd_pr__pfet_01v8_hvt VGND net108 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07968__9_sky130_fd_pr__pfet_01v8_hvt VGND net108 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07968__0_sky130_fd_pr__nfet_01v8 VPWR net108 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__8_sky130_fd_pr__nfet_01v8 VGND VGND net97 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__24_sky130_fd_pr__nfet_01v8 VGND VGND net97 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__20_sky130_fd_pr__nfet_01v8 net97 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__7_sky130_fd_pr__pfet_01v8_hvt net97 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net97 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__29_sky130_fd_pr__pfet_01v8_hvt net97 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput97_3_sky130_fd_pr__nfet_01v8 VPWR net97 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput97_2_sky130_fd_pr__pfet_01v8_hvt VGND net97 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16077__1_sky130_fd_pr__nfet_01v8 VPWR net97 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16077__0_sky130_fd_pr__pfet_01v8_hvt VGND net97 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07956__4_sky130_fd_pr__nfet_01v8 VGND net97 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07956__2_sky130_fd_pr__pfet_01v8_hvt VPWR net97 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07887__3_sky130_fd_pr__nfet_01v8 VPWR net97 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07887__2_sky130_fd_pr__pfet_01v8_hvt VGND net97 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07955__4_sky130_fd_pr__pfet_01v8_hvt VPWR net97 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07955__0_sky130_fd_pr__nfet_01v8 VPWR net97 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net97 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15149__2_sky130_fd_pr__nfet_01v8 net97 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07968__5_sky130_fd_pr__pfet_01v8_hvt VGND net97 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07968__4_sky130_fd_pr__nfet_01v8 VGND net97 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_9_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net247 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_4_sky130_fd_pr__pfet_01v8_hvt net247 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_1_sky130_fd_pr__pfet_01v8_hvt net247 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_8_sky130_fd_pr__nfet_01v8 net247 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_7_sky130_fd_pr__nfet_01v8 VGND VGND net247 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_6_sky130_fd_pr__nfet_01v8 net247 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08166__1_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08166__0_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08180__8_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08180__0_sky130_fd_pr__nfet_01v8 VPWR net247 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08163__8_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08163__2_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08359__5_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08359__4_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+Mfanout247_5_sky130_fd_pr__nfet_01v8 VGND VGND net247 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout247_0_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net247 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08157__9_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08157__6_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08157__4_sky130_fd_pr__pfet_01v8_hvt VPWR net247 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08157__0_sky130_fd_pr__nfet_01v8 VPWR net247 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07799__6_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07799__5_sky130_fd_pr__nfet_01v8 VPWR net247 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07919__2_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07919__1_sky130_fd_pr__pfet_01v8_hvt VPWR net247 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07918__4_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07918__2_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_12422__6_sky130_fd_pr__pfet_01v8_hvt VGND net247 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12422__1_sky130_fd_pr__nfet_01v8 VGND net247 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07796__2_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07796__3_sky130_fd_pr__pfet_01v8_hvt VGND net211 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__8_sky130_fd_pr__nfet_01v8 VGND VGND net211 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__24_sky130_fd_pr__nfet_01v8 VGND VGND net211 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__20_sky130_fd_pr__nfet_01v8 net211 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__7_sky130_fd_pr__pfet_01v8_hvt net211 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net211 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__29_sky130_fd_pr__pfet_01v8_hvt net211 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput211_3_sky130_fd_pr__nfet_01v8 VPWR net211 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput211_2_sky130_fd_pr__pfet_01v8_hvt VGND net211 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08180__4_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08180__1_sky130_fd_pr__pfet_01v8_hvt VPWR net211 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08174__4_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08174__2_sky130_fd_pr__pfet_01v8_hvt VPWR net211 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15166__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net211 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15166__2_sky130_fd_pr__nfet_01v8 net211 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_12446__6_sky130_fd_pr__pfet_01v8_hvt VGND net211 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12446__1_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07798__4_sky130_fd_pr__pfet_01v8_hvt VGND net211 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07798__2_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07797__2_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07797__1_sky130_fd_pr__pfet_01v8_hvt VPWR net211 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07796__1_sky130_fd_pr__pfet_01v8_hvt VPWR net211 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07796__0_sky130_fd_pr__nfet_01v8 VPWR net211 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08361__5_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08361__4_sky130_fd_pr__pfet_01v8_hvt VGND net211 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08167__8_sky130_fd_pr__nfet_01v8 VGND net211 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08167__7_sky130_fd_pr__pfet_01v8_hvt VGND net211 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08167__3_sky130_fd_pr__nfet_01v8 VPWR net211 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08167__0_sky130_fd_pr__pfet_01v8_hvt VPWR net211 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__8_sky130_fd_pr__nfet_01v8 VGND VGND net212 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__24_sky130_fd_pr__nfet_01v8 VGND VGND net212 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__20_sky130_fd_pr__nfet_01v8 net212 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__7_sky130_fd_pr__pfet_01v8_hvt net212 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net212 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__29_sky130_fd_pr__pfet_01v8_hvt net212 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08181__8_sky130_fd_pr__nfet_01v8 VGND net212 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08181__7_sky130_fd_pr__pfet_01v8_hvt VGND net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08181__3_sky130_fd_pr__nfet_01v8 VPWR net212 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08181__0_sky130_fd_pr__pfet_01v8_hvt VPWR net212 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput212_5_sky130_fd_pr__nfet_01v8 VPWR net212 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput212_1_sky130_fd_pr__pfet_01v8_hvt VGND net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12473__6_sky130_fd_pr__pfet_01v8_hvt VGND net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12473__1_sky130_fd_pr__nfet_01v8 VGND net212 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08178__8_sky130_fd_pr__pfet_01v8_hvt VGND net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08178__2_sky130_fd_pr__nfet_01v8 VGND net212 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net212 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15167__2_sky130_fd_pr__nfet_01v8 net212 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08363__5_sky130_fd_pr__nfet_01v8 VGND net212 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08363__4_sky130_fd_pr__pfet_01v8_hvt VGND net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07794__2_sky130_fd_pr__nfet_01v8 VGND net212 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07794__1_sky130_fd_pr__pfet_01v8_hvt VPWR net212 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07793__4_sky130_fd_pr__pfet_01v8_hvt VGND net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07793__2_sky130_fd_pr__nfet_01v8 VGND net212 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07792__6_sky130_fd_pr__pfet_01v8_hvt VPWR net212 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07792__1_sky130_fd_pr__nfet_01v8 VPWR net212 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08154__9_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02758_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08154__3_sky130_fd_pr__nfet_01v8 VGND VGND _02758_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08093__4_sky130_fd_pr__pfet_01v8_hvt VGND _02700_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08093__2_sky130_fd_pr__nfet_01v8 VGND _02700_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08092__9_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02700_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08092__3_sky130_fd_pr__nfet_01v8 VGND VGND _02700_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15218__19_sky130_fd_pr__pfet_01v8_hvt _15218__a_27_47 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__18_sky130_fd_pr__nfet_01v8 _15218__a_27_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15218__12_sky130_fd_pr__nfet_01v8 VGND _15218__a_27_47 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15218__3_sky130_fd_pr__pfet_01v8_hvt _15218__a_634_159 _15218__a_27_47 
++ _15218__a_891_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+MnFct_15218__3_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _15218__a_891_413 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__20_sky130_fd_pr__pfet_01v8_hvt VPWR _15218__a_27_47 _15218__a_193_47 
++ VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 
++ nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15218__16_sky130_fd_pr__nfet_01v8 VGND _15218__a_27_47 _15218__a_193_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15218__13_sky130_fd_pr__nfet_01v8 _15218__a_634_159 _15218__a_193_47 
++ _15218__a_891_413 VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+MnFct_15218__13_sky130_fd_pr__nfet_01v8 VGND VGND _15218__a_891_413 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15218__0_sky130_fd_pr__pfet_01v8_hvt VGND _15218__a_193_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08017__5_sky130_fd_pr__pfet_01v8_hvt VGND _02630_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08017__4_sky130_fd_pr__nfet_01v8 VPWR _02630_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08016__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02630_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08016__1_sky130_fd_pr__nfet_01v8 VGND VGND _02630_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08031__9_sky130_fd_pr__pfet_01v8_hvt VGND _02630_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08031__7_sky130_fd_pr__nfet_01v8 VGND _02630_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15155__23_sky130_fd_pr__nfet_01v8 VGND VGND net125 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15155__11_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net125 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07872__3_sky130_fd_pr__nfet_01v8 VPWR net125 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07872__2_sky130_fd_pr__pfet_01v8_hvt VGND net125 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput125_3_sky130_fd_pr__nfet_01v8 VPWR net125 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput125_2_sky130_fd_pr__pfet_01v8_hvt VGND net125 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16083__1_sky130_fd_pr__nfet_01v8 VPWR net125 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16083__0_sky130_fd_pr__pfet_01v8_hvt VGND net125 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15156__23_sky130_fd_pr__nfet_01v8 VGND VGND net126 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15156__11_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net126 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07869__3_sky130_fd_pr__nfet_01v8 VPWR net126 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07869__2_sky130_fd_pr__pfet_01v8_hvt VGND net126 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput126_3_sky130_fd_pr__nfet_01v8 VPWR net126 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput126_2_sky130_fd_pr__pfet_01v8_hvt VGND net126 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16084__1_sky130_fd_pr__nfet_01v8 VPWR net126 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_16084__0_sky130_fd_pr__pfet_01v8_hvt VGND net126 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08153__2_sky130_fd_pr__nfet_01v8 VGND VGND _02757_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08153__4_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02757_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08289__2_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08289__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02757_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08267__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02757_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08267__2_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08318__7_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08318__4_sky130_fd_pr__pfet_01v8_hvt VGND _02757_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08156__3_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08156__0_sky130_fd_pr__pfet_01v8_hvt VGND _02757_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08153__3_sky130_fd_pr__pfet_01v8_hvt _02757_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08153__0_sky130_fd_pr__nfet_01v8 _02757_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08298__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02757_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08298__2_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08329__5_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08329__1_sky130_fd_pr__pfet_01v8_hvt VGND _02757_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08309__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02757_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08309__2_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08273__6_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08273__5_sky130_fd_pr__pfet_01v8_hvt VGND _02757_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08255__2_sky130_fd_pr__nfet_01v8 VGND _02757_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08255__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02757_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08325__3_sky130_fd_pr__nfet_01v8 VGND _02912_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08325__0_sky130_fd_pr__pfet_01v8_hvt VGND _02912_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08322__3_sky130_fd_pr__nfet_01v8 _08322__A_113_47 _02910_ _02912_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+MnFct_08322__3_sky130_fd_pr__nfet_01v8 _08322__A_113_47 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08322__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02912_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08322__0_sky130_fd_pr__pfet_01v8_hvt _02912_ _02910_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07779__2_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07779__3_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__8_sky130_fd_pr__nfet_01v8 VGND VGND net216 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__24_sky130_fd_pr__nfet_01v8 VGND VGND net216 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__20_sky130_fd_pr__nfet_01v8 net216 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__7_sky130_fd_pr__pfet_01v8_hvt net216 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net216 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__29_sky130_fd_pr__pfet_01v8_hvt net216 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08216__8_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08216__7_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08216__3_sky130_fd_pr__nfet_01v8 VPWR net216 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08216__0_sky130_fd_pr__pfet_01v8_hvt VPWR net216 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput216_3_sky130_fd_pr__nfet_01v8 VPWR net216 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput216_2_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net216 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15170__2_sky130_fd_pr__nfet_01v8 net216 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07780__6_sky130_fd_pr__pfet_01v8_hvt VPWR net216 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07780__5_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07780__4_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07780__1_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08225__6_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08225__5_sky130_fd_pr__nfet_01v8 VPWR net216 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08224__8_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08224__2_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_12534__6_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12534__1_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08369__5_sky130_fd_pr__nfet_01v8 VGND net216 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08369__4_sky130_fd_pr__pfet_01v8_hvt VGND net216 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08223__4_sky130_fd_pr__pfet_01v8_hvt VPWR net216 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08223__0_sky130_fd_pr__nfet_01v8 VPWR net216 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07779__1_sky130_fd_pr__pfet_01v8_hvt VPWR net216 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07779__0_sky130_fd_pr__nfet_01v8 VPWR net216 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__8_sky130_fd_pr__nfet_01v8 VGND VGND net217 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__24_sky130_fd_pr__nfet_01v8 VGND VGND net217 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__20_sky130_fd_pr__nfet_01v8 net217 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__7_sky130_fd_pr__pfet_01v8_hvt net217 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__5_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net217 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__29_sky130_fd_pr__pfet_01v8_hvt net217 VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_12561__6_sky130_fd_pr__pfet_01v8_hvt VGND net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_12561__1_sky130_fd_pr__nfet_01v8 VGND net217 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08230__8_sky130_fd_pr__nfet_01v8 VGND net217 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08230__7_sky130_fd_pr__pfet_01v8_hvt VGND net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08230__3_sky130_fd_pr__nfet_01v8 VPWR net217 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08230__0_sky130_fd_pr__pfet_01v8_hvt VPWR net217 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__12_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR net217 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15171__2_sky130_fd_pr__nfet_01v8 net217 VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput217_5_sky130_fd_pr__nfet_01v8 VPWR net217 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Moutput217_1_sky130_fd_pr__pfet_01v8_hvt VGND net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08371__5_sky130_fd_pr__nfet_01v8 VGND net217 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08371__4_sky130_fd_pr__pfet_01v8_hvt VGND net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07783__6_sky130_fd_pr__pfet_01v8_hvt VPWR net217 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07783__1_sky130_fd_pr__nfet_01v8 VPWR net217 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08227__8_sky130_fd_pr__pfet_01v8_hvt VGND net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08227__2_sky130_fd_pr__nfet_01v8 VGND net217 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07777__2_sky130_fd_pr__nfet_01v8 VGND net217 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07777__1_sky130_fd_pr__pfet_01v8_hvt VPWR net217 VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07776__4_sky130_fd_pr__pfet_01v8_hvt VGND net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_07776__2_sky130_fd_pr__nfet_01v8 VGND net217 VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08314__3_sky130_fd_pr__pfet_01v8_hvt VGND _02904_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08314__2_sky130_fd_pr__nfet_01v8 VGND _02904_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08313__3_sky130_fd_pr__pfet_01v8_hvt _02904_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08313__2_sky130_fd_pr__nfet_01v8 VGND VGND _02904_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08313__1_sky130_fd_pr__nfet_01v8 _02904_ VGND VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08312__2_sky130_fd_pr__nfet_01v8 VGND _02902_ VPWR VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08312__3_sky130_fd_pr__pfet_01v8_hvt VGND _02902_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08312__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02902_ VGND VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08312__0_sky130_fd_pr__nfet_01v8 VPWR _02902_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08311__3_sky130_fd_pr__nfet_01v8 VGND VGND _02902_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08311__1_sky130_fd_pr__pfet_01v8_hvt VPWR VPWR _02902_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08311__0_sky130_fd_pr__pfet_01v8_hvt _02902_ VPWR VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__0_sky130_fd_pr__nfet_01v8 _08323__a_384_47 _02906_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__7_sky130_fd_pr__nfet_01v8 _08323__a_81_21 _02902_ _08323__a_384_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08323__3_sky130_fd_pr__nfet_01v8 VGND _02904_ _08323__a_81_21 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__5_sky130_fd_pr__pfet_01v8_hvt VPWR _02906_ _08323__a_299_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__4_sky130_fd_pr__pfet_01v8_hvt _08323__a_299_297 _02902_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__2_sky130_fd_pr__pfet_01v8_hvt _08323__a_81_21 _02904_ 
++ _08323__a_299_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08238__7_sky130_fd_pr__nfet_01v8 VGND _02813_ _08238__A_109_93 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08238__9_sky130_fd_pr__pfet_01v8_hvt VPWR _02813_ _08238__A_109_93 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08238__8_sky130_fd_pr__nfet_01v8 VGND net216 _08238__A_215_53 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08238__6_sky130_fd_pr__nfet_01v8 _08238__A_215_53 net217 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08238__0_sky130_fd_pr__nfet_01v8 _08238__A_215_53 _08238__A_109_93 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08238__4_sky130_fd_pr__pfet_01v8_hvt _08238__A_369_297 net217 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08238__3_sky130_fd_pr__pfet_01v8_hvt _08238__a_297_297 net216 
++ _08238__A_369_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08238__2_sky130_fd_pr__pfet_01v8_hvt _08238__A_215_53 _08238__A_109_93 
++ _08238__a_297_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08324__3_sky130_fd_pr__nfet_01v8 _08324__A_68_297 _02912_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08324__2_sky130_fd_pr__nfet_01v8 VGND _02913_ _08324__A_68_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08324__0_sky130_fd_pr__pfet_01v8_hvt _08324__A_150_297 _02912_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08324__4_sky130_fd_pr__pfet_01v8_hvt _08324__A_68_297 _02913_ 
++ _08324__A_150_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08239__4_sky130_fd_pr__nfet_01v8 _08239__A_145_75 _02835_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08239__2_sky130_fd_pr__nfet_01v8 _08239__A_59_75 _02757_ _08239__A_145_75 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08239__3_sky130_fd_pr__pfet_01v8_hvt _08239__A_59_75 _02835_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08239__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02757_ _08239__A_59_75 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08045__13_sky130_fd_pr__nfet_01v8 VGND net125 _08045__A_32_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__10_sky130_fd_pr__nfet_01v8 _08045__A_32_297 net126 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__2_sky130_fd_pr__nfet_01v8 VGND _02630_ _08045__A_32_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__0_sky130_fd_pr__nfet_01v8 _08045__A_32_297 _02609_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__11_sky130_fd_pr__pfet_01v8_hvt _08045__A_304_297 net126 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__14_sky130_fd_pr__pfet_01v8_hvt _08045__A_220_297 net125 
++ _08045__A_304_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08045__1_sky130_fd_pr__pfet_01v8_hvt _08045__A_114_297 _02609_ 
++ _08045__A_220_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08045__4_sky130_fd_pr__pfet_01v8_hvt _08045__A_32_297 _02630_ 
++ _08045__A_114_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15218__7_sky130_fd_pr__nfet_01v8 VGND _15218__a_466_413 _15218__a_634_159 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__6_sky130_fd_pr__pfet_01v8_hvt VPWR _15218__a_466_413 
++ _15218__a_634_159 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.75U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15218__21_sky130_fd_pr__nfet_01v8 VGND alu_out_31 _15218__a_381_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15218__14_sky130_fd_pr__nfet_01v8 _15218__a_592_47 _15218__a_634_159 VGND 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__15_sky130_fd_pr__nfet_01v8 _15218__a_466_413 VGND _15218__a_592_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__5_sky130_fd_pr__pfet_01v8_hvt VPWR alu_out_31 _15218__a_381_47 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__4_sky130_fd_pr__pfet_01v8_hvt _15218__a_381_47 VGND _15218__a_466_413 
++ VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 
++ nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15218__17_sky130_fd_pr__nfet_01v8 _15218__a_381_47 VPWR _15218__a_466_413 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15218__10_sky130_fd_pr__pfet_01v8_hvt _15218__a_561_413 _15218__a_634_159 
++ VPWR VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U 
++ nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15218__2_sky130_fd_pr__pfet_01v8_hvt _15218__a_466_413 VPWR 
++ _15218__a_561_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08155__8_sky130_fd_pr__nfet_01v8 _08155__a_27_47 _02758_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__6_sky130_fd_pr__nfet_01v8 VGND _02700_ _08155__a_27_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__3_sky130_fd_pr__nfet_01v8 _08155__a_27_47 _02657_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__7_sky130_fd_pr__pfet_01v8_hvt _08155__a_193_297 _02657_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__12_sky130_fd_pr__pfet_01v8_hvt _08155__a_109_297 _02700_ 
++ _08155__a_193_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08155__10_sky130_fd_pr__pfet_01v8_hvt _08155__a_27_47 _02758_ 
++ _08155__a_109_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08190__6_sky130_fd_pr__nfet_01v8 _08190__a_27_297 net247 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08190__2_sky130_fd_pr__nfet_01v8 VGND net211 _08190__a_27_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08190__1_sky130_fd_pr__nfet_01v8 VGND _02759_ _08190__a_27_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08190__0_sky130_fd_pr__nfet_01v8 _08190__a_27_297 net212 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08190__7_sky130_fd_pr__pfet_01v8_hvt _08190__a_277_297 net212 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08190__5_sky130_fd_pr__pfet_01v8_hvt _08190__A_205_297 net211 
++ _08190__a_277_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08190__4_sky130_fd_pr__pfet_01v8_hvt _08190__a_109_297 net247 
++ _08190__A_205_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08190__8_sky130_fd_pr__pfet_01v8_hvt _08190__a_27_297 _02759_ 
++ _08190__a_109_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_07993__13_sky130_fd_pr__nfet_01v8 VGND net108 _07993__A_32_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__10_sky130_fd_pr__nfet_01v8 _07993__A_32_297 net97 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__2_sky130_fd_pr__nfet_01v8 VGND net119 _07993__A_32_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__0_sky130_fd_pr__nfet_01v8 _07993__A_32_297 net251 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__11_sky130_fd_pr__pfet_01v8_hvt _07993__A_304_297 net97 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__14_sky130_fd_pr__pfet_01v8_hvt _07993__A_220_297 net108 
++ _07993__A_304_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_07993__1_sky130_fd_pr__pfet_01v8_hvt _07993__A_114_297 net251 
++ _07993__A_220_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_07993__4_sky130_fd_pr__pfet_01v8_hvt _07993__A_32_297 net119 
++ _07993__A_114_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08315__4_sky130_fd_pr__nfet_01v8 _08315__A_297_47 _02891_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08315__1_sky130_fd_pr__nfet_01v8 VGND _02458_ _08315__A_297_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08315__2_sky130_fd_pr__nfet_01v8 _08315__a_79_21 _02894_ _08315__A_297_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08315__6_sky130_fd_pr__pfet_01v8_hvt VPWR _02894_ _08315__a_79_21 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08315__0_sky130_fd_pr__pfet_01v8_hvt _08315__a_382_297 _02458_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08315__5_sky130_fd_pr__pfet_01v8_hvt _08315__a_79_21 _02891_ 
++ _08315__a_382_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08280__7_sky130_fd_pr__nfet_01v8 VGND _02864_ _08280__a_253_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08280__4_sky130_fd_pr__nfet_01v8 VGND _02849_ _08280__a_253_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08280__0_sky130_fd_pr__nfet_01v8 _08280__a_253_47 _02855_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08280__6_sky130_fd_pr__nfet_01v8 _08280__a_253_47 _02873_ _08280__a_103_199 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08280__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02849_ _08280__a_253_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08280__8_sky130_fd_pr__pfet_01v8_hvt _08280__a_253_297 _02855_ 
++ _08280__a_337_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08280__9_sky130_fd_pr__pfet_01v8_hvt _08280__a_337_297 _02864_ 
++ _08280__a_103_199 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08280__5_sky130_fd_pr__pfet_01v8_hvt _08280__a_103_199 _02873_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08282__3_sky130_fd_pr__nfet_01v8 _08282__A_68_297 _02871_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08282__2_sky130_fd_pr__nfet_01v8 VGND _02874_ _08282__A_68_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08282__0_sky130_fd_pr__pfet_01v8_hvt _08282__A_150_297 _02871_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08282__4_sky130_fd_pr__pfet_01v8_hvt _08282__A_68_297 _02874_ 
++ _08282__A_150_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08336__5_sky130_fd_pr__nfet_01v8 VGND _08336__a_226_47 _08336__a_76_199 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08336__11_sky130_fd_pr__nfet_01v8 _08336__a_556_47 _02393_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08336__2_sky130_fd_pr__nfet_01v8 _08336__a_76_199 _02924_ _08336__a_556_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08336__10_sky130_fd_pr__pfet_01v8_hvt VPWR _02393_ _08336__a_489_413 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08336__0_sky130_fd_pr__pfet_01v8_hvt _08336__a_489_413 _02924_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08336__8_sky130_fd_pr__pfet_01v8_hvt _08336__a_76_199 _08336__a_226_47 
++ _08336__a_489_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08336__9_sky130_fd_pr__nfet_01v8 _08336__a_226_47 _02922_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08336__1_sky130_fd_pr__nfet_01v8 VGND _02920_ _08336__a_226_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08336__3_sky130_fd_pr__pfet_01v8_hvt VPWR _02920_ _08336__a_226_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08336__4_sky130_fd_pr__pfet_01v8_hvt _08336__a_226_297 _02922_ 
++ _08336__a_226_47 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__1_sky130_fd_pr__nfet_01v8 _15152__a_1059_315 _15152__a_891_413 VGND 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15152__9_sky130_fd_pr__pfet_01v8_hvt _15152__a_1059_315 _15152__a_891_413 
++ VPWR VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 
++ nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__7_sky130_fd_pr__nfet_01v8 VGND _15152__a_466_413 _15152__a_634_159 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.64U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15152__8_sky130_fd_pr__nfet_01v8 _15152__a_1017_47 _15152__a_1059_315 VGND 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_15152__12_sky130_fd_pr__nfet_01v8 _15152__a_891_413 _15152__a_27_47 
++ _15152__a_1017_47 VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__6_sky130_fd_pr__pfet_01v8_hvt VPWR _15152__a_466_413 
++ _15152__a_634_159 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.75U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__3_sky130_fd_pr__pfet_01v8_hvt _15152__a_634_159 _15152__a_27_47 
++ _15152__a_891_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__13_sky130_fd_pr__nfet_01v8 _15152__a_634_159 _15152__a_193_47 
++ _15152__a_891_413 VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.36U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__22_sky130_fd_pr__pfet_01v8_hvt _15152__a_975_413 _15152__a_1059_315 
++ VPWR VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U 
++ nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_15152__0_sky130_fd_pr__pfet_01v8_hvt _15152__a_891_413 _15152__a_193_47 
++ _15152__a_975_413 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+Mfanout251_3_sky130_fd_pr__nfet_01v8 fanout251_a_27_47 net122 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_2_sky130_fd_pr__pfet_01v8_hvt fanout251_a_27_47 net122 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mmax_cap236_1_sky130_fd_pr__nfet_01v8 max_cap236_a_27_47 _02844_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mmax_cap236_0_sky130_fd_pr__pfet_01v8_hvt max_cap236_a_27_47 _02844_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__7_sky130_fd_pr__nfet_01v8 VGND _02884_ _08301__a_209_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__2_sky130_fd_pr__nfet_01v8 _08301__a_209_47 _02876_ _08301__a_303_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08301__4_sky130_fd_pr__nfet_01v8 _08301__a_303_47 _02869_ _08301__a_80_21 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08301__0_sky130_fd_pr__nfet_01v8 _08301__a_80_21 _02886_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__9_sky130_fd_pr__pfet_01v8_hvt VPWR _02884_ _08301__a_209_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__8_sky130_fd_pr__pfet_01v8_hvt _08301__a_209_297 _02876_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__5_sky130_fd_pr__pfet_01v8_hvt VPWR _02869_ _08301__a_209_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__6_sky130_fd_pr__pfet_01v8_hvt _08301__a_209_297 _02886_ 
++ _08301__a_80_21 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08302__3_sky130_fd_pr__nfet_01v8 _08302__A_68_297 _02892_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08302__2_sky130_fd_pr__nfet_01v8 VGND _02893_ _08302__A_68_297 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08302__0_sky130_fd_pr__pfet_01v8_hvt _08302__A_150_297 _02892_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08302__4_sky130_fd_pr__pfet_01v8_hvt _08302__A_68_297 _02893_ 
++ _08302__A_150_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=0.42U 
++ PS=0U PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08252__7_sky130_fd_pr__nfet_01v8 _08252__a_27_47 _02847_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__4_sky130_fd_pr__nfet_01v8 _08252__a_465_47 _02846_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__5_sky130_fd_pr__nfet_01v8 _08252__a_27_47 _02845_ _08252__a_465_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08252__10_sky130_fd_pr__nfet_01v8 VGND _02807_ _08252__a_205_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__3_sky130_fd_pr__nfet_01v8 _08252__a_205_47 _02844_ _08252__a_27_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08252__9_sky130_fd_pr__pfet_01v8_hvt _08252__a_109_297 _02807_ 
++ _08252__a_193_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08252__1_sky130_fd_pr__pfet_01v8_hvt _08252__a_193_297 _02846_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__0_sky130_fd_pr__pfet_01v8_hvt VPWR _02845_ _08252__a_193_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__6_sky130_fd_pr__pfet_01v8_hvt _08252__a_193_297 _02844_ 
++ _08252__a_109_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08252__8_sky130_fd_pr__pfet_01v8_hvt _08252__a_27_47 _02847_ 
++ _08252__a_109_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08248__14_sky130_fd_pr__nfet_01v8 VGND _02838_ _02844_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__9_sky130_fd_pr__nfet_01v8 _02844_ _02838_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__11_sky130_fd_pr__nfet_01v8 _02844_ _02801_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__7_sky130_fd_pr__nfet_01v8 VGND _02801_ _02844_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__10_sky130_fd_pr__nfet_01v8 _02844_ _02831_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__12_sky130_fd_pr__nfet_01v8 VGND _02831_ _02844_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__0_sky130_fd_pr__nfet_01v8 _02844_ _02818_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__3_sky130_fd_pr__nfet_01v8 VGND _02818_ _02844_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__1_sky130_fd_pr__pfet_01v8_hvt VPWR _02801_ _08248__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__6_sky130_fd_pr__pfet_01v8_hvt _08248__a_27_297 _02801_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__2_sky130_fd_pr__pfet_01v8_hvt _08248__A_281_297 _02818_ 
++ _08248__a_27_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08248__4_sky130_fd_pr__pfet_01v8_hvt _08248__a_27_297 _02818_ 
++ _08248__A_281_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08248__5_sky130_fd_pr__pfet_01v8_hvt _08248__A_281_297 _02831_ 
++ _08248__A_475_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08248__8_sky130_fd_pr__pfet_01v8_hvt _08248__A_475_297 _02831_ 
++ _08248__A_281_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08248__13_sky130_fd_pr__pfet_01v8_hvt _08248__A_475_297 _02838_ _02844_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08248__15_sky130_fd_pr__pfet_01v8_hvt _02844_ _02838_ _08248__A_475_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__2_sky130_fd_pr__nfet_01v8 VGND _08252__a_27_47 _02848_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08252__11_sky130_fd_pr__pfet_01v8_hvt VPWR _08252__a_27_47 _02848_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__0_sky130_fd_pr__nfet_01v8 VGND _08155__a_27_47 _02759_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__13_sky130_fd_pr__nfet_01v8 _02759_ _08155__a_27_47 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__5_sky130_fd_pr__nfet_01v8 VGND _08155__a_27_47 _02759_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__9_sky130_fd_pr__nfet_01v8 _02759_ _08155__a_27_47 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__1_sky130_fd_pr__pfet_01v8_hvt VPWR _08155__a_27_47 _02759_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__11_sky130_fd_pr__pfet_01v8_hvt _02759_ _08155__a_27_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__2_sky130_fd_pr__pfet_01v8_hvt VPWR _08155__a_27_47 _02759_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08155__4_sky130_fd_pr__pfet_01v8_hvt _02759_ _08155__a_27_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__15_sky130_fd_pr__nfet_01v8 _08241__a_560_47 net186 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__18_sky130_fd_pr__nfet_01v8 VGND net186 _08241__a_560_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__1_sky130_fd_pr__nfet_01v8 VGND _02837_ _08241__a_560_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__12_sky130_fd_pr__nfet_01v8 _08241__a_560_47 _02837_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__16_sky130_fd_pr__nfet_01v8 _02838_ _08241__a_27_297 _08241__a_560_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08241__19_sky130_fd_pr__nfet_01v8 _08241__a_560_47 _08241__a_27_297 _02838_ 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08241__5_sky130_fd_pr__pfet_01v8_hvt VPWR net186 _08241__A_474_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__8_sky130_fd_pr__pfet_01v8_hvt _08241__A_474_297 net186 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__11_sky130_fd_pr__pfet_01v8_hvt _08241__A_474_297 _02837_ _02838_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__3_sky130_fd_pr__pfet_01v8_hvt _02838_ _02837_ _08241__A_474_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__10_sky130_fd_pr__pfet_01v8_hvt _02838_ _08241__a_27_297 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08241__13_sky130_fd_pr__pfet_01v8_hvt VPWR _08241__a_27_297 _02838_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__3_sky130_fd_pr__nfet_01v8 _02893_ _08301__a_80_21 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08301__1_sky130_fd_pr__pfet_01v8_hvt _02893_ _08301__a_80_21 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__23_sky130_fd_pr__nfet_01v8 VGND _15152__a_1059_315 net122 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_15152__11_sky130_fd_pr__pfet_01v8_hvt VPWR _15152__a_1059_315 net122 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_5_sky130_fd_pr__nfet_01v8 VGND fanout251_a_27_47 net251 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_6_sky130_fd_pr__nfet_01v8 net251 fanout251_a_27_47 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_7_sky130_fd_pr__nfet_01v8 VGND fanout251_a_27_47 net251 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_8_sky130_fd_pr__nfet_01v8 net251 fanout251_a_27_47 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_0_sky130_fd_pr__pfet_01v8_hvt VPWR fanout251_a_27_47 net251 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_1_sky130_fd_pr__pfet_01v8_hvt net251 fanout251_a_27_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_4_sky130_fd_pr__pfet_01v8_hvt net251 fanout251_a_27_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mfanout251_9_sky130_fd_pr__pfet_01v8_hvt VPWR fanout251_a_27_47 net251 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__15_sky130_fd_pr__nfet_01v8 _08240__a_560_47 net218 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__18_sky130_fd_pr__nfet_01v8 VGND net218 _08240__a_560_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__1_sky130_fd_pr__nfet_01v8 VGND _02836_ _08240__a_560_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__12_sky130_fd_pr__nfet_01v8 _08240__a_560_47 _02836_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__16_sky130_fd_pr__nfet_01v8 _02837_ _08240__a_27_297 _08240__a_560_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08240__19_sky130_fd_pr__nfet_01v8 _08240__a_560_47 _08240__a_27_297 _02837_ 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08240__5_sky130_fd_pr__pfet_01v8_hvt VPWR net218 _08240__A_474_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__8_sky130_fd_pr__pfet_01v8_hvt _08240__A_474_297 net218 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__11_sky130_fd_pr__pfet_01v8_hvt _08240__A_474_297 _02836_ _02837_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__3_sky130_fd_pr__pfet_01v8_hvt _02837_ _02836_ _08240__A_474_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__10_sky130_fd_pr__pfet_01v8_hvt _02837_ _08240__a_27_297 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08240__13_sky130_fd_pr__pfet_01v8_hvt VPWR _08240__a_27_297 _02837_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08302__1_sky130_fd_pr__nfet_01v8 VGND _08302__A_68_297 _02894_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08302__5_sky130_fd_pr__pfet_01v8_hvt VPWR _08302__A_68_297 _02894_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08282__1_sky130_fd_pr__nfet_01v8 VGND _08282__A_68_297 _02876_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08282__5_sky130_fd_pr__pfet_01v8_hvt VPWR _08282__A_68_297 _02876_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__12_sky130_fd_pr__nfet_01v8 _02657_ _08045__A_32_297 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__15_sky130_fd_pr__nfet_01v8 VGND _08045__A_32_297 _02657_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__3_sky130_fd_pr__nfet_01v8 _02657_ _08045__A_32_297 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__5_sky130_fd_pr__nfet_01v8 VGND _08045__A_32_297 _02657_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__6_sky130_fd_pr__pfet_01v8_hvt _02657_ _08045__A_32_297 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__7_sky130_fd_pr__pfet_01v8_hvt _02657_ _08045__A_32_297 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__8_sky130_fd_pr__pfet_01v8_hvt VPWR _08045__A_32_297 _02657_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08045__9_sky130_fd_pr__pfet_01v8_hvt VPWR _08045__A_32_297 _02657_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08190__3_sky130_fd_pr__nfet_01v8 VGND _08190__a_27_297 _02791_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08190__9_sky130_fd_pr__pfet_01v8_hvt VPWR _08190__a_27_297 _02791_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__11_sky130_fd_pr__nfet_01v8 VGND _02791_ _02813_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__9_sky130_fd_pr__nfet_01v8 _02813_ _02791_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__7_sky130_fd_pr__nfet_01v8 VGND net215 _02813_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__8_sky130_fd_pr__nfet_01v8 _02813_ net215 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__0_sky130_fd_pr__nfet_01v8 _02813_ net213 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__4_sky130_fd_pr__nfet_01v8 VGND net213 _02813_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__2_sky130_fd_pr__pfet_01v8_hvt VPWR net215 _08214__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__6_sky130_fd_pr__pfet_01v8_hvt _08214__a_27_297 net215 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__3_sky130_fd_pr__pfet_01v8_hvt _08214__A_281_297 net213 
++ _08214__a_27_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08214__5_sky130_fd_pr__pfet_01v8_hvt _08214__a_27_297 net213 
++ _08214__A_281_297 VPWR sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U 
++ PD=0U nrs=0 nrd=0 sa=0 sb=0 sd=0 nf=1 
+M_08214__1_sky130_fd_pr__pfet_01v8_hvt _02813_ _02791_ _08214__A_281_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08214__10_sky130_fd_pr__pfet_01v8_hvt _08214__A_281_297 _02791_ _02813_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mmax_cap236_4_sky130_fd_pr__nfet_01v8 net236 max_cap236_a_27_47 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mmax_cap236_5_sky130_fd_pr__nfet_01v8 VGND max_cap236_a_27_47 net236 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.42U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mmax_cap236_2_sky130_fd_pr__pfet_01v8_hvt net236 max_cap236_a_27_47 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Mmax_cap236_3_sky130_fd_pr__pfet_01v8_hvt VPWR max_cap236_a_27_47 net236 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08331__0_sky130_fd_pr__nfet_01v8 _08331__a_199_47 _02914_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08331__5_sky130_fd_pr__nfet_01v8 _02920_ _02910_ _08331__a_199_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08331__3_sky130_fd_pr__nfet_01v8 VGND _02919_ _02920_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08331__4_sky130_fd_pr__pfet_01v8_hvt VPWR _02914_ _08331__a_113_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08331__1_sky130_fd_pr__pfet_01v8_hvt _08331__a_113_297 _02910_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08331__2_sky130_fd_pr__pfet_01v8_hvt _02920_ _02919_ _08331__a_113_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08336__6_sky130_fd_pr__nfet_01v8 alu_out_31 _08336__a_76_199 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08336__7_sky130_fd_pr__pfet_01v8_hvt alu_out_31 _08336__a_76_199 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__12_sky130_fd_pr__nfet_01v8 _02609_ _07993__A_32_297 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__15_sky130_fd_pr__nfet_01v8 VGND _07993__A_32_297 _02609_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__3_sky130_fd_pr__nfet_01v8 _02609_ _07993__A_32_297 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__5_sky130_fd_pr__nfet_01v8 VGND _07993__A_32_297 _02609_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__6_sky130_fd_pr__pfet_01v8_hvt _02609_ _07993__A_32_297 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__7_sky130_fd_pr__pfet_01v8_hvt _02609_ _07993__A_32_297 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__8_sky130_fd_pr__pfet_01v8_hvt VPWR _07993__A_32_297 _02609_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_07993__9_sky130_fd_pr__pfet_01v8_hvt VPWR _07993__A_32_297 _02609_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08280__2_sky130_fd_pr__nfet_01v8 _02874_ _08280__a_103_199 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08280__3_sky130_fd_pr__pfet_01v8_hvt _02874_ _08280__a_103_199 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08324__1_sky130_fd_pr__nfet_01v8 VGND _08324__A_68_297 _02914_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08324__5_sky130_fd_pr__pfet_01v8_hvt VPWR _08324__A_68_297 _02914_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08315__7_sky130_fd_pr__nfet_01v8 _02906_ _08315__a_79_21 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08315__3_sky130_fd_pr__pfet_01v8_hvt _02906_ _08315__a_79_21 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__13_sky130_fd_pr__nfet_01v8 VGND _02848_ _02849_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__21_sky130_fd_pr__nfet_01v8 _02849_ _02848_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__28_sky130_fd_pr__nfet_01v8 VGND _02848_ _02849_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__3_sky130_fd_pr__nfet_01v8 _02849_ _02848_ VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__10_sky130_fd_pr__nfet_01v8 VGND net236 _08253__a_27_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__16_sky130_fd_pr__nfet_01v8 _08253__a_27_47 net236 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__18_sky130_fd_pr__nfet_01v8 VGND net236 _08253__a_27_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__20_sky130_fd_pr__nfet_01v8 _08253__a_27_47 net236 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__12_sky130_fd_pr__nfet_01v8 _08253__a_445_47 net237 _08253__a_27_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08253__2_sky130_fd_pr__nfet_01v8 _08253__a_27_47 net237 _08253__a_445_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08253__27_sky130_fd_pr__nfet_01v8 _08253__a_445_47 net237 _08253__a_27_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08253__4_sky130_fd_pr__nfet_01v8 _08253__a_27_47 net237 _08253__a_445_47 
++ VGND sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 
++ sa=0 sb=0 sd=0 nf=1 
+M_08253__1_sky130_fd_pr__nfet_01v8 _02849_ _02756_ _08253__a_445_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__26_sky130_fd_pr__nfet_01v8 _08253__a_445_47 _02756_ _02849_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__31_sky130_fd_pr__nfet_01v8 _08253__a_445_47 _02756_ _02849_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__6_sky130_fd_pr__nfet_01v8 _02849_ _02756_ _08253__a_445_47 VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__19_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 net236 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__23_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 net236 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__25_sky130_fd_pr__pfet_01v8_hvt VPWR net236 _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__29_sky130_fd_pr__pfet_01v8_hvt VPWR net236 _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__14_sky130_fd_pr__pfet_01v8_hvt VPWR _02756_ _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__15_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 _02756_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__17_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 _02756_ VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__8_sky130_fd_pr__pfet_01v8_hvt VPWR _02756_ _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__11_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 net237 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__22_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 net237 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__7_sky130_fd_pr__pfet_01v8_hvt VPWR net237 _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__9_sky130_fd_pr__pfet_01v8_hvt VPWR net237 _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__0_sky130_fd_pr__pfet_01v8_hvt _02849_ _02848_ _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__24_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 _02848_ _02849_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__30_sky130_fd_pr__pfet_01v8_hvt _02849_ _02848_ _08253__a_27_297 VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08253__5_sky130_fd_pr__pfet_01v8_hvt _08253__a_27_297 _02848_ _02849_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08239__0_sky130_fd_pr__nfet_01v8 VGND _08239__A_59_75 _02836_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08239__5_sky130_fd_pr__pfet_01v8_hvt VPWR _08239__A_59_75 _02836_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__6_sky130_fd_pr__nfet_01v8 _02913_ _08323__a_81_21 VGND VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08323__1_sky130_fd_pr__pfet_01v8_hvt _02913_ _08323__a_81_21 VPWR VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08238__1_sky130_fd_pr__nfet_01v8 VGND _08238__A_215_53 _02835_ VGND 
++ sky130_fd_pr__nfet_01v8__model L=0.15U W=0.65U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+M_08238__5_sky130_fd_pr__pfet_01v8_hvt VPWR _08238__A_215_53 _02835_ VPWR 
++ sky130_fd_pr__pfet_01v8_hvt__model L=0.15U W=1U PS=0U PD=0U nrs=0 nrd=0 sa=0 
++ sb=0 sd=0 nf=1 
+Ct5939731 _08240__a_27_47 0 0
+Ct5921410 _08241__a_27_47 0 0
+Ct5901728 _08251__a_109_297 0 0
+Ct5856109 _15152__a_592_47 0 0
+Ct5822205 _15152__a_381_47 0 0
+Ct5788299 _15152__a_561_413 0 0
+Ct5754391 _08277__A_113_47 0 0
+Ct5744174 _08300__A_377_297 0 0
+Ct5702906 _15218__a_891_413 0 0
+Ct5685630 _08322__A_113_47 0 0
+Ct5684732 _08323__a_384_47 0 0
+Ct5682461 _02902_ 0 0
+Ct5626607 _08323__a_299_297 0 0
+Ct5624338 _02904_ 0 0
+Ct5568937 net217 0 0
+Ct5519679 _08238__A_369_297 0 0
+Ct5516303 net216 0 0
+Ct5466281 _08238__a_297_297 0 0
+Ct5462904 _08238__A_109_93 0 0
+Ct5459526 _02912_ 0 0
+Ct5401619 _08324__A_150_297 0 0
+Ct5398028 _08239__A_145_75 0 0
+Ct5393299 _02757_ 0 0
+Ct5341301 net126 0 0
+Ct5289487 _08045__A_304_297 0 0
+Ct5279633 net125 0 0
+Ct5227374 _08045__A_220_297 0 0
+Ct5217519 _08045__A_114_297 0 0
+Ct5207663 _02630_ 0 0
+Ct5153205 _15218__a_592_47 0 0
+Ct5135939 _15218__a_193_47 0 0
+Ct5118664 _15218__a_381_47 0 0
+Ct5101396 _15218__a_634_159 0 0
+Ct5084127 _15218__a_466_413 0 0
+Ct5066855 _15218__a_561_413 0 0
+Ct5049585 _15218__a_27_47 0 0
+Ct5032314 _08155__a_193_297 0 0
+Ct5012846 _02700_ 0 0
+Ct4961809 _08155__a_109_297 0 0
+Ct4942342 _02758_ 0 0
+Ct4886059 net212 0 0
+Ct4836248 _08190__a_277_297 0 0
+Ct4815086 net211 0 0
+Ct4765273 _08190__A_205_297 0 0
+Ct4744110 net247 0 0
+Ct4695690 _08190__a_109_297 0 0
+Ct4674526 net97 0 0
+Ct4625714 _07993__A_304_297 0 0
+Ct4601668 net108 0 0
+Ct4547563 _07993__A_220_297 0 0
+Ct4523516 _07993__A_114_297 0 0
+Ct4499468 net119 0 0
+Ct4445676 _08315__A_297_47 0 0
+Ct4419468 _02458_ 0 0
+Ct4368439 _08315__a_382_297 0 0
+Ct4342230 _02891_ 0 0
+Ct4291200 _08280__a_253_47 0 0
+Ct4264517 _08280__a_253_297 0 0
+Ct4237835 _02855_ 0 0
+Ct4182752 _08280__a_337_297 0 0
+Ct4156072 _02864_ 0 0
+Ct4102783 _02873_ 0 0
+Ct4047699 _02871_ 0 0
+Ct3993157 _08282__A_150_297 0 0
+Ct3963836 _08336__a_556_47 0 0
+Ct3932056 _02393_ 0 0
+Ct3878078 _02924_ 0 0
+Ct3824099 _08336__a_489_413 0 0
+Ct3792316 _08336__a_226_297 0 0
+Ct3760537 _08336__a_226_47 0 0
+Ct3728755 _02922_ 0 0
+Ct3674778 _15152__a_1017_47 0 0
+Ct3640873 _15152__a_466_413 0 0
+Ct3606963 _15152__a_27_47 0 0
+Ct3573054 _15152__a_634_159 0 0
+Ct3539147 _15152__a_891_413 0 0
+Ct3505233 _15152__a_975_413 0 0
+Ct3471321 _15152__a_193_47 0 0
+Ct3437408 _08301__a_209_47 0 0
+Ct3394793 _08301__a_303_47 0 0
+Ct3352179 _02884_ 0 0
+Ct3301680 _02869_ 0 0
+Ct3251183 _08301__a_209_297 0 0
+Ct3208570 _02886_ 0 0
+Ct3158070 _02892_ 0 0
+Ct3108842 _08302__A_150_297 0 0
+Ct3064814 _08252__a_465_47 0 0
+Ct3017794 _08252__a_205_47 0 0
+Ct2970773 _02807_ 0 0
+Ct2922516 _02846_ 0 0
+Ct2874261 _02845_ 0 0
+Ct2826007 _08252__a_193_297 0 0
+Ct2778984 _08252__a_109_297 0 0
+Ct2731965 _02847_ 0 0
+Ct2683707 _02801_ 0 0
+Ct2635292 _08248__a_27_297 0 0
+Ct2606394 _02818_ 0 0
+Ct2557977 _08248__A_281_297 0 0
+Ct2529080 _02831_ 0 0
+Ct2479964 _02844_ 0 0
+Ct2431708 _08248__A_475_297 0 0
+Ct2402812 _08252__a_27_47 0 0
+Ct2355790 _02759_ 0 0
+Ct2307369 _08155__a_27_47 0 0
+Ct2287900 _08241__a_560_47 0 0
+Ct2268216 net186 0 0
+Ct2218411 _08241__A_474_297 0 0
+Ct2198728 _02838_ 0 0
+Ct2149611 _08241__a_27_297 0 0
+Ct2129926 _02893_ 0 0
+Ct2080697 _08301__a_80_21 0 0
+Ct2038081 net122 0 0
+Ct1988425 _15152__a_1059_315 0 0
+Ct1954514 net251 0 0
+Ct1904814 fanout251_a_27_47 0 0
+Ct1867573 _08240__a_560_47 0 0
+Ct1849250 net218 0 0
+Ct1800697 _08240__A_474_297 0 0
+Ct1782375 _02837_ 0 0
+Ct1732569 _08240__a_27_297 0 0
+Ct1714245 _02894_ 0 0
+Ct1664334 _08302__A_68_297 0 0
+Ct1620307 _02876_ 0 0
+Ct1569809 _08282__A_68_297 0 0
+Ct1540489 _02657_ 0 0
+Ct1489453 _08045__A_32_297 0 0
+Ct1479596 _08190__a_27_297 0 0
+Ct1458431 net215 0 0
+Ct1407318 _08214__a_27_297 0 0
+Ct1366263 net213 0 0
+Ct1317801 _08214__A_281_297 0 0
+Ct1276745 _02813_ 0 0
+Ct1225630 _02791_ 0 0
+Ct1174516 max_cap236_a_27_47 0 0
+Ct1136238 _08331__a_199_47 0 0
+Ct1111129 _02910_ 0 0
+Ct1062014 _02920_ 0 0
+Ct1008038 _08331__a_113_297 0 0
+Ct982930 _02919_ 0 0
+Ct928065 alu_out_31 0 0
+Ct874085 _08336__a_76_199 0 0
+Ct842304 _02609_ 0 0
+Ct787847 _07993__A_32_297 0 0
+Ct763798 _02874_ 0 0
+Ct709255 _08280__a_103_199 0 0
+Ct682574 _02914_ 0 0
+Ct627710 _08324__A_68_297 0 0
+Ct624120 _02906_ 0 0
+Ct569199 _08315__a_79_21 0 0
+Ct542992 _08253__a_27_47 0 0
+Ct542097 _08253__a_445_47 0 0
+Ct541201 net236 0 0
+Ct489089 _02756_ 0 0
+Ct438054 net237 0 0
+Ct381924 _08253__a_27_297 0 0
+Ct381027 _02849_ 0 0
+Ct325945 _02848_ 0 0
+Ct277686 _02836_ 0 0
+Ct221261 _08239__A_59_75 0 0
+Ct216531 _02913_ 0 0
+Ct158623 _08323__a_81_21 0 0
+Ct156353 _02835_ 0 0
+Ct98428 _08238__A_215_53 0 0
+Ct95049 VPWR 0 0
+Ct47524 VGND 0 0
+.ends picorv32_m_ext
+

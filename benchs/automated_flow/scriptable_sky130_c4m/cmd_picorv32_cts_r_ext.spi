@@ -1,0 +1,415 @@
+*** SIM library ***
+
+
+.OPTION TNOM=27
+.TEMP 25
+
+.include "/users/cao/aoudrhiri/coriolis-2.x/src/alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice_hitas/C4M.Sky130_ff_model_hitas.spice"
+
+
+.include "picorv32_cts_r_ext.spi"
+
+Xpicorv32_cts_r_ext subckt_8938_sff1_x4_sff_s abc_30082_new_n4132 
++ abc_30082_new_n3940 reg_pc_1 abc_30082_new_n4365 abc_30082_new_n4327 
++ abc_30082_new_n4289 abc_30082_new_n4441 subckt_8938_sff1_x4_nckr 
++ subckt_8938_sff1_x4_ckr abc_30082_new_n4052 abc_30082_new_n3917 
++ abc_30082_new_n3876 abc_30082_new_n4213 abc_30082_new_n4175 
++ abc_30082_new_n4403 abc_30082_new_n3964 abc_30082_new_n4251 
++ subckt_8644_sff1_x4_nckr subckt_8644_sff1_x4_ckr cpu_state_bit3_hfns_0 
++ abc_30082_new_n4458 abc_30082_new_n4092 abc_30082_new_n4091 
++ abc_30082_new_n4032 abc_30082_new_n4031 abc_30082_new_n4250 
++ abc_30082_new_n4269 abc_30082_new_n4270 abc_30082_new_n4383 
++ abc_30082_new_n4384 abc_30082_new_n3963 abc_30082_new_n4402 
++ abc_30082_new_n4174 abc_30082_new_n4421 abc_30082_new_n4422 
++ abc_30082_new_n4193 abc_30082_new_n4194 abc_30082_new_n4212 
++ abc_30082_new_n3874 abc_30082_new_n4459 abc_30082_new_n4472 
++ abc_30082_new_n4231 abc_30082_new_n4232 abc_30082_new_n3916 
++ abc_30082_new_n4111 abc_30082_new_n4112 abc_30082_new_n4071 
++ abc_30082_new_n4072 abc_30082_new_n4051 abc_30082_new_n3893 
++ abc_30082_new_n3892 abc_30082_new_n3987 abc_30082_new_n3988 
++ subckt_8938_sff1_x4_sff_m abc_30082_new_n4008 abc_30082_new_n4009 
++ abc_30082_new_n4440 abc_30082_new_n4288 abc_30082_new_n4307 
++ abc_30082_new_n4308 abc_30082_new_n4326 abc_30082_new_n4345 
++ abc_30082_new_n4346 abc_30082_new_n4364 abc_30082_new_n4151 
++ abc_30082_new_n4152 abc_30082_new_n3939 abc_30082_new_n4131 
++ subckt_8644_sff1_x4_sff_m picorv32_cts_r_ext
+
+* Main supply *************************************
+
+
+* Current measure *********************************
+
+
+* Initial state ***********************************
+
+* Ic for locon subckt_8644_sff1_x4.sff_m
+.IC v(subckt_8644_sff1_x4_sff_m)=1.8V
+
+* Ic for locon subckt_8644_sff1_x4.y
+.IC v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_y)=0V
+
+* User specified input ****************************
+
+
+* Input stimuli ***********************************
+
+* Static input vss
+V1 xpicorv32_cts_r_ext.vss 0 dc 0V
+
+* Static input vdd
+V2 xpicorv32_cts_r_ext.vdd 0 dc 1.8V
+
+* Static input subckt_8938_sff1_x4.nckr
+V3 subckt_8938_sff1_x4_nckr 0 dc 0V
+
+* Static input subckt_8938_sff1_x4.ckr
+V4 subckt_8938_sff1_x4_ckr 0 dc 0V
+
+* Static input subckt_8644_sff1_x4.nckr
+V5 subckt_8644_sff1_x4_nckr 0 dc 0V
+
+* Static input subckt_8938_sff1_x4.sff_m
+V6 subckt_8938_sff1_x4_sff_m 0 dc 0V
+
+* Static input abc_30082_new_n4092
+V7 abc_30082_new_n4092 0 dc 1.8V
+
+* Static input abc_30082_new_n4091
+V8 abc_30082_new_n4091 0 dc 0V
+
+* Static input cpu_state_bit3_hfns_0
+V9 cpu_state_bit3_hfns_0 0 dc 1.8V
+
+* Static input abc_30082_new_n4458
+V10 abc_30082_new_n4458 0 dc 0V
+
+* Static input abc_30082_new_n4032
+V11 abc_30082_new_n4032 0 dc 1.8V
+
+* Static input abc_30082_new_n4031
+V12 abc_30082_new_n4031 0 dc 0V
+
+* Static input abc_30082_new_n4251
+V13 abc_30082_new_n4251 0 dc 1.8V
+
+* Static input abc_30082_new_n4250
+V14 abc_30082_new_n4250 0 dc 0V
+
+* Static input abc_30082_new_n4269
+V15 abc_30082_new_n4269 0 dc 1.8V
+
+* Static input abc_30082_new_n4270
+V16 abc_30082_new_n4270 0 dc 0V
+
+* Static input abc_30082_new_n4383
+V17 abc_30082_new_n4383 0 dc 1.8V
+
+* Static input abc_30082_new_n4384
+V18 abc_30082_new_n4384 0 dc 0V
+
+* Static input abc_30082_new_n3964
+V19 abc_30082_new_n3964 0 dc 1.8V
+
+* Static input abc_30082_new_n3963
+V20 abc_30082_new_n3963 0 dc 0V
+
+* Static input abc_30082_new_n4403
+V21 abc_30082_new_n4403 0 dc 1.8V
+
+* Static input abc_30082_new_n4402
+V22 abc_30082_new_n4402 0 dc 0V
+
+* Static input abc_30082_new_n4175
+V23 abc_30082_new_n4175 0 dc 1.8V
+
+* Static input abc_30082_new_n4174
+V24 abc_30082_new_n4174 0 dc 0V
+
+* Static input abc_30082_new_n4421
+V25 abc_30082_new_n4421 0 dc 1.8V
+
+* Static input abc_30082_new_n4422
+V26 abc_30082_new_n4422 0 dc 0V
+
+* Static input abc_30082_new_n4193
+V27 abc_30082_new_n4193 0 dc 1.8V
+
+* Static input abc_30082_new_n4194
+V28 abc_30082_new_n4194 0 dc 0V
+
+* Static input abc_30082_new_n4213
+V29 abc_30082_new_n4213 0 dc 1.8V
+
+* Static input abc_30082_new_n4212
+V30 abc_30082_new_n4212 0 dc 0V
+
+* Static input abc_30082_new_n3876
+V31 abc_30082_new_n3876 0 dc 1.8V
+
+* Static input abc_30082_new_n3874
+V32 abc_30082_new_n3874 0 dc 0V
+
+* Static input abc_30082_new_n4472
+V33 abc_30082_new_n4472 0 dc 0V
+
+* Static input abc_30082_new_n4459
+V34 abc_30082_new_n4459 0 dc 1.8V
+
+* Static input abc_30082_new_n4231
+V35 abc_30082_new_n4231 0 dc 1.8V
+
+* Static input abc_30082_new_n4232
+V36 abc_30082_new_n4232 0 dc 0V
+
+* Static input abc_30082_new_n3917
+V37 abc_30082_new_n3917 0 dc 1.8V
+
+* Static input abc_30082_new_n3916
+V38 abc_30082_new_n3916 0 dc 0V
+
+* Static input abc_30082_new_n4111
+V39 abc_30082_new_n4111 0 dc 1.8V
+
+* Static input abc_30082_new_n4112
+V40 abc_30082_new_n4112 0 dc 0V
+
+* Static input abc_30082_new_n4071
+V41 abc_30082_new_n4071 0 dc 1.8V
+
+* Static input abc_30082_new_n4072
+V42 abc_30082_new_n4072 0 dc 0V
+
+* Static input abc_30082_new_n4052
+V43 abc_30082_new_n4052 0 dc 1.8V
+
+* Static input abc_30082_new_n4051
+V44 abc_30082_new_n4051 0 dc 0V
+
+* Static input abc_30082_new_n3893
+V45 abc_30082_new_n3893 0 dc 1.8V
+
+* Static input abc_30082_new_n3892
+V46 abc_30082_new_n3892 0 dc 0V
+
+* Static input abc_30082_new_n3987
+V47 abc_30082_new_n3987 0 dc 1.8V
+
+* Static input abc_30082_new_n3988
+V48 abc_30082_new_n3988 0 dc 0V
+
+* Static input abc_30082_new_n4008
+V49 abc_30082_new_n4008 0 dc 1.8V
+
+* Static input abc_30082_new_n4009
+V50 abc_30082_new_n4009 0 dc 0V
+
+* Static input abc_30082_new_n4441
+V51 abc_30082_new_n4441 0 dc 1.8V
+
+* Static input abc_30082_new_n4440
+V52 abc_30082_new_n4440 0 dc 0V
+
+* Static input abc_30082_new_n4289
+V53 abc_30082_new_n4289 0 dc 1.8V
+
+* Static input abc_30082_new_n4288
+V54 abc_30082_new_n4288 0 dc 0V
+
+* Static input abc_30082_new_n4307
+V55 abc_30082_new_n4307 0 dc 1.8V
+
+* Static input abc_30082_new_n4308
+V56 abc_30082_new_n4308 0 dc 0V
+
+* Static input abc_30082_new_n4327
+V57 abc_30082_new_n4327 0 dc 1.8V
+
+* Static input abc_30082_new_n4326
+V58 abc_30082_new_n4326 0 dc 0V
+
+* Static input abc_30082_new_n4345
+V59 abc_30082_new_n4345 0 dc 1.8V
+
+* Static input abc_30082_new_n4346
+V60 abc_30082_new_n4346 0 dc 0V
+
+* Static input abc_30082_new_n4365
+V61 abc_30082_new_n4365 0 dc 1.8V
+
+* Static input abc_30082_new_n4364
+V62 abc_30082_new_n4364 0 dc 0V
+
+* Static input abc_30082_new_n4151
+V63 abc_30082_new_n4151 0 dc 1.8V
+
+* Static input abc_30082_new_n4152
+V64 abc_30082_new_n4152 0 dc 0V
+
+* Static input reg_pc 1
+V65 reg_pc_1 0 dc 1.8V
+
+* Static input abc_30082_new_n3940
+V66 abc_30082_new_n3940 0 dc 1.8V
+
+* Static input abc_30082_new_n3939
+V67 abc_30082_new_n3939 0 dc 0V
+
+* Static input abc_30082_new_n4132
+V68 abc_30082_new_n4132 0 dc 1.8V
+
+* Static input abc_30082_new_n4131
+V69 abc_30082_new_n4131 0 dc 0V
+
+* Static input subckt_8644_sff1_x4.ckr
+V70 subckt_8644_sff1_x4_ckr 0 dc 0V
+
+* Mathematic function input subckt_8938_sff1_x4.sff_s
+V71 subckt_8938_sff1_x4_sff_s 0 DC 0 PWL ( 0s 0V 8e-11s 1.07008V 
++ 9e-11s 1.18344V 1.04e-10s 1.32226V 1.16e-10s 1.42182V 1.29e-10s 1.51018V 
++ 1.42e-10s 1.58029V 1.57e-10s 1.64205V 1.74e-10s 1.69242V 1.93e-10s 1.73059V 
++ 2.17e-10s 1.76043V 2.49e-10s 1.78146V 2.51e-10s 1.8V )
+
+* Measure *****************************************
+
+* Spice Measure ***********************************
+
+.measure tran SIM_DELAY_subckt_8644_sff1_x4_sff_m___subckt_8644_sff1_x4_y TRIG v(subckt_8644_sff1_x4_sff_m) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_y) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_8644_sff1_x4_y TRIG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_y) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_y) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_8644_sff1_x4_u___subckt_8644_sff1_x4_sff_m TRIG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_u) val=0.9 rise=1 TARG v(subckt_8644_sff1_x4_sff_m) val=0.9 fall=1
+.measure tran SIM_SLOPE_subckt_8644_sff1_x4_sff_m TRIG v(subckt_8644_sff1_x4_sff_m) val=1.44 fall=1 TARG v(subckt_8644_sff1_x4_sff_m) val=0.36 fall=1
+.measure tran sim_loop_feed_back_delay TRIG v(subckt_8644_sff1_x4_sff_m) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_y) val=0.9 rise=1
+.measure tran SIM_DELAY_procmux_1296_y_31___subckt_8644_sff1_x4_u TRIG v(xpicorv32_cts_r_ext.procmux_1296_y_31) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_u) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_8644_sff1_x4_u TRIG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_u) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_8644_sff1_x4_u) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1184_oa22_x2__net0___procmux_1296_y_31 TRIG v(xpicorv32_cts_r_ext.subckt_1184_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.procmux_1296_y_31) val=0.9 fall=1
+.measure tran SIM_SLOPE_procmux_1296_y_31 TRIG v(xpicorv32_cts_r_ext.procmux_1296_y_31) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.procmux_1296_y_31) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4460___subckt_1184_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4460) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1184_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1184_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1184_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1184_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1171_ao22_x2__net0___abc_30082_new_n4460 TRIG v(xpicorv32_cts_r_ext.subckt_1171_ao22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4460) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4460 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4460) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4460) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4457___subckt_1171_ao22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4457) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1171_ao22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1171_ao22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1171_ao22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1171_ao22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1168_oa22_x2__net0___abc_30082_new_n4457 TRIG v(xpicorv32_cts_r_ext.subckt_1168_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4457) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4457 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4457) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4457) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4439___subckt_1168_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4439) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1168_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1168_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1168_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1168_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1150_oa22_x2__net0___abc_30082_new_n4439 TRIG v(xpicorv32_cts_r_ext.subckt_1150_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4439) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4439 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4439) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4439) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4420___subckt_1150_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4420) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1150_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1150_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1150_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1150_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1131_oa22_x2__net0___abc_30082_new_n4420 TRIG v(xpicorv32_cts_r_ext.subckt_1131_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4420) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4420 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4420) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4420) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4401___subckt_1131_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4401) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1131_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1131_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1131_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1131_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1112_oa22_x2__net0___abc_30082_new_n4401 TRIG v(xpicorv32_cts_r_ext.subckt_1112_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4401) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4401 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4401) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4401) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4382___subckt_1112_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4382) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1112_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1112_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1112_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1112_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1093_oa22_x2__net0___abc_30082_new_n4382 TRIG v(xpicorv32_cts_r_ext.subckt_1093_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4382) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4382 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4382) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4382) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4363___subckt_1093_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4363) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1093_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1093_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1093_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1093_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1074_oa22_x2__net0___abc_30082_new_n4363 TRIG v(xpicorv32_cts_r_ext.subckt_1074_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4363) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4363 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4363) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4363) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4344___subckt_1074_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4344) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1074_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1074_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1074_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1074_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1055_oa22_x2__net0___abc_30082_new_n4344 TRIG v(xpicorv32_cts_r_ext.subckt_1055_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4344) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4344 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4344) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4344) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4325___subckt_1055_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4325) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1055_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1055_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1055_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1055_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1036_oa22_x2__net0___abc_30082_new_n4325 TRIG v(xpicorv32_cts_r_ext.subckt_1036_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4325) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4325 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4325) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4325) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4306___subckt_1036_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4306) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1036_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1036_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1036_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1036_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_1017_oa22_x2__net0___abc_30082_new_n4306 TRIG v(xpicorv32_cts_r_ext.subckt_1017_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4306) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4306 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4306) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4306) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4287___subckt_1017_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4287) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_1017_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_1017_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_1017_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_1017_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_998_oa22_x2__net0___abc_30082_new_n4287 TRIG v(xpicorv32_cts_r_ext.subckt_998_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4287) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4287 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4287) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4287) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4268___subckt_998_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4268) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_998_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_998_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_998_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_998_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_979_oa22_x2__net0___abc_30082_new_n4268 TRIG v(xpicorv32_cts_r_ext.subckt_979_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4268) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4268 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4268) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4268) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4249___subckt_979_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4249) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_979_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_979_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_979_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_979_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_960_oa22_x2__net0___abc_30082_new_n4249 TRIG v(xpicorv32_cts_r_ext.subckt_960_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4249) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4249 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4249) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4249) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4230___subckt_960_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4230) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_960_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_960_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_960_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_960_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_941_oa22_x2__net0___abc_30082_new_n4230 TRIG v(xpicorv32_cts_r_ext.subckt_941_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4230) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4230 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4230) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4230) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4211___subckt_941_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4211) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_941_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_941_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_941_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_941_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_922_oa22_x2__net0___abc_30082_new_n4211 TRIG v(xpicorv32_cts_r_ext.subckt_922_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4211) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4211 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4211) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4211) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4192___subckt_922_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4192) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_922_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_922_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_922_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_922_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_903_oa22_x2__net0___abc_30082_new_n4192 TRIG v(xpicorv32_cts_r_ext.subckt_903_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4192) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4192 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4192) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4192) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4173___subckt_903_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4173) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_903_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_903_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_903_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_903_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_884_oa22_x2__net0___abc_30082_new_n4173 TRIG v(xpicorv32_cts_r_ext.subckt_884_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4173) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4173 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4173) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4173) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4150___subckt_884_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4150) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_884_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_884_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_884_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_884_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_861_oa22_x2__net0___abc_30082_new_n4150 TRIG v(xpicorv32_cts_r_ext.subckt_861_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4150) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4150 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4150) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4150) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4130___subckt_861_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4130) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_861_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_861_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_861_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_861_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_841_oa22_x2__net0___abc_30082_new_n4130 TRIG v(xpicorv32_cts_r_ext.subckt_841_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4130) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4130 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4130) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4130) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4110___subckt_841_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4110) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_841_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_841_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_841_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_841_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_821_oa22_x2__net0___abc_30082_new_n4110 TRIG v(xpicorv32_cts_r_ext.subckt_821_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4110) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4110 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4110) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4110) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4090___subckt_821_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4090) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_821_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_821_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_821_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_821_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_801_oa22_x2__net0___abc_30082_new_n4090 TRIG v(xpicorv32_cts_r_ext.subckt_801_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4090) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4090 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4090) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4090) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4070___subckt_801_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4070) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_801_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_801_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_801_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_801_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_781_oa22_x2__net0___abc_30082_new_n4070 TRIG v(xpicorv32_cts_r_ext.subckt_781_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4070) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4070 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4070) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4070) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4050___subckt_781_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4050) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_781_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_781_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_781_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_781_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_761_oa22_x2__net0___abc_30082_new_n4050 TRIG v(xpicorv32_cts_r_ext.subckt_761_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4050) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4050 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4050) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4050) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4030___subckt_761_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4030) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_761_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_761_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_761_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_761_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_741_oa22_x2__net0___abc_30082_new_n4030 TRIG v(xpicorv32_cts_r_ext.subckt_741_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4030) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4030 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4030) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4030) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n4007___subckt_741_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4007) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_741_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_741_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_741_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_741_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_718_oa22_x2__net0___abc_30082_new_n4007 TRIG v(xpicorv32_cts_r_ext.subckt_718_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4007) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n4007 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n4007) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n4007) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n3986___subckt_718_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3986) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_718_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_718_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_718_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_718_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_697_oa22_x2__net0___abc_30082_new_n3986 TRIG v(xpicorv32_cts_r_ext.subckt_697_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3986) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n3986 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3986) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3986) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n3962___subckt_697_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3962) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_697_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_697_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_697_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_697_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_673_oa22_x2__net0___abc_30082_new_n3962 TRIG v(xpicorv32_cts_r_ext.subckt_673_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3962) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n3962 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3962) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3962) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n3938___subckt_673_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3938) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_673_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_673_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_673_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_673_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_649_oa22_x2__net0___abc_30082_new_n3938 TRIG v(xpicorv32_cts_r_ext.subckt_649_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3938) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n3938 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3938) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3938) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n3915___subckt_649_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3915) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_649_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_649_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_649_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_649_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_626_oa22_x2__net0___abc_30082_new_n3915 TRIG v(xpicorv32_cts_r_ext.subckt_626_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3915) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n3915 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3915) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3915) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n3891___subckt_626_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3891) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_626_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_626_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_626_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_626_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_602_oa22_x2__net0___abc_30082_new_n3891 TRIG v(xpicorv32_cts_r_ext.subckt_602_oa22_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3891) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n3891 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3891) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3891) val=0.36 fall=1
+.measure tran SIM_DELAY_abc_30082_new_n3860___subckt_602_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3860) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_602_oa22_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_602_oa22_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_602_oa22_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_602_oa22_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_571_a2_x2__net0___abc_30082_new_n3860 TRIG v(xpicorv32_cts_r_ext.subckt_571_a2_x2__net0) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3860) val=0.9 fall=1
+.measure tran SIM_SLOPE_abc_30082_new_n3860 TRIG v(xpicorv32_cts_r_ext.abc_30082_new_n3860) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.abc_30082_new_n3860) val=0.36 fall=1
+.measure tran SIM_DELAY_decoded_imm_1___subckt_571_a2_x2__net0 TRIG v(xpicorv32_cts_r_ext.decoded_imm_1) val=0.9 fall=1 TARG v(xpicorv32_cts_r_ext.subckt_571_a2_x2__net0) val=0.9 rise=1
+.measure tran SIM_SLOPE_subckt_571_a2_x2__net0 TRIG v(xpicorv32_cts_r_ext.subckt_571_a2_x2__net0) val=0.36 rise=1 TARG v(xpicorv32_cts_r_ext.subckt_571_a2_x2__net0) val=1.44 rise=1
+.measure tran SIM_DELAY_subckt_8938_sff1_x4_sff_s___decoded_imm_1 TRIG v(subckt_8938_sff1_x4_sff_s) val=0.9 rise=1 TARG v(xpicorv32_cts_r_ext.decoded_imm_1) val=0.9 fall=1
+.measure tran SIM_SLOPE_decoded_imm_1 TRIG v(xpicorv32_cts_r_ext.decoded_imm_1) val=1.44 fall=1 TARG v(xpicorv32_cts_r_ext.decoded_imm_1) val=0.36 fall=1
+.measure tran SIM_DELAY_subckt_8938_sff1_x4_sff_s___subckt_8644_sff1_x4_sff_m TRIG v(subckt_8938_sff1_x4_sff_s) val=0.9 rise=1 TARG v(subckt_8644_sff1_x4_sff_m) val=0.9 fall=1
+.tran 1e-12s 6.7802e-09s
+.end

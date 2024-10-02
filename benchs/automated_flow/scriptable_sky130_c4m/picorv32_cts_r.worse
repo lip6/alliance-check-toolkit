@@ -1,0 +1,109 @@
+#  
+#  Avertec Release v3.4p5 (64 bits on Linux 3.10.0-1160.108.1.el7.x86_64)
+#  [AVT_only] host: bip
+#  [AVT_only] arch: x86_64
+#  [AVT_only] path: /users/outil/tasyag/Linux.el7_64/install/bin/avt_shell
+#  argv: ./paths_simu.tcl 
+#  
+#  User: aoudrhiri
+#  Generation date Tue Apr 23 14:49:01 2024
+#  
+#  Timing figure: picorv32_cts_r   generated on Mon Apr 22 17:42:38 2024
+#                 supply: 1.8  temperature: 25
+#                 slope thresholds : 0.2 / 0.8
+#                 delay threshold : 0.5
+#  
+
+     Voltage :        1.8V
+     Temperature :    25 degree C
+
+      *** Path list (unit:[ns]) ***
+
+ Path     Start     Start      Path     Total      Data    Ending       Start                                                     
+           time     slope     delay     delay       lag     slope       From_node                       To_node                   
+__________________________________________________________________________________________________________________________________
+    1     0.000     0.092     3.268     3.268     0.000     0.030   (R) subckt_8938_sff1_x4.sff_s   (F) subckt_8644_sff1_x4.sff_m 
+
+Node type Index:
+   (C) : Clock node          (L) : Latch node         (F) : Flip-flop node
+   (B) : Breakpoint node     (K) : Latch command node (S) : Output connector node
+   (SZ): Output HZ connector (N) : Precharge node
+
+      *** Path details (unit:[ns]) ***
+
+Path (1) : 
+
+      Sim_Delay    Sim_R/F    %         Delay                                                                                                   
+      Acc    Delta   R/F              Acc    Delta    R/F     Cap[pf]   Type   Node_Name                   Net_Name                      Line   
+   _____________________________________________________________________________________________________________________________________________
+     0.000   0.000   0.092 .....     0.000   0.000 0.092 R      0.015    (L)   subckt_8938_sff1_x4.sff_s   subckt_8938_sff1_x4.sff_s            
+         /       /       /    /      0.054   0.054 0.045 F      0.054          decoded_imm[1]              decoded_imm[1]                 inv   
+         /       /       /    /      0.094   0.040 0.032 R      0.008          subckt_571_a2_x2._net0      subckt_571_a2_x2._net0         nd2   
+         /       /       /    /      0.117   0.023 0.017 F      0.011          abc_30082_new_n3860         abc_30082_new_n3860            inv   
+         /       /       /    /      0.183   0.066 0.070 R      0.009          subckt_602_oa22_x2._net0    subckt_602_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.201   0.018 0.016 F      0.006          abc_30082_new_n3891         abc_30082_new_n3891            inv   
+         /       /       /    /      0.266   0.065 0.070 R      0.009          subckt_626_oa22_x2._net0    subckt_626_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.300   0.034 0.028 F      0.015          abc_30082_new_n3915         abc_30082_new_n3915            inv   
+         /       /       /    /      0.370   0.070 0.071 R      0.009          subckt_649_oa22_x2._net0    subckt_649_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.404   0.034 0.028 F      0.015          abc_30082_new_n3938         abc_30082_new_n3938            inv   
+         /       /       /    /      0.474   0.070 0.071 R      0.009          subckt_673_oa22_x2._net0    subckt_673_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.508   0.034 0.028 F      0.015          abc_30082_new_n3962         abc_30082_new_n3962            inv   
+         /       /       /    /      0.578   0.070 0.071 R      0.009          subckt_697_oa22_x2._net0    subckt_697_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.613   0.035 0.029 F      0.016          abc_30082_new_n3986         abc_30082_new_n3986            inv   
+         /       /       /    /      0.683   0.070 0.071 R      0.009          subckt_718_oa22_x2._net0    subckt_718_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.718   0.035 0.029 F      0.016          abc_30082_new_n4007         abc_30082_new_n4007            inv   
+         /       /       /    /      0.788   0.070 0.071 R      0.009          subckt_741_oa22_x2._net0    subckt_741_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.821   0.033 0.027 F      0.014          abc_30082_new_n4030         abc_30082_new_n4030            inv   
+         /       /       /    /      0.890   0.070 0.071 R      0.009          subckt_761_oa22_x2._net0    subckt_761_oa22_x2._net0      <Dg>   
+         /       /       /    /      0.924   0.034 0.028 F      0.015          abc_30082_new_n4050         abc_30082_new_n4050            inv   
+         /       /       /    /      0.994   0.070 0.071 R      0.009          subckt_781_oa22_x2._net0    subckt_781_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.027   0.033 0.027 F      0.014          abc_30082_new_n4070         abc_30082_new_n4070            inv   
+         /       /       /    /      1.097   0.070 0.071 R      0.009          subckt_801_oa22_x2._net0    subckt_801_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.131   0.034 0.028 F      0.015          abc_30082_new_n4090         abc_30082_new_n4090            inv   
+         /       /       /    /      1.201   0.070 0.071 R      0.009          subckt_821_oa22_x2._net0    subckt_821_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.234   0.033 0.027 F      0.014          abc_30082_new_n4110         abc_30082_new_n4110            inv   
+         /       /       /    /      1.303   0.070 0.071 R      0.009          subckt_841_oa22_x2._net0    subckt_841_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.337   0.034 0.028 F      0.015          abc_30082_new_n4130         abc_30082_new_n4130            inv   
+         /       /       /    /      1.407   0.070 0.071 R      0.009          subckt_861_oa22_x2._net0    subckt_861_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.440   0.033 0.027 F      0.014          abc_30082_new_n4150         abc_30082_new_n4150            inv   
+         /       /       /    /      1.510   0.070 0.071 R      0.009          subckt_884_oa22_x2._net0    subckt_884_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.544   0.034 0.028 F      0.015          abc_30082_new_n4173         abc_30082_new_n4173            inv   
+         /       /       /    /      1.614   0.070 0.071 R      0.009          subckt_903_oa22_x2._net0    subckt_903_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.646   0.033 0.027 F      0.014          abc_30082_new_n4192         abc_30082_new_n4192            inv   
+         /       /       /    /      1.716   0.070 0.071 R      0.009          subckt_922_oa22_x2._net0    subckt_922_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.750   0.034 0.028 F      0.015          abc_30082_new_n4211         abc_30082_new_n4211            inv   
+         /       /       /    /      1.820   0.070 0.071 R      0.009          subckt_941_oa22_x2._net0    subckt_941_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.853   0.033 0.027 F      0.014          abc_30082_new_n4230         abc_30082_new_n4230            inv   
+         /       /       /    /      1.922   0.070 0.071 R      0.009          subckt_960_oa22_x2._net0    subckt_960_oa22_x2._net0      <Dg>   
+         /       /       /    /      1.956   0.034 0.028 F      0.015          abc_30082_new_n4249         abc_30082_new_n4249            inv   
+         /       /       /    /      2.026   0.070 0.071 R      0.009          subckt_979_oa22_x2._net0    subckt_979_oa22_x2._net0      <Dg>   
+         /       /       /    /      2.059   0.033 0.027 F      0.014          abc_30082_new_n4268         abc_30082_new_n4268            inv   
+         /       /       /    /      2.129   0.070 0.071 R      0.009          subckt_998_oa22_x2._net0    subckt_998_oa22_x2._net0      <Dg>   
+         /       /       /    /      2.163   0.034 0.028 F      0.015          abc_30082_new_n4287         abc_30082_new_n4287            inv   
+         /       /       /    /      2.233   0.070 0.071 R      0.009          subckt_1017_oa22_x2._net0   subckt_1017_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.266   0.033 0.027 F      0.014          abc_30082_new_n4306         abc_30082_new_n4306            inv   
+         /       /       /    /      2.335   0.070 0.071 R      0.009          subckt_1036_oa22_x2._net0   subckt_1036_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.369   0.034 0.028 F      0.015          abc_30082_new_n4325         abc_30082_new_n4325            inv   
+         /       /       /    /      2.439   0.070 0.071 R      0.009          subckt_1055_oa22_x2._net0   subckt_1055_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.472   0.033 0.027 F      0.014          abc_30082_new_n4344         abc_30082_new_n4344            inv   
+         /       /       /    /      2.542   0.070 0.071 R      0.009          subckt_1074_oa22_x2._net0   subckt_1074_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.576   0.034 0.028 F      0.015          abc_30082_new_n4363         abc_30082_new_n4363            inv   
+         /       /       /    /      2.646   0.070 0.071 R      0.009          subckt_1093_oa22_x2._net0   subckt_1093_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.678   0.033 0.027 F      0.014          abc_30082_new_n4382         abc_30082_new_n4382            inv   
+         /       /       /    /      2.748   0.070 0.071 R      0.009          subckt_1112_oa22_x2._net0   subckt_1112_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.782   0.034 0.028 F      0.015          abc_30082_new_n4401         abc_30082_new_n4401            inv   
+         /       /       /    /      2.852   0.070 0.071 R      0.009          subckt_1131_oa22_x2._net0   subckt_1131_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.885   0.033 0.027 F      0.014          abc_30082_new_n4420         abc_30082_new_n4420            inv   
+         /       /       /    /      2.954   0.070 0.071 R      0.009          subckt_1150_oa22_x2._net0   subckt_1150_oa22_x2._net0     <Dg>   
+         /       /       /    /      2.987   0.033 0.027 F      0.014          abc_30082_new_n4439         abc_30082_new_n4439            inv   
+         /       /       /    /      3.057   0.070 0.071 R      0.009          subckt_1168_oa22_x2._net0   subckt_1168_oa22_x2._net0     <Dg>   
+         /       /       /    /      3.082   0.025 0.022 F      0.010          abc_30082_new_n4457         abc_30082_new_n4457            inv   
+         /       /       /    /      3.133   0.051 0.050 R      0.008          subckt_1171_ao22_x2._net0   subckt_1171_ao22_x2._net0     <Dg>   
+         /       /       /    /      3.151   0.018 0.016 F      0.006          abc_30082_new_n4460         abc_30082_new_n4460            inv   
+         /       /       /    /      3.203   0.053 0.054 R      0.009          subckt_1184_oa22_x2._net0   subckt_1184_oa22_x2._net0     <Dg>   
+         /       /       /    /      3.219   0.015 0.014 F      0.005          procmux_1296_y[31]          procmux_1296_y[31]             inv   
+         /       /       /    /      3.238   0.019 0.015 R      0.004          subckt_8644_sff1_x4.u       subckt_8644_sff1_x4.u          inv   
+         /       /       /    /      3.268   0.030 0.030 F      0.005    (L)   subckt_8644_sff1_x4.sff_m   subckt_8644_sff1_x4.sff_m   master   
+   _____________________________________________________________________________________________________________________________________________
+     0.000   0.000         .....     3.268   3.268            (total)                                                                           
+

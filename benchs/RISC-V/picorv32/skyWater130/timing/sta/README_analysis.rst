@@ -1,7 +1,7 @@
 ********************************
 README_analysis.rst
 ******************************
-alliance-check-toolkit/benchs/picorv32/skyWater130/timing/sta
+alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta
 
 ************************************
 Ali Oudrhiri, April 2024
@@ -60,11 +60,19 @@ PFET
 
 **subdirectory : XXXXXXXX/skywater-pdk/libraries/sky130_fd_pr/latest/cells/**
 
-transistor models coming from the PDK
-NFET
-nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice 
-PFET
-/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice 
+transistor models coming from the PDK:
+
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/sky130_fd_pr__nfet_01v8__mismatch.corner.spice
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/sky130_fd_pr__nfet_01v8__tt.pm3.spice
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/sky130_fd_pr__nfet_01v8__tt.corner.spice
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/sky130_fd_pr__pfet_01v8_hvt__tt.pm3.spice
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
+
+
+Libraries models coming from the PDK:
+ coriolis-2.x/src/alliance-check-toolkit/benchs/RISC-V/picorv32/skyWater130/timing/sta/skylibm/library.spice
+
 
 run Hitas sta:
 ----------------
@@ -84,40 +92,9 @@ run Hitas sta:
   ./hitas/paths_simu.tcl
   beware that in the used standard cells nfet uses the standard transistor nfet_01v8__tt
   and pfet the hvt transistor pfet_01v8_hvt__tt
-  both included in alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice_hitas/C4M.Sky130_tt_model.spice
+  both included in alliance-check-toolkit/pdkmaster/C4M.Sky130/libs.tech/ngspice/
   which has been flatten at model MOS level
   and required for this analysis at transistor level
 
-Note
---------
-NB. The files used either in the transistor model:
-the ones coming from the PDK
-NFET
-XXXXXXXX/skywater-pdk/libraries/sky130_fd_pr/latest/cells/nfet_01v8/sky130_fd_pr__nfet_01v8__mismatch.corner.spice spice
-PFET
-XXXXXXXXX/skywater-pdk/libraries/sky130_fd_pr/latest/cells/pfet_01v8_hvt/sky130_fd_pr__pfet_01v8_hvt__mismatch.corner.spice spice
 
-the ones that had and have to be updated:
-NFET
-YYYYYYYYYY/alliance-check-toolkit/benchs/inverter/skyWater130/sta/techno/sky130_fd_pr__nfet_01v8__tt.corner.spice
-
-PFET
-YYYYYYYYYY/alliance-check-toolkit/benchs/inverter/skyWater130/sta/techno/sky130_fd_pr__pfet_01v8_hvt__tt.corner.spice
-
-or the netlist to be analysed:
-ZZZZZZZZZZZZZ/alliance-check-toolkit/benchs/picorv32/skyWater130/timing/sta/picorv32_m_hitas.spi spice
-
-are set with absolute paths.
-
-You SHOULD update the paths according to your local environment
-
-The absolute path problem of HiTas,
-comes from the library which is used in HiTas.
-You may try to set environment variables to designate where your designs are.
-The variables are MBK_WORK_LIB and MBK_CATA_LIB.
-
-You may set in your .profile
-export MBK_WORK_LIB=.
-Usually one of the variable is enough to use for local evaluation.
-MBK_CATA_LIB is usually used to designate libraries with colon separated paths.
 
