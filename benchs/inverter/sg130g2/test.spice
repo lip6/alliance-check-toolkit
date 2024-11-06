@@ -1,0 +1,131 @@
+test spice model
+.param temp=27
+
+*.lib cornerMOSlv.lib mos_tt
+******************************************************************************* 
+*                                                                             * 
+* Library:      SG13G2_dev                                                    * 
+* Technologies: SG13G2                                                        *
+* Component:    Spectre model file for Spectre 18                             *
+*                                                                             *
+* Simulator:    Spectre 20.1                                                  *
+* Model:        PSP 103.6                                                     *
+* Revision:     200310                                                        * 
+*                                                                             * 
+******************************************************************************* 
+*                                                                             * 
+* Copyright 2023 IHP PDK Authors                                              *
+*                                                                             *
+* Licensed under the Apache License, Version 2.0 (the "License");             *
+* you may not use this file except in compliance with the License.            *
+* You may obtain a copy of the License at                                     *
+*                                                                             *
+*     https://www.apache.org/licenses/LICENSE-2.0                             *
+*                                                                             *
+* Unless required by applicable law or agreed to in writing, software         *
+* distributed under the License is distributed on an "AS IS" BASIS,           *
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.    *
+* See the License for the specific language governing permissions and         *
+* limitations under the License.                                              *
+*                                                                             *
+*******************************************************************************
+******************************************************************************* 
+*                                                                             *
+*                                                                             *
+*                            M O S     C O R N E R S                          *
+*                                                                             *
+*                                                                             *
+******************************************************************************* 
+*
+* NOTE: use only typical mean file (this file) for Monte Carlo simulations of process tolerance!
+*
+* hint: using spectre, add this file as a model file in analog artist;
+*	using spectreS, add it under Environment/Include with syntax=spectre
+*
+* Corner naming scheme: typical mean=tt, worst case=ss, best case=ff, combinations sf, fs, ...
+* Digit	Devices
+ 
+
+* Monte-Carlo begin ---------------------------------------------
+*
+* NOTE: default of all   param should be 1.0
+* NOTE: deviations from 1.0 are used to fit statistical results
+* 
+*
+*
+*
+*******************************************************************************
+*                                                                             
+* Low Voltage (lv) MOS Transistors   
+*                                                 
+* Model:                                PSP 103.6
+* Date:                                 10.03.2020
+* Lot:                                  EDJ809
+* WAFER:                                06
+* CHIP Nr:                              x=3, y=9
+* Device:                               SG13G2
+* Maximum drain-source voltage:         1.5
+* Measurement data:                     
+* Nom. Temperature  (TNOM):             27 grd C
+* Meas. Temperature (TEMP):             27 grd C
+* Valid range for model:                L = (0.13 - 10)um
+*                                       W = (0.15 - 10)um
+*                                                                             
+*******************************************************************************
+
+**************** CORNER_LIB OF sg13g2_lv TT MODEL ****************  
+* Typical           
+.param sg13g2_lv_nmos_vfbo_mm= 1.0
+.param sg13g2_lv_nmos_ctl    = 1.2080
+.param sg13g2_lv_nmos_rsw1   = 0.7200
+.param sg13g2_lv_nmos_muew   = 0.8500
+.param sg13g2_lv_nmos_dphibo = 0.9915
+.param sg13g2_lv_nmos_dphibl = 0.9693
+.param sg13g2_lv_nmos_dphibw = 0.9749
+.param sg13g2_lv_nmos_dphiblw= 0.9754
+.param sg13g2_lv_nmos_themuo = 0.8757
+.param sg13g2_lv_nmos_thesatl= 0.7850
+.param sg13g2_lv_nmos_thesatw= 1.5000
+.param sg13g2_lv_nmos_thesatlw= 0.6127
+.param sg13g2_lv_nmos_toxo   = 1.0000
+.param sg13g2_lv_nmos_toxovo = 1.0000
+.param sg13g2_lv_nmos_cjorbot= 1.0000
+.param sg13g2_lv_nmos_cjorsti= 1.0000
+.param sg13g2_lv_nmos_cjorgat= 1.0000
+
+.param sg13g2_lv_pmos_vfbo_mm= 1.0
+.param sg13g2_lv_pmos_ctl    = 1.9570
+.param sg13g2_lv_pmos_rsw1   = 0.7720
+.param sg13g2_lv_pmos_muew   = 1.0520
+.param sg13g2_lv_pmos_dphibo = 0.9050
+.param sg13g2_lv_pmos_dphibl = 0.8550
+.param sg13g2_lv_pmos_dphibw = -1.5800
+.param sg13g2_lv_pmos_dphiblw= 1.0000
+.param sg13g2_lv_pmos_themuo = 0.9580
+.param sg13g2_lv_pmos_thesatl= 0.5510
+.param sg13g2_lv_pmos_thesatw= 1.0800
+.param sg13g2_lv_pmos_thesatlw= 1.0000
+.param sg13g2_lv_pmos_toxo   = 1.0000
+.param sg13g2_lv_pmos_toxovo = 1.0000
+.param sg13g2_lv_pmos_cjorbot= 1.0000
+.param sg13g2_lv_pmos_cjorsti= 1.0000
+.param sg13g2_lv_pmos_cjorgat= 1.0000
+ 
+.param sg13g2_lv_svaricap_lap   = 1.082   
+.param sg13g2_lv_svaricap_toxo  = 1   
+
+.include sg13g2_moslv_mod.lib
+.include sg13g2_moslv_parm.lib
+*.include sg13g2_moslv_stat.lib
+
+.subckt test in out vdd vss
+XM1 vdd in out vdd sg13_lv_pmos w=1.0u l=0.13u ng=1 m=1
+XM2 out in vss vss sg13_lv_nmos w=1.0u l=0.13u ng=1 m=1
+.ends test
+
+
+Vgnd evss 0 0
+Vdd  evdd 0 DC 1.8
+
+Xinv in out evdd evss test
+.end
