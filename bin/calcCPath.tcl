@@ -13,7 +13,7 @@ set VssName  vss
 
 set idx 0
 if {$argc == 0} {
-    puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssName vss_name -Temperature temperature"
+    puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssName vss_name -Temperature temperature -OsdiDll osdi_dllname"
     puts "if you need multiple spice models, put your models as a list \" model1 model2 ..\" it will feed to avt_LoadFile in the order"
     exit 1
 }
@@ -25,6 +25,12 @@ while {$idx < $argc} {
   -t  {
      if {$idx < $argc} {
      set target [lindex $argv $idx]
+     incr idx
+   } }
+  -OsdiDll -
+  -o  {
+     if {$idx < $argc} {
+     set odsidll [lindex $argv $idx]
      incr idx
    } }
   -SpiceModel -
@@ -70,7 +76,7 @@ while {$idx < $argc} {
      incr idx
    } }
   default {
-    puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssNmae vss_name -Temperature temperature"
+    puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssName vss_name -Temperature temperature -OsdiDll osdi_dllname"
     exit 1
     }
  }
@@ -97,6 +103,9 @@ avt_config simPowerSupply $vddvolt
 # Files of transistor model of the technology, that may require modifications
 #
 # nfet_01v8
+foreach i $odsidll {
+	avt_LoadFile $i osdi
+}
 foreach i $spimodel {
 	avt_LoadFile $i spice
 }
