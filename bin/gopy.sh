@@ -6,6 +6,14 @@
    echo $string
  }
 
+ getRuntime ()
+ {
+   startTime="$1"
+   mins=$(( (SECONDS - startTime)/60 ))
+   secs=$(( (SECONDS - startTime)%60 ))
+   printf "%u:%02u" $mins $secs
+ }
+
  runSetId="not_set"
  onGithub="false"
  while [ $# -gt 0 ]; do
@@ -100,8 +108,8 @@
  mode="ignoreFailure"
 # hline="+---+----+--------------------------------+------------+----------+-----------+"
 #header="|Set| No |             bench              |    Rule    |  Runtime |  Status   |"
-  hline="===  ==  ==============================  ================  ==========  ==========="
- header="Set  No  Bench                           Rule                 Runtime  Status     "
+  hline="=====  ==  ==============================  ================  ==========  ==========="
+ header="Set    No  Bench                           Rule                 Runtime  Status     "
 
  runSet () {
    setId="$1"
@@ -120,7 +128,7 @@
      echo "=============================================================================" >> ${benchLog}
 
     #statusLine="| %u | %2u | %-30s | %-10s | %10s | %-7s |"
-     statusLine="%3u  %2u  %-30s  %-16s  %10s  %-7s "
+     statusLine="%s  %2u  %-30s  %-16s  %10s  %-7s "
   
      if [ ! -d "${bench}" ]; then
        echo ""
@@ -128,16 +136,24 @@
        continue
      fi
   
+     case $setId in
+       1) setIdStr="1    ";;
+       2) setIdStr=" 2   ";;
+       3) setIdStr="  3  ";;
+       4) setIdStr="   4 ";;
+       5) setIdStr="    5";;
+       *) setIdStr="    X";;
+     esac
      success="true"
      pushd ${bench} > /dev/null
+     startTime="$SECONDS"
      ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
      for rule in ${rules}; do
-       /usr/bin/time -f '%E' -o time.txt ${crlenv} -- doit ${rule} >> ${benchLog} 2>&1
+       ${crlenv} -- doit ${rule} >> ${benchLog} 2>&1
        if [ $? -ne 0 ]; then
          success="false"
-         printf "${statusLine}\n" $setId $benchCount "<${bench}>" "${rule}" "`tail -n 1 time.txt`" "FAILED"
+         printf "${statusLine}\n" "$setIdStr" $benchCount "<${bench}>" "${rule}" "`getRuntime $startTime`" "FAILED"
          touch ${failedTag}
-	 rm -f time.txt
          if [ "${mode}" = "stopOnFailure" ]; then
            echo ""
            echo ""
@@ -149,11 +165,11 @@
      done
      ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
      if [ "${success}" = "true" ]; then
-       printf "${statusLine}\n" $setId       \
+       printf "${statusLine}\n" "$setIdStr"  \
                                 $benchCount  \
                                 "<${bench}>" \
 				"`echo \"${rules}\" | sed 's/ /,/g'`" \
-				"`tail -n 1 time.txt`" \
+				"`getRuntime $startTime`" \
 				"success"
      fi
      popd > /dev/null
@@ -166,13 +182,12 @@
 
 
  timedRunSet () {
+   startTime="$SECONDS"
    setId="$1"
    rvalue=0
-   timeSet="time-set-${setId}.txt"
-   /usr/bin/time -f '%E' -o ${timeSet} ../bin/gopy.sh --run-set=${setId}
+   ../bin/gopy.sh --run-set=${setId}
    if [ $? -ne 0 ]; then rvalue=1; fi
-   printf "         **Benchs set %u completed** %33s\n" "${setId}" "`tail -n 1 ${timeSet}`"
-   rm -f ${timeSet}
+   printf "           **Benchs set %u completed** %33s\n" "${setId}" "`getRuntime $startTime`"
    exit $rvalue
  }
 

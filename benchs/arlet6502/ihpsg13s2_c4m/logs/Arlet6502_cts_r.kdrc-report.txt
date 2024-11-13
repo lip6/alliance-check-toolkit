@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report-database>
+ <description>C4M.IHPSG13G2 DRC</description>
+ <original-file/>
+ <generator>drc: script='/dsk/l1/jpc/coriolis-2.x/release/install/lib64/python3.9/site-packages/pdks/c4m_ihpsg13g2/libs.tech/klayout/share/C4M.IHPSG13G2.drc'</generator>
+ <top-cell>Arlet6502_cts_r</top-cell>
+ <tags>
+ </tags>
+ <categories>
+  <category>
+   <name>NWell grid</name>
+   <description>NWell grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD grid</name>
+   <description>pSD grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>ThickGateOx grid</name>
+   <description>ThickGateOx grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly_pin grid</name>
+   <description>GatPoly_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly_obs grid</name>
+   <description>GatPoly_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly grid</name>
+   <description>GatPoly grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ_pin grid</name>
+   <description>Activ_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ_obs grid</name>
+   <description>Activ_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ grid</name>
+   <description>Activ grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1_pin grid</name>
+   <description>Metal1_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1_obs grid</name>
+   <description>Metal1_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1 grid</name>
+   <description>Metal1 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2_pin grid</name>
+   <description>Metal2_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2_obs grid</name>
+   <description>Metal2_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2 grid</name>
+   <description>Metal2 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3_pin grid</name>
+   <description>Metal3_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3_obs grid</name>
+   <description>Metal3_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3 grid</name>
+   <description>Metal3 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4_pin grid</name>
+   <description>Metal4_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4_obs grid</name>
+   <description>Metal4_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4 grid</name>
+   <description>Metal4 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5_pin grid</name>
+   <description>Metal5_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5_obs grid</name>
+   <description>Metal5_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5 grid</name>
+   <description>Metal5 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1_pin grid</name>
+   <description>TopMetal1_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1_obs grid</name>
+   <description>TopMetal1_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1 grid</name>
+   <description>TopMetal1 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2_pin grid</name>
+   <description>TopMetal2_pin grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2_obs grid</name>
+   <description>TopMetal2_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2 grid</name>
+   <description>TopMetal2 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Cont_obs grid</name>
+   <description>Cont_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via1_obs grid</name>
+   <description>Via1_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via2_obs grid</name>
+   <description>Via2_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via3_obs grid</name>
+   <description>Via3_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via4_obs grid</name>
+   <description>Via4_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia1_obs grid</name>
+   <description>TopVia1_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia2_obs grid</name>
+   <description>TopVia2_obs grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Cont grid</name>
+   <description>Cont grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via1 grid</name>
+   <description>Via1 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via2 grid</name>
+   <description>Via2 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via3 grid</name>
+   <description>Via3 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via4 grid</name>
+   <description>Via4 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia1 grid</name>
+   <description>TopVia1 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia2 grid</name>
+   <description>TopVia2 grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Substrate grid</name>
+   <description>Substrate grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Passiv grid</name>
+   <description>Passiv grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>EXTBlock grid</name>
+   <description>EXTBlock grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>SalBlock grid</name>
+   <description>SalBlock grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>RES grid</name>
+   <description>RES grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Recog_dio grid</name>
+   <description>Recog_dio grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Recog_esd grid</name>
+   <description>Recog_esd grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TEXT grid</name>
+   <description>TEXT grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>prBoundary grid</name>
+   <description>prBoundary grid: 0.005µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>NWell width</name>
+   <description>NWell minimum width: 0.62µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>NWell space</name>
+   <description>NWell minimum space: 0.62µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD width</name>
+   <description>pSD minimum width: 0.31µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD space</name>
+   <description>pSD minimum space: 0.31µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD area</name>
+   <description>pSD minimum area: 0.25µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>ThickGateOx width</name>
+   <description>ThickGateOx minimum width: 0.86µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>ThickGateOx space</name>
+   <description>ThickGateOx minimum space: 0.86µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly width</name>
+   <description>GatPoly minimum width: 0.13µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly space</name>
+   <description>GatPoly minimum space: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly area</name>
+   <description>GatPoly minimum area: 0.09µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ width</name>
+   <description>Activ minimum width: 0.15µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ space</name>
+   <description>Activ minimum space: 0.21µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ area</name>
+   <description>Activ minimum area: 0.122µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD.edges.interacting(Activ) empty</name>
+   <description/>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD:Activ enclosure</name>
+   <description>Minimum enclosure of pSD around Activ: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>NWell:(Activ&amp;pSD) enclosure</name>
+   <description>Minimum enclosure of NWell around (Activ&amp;pSD): 0.31µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>NWell:(Activ&amp;ThickGateOx) enclosure</name>
+   <description>Minimum enclosure of NWell around (Activ&amp;ThickGateOx): 0.62µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>substrate__IHPSG13G2:(Activ&amp;pSD) enclosure</name>
+   <description>Minimum enclosure of substrate__IHPSG13G2 around (Activ&amp;pSD): 0.03µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>substrate__IHPSG13G2:(Activ&amp;ThickGateOx) enclosure</name>
+   <description>Minimum enclosure of substrate__IHPSG13G2 around (Activ&amp;ThickGateOx): 0.62µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>ThickGateOx:Activ enclosure</name>
+   <description>Minimum enclosure of ThickGateOx around Activ: 0.27µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ.edges.interacting(NWell.edges) empty</name>
+   <description/>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1 width</name>
+   <description>Metal1 minimum width: 0.16µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1 space</name>
+   <description>Metal1 minimum space: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1 area</name>
+   <description>Metal1 minimum area: 0.09µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>[Warning]Metal1 table spacing</name>
+   <description>Check minimum Metal1 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1 table spacing</name>
+   <description>Minimum Metal1 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2 width</name>
+   <description>Metal2 minimum width: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2 space</name>
+   <description>Metal2 minimum space: 0.21µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2 area</name>
+   <description>Metal2 minimum area: 0.144µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>[Warning]Metal2 table spacing</name>
+   <description>Check minimum Metal2 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2 table spacing</name>
+   <description>Minimum Metal2 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3 width</name>
+   <description>Metal3 minimum width: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3 space</name>
+   <description>Metal3 minimum space: 0.21µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3 area</name>
+   <description>Metal3 minimum area: 0.144µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>[Warning]Metal3 table spacing</name>
+   <description>Check minimum Metal3 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3 table spacing</name>
+   <description>Minimum Metal3 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4 width</name>
+   <description>Metal4 minimum width: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4 space</name>
+   <description>Metal4 minimum space: 0.21µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4 area</name>
+   <description>Metal4 minimum area: 0.144µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>[Warning]Metal4 table spacing</name>
+   <description>Check minimum Metal4 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4 table spacing</name>
+   <description>Minimum Metal4 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5 width</name>
+   <description>Metal5 minimum width: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5 space</name>
+   <description>Metal5 minimum space: 0.21µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5 area</name>
+   <description>Metal5 minimum area: 0.144µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>[Warning]Metal5 table spacing</name>
+   <description>Check minimum Metal5 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5 table spacing</name>
+   <description>Minimum Metal5 spacing for 10.0µm width and 10.0µm length: 0.6µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1 width</name>
+   <description>TopMetal1 minimum width: 1.64µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1 space</name>
+   <description>TopMetal1 minimum space: 1.64µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2 width</name>
+   <description>TopMetal2 minimum width: 2.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2 space</name>
+   <description>TopMetal2 minimum space: 2.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>[Warning]TopMetal2 table spacing</name>
+   <description>Check minimum TopMetal2 spacing for 5.0µm width and 50.0µm length: 5.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2 table spacing</name>
+   <description>Minimum TopMetal2 spacing for 5.0µm width and 50.0µm length: 5.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Cont width</name>
+   <description>Cont width: 0.16µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Cont space</name>
+   <description>Cont minimum space: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ:Cont enclosure</name>
+   <description>Minimum enclosure of Activ around Cont: 0.07µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly:Cont enclosure</name>
+   <description>Minimum enclosure of GatPoly around Cont: 0.07µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1:Cont asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal1 around Cont: 0.0µm minimum, 0.08µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via1 width</name>
+   <description>Via1 width: 0.19µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via1 space</name>
+   <description>Via1 minimum space: 0.22µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal1:Via1 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal1 around Via1: 0.01µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2:Via1 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal2 around Via1: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via2 width</name>
+   <description>Via2 width: 0.19µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via2 space</name>
+   <description>Via2 minimum space: 0.22µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal2:Via2 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal2 around Via2: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3:Via2 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal3 around Via2: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via3 width</name>
+   <description>Via3 width: 0.19µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via3 space</name>
+   <description>Via3 minimum space: 0.22µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal3:Via3 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal3 around Via3: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4:Via3 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal4 around Via3: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via4 width</name>
+   <description>Via4 width: 0.19µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Via4 space</name>
+   <description>Via4 minimum space: 0.22µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal4:Via4 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal4 around Via4: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5:Via4 asymmetric enclosure</name>
+   <description>Minimum enclosure of Metal5 around Via4: 0.005µm minimum, 0.05µm opposite</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia1 width</name>
+   <description>TopVia1 width: 0.42µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia1 space</name>
+   <description>TopVia1 minimum space: 0.42µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Metal5:TopVia1 enclosure</name>
+   <description>Minimum enclosure of Metal5 around TopVia1: 0.01µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1:TopVia1 enclosure</name>
+   <description>Minimum enclosure of TopMetal1 around TopVia1: 0.42µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia2 width</name>
+   <description>TopVia2 width: 0.9µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopVia2 space</name>
+   <description>TopVia2 minimum space: 1.06µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal1:TopVia2 enclosure</name>
+   <description>Minimum enclosure of TopMetal1 around TopVia2: 0.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2:TopVia2 enclosure</name>
+   <description>Minimum enclosure of TopMetal2 around TopVia2: 0.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(Activ.edges&amp;gate__hvmosgate.edges) length</name>
+   <description>Minimum length of (Activ.edges&amp;gate__hvmosgate.edges): 0.45µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(GatPoly__conn.edges&amp;gate__hvmosgate.edges) length</name>
+   <description>Minimum length of (GatPoly__conn.edges&amp;gate__hvmosgate.edges): 0.3µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(GatPoly__conn.edges&amp;gate__hvmosgate.edges) maximum length</name>
+   <description>Maximum length of (GatPoly__conn.edges&amp;gate__hvmosgate.edges): 10.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ:gate__hvmosgate extension</name>
+   <description>Minimum extension of Activ of gate__hvmosgate: 0.23µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly__conn:gate__hvmosgate extension</name>
+   <description>Minimum extension of GatPoly__conn of gate__hvmosgate: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(gate__hvmosgate.edges&amp;GatPoly.edges) space</name>
+   <description>Minimum spacing between (gate__hvmosgate.edges&amp;GatPoly.edges): 0.25µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>gate__hvmosgate:Cont spacing</name>
+   <description>Minimum spacing between gate__hvmosgate and Cont: 0.11µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ:gate__lvmosgate extension</name>
+   <description>Minimum extension of Activ of gate__lvmosgate: 0.23µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly__conn:gate__lvmosgate extension</name>
+   <description>Minimum extension of GatPoly__conn of gate__lvmosgate: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>gate__lvmosgate:Cont spacing</name>
+   <description>Minimum spacing between gate__lvmosgate and Cont: 0.11µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD:gate__mosfet__sg13g2_hv_pmos enclosure</name>
+   <description>Minimum enclosure of pSD around gate__mosfet__sg13g2_hv_pmos: 0.4µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD:gate__mosfet__sg13g2_lv_pmos enclosure</name>
+   <description>Minimum enclosure of pSD around gate__mosfet__sg13g2_lv_pmos: 0.3µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Passiv width</name>
+   <description>Passiv minimum width: 40.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Passiv space</name>
+   <description>Passiv minimum space: 3.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>TopMetal2:Passiv enclosure</name>
+   <description>Minimum enclosure of TopMetal2 around Passiv: 2.1µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>EXTBlock width</name>
+   <description>EXTBlock minimum width: 0.31µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>EXTBlock space</name>
+   <description>EXTBlock minimum space: 0.31µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>SalBlock width</name>
+   <description>SalBlock minimum width: 0.42µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>SalBlock space</name>
+   <description>SalBlock minimum space: 0.42µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(body__resistor__Rppd.edges&amp;indicators__resistor__Rppd.edges) length</name>
+   <description>Minimum length of (body__resistor__Rppd.edges&amp;indicators__resistor__Rppd.edges): 0.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(body__resistor__Rppd.edges&amp;GatPoly.edges) length</name>
+   <description>Minimum length of (body__resistor__Rppd.edges&amp;GatPoly.edges): 0.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(SalBlock-GatPoly) width</name>
+   <description>(SalBlock-GatPoly) minimum width: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD:resistor__Rppd enclosure</name>
+   <description>Minimum enclosure of pSD around resistor__Rppd: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>EXTBlock:resistor__Rppd enclosure</name>
+   <description>Minimum enclosure of EXTBlock around resistor__Rppd: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(body__resistor__Rsil.edges&amp;indicators__resistor__Rsil.edges) length</name>
+   <description>Minimum length of (body__resistor__Rsil.edges&amp;indicators__resistor__Rsil.edges): 0.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(body__resistor__Rsil.edges&amp;GatPoly.edges) length</name>
+   <description>Minimum length of (body__resistor__Rsil.edges&amp;GatPoly.edges): 0.5µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>(RES-GatPoly) width</name>
+   <description>(RES-GatPoly) minimum width: 0.0µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>diode__pdiode width</name>
+   <description>diode__pdiode minimum width: 0.48µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Recog_dio:Activ enclosure</name>
+   <description>Minimum enclosure of Recog_dio around Activ: 0.02µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>pSD:diode__pdiode enclosure</name>
+   <description>Minimum enclosure of pSD around diode__pdiode: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>diode__ndiode width</name>
+   <description>diode__ndiode minimum width: 0.48µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>EXTBlock:pSD spacing</name>
+   <description>Minimum spacing between EXTBlock and pSD: 0.31µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ:ThickGateOx spacing</name>
+   <description>Minimum spacing between Activ and ThickGateOx: 0.27µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>gate__mosfet__sg13g2_lv_nmos:pSD spacing</name>
+   <description>Minimum spacing between gate__mosfet__sg13g2_lv_nmos and pSD: 0.3µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>gate__mosfet__sg13g2_hv_nmos:pSD spacing</name>
+   <description>Minimum spacing between gate__mosfet__sg13g2_hv_nmos and pSD: 0.4µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>GatPoly:EXTBlock spacing</name>
+   <description>Minimum spacing between GatPoly and EXTBlock: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ:pSD spacing</name>
+   <description>Minimum spacing between Activ and pSD: 0.18µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>SalBlock:Activ spacing</name>
+   <description>Minimum spacing between SalBlock and Activ: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>SalBlock:GatPoly spacing</name>
+   <description>Minimum spacing between SalBlock and GatPoly: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>SalBlock:Cont spacing</name>
+   <description>Minimum spacing between SalBlock and Cont: 0.2µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Activ:GatPoly spacing</name>
+   <description>Minimum spacing between Activ and GatPoly: 0.07µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>Cont:Activ spacing</name>
+   <description>Minimum spacing between Cont and Activ: 0.14µm</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>NWell:Activ spacing</name>
+   <description>Minimum spacing between NWell and Activ: 0.24µm</description>
+   <categories>
+   </categories>
+  </category>
+ </categories>
+ <cells>
+  <cell>
+   <name>Arlet6502_cts_r</name>
+   <variant/>
+   <layout-name/>
+   <references>
+   </references>
+  </cell>
+ </cells>
+ <items>
+  <item>
+   <tags/>
+   <category>'[Warning]Metal5 table spacing'</category>
+   <cell>Arlet6502_cts_r</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>edge-pair: (28.82,194.145;28.82,193.355)/(29.055,193.306;29.055,194.194)</value>
+   </values>
+  </item>
+ </items>
+</report-database>
