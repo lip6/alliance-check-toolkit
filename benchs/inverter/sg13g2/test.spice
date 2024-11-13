@@ -3,14 +3,10 @@ test spice model
 
 .lib cornerMOSlv.lib mos_tt
 
-.subckt test in out vdd vss
-XM1 vdd in out vdd sg13_lv_pmos w=1.0u l=0.13u ng=1 m=1
-XM2 out in vss vss sg13_lv_nmos w=1.0u l=0.13u ng=1 m=1
-.ends test
-
+.include inv_1.spice
 
 Vgnd evss 0 0
 Vdd  evdd 0 DC 1.8
 
-Xinv in out evdd evss test
+Xinv in out evdd evss inv_1
 .end

@@ -1,0 +1,7 @@
+inv_1 spice model
+
+.subckt inv_1 in out vdd vss
+XM1 vdd in out vdd sg13_lv_pmos w=1.0u l=0.13u ng=1 m=1
+XM2 out in vss vss sg13_lv_nmos w=1.0u l=0.13u ng=1 m=1
+.ends inv_1
+
