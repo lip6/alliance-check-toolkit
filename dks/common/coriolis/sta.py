@@ -21,6 +21,7 @@ class STA ( FlowTask ):
     VddName             = 'vdd'
     VssName             = 'vss'
     Temperature         = 25.0
+    OSDIdll             = ''
 
     @staticmethod
     def mkRule ( rule, targets, depends=[], flags=0 ):
@@ -36,7 +37,7 @@ class STA ( FlowTask ):
           model = ' '.join(self.SpiceTrModel)
         else:
           model = self.SpiceTrModel
-        self.command    = [ 'avt_shell' , str(CalcCPathBin ), '-Target', self.inputFile.stem, '-SpiceModel', model,  '-SpiceType', self.SpiceType, '-VddVoltage', str(self.VddSupply), '-ClockSignal', self.ClockName, '-VddName', self.VddName, '-VssName', self.VssName, '-Temperature', str(self.Temperature)]
+        self.command    = [ 'avt_shell' , str(CalcCPathBin ), '-Target', self.inputFile.stem, '-SpiceModel', model,  '-SpiceType', self.SpiceType, '-VddVoltage', str(self.VddSupply), '-ClockSignal', self.ClockName, '-VddName', self.VddName, '-VssName', self.VssName, '-Temperature', str(self.Temperature), '-OsdiDll', str(self.OSDIdll)]
         self.addClean( self.targets )
 
     def __repr__ ( self ):
