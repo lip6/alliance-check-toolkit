@@ -26,7 +26,7 @@ avt_LoadFile psp103_nqs.osdi osdi
 avt_LoadFile test.spice spice
 
 # Database generation
-set fig [hitas test]
+set fig [hitas inv_1]
 
 set temp   [ttv_GetTimingFigureProperty $fig TEMP]
 set supply [ttv_GetTimingFigureProperty $fig DEF_SUPPLY]
