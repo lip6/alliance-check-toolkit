@@ -5,6 +5,7 @@ setupCMOS()
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
+from coriolis.designflow.task     import Tasks
 from coriolis.designflow.genpat   import Genpat
 from coriolis.designflow.asimut   import Asimut
 from coriolis.designflow.cougar   import Cougar

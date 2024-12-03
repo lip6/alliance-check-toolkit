@@ -5,6 +5,7 @@ checkToolkit=pathlib.Path('../../..')
 setupSky130_nsx2( checkToolkit )
 DOIT_CONFIG = { 'verbosity' : 2 }
 
+from coriolis.designflow.task     import Tasks
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.blif2vst import Blif2Vst

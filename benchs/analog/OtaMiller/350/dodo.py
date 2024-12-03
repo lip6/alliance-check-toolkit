@@ -21,6 +21,7 @@ elif useTechno == 'MOSIS':
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
+from coriolis.designflow.task  import Tasks
 from coriolis.designflow.pnr   import PnR
 from coriolis.designflow.clean import Clean
 PnR.textMode = True

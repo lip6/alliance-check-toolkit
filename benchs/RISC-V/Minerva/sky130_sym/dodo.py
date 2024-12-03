@@ -2,7 +2,7 @@ import sys
 import os
 import socket
 from   pathlib import Path
-from   coriolis.designflow.task   import ShellEnv
+from   coriolis.designflow.task    import ShellEnv, Tasks
 from   coriolis.designflow.technos import Where
 
 def setupSky130nsx ( useNsxlib=False, checkToolkit=None, cellsTop=None ):
@@ -73,6 +73,6 @@ setupSky130nsx( checkToolkit='../../../..' )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from coriolis.designflow import pnrcheck
+from coriolis.designflow      import pnrcheck
 
 pnrcheck.mkRuleSet( globals(), 'minerva_cpu', pnrcheck.UseClockTree )
