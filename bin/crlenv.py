@@ -15,6 +15,11 @@ reReleasePattern  = re.compile( r".*release.*" )
 reDebugPattern    = re.compile( r".*debug.*" )
 
 
+def isInVenv():
+    return (hasattr(sys, 'real_prefix') or
+           (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix))
+
+
 def scrubPath ( pathName ):
     """
     Remove from the PATH like environment variable ``pathName`` any
@@ -35,7 +40,7 @@ def scrubPath ( pathName ):
     return ':'.join( scrubbed )
 
 
-def envWriteBack ( pathName, pathValue ):
+def envWriteBack ( pathName, pathValues ):
     """
     Add to the environment PATH like variable ``pathName`` the components
     given in ``pathValue`` and export it back. To avoid having multiple
@@ -44,9 +49,9 @@ def envWriteBack ( pathName, pathValue ):
     if pathName in os.environ:
         scrubbed = scrubPath( pathName )
         if scrubbed != '':
-            pathValue += ':' + scrubbed
-    os.environ[ pathName ] = pathValue
-    return pathValue
+            pathValues += ':' + scrubbed
+    os.environ[ pathName ] = pathValues
+    return pathValues
 
 
 def setupPaths ( verbose, debug=False ):
@@ -120,7 +125,10 @@ def setupPaths ( verbose, debug=False ):
     else:                     sysconfDir = coriolisTop / 'etc'
 
     # Setup PATH.
-    binPath = envWriteBack( 'PATH', (coriolisTop/'bin').as_posix() )
+    customPath = (coriolisTop/'bin').as_posix()
+    if isInVenv():
+        customPath += ":" + sys.prefix + '/bin'
+    binPath = envWriteBack( 'PATH', customPath )
 
     # Setup LD_LIBRARY_PATH.
     libDirs = []
@@ -186,13 +194,13 @@ def setupPaths ( verbose, debug=False ):
 
 def printVariable ( name ):
     if not name in os.environ:
-        print( '{}:'.format( name ))
-        print( '- variable_not_set' )
+        print( '  {}:'.format( name ))
+        print( '    - variable_not_set' )
         return
     values = os.environ[ name ].split( ':' )
-    print( '{}:'.format( name ))
+    print( '  {}:'.format( name ))
     for value in values:
-        print( '- {}'.format( value ))
+        print( '    - {}'.format( value ))
 
 
 def printEnvironment ():
@@ -201,6 +209,11 @@ def printEnvironment ():
     """
     print( '# crlenv.py: Alliance/Coriolis finder, guessed values.' )
     print( '---' )
+    print( 'Environment:' )
+    print( '  isInVenv:' )
+    print( '    state:          ', isInVenv() )
+    print( '    sys.prefix:     ', sys.prefix )
+    print( '    sys.base_prefix:', sys.base_prefix )
     for name in ('CORIOLIS_TOP', 'PATH', 'DYLD_LIBRARY_PATH'
                 , 'LD_LIBRARY_PATH', 'PYTHONPATH'):
         printVariable( name )
