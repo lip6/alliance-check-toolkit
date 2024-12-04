@@ -39,20 +39,21 @@ Xc in out evdd evss  inv_1
 
 *input
 *vin in evss dc 0.8 pulse (0 1.8 50ps 10ps 10ps 40ps 100ps)
-vin in evss dc 0.8 pulse (0 1.8 50ps 10ps 10ps 190ps 400ps)
+vin in evss dc 0.8 pulse (0 1.8 50ps 10ps 10ps 280ps 600ps)
 
 
 *loading output
 *Cload out evss 0.0005pF
 *Cload out evss 0.0022pF
-Cload out evss 0.0018pF
+*Cload out evss 0.0018pF
+*Cload out evss 0.359pF
 
 
 * transient analysis *
 .control
 pre_osdi ../../../dks/sg13g2_nsx2/libs.tech/coriolis/sg13g2_nsx2/psp103_nqs.osdi
 
-TRAN 1ps 1000ps 0 
+TRAN 1ps 1200ps 0 
 
 set width=110
 
