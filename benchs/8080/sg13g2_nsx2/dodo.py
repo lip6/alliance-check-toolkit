@@ -13,13 +13,15 @@ from coriolis.designflow.task         import ShellEnv
 
 checkToolkit=pathlib.Path('../../..')
 pdkDir          = checkToolkit / 'dks' / 'sg13g2_nsx2' / 'libs.tech'
-coriolisTechDir = pdkDir / 'coriolis'
+coriolisTechDir = pdkDir / 'coriolis' / 'sg13g2_nsx2'
 sys.path.append( coriolisTechDir.as_posix() )
-from sg13g2_nsx2 import techno, nsxlib2, Sg13g2Setup 
+import techno, nsxlib2, Sg13g2Setup 
 
 pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
+pdkCommonTechDir      = checkToolkit / 'dks' / 'common'  / 'libs.tech' / 'IHP-Open-PDK' / 'ihp-sg13g2' / 'libs.tech'
 sys.path.append( pdkCommonDir.as_posix() )
 from s2r import S2R
+from sta import STA
 import pnrcheck
 
 
@@ -36,6 +38,17 @@ import doDesign
 kdrcRules = pdkDir / 'klayout' /  'sg13g2.lydrc'
 DRC.setDrcRules( kdrcRules )
 
+STA.VddSupply = 1.8
+STA.ClockName = 'm_clock'
+STA.SpiceType = 'hspice'
+STA.OSDIdll = 'psp103_nqs.osdi'
+STA.SpiceTrModel = 'mos_tt.lib'
+STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )+':'+str( pdkCommonTechDir ) + '/ngspice/models'
+print(STA.MBK_CATA_LIB)
+shellEnv = ShellEnv()
+shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
+shellEnv.export()
+STA.flags = STA.Transistor
 pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
 
 
