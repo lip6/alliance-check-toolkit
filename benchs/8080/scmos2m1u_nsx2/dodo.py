@@ -30,7 +30,8 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 PnR.textMode  = True
 import doDesign
 
-SCR.RandSeed_value = 3
+SCR.RandSeed_value = 1
+SCR.MaxRetry_value = 10
 SCR.MBK_CATA_LIB = ShellEnv.MBK_CATA_LIB
 STA.VddSupply = 5.0
 STA.ClockName = 'm_clock'

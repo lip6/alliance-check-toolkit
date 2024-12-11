@@ -32,6 +32,7 @@ from sky130_nsx2 import techno, nsxlib2, Sky130nsx2Setup
 kdrcRules = pdkDir / 'klayout' / 'sky130A.lydrc'
 
 pdkCommonDir          = checkToolkit / 'dks' / 'common'  / 'coriolis'
+pdkCommonTechDir          = checkToolkit / 'dks' / 'common'  / 'libs.tech'
 sys.path.append( pdkCommonDir.as_posix() )
 from s2r import S2R
 import pnrcheck
@@ -44,7 +45,7 @@ STA.VddSupply = 1.8
 STA.ClockName = 'clk'
 STA.SpiceType = 'hspice'
 STA.SpiceTrModel = 'sky130_fd_pr__nfet_01v8__mismatch.corner.spice sky130_fd_pr__nfet_01v8__tt.pm3.spice sky130_fd_pr__nfet_01v8__tt.corner.spice sky130_fd_pr__pfet_01v8__mismatch.corner.spice sky130_fd_pr__pfet_01v8__tt.pm3.spice sky130_fd_pr__pfet_01v8__tt.corner.spice  parameters/lod.spice '
-STA.MBK_CATA_LIB = '.:'+str( pdkDir / 'skywater-pdk-libs-sky130_fd_pr' / 'models') + ':' + str( pdkDir / 'skywater-pdk-libs-sky130_fd_pr' / 'cells' / 'pfet_01v8') + ':' + str( pdkDir / 'skywater-pdk-libs-sky130_fd_pr' / 'cells' / 'nfet_01v8')
+STA.MBK_CATA_LIB = '.:'+str( pdkCommonTechDir / 'skywater-pdk-libs-sky130_fd_pr' / 'models') + ':' + str( pdkCommonTechDir / 'skywater-pdk-libs-sky130_fd_pr' / 'cells' / 'pfet_01v8') + ':' + str( pdkCommonTechDir / 'skywater-pdk-libs-sky130_fd_pr' / 'cells' / 'nfet_01v8')
 print ('CATALIB=',STA.MBK_CATA_LIB)
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
