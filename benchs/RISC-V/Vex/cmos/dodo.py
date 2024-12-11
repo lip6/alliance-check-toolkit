@@ -5,6 +5,7 @@ setupCMOS()
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from coriolis.designflow import pnrcheck
+from coriolis.designflow.task import Tasks
+from coriolis.designflow      import pnrcheck
 
 pnrcheck.mkRuleSet( globals(), 'VexRiscv', flags=pnrcheck.NoGDS )

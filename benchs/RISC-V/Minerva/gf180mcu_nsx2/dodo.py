@@ -1,6 +1,6 @@
 import pathlib
 import sys
-from coriolis.designflow.technos import setupSky130_nsx2
+from coriolis.designflow.technos  import setupSky130_nsx2
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.blif2vst import Blif2Vst
@@ -9,7 +9,7 @@ from coriolis.designflow.klayout  import DRC
 from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
 from coriolis.designflow          import pnrcheck
-from coriolis.designflow.task         import ShellEnv
+from coriolis.designflow.task     import ShellEnv, Tasks
 
 checkToolkit=pathlib.Path('../../../..')
 pdkDir          = checkToolkit / 'dks' / 'gf180mcu_nsx2' / 'libs.tech'

@@ -5,6 +5,7 @@ setupSky130_c4m( '../../../..', '../../../../pdkmaster/C4M.Sky130' )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
+from coriolis.designflow.task     import Tasks
 from coriolis.designflow.copy     import Copy
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys

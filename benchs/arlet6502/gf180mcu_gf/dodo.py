@@ -20,6 +20,7 @@ setupGF180MCU_GF( checkToolkit='../../..', pdkTop='../../../../gf180mcu-pdk', us
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
+from coriolis.designflow.task     import Tasks
 from coriolis.designflow.cougar   import Cougar
 from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc

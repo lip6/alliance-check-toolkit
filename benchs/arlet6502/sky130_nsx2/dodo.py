@@ -1,7 +1,6 @@
 import sys
 import pathlib
 from coriolis.designflow.technos import setupSky130_nsx2
-from coriolis.designflow.task import ShellEnv
 checkToolkit=pathlib.Path('../../..')
 setupSky130_nsx2( checkToolkit )
 DksCommonDir = checkToolkit / 'dks' / 'common' / 'coriolis'
@@ -17,6 +16,7 @@ from coriolis.designflow.cougar   import Cougar
 from coriolis.designflow.klayout  import DRC
 from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
+from coriolis.designflow.task     import ShellEnv, Tasks
 import pnrcheck
 from sta                          import STA
 PnR.textMode  = True

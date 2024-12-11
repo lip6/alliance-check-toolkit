@@ -1,7 +1,6 @@
 import sys
 import pathlib
 from coriolis.designflow.technos import setupSky130_nsx2
-from coriolis.designflow.task import ShellEnv
 checkToolkit=pathlib.Path('../../..')
 setupSky130_nsx2( checkToolkit )
 DksCommonDir = checkToolkit / 'dks' / 'common' / 'coriolis'
@@ -9,6 +8,7 @@ sys.path.append( DksCommonDir.as_posix() )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
+from coriolis.designflow.task     import ShellEnv, Tasks
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.blif2vst import Blif2Vst

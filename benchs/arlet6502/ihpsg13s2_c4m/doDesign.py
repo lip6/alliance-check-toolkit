@@ -62,7 +62,7 @@ def scriptMain ( **kw ):
         #setTraceLevel( 550 )
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
-        Breakpoint.setStopLevel( 100 )
+        #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'Arlet6502', CRL.Catalog.State.Logical )
@@ -151,10 +151,6 @@ def scriptMain ( **kw ):
         designConf.cfg.katana.runRealignStage      = True
         designConf.cfg.block.spareSide             = 16*sliceHeight
         designConf.cfg.chip.padCoreSide            = 'North'
-       #designConf.cfg.chip.use45corners           = False
-       #designConf.cfg.chip.useAbstractPads        = True
-        designConf.cfg.chip.supplyRailWidth        = l(250.0)
-        designConf.cfg.chip.supplyRailPitch        = l(450.0)
         designConf.editor              = editor
         designConf.useSpares           = True
         designConf.useHFNS             = False
@@ -164,7 +160,7 @@ def scriptMain ( **kw ):
         designConf.chipConf.ioPadGauge = 'LEF.IO_Site'
         designConf.coreToChipClass     = CoreToChip
         designConf.coreSize            = (  252*sliceStep,  35*sliceHeight )
-        designConf.chipSize            = ( u(14*80 + 2*180.0), u(16*80 + 2*180.0) )
+        designConf.chipSize            = ( u(14*85 + 2*260.0), u(16*85 + 2*260.0) )
         if buildChip:
             designConf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
             designConf.useHTree( 'reset_from_pad' )

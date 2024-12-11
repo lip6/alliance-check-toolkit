@@ -2,7 +2,7 @@ import sys
 import os
 import socket
 from   pathlib import Path
-from   coriolis.designflow.task   import ShellEnv
+from   coriolis.designflow.task    import ShellEnv, Tasks
 from   coriolis.designflow.technos import Where
 
 def setupSky130nsx ( useNsxlib=False, checkToolkit=None, cellsTop=None ):
