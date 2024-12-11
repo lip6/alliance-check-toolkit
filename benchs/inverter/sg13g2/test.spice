@@ -1,0 +1,17 @@
+*test spice model
+.param temp=27
+
+.lib cornerMOSlv.lib mos_tt
+
+.include inv_1.spice
+
+.subckt inv_5 in out vdd vss
+Xinv1 in  v1 vdd vss inv_1
+Xinv2 v1  v2 vdd vss inv_1
+Xinv3 v2  v3 vdd vss inv_1
+Xinv4 v3  v4 vdd vss inv_1
+Xinv5 v4 out vdd vss inv_1
+.ends inv_5
+
+Xc in out evdd evss inv_5
+.end

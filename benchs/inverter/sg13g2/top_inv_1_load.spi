@@ -1,0 +1,84 @@
+inv_1 for IHP sg13g2
+*
+* top_inv_1_load.spi
+* ngspice simulation
+* 
+
+*****************
+.option  nopage nomod
++        newtol numdgt=7 ingold=2 gmindc=1e-18
+.option DOTNODE
+.option MSGNODE = 0
+
+.TEMP 25
+
+******************
+* BSIM4 transistor model parameters for ngspice
+*
+* nfet_01v8
+.include mos_tt.lib
+
+*******************************
+*Simulation conditions
+
+Vground evss 0 0
+Vsupply evdd 0 DC 1.8
+gfoncd evdd 0 evdd 0 1.0e-15
+
+******************
+* circuit model
+* include circuit netlist
+.INCLUDE inv_1.spice
+*****************
+
+*****************
+* Circuit Instantiation
+*.subckt sky130_fd_sc_hd__inv_1 A VGND VNB VPB VPWR Y
+
+Xc in out evdd evss  inv_1
+
+*input
+*vin in evss dc 0.8 pulse (0 1.8 50ps 10ps 10ps 40ps 100ps)
+vin in evss dc 0.8 pulse (0 1.8 50ps 10ps 10ps 280ps 600ps)
+
+
+*loading output
+*Cload out evss 0.0005pF
+*Cload out evss 0.0022pF
+*Cload out evss 0.0018pF
+*Cload out evss 0.359pF
+
+
+* transient analysis *
+.control
+pre_osdi ../../../dks/sg13g2_nsx2/libs.tech/coriolis/sg13g2_nsx2/psp103_nqs.osdi
+
+TRAN 1ps 1200ps 0 
+
+set width=110
+
+*meas tran inputRslope TRIG v(in) val=0.001 RISE=1 TARG v(in) VAL=1.782 RISE=1
+*meas tran inputFslope TRIG v(in) val=1.799 FALL=1 TARG v(in) VAL=0.0018 FALL=1
+*
+*meas tran outputRslope TRIG v(out) val=0.001 RISE=2 TARG v(out) VAL=1.782 RISE=2
+*meas tran outputFslope TRIG v(out) val=1.799 FALL=2 TARG v(out) VAL=0.0018 FALL=2
+
+meas tran inputRslope-- TRIG v(in) val=0.018 RISE=1 TARG v(in) VAL=1.782 RISE=1
+meas tran inputFslope-- TRIG v(in) val=1.782 FALL=1 TARG v(in) VAL=0.018 FALL=1
+
+meas tran outputRslope-- TRIG v(out) val=0.018 RISE=2 TARG v(out) VAL=1.782 RISE=2
+meas tran outputFslope-- TRIG v(out) val=1.782 FALL=1 TARG v(out) VAL=0.018 FALL=1
+
+meas tran proptimeRF TRIG v(in) val=0.9 RISE=1 TARG v(out) VAL=0.9 FALL=1
+meas tran proptimeFR TRIG v(in) val=0.9 FALL=1 TARG v(out) VAL=0.9 RISE=1
+
+gnuplot res v(in) v(out)
++ title 'input and output of the inverter inv_1 with load'
++ xlabel 'time / s' ylabel 'ResultOutput / V' 
+
+.endc
+
+
+
+.end
+
