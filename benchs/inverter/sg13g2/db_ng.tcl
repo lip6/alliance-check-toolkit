@@ -12,8 +12,11 @@ avt_config avtVerboseConeFile yes
 
 avt_config simVthHigh 0.8
 avt_config simVthLow 0.2
+avt_config simPowerSupply 1.8
 avt_config simSlope 10e-12 
-avt_config simTemperature 25.0
+avt_config simTemperature 27.0
+avt_config avtVddName evdd
+avt_config avtVssName evss
 
 avt_config simToolModel hspice
 avt_config tasGenerateDetailTimingFile yes
@@ -26,7 +29,7 @@ avt_LoadFile psp103_nqs.osdi osdi
 avt_LoadFile test.spice spice
 
 # Database generation
-set fig [hitas inv_1]
+set fig [hitas inv_5]
 
 set temp   [ttv_GetTimingFigureProperty $fig TEMP]
 set supply [ttv_GetTimingFigureProperty $fig DEF_SUPPLY]
