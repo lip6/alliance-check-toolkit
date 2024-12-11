@@ -14,6 +14,7 @@ if ([string match sff* $cell]) {
   inf_MarkSignal      sff_s SLAVE
 }
 
+avt_config   yagSetResetDetection yes
 avt_config   simToolModel  $spiceFormat
 avt_LoadFile $techno       spice
 avt_LoadFile $cell.spi     spice
