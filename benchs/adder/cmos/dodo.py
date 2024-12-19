@@ -40,5 +40,5 @@ ruleLvx    = Lvx   .mkRule( 'lvx'
                             , ruleCougar.file_target(0) ]
                           , flags=Lvx.Flatten )
 ruleDruc   = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
-ruleCgt    = PnR   .mkRule( 'cgt' )
+ruleCgt    = PnR   .mkRule( 'cgt', depends=[ruleAdder] )
 ruleClean  = Clean .mkRule()

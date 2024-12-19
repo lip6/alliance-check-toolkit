@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
         cfg.misc.info                    = False
         cfg.misc.paranoid                = False
         cfg.misc.bug                     = False
-        cfg.misc.logMode                 = False
+        cfg.misc.logMode                 = True
         cfg.misc.verboseLevel1           = True
         cfg.misc.verboseLevel2           = True
         cfg.misc.minTraceLevel           = 1590
@@ -241,6 +241,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.hTracksReservedMin    = 8
         conf.cfg.katana.vTracksReservedMin    = 7
         conf.cfg.katana.eventsLimit           = 4000000
+        conf.cfg.katana.runRealignStage       = False
         conf.editor              = editor
         conf.useHFNS             = False
         conf.useSpares           = True
@@ -252,6 +253,7 @@ def scriptMain ( **kw ):
         conf.coreSize            = ( l( 6100.0), l( 6150.0) )
         conf.chipSize            = ( l(10300.0), l(10300.0) )
         conf.coreToChipClass     = CoreToChip
+        #conf.doLvx               = False
         conf.useHTree( 'ck' )
        #conf.useHTree( 'reset_n' )
         if buildChip:
