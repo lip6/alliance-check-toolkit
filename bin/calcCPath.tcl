@@ -11,6 +11,10 @@ set Temperature 25.0
 set VddName  vdd
 set VssName  vss
 
+set osdidll {}
+set spimodel {}
+set vddvolt 1.8
+
 set idx 0
 if {$argc == 0} {
     puts "calcCPath -Target taget_name -SpiceModel spice_model -SpiceType spice_type -VddVoltage vdd_voltage -ClockSignal clock_signal_name -VddName vdd_name -VssName vss_name -Temperature temperature -OsdiDll osdi_dllname"
