@@ -18,7 +18,7 @@ PnR.textMode = True
 
 from doDesign import scriptMain
 
-buildChip = True
+buildChip = False
 if buildChip:
     pnrFiles = [ 'chip_r.ap'
                , 'chip_r.vst'

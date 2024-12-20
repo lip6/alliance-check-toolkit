@@ -56,7 +56,7 @@ def scriptMain ( **kw ):
     try:
         #setTraceLevel( 550 )
         #Breakpoint.setStopLevel( 100 )
-        buildChip = True
+        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
         if editor:
@@ -107,15 +107,15 @@ def scriptMain ( **kw ):
         # etesian.spaceMargin is ignored if the coreSize is directly set.
         #arlet6502Conf.cfg.etesian.spaceMargin         = 0.10
         #arlet6502Conf.cfg.anabatic.searchHalo         = 2
-        arlet6502Conf.cfg.anabatic.globalIterations   = 10
+        arlet6502Conf.cfg.anabatic.globalIterations   = 6
         arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-        arlet6502Conf.cfg.katana.hTracksReservedLocal = 10
-        arlet6502Conf.cfg.katana.vTracksReservedLocal = 10
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 7
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 5
+        arlet6502Conf.cfg.katana.hTracksReservedLocal = 15
+        arlet6502Conf.cfg.katana.vTracksReservedLocal = 15
+        arlet6502Conf.cfg.katana.hTracksReservedMin   = 6
+        arlet6502Conf.cfg.katana.vTracksReservedMin   = 6
         arlet6502Conf.cfg.katana.trackFill            = 0
-        arlet6502Conf.cfg.katana.runRealignStage      = True
-        arlet6502Conf.cfg.block.spareSide             = l(7*50.0)
+        arlet6502Conf.cfg.katana.runRealignStage      = False
+        arlet6502Conf.cfg.block.spareSide             = l(14*50.0)
         arlet6502Conf.cfg.chip.supplyRailWidth        = l(250.0)
         arlet6502Conf.cfg.chip.supplyRailPitch        = l(150.0)
         arlet6502Conf.editor              = editor
@@ -125,7 +125,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.bRows               = 2
         arlet6502Conf.chipConf.ioPadGauge = 'pxlib'
         arlet6502Conf.chipName            = 'chip'
-        arlet6502Conf.coreSize            = ( l( 35*50.0), l( 39*50.0) )
+        arlet6502Conf.coreSize            = ( l( 31*50.0), l( 31*50.0) )
         if useNiolib:
             arlet6502Conf.chipSize        = ( l(  9400.0), l(10400.0) )
         else:

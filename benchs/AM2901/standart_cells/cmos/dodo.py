@@ -59,7 +59,7 @@ ruleLvx    = Lvx   .mkRule( 'lvx'
                           , [ rulePnR.file_target(1)
                             , ruleCougar.file_target(0) ]
                           , flags=Lvx.Flatten )
-ruleDruc   = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
-ruleCgt    = PnR   .mkRule( 'cgt' )
-ruleGraal  = Graal .mkRule( 'graal' , [rulePnR] )
+ruleDruc   = Druc  .mkRule( 'druc' , [rulePnR], flags=0 )
+ruleCgt    = PnR   .mkRule( 'cgt'  , depends=[ruleAccu, ruleAlu, ruleCoeur, ruleMuxe, ruleMuxs, ruleRam] )
+ruleGraal  = Graal .mkRule( 'graal', [rulePnR] )
 ruleClean  = Clean .mkRule()

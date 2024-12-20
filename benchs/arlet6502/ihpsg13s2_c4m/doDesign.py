@@ -29,7 +29,7 @@ def scriptMain ( **kw ):
         cfg.misc.bug                    = False
         cfg.misc.logMode                = True
         cfg.misc.verboseLevel1          = True
-        cfg.misc.verboseLevel2          = False
+        cfg.misc.verboseLevel2          = True
         cfg.misc.minTraceLevel          = 16000
         cfg.misc.maxTraceLevel          = 17000
         cfg.anabatic.routingGauge       = None   # Trigger disk loading.
@@ -63,7 +63,7 @@ def scriptMain ( **kw ):
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )
-        buildChip = True
+        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'Arlet6502', CRL.Catalog.State.Logical )
         if not cell:
@@ -148,7 +148,7 @@ def scriptMain ( **kw ):
         designConf.cfg.katana.hTracksReservedMin   = 6
         designConf.cfg.katana.vTracksReservedMin   = 6
         designConf.cfg.katana.trackFill            = 0
-        designConf.cfg.katana.runRealignStage      = True
+        designConf.cfg.katana.runRealignStage      = False
         designConf.cfg.block.spareSide             = 16*sliceHeight
         designConf.cfg.chip.padCoreSide            = 'North'
         designConf.editor              = editor
@@ -159,7 +159,7 @@ def scriptMain ( **kw ):
         designConf.chipName            = 'chip'
         designConf.chipConf.ioPadGauge = 'LEF.IO_Site'
         designConf.coreToChipClass     = CoreToChip
-        designConf.coreSize            = (  252*sliceStep,  35*sliceHeight )
+        designConf.coreSize            = (  244*sliceStep,  34*sliceHeight )
         designConf.chipSize            = ( u(14*85 + 2*260.0), u(16*85 + 2*260.0) )
         if buildChip:
             designConf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
