@@ -28,23 +28,21 @@ END sff1r_x4;
 
 ARCHITECTURE VBE OF sff1r_x4 IS
   SIGNAL sff_m	 : REG_BIT REGISTER;
+  SIGNAL sff_s : REG_BIT REGISTER;	-- sff_s
 
 BEGIN
   ASSERT (vdd and not (vss))
   REPORT "power supply is missing on sff1r_x4"
   SEVERITY WARNING;
 
-  label0 : BLOCK (nrst = '0')
+  label0 : BLOCK (ck = '1')
   BEGIN
-    sff_m <= GUARDED '0';
+    sff_s <= GUARDED (NOT(nrst) OR NOT(sff_m));
   END BLOCK label0;
-  label1 : BLOCK ( (ck AND NOT(ck'STABLE)) = '1' )
+  label1 : BLOCK (NOT(ck) = '1')
   BEGIN
-    label2 : BLOCK (nrst = '1')
-    BEGIN
       sff_m <= GUARDED i;
-    END BLOCK label2;
   END BLOCK label1;
 
-  q <= sff_m after 1700 ps;
+  q <= NOT(sff_s) after 1700 ps;
 END;
