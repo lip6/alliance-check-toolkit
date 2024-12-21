@@ -28,7 +28,7 @@ while {$idx < $argc} {
   -OsdiDll -
   -o  {
      if {$idx < $argc} {
-     set odsidll [lindex $argv $idx]
+     set osdidll [lindex $argv $idx]
      incr idx
    } }
   -SpiceModel -
@@ -81,6 +81,8 @@ while {$idx < $argc} {
 }
 
 foreach i $osdidll {
+        puts "OSDI loading"
+        puts $i
 	avt_LoadFile $i osdi
 }
 foreach i $spimodel {
@@ -112,7 +114,7 @@ foreach i $spimodel {
  
    avt_LoadFile $cell spice
    avt_config   tasBefig             yes
-   avt_config   tmaFunctionalityMode w
+   # avt_config   tmaFunctionalityMode w
    avt_config   tmaDriveCapaout      yes
    avt_config   avtPowerCalculation  yes
 
