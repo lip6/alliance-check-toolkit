@@ -40,7 +40,7 @@ DRC.setDrcRules( kdrcRules )
 STA.VddSupply = 3.3
 STA.ClockName = 'm_clock'
 STA.SpiceType = 'hspice'
-STA.SpiceTrModel = 'sm141064.spi'
+STA.SpiceTrModel = 'typical.lib design.ngspice sm141064.ngspice'
 STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )

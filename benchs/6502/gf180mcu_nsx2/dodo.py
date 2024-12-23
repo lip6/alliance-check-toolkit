@@ -9,7 +9,7 @@ from coriolis.designflow.klayout  import DRC
 from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
 #from coriolis.designflow          import pnrcheck
-from coriolis.designflow.task     import Tasks
+from coriolis.designflow.task     import ShellEnv, Tasks
 
 checkToolkit=pathlib.Path('../../..')
 pdkDir          = checkToolkit / 'dks' / 'gf180mcu_nsx2' / 'libs.tech'
@@ -40,7 +40,7 @@ DRC.setDrcRules( kdrcRules )
 STA.VddSupply = 3.3
 STA.ClockName = 'm_clock'
 STA.SpiceType = 'hspice'
-STA.SpiceTrModel = 'sm141064.spi'
+STA.SpiceTrModel = 'typical.lib design.ngspice sm141064.ngspice'
 STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
