@@ -54,7 +54,7 @@ def setupSg13g2_nsx2 ( checkToolkit=None ):
     sys.path.append( coriolisTechDir.as_posix() )
 
     cellsTop  = Where.checkToolkit / 'cells'
-    liberty   = cellsTop / 'nsxlib2' / 'nsxlib2.lib'
+    liberty   = coriolisTechDir / 'sg13g2_nsx2' / 'nsxlib2.lib'
 #    kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
 
     from coriolis          import Cfg 
