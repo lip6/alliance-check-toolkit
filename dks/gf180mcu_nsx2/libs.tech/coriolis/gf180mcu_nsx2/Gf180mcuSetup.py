@@ -54,7 +54,7 @@ def setupGf180mcu_nsx2 ( checkToolkit=None ):
     sys.path.append( coriolisTechDir.as_posix() )
 
     cellsTop  = Where.checkToolkit / 'cells'
-    liberty   = cellsTop / 'nsxlib2' / 'nsxlib2.lib'
+    liberty   = coriolisTechDir / 'gf180mcu_nsx2' / 'nsxlib2.lib'
 #    kdrcRules = pdkDir / 'klayout' / 'drc' / 'gf180mcu.drc'
 
     from coriolis          import Cfg 
