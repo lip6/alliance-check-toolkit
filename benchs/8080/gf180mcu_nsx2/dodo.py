@@ -41,7 +41,8 @@ STA.VddSupply = 3.3
 STA.ClockName = 'm_clock'
 STA.SpiceType = 'hspice'
 STA.SpiceTrModel = 'typical.lib design.ngspice sm141064.ngspice'
-STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )
+GfpdkDir              = checkToolkit / 'dks' / 'common'  / 'libs.tech' / 'globalfoundries-pdk-libs-gf180mcu_fd_pr' / 'models' / 'ngspice'
+STA.MBK_CATA_LIB = '.:'+str( coriolisTechDir )+':'+str( GfpdkDir )
 shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
 shellEnv.export()
