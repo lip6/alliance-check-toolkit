@@ -39,7 +39,7 @@ cell-check-proof-%: ./%.vbe ./check/%.vhd
 	  $(CELL_CHECK_DIR); $(PROOF) -d $* $*_opt
 
 ./check/%.vhd: ./check/%.spi
-	 $(CELL_CHECK_DIR); $(YAGLE_CELL) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $*
+	 $(CELL_CHECK_DIR); $(YAGLE_CELL) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $* $(YAGLE_OPTION)
 
 ./check/%.spi: %.ap
 	 $(CELL_CHECK_DIR); $(FLATPH) -t $* $*_flat
@@ -52,5 +52,5 @@ cell-check-proof-%: ./%.vbe ./check/%.vhd
 	 $(CELL_CHECK_DIR); $(COUGAR_spice) -ar -ac -t $*_rename $*
 
 %-dot-lib: check-lib $(foreach cell,$(wildcard *.ap),$(patsubst %.ap,./check/%.spi,$(cell)))
-	 $(CELL_CHECK_DIR); $(YAGLE_LIB) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $*
+	 $(CELL_CHECK_DIR); $(YAGLE_LIB) $(SPI_TECHNO_NAME) $(SPI_FORMAT) $* $(YAGLE_OPTION)
 	 mv -f ./check/$*.lib $*.lib.new
