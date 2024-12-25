@@ -53,15 +53,16 @@ def setupSky130_nsx2 ( checkToolkit=None ):
     sys.path.append( coriolisTechDir.as_posix() )
 
     cellsTop  = Where.checkToolkit / 'cells'
-    liberty   = cellsTop / 'nsxlib2' / 'nsxlib2.lib'
+    liberty   = coriolisTechDir / 'sky130_nsx2' / 'nsxlib2.lib'
+    print(liberty)
     kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
 
     from coriolis          import Cfg 
     from coriolis          import Viewer
     from coriolis          import CRL 
     from coriolis.helpers   import overlay, l, u, n
-    from coriolis.desigflow.yosys      import Yosys
-    from coriolis.desigflow.klayout    import DRC
+    from coriolis.designflow.yosys      import Yosys
+    from coriolis.designflow.klayout    import DRC
     from sky130_nsx2 import techno, nsxlib2
     techno.setup( coriolisTechDir )
     nsxlib2.setup( cellsTop )
