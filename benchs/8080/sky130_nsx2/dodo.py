@@ -2,20 +2,12 @@ import sys
 import pathlib
 from coriolis.designflow.task    import ShellEnv, Tasks
 checkToolkit=pathlib.Path('../../..')
-DksCommonDir = checkToolkit / 'dks' / 'common' / 'coriolis'
-sys.path.append( DksCommonDir.as_posix() )
-
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.blif2vst import Blif2Vst
-from coriolis.designflow.s2r      import S2R
-from coriolis.designflow.cougar   import Cougar
 from coriolis.designflow.klayout  import DRC
 from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
-import pnrcheck
-from sta                          import STA
-pnrcheck.textMode  = True
 
 pdkDir          = checkToolkit / 'dks' / 'sky130_nsx2' / 'libs.tech'
 coriolisTechDir = pdkDir / 'coriolis' / 'sky130_nsx2'
@@ -30,6 +22,8 @@ pdkCommonTechDir          = checkToolkit / 'dks' / 'common'  / 'libs.tech'
 sys.path.append( pdkCommonDir.as_posix() )
 from s2r import S2R
 import pnrcheck
+from sta                          import STA
+pnrcheck.textMode  = True
 import doDesign
 
 S2R.flags = S2R.PinLayer | S2R.DeleteSubConnectors | S2R.Verbose|S2R.NoReplaceBlackboxes 
@@ -46,5 +40,5 @@ shellEnv = ShellEnv()
 shellEnv[ 'MBK_SPI_MODEL' ] =  str( coriolisTechDir / 'spimodel.cfg' )
 shellEnv.export()
 STA.flags = STA.Transistor
-
 pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
+
