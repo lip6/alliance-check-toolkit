@@ -1,0 +1,8 @@
+*inv_1 spice model
+
+.subckt inv_1 in out vdd vss
+XM1 vdd in out vdd pmos_3p3 w=14.0u l=0.28u
+XM2 out in vss vss nmos_3p3 w=14.0u l=0.28u
+*C1  out vss 0.01pf
+.ends inv_1
+
