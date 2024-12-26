@@ -55,7 +55,7 @@ def setupScmos2m1u_nsx2 ( checkToolkit=None ):
     sys.path.append( coriolisTechDir.as_posix() )
 
     cellsTop  = Where.checkToolkit / 'cells'
-    liberty   = cellsTop / 'nsxlib2' / 'nsxlib2.lib'
+    liberty   = coriolisTechDir / 'scmos2m1u_nsx2' / 'nsxlib2.lib'
 #    kdrcRules = pdkDir / 'klayout' / 'drc' / 'drc_SCMOS.lydrc'
 
     from coriolis          import Cfg 

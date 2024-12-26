@@ -26,7 +26,7 @@ from sta                          import STA
 pnrcheck.textMode  = True
 import doDesign
 
-SCR.RandSeed_value = 1
+SCR.RandSeed_value = 2
 SCR.MaxRetry_value = 10
 SCR.MBK_CATA_LIB = ShellEnv.MBK_CATA_LIB
 STA.VddSupply = 5.0
