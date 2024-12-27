@@ -1,0 +1,8 @@
+*inv_1 spice model
+
+.subckt inv_1 in out vdd vss
+XM1 vdd in out vdd sky130_fd_pr__pfet_01v8 w=14.0 l=0.15
+XM2 out in vss vss sky130_fd_pr__nfet_01v8 w=14.0 l=0.15
+*C1  out vss 0.01pf
+.ends inv_1
+
