@@ -36,8 +36,8 @@ BEGIN
 
   label0 : BLOCK (e)
   BEGIN
-    la_m <= GUARDED d;
+    la_m <= GUARDED not d;
   END BLOCK label0;
 
-  z <= la_m after 260 ps;
+  z <= not la_m after 260 ps;
 END;

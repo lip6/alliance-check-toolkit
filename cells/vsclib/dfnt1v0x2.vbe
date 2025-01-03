@@ -32,8 +32,8 @@ BEGIN
 
   label0 : BLOCK (cp and not cp'STABLE)
   BEGIN
-    df_m <= GUARDED d;
+    df_m <= GUARDED not d;
   END BLOCK label0;
 
-  z <= df_m after 255 ps;
+  z <= not df_m after 255 ps;
 END;

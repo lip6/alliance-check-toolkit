@@ -4,7 +4,7 @@
  ALLIANCE_BIN      = $(ALLIANCE_TOP)/bin
  SYSCONF_TOP       = $(ALLIANCE_TOP)/etc
  CELLS_TOP         = $(ALLIANCE_TOP)/cells
- SPI_MODEL         = $(CELL_TOP)/vsclib/techno/spimodel.cfg
+ SPI_MODEL         = $(SYSCONF_TOP)/spimodel.cfg
  TOOLKIT_BIN       = $(CHECK_TOOLKIT)/bin
 
  AVERTEC_BIN       = $(AVERTEC_TOP)/../../bin
