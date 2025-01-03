@@ -59,5 +59,5 @@
  endif
 
  ifeq ($(SPI_FORMAT),)
-   SPI_FORMAT = spice
+   SPI_FORMAT = hspice
  endif
