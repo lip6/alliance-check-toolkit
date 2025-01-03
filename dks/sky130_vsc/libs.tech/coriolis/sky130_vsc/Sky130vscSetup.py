@@ -54,7 +54,7 @@ def setupSky130_vsc ( checkToolkit=None ):
     sys.path.append( coriolisTechDir.as_posix() )
 
     cellsTop  = Where.checkToolkit / 'cells'
-    liberty   = cellsTop / 'vsclib' / 'vsclib.lib'
+    liberty   = coriolisTechDir / 'sky130_vsc' / 'vsclib.lib'
     #kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
 
     from coriolis          import Cfg 
