@@ -9,6 +9,9 @@ set vddvolt 1.8
 set osdidll  {}
 set spimodel  {}
 
+set MasterFF sff_m
+set SlaveFF  sff_s
+set FFCell   sff*
 
  set techno      [lindex $argv 0]
  set spiceFormat [lindex $argv 1]
@@ -73,8 +76,26 @@ while {$idx < $argc} {
      set Temperature [lindex $argv $idx]
      incr idx
    } }
+  -MasterFlipFlop -
+  -M {
+     if {$idx < $argc} {
+     set MasterFF [lindex $argv $idx]
+     incr idx
+   } }
+  -SlaveFlipFlop - 
+  -s {
+     if {$idx < $argc} {
+     set SlaveFF [lindex $argv $idx]
+     incr idx
+   } }
+  -FlipFlopCell -
+  -c {
+     if {$idx < $argc} {
+     set FFCell [lindex $argv $idx]
+     incr idx
+   } }
   default {
-    puts "Unknown parameter"
+    puts [concat "Unknown parameter" $flag]
     exit 1
     }
  }
@@ -118,12 +139,12 @@ foreach i $spimodel {
    avt_config   tmaDriveCapaout      yes
    avt_config   avtPowerCalculation  yes
 
-   if ([string match sff* $cell]) {
+   if ([string match $FFCell $cell]) {
      puts "Cell is a D flip-flop."
-   
+
      inf_SetFigureName   $cell
-     inf_MarkSignal      sff_m "FLIPFLOP+MASTER"
-     inf_MarkSignal      sff_s SLAVE
+     inf_MarkSignal      $MasterFF "FLIPFLOP+MASTER"
+     inf_MarkSignal      $SlaveFF SLAVE
      create_clock -period 3000 ck
    }
 

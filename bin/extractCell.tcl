@@ -14,11 +14,11 @@ set cell        [lindex $argv 2]
 
 set osdidll  {}
 set spimodel  {}
-
-puts "MBK_CATA_LIB=$env(MBK_CATA_LIB)"
+set MasterFF sff_m
+set SlaveFF  sff_s
+set FFCell   sff*
 
 set idx 3
-puts [lindex $argv $idx]
 
 while {$idx < $argc} {
   set flag [lindex $argv $idx]
@@ -78,9 +78,26 @@ while {$idx < $argc} {
      set Temperature [lindex $argv $idx]
      incr idx
    } }
+  -MasterFlipFlop -
+  -M {
+     if {$idx < $argc} {
+     set MasterFF [lindex $argv $idx]
+     incr idx
+   } }
+  -SlaveFlipFlop - 
+  -s {
+     if {$idx < $argc} {
+     set SlaveFF [lindex $argv $idx]
+     incr idx
+   } }
+  -FlipFlopCell -
+  -c {
+     if {$idx < $argc} {
+     set FFCell [lindex $argv $idx]
+     incr idx
+   } }
   default {
-    puts [lindex $argv $idx]
-    puts "Unknown parameter"
+    puts [concat "Unknown parameter" $flag]
     exit 1
     }
  }
@@ -90,12 +107,12 @@ while {$idx < $argc} {
 puts "Using technology:        <$techno>"
 puts "Extracting boolean cell: <$cell.spi>"
 
-if ([string match sff* $cell]) {
+if ([string match $FFCell $cell]) {
   puts "Cell is a D flip-flop."
 
   inf_SetFigureName   $cell
-  inf_MarkSignal      sff_m "FLIPFLOP+MASTER"
-  inf_MarkSignal      sff_s SLAVE
+  inf_MarkSignal      $MasterFF "FLIPFLOP+MASTER"
+  inf_MarkSignal      $SlaveFF SLAVE
 }
 
 avt_config   yagSetResetDetection yes
