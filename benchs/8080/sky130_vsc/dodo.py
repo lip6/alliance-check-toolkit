@@ -31,7 +31,7 @@ import doDesign
 kdrcRules = pdkDir / 'klayout' /   'sky130A.lydrc'
 DRC.setDrcRules( kdrcRules )
 
-pnrcheck.mkRuleSet( globals(), doDesign.coreName, pnrcheck.UseClockTree )
+pnrcheck.mkRuleSet( globals(), doDesign.CoreName, pnrcheck.UseClockTree )
 #pnrcheck.mkRuleSet( globals(), 'adder')
 #ruleGds = S2R.mkRule( 'gds', 'adder_r.gds', 'adder_r.ap'
 #                    , flags=S2R.Verbose|S2R.NoReplaceBlackboxes )

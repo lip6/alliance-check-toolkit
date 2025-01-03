@@ -18,18 +18,18 @@ from   coriolis.plugins.chip.chip           import Chip
 
 af = CRL.AllianceFramework.get()
 
-coreName='my80core'
+CoreName='my80core'
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
-    global af
+    global af, CoreName
     DbU.setStringMode( DbU.StringModeSymbolic )
     rvalue = True
     try:
         #setTraceLevel( 550 )
-        Breakpoint.setStopLevel( 100 )
+        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( coreName, CRL.Catalog.State.Logical )
+        cell = af.getCell( CoreName, CRL.Catalog.State.Logical )
         af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
@@ -38,7 +38,7 @@ def scriptMain ( **kw ):
         m2pitch = l(8.0)
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        conf.cfg.anabatic.globalIterations   = 10
+        conf.cfg.anabatic.globalIterations   = 100
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         conf.cfg.block.spareSide             = l(800)
         conf.cfg.katana.hTracksReservedMin   = 4
@@ -53,7 +53,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        #conf.coreSize  = ( l( 9000.0), l( 9000.0) )
+        conf.coreSize  = ( l( 5000.0), l( 5000.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
