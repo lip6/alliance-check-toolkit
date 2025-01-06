@@ -174,7 +174,7 @@ def scriptMain ( **kw ):
        #ao68000Conf.cfg.chip.use45corners           = False
         ao68000Conf.cfg.chip.useAbstractPads        = False
         ao68000Conf.cfg.chip.minPadSpacing          = u(1.46)
-        ao68000Conf.cfg.chip.supplyRailWidth        = u(8.0)
+        ao68000Conf.cfg.chip.supplyRailWidth        = u(5.5)
         ao68000Conf.cfg.chip.supplyRailPitch        = u(9.0)
         ao68000Conf.editor              = editor
         ao68000Conf.useSpares           = True
