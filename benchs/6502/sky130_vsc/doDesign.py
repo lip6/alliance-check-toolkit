@@ -18,7 +18,7 @@ from   coriolis.plugins.chip.chip           import Chip
 
 af = CRL.AllianceFramework.get()
 
-CoreName='my80core'
+CoreName='m65s'
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
