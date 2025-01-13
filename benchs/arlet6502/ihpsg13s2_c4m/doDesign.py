@@ -10,7 +10,7 @@ from   coriolis            import plugins
 from   coriolis.plugins.block.block          import Block
 from   coriolis.plugins.block.configuration  import IoPin, GaugeConf
 from   coriolis.plugins.block.spares         import Spares
-from   pdks.c4m_ihpsg13g2.core2chip.sg13g2io import CoreToChip
+from   pdks.ihpsg13g2_c4m.core2chip.sg13g2io import CoreToChip
 from   coriolis.plugins.chip.configuration   import ChipConf
 from   coriolis.plugins.chip.chip            import Chip
 
@@ -159,7 +159,7 @@ def scriptMain ( **kw ):
         designConf.chipName            = 'chip'
         designConf.chipConf.ioPadGauge = 'LEF.IO_Site'
         designConf.coreToChipClass     = CoreToChip
-        designConf.coreSize            = (  244*sliceStep,  34*sliceHeight )
+        designConf.coreSize            = (  250*sliceStep,  35*sliceHeight )
         designConf.chipSize            = ( u(14*85 + 2*260.0), u(16*85 + 2*260.0) )
         if buildChip:
             designConf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )

@@ -1,7 +1,7 @@
 
 import os
 from   pathlib import Path
-from   pdks.c4m_ihpsg13g2 import setup
+from   pdks.ihpsg13g2_c4m import setup
 
 setup( checkToolkit=Path('../../..') )
 
@@ -15,9 +15,9 @@ from coriolis.designflow.klayout            import Klayout
 from coriolis.designflow.pnr                import PnR
 from coriolis.designflow.alias              import Alias
 from coriolis.designflow.clean              import Clean
-from pdks.c4m_ihpsg13g2.designflow.filler   import Filler
-from pdks.c4m_ihpsg13g2.designflow.sealring import SealRing
-from pdks.c4m_ihpsg13g2.designflow.drc      import DRC
+from pdks.ihpsg13g2_c4m.designflow.filler   import Filler
+from pdks.ihpsg13g2_c4m.designflow.sealring import SealRing
+from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
 from doDesign                               import scriptMain
 
 buildChip    = False
