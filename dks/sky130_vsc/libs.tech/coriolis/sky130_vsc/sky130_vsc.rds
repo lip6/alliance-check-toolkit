@@ -159,20 +159,20 @@ table mbk_to_rds_segment
   pwell   rds_pwell  vw    0.300   0.0  .0  all
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
-  ndif    rds_activ  vw    0.15     0.0    .0  all\
-          rds_nimp   vw    0.275    0.25   .0  all\
-          rds_ndif   vw    0.15     0.0    .0  all
+  ndif    rds_activ  vw    0.00     0.0    .0  all\
+          rds_nimp   vw    0.125    0.24   .0  all\
+          rds_ndif   vw    0.00     0.0    .0  all
                                                                                                                   
-  pdif    rds_activ  vw    0.15     0.0    .0  all\
-          rds_pimp   vw    0.275    0.25   .0  all\
-          rds_pdif   vw    0.15     0.0    .0  all
+  pdif    rds_activ  vw    0.00     0.0    .0  all\
+          rds_pimp   vw    0.125    0.24   .0  all\
+          rds_pdif   vw    0.00     0.0    .0  all
                                                                                                                   
   ntie    rds_ntie   vw    0.10    0.0    .0  all\
-          rds_nimp   vw    0.225   0.25   .0  all
+          rds_nimp   vw    0.225   0.24   .0  all
 #          rds_activ  vw    0.15    0.0    .0  all
                                                                                                                   
   ptie    rds_ptie   vw    0.10    0.0    .0  all\
-          rds_pimp   vw    0.225   0.25   .0  all
+          rds_pimp   vw    0.225   0.24   .0  all
 #          rds_activ  vw    0.15    0.0    .0  all
 #          rds_pwell  vw    0.460   0.510  .0  all
                                                                                                                   
@@ -476,9 +476,9 @@ layer RDS_VIA2    0.300 ;
 layer RDS_VIA3    0.300 ;
 layer RDS_VIA4    0.300 ;
 layer RDS_VIA5    0.300 ;
-layer RDS_ALU1    0.140 ;
-layer RDS_ALU2    0.140 ;
-layer RDS_ALU3    0.140 ;
+layer RDS_ALU1    0.170 ;
+layer RDS_ALU2    0.170 ;
+layer RDS_ALU3    0.170 ;
 layer RDS_ALU4    0.300 ;
 layer RDS_ALU5    0.300 ;
 layer RDS_ALU6    0.300 ;
