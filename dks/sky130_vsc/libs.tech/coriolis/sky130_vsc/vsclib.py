@@ -56,7 +56,7 @@ def _routing ():
                                 , RoutingLayerGauge.Default         # layer usage
                                 , 1                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 4.0)                           # track offset from AB
+                                , l( 0.0)                           # track offset from AB
                                 , l( 8.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
@@ -80,7 +80,7 @@ def _routing ():
                                 , RoutingLayerGauge.Default         # layer usage
                                 , 3                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 4.0)                           # track offset from AB
+                                , l( 0.0)                           # track offset from AB
                                 , l( 16.0)                           # track pitch
                                 , l( 4.0)                           # wire width
                                 , l( 4.0)                           # perpandicular wire width
@@ -104,7 +104,7 @@ def _routing ():
                                 , RoutingLayerGauge.PowerSupply     # layer usage
                                 , 5                                 # depth
                                 , 0.0                               # density (deprecated)
-                                , l( 4.0)                           # track offset from AB
+                                , l( 0.0)                           # track offset from AB
                                 , l(16.0)                           # track pitch
                                 , l(12.0)                           # wire width
                                 , l(12.0)                           # perpandicular wire width
