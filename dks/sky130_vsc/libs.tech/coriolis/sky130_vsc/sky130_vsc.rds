@@ -191,25 +191,25 @@ table mbk_to_rds_segment
                                                                                                                   
   poly    rds_poly   vw    0.075    0.0   .0  all
 
-  alu1    rds_alu1   vw    0.125    0.03 .0  all
-  calu1   rds_alu1   vw    0.125    0.03 .0  all
-  talu1   rds_talu1  vw    0.125    0.03 .0  all
+  alu1    rds_alu1   vw    0.01    0.03 .0  all
+  calu1   rds_alu1   vw    0.01    0.03 .0  all
+  talu1   rds_talu1  vw    0.01    0.03 .0  all
 
-  alu2    rds_alu2   vw    0.125    0.05   .0  all
-  calu2   rds_alu2   vw    0.125    0.05   .0  all
-  talu2   rds_talu2  vw    0.125    0.05   .0  all
+  alu2    rds_alu2   vw    0.11    0.0   .0  all
+  calu2   rds_alu2   vw    0.11    0.0   .0  all
+  talu2   rds_talu2  vw    0.11    0.0   .0  all
 
-  alu3    rds_alu3   vw    0.125    0.07   .0  all
-  calu3   rds_alu3   vw    0.125    0.07   .0  all
-  talu3   rds_talu3  vw    0.125    0.07   .0  all
+  alu3    rds_alu3   vw    0.11    0.0   .0  all
+  calu3   rds_alu3   vw    0.11    0.0   .0  all
+  talu3   rds_talu3  vw    0.11    0.0   .0  all
 
-  alu4    rds_alu4   vw    0.095     0.19   .0  all
-  calu4   rds_alu4   vw    0.095     0.19   .0  all
-  talu4   rds_talu4  vw    0.095     0.19   .0  all
+  alu4    rds_alu4   vw    0.15     0.0   .0  all
+  calu4   rds_alu4   vw    0.15     0.0   .0  all
+  talu4   rds_talu4  vw    0.15     0.0   .0  all
 
-  alu5    rds_alu5   vw    0.095     0.19   .0  all
-  calu5   rds_alu5   vw    0.095     0.19   .0  all
-  talu5   rds_talu5  vw    0.095     0.19   .0  all
+  alu5    rds_alu5   vw    0.15     0.0   .0  all
+  calu5   rds_alu5   vw    0.15     0.0   .0  all
+  talu5   rds_talu5  vw    0.15     0.0   .0  all
 
   alu6    rds_alu6   vw    0.30     0.0    .0  all
   calu6   rds_alu6   vw    0.30     0.0    .0  all
@@ -242,16 +242,16 @@ table mbk_to_rds_via
   cont_body_n \
     rds_cont        0.170  all\
     rds_alu1        0.410  all\
-    rds_nimp        0.660  all\
-    rds_ntie        0.410  all
+    rds_nimp        0.650  all\
+    rds_ntie        0.400  all
 
 # licon.7 0.170+0.120*2
 # difftap.5
   cont_body_p \
     rds_cont        0.170  all\
     rds_alu1        0.410  all\
-    rds_pimp        0.660  all\
-    rds_ptie        0.410  all
+    rds_pimp        0.650  all\
+    rds_ptie        0.400  all
 
 # licon.5c
   cont_dif_n  \
@@ -259,7 +259,7 @@ table mbk_to_rds_via
     rds_alu1        0.330  all\
     rds_activ       0.290  drc\
     rds_nimp        0.540  all\
-    rds_ndif        0.290  all
+    rds_ndif        0.420  all
 
 # licon.5c
   cont_dif_p  \
@@ -267,7 +267,7 @@ table mbk_to_rds_via
     rds_alu1        0.330  all\
     rds_activ       0.290  drc\
     rds_pimp        0.540  all\
-    rds_pdif        0.290  all
+    rds_pdif        0.420  all
 
 # licon.8a
 # NPC --> poly2
@@ -282,14 +282,14 @@ table mbk_to_rds_via
   cont_via    \
     rds_via1        0.170  all\
     rds_alu1        0.330  all\
-    rds_alu2        0.350  all
+    rds_alu2        0.330  all
 
 # via.1b
 # via.5b
 # m2.5
   cont_via2   \
     rds_via2        0.150  all\
-    rds_alu2        0.350  all\
+    rds_alu2        0.370  all\
     rds_alu3        0.370  all
 
 # via.1b
@@ -298,12 +298,12 @@ table mbk_to_rds_via
   cont_via3   \
     rds_via3        0.200  all\
     rds_alu3        0.370  all\
-    rds_alu4        0.490  all
+    rds_alu4        0.370  all
 
   cont_via4   \
     rds_via4        0.200  all\
     rds_alu4        0.490  all\
-    rds_alu5        0.490  all
+    rds_alu5        0.380  all
 end
 
 table mbk_to_rds_bigvia_hole
