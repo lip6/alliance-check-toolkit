@@ -195,21 +195,21 @@ table mbk_to_rds_segment
   calu1   rds_alu1   vw    0.01    0.03 .0  all
   talu1   rds_talu1  vw    0.01    0.03 .0  all
 
-  alu2    rds_alu2   vw    0.11    0.0   .0  all
-  calu2   rds_alu2   vw    0.11    0.0   .0  all
-  talu2   rds_talu2  vw    0.11    0.0   .0  all
+  alu2    rds_alu2   vw    0.0     0.0   .0  all
+  calu2   rds_alu2   vw    0.0     0.0   .0  all
+  talu2   rds_talu2  vw    0.0     0.0   .0  all
 
-  alu3    rds_alu3   vw    0.11    0.0   .0  all
-  calu3   rds_alu3   vw    0.11    0.0   .0  all
-  talu3   rds_talu3  vw    0.11    0.0   .0  all
+  alu3    rds_alu3   vw    0.0     0.0   .0  all
+  calu3   rds_alu3   vw    0.0     0.0   .0  all
+  talu3   rds_talu3  vw    0.0     0.0   .0  all
 
-  alu4    rds_alu4   vw    0.15     0.0   .0  all
-  calu4   rds_alu4   vw    0.15     0.0   .0  all
-  talu4   rds_talu4  vw    0.15     0.0   .0  all
+  alu4    rds_alu4   vw    0.19     0.0   .0  all
+  calu4   rds_alu4   vw    0.19     0.0   .0  all
+  talu4   rds_talu4  vw    0.19     0.0   .0  all
 
-  alu5    rds_alu5   vw    0.15     0.0   .0  all
-  calu5   rds_alu5   vw    0.15     0.0   .0  all
-  talu5   rds_talu5  vw    0.15     0.0   .0  all
+  alu5    rds_alu5   vw    0.225     0.0   .0  all
+  calu5   rds_alu5   vw    0.225     0.0   .0  all
+  talu5   rds_talu5  vw    0.225     0.0   .0  all
 
   alu6    rds_alu6   vw    0.30     0.0    .0  all
   calu6   rds_alu6   vw    0.30     0.0    .0  all
@@ -312,8 +312,8 @@ table mbk_to_rds_bigvia_hole
 # -------------------------------------------------------------------
 CONT_VIA   RDS_VIA1 0.17 0.34 ALL
 CONT_VIA2  RDS_VIA2 0.15 0.32 ALL
-CONT_VIA3  RDS_VIA3 0.20 0.40 ALL
-CONT_VIA4  RDS_VIA4 0.20 0.40 ALL   # should be more than 4
+CONT_VIA3  RDS_VIA3 0.20 0.37 ALL
+CONT_VIA4  RDS_VIA4 0.20 0.38 ALL   # should be more than 4
 CONT_VIA5  RDS_VIA5 0.80 1.60 ALL   # should be more than 4
 end
 
