@@ -82,7 +82,7 @@ def _routing ():
                                 , 0.0                               # density (deprecated)
                                 , l( 0.0)                           # track offset from AB
                                 , l( 16.0)                           # track pitch
-                                , l( 6.0)                           # wire width
+                                , l( 7.0)                           # wire width
                                 , l( 6.0)                           # perpandicular wire width
                                 , l( 2.0)                           # VIA side
                                 , l( 6.0) ))                        # obstacle dW
