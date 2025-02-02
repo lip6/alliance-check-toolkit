@@ -7,7 +7,7 @@
  SPI_MODEL         = $(SYSCONF_TOP)/spimodel.cfg
  TOOLKIT_BIN       = $(CHECK_TOOLKIT)/bin
 
- AVERTEC_BIN       = $(ALLIANCE_TOP)/bin
+ AVERTEC_BIN       = $(AVERTEC_TOP)/../../bin
  YOSYS_BIN         = $(YOSYS_TOP)/bin
 
  PATH              = $(ALLIANCE_BIN):$(shell echo $$PATH)
