@@ -44,7 +44,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.hTracksReservedMin   = 5
         conf.cfg.katana.vTracksReservedMin   = 4
         conf.cfg.katana.hTracksReservedLocal = 9
-        conf.cfg.katana.vTracksReservedLocal = 9 
+        conf.cfg.katana.vTracksReservedLocal = 9
         conf.cfg.katana.termSatReservedLocal = 6 
         conf.cfg.katana.termSatThreshold     = 9 
         conf.cfg.katana.trackFill            = 0
@@ -53,7 +53,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize  = ( l( 4200.0), l( 4200.0) )
+        conf.coreSize  = ( l( 4400.0), l( 4400.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
