@@ -180,7 +180,7 @@ def setup ():
     METAL3 .setMinimalSize   (           l(1.0) )
     METAL3 .setExtentionCap  ( metal3  , l(1.0) )
     METAL4 .setMinimalSize   (           l(1.0) )
-    METAL4 .setExtentionCap  ( metal4  , l(1.0) )
+    METAL4 .setExtentionCap  ( metal4  , l(2.0) )
     METAL4 .setMinimalSpacing(           l(3.0) )
     METAL5 .setMinimalSize   (           l(2.0) )
     METAL5 .setExtentionCap  ( metal5  , l(1.0) )
