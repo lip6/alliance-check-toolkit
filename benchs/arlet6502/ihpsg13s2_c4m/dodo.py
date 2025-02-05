@@ -13,6 +13,7 @@ from coriolis.designflow.yosys              import Yosys
 from coriolis.designflow.blif2vst           import Blif2Vst
 from coriolis.designflow.klayout            import Klayout
 from coriolis.designflow.pnr                import PnR
+from coriolis.designflow.sta                import STA, FMax
 from coriolis.designflow.alias              import Alias
 from coriolis.designflow.clean              import Clean
 from pdks.ihpsg13g2_c4m.designflow.filler   import Filler
@@ -56,6 +57,7 @@ else:
 ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), DRC.Minimal )
 ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), DRC.Maximal )
 ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), DRC.C4M )
+ruleSTA     = FMax   .mkRule( 'fmax'   , 'yoyo', rulePnR.file_target(2))
 ruleCgt     = PnR    .mkRule( 'cgt' )
 ruleKlayout = Klayout.mkRule( 'klayout', depends=rulePnR.file_target(0) )
 ruleClean   = Clean  .mkRule( [ 'lefRWarning.log', 'cgt.log' ] )
