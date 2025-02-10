@@ -36,7 +36,18 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         m1pitch = l(8.0)
         m2pitch = l(8.0)
-        ioPinsSpec = []
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'  , 10*m1pitch, 20*m1pitch,  8)
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'  , 20*m1pitch, 20*m1pitch,  8)
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'   , 10*m1pitch, 15*m1pitch, 16)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'm_clock'     , l(804),       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'p_reset'     , l(884),       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'extint'     , l(964),       0 ,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'ack'      , l(1044),       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'memory_read'     , l(804),       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'memory_write'     , l(964),       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_read'     , l(1124),       0 ,  1)
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_write'     , l(1284),       0 ,  1)
+                         ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 100
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
@@ -53,7 +64,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize  = ( l( 4400.0), l( 4400.0) )
+        conf.coreSize  = ( l( 4480.0), l( 4480.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
