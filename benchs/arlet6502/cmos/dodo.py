@@ -52,6 +52,10 @@ ruleLvx    = Lvx     .mkRule( 'lvx'
                             , [ rulePnR.file_target(1)
                               , ruleCougar.file_target(0) ]
                             , flags=Lvx.Flatten )
+ruleLvxSpi = Lvx     .mkRule( 'lvx_spi'
+                            , [ rulePnR.file_target(1)
+                              , pnrFiles[2] ]
+                            , flags=Lvx.Verbose|Lvx.Flatten )
 ruleDruc   = Druc    .mkRule( 'druc', [rulePnR], flags=0 )
 ruleCgt    = PnR     .mkRule( 'cgt' )
 ruleClean  = Clean   .mkRule()
