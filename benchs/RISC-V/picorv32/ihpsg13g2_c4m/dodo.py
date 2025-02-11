@@ -14,6 +14,7 @@ from coriolis.designflow.yosys              import Yosys
 from coriolis.designflow.blif2vst           import Blif2Vst
 from coriolis.designflow.alias              import Alias
 from coriolis.designflow.klayout            import Klayout, DRC
+from coriolis.designflow.tasyagle           import TasYagle, STA, XTas
 from coriolis.designflow.copy               import Copy
 from coriolis.designflow.clean              import Clean
 from pdks.ihpsg13g2_c4m.designflow.filler   import Filler
@@ -21,9 +22,10 @@ from pdks.ihpsg13g2_c4m.designflow.sealring import SealRing
 from doDesign                               import scriptMain
 
 
-PnR.textMode = True
-pnrSuffix    = '_cts_r'
-topName      = 'picorv32'
+PnR.textMode       = True
+pnrSuffix          = '_cts_r'
+topName            = 'picorv32'
+TasYagle.ClockName = 'clk'
 
 ruleYosys = Yosys   .mkRule( 'yosys', 'picorv32.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'picorv32.vst', [ruleYosys], flags=0 )
@@ -61,6 +63,8 @@ rulePnR   = PnR     .mkRule( 'gds'  , [ 'picorv32_cts_r.gds'
 #shellEnv[ 'CELL_NAME'   ] = rulePnR.file_target(0).stem
 #shellEnv.export()
 #ruleDRC    = DRC   .mkRule( 'drc', rulePnR.file_target(0) )
+ruleSTA     = STA    .mkRule( 'sta'    , rulePnR.file_target(2))
+ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
 
 # To run individual tools in stand-alone mode.
 ruleCgt     = PnR    .mkRule( 'cgt' )
