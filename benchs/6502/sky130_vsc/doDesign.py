@@ -36,18 +36,18 @@ def scriptMain ( **kw ):
         ioPadsSpec = []
         m1pitch = l(8.0)
         m2pitch = l(8.0)
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'    ,  10*m1pitch, 10*m1pitch,  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'   ,  15*m1pitch, 10*m1pitch,  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'    ,  10*m1pitch, 20*m1pitch, 16)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'm_clock'     , l(804),       0 , 1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'p_reset'     , l(724),       0 , 1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'         , l(564),       0 , 1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'         , l(644),       0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'rd'          , l(164),       0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'wt'          , l(324),       0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'start'       , l(484),       0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'sync'        , l(644),       0 , 1)
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'rdy'         , l(724),       0 , 1)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'    ,  110*m1pitch, 20*m1pitch,  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'   ,  120*m1pitch, 20*m1pitch,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'    ,  100*m1pitch, 20*m1pitch, 16)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'm_clock'     , l(2004),       0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'p_reset'     , l(2084),       0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'         , l(2204),       0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'         , l(2284),       0 , 1)
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'rd'          , l(2004),       0 , 1)
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'wt'          , l(2084),       0 , 1)
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'start'       , l(2204),       0 , 1)
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'sync'        , l(2284),       0 , 1)
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'rdy'         , l(2404),       0 , 1)
                      ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 100
@@ -65,7 +65,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize  = ( l( 6200.0), l( 6200.0) )
+        conf.coreSize  = ( l( 5680.0), l( 5680.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
