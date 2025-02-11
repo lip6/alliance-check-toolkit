@@ -151,12 +151,12 @@ table mbk_to_rds_segment
 # ----------------------------------------------------------------------------------
 
 
-  nwell   rds_nwell  vw    0.300   0.0  .0  all\
-          rds_pimp   vw    0.0   -0.80     .275  all \
-          rds_nimp   vw    0.0   -1.65     2.75  all 
+  nwell   rds_nwell  vw    0.390   0.2  -0.1  all\
+          rds_pimp   vw    0.09  -0.80     .275  all \
+          rds_nimp   vw    0.09  -1.65     2.75  all 
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
-  pwell   rds_pwell  vw    0.300   0.0  .0  all
+  pwell   rds_pwell  vw    0.390   0.0  .0  all
 #          rds_nimp   vw    0.225   0.170  .0  all
                                                                                                                   
   ndif    rds_activ  vw    0.00     0.0    .0  all\
@@ -168,11 +168,11 @@ table mbk_to_rds_segment
           rds_pdif   vw    0.00     0.0    .0  all
                                                                                                                   
   ntie    rds_ntie   vw    0.10    0.1    .0  all\
-          rds_nimp   vw    0.225   0.25   .0  all
+          rds_nimp   vw    0.225   0.35   .0  all
 #          rds_activ  vw    0.15    0.0    .0  all
                                                                                                                   
   ptie    rds_ptie   vw    0.10    0.1    .0  all\
-          rds_pimp   vw    0.225   0.25   .0  all
+          rds_pimp   vw    0.225   0.35   .0  all
 #          rds_activ  vw    0.15    0.0    .0  all
 #          rds_pwell  vw    0.460   0.510  .0  all
                                                                                                                   
@@ -242,16 +242,16 @@ table mbk_to_rds_via
   cont_body_n \
     rds_cont        0.170  all\
     rds_alu1        0.410  all\
-    rds_nimp        0.650  all\
-    rds_ntie        0.400  all
+    rds_nimp        0.660  all\
+    rds_ntie        0.410  all
 
 # licon.7 0.170+0.120*2
 # difftap.5
   cont_body_p \
     rds_cont        0.170  all\
     rds_alu1        0.410  all\
-    rds_pimp        0.650  all\
-    rds_ptie        0.400  all
+    rds_pimp        0.660  all\
+    rds_ptie        0.410  all
 
 # licon.5c
   cont_dif_n  \
