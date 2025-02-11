@@ -64,7 +64,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize  = ( l( 5000.0), l( 5000.0) )
+        conf.coreSize  = ( l( 3500.0), l( 3500.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
