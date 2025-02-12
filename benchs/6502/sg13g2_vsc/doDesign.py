@@ -60,12 +60,12 @@ def scriptMain ( **kw ):
         conf.cfg.katana.termSatReservedLocal = 6 
         conf.cfg.katana.termSatThreshold     = 9 
         conf.cfg.katana.trackFill            = False
-        conf.cfg.katana.runRealignStage      = False
+        conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = False
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize  = ( l( 5680.0), l( 5680.0) )
+        conf.coreSize  = ( l( 5800.0), l( 5800.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
