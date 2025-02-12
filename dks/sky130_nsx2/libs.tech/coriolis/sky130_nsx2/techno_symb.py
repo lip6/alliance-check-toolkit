@@ -53,11 +53,11 @@ def setup ():
     cut5      = tech.getBasicLayer( 'via4'    )
     metal6    = tech.getBasicLayer( 'm5'      )
     blockage1 = tech.getBasicLayer( 'blockage1' )
-    blockage2 = tech.getBasicLayer( 'blockage1' )
-    blockage3 = tech.getBasicLayer( 'blockage2' )
-    blockage4 = tech.getBasicLayer( 'blockage3' )
-    blockage5 = tech.getBasicLayer( 'blockage4' )
-    blockage6 = tech.getBasicLayer( 'blockage5' )
+    blockage2 = tech.getBasicLayer( 'blockage2' )
+    blockage3 = tech.getBasicLayer( 'blockage3' )
+    blockage4 = tech.getBasicLayer( 'blockage4' )
+    blockage5 = tech.getBasicLayer( 'blockage5' )
+    blockage6 = tech.getBasicLayer( 'blockage6' )
 
     # Composite/Symbolic layers.
     NWELL       = RegularLayer   .create( tech, 'NWELL'      , nWell    )

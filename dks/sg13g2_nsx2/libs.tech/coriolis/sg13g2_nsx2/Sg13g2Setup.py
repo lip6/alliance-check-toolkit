@@ -4,6 +4,8 @@ import os
 import socket
 from   pathlib import Path
 from   coriolis.designflow.task   import ShellEnv
+from   coriolis.designflow.yosys      import Yosys
+from   coriolis.designflow.klayout    import DRC
 
 
 __all__ = [ 'Where', 'setupSg13g2_nsx2 ' ]
@@ -55,14 +57,11 @@ def setupSg13g2_nsx2 ( checkToolkit=None ):
 
     cellsTop  = Where.checkToolkit / 'cells'
     liberty   = coriolisTechDir / 'sg13g2_nsx2' / 'nsxlib2.lib'
-#    kdrcRules = pdkDir / 'klayout' / 'drc_sky130.lydrc'
 
     from coriolis          import Cfg 
     from coriolis          import Viewer
     from coriolis          import CRL 
     from coriolis.helpers   import overlay, l, u, n
-    from coriolis.designflow.yosys      import Yosys
-    from coriolis.designflow.klayout    import DRC
     from sg13g2_nsx2 import techno, nsxlib2
     techno.setup( coriolisTechDir )
     nsxlib2.setup( cellsTop )
