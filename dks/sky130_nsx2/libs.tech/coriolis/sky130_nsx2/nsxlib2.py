@@ -2,7 +2,7 @@
 import sys
 import os.path
 from   coriolis                 import Cfg
-from   coriolis.Hurricane       import Technology, DataBase, DbU, Library, Layer,         \
+from   coriolis.Hurricane       import Technology, DataBase, DbU, Library, Layer, \
                                        BasicLayer, Cell, Net, Horizontal, Vertical,       \
                                        Rectilinear, Box, Point, Instance, Transformation, \
                                        NetExternalComponents, Pad
