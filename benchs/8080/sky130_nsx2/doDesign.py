@@ -22,19 +22,20 @@ CoreName = 'my80core'
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
-    global af
+    global af, CoreName
+    DbU.setStringMode( DbU.StringModeSymbolic )
     rvalue = True
     try:
        #setTraceLevel( 550 )
-#        Breakpoint.setStopLevel( 100 )
+       #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( CoreName, CRL.Catalog.State.Logical )
         af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
             editor.setCell( cell ) 
         ioPadsSpec = []
-        m1pitch=l(10)
-        m2pitch=l(20)
+        m1pitch = l(10.0)
+        m2pitch = l(20.0)
         ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'data({})'  , 10*m1pitch, 20*m1pitch,  8)
                          , (IoPin.WEST |IoPin.A_BEGIN, 'datao({})'  , 20*m1pitch, 20*m1pitch,  8)
                          , (IoPin.EAST |IoPin.A_BEGIN, 'adrs({})'   , 10*m1pitch, 15*m1pitch, 16)
@@ -48,7 +49,7 @@ def scriptMain ( **kw ):
                          , (IoPin.SOUTH|IoPin.A_BEGIN, 'io_write'     , 130*m2pitch,       0 ,  1)
                          ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        conf.cfg.anabatic.globalIterations   = 10
+        conf.cfg.anabatic.globalIterations   = 20
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         conf.cfg.block.spareSide             = l(1000)
         conf.cfg.katana.hTracksReservedMin   = 6
@@ -63,9 +64,9 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize =  ( l( 100*50.0), l( 100*50.0) )
-        conf.editor = editor
-        blockBuilder = Block( conf )
+        conf.coreSize =  ( l( 4000.0), l( 4200.0) )
+        conf.editor    = editor
+        blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
         rvalue = blockBuilder.doPnR()
         blockBuilder.save()
