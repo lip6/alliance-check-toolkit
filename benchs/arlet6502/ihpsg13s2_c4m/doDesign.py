@@ -2,7 +2,7 @@
 
 import sys
 import traceback
-from   coriolis.Hurricane  import DbU, Breakpoint, PythonAttributes
+from   coriolis.Hurricane  import DbU, Breakpoint, PythonAttributes, Instance, Transformation
 from   coriolis            import CRL, Cfg
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
@@ -160,7 +160,7 @@ def scriptMain ( **kw ):
         designConf.chipConf.ioPadGauge = 'LEF.IO_Site'
         designConf.coreToChipClass     = CoreToChip
         designConf.coreSize            = (  250*sliceStep,  35*sliceHeight )
-        designConf.chipSize            = ( u(14*85 + 2*260.0), u(16*85 + 2*260.0) )
+        designConf.chipSize            = ( u(16*85 + 2*260.0 + 40.0), u(18*85 + 2*260.0) )
         if buildChip:
             designConf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
             designConf.useHTree( 'reset_from_pad' )
@@ -168,6 +168,22 @@ def scriptMain ( **kw ):
             chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
+            CRL.Gds.load( chipBuilder.conf.chip.getLibrary()
+                        , 'chip_r_seal.gds'
+                        , CRL.Gds.Layer_0_IsBoundary )
+            with overlay.UpdateSession():
+                chipCell = chipBuilder.conf.chip
+                sealCell = chipBuilder.conf.chip.getLibrary().getCell( 'sealring_top' )
+                chipAb = chipCell.getAbutmentBox()
+                sealAb = sealCell.getAbutmentBox()
+                sealX  = (chipAb.getWidth () - sealAb.getWidth ()) // 2
+                sealY  = (chipAb.getHeight() - sealAb.getHeight()) // 2
+                Instance.create( chipCell
+                               , 'sealring'
+                               , sealCell
+                               , Transformation( sealX, sealY, Transformation.Orientation.ID )
+                               , Instance.PlacementStatus.FIXED
+                               )
             chipBuilder.save()
         else:
             designConf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )

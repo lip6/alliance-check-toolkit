@@ -33,6 +33,7 @@ ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
 
 if buildChip:
     # Rule for chip generation.
+    ruleSeal  = SealRing.mkRule( 'sealring', targets=[ 'chip_r_seal.gds' ] , size=[2200.0, 2200.0] )
     rulePnR   = PnR.mkRule( 'gds'  , [ 'chip_r.gds'
                                      , 'chip_r.vst'
                                      , 'chip_r.spi'
@@ -44,9 +45,10 @@ if buildChip:
                                      , 'corona.spi'
                                      , 'Arlet6502_cts.spi'
                                      , 'arlet6502_cts.vst' ]
-                                     , [ruleB2V]
+                                     , [ruleB2V, ruleSeal]
                                    , scriptMain
                                    , topName=topName )
+    staLayout = rulePnR.file_target( 6 )
 else:
     # Rule for block generation.
     rulePnR = PnR.mkRule( 'gds'    , [ 'Arlet6502_cts_r.gds'
@@ -58,11 +60,12 @@ else:
     ruleLvx = Lvx.mkRule( 'lvx_spi', [ 'arlet6502_cts_r.vst'
                                      , 'Arlet6502_cts_r.spi' ]
                                    , Lvx.MergeSupply|Lvx.Flatten )
+    staLayout = rulePnR.file_target( 2 )
 
 ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), DRC.Minimal )
 ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), DRC.Maximal )
 ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), DRC.C4M )
-ruleSTA     = STA    .mkRule( 'sta'    , rulePnR.file_target(2))
+ruleSTA     = STA    .mkRule( 'sta'    , staLayout )
 ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
 ruleCgt     = PnR    .mkRule( 'cgt' )
 ruleKlayout = Klayout.mkRule( 'klayout', depends=rulePnR.file_target(0) )
