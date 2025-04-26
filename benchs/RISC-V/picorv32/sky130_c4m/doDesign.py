@@ -4,7 +4,7 @@ import sys
 import os
 import traceback
 from   coriolis            import CRL
-from   coriolis.Hurricane  import DbU, Breakpoint
+from   coriolis.Hurricane  import DbU, Breakpoint, DataBase, Library
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
 loadUserSettings()
@@ -20,13 +20,14 @@ af = CRL.AllianceFramework.get()
 
 
 def scriptMain ( **kw ):
-
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     global af
-    rvalue = True
+    loadOpenROAD = False
+    buildChip    = False
+    rvalue       = True
     try:
-       #setTraceLevel( 540 )
-        Breakpoint.setStopLevel( 100 )
+        #setTraceLevel( 540 )
+        #Breakpoint.setStopLevel( 100 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
             harnessProjectDir = checkToolkitDir + '/cells/sky130'
@@ -34,8 +35,23 @@ def scriptMain ( **kw ):
             print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
             print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
             sys.exit( 1 )
-        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
+
+        if loadOpenROAD:
+            db      = DataBase.getDB()
+            tech    = db.getTechnology()
+            rootlib = db.getRootLibrary()
+            orLib   = Library.create(rootlib, 'OpenROAD')
+            gdsPath = '../sky130_OpenROAD/picorv32_openroad.gds'
+            CRL.Gds.load( orLib, gdsPath, CRL.Gds.Layer_0_IsBoundary|CRL.Gds.NoBlockages )
+            af.wrapLibrary( orLib, 1 ) 
+            cell, editor = plugins.kwParseMain( **kw )
+            cell = af.getCell( 'picorv32', CRL.Catalog.State.Logical )
+            if editor:
+                editor.setCell( cell ) 
+                editor.setDbuMode( DbU.StringModePhysical )
+            return True
+
         cellName = 'picorv32'
         if buildChip:
             cellName += '_harness'

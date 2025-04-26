@@ -26,4 +26,6 @@ rulePnR   = PnR     .mkRule( 'pnr'  , [ 'picorv32_cts_r.gds'
                                     , scriptMain )
 ruleCgt   = PnR     .mkRule( 'cgt' )
 ruleGds   = Alias   .mkRule( 'gds', [rulePnR] )
-ruleClean = Clean   .mkRule()
+ruleClean = Clean   .mkRule( [], [ ('.', '*.log'        )
+                                 , ('.', '*.histogram.*')
+                                 , ('.', '*.katana.dat' ) ] )
