@@ -14,6 +14,7 @@ from coriolis.designflow.blif2vst           import Blif2Vst
 from coriolis.designflow.klayout            import Klayout
 from coriolis.designflow.pnr                import PnR
 from coriolis.designflow.lvx                import Lvx
+from coriolis.designflow.x2y                import x2y
 from coriolis.designflow.tasyagle           import TasYagle, STA, XTas
 from coriolis.designflow.alias              import Alias
 from coriolis.designflow.clean              import Clean
@@ -22,16 +23,16 @@ from pdks.ihpsg13g2_c4m.designflow.sealring import SealRing
 from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
 from doDesign                               import scriptMain
 
-buildChip          = False
+buildChip          = True
 PnR.textMode       = True
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
-TasYagle.ClockName = 'clk'
 
 ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
 
 if buildChip:
+    TasYagle.ClockName = 'clk_from_pad'
     # Rule for chip generation.
     ruleSeal  = SealRing.mkRule( 'sealring', targets=[ 'chip_r_seal.gds' ] , size=[2200.0, 2200.0] )
     rulePnR   = PnR.mkRule( 'gds'  , [ 'chip_r.gds'
@@ -50,6 +51,7 @@ if buildChip:
                                    , topName=topName )
     staLayout = rulePnR.file_target( 6 )
 else:
+    TasYagle.ClockName = 'clk'
     # Rule for block generation.
     rulePnR = PnR.mkRule( 'gds'    , [ 'Arlet6502_cts_r.gds'
                                      , 'arlet6502_cts_r.vst'
@@ -57,6 +59,7 @@ else:
                                      , [ruleB2V]
                                    , scriptMain
                                    , topName=topName )
+    ruleX2Y = x2y.mkRule( 'spi2vst', 'arlet6502_cts_r_spi.vst', 'Arlet6502_cts_r.spi' )
     ruleLvx = Lvx.mkRule( 'lvx_spi', [ 'arlet6502_cts_r.vst'
                                      , 'Arlet6502_cts_r.spi' ]
                                    , Lvx.MergeSupply|Lvx.Flatten )
