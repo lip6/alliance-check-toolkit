@@ -1,0 +1,15 @@
+from coriolis.Hurricane import DebugSession
+
+#DebugSession.addToTrace( katana.getCell().getNet( 'cu_issue_i' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'cu_wr_rel_o(2)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'xer_so_ok' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'r2(0)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'r6(0)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'r4(2)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'b(2)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_261_new_n13' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'n0_r1_3_0_1' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'n0_r1_3_0_0' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'a(2)' ) )
+DebugSession.addToTrace( katana.getCell().getNet( 'n0_r1_3_0_3' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'a(1)' ) )
