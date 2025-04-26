@@ -9,13 +9,13 @@ import optparse
 from   coriolis.Hurricane     import DbU, DataBase, UpdateSession, Breakpoint, \
                                      Transformation, Instance
 from   coriolis               import Cfg, Viewer, CRL, Etesian, Anabatic, Katana, \
-                                     Unicorn
+                                     Tramontana, Unicorn
 from   coriolis.helpers       import ErrorMessage, overlay, l, u, n
 from   coriolis.plugins.rsave import rsave
 
 
 def scriptMain ( **kw ):
-    #Breakpoint.setStopLevel( 99 )
+    #Breakpoint.setStopLevel( 100 )
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         # Common settings for all runs.
         cfg.misc.catchCore              = False
@@ -29,12 +29,14 @@ def scriptMain ( **kw ):
         #cfg.misc.maxTraceLevel          = 120
         cfg.anabatic.globalIterations   = 15
         cfg.anabatic.topRoutingLayer    = 'METAL5'
-        cfg.katana.searchHalo           = 2
+        cfg.katana.searchHalo           = 1
         cfg.katana.eventsLimit          = 1000000
-        cfg.katana.hTracksReservedLocal = 5 
+        cfg.katana.hTracksReservedLocal = 7 
         cfg.katana.vTracksReservedLocal = 6 
         cfg.katana.hTracksReservedMin   = 2 
         cfg.katana.vTracksReservedMin   = 4 
+        cfg.katana.runRealignStage      = False 
+        cfg.tramontana.mergeSupplies    = True
     
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
         af  = CRL.AllianceFramework.get()
@@ -60,6 +62,7 @@ def scriptMain ( **kw ):
     katana.loadGlobalRouting    ( Anabatic.EngineLoadGrByNet )
     Breakpoint.stop( 100, 'Global routing has been loaded.' )
     katana.layerAssign          ( Anabatic.EngineNoNetLayerAssign )
+    Breakpoint.stop( 100, 'Layer assignment done.' )
     katana.runNegociate         ( Katana.Flags.NoFlags )
     Breakpoint.stop( 99, 'Detailed routing finished, before finalize layout.' )
     katana.finalizeLayout()
@@ -67,5 +70,12 @@ def scriptMain ( **kw ):
     katana.destroy()
     cell.setName( cell.getName()+'_r' )
     rsave( cell, CRL.Catalog.State.Logical|CRL.Catalog.State.Physical )
+    if not success:
+        return success
+    tramontana = Tramontana.TramontanaEngine.create( cell )
+    tramontana.printConfiguration()
+    tramontana.extract()
+    tramontana.printSummary()
+    success = tramontana.getSuccessState()
   
     return success

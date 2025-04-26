@@ -28,3 +28,4 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'wreg_sw(11)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'rtdnbr_sd(12)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'rtdnbr_sd(15)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_shift32_rshift_se_msb' ) )
