@@ -51,12 +51,13 @@ def scriptMain ( **kw ):
                      ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 100
+        conf.cfg.anabatic.searchHalo         = 1
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         conf.cfg.block.spareSide             = l(800)
-        conf.cfg.katana.hTracksReservedMin   = 4
+        conf.cfg.katana.hTracksReservedMin   = 5
         conf.cfg.katana.vTracksReservedMin   = 4
-        conf.cfg.katana.hTracksReservedLocal = 4
-        conf.cfg.katana.vTracksReservedLocal = 4 
+        conf.cfg.katana.hTracksReservedLocal = 8
+        conf.cfg.katana.vTracksReservedLocal = 8 
         conf.cfg.katana.termSatReservedLocal = 6 
         conf.cfg.katana.termSatThreshold     = 9 
         conf.cfg.katana.trackFill            = False
@@ -65,7 +66,7 @@ def scriptMain ( **kw ):
         conf.useSpares = True
         conf.useHFNS   = False
         conf.useHTree( 'm_clock', Spares.HEAVY_LEAF_LOAD )
-        conf.coreSize  = ( l( 5800.0), l( 5800.0) )
+        conf.coreSize  = ( l( 5300.0), l( 5300.0) )
         conf.editor    = editor
         blockBuilder   = Block( conf )
         cell.setTerminalNetlist( False )
