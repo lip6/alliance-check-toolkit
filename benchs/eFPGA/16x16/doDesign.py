@@ -3,8 +3,8 @@
 import sys
 import traceback
 from   coriolis.Hurricane  import DbU, Breakpoint, Cell
-from   coriolis            import CRL
-from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+from   coriolis            import CRL, Cfg
+from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
 from   coriolis.helpers.io import ErrorMessage, WarningMessage
 loadUserSettings()
 from   coriolis            import plugins
@@ -24,6 +24,16 @@ env.addSYSTEM_LIBRARY( library='../efpgalib', mode=CRL.Environment.Prepend )
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
     global af
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore              = False
+        cfg.misc.info                   = False
+        cfg.misc.paranoid               = False
+        cfg.misc.bug                    = False
+        cfg.misc.logMode                = False
+        cfg.misc.verboseLevel1          = True
+        cfg.misc.verboseLevel2          = False
+        cfg.misc.minTraceLevel          = 16000
+        cfg.misc.maxTraceLevel          = 17000
     rvalue = True
     try:
        #setTraceLevel( 550 )
@@ -47,7 +57,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.hTracksReservedMin   = 5
         conf.cfg.katana.vTracksReservedMin   = 5
         conf.cfg.katana.trackFill            = 0
-        conf.cfg.katana.runRealignStage      = True
+        conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = True
         conf.useSpares = False
         conf.editor    = editor
