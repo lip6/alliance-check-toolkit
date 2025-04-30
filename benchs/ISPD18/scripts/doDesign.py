@@ -2,8 +2,9 @@
 
 import sys
 import traceback
-from   coriolis.Hurricane  import DataBase, DbU, Breakpoint, PythonAttributes, Instance, Transformation
-from   coriolis            import CRL, Cfg, Anabatic, Katana, Tramontana
+from   coriolis.Hurricane  import DataBase, DbU, Breakpoint, PythonAttributes, Instance, \
+                                  Box, Transformation
+from   coriolis            import CRL, Cfg, Etesian, Anabatic, Katana, Tramontana
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 from   coriolis            import plugins
@@ -72,6 +73,12 @@ def scriptMain ( **kw ):
             print( cell.getAbutmentBox() )
             cell.setAbutmentBox( ab )
             print( cell.getAbutmentBox() )
+        if cell.getName() in ( 'ispd18_test7.input'):
+            etesian = Etesian.EtesianEngine.create( cell )
+            etesian.setPlaceArea( Box( u(9.6), u(278.4), u(901.5), u(1046.4) ))
+            etesian.toHurricane()
+            etesian.destroy()
+            
 
         katana = Katana.KatanaEngine.create( cell )
         katana.digitalInit       ()
