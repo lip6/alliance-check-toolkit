@@ -9,7 +9,7 @@ import optparse
 from   coriolis.Hurricane     import DbU, DataBase, UpdateSession, Breakpoint, \
                                      Transformation, Instance
 from   coriolis               import Cfg, Viewer, CRL, Etesian, Anabatic, Katana, \
-                                     Unicorn
+                                     Unicorn, Tramontana
 from   coriolis.helpers       import ErrorMessage, overlay, l, u, n
 from   coriolis.plugins.rsave import rsave
 
@@ -32,6 +32,7 @@ def scriptMain ( **kw ):
         cfg.katana.vTracksReservedLocal = 7 
         cfg.katana.hTracksReservedMin   = 1 
         cfg.katana.vTracksReservedMin   = 5 
+        cfg.tramontana.mergeSupplies    = True
     
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )
         af  = CRL.AllianceFramework.get()
@@ -62,5 +63,10 @@ def scriptMain ( **kw ):
     katana.destroy()
     cell.setName( cell.getName()+'_r' )
     rsave( cell, CRL.Catalog.State.Logical|CRL.Catalog.State.Physical )
+    tramontana = Tramontana.TramontanaEngine.create( cell )
+    tramontana.printConfiguration()
+    tramontana.extract()
+    tramontana.printSummary()
+    success = tramontana.getSuccessState()
   
     return success

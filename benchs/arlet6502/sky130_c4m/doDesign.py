@@ -124,6 +124,7 @@ def scriptMain ( **kw ):
        #conf.cfg.katana.vTracksReservedLocal = 3
        #conf.cfg.katana.hTracksReservedMin   = 3
        #conf.cfg.katana.vTracksReservedMin   = 1
+        conf.cfg.katana.globalRipupLimit     = 7
         conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = True
         if buildChip:

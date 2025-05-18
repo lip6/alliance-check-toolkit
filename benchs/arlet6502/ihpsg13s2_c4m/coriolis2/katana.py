@@ -8,3 +8,4 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11869_new_n564' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11869_new_n518' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11869_new_n1150' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n1363' ) )

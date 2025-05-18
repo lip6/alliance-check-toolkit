@@ -54,6 +54,7 @@ def scriptMain ( **kw ):
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
+        stdCellArea = None
         if cell.getName() in ( 'ispd18_test1.input'
                              , 'ispd18_test2.input'):
             ab       = cell.getAbutmentBox()
@@ -74,14 +75,18 @@ def scriptMain ( **kw ):
             cell.setAbutmentBox( ab )
             print( cell.getAbutmentBox() )
         if cell.getName() in ( 'ispd18_test7.input'):
+            stdCellArea = Box( u(9.6), u(278.4), u(901.5), u(1046.4) )
             etesian = Etesian.EtesianEngine.create( cell )
-            etesian.setPlaceArea( Box( u(9.6), u(278.4), u(901.5), u(1046.4) ))
+            etesian.setPlaceArea( stdCellArea )
             etesian.toHurricane()
             etesian.destroy()
             
 
         katana = Katana.KatanaEngine.create( cell )
         katana.digitalInit       ()
+        if stdCellArea:
+            katana.resetStdCellArea()
+            katana.addStdCellArea( stdCellArea )
         Breakpoint.stop( 100, 'Block.route() Before global routing.' )
         katana.runGlobalRouter  ( Katana.Flags.NoFlags )
         Breakpoint.stop( 100, 'Block.route() After global routing.' )
