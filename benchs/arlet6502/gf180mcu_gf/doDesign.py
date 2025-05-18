@@ -122,9 +122,9 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH, None, 'ioground_7' , 'vss'    )
                      , (IoPin.NORTH, None, 'iopower_7'  , 'iovdd'  )
                      ]
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  ,    sliceHeight, sliceHeight,  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , 14*sliceHeight, sliceHeight,  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   ,    sliceHeight, sliceHeight, 16)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  , u(0.28) +    sliceHeight, sliceHeight,  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , u(0.28) + 14*sliceHeight, sliceHeight,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   , u(0.28) +    sliceHeight, sliceHeight, 16)
                      
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*sliceHeight,      0 ,  1)
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 11*sliceHeight,      0 ,  1)

@@ -1,7 +1,9 @@
 
-from coriolis.designflow.technos import setupGF180MCU_GF
+from pathlib          import Path
 from coriolis         import Cfg 
 from coriolis.helpers import overlay
+from pdks.gf180mcu    import setup
+
 
 def userSetup ():
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
@@ -16,7 +18,7 @@ def userSetup ():
         cfg.misc.verboseLevel2       = True
 
 userSetup()
-setupGF180MCU_GF( checkToolkit='../../..', pdkTop='../../../../gf180mcu-pdk', useHV=False )
+setup( checkToolkit=Path('../../..'), useHV=True )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 

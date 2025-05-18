@@ -39,3 +39,15 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n374' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n1008' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_auto_rtlil_cc_2608_MuxGate_11836' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n546' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n547' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'clk_root_bl_0' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n634' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n1481' ) )
+# Should look why it goes up. As it has enough space to stay in M2.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n376' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502_ALU_OUT(0)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n1497' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n696' ) )
+DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n802' ) )
+
