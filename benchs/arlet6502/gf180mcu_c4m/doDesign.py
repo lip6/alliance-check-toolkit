@@ -6,12 +6,11 @@ from   coriolis.Hurricane  import DbU, Breakpoint, PythonAttributes
 from   coriolis            import CRL, Cfg
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
-loadUserSettings()
 from   coriolis            import plugins
 from   coriolis.plugins.block.block         import Block
 from   coriolis.plugins.block.configuration import IoPin, GaugeConf
 from   coriolis.plugins.block.spares        import Spares
-from   coriolis.plugins.core2chip.gf180mcu  import CoreToChip
+from   pdks.gf180mcu_c4m.core2chip.gf180mcu import CoreToChip
 from   coriolis.plugins.chip.configuration  import ChipConf
 from   coriolis.plugins.chip.chip           import Chip
 
