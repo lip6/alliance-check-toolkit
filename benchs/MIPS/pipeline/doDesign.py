@@ -35,6 +35,8 @@ def scriptMain ( **kw ):
         cfg.katana.vTracksReservedLocal = 6 
         cfg.katana.hTracksReservedMin   = 2 
         cfg.katana.vTracksReservedMin   = 4 
+        cfg.katana.globalRipupLimit     = 7 
+        cfg.katana.nonPrefRipupLimit    = 16
         cfg.katana.runRealignStage      = False 
         cfg.tramontana.mergeSupplies    = True
     
