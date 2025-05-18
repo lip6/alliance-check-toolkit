@@ -1,13 +1,24 @@
 
 import os
-from   pathlib import Path
-from   coriolis.designflow.technos import setupGf180mcu_c4m
+from   pathlib           import Path
+from   coriolis          import Cfg
+from   coriolis.helpers  import overlay
+from   pdks.gf180mcu_c4m import setup
 
-if 'GITHUB_WORKFLOW' in os.environ:
-    pdkMasterTop = Path('../../../../openpdks-c4m-gf180mcu/C4M.gf180mcu')
-else:
-    pdkMasterTop = Path('/usr/share/open_pdks/C4M.gf180mcu')
-    setupGf180mcu_c4m( checkToolkit=Path('../../..'), pdkMasterTop=pdkMasterTop )
+
+def userSettings ():
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore     = False
+        cfg.misc.info          = False
+        cfg.misc.paranoid      = False
+        cfg.misc.bug           = False
+        cfg.misc.logMode       = False
+        cfg.misc.verboseLevel1 = True
+        cfg.misc.verboseLevel2 = True
+
+
+userSettings()
+setup( checkToolkit=Path('../../..') )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
