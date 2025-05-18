@@ -29,6 +29,7 @@ perf.data
 c35b4
 [Hh]elvellyn*
 chipflow
+benchs/runset-*.failed
 benchs/tests/
 benchs/snx/tcb773pdgo/
 benchs/snx/nshimizu
@@ -36,6 +37,9 @@ benchs/snx/phenitec06_3
 benchs/snx/phenitec06_20190926_submit
 benchs/ARM/cmos/runs/
 benchs/AM2901/standart_cells/cmos/runs
+benchs/MIPS/*/*_r.*
+benchs/ARM/cmos/chip.*
+benchs/ISPD18/*/*.def
 
 .ipynb_checkpoints
 .vscode
