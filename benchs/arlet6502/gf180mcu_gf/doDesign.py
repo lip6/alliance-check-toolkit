@@ -11,12 +11,13 @@ from   coriolis            import plugins
 from   coriolis.plugins.block.block         import Block
 from   coriolis.plugins.block.configuration import IoPin, GaugeConf
 from   coriolis.plugins.block.spares        import Spares
-#from   coriolis.plugins.core2chip.niolib    import CoreToChip
+from   pdks.gf180mcu.core2chip.gf180mcu     import CoreToChip
 from   coriolis.plugins.chip.configuration  import ChipConf
 from   coriolis.plugins.chip.chip           import Chip
 
 
-af = CRL.AllianceFramework.get()
+af        = CRL.AllianceFramework.get()
+buildChip = True
 
 
 def scriptMain ( **kw ):
@@ -32,7 +33,7 @@ def scriptMain ( **kw ):
         cfg.misc.minTraceLevel          = 15900
         cfg.misc.maxTraceLevel          = 16000
 
-    global af
+    global af, buildChip
     hpitch       = 0
     gaugeName    = Cfg.getParamString('anabatic.routingGauge').asString()
     routingGauge = af.getRoutingGauge( gaugeName )
@@ -51,76 +52,61 @@ def scriptMain ( **kw ):
         #setTraceLevel( 550 )
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
-        Breakpoint.setStopLevel( 100 )
-        buildChip = False
+        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'Arlet6502' )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
-        ioPadsSpec = [ (IoPin.WEST , None, 'iopower_0'  , 'iovdd'  )
-                     , (IoPin.WEST , None, 'ioground_0' , 'vss'    )
-                     , (IoPin.WEST , None, 'di_0'       , 'di(0)'  , 'DI(0)'  )
+        ioPadsSpec = [ (IoPin.WEST , None, 'di_0'       , 'di(0)'  , 'DI(0)'  )
                      , (IoPin.WEST , None, 'di_1'       , 'di(1)'  , 'DI(1)'  )
                      , (IoPin.WEST , None, 'di_2'       , 'di(2)'  , 'DI(2)'  )
                      , (IoPin.WEST , None, 'di_3'       , 'di(3)'  , 'DI(3)'  )
-                     , (IoPin.WEST , None, 'power_0'    , 'vdd'    )
-                     , (IoPin.WEST , None, 'ground_0'   , 'vss'    )
+                     , (IoPin.WEST , None, 'allpower_0' , 'DVDD'   , 'VDD'    )
+                     , (IoPin.WEST , None, 'allground_0', 'DVSS'   , 'VSS'    )
                      , (IoPin.WEST , None, 'di_4'       , 'di(4)'  , 'DI(4)'  )
                      , (IoPin.WEST , None, 'di_5'       , 'di(5)'  , 'DI(5)'  )
                      , (IoPin.WEST , None, 'di_6'       , 'di(6)'  , 'DI(6)'  )
                      , (IoPin.WEST , None, 'di_7'       , 'di(7)'  , 'DI(7)'  )
-                     , (IoPin.WEST , None, 'ioground_1' , 'vss'    )
-                     , (IoPin.WEST , None, 'iopower_1'  , 'iovdd'  )
 
-                     , (IoPin.SOUTH, None, 'iopower_2'  , 'iovdd'  )
-                     , (IoPin.SOUTH, None, 'ioground_2' , 'vss'    )
                      , (IoPin.SOUTH, None, 'do_0'       , 'do(0)'  , 'DO(0)'  )
                      , (IoPin.SOUTH, None, 'do_1'       , 'do(1)'  , 'DO(1)'  )
                      , (IoPin.SOUTH, None, 'do_2'       , 'do(2)'  , 'DO(2)'  )
                      , (IoPin.SOUTH, None, 'do_3'       , 'do(3)'  , 'DO(3)'  )
                      , (IoPin.SOUTH, None, 'do_4'       , 'do(4)'  , 'DO(4)'  )
+                     , (IoPin.SOUTH, None, 'allpower_1' , 'DVDD'   , 'VDD'    )
+                     , (IoPin.SOUTH, None, 'allground_1', 'DVSS'   , 'VSS'    )
                      , (IoPin.SOUTH, None, 'do_5'       , 'do(5)'  , 'DO(5)'  )
                      , (IoPin.SOUTH, None, 'do_6'       , 'do(6)'  , 'DO(6)'  )
                      , (IoPin.SOUTH, None, 'do_7'       , 'do(7)'  , 'DO(7)'  )
                      , (IoPin.SOUTH, None, 'a_0'        , 'a(0)'   , 'A(0)'   )
                      , (IoPin.SOUTH, None, 'a_1'        , 'a(1)'   , 'A(1)'   )
-                     , (IoPin.SOUTH, None, 'iopower_3'  , 'iovdd'  )
-                     , (IoPin.SOUTH, None, 'ioground_3' , 'vss'    )
 
-                     , (IoPin.EAST , None, 'iopower_4'  , 'iovdd'  )
-                     , (IoPin.EAST , None, 'ioground_4' , 'vss'    )
                      , (IoPin.EAST , None, 'a_2'        , 'a(2)'   , 'A(2)'   )
                      , (IoPin.EAST , None, 'a_3'        , 'a(3)'   , 'A(3)'   )
                      , (IoPin.EAST , None, 'a_4'        , 'a(4)'   , 'A(4)'   )
                      , (IoPin.EAST , None, 'a_5'        , 'a(5)'   , 'A(5)'   )
                      , (IoPin.EAST , None, 'a_6'        , 'a(6)'   , 'A(6)'   )
                      , (IoPin.EAST , None, 'a_7'        , 'a(7)'   , 'A(7)'   )
-                     , (IoPin.EAST , None, 'power_1'    , 'vdd'    )
-                     , (IoPin.EAST , None, 'ground_1'   , 'vss'    )
+                     , (IoPin.EAST , None, 'allpower_2' , 'DVDD'   , 'VDD'    )
+                     , (IoPin.EAST , None, 'allground_2', 'DVSS'   , 'VSS'    )
                      , (IoPin.EAST , None, 'a_8'        , 'a(8)'   , 'A(8)'   )
                      , (IoPin.EAST , None, 'a_9'        , 'a(9)'   , 'A(9)'   )
                      , (IoPin.EAST , None, 'a_10'       , 'a(10)'  , 'A(10)'  )
                      , (IoPin.EAST , None, 'a_11'       , 'a(11)'  , 'A(11)'  )
                      , (IoPin.EAST , None, 'a_12'       , 'a(12)'  , 'A(12)'  )
                      , (IoPin.EAST , None, 'a_13'       , 'a(13)'  , 'A(13)'  )
-                     , (IoPin.EAST , None, 'ioground_5' , 'vss'    )
-                     , (IoPin.EAST , None, 'iopower_5'  , 'iovdd'  )
 
-                     , (IoPin.NORTH, None, 'iopower_6'  , 'iovdd'  )
-                     , (IoPin.NORTH, None, 'ioground_6' , 'vss'    )
                      , (IoPin.NORTH, None, 'irq'        , 'irq'    , 'IRQ'    )
                      , (IoPin.NORTH, None, 'nmi'        , 'nmi'    , 'NMI'    )
                      , (IoPin.NORTH, None, 'rdy'        , 'rdy'    , 'RDY'    )
-                     , (IoPin.NORTH, None, 'power_2'    , 'vdd'    )
-                     , (IoPin.NORTH, None, 'ground_2'   , 'vss'    )
+                     , (IoPin.NORTH, None, 'allground_3', 'DVSS'   , 'VSS'    )
+                     , (IoPin.NORTH, None, 'allpower_3' , 'DVDD'   , 'VDD'    )
                      , (IoPin.NORTH, None, 'clk'        , 'clk'    , 'clk'    )
-                     , (IoPin.NORTH, None, 'reset'      , 'reset'  , 'RESET'  )
+                     , (IoPin.NORTH, None, 'reset'      , 'reset'  , 'reset'  )
                      , (IoPin.NORTH, None, 'we'         , 'we'     , 'WE'     )
                      , (IoPin.NORTH, None, 'a_14'       , 'a(14)'  , 'A(14)'  )
                      , (IoPin.NORTH, None, 'a_15'       , 'a(15)'  , 'A(15)'  )
-                     , (IoPin.NORTH, None, 'ioground_7' , 'vss'    )
-                     , (IoPin.NORTH, None, 'iopower_7'  , 'iovdd'  )
                      ]
         ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  , u(0.28) +    sliceHeight, sliceHeight,  8)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , u(0.28) + 14*sliceHeight, sliceHeight,  8)
@@ -143,37 +129,34 @@ def scriptMain ( **kw ):
        #arlet6502Conf.cfg.etesian.spaceMargin         = 0.10
        #arlet6502Conf.cfg.anabatic.searchHalo         = 2
         arlet6502Conf.cfg.anabatic.globalIterations   = 6
-        arlet6502Conf.cfg.katana.hTracksReservedLocal = 6
-        arlet6502Conf.cfg.katana.vTracksReservedLocal = 5
+        arlet6502Conf.cfg.katana.hTracksReservedLocal = 7
+        arlet6502Conf.cfg.katana.vTracksReservedLocal = 7
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 5
         arlet6502Conf.cfg.katana.vTracksReservedMin   = 6
         arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = True
         arlet6502Conf.cfg.block.spareSide             = 16*sliceHeight
-        arlet6502Conf.cfg.chip.padCoreSide            = 'North'
-       #arlet6502Conf.cfg.chip.use45corners           = False
-        arlet6502Conf.cfg.chip.useAbstractPads        = True
-        arlet6502Conf.cfg.chip.supplyRailWidth        = l(250.0)
-        arlet6502Conf.cfg.chip.supplyRailPitch        = l(150.0)
+        arlet6502Conf.coreToChipClass     = CoreToChip
+       #arlet6502Conf.chipConf.ioPadGauge = 'LEF.GF_IO_Site'
         arlet6502Conf.editor              = editor
         arlet6502Conf.useSpares           = True
         arlet6502Conf.useHFNS             = False
         arlet6502Conf.bColumns            = 2
         arlet6502Conf.bRows               = 2
         arlet6502Conf.chipName            = 'chip'
-        arlet6502Conf.chipConf.ioPadGauge = 'niolib'
-        arlet6502Conf.coreSize            = (  40*sliceHeight,  40*sliceHeight )
-        arlet6502Conf.chipSize            = ( 100*sliceHeight, 100*sliceHeight )
-        arlet6502Conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
-        arlet6502Conf.useHTree( 'reset' )
+        arlet6502Conf.coreSize            = (  45*sliceHeight,  45*sliceHeight )
+        arlet6502Conf.chipSize            = ( 350*sliceHeight, 350*sliceHeight )
         if buildChip:
-            arlet6502ToChip = CoreToChip( arlet6502Conf )
-            arlet6502ToChip.buildChip()
+            arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
+            arlet6502Conf.useHTree( 'reset_from_pad' )
             chipBuilder = Chip( arlet6502Conf )
+            chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:
+            arlet6502Conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
+            arlet6502Conf.useHTree( 'reset' )
             blockBuilder = Block( arlet6502Conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()

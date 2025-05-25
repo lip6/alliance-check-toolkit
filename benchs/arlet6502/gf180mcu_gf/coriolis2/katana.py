@@ -49,5 +49,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502_ALU_OUT(0)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n1497' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n696' ) )
-DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n802' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n802' ) )
 

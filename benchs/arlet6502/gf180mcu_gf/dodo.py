@@ -15,7 +15,7 @@ def userSetup ():
         cfg.misc.bug                 = False
         cfg.misc.logMode             = True
         cfg.misc.verboseLevel1       = True
-        cfg.misc.verboseLevel2       = True
+        cfg.misc.verboseLevel2       = False
 
 userSetup()
 setup( checkToolkit=Path('../../..'), useHV=True )
@@ -28,24 +28,41 @@ from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
+from coriolis.designflow.klayout  import Klayout
 from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.clean    import Clean
+from pdks.gf180mcu.designflow.drc import DRC
 PnR.textMode = True
 
-from doDesign  import scriptMain
+import doDesign
 
-ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
-rulePnR   = PnR     .mkRule( 'pnr'  , [ 'arlet6502_cts_r.ap'
-                                      , 'arlet6502_cts_r.vst'
-                                      , 'arlet6502_cts_r.spi' ]
-                                      , [ruleB2V]
-                                    , scriptMain )
-#ruleCougar = Cougar.mkRule( 'cougar', 'arlet6502_cts_r_ext.vst', [rulePnR], flags=Cougar.Verbose )
-#ruleLvx    = Lvx   .mkRule( 'lvx'
-#                          , [ rulePnR.file_target(1)
-#                            , ruleCougar.file_target(0) ]
-#                          , flags=Lvx.Flatten )
-#ruleDruc   = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
-ruleCgt    = PnR   .mkRule( 'cgt' )
-ruleClean  = Clean .mkRule()
+if doDesign.buildChip:
+    pnrFiles = [ 'chip_r.gds'
+               , 'chip_r.vst'
+               , 'chip_r.spi'
+               , 'chip.vst'
+               , 'chip.spi'
+               , 'corona_cts_r.vst'
+               , 'corona_cts_r.spi'
+               , 'corona_r.vst'
+               , 'corona_r.spi'
+               , 'corona.vst'
+               , 'corona.spi'
+               , 'arlet6502_cts.vst'
+               , 'arlet6502_cts.spi'
+               , 'arlet6502.spi'
+               ]
+else:
+    pnrFiles = [ 'Arlet6502_cts_r.gds'
+               , 'Arlet6502_cts_r.spi'
+               , 'arlet6502_cts_r.vst'
+               ]
+
+
+ruleYosys   = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
+ruleB2V     = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
+rulePnR     = PnR     .mkRule( 'pnr'  , pnrFiles, [ruleYosys], doDesign.scriptMain )
+ruleDRC     = DRC     .mkRule( 'drc'  , [rulePnR], DRC.GF180MCU_C )
+ruleCgt     = PnR     .mkRule( 'cgt'  )
+ruleKlayout = Klayout .mkRule( 'klayout'  )
+ruleClean   = Clean   .mkRule()
