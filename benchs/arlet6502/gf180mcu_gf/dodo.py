@@ -28,7 +28,7 @@ from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
-from coriolis.designflow.klayout  import Klayout
+from coriolis.designflow.klayout  import Klayout, ShowDRC
 from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.clean    import Clean
 from pdks.gf180mcu.designflow.drc import DRC
@@ -59,10 +59,10 @@ else:
                ]
 
 
-ruleYosys   = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V     = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
-rulePnR     = PnR     .mkRule( 'pnr'  , pnrFiles, [ruleYosys], doDesign.scriptMain )
-ruleDRC     = DRC     .mkRule( 'drc'  , [rulePnR], DRC.GF180MCU_C )
-ruleCgt     = PnR     .mkRule( 'cgt'  )
-ruleKlayout = Klayout .mkRule( 'klayout'  )
+ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
+ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
+rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
+ruleCgt     = PnR     .mkRule( 'cgt'     )
+ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()

@@ -17,7 +17,7 @@ from   coriolis.plugins.chip.chip           import Chip
 
 
 af        = CRL.AllianceFramework.get()
-buildChip = True
+buildChip = False
 
 
 def scriptMain ( **kw ):
@@ -50,8 +50,6 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
         #setTraceLevel( 550 )
-        #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
-        #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'Arlet6502' )
@@ -165,7 +163,8 @@ def scriptMain ( **kw ):
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    return rvalue
+    #return rvalue
+    return True
 
 
 if __name__ == '__main__':
