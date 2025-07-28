@@ -135,6 +135,7 @@ def _routing():
         cfg.anabatic.edgeHScaling = 1.0
         cfg.anabatic.globalIterations = 20
         cfg.anabatic.globalIterations = [ 1, 100 ]
+        cfg.anabatic.gcellAspectRatio = 2.0
         cfg.anabatic.gcell.displayMode = 1
         cfg.anabatic.gcell.displayMode = (("Boundary", 1), ("Density", 2))
         cfg.anabatic.searchHalo = 2
@@ -164,13 +165,14 @@ def _routing():
     with CfgCache(priority=Cfg.Parameter.Priority.ConfigurationFile) as cfg:
         cfg.viewer.minimumSize = 500
         cfg.viewer.pixelThreshold = 10
+        cfg.block.upperEastWestPins = False
         cfg.chip.block.rails.count = 5
         cfg.chip.block.rails.hWidth = u(2.68)
         cfg.chip.block.rails.vWidth = u(2.68)
         cfg.chip.block.rails.hSpacing = u(0.7)
         cfg.chip.block.rails.vSpacing = u(0.7)
-        cfg.chip.supplyRailWidth = u(20.0)
-        cfg.chip.supplyRailPitch = u(40.0)
+        cfg.chip.supplyRailWidth = u(40.0)
+        cfg.chip.supplyRailPitch = u(80.0)
         cfg.clockTree.placerEngine = 'Etesian'
         cfg.block.spareSide = 8*u(5.6)
         cfg.spares.buffer = 'buf_x4'

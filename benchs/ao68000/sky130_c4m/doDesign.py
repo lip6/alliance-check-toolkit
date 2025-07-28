@@ -18,6 +18,7 @@ from   coriolis.plugins.chip.chip            import Chip
 
 
 af         = CRL.AllianceFramework.get()
+buildChip  = False
 powerCount = 0
 
 
@@ -100,8 +101,8 @@ def scriptMain ( **kw ):
        #Breakpoint.setStopLevel( 100 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'ao68000', CRL.Catalog.State.Logical )
-        toVhdlInterface( cell )
+        cell = CRL.Blif.load( 'ao68000' )
+       #toVhdlInterface( cell )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
@@ -142,75 +143,77 @@ def scriptMain ( **kw ):
         ioPadsSpec += doIoPinVector( (IoPin.NORTH, None, 'dat_o_{}', 'dat_o({})', 'dat_o({})'), range(32) )
         ioPadsSpec += doIoPowerCap( IoPin.NORTH|IoPin.A_END )
         
-        m1pitch    = u(0.46)
-        m2pitch    = u(0.51)
-        vspace     = m1pitch * 10
-        hspace     = m2pitch * 8
+        vspace     = 10
+        hspace     = 8
         # ioPinsSpec, for peripheral pin placement as a standalone block.
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'ack_i'    ,  1*vspace, 0, 1)
-                    #, (IoPin.WEST |IoPin.A_BEGIN, 'clk_i'    ,  2*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'err_i'    ,  3*vspace, 0, 1)
-                    #, (IoPin.WEST |IoPin.A_BEGIN, 'reset_n'  ,  4*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'rty_i'    ,  5*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'blk_o'    ,  6*vspace, 0, 1)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'ACK_I'    ,  1*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'CLK_I'    ,  2*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'ERR_I'    ,  3*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'reset_n'  ,  4*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'RTY_I'    ,  5*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'BLK_O'    ,  6*vspace, 0, 1)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'blocked_o',  7*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'cyc_o'    ,  8*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'CYC_O'    ,  8*vspace, 0, 1)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'reset_o'  ,  9*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'rmw_o'    , 10*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'sgl_o'    , 11*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'stb_o'    , 12*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'we_o'     , 13*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'RMW_O'    , 10*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'SGL_O'    , 11*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'STB_O'    , 12*vspace, 0, 1)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'WE_O'     , 13*vspace, 0, 1)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'ipl_i({})', 14*vspace, vspace, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'bte_o({})', 17*vspace, vspace, 2 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'cti_o({})', 19*vspace, vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'BTE_O({})', 17*vspace, vspace, 2 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'CTI_O({})', 19*vspace, vspace, 3 )
                      , (IoPin.WEST |IoPin.A_BEGIN,  'fc_o({})', 22*vspace, vspace, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'sel_o({})', 26*vspace, vspace, 4 )
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'dat_i({})',    hspace, hspace, 32 )
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'adr_o({})',    vspace,  6*vspace, 32 )
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'dat_o({})',    hspace,  5*hspace, 32 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'SEL_O({})', 26*vspace, vspace, 4 )
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'DAT_I({})',    hspace, hspace, 32 )
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'ADR_O({})',    vspace,  5*vspace, range(2,32) )
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'DAT_O({})',    hspace,  5*hspace, 32 )
                      ]
-        ao68000Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        ao68000Conf.cfg.misc.logMode                = True
-        ao68000Conf.cfg.misc.verboseLevel1          = True
-        ao68000Conf.cfg.misc.verboseLevel2          = True
-       #ao68000Conf.cfg.etesian.bloat               = 'Flexlib'
-        ao68000Conf.cfg.etesian.densityVariation    = 0.05
-        ao68000Conf.cfg.etesian.aspectRatio         = 1.0
+        conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        conf.cfg.misc.logMode                = True
+        conf.cfg.misc.verboseLevel1          = True
+        conf.cfg.misc.verboseLevel2          = True
+       #conf.cfg.etesian.bloat               = 'Flexlib'
+        conf.cfg.etesian.densityVariation    = 0.05
+        conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        ao68000Conf.cfg.etesian.spaceMargin         = 1.40
-        ao68000Conf.cfg.anabatic.searchHalo         = 2
-        ao68000Conf.cfg.anabatic.globalIterations   = 20
-        ao68000Conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        ao68000Conf.cfg.katana.hTracksReservedLocal = 20
-        ao68000Conf.cfg.katana.vTracksReservedLocal = 20
-        ao68000Conf.cfg.katana.hTracksReservedMin   = 4
-        ao68000Conf.cfg.katana.vTracksReservedMin   = 4
-       #ao68000Conf.cfg.katana.trackFill            = 0
-        ao68000Conf.cfg.katana.runRealignStage      = True
-        ao68000Conf.cfg.katana.dumpMeasures         = False
-        ao68000Conf.cfg.block.spareSide             = u(8*10)
-        ao68000Conf.cfg.chip.useAbstractPads        = False
-        ao68000Conf.editor              = editor
-        ao68000Conf.useSpares           = True
-        ao68000Conf.useClockTree        = True
-        ao68000Conf.useHFNS             = True
-        ao68000Conf.bColumns            = 2
-        ao68000Conf.bRows               = 2
-        ao68000Conf.chipName            = 'chip'
-        ao68000Conf.chipConf.ioPadGauge = 'LibreSOCIO'
-        ao68000Conf.coreToChipClass     = CoreToChip
-        ao68000Conf.useHTree( 'clk_i', Spares.HEAVY_LEAF_LOAD )
-        ao68000Conf.useHTree( 'reset_n' )
+        conf.cfg.etesian.spaceMargin         = 1.45
+        conf.cfg.anabatic.searchHalo         = 1
+        conf.cfg.anabatic.gcellAspectRatio   = 2.0
+        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.katana.maxFlatEdgeOverflow  = 300
+        conf.cfg.anabatic.topRoutingLayer    = 'm4'
+       #conf.cfg.anabatic.gcellAspectRatio   = 1.8 
+        conf.cfg.katana.maxFlatEdgeOverflow  = 300
+        conf.cfg.katana.hTracksReservedLocal = 20
+        conf.cfg.katana.vTracksReservedLocal = 26
+        conf.cfg.katana.hTracksReservedMin   = 9
+        conf.cfg.katana.vTracksReservedMin   = 9
+       #conf.cfg.katana.trackFill            = 0
+        conf.cfg.katana.runRealignStage      = False
+        conf.cfg.katana.dumpMeasures         = False
+        conf.cfg.block.spareSide             = 8*conf.sliceHeight
+        conf.cfg.chip.useAbstractPads        = False
+        conf.editor              = editor
+        conf.ioPinsInTracks      = True
+        conf.useSpares           = True
+        conf.useClockTree        = True
+        conf.useHFNS             = True
+        conf.bColumns            = 2
+        conf.bRows               = 2
+        conf.chipName            = 'chip'
+        conf.coreToChipClass     = CoreToChip
+        conf.coreSize            = conf.computeCoreSize( 170*conf.sliceHeight, 1.0 )
+        conf.chipSize            = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
+        conf.useHTree( 'CLK_I', Spares.HEAVY_LEAF_LOAD )
+        conf.useHTree( 'reset_n' )
         if buildChip:
-            ao68000Conf.coreSize = ( u(110*10.0          ), u(100*10.0          ) )
-            ao68000Conf.chipSize = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
-            chipBuilder = Chip( ao68000Conf )
+            chipBuilder = Chip( conf )
             chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:
-            blockBuilder = Block( ao68000Conf )
+            blockBuilder = Block( conf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
     except Exception as e:

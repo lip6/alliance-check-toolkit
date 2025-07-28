@@ -22,6 +22,7 @@ buildChip = False
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
+
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         cfg.misc.catchCore              = False
         cfg.misc.info                   = False
@@ -32,6 +33,8 @@ def scriptMain ( **kw ):
         cfg.misc.verboseLevel2          = True
         cfg.misc.minTraceLevel          = 15900
         cfg.misc.maxTraceLevel          = 16000
+        #cfg.block.upperEastWestPins     = None
+        #print( 'cfg.block.upperEastWestPins={}'.format( cfg.block.upperEastWestPins ))
 
     global af, buildChip
     hpitch       = 0
@@ -106,56 +109,56 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH, None, 'a_14'       , 'a(14)'  , 'A(14)'  )
                      , (IoPin.NORTH, None, 'a_15'       , 'a(15)'  , 'A(15)'  )
                      ]
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  , u(0.28) +    sliceHeight, sliceHeight,  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , u(0.28) + 14*sliceHeight, sliceHeight,  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   , u(0.28) +    sliceHeight, sliceHeight, 16)
-                     
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*sliceHeight,      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 11*sliceHeight,      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'NMI'     , 12*sliceHeight,      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'RDY'     , 13*sliceHeight,      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'WE'      , 14*sliceHeight,      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*sliceHeight,      0 ,  1)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  ,    16, 16,  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , 14*16, 16,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   ,    16, 16, 16)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*16,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 11*16,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'NMI'     , 12*16,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'RDY'     , 13*16,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'WE'      , 14*16,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*16,  0 , 1)
                      ]
        #ioPinsSpec = []
-        arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        arlet6502Conf.cfg.etesian.bloat               = 'disabled'
-       #arlet6502Conf.cfg.etesian.bloat               = 'nsxlib'
-        arlet6502Conf.cfg.etesian.densityVariation    = 0.05
-        arlet6502Conf.cfg.etesian.aspectRatio         = 1.0
+        designConf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
+        designConf.cfg.etesian.bloat               = 'disabled'
+       #designConf.cfg.etesian.bloat               = 'nsxlib'
+        designConf.cfg.etesian.densityVariation    = 0.05
+        designConf.cfg.etesian.aspectRatio         = 2.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-       #arlet6502Conf.cfg.etesian.spaceMargin         = 0.10
-       #arlet6502Conf.cfg.anabatic.searchHalo         = 2
-        arlet6502Conf.cfg.anabatic.globalIterations   = 6
-        arlet6502Conf.cfg.katana.hTracksReservedLocal = 7
-        arlet6502Conf.cfg.katana.vTracksReservedLocal = 7
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 5
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 6
-        arlet6502Conf.cfg.katana.trackFill            = 0
-        arlet6502Conf.cfg.katana.runRealignStage      = True
-        arlet6502Conf.cfg.block.spareSide             = 16*sliceHeight
-        arlet6502Conf.coreToChipClass     = CoreToChip
-       #arlet6502Conf.chipConf.ioPadGauge = 'LEF.GF_IO_Site'
-        arlet6502Conf.editor              = editor
-        arlet6502Conf.useSpares           = True
-        arlet6502Conf.useHFNS             = False
-        arlet6502Conf.bColumns            = 2
-        arlet6502Conf.bRows               = 2
-        arlet6502Conf.chipName            = 'chip'
-        arlet6502Conf.coreSize            = (  45*sliceHeight,  45*sliceHeight )
-        arlet6502Conf.chipSize            = ( 350*sliceHeight, 350*sliceHeight )
+       #designConf.cfg.etesian.spaceMargin         = 0.10
+       #designConf.cfg.anabatic.searchHalo         = 2
+       #designConf.cfg.anabatic.globalIterations   = 6
+        designConf.cfg.anabatic.gcellAspectRatio   = 2.0
+       #designConf.cfg.katana.hTracksReservedLocal = 7
+        designConf.cfg.katana.vTracksReservedLocal = 8
+       #designConf.cfg.katana.hTracksReservedMin   = 5
+       #designConf.cfg.katana.vTracksReservedMin   = 6
+        designConf.cfg.katana.trackFill            = 0
+        designConf.cfg.katana.runRealignStage      = False
+        designConf.cfg.block.spareSide             = 8*sliceHeight
+        designConf.coreToChipClass     = CoreToChip
+        designConf.editor              = editor
+        designConf.ioPinsInTracks      = True
+        designConf.useSpares           = True
+        designConf.useHFNS             = True
+        designConf.bColumns            = 2
+        designConf.bRows               = 2
+        designConf.chipName            = 'chip'
+        designConf.coreSize            = designConf.computeCoreSize( 44*designConf.sliceHeight, 1.0 )
+        designConf.chipSize            = ( 350*sliceHeight, 350*sliceHeight )
         if buildChip:
-            arlet6502Conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
-            arlet6502Conf.useHTree( 'reset_from_pad' )
-            chipBuilder = Chip( arlet6502Conf )
+            designConf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
+            designConf.useHTree( 'reset_from_pad' )
+            chipBuilder = Chip( designConf )
             chipBuilder.doChipNetlist()
             chipBuilder.doChipFloorplan()
             rvalue = chipBuilder.doPnR()
             chipBuilder.save()
         else:
-            arlet6502Conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
-            arlet6502Conf.useHTree( 'reset' )
-            blockBuilder = Block( arlet6502Conf )
+            designConf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )
+            designConf.useHTree( 'reset' )
+            blockBuilder = Block( designConf )
             rvalue = blockBuilder.doPnR()
             blockBuilder.save()
     except Exception as e:

@@ -15,24 +15,26 @@ def userSetup ():
         cfg.misc.bug                 = False
         cfg.misc.logMode             = True
         cfg.misc.verboseLevel1       = True
-        cfg.misc.verboseLevel2       = False
+        cfg.misc.verboseLevel2       = True
 
 userSetup()
 setup( checkToolkit=Path('../../..'), useHV=True )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from coriolis.designflow.task     import Tasks
-from coriolis.designflow.cougar   import Cougar
-from coriolis.designflow.lvx      import Lvx
-from coriolis.designflow.druc     import Druc
+from coriolis                     import CRL
+from coriolis.designflow.task     import ShellEnv, Tasks
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
-from coriolis.designflow.klayout  import Klayout, ShowDRC
 from coriolis.designflow.blif2vst import Blif2Vst
+from coriolis.designflow.alias    import Alias
+from coriolis.designflow.klayout  import Klayout, DRC
+from coriolis.designflow.tasyagle import TasYagle, STA, XTas
+from coriolis.designflow.copy     import Copy
 from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
 from pdks.gf180mcu.designflow.drc import DRC
+from doDesign                               import scriptMain
 PnR.textMode = True
 
 import doDesign
@@ -49,22 +51,22 @@ if doDesign.buildChip:
                , 'corona_r.spi'
                , 'corona.vst'
                , 'corona.spi'
-               , 'arlet6502_cts.vst'
-               , 'arlet6502_cts.spi'
-               , 'arlet6502.spi'
+               , 'picorv32_cts.vst'
+               , 'picorv32_cts.spi'
+               , 'picorv32.spi'
                ]
 else:
-    pnrFiles = [ 'Arlet6502_cts_r.gds'
-               , 'Arlet6502_cts_r.spi'
-               , 'arlet6502_cts_r.vst'
+    pnrFiles = [ 'picorv32_cts_r.gds'
+               , 'picorv32_cts_r.spi'
+               , 'picorv32_cts_r.vst'
                ]
 
 
-ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
-ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
+ruleYosys   = Yosys   .mkRule( 'yosys'   , 'picorv32.v' )
+ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'picorv32.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
-ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS|DRC.ANTENNA )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
 ruleCgt     = PnR     .mkRule( 'cgt'     )
 ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()

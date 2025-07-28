@@ -39,4 +39,5 @@ ruleDruc      = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
 ruleGds       = S2R   .mkRule( 'gds', 'm65s_cts_r.gds', [rulePnR]
                              , flags=S2R.Verbose|S2R.NoReplaceBlackboxes )
 ruleCgt       = PnR   .mkRule( 'cgt', depends=[ruleB2V] )
+ruleGraal     = Graal .mkRule( 'graal' )
 ruleClean     = Clean .mkRule()

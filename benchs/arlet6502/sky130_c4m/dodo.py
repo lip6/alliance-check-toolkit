@@ -51,10 +51,10 @@ ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'arlet6502.vst' ]
                                     , [ruleYosys]
                                     , flags=0 )
-rulePnR   = PnR     .mkRule( 'pnr'  , [ 'arlet6502_cts_r.gds'
-                                      , 'arlet6502_cts_r.spi'
+rulePnR   = PnR     .mkRule( 'pnr'  , [ 'Arlet6502_cts_r.gds'
+                                      , 'Arlet6502_cts_r.spi'
                                       , 'arlet6502_cts_r.vst' ]
-                                    , [ruleB2V]
+                                    , [ruleYosys]
                                     , scriptMain )
 ruleCgt   = PnR     .mkRule( 'cgt' )
 ruleGds   = Alias   .mkRule( 'gds', [rulePnR] )

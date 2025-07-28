@@ -15,7 +15,7 @@ def userSetup ():
         cfg.misc.bug                 = False
         cfg.misc.logMode             = True
         cfg.misc.verboseLevel1       = True
-        cfg.misc.verboseLevel2       = True
+        cfg.misc.verboseLevel2       = False
 
 userSetup()
 setup( checkToolkit=Path('../../..'), useHV=True )
@@ -31,21 +31,38 @@ from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.klayout  import Klayout, ShowDRC
 from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.clean    import Clean
-from coriolis.designflow.alias    import Alias
 from pdks.gf180mcu.designflow.drc import DRC
 PnR.textMode = True
 
-from doDesign  import scriptMain
+import doDesign
 
-ruleYosys  = Yosys     .mkRule( 'yosys', 'ao68000.v' )
-ruleB2V    = Blif2Vst  .mkRule( 'b2v'  , 'ao68000.vst', [ruleYosys], flags=0 )
-rulePnR    = PnR       .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
-                                         , 'ao68000_cts_r.vst'
-                                         , 'ao68000_cts_r.spi' ]
-                                         , [ruleYosys]
-                                       , scriptMain )
-ruleGds     = Alias   .mkRule( 'gds'   , [rulePnR] )
-ruleDRC     = DRC     .mkRule( 'drc'   , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
-ruleCgt     = PnR     .mkRule( 'cgt' )
+if doDesign.buildChip:
+    pnrFiles = [ 'chip_r.gds'
+               , 'chip_r.vst'
+               , 'chip_r.spi'
+               , 'chip.vst'
+               , 'chip.spi'
+               , 'corona_cts_r.vst'
+               , 'corona_cts_r.spi'
+               , 'corona_r.vst'
+               , 'corona_r.spi'
+               , 'corona.vst'
+               , 'corona.spi'
+               , 'arbiter_cts.vst'
+               , 'arbiter_cts.spi'
+               , 'arbiter.spi'
+               ]
+else:
+    pnrFiles = [ 'arbiter_cts_r.gds'
+               , 'arbiter_cts_r.spi'
+               , 'arbiter_cts_r.vst'
+               ]
+
+
+ruleYosys   = Yosys   .mkRule( 'yosys'   , 'arbiter.v', top='top' )
+ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arbiter.vst', [ruleYosys], flags=0 )
+rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
+ruleCgt     = PnR     .mkRule( 'cgt'     )
 ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()
