@@ -31,12 +31,12 @@ def scriptMain ( **kw ):
         cfg.anabatic.topRoutingLayer    = 'METAL5'
         cfg.katana.searchHalo           = 1
         cfg.katana.eventsLimit          = 1000000
-        cfg.katana.hTracksReservedLocal = 7 
+        cfg.katana.hTracksReservedLocal = 6 
         cfg.katana.vTracksReservedLocal = 6 
         cfg.katana.hTracksReservedMin   = 2 
         cfg.katana.vTracksReservedMin   = 4 
         cfg.katana.globalRipupLimit     = 7 
-        cfg.katana.nonPrefRipupLimit    = 16
+        cfg.katana.nonPrefRipupLimit    = 7
         cfg.katana.runRealignStage      = False 
         cfg.tramontana.mergeSupplies    = True
     

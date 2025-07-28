@@ -21,4 +21,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'datao(2)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n1288' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n406' ) )
-#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n403' ) )
+# Pb @(1100,565) id:70051 Vertical METAL2 -> lost even, unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n531' ) )
+# Pb @(665,960) id:59808 Vertical METAL2 -> lost even, unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_13035_new_n1173' ) )

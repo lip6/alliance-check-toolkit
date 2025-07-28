@@ -3,10 +3,10 @@
 import sys
 import os
 import traceback
-from   coriolis            import CRL
+from   coriolis            import Cfg, CRL
 from   coriolis.Hurricane  import DbU, Breakpoint
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
-from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
 loadUserSettings()
 from   coriolis            import plugins
 from   coriolis.plugins.block.block         import Block
@@ -17,13 +17,26 @@ from   coriolis.plugins.chip.chip           import Chip
 from   coriolis.plugins.core2chip.sky130    import CoreToChip
 
 
-af = CRL.AllianceFramework.get()
+af        = CRL.AllianceFramework.get()
+buildChip = False
 
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
-    global af
-    rvalue = True
+    global af, buildChip
+    rvalue    = True
+    gaugeName = None
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore              = False
+        cfg.misc.info                   = False
+        cfg.misc.paranoid               = False
+        cfg.misc.bug                    = False
+        cfg.misc.logMode                = True
+        cfg.misc.verboseLevel1          = True
+        cfg.misc.verboseLevel2          = True
+        cfg.misc.minTraceLevel          = 16000
+        cfg.misc.maxTraceLevel          = 17000
+
     try:
        #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 99 )
@@ -34,12 +47,11 @@ def scriptMain ( **kw ):
             print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
             print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
             sys.exit( 1 )
-        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cellName = 'arlet6502'
         if buildChip:
             cellName += '_harness'
-        cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
+        cell = CRL.Blif.load( 'Arlet6502' )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
@@ -90,19 +102,16 @@ def scriptMain ( **kw ):
                          , (None, None, None       , 'io_in(36)'  , 'we'     )
                          ]
         else:
-            m1pitch    = u(0.46)
-            m2pitch    = u(0.51)
             ioPadsSpec = [ ]
-            ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  , 10*m1pitch, 10*m1pitch,  8)
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , 15*m1pitch, 10*m1pitch,  8)
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   , 20*m1pitch, 15*m1pitch, 16)
-                         
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 100*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , 110*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'     , 120*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'rdy'     , 130*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , 140*m2pitch,       0 ,  1)
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 150*m2pitch,       0 ,  1)
+            ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  , 10, 10,  8)
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , 15, 10,  8)
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   , 20, 15, 16)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 100, 0,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 110, 0,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'NMI'     , 120, 0,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'RDY'     , 130, 0,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'WE'      , 140, 0,  1)
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 150, 0,  1)
                          ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.misc.catchCore              = False
@@ -120,24 +129,27 @@ def scriptMain ( **kw ):
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.05
         conf.cfg.anabatic.globalIterations   = 10
-       #conf.cfg.katana.hTracksReservedLocal = 6
-       #conf.cfg.katana.vTracksReservedLocal = 3
+        conf.cfg.anabatic.gcellAspectRatio   = 2.0
+        conf.cfg.katana.maxFlatEdgeOverflow  = 200
        #conf.cfg.katana.hTracksReservedMin   = 3
        #conf.cfg.katana.vTracksReservedMin   = 1
+       #conf.cfg.katana.hTracksReservedLocal = 6
+       #conf.cfg.katana.vTracksReservedLocal = 3
         conf.cfg.katana.globalRipupLimit     = 7
         conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = True
         if buildChip:
             conf.cfg.harness.path            = harnessProjectDir + '/user_project_wrapper.def'
         conf.editor              = editor
+        conf.ioPinsInTracks      = True
         conf.useSpares           = True
         conf.useClockTree        = True
         conf.useHFNS             = True
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = ( u(265*0.76), u( 32*6.0) )
-        conf.chipSize            = ( u(  2020.0), u( 2060.0) )
+        conf.coreSize            = conf.computeCoreSize( 40*conf.sliceHeight, 1.0 )
+        conf.chipSize            = ( u(2020.0), u(2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
             conf.useHTree( 'io_in_from_pad(37)', Spares.HEAVY_LEAF_LOAD )

@@ -22,7 +22,7 @@ ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'ao68000.vst' ]
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
                                       , 'ao68000_cts_r.spi'
                                       , 'ao68000_cts_r.vst' ]
-                                    , [ruleB2V]
+                                    , [ruleYosys]
                                     , scriptMain )
 ruleCgt   = PnR     .mkRule( 'cgt' )
 ruleGds   = Alias   .mkRule( 'gds', [rulePnR] )

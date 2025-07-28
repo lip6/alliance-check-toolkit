@@ -235,11 +235,13 @@ def scriptMain ( **kw ):
         conf.cfg.block.spareSide              = l(350)
         conf.cfg.spares.maxSink               = 30
         conf.cfg.anabatic.topRoutingLayer     = 'METAL5'
-        conf.cfg.katana.hTracksReservedLocal  = 14
-        conf.cfg.katana.vTracksReservedLocal  = 14
+        conf.cfg.anabatic.hsmallThreshold     = 4
+        conf.cfg.anabatic.vsmallThreshold     = 3
+        conf.cfg.katana.hTracksReservedLocal  = 16
+        conf.cfg.katana.vTracksReservedLocal  = 16
         conf.cfg.katana.terminalReservedLocal = 10
         conf.cfg.katana.hTracksReservedMin    = 9
-        conf.cfg.katana.vTracksReservedMin    = 8
+        conf.cfg.katana.vTracksReservedMin    = 10
         conf.cfg.katana.eventsLimit           = 4000000
         conf.cfg.katana.runRealignStage       = False
         conf.editor              = editor

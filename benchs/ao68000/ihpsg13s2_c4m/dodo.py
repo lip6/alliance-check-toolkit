@@ -1,19 +1,23 @@
 
 import os
 from   pathlib import Path
-from   pdks.c4m_ihpsg13g2 import setup
+from   pdks.ihpsg13g2_c4m import setup
 
 setup( checkToolkit=Path('../../..') )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
-from coriolis.designflow.task     import ShellEnv, Tasks
-from coriolis.designflow.pnr      import PnR
-from coriolis.designflow.yosys    import Yosys
-from coriolis.designflow.blif2vst import Blif2Vst
-from coriolis.designflow.alias    import Alias
-from coriolis.designflow.klayout  import DRC
-from coriolis.designflow.clean    import Clean
+from coriolis.designflow.task               import ShellEnv, Tasks
+from coriolis.designflow.pnr                import PnR
+from coriolis.designflow.yosys              import Yosys
+from coriolis.designflow.blif2vst           import Blif2Vst
+from coriolis.designflow.alias              import Alias
+from coriolis.designflow.klayout            import DRC
+from coriolis.designflow.tasyagle           import TasYagle, STA, XTas
+from coriolis.designflow.clean              import Clean
+from pdks.ihpsg13g2_c4m.designflow.filler   import Filler
+from pdks.ihpsg13g2_c4m.designflow.sealring import SealRing
+from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
 PnR.textMode  = True
 
 from doDesign  import scriptMain
@@ -25,16 +29,16 @@ ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'ao68000.vst' ]
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
                                       , 'ao68000_cts_r.spi'
                                       , 'ao68000_cts_r.vst' ]
-                                    , [ruleB2V]
+                                    , [ruleYosys]
                                     , scriptMain )
-ruleCgt   = PnR     .mkRule( 'cgt' )
-ruleGds   = Alias   .mkRule( 'gds', [rulePnR] )
-shellEnv  = ShellEnv()
-shellEnv[ 'SOURCE_FILE' ] = rulePnR.file_target(0).as_posix()
-shellEnv[ 'REPORT_FILE' ] = rulePnR.file_target(0).with_suffix('.kdrc-report.txt').as_posix()
-shellEnv[ 'CELL_NAME'   ] = rulePnR.file_target(0).stem
-shellEnv.export()
-ruleDRC   = DRC     .mkRule( 'drc', rulePnR.file_target(0) )
-ruleClean = Clean   .mkRule( [ 'ao68000.00.density.histogram.dat'
+staLayout   = rulePnR.file_target( 2 )
+ruleCgt     = PnR    .mkRule( 'cgt' )
+ruleGds     = Alias  .mkRule( 'gds'    , [rulePnR] )
+ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), DRC.Minimal )
+ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), DRC.Maximal )
+ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), DRC.C4M )
+ruleSTA     = STA    .mkRule( 'sta'    , staLayout )
+ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
+ruleClean   = Clean  .mkRule( [ 'ao68000.00.density.histogram.dat'
                              , 'ao68000.00.density.histogram.plt'
                              , 'ao68000.katana.dat' ] ) 

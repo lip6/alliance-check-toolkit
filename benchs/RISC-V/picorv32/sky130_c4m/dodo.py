@@ -22,7 +22,7 @@ ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'picorv32.vst' ]
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'picorv32_cts_r.gds'
                                       , 'picorv32_cts_r.spi'
                                       , 'picorv32_cts_r.vst' ]
-                                    , [ruleB2V]
+                                    , [ruleYosys]
                                     , scriptMain )
 ruleCgt   = PnR     .mkRule( 'cgt' )
 ruleGds   = Alias   .mkRule( 'gds', [rulePnR] )

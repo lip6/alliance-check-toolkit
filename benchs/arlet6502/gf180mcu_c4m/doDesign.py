@@ -15,7 +15,8 @@ from   coriolis.plugins.chip.configuration  import ChipConf
 from   coriolis.plugins.chip.chip           import Chip
 
 
-af = CRL.AllianceFramework.get()
+af        = CRL.AllianceFramework.get()
+buildChip = True
 
 
 def scriptMain ( **kw ):
@@ -31,7 +32,7 @@ def scriptMain ( **kw ):
         cfg.misc.minTraceLevel          = 16000
         cfg.misc.maxTraceLevel          = 17000
 
-    global af
+    global af, buildChip
     hpitch       = 0
     gaugeName    = Cfg.getParamString('anabatic.routingGauge').asString()
     routingGauge = af.getRoutingGauge( gaugeName )
@@ -51,7 +52,6 @@ def scriptMain ( **kw ):
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )
-        buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'Arlet6502', CRL.Catalog.State.Logical )
         if not cell:

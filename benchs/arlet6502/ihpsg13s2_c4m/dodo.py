@@ -21,9 +21,8 @@ from coriolis.designflow.clean              import Clean
 from pdks.ihpsg13g2_c4m.designflow.filler   import Filler
 from pdks.ihpsg13g2_c4m.designflow.sealring import SealRing
 from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
-from doDesign                               import scriptMain
+import doDesign
 
-buildChip          = True
 PnR.textMode       = True
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
@@ -31,7 +30,7 @@ topName            = 'arlet6502'
 ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
 
-if buildChip:
+if doDesign.buildChip:
     TasYagle.ClockName = 'clk_from_pad'
     # Rule for chip generation.
     ruleSeal  = SealRing.mkRule( 'sealring', targets=[ 'chip_r_seal.gds' ] , size=[2200.0, 2200.0] )
@@ -47,7 +46,7 @@ if buildChip:
                                      , 'Arlet6502_cts.spi'
                                      , 'arlet6502_cts.vst' ]
                                      , [ruleB2V, ruleSeal]
-                                   , scriptMain
+                                   , doDesign.scriptMain
                                    , topName=topName )
     staLayout = rulePnR.file_target( 6 )
 else:
@@ -57,7 +56,7 @@ else:
                                      , 'arlet6502_cts_r.vst'
                                      , 'Arlet6502_cts_r.spi' ]
                                      , [ruleB2V]
-                                   , scriptMain
+                                   , doDesign.scriptMain
                                    , topName=topName )
     ruleX2Y = x2y.mkRule( 'spi2vst', 'arlet6502_cts_r_spi.vst', 'Arlet6502_cts_r.spi' )
     ruleLvx = Lvx.mkRule( 'lvx_spi', [ 'arlet6502_cts_r.vst'

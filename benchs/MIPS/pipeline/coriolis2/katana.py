@@ -29,3 +29,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'rtdnbr_sd(12)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'rtdnbr_sd(15)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_shift32_rshift_se_msb' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_ct_ao22_x2_54_sig' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_toper_rd(4)' ) )

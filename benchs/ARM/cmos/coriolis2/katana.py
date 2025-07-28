@@ -19,3 +19,9 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.not_p446_6_def_56' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'arm_core_i.decod_i.reg_bank.not_wadr2(2)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.decod_i.reg_bank.not_p446_6_def_49' ) )
+# Pb @( , ) M3 not moved, while it as the space to do so.
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.decod_i.reg_bank.noa2ao222_x1_23_sig' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.exec_i.shifter_0.aux395' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.exec_i.shifter_0.not_shift(4)' ) )
+# Pb <id:640947 Horizontal core.decod_i.reg_bank.na4_x1_535_sig METAL2 [2530.0L 5480.0L]>
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.decod_i.reg_bank.na4_x1_535_sig' ) )
