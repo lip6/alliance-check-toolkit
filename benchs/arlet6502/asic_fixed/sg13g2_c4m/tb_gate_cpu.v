@@ -1,0 +1,1 @@
+../rtl/tb_gate_cpu.v

@@ -1,1 +1,0 @@
-../rtl_corrected/cpu_syncreset.v

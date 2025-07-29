@@ -1,0 +1,1 @@
+../../asic_fixed/rtl/cpu_syncreset.v
