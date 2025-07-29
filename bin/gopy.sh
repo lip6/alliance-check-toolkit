@@ -32,14 +32,14 @@
  benchRules["AM2901/standart_cells/cmos"]="druc lvx"
  benchRules["AM2901/datapath"]="druc lvx"
  benchRules["6502/cmos"]="druc lvx"
- benchRules["arlet6502/cmos"]="druc lvx"
- benchRules["arlet6502/cmos350"]="lvx"
- benchRules["arlet6502/tsmc_c018"]="gds"
- benchRules["arlet6502/freepdk45_c4m"]="gds"
- benchRules["arlet6502/sky130_c4m"]="gds"
- benchRules["arlet6502/ihpsg13s2_c4m"]="gds"
- benchRules["arlet6502/gf180mcu_c4m"]="gds"
- benchRules["arlet6502/gf180mcu_gf"]="gds"
+ benchRules["arlet6502/original/cmos"]="druc lvx"
+ benchRules["arlet6502/original/cmos350"]="lvx"
+ benchRules["arlet6502/original/tsmc_c018"]="gds"
+ benchRules["arlet6502/original/freepdk45_c4m"]="gds"
+ benchRules["arlet6502/original/sky130_c4m"]="gds"
+ benchRules["arlet6502/original/ihpsg13s2_c4m"]="gds"
+ benchRules["arlet6502/original/gf180mcu_c4m"]="gds"
+ benchRules["arlet6502/original/gf180mcu_gf"]="gds"
  benchRules["MIPS/microprogrammed"]="druc lvx"
  benchRules["MIPS/pipeline"]="druc lvx"
  benchRules["snx/cmos"]="druc lvx"
@@ -67,8 +67,8 @@
  benchsSet1="${benchsSet1} AM2901/standart_cells/cmos"
 #benchsSet1="${benchsSet1} AM2901/datapath/cmos"
  benchsSet1="${benchsSet1} 6502/cmos"
- benchsSet1="${benchsSet1} arlet6502/cmos"
-#benchsSet1="${benchsSet1} arlet6502/cmos350"
+ benchsSet1="${benchsSet1} arlet6502/original/cmos"
+#benchsSet1="${benchsSet1} arlet6502/original/cmos350"
  benchsSet2="${benchsSet2} MIPS/microprogrammed"
  benchsSet2="${benchsSet2} MIPS/pipeline"
 #benchsSet1="${benchsSet1} snx/cmos"
@@ -79,32 +79,32 @@
  benchsSet1="${benchsSet1} DCT/lvl0"
 
  if [ -e "../pdkmaster/C4M.Sky130" ]; then
-   benchsSet1="${benchsSet1} arlet6502/sky130_c4m"
+   benchsSet1="${benchsSet1} arlet6502/original/sky130_c4m"
    benchsSet3="${benchsSet3} RISC-V/picorv32/sky130_c4m"
    benchsSet2="${benchsSet2} ao68000/sky130_c4m"
   #benchsSet4="${benchsSet4} RISC-V/Minerva/sky130_c4m"
  fi
  if [ -e "../../coriolis-pdk-gf180mcu" ]; then
-   benchsSet1="${benchsSet1} arlet6502/gf180mcu_gf"
+   benchsSet1="${benchsSet1} arlet6502/original/gf180mcu_gf"
    benchsSet1="${benchsSet1} RISC-V/picorv32/gf180mcu_gf"
    benchsSet4="${benchsSet4} ao68000/gf180mcu_gf"
  fi
  if [ -e "../../coriolis-pdk-gf180mcu-c4m" ]; then
-   benchsSet1="${benchsSet1} arlet6502/gf180mcu_c4m"
+   benchsSet1="${benchsSet1} arlet6502/original/gf180mcu_c4m"
  fi
  if [ -e "../../coriolis-pdk-ihpsg13g2-c4m" ]; then
-   benchsSet1="${benchsSet1} arlet6502/ihpsg13s2_c4m"
+   benchsSet1="${benchsSet1} arlet6502/original/ihpsg13s2_c4m"
    benchsSet1="${benchsSet1} RISC-V/picorv32/ihpsg13g2_c4m"
    benchsSet4="${benchsSet4} ao68000/ihpsg13s2_c4m"
  fi
  if [ -e "/dsk/l1/jpc/crypted/soc/techno/etc/coriolis2/NDA/node180/tsmc_c018" ]; then
    benchsSet1="${benchsSet1} adder/tsmc_c180"
-   benchsSet1="${benchsSet1} arlet6502/tsmc_c018"
+   benchsSet1="${benchsSet1} arlet6502/original/tsmc_c018"
    benchsSet3="${benchsSet3} ao68000/tsmc_c018"
  fi
 #if [ -e "../../libre-soc/c4m-pdk-freepdk45" ]; then
 #  benchsSet1="${benchsSet1} adder/freepdk45_c4m"
-#  benchsSet1="${benchsSet1} arlet6502/freepdk45_c4m"
+#  benchsSet1="${benchsSet1} arlet6502/original/freepdk45_c4m"
 #  benchsSet5="${benchsSet5} ao68000/freepdk45_c4m"
 #fi
 
