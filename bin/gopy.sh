@@ -40,6 +40,8 @@
  benchRules["arlet6502/original/ihpsg13s2_c4m"]="gds"
  benchRules["arlet6502/original/gf180mcu_c4m"]="gds"
  benchRules["arlet6502/original/gf180mcu_gf"]="gds"
+ benchRules["arlet6502/asic_fixed/ihpsg13g2_c4m"]="gds"
+ benchRules["arlet6502/asic_serialized/ihpsg13g2_c4m"]="gds"
  benchRules["MIPS/microprogrammed"]="druc lvx"
  benchRules["MIPS/pipeline"]="druc lvx"
  benchRules["snx/cmos"]="druc lvx"
@@ -79,13 +81,13 @@
  benchsSet1="${benchsSet1} DCT/lvl0"
 
  if [ -e "../pdkmaster/C4M.Sky130" ]; then
-   benchsSet1="${benchsSet1} arlet6502/original/sky130_c4m"
+   benchsSet5="${benchsSet5} arlet6502/original/sky130_c4m"
    benchsSet3="${benchsSet3} RISC-V/picorv32/sky130_c4m"
    benchsSet2="${benchsSet2} ao68000/sky130_c4m"
   #benchsSet4="${benchsSet4} RISC-V/Minerva/sky130_c4m"
  fi
  if [ -e "../../coriolis-pdk-gf180mcu" ]; then
-   benchsSet1="${benchsSet1} arlet6502/original/gf180mcu_gf"
+   benchsSet5="${benchsSet5} arlet6502/original/gf180mcu_gf"
    benchsSet1="${benchsSet1} RISC-V/picorv32/gf180mcu_gf"
    benchsSet4="${benchsSet4} ao68000/gf180mcu_gf"
  fi
@@ -93,13 +95,15 @@
    benchsSet1="${benchsSet1} arlet6502/original/gf180mcu_c4m"
  fi
  if [ -e "../../coriolis-pdk-ihpsg13g2-c4m" ]; then
-   benchsSet1="${benchsSet1} arlet6502/original/ihpsg13s2_c4m"
+   benchsSet5="${benchsSet5} arlet6502/original/ihpsg13s2_c4m"
+   benchsSet5="${benchsSet5} arlet6502/asic_fixed/ihpsg13g2_c4m"
+   benchsSet5="${benchsSet5} arlet6502/asic_serialized/ihpsg13g2_c4m"
    benchsSet1="${benchsSet1} RISC-V/picorv32/ihpsg13g2_c4m"
    benchsSet4="${benchsSet4} ao68000/ihpsg13s2_c4m"
  fi
  if [ -e "/dsk/l1/jpc/crypted/soc/techno/etc/coriolis2/NDA/node180/tsmc_c018" ]; then
    benchsSet1="${benchsSet1} adder/tsmc_c180"
-   benchsSet1="${benchsSet1} arlet6502/original/tsmc_c018"
+   benchsSet5="${benchsSet5} arlet6502/original/tsmc_c018"
    benchsSet3="${benchsSet3} ao68000/tsmc_c018"
  fi
 #if [ -e "../../libre-soc/c4m-pdk-freepdk45" ]; then
@@ -125,17 +129,13 @@
    setId="$1"
    benchCount=1
 
-   benchLog="`pwd`/runset-${setId}.log"
+   logDir="`pwd`/logs"
+   if [ ! -d "${logDir}" ]; then mkdir -p "${logDir}"; fi
    failedTag="`pwd`/runset-${setId}.failed"
-   rm -f "${benchLog}" "${failedTag}"
+   rm -f "${failedTag}"
    benchsSetName="benchsSet${setId}"
    for bench in ${!benchsSetName}; do
      rules="${benchRules[$bench]}"
-       
-     echo -e "\n\n\n\n" >> ${benchLog}
-     echo "=============================================================================" >> ${benchLog}
-     echo "Running bench <${bench}> with rules \"${rules}\""                              >> ${benchLog}
-     echo "=============================================================================" >> ${benchLog}
 
     #statusLine="| %u | %2u | %-30s | %-10s | %10s | %-7s |"
      statusLine="%s  %2u  %-34s  %-16s  %10s  %-7s "
@@ -145,6 +145,13 @@
        echo "[WARNING] No bench directory \"${bench}\", skipped."
        continue
      fi
+     benchLogFile=`echo "${bench}" | sed 's,/,.,g'`.log
+     benchLog="${logDir}/${benchLogFile}"
+     rm -f "${benchLog}"
+     echo -e "\n\n\n\n" >> ${benchLog}
+     echo "=============================================================================" >> ${benchLog}
+     echo "Running bench <${bench}> with rules \"${rules}\""                              >> ${benchLog}
+     echo "=============================================================================" >> ${benchLog}
   
      case $setId in
        1) setIdStr="1    ";;
@@ -163,7 +170,7 @@
        if [ $? -ne 0 ]; then
          success="false"
          printf "${statusLine}\n" "$setIdStr" $benchCount "<${bench}>" "${rule}" "`getRuntime $startTime`" "FAILED"
-         touch ${failedTag}
+         echo "* Bench <${bench}> \"${rule}\" failed" >> ${failedTag}
          if [ "${mode}" = "stopOnFailure" ]; then
            echo ""
            echo ""
