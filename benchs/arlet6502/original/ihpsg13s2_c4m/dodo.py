@@ -26,6 +26,8 @@ import doDesign
 PnR.textMode       = True
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
+#drcFlags           = DRC.SHOW_ERRORS
+drcFlags           = 0
 
 ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
@@ -64,9 +66,9 @@ else:
                                    , Lvx.MergeSupply|Lvx.Flatten )
     staLayout = rulePnR.file_target( 2 )
 
-ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), DRC.Minimal )
-ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), DRC.Maximal )
-ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), DRC.C4M )
+ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), drcFlags|DRC.Minimal )
+ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), drcFlags|DRC.Maximal )
+ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), drcFlags|DRC.C4M )
 ruleSTA     = STA    .mkRule( 'sta'    , staLayout )
 ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
 ruleCgt     = PnR    .mkRule( 'cgt' )

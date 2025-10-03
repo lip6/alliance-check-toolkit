@@ -4,7 +4,7 @@ import sys
 import os
 import traceback
 from   coriolis            import Cfg, CRL
-from   coriolis.Hurricane  import DbU, Breakpoint
+from   coriolis.Hurricane  import DbU, Breakpoint, DataBase, Library
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, overlay, trace, l, u, n
 loadUserSettings()
@@ -24,8 +24,9 @@ def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
 
     global af, buildChip
-    rvalue    = True
-    gaugeName = None
+    loadOpenROAD = False
+    rvalue       = True
+    gaugeName    = None
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         cfg.misc.verboseLevel1    = True
         cfg.misc.verboseLevel2    = True
@@ -35,6 +36,23 @@ def scriptMain ( **kw ):
     try:
         #setTraceLevel( 540 )
         #Breakpoint.setStopLevel( 99 )
+
+        if loadOpenROAD:
+            db      = DataBase.getDB()
+            tech    = db.getTechnology()
+            rootlib = db.getRootLibrary()
+            orLib   = Library.create(rootlib, 'OpenROAD')
+            gdsPath = '../OpenROAD/picorv32_gf180mcu.gds'
+            print( '  o  Loading OpenROAD layout "{}"'.format( gdsPath ))
+            CRL.Gds.load( orLib, gdsPath, CRL.Gds.Layer_0_IsBoundary|CRL.Gds.NoBlockages )
+            af.wrapLibrary( orLib, 1 ) 
+            cell, editor = plugins.kwParseMain( **kw )
+            cell = af.getCell( 'picorv32', CRL.Catalog.State.Logical )
+            if editor:
+                editor.setCell( cell ) 
+                editor.setDbuMode( DbU.StringModePhysical )
+            return True
+
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'picorv32', CRL.Catalog.State.Logical )
         if not cell:
@@ -88,9 +106,9 @@ def scriptMain ( **kw ):
        #conf.cfg.etesian.spaceMargin         = 0.10
        #conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.globalIterations   = 15
-        conf.cfg.katana.hTracksReservedLocal = 10
+        conf.cfg.katana.hTracksReservedLocal = 11
         conf.cfg.katana.vTracksReservedLocal = 10
-        conf.cfg.katana.hTracksReservedMin   = 7
+        conf.cfg.katana.hTracksReservedMin   = 8
         conf.cfg.katana.vTracksReservedMin   = 7
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False

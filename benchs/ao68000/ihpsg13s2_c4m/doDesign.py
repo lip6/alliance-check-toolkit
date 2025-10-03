@@ -193,7 +193,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.hTracksReservedLocal = 20
         conf.cfg.katana.vTracksReservedLocal = 30
         conf.cfg.katana.hTracksReservedMin   = 9
-        conf.cfg.katana.vTracksReservedMin   = 12
+        conf.cfg.katana.vTracksReservedMin   = 13
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = False

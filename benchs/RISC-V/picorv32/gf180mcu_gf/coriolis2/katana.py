@@ -34,3 +34,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30082_new_n7706' ))
 # Pb @<id:941961 Horizontal abc_30082_new_n4179 Metal2 [318.36um 223.16um]>. 
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30082_new_n4179' ))
+# Pb @<id:981204 Vertical abc_30082_new_n3703 Metal3 [306.6um 82.04um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_30082_new_n3703' ))

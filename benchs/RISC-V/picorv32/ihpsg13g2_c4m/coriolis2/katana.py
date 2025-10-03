@@ -10,3 +10,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'cpuregs_rdreg_0_q_0_hfns_13' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30082_new_n3303' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30082_new_n6852' ) )
+# Unrouted: <id:1520231 Vertical pcpi_rs2(29) Metal3 [0um 409.5um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'pcpi_rs2(29)' ) )

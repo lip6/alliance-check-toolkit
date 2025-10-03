@@ -43,7 +43,7 @@ def scriptMain ( **kw ):
             tech    = db.getTechnology()
             rootlib = db.getRootLibrary()
             orLib   = Library.create(rootlib, 'OpenROAD')
-            gdsPath = '../sky130_OpenROAD/picorv32_openroad.gds'
+            gdsPath = '../OpenROAD/picorv32_sky130.gds'
             CRL.Gds.load( orLib, gdsPath, CRL.Gds.Layer_0_IsBoundary|CRL.Gds.NoBlockages )
             af.wrapLibrary( orLib, 1 ) 
             cell, editor = plugins.kwParseMain( **kw )

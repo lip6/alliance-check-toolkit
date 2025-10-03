@@ -15,13 +15,13 @@ from   coriolis.plugins.chip.configuration   import ChipConf
 from   coriolis.plugins.chip.chip            import Chip
 
 
-af = CRL.AllianceFramework.get()
+af        = CRL.AllianceFramework.get()
+buildChip = False
 
 
 def scriptMain ( **kw ):
     """The mandatory function to be called by Coriolis CGT/Unicorn."""
-    global af
-    gaugeName = None
+    global af, buildChip
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         cfg.misc.catchCore     = False
         cfg.misc.info          = False
@@ -39,7 +39,6 @@ def scriptMain ( **kw ):
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )
-        buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'Arlet6502', CRL.Catalog.State.Logical )
         if not cell:
@@ -117,9 +116,9 @@ def scriptMain ( **kw ):
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #conf.cfg.etesian.spaceMargin         = 0.10
        #conf.cfg.anabatic.searchHalo         = 2
-        conf.cfg.anabatic.globalIterations   = 6
-        conf.cfg.katana.hTracksReservedLocal = 15
-        conf.cfg.katana.vTracksReservedLocal = 15
+        conf.cfg.anabatic.globalIterations   = 10
+        conf.cfg.katana.hTracksReservedLocal = 20
+        conf.cfg.katana.vTracksReservedLocal = 20
         conf.cfg.katana.hTracksReservedMin   = 6
         conf.cfg.katana.vTracksReservedMin   = 6
         conf.cfg.katana.trackFill            = 0
@@ -134,7 +133,7 @@ def scriptMain ( **kw ):
         conf.chipName            = 'chip'
         conf.chipConf.ioPadGauge = 'LEF.IO_Site'
         conf.coreToChipClass     = CoreToChip
-        conf.coreSize            = conf.computeCoreSize( 35*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 40*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u(16*85 + 2*260.0 + 40.0), u(18*85 + 2*260.0) )
         if buildChip:
             conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )

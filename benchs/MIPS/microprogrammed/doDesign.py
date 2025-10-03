@@ -28,10 +28,12 @@ def scriptMain ( **kw ):
         #cfg.misc.maxTraceLevel          = 120
         cfg.katana.eventsLimit          = 1000000
         cfg.anabatic.topRoutingLayer    = 'METAL5'
-        cfg.katana.hTracksReservedLocal = 6 
-        cfg.katana.vTracksReservedLocal = 7 
+        cfg.katana.searchHalo           = 1 
+        cfg.katana.hTracksReservedLocal = 8 
+        cfg.katana.vTracksReservedLocal = 6 
         cfg.katana.hTracksReservedMin   = 1 
-        cfg.katana.vTracksReservedMin   = 5 
+        cfg.katana.vTracksReservedMin   = 4 
+        cfg.katana.runRealignStage      = False
         cfg.tramontana.mergeSupplies    = True
     
         Viewer.Graphics.setStyle( 'Alliance.Classic [black]' )

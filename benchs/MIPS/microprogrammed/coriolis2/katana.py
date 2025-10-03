@@ -36,3 +36,7 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'test' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_wm_rf_dinx_0' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'crsrin_0' ) )
+# Misaligned VIA @(1809.5L,20L).
+#DebugSession.addToTrace( katana.getCell().getNet( 'dpt_dt_reg_desc_nwenx' ) )
+# Empty constraint box on <id:183479 ContactTerminal dpt_hi_s_28 VIA12 [1075um 1477.5um] 1um x 1um -T-----c->
+#DebugSession.addToTrace( katana.getCell().getNet( 'dpt_hi_s_28' ) )
