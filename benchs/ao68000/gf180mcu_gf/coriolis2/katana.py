@@ -42,3 +42,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'reset_n_root_bl_tr_tl_0' ) )
 # Pb @(130,23)
 # Pb @(379,240) registers_m_offset(2) same net gap not closed.
+# Pb @(664,263) Same net loop not closed.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n11781' ) )

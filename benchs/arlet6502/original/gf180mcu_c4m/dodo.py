@@ -29,33 +29,63 @@ from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
-from doDesign                     import scriptMain
+from coriolis.designflow.klayout  import Klayout, ShowDRC
+from pdks.gf180mcu.designflow.drc import DRC
+import doDesign
 
 PnR.textMode = True
 pnrSuffix    = '_cts_r'
 topName      = 'arlet6502'
 
-ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
-rulePnR   = PnR     .mkRule( 'gds'  , [ 'chip_r.gds'
-                                      , 'chip_r.vst'
-                                      , 'chip_r.spi'
-                                      , 'chip.vst'
-                                      , 'chip.spi'
-                                      , 'corona_cts_r.vst'
-                                      , 'corona_cts_r.spi'
-                                      , 'corona.vst'
-                                      , 'corona.spi'
-                                      , 'Arlet6502_cts.spi'
-                                      , 'arlet6502_cts.vst' ]
-                                      , [ruleB2V]
-                                    , scriptMain
-                                    , topName=topName )
-#ruleCougar = Cougar.mkRule( 'cougar', 'arlet6502_cts_r_ext.vst', [rulePnR], flags=Cougar.Verbose )
-#ruleLvx    = Lvx   .mkRule( 'lvx'
-#                          , [ rulePnR.file_target(1)
-#                            , ruleCougar.file_target(0) ]
-#                          , flags=Lvx.Flatten )
-#ruleDruc   = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
-ruleCgt    = PnR   .mkRule( 'cgt' )
-ruleClean  = Clean .mkRule( [ 'lefRWarning.log', 'cgt.log' ] )
+if doDesign.buildChip:
+    pnrFiles = [ 'chip_r.gds'
+               , 'chip_r.vst'
+               , 'chip_r.spi'
+               , 'chip.vst'
+               , 'chip.spi'
+               , 'corona_cts_r.vst'
+               , 'corona_cts_r.spi'
+               , 'corona_r.vst'
+               , 'corona_r.spi'
+               , 'corona.vst'
+               , 'corona.spi'
+               , 'arlet6502_cts.vst'
+               , 'arlet6502_cts.spi'
+               , 'arlet6502.spi'
+               ]
+else:
+    pnrFiles = [ 'Arlet6502_cts_r.gds'
+               , 'Arlet6502_cts_r.spi'
+               , 'arlet6502_cts_r.vst'
+               ]
+
+ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
+ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
+rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
+ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS|DRC.ANTENNA )
+ruleCgt     = PnR     .mkRule( 'cgt'     )   
+ruleKlayout = Klayout .mkRule( 'klayout' )
+ruleClean   = Clean   .mkRule()
+
+
+#ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
+#ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
+#rulePnR   = PnR     .mkRule( 'gds'  , [ 'chip_r.gds'
+#                                      , 'chip_r.vst'
+#                                      , 'chip_r.spi'
+#                                      , 'chip.vst'
+#                                      , 'chip.spi'
+#                                      , 'corona_cts_r.vst'
+#                                      , 'corona_cts_r.spi'
+#                                      , 'corona.vst'
+#                                      , 'corona.spi'
+#                                      , 'Arlet6502_cts.spi'
+#                                      , 'arlet6502_cts.vst' ]
+#                                      , [ruleB2V]
+#                                    , scriptMain
+#                                    , topName=topName )
+#ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS|DRC.ANTENNA )
+#ruleCgt     = PnR     .mkRule( 'cgt'     )   
+#ruleKlayout = Klayout .mkRule( 'klayout' )
+#ruleClean   = Clean   .mkRule( [ 'lefRWarning.log', 'cgt.log' ] )

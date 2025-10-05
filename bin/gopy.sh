@@ -14,16 +14,20 @@
    printf "%u:%02u" $mins $secs
  }
 
- runSetId="not_set"
- onGithub="false"
+  runSetId="not_set"
+  onGithub="false"
+ gf180rule="gds"
  while [ $# -gt 0 ]; do
    case $1 in
      --github-runner) echo "Github/runner mode..";
                       onGithub="true";;
      --run-set=*)     runSetId=`getString $1`;;
+     --gf180-drc)     gf180rule="drc";;
    esac
    shift
  done
+
+ 
 
  declare -A benchRules
  benchRules["adder/cmos"]="druc lvx"
@@ -38,8 +42,8 @@
  benchRules["arlet6502/original/freepdk45_c4m"]="gds"
  benchRules["arlet6502/original/sky130_c4m"]="gds"
  benchRules["arlet6502/original/ihpsg13s2_c4m"]="gds"
- benchRules["arlet6502/original/gf180mcu_c4m"]="gds"
- benchRules["arlet6502/original/gf180mcu_gf"]="gds"
+ benchRules["arlet6502/original/gf180mcu_c4m"]="${gf180rule}"
+ benchRules["arlet6502/original/gf180mcu_gf"]="${gf180rule}"
  benchRules["arlet6502/asic_fixed/ihpsg13g2_c4m"]="gds"
  benchRules["arlet6502/asic_serialized/ihpsg13g2_c4m"]="gds"
  benchRules["MIPS/microprogrammed"]="druc lvx"
@@ -49,11 +53,11 @@
  benchRules["ao68000/freepdk45_c4m"]="gds"
  benchRules["ao68000/sky130_c4m"]="gds"
  benchRules["ao68000/ihpsg13s2_c4m"]="gds"
- benchRules["ao68000/gf180mcu_gf"]="gds"
+ benchRules["ao68000/gf180mcu_gf"]="${gf180rule}"
  benchRules["RISC-V/Vex/cmos"]="druc lvx"
  benchRules["RISC-V/picorv32/sky13_c4m"]="gds"
  benchRules["RISC-V/picorv32/ihpsg13g2_c4m"]="gds"
- benchRules["RISC-V/picorv32/gf180mcu_gf"]="gds"
+ benchRules["RISC-V/picorv32/gf180mcu_gf"]="${gf180rule}"
  benchRules["ARM/cmos"]="druc lvx"
  if [ "${onGithub}" = "true" ]; then
    benchRules["RingOscillator"]="druc lvx"
@@ -122,8 +126,8 @@
  mode="ignoreFailure"
 # hline="+---+----+--------------------------------+------------+----------+-----------+"
 #header="|Set| No |             bench              |    Rule    |  Runtime |  Status   |"
-  hline="=====  ==  ==================================  ================  ==========  ==========="
- header="Set    No  Bench                               Rule                 Runtime  Status     "
+  hline="=====  ==  ==========================================  ================  ==========  ==========="
+ header="Set    No  Bench                                       Rule                 Runtime  Status     "
 
  runSet () {
    setId="$1"
@@ -138,7 +142,7 @@
      rules="${benchRules[$bench]}"
 
     #statusLine="| %u | %2u | %-30s | %-10s | %10s | %-7s |"
-     statusLine="%s  %2u  %-34s  %-16s  %10s  %-7s "
+     statusLine="%s  %2u  %-42s  %-16s  %10s  %-7s "
   
      if [ ! -d "${bench}" ]; then
        echo ""
@@ -199,12 +203,14 @@
 
 
  timedRunSet () {
+   args=""
+   if [ "${gf180rule}" != "gds" ]; then args="${args} --gf180-drc"; fi
    startTime="$SECONDS"
    setId="$1"
    rvalue=0
-   ../bin/gopy.sh --run-set=${setId}
+   ../bin/gopy.sh --run-set=${setId} ${args}
    if [ $? -ne 0 ]; then rvalue=1; fi
-   printf "           **Benchs set %u completed** %37s\n" "${setId}" "`getRuntime $startTime`"
+   printf "           **Benchs set %u completed** %45s\n" "${setId}" "`getRuntime $startTime`"
    exit $rvalue
  }
 

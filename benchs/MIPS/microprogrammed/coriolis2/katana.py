@@ -40,3 +40,5 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_dt_reg_desc_nwenx' ) )
 # Empty constraint box on <id:183479 ContactTerminal dpt_hi_s_28 VIA12 [1075um 1477.5um] 1um x 1um -T-----c->
 #DebugSession.addToTrace( katana.getCell().getNet( 'dpt_hi_s_28' ) )
+# Packing error on <id:272860 Vertical dpt_ishifter_muxoutput_79 METAL3 [2990um 765um] [2990um 775um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'dpt_ishifter_muxoutput_79' ) )

@@ -16,7 +16,7 @@ from   coriolis.plugins.chip.chip           import Chip
 
 
 af        = CRL.AllianceFramework.get()
-buildChip = True
+buildChip = False
 
 
 def scriptMain ( **kw ):

@@ -169,3 +169,6 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n377' ) )
 # Pb <id:563668 Horizontal abc_11867_new_n591 Metal2 [101.08um 204.12um]> Unrouted.
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n591' ) )
+# Pb @(19,154) Bad terminal fusing in M2 (DRC M2.2a).
+#DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502_IRHOLD_valid' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n529' ) )
