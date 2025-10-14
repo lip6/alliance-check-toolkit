@@ -119,9 +119,9 @@ def scriptMain ( **kw ):
        #conf.cfg.etesian.spaceMargin         = 0.10
        #conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.globalIterations   = 6
-        conf.cfg.katana.hTracksReservedLocal = 15
+        conf.cfg.katana.hTracksReservedLocal = 20
         conf.cfg.katana.vTracksReservedLocal = 15
-        conf.cfg.katana.hTracksReservedMin   = 6
+        conf.cfg.katana.hTracksReservedMin   = 9
         conf.cfg.katana.vTracksReservedMin   = 6
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False

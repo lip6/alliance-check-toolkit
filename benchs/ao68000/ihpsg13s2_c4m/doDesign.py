@@ -190,10 +190,10 @@ def scriptMain ( **kw ):
         conf.cfg.anabatic.globalIterations   = 20
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
        #conf.cfg.anabatic.topRoutingLayer    = 'm5'
-        conf.cfg.katana.hTracksReservedLocal = 20
-        conf.cfg.katana.vTracksReservedLocal = 30
-        conf.cfg.katana.hTracksReservedMin   = 9
-        conf.cfg.katana.vTracksReservedMin   = 13
+        conf.cfg.katana.hTracksReservedLocal = 15
+        conf.cfg.katana.vTracksReservedLocal = 23
+        conf.cfg.katana.hTracksReservedMin   = 6
+        conf.cfg.katana.vTracksReservedMin   = 9
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = False
