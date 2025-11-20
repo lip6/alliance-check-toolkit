@@ -82,22 +82,23 @@ def scriptMain ( **kw ):
                          , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_ready'      , 141*hspace-6, 0, range(0, 1))]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.tramontana.mergeSupplies    = True
-        conf.cfg.etesian.bloat               = 'disabled'
-       #conf.cfg.etesian.bloat               = 'nsxlib'
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #conf.cfg.etesian.spaceMargin         = 0.10
-       #conf.cfg.anabatic.searchHalo         = 2
-        conf.cfg.anabatic.globalIterations   = 15
-        conf.cfg.katana.hTracksReservedLocal = 15
+        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.lowDensity         = 0.7
+        conf.cfg.anabatic.lowUpDensity       = 0.4
+        conf.cfg.anabatic.moveUpReserve      = 1.0
+        conf.cfg.katana.searchHalo           = 1
+        conf.cfg.katana.maxFlatEdgeOverflow  = 100
+        conf.cfg.katana.hTracksReservedLocal = 16
         conf.cfg.katana.vTracksReservedLocal = 15
         conf.cfg.katana.hTracksReservedMin   = 7
         conf.cfg.katana.vTracksReservedMin   = 5
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False
         conf.cfg.block.spareSide             = 8*conf.sliceHeight
-        conf.cfg.chip.padCoreSide            = 'North'
         conf.editor              = editor
         conf.ioPinsInTracks      = True
         conf.useSpares           = True
@@ -105,9 +106,8 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.chipConf.ioPadGauge = 'IOPadLib'
         conf.coreToChipClass     = CoreToChip
-        conf.coreSize            = conf.computeCoreSize( 86*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 88*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u( 8*85 + 2*270.0), u( 8*85 + 2*300.0) )
         conf.doLvx               = 'corona'
         conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )

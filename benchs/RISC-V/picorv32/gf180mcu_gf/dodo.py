@@ -1,5 +1,6 @@
 
 from pathlib          import Path
+from doit             import get_var
 from coriolis         import Cfg 
 from coriolis.helpers import overlay
 from pdks.gf180mcu    import setup
@@ -24,6 +25,7 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis                     import CRL
 from coriolis.designflow.task     import ShellEnv, Tasks
+from coriolis.designflow.copy     import Copy
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.blif2vst import Blif2Vst
@@ -36,6 +38,8 @@ from coriolis.designflow.clean    import Clean
 from pdks.gf180mcu.designflow.drc import DRC
 from doDesign                               import scriptMain
 PnR.textMode = True
+reuseBlif    = get_var( 'reuse-blif', None )
+
 
 import doDesign
 
@@ -61,9 +65,11 @@ else:
                , 'picorv32_cts_r.vst'
                ]
 
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'picorv32.blif', './non_generateds/picorv32.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys   = Yosys.mkRule( 'yosys'   , 'picorv32.v' )
 
-ruleYosys   = Yosys   .mkRule( 'yosys'   , 'picorv32.v' )
-ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'picorv32.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
 ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )

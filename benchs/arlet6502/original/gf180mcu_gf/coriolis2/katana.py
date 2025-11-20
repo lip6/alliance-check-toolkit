@@ -172,3 +172,5 @@ from coriolis.Hurricane import DebugSession
 # Pb @(19,154) Bad terminal fusing in M2 (DRC M2.2a).
 #DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502_IRHOLD_valid' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n529' ) )
+# Pb on RP id:493841 too close non-pref and non-fused.
+#DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502_AXYS_0_1' ) )

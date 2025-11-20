@@ -108,7 +108,7 @@ def scriptMain ( **kw ):
         conf.cfg.anabatic.globalIterations   = 15
         conf.cfg.katana.hTracksReservedLocal = 11
         conf.cfg.katana.vTracksReservedLocal = 10
-        conf.cfg.katana.hTracksReservedMin   = 8
+        conf.cfg.katana.hTracksReservedMin   = 9
         conf.cfg.katana.vTracksReservedMin   = 7
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False

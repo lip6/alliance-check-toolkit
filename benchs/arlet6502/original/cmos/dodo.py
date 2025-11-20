@@ -1,4 +1,5 @@
 
+from doit import get_var
 from coriolis.designflow.technos import setupCMOS
 
 setupCMOS()
@@ -6,7 +7,7 @@ setupCMOS()
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.task     import Tasks
-from coriolis.designflow.task     import Tasks
+from coriolis.designflow.copy     import Copy
 from coriolis.designflow.cougar   import Cougar
 from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
@@ -17,6 +18,8 @@ from coriolis.designflow.clean    import Clean
 PnR.textMode = True
 
 from doDesign import scriptMain
+
+reuseBlif = get_var( 'reuse-blif', None )
 
 buildChip = False
 if buildChip:
@@ -41,9 +44,12 @@ else:
                , 'arlet6502_cts_r.spi'
                ]
 
-ruleYosys  = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V    = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
-rulePnR    = PnR     .mkRule( 'pnr'  , pnrFiles, [ruleB2V], scriptMain )
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'Arlet6502.blif', './non_generateds/Arlet6502.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys  = Yosys.mkRule( 'yosys', 'Arlet6502.v' )
+
+rulePnR    = PnR     .mkRule( 'pnr'  , pnrFiles, [ruleYosys], scriptMain )
 ruleCougar = Cougar  .mkRule( 'cougar'
                             , 'arlet6502_cts_r_ext.al'
                             , [rulePnR]

@@ -35,7 +35,7 @@ def scriptMain ( **kw ):
 
     rvalue = True
     try:
-        #setTraceLevel( 550 )
+        setTraceLevel( 540 )
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )

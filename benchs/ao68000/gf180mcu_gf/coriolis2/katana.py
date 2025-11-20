@@ -44,3 +44,29 @@ from coriolis.Hurricane import DebugSession
 # Pb @(379,240) registers_m_offset(2) same net gap not closed.
 # Pb @(664,263) Same net loop not closed.
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n11781' ) )
+# abc_68674_new_n6573
+# abc_68674_new_n6578
+# abc_68674_new_n6579
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n6578' ) )
+# Pb unrouted <id:1293905 Horizontal abc_68674_new_n10786 Metal2 [69.72um 109.48um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n10786' ) )
+# Pb bad base track <id:1373250 Vertical abc_68674_new_n10954 Metal2 [91.56um 113.4um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n10954' ) )
+# Pb unrouted <id:1293905 Horizontal abc_68674_new_n10786 Metal2 [69.72um 109.48um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n10786' ) )
+# Pb unrouted <id:1298327 Horizontal abc_68674_new_n3652 [283.11um 694.12um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n3652' ) )
+# Pb unrouted <id:1306140 Horizontal abc_68674_new_n9605 Metal2 [436.52um 687.96um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n9605' ) )
+# Pb unrouted <id:1309503 Horizontal abc_68674_new_n5637 Metal2 [755.16um 808.92um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n5637' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n5657' ) )
+# Pb unrouted <id:1308545 Vertical abc_68674_new_n4780 Metal2 [35.56um 647.08um] ...>
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n4780' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n4794' ) )
+# Pb unrouted <id:1048040 Horizontal abc_68674_new_n6578 Metal2 [525um 763.56um] 
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n6578' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n13783' ) )
+# Pb <id:1377612 Vertical CLK_I_root_bl_tl_br_br_0 Metal3 [184.72um 232.49um] 
+#DebugSession.addToTrace( katana.getCell().getNet( 'CLK_I_root_bl_tl_br_br_0' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n5573' ) )

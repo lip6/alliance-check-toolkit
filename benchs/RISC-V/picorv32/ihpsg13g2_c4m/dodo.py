@@ -1,6 +1,7 @@
 
 import os
 from   pathlib import Path
+from   doit    import get_var
 import pdks.ihpsg13g2_c4m
 
 pdks.ihpsg13g2_c4m.setup()
@@ -25,13 +26,17 @@ from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
 import doDesign
 
 
+reuseBlif          = get_var( 'reuse-blif', None )
 PnR.textMode       = True
 pnrSuffix          = '_cts_r'
 topName            = 'picorv32'
 TasYagle.ClockName = 'clk'
 
-ruleYosys = Yosys   .mkRule( 'yosys', 'picorv32.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'picorv32.vst', [ruleYosys], flags=0 )
+print( 'reuseBlif', reuseBlif )
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'picorv32.blif', './non_generateds/picorv32.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys = Yosys   .mkRule( 'yosys', 'picorv32.v' )
 # Rule for chip generation.
 #ruleSeal  = SealRing.mkRule( 'sealring', targets=[ 'chip_r_seal.gds' ] , size=[1414.0, 1414.0] )
 #rulePnR   = PnR     .mkRule( 'gds'  , [ 'chip_r.gds'

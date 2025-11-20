@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
         #setTraceLevel( 550 )
         #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'm65s', CRL.Catalog.State.Logical )
+        cell = CRL.Blif.load( 'm65s' )
         if editor: editor.setCell( cell ) 
 
         # ioPinsSpec, for peripheral pin placement as a standalone block.
@@ -51,6 +51,7 @@ def scriptMain ( **kw ):
         m65sConf.cfg.etesian.densityVariation    = 0.05
         m65sConf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         m65sConf.cfg.katana.eventsLimit          = 1000000
+        m65sConf.cfg.anabatic.moveUpReserve      = 1.5
         m65sConf.cfg.katana.hTracksReservedMin   = 7 
         m65sConf.cfg.katana.vTracksReservedMin   = 6
         m65sConf.cfg.katana.hTracksReservedLocal = 9 

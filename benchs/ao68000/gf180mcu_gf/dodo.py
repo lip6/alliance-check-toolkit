@@ -1,5 +1,6 @@
 
 from pathlib          import Path
+from doit             import get_var
 from coriolis         import Cfg 
 from coriolis.helpers import overlay
 from pdks.gf180mcu    import setup
@@ -23,6 +24,7 @@ setup( checkToolkit=Path('../../..'), useHV=True )
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.task     import Tasks
+from coriolis.designflow.copy     import Copy
 from coriolis.designflow.cougar   import Cougar
 from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
@@ -34,11 +36,16 @@ from coriolis.designflow.clean    import Clean
 from coriolis.designflow.alias    import Alias
 from pdks.gf180mcu.designflow.drc import DRC
 PnR.textMode = True
+reuseBlif    = get_var( 'reuse-blif', None )
+
 
 from doDesign  import scriptMain
 
-ruleYosys  = Yosys     .mkRule( 'yosys', 'ao68000.v' )
-ruleB2V    = Blif2Vst  .mkRule( 'b2v'  , 'ao68000.vst', [ruleYosys], flags=0 )
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'ao68000.blif', './non_generateds/ao68000.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys  = Yosys     .mkRule( 'yosys', 'ao68000.v' )
+
 rulePnR    = PnR       .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
                                          , 'ao68000_cts_r.vst'
                                          , 'ao68000_cts_r.spi' ]

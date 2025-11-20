@@ -132,8 +132,8 @@ def scriptMain ( **kw ):
         designConf.cfg.anabatic.gcellAspectRatio   = 2.0
        #designConf.cfg.katana.hTracksReservedLocal = 7
         designConf.cfg.katana.vTracksReservedLocal = 8
-       #designConf.cfg.katana.hTracksReservedMin   = 5
-       #designConf.cfg.katana.vTracksReservedMin   = 6
+        designConf.cfg.katana.hTracksReservedMin   = 6
+        designConf.cfg.katana.vTracksReservedMin   = 12
         designConf.cfg.katana.trackFill            = 0
         designConf.cfg.katana.runRealignStage      = False
         designConf.cfg.block.spareSide             = 8*sliceHeight
@@ -166,8 +166,7 @@ def scriptMain ( **kw ):
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    #return rvalue
-    return True
+    return rvalue
 
 
 if __name__ == '__main__':

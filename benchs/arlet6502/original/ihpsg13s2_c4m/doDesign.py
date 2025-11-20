@@ -41,9 +41,7 @@ def scriptMain ( **kw ):
         #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'Arlet6502', CRL.Catalog.State.Logical )
-        if not cell:
-            cell = CRL.Blif.load( 'Arlet6502' )
+        cell = CRL.Blif.load( 'Arlet6502' )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
@@ -110,6 +108,7 @@ def scriptMain ( **kw ):
                      ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.tramontana.mergeSupplies    = True
+        conf.cfg.etesian.graphics            = 2
         conf.cfg.etesian.bloat               = 'disabled'
        #conf.cfg.etesian.bloat               = 'nsxlib'
         conf.cfg.etesian.densityVariation    = 0.05
@@ -117,11 +116,11 @@ def scriptMain ( **kw ):
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #conf.cfg.etesian.spaceMargin         = 0.10
        #conf.cfg.anabatic.searchHalo         = 2
-        conf.cfg.anabatic.globalIterations   = 6
+        conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.katana.hTracksReservedLocal = 15
-        conf.cfg.katana.vTracksReservedLocal = 15
+        conf.cfg.katana.vTracksReservedLocal = 16
         conf.cfg.katana.hTracksReservedMin   = 6
-        conf.cfg.katana.vTracksReservedMin   = 6
+        conf.cfg.katana.vTracksReservedMin   = 7
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False
         conf.editor              = editor

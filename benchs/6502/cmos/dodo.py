@@ -1,4 +1,5 @@
 
+from doit import get_var
 from coriolis.designflow.technos import setupCMOS
 
 setupCMOS()
@@ -22,12 +23,15 @@ PnR.textMode = True
 
 from doDesign  import scriptMain
 
-ruleYosys = Yosys   .mkRule( 'yosys', 'm65s.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'm65s.vst', [ruleYosys], flags=0 )
-rulePnR   = PnR     .mkRule( 'pnr'  , [ 'm65s_cts_r.ap'
-                                      , 'm65s_cts_r.vst'
-                                      ]
-                                      , [ruleB2V]
+reuseBlif = get_var( 'reuse-blif', None )
+
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'm65s.blif', './non_generateds/m65s.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys = Yosys.mkRule( 'yosys', 'm65s.v' )
+
+rulePnR   = PnR     .mkRule( 'pnr'  , [ 'm65s_cts_r.ap', 'm65s_cts_r.vst' ]
+                                    , [ruleYosys]
                                     , scriptMain )
 ruleCougar    = Cougar.mkRule( 'cougar', 'm65s_cts_r_ext.al', [rulePnR]
                              , flags=Cougar.Verbose|Cougar.Flatten )
@@ -38,6 +42,6 @@ ruleLvx       = Lvx   .mkRule( 'lvx'
 ruleDruc      = Druc  .mkRule( 'druc', [rulePnR], flags=0 )
 ruleGds       = S2R   .mkRule( 'gds', 'm65s_cts_r.gds', [rulePnR]
                              , flags=S2R.Verbose|S2R.NoReplaceBlackboxes )
-ruleCgt       = PnR   .mkRule( 'cgt', depends=[ruleB2V] )
+ruleCgt       = PnR   .mkRule( 'cgt', depends=[ruleYosys] )
 ruleGraal     = Graal .mkRule( 'graal' )
 ruleClean     = Clean .mkRule()

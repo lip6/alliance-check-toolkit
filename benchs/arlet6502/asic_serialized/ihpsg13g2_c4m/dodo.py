@@ -1,6 +1,7 @@
 
 import os
 from   pathlib import Path
+from   doit    import get_var
 from   pdks.ihpsg13g2_c4m import setup
 
 setup( checkToolkit=Path('../../..') )
@@ -9,6 +10,7 @@ DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis                               import CRL
 from coriolis.designflow.task               import ShellEnv, Tasks
+from coriolis.designflow.copy               import Copy
 from coriolis.designflow.yosys              import Yosys
 from coriolis.designflow.blif2vst           import Blif2Vst
 from coriolis.designflow.vasy               import Vasy
@@ -26,12 +28,16 @@ from pdks.ihpsg13g2_c4m.designflow.sealring import SealRing
 from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
 from doDesign                               import scriptMain
 
-buildChip          = False
-PnR.textMode       = True
-pnrSuffix          = '_cts_r'
-topName            = 'serialized_arlet6502'
+reuseBlif    = get_var( 'reuse-blif', None )
+buildChip    = False
+PnR.textMode = True
+pnrSuffix    = '_cts_r'
+topName      = 'serialized_arlet6502'
 
-ruleYosys = Yosys   .mkRule( 'yosys', 'serialized_arlet6502.v' )
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'serialized_arlet6502.blif', './non_generateds/serialized_rlet6502.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys = Yosys.mkRule( 'yosys', 'serialized_arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'serialized_arlet6502.vst', [ruleYosys], flags=0 )
 
 if buildChip:

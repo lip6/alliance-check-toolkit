@@ -13,4 +13,9 @@ from coriolis.Hurricane import DebugSession
 # Pb: <id:2153661 Vertical bus_control_m_prefetch_ir_o_bit76_hfns_0 Metal3 [187.5um 381.5um] ...>
 #DebugSession.addToTrace( katana.getCell().getNet( 'memory_registers_m_micro_data(25)' ))
 #DebugSession.addToTrace( katana.getCell().getNet( 'bus_control_m_prefetch_ir_o_bit76_hfns_0' ))
+# Pb @(558,395) Short between
+# id:2029795 -> event:00126542
+# id:2208364 -> event:00178312
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68950_new_n20700' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_68950_new_n20881' ))
 

@@ -58,27 +58,28 @@ def scriptMain ( **kw ):
         #Breakpoint.setStopLevel( 100 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'arlet6502', CRL.Catalog.State.Logical )
+        cell = CRL.Blif.load( 'Arlet6502' )
+        cell.setName( 'arlet6502' )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
         ioPadsSpec = []
-        ioPadsSpec.append(( IoPin.WEST , None, 'di_{}'  , 'di({})' , 'di({})', range( 0, 4) ))
+        ioPadsSpec.append(( IoPin.WEST , None, 'di_{}'  , 'DI({})' , 'DI({})', range( 0, 4) ))
         addSupplyPads(      IoPin.WEST , ioPadsSpec )
-        ioPadsSpec.append(( IoPin.WEST , None, 'di_{}'  , 'di({})' , 'di({})', range( 4, 8) ))
+        ioPadsSpec.append(( IoPin.WEST , None, 'di_{}'  , 'DI({})' , 'DI({})', range( 4, 8) ))
                             
-        ioPadsSpec.append(( IoPin.SOUTH, None, 'do_{}'  , 'do({})' , 'do({})', range( 0, 5) ))
+        ioPadsSpec.append(( IoPin.SOUTH, None, 'do_{}'  , 'DO({})' , 'DO({})', range( 0, 5) ))
         addSupplyPads(      IoPin.SOUTH, ioPadsSpec )
-        ioPadsSpec.append(( IoPin.SOUTH, None, 'do_{}'  , 'do({})' , 'do({})', range( 5, 8) ))
-        ioPadsSpec.append(( IoPin.SOUTH, None, 'a_{}'   , 'a({})'  , 'a({})' , range( 0, 2) ))
+        ioPadsSpec.append(( IoPin.SOUTH, None, 'do_{}'  , 'DO({})' , 'DO({})', range( 5, 8) ))
+        ioPadsSpec.append(( IoPin.SOUTH, None, 'a_{}'   , 'A({})'  , 'A({})' , range( 0, 2) ))
                             
-        ioPadsSpec.append(( IoPin.EAST , None, 'a_{}'   , 'a({})'  , 'a({})' , range( 2, 8) ))
+        ioPadsSpec.append(( IoPin.EAST , None, 'a_{}'   , 'A({})'  , 'A({})' , range( 2, 8) ))
         addSupplyPads(      IoPin.EAST , ioPadsSpec )
-        ioPadsSpec.append(( IoPin.EAST , None, 'a_{}'   , 'a({})'  , 'a({})' , range( 8,14) ))
+        ioPadsSpec.append(( IoPin.EAST , None, 'a_{}'   , 'A({})'  , 'A({})' , range( 8,14) ))
 
-        ioPadsSpec.append(( IoPin.NORTH, None, 'irq'    , 'irq'    , 'irq'    ))
-        ioPadsSpec.append(( IoPin.NORTH, None, 'nmi'    , 'nmi'    , 'nmi'    ))
-        ioPadsSpec.append(( IoPin.NORTH, None, 'rdy'    , 'rdy'    , 'rdy'    ))
+        ioPadsSpec.append(( IoPin.NORTH, None, 'irq'    , 'IRQ'    , 'IRQ'    ))
+        ioPadsSpec.append(( IoPin.NORTH, None, 'nmi'    , 'NMI'    , 'NMI'    ))
+        ioPadsSpec.append(( IoPin.NORTH, None, 'rdy'    , 'RDY'    , 'RDY'    ))
         if useNiolib:
             ioPadsSpec.append(( IoPin.NORTH, None, 'clk', 'clk', 'clk' ))
         else:
@@ -86,17 +87,17 @@ def scriptMain ( **kw ):
         addSupplyPads(      IoPin.NORTH, ioPadsSpec )
         ioPadsSpec.append(( IoPin.NORTH, None, 'reset'  , 'reset'  , 'reset'  ))
         ioPadsSpec.append(( IoPin.NORTH, None, 'we'     , 'we'     , 'we'     ))
-        ioPadsSpec.append(( IoPin.NORTH, None, 'a_{}'   , 'a({})'  , 'a({})' , range(14,16) ))
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'di({})'  ,    l(50.0), l(50.0),  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'do({})'  , 14*l(50.0), l(50.0),  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'a({})'   ,    l(50.0), l(50.0), 16)
+        ioPadsSpec.append(( IoPin.NORTH, None, 'a_{}'   , 'A({})'  , 'A({})' , range(14,16) ))
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  ,    l(50.0), l(50.0),  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , 14*l(50.0), l(50.0),  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   ,    l(50.0), l(50.0), 16)
                      
-                     #, (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*l(50.0),      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'irq'     , 11*l(50.0),      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'nmi'     , 12*l(50.0),      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'rdy'     , 13*l(50.0),      0 ,  1)
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'we'      , 14*l(50.0),      0 ,  1)
-                     #, (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 11*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'NMI'     , 12*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'RDY'     , 13*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'WE'      , 14*l(50.0),      0 ,  1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'reset'   , 15*l(50.0),      0 ,  1)
                      ]
         arlet6502Conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         arlet6502Conf.cfg.tramontana.mergeSupplies    = True
@@ -111,8 +112,8 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         arlet6502Conf.cfg.katana.hTracksReservedLocal = 15
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 15
-        arlet6502Conf.cfg.katana.hTracksReservedMin   = 6
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 6
+        arlet6502Conf.cfg.katana.hTracksReservedMin   = 7
+        arlet6502Conf.cfg.katana.vTracksReservedMin   = 7
         arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = False
         arlet6502Conf.cfg.block.spareSide             = l(14*50.0)
@@ -125,7 +126,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.bRows               = 2
         arlet6502Conf.chipConf.ioPadGauge = 'pxlib'
         arlet6502Conf.chipName            = 'chip'
-        arlet6502Conf.coreSize            = ( l( 31*50.0), l( 31*50.0) )
+        arlet6502Conf.coreSize            = ( l( 32*50.0), l( 32*50.0) )
         if useNiolib:
             arlet6502Conf.chipSize        = ( l(  9400.0), l(10400.0) )
         else:

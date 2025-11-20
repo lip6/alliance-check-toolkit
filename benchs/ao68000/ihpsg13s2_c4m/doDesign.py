@@ -192,7 +192,7 @@ def scriptMain ( **kw ):
        #conf.cfg.anabatic.topRoutingLayer    = 'm5'
         conf.cfg.katana.hTracksReservedLocal = 15
         conf.cfg.katana.vTracksReservedLocal = 23
-        conf.cfg.katana.hTracksReservedMin   = 6
+        conf.cfg.katana.hTracksReservedMin   = 8
         conf.cfg.katana.vTracksReservedMin   = 9
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False

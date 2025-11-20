@@ -170,7 +170,7 @@
      startTime="$SECONDS"
      ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
      for rule in ${rules}; do
-       ${crlenv} -- doit ${rule} >> ${benchLog} 2>&1
+       ${crlenv} -- doit ${rule} reuse-blif=v58 >> ${benchLog} 2>&1
        if [ $? -ne 0 ]; then
          success="false"
          printf "${statusLine}\n" "$setIdStr" $benchCount "<${bench}>" "${rule}" "`getRuntime $startTime`" "FAILED"

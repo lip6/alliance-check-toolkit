@@ -25,3 +25,4 @@ from Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.exec_i.shifter_0.not_shift(4)' ) )
 # Pb <id:640947 Horizontal core.decod_i.reg_bank.na4_x1_535_sig METAL2 [2530.0L 5480.0L]>
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.decod_i.reg_bank.na4_x1_535_sig' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'mem_adr_to_pad(9)' ) )

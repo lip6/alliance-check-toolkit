@@ -1,5 +1,6 @@
 
 from pathlib          import Path
+from doit             import get_var
 from coriolis         import Cfg 
 from coriolis.helpers import overlay
 from pdks.gf180mcu    import setup
@@ -23,6 +24,7 @@ setup( checkToolkit=Path('../../../..'), useHV=True )
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.task     import Tasks
+from coriolis.designflow.copy     import Copy
 from coriolis.designflow.cougar   import Cougar
 from coriolis.designflow.lvx      import Lvx
 from coriolis.designflow.druc     import Druc
@@ -34,6 +36,7 @@ from coriolis.designflow.alias    import Alias
 from coriolis.designflow.clean    import Clean
 from pdks.gf180mcu.designflow.drc import DRC
 PnR.textMode = True
+reuseBlif    = get_var( 'reuse-blif', None )
 
 import doDesign
 
@@ -60,7 +63,10 @@ else:
                ]
 
 
-ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'Arlet6502.blif', './non_generateds/Arlet6502.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys   = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
 ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
