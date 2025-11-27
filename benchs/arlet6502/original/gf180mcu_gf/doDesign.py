@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         cfg.misc.catchCore              = False
         cfg.misc.info                   = False
-        cfg.misc.paranoid               = False
+        cfg.misc.paranoid               = True
         cfg.misc.bug                    = False
         cfg.misc.logMode                = True
         cfg.misc.verboseLevel1          = True

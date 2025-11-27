@@ -35,7 +35,7 @@ pnrSuffix    = '_cts_r'
 topName      = 'serialized_arlet6502'
 
 if reuseBlif:
-    ruleYosys = Copy.mkRule( 'yosys', 'serialized_arlet6502.blif', './non_generateds/serialized_rlet6502.{}.blif'.format( reuseBlif ))
+    ruleYosys = Copy.mkRule( 'yosys', 'serialized_arlet6502.blif', './non_generateds/serialized_arlet6502.{}.blif'.format( reuseBlif ))
 else:
     ruleYosys = Yosys.mkRule( 'yosys', 'serialized_arlet6502.v' )
 ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'serialized_arlet6502.vst', [ruleYosys], flags=0 )

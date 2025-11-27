@@ -30,9 +30,9 @@ def scriptMain ( **kw ):
         cfg.misc.bug           = False
         cfg.misc.logMode       = True
         cfg.misc.verboseLevel1 = True
-        cfg.misc.verboseLevel2 = True
-        cfg.misc.minTraceLevel = 16000
-        cfg.misc.maxTraceLevel = 17000
+        cfg.misc.verboseLevel2 = False
+        cfg.misc.minTraceLevel = 15900
+        cfg.misc.maxTraceLevel = 16000
 
     rvalue = True
     try:
