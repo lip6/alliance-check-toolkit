@@ -231,6 +231,42 @@ class CoriolisCommand ( CommandArg ):
         return
 
 
+class PdkIHPsg13g2Command ( CommandArg ):
+
+    def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
+        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+                                  , wd=srcDir+'/coriolis-pdk-ihpsg13g2'
+                                  , fdLog=fdLog )
+        return
+
+
+class PdkIHPsg13g2c4mCommand ( CommandArg ):
+
+    def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
+        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+                                  , wd=srcDir+'/coriolis-pdk-ihpsg13g2-c4m'
+                                  , fdLog=fdLog )
+        return
+
+
+class PdkGF180mcuCommand ( CommandArg ):
+
+    def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
+        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+                                  , wd=srcDir+'/coriolis-pdk-gf180mcu'
+                                  , fdLog=fdLog )
+        return
+
+
+class PdkGF180mcuc4mCommand ( CommandArg ):
+
+    def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
+        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+                                  , wd=srcDir+'/coriolis-pdk-gf180mcu-c4m'
+                                  , fdLog=fdLog )
+        return
+
+
 class BenchsCommand ( CommandArg ):
 
     def __init__ ( self, benchsDir, fdLog=None ):
@@ -288,59 +324,77 @@ class GitRepository ( object ):
         Command( [ 'git', 'checkout', branch ], self.fdLog ).execute()
         return
 
-    def submoduleInit ( self ):
-        os.chdir( self.localRepoDir )
-        Command( [ 'git', 'submodule', 'init' ], self.fdLog ).execute()
-        return
-
     def submoduleUpdate ( self ):
         os.chdir( self.localRepoDir )
-        Command( [ 'git', 'submodule', 'update' ], self.fdLog ).execute()
+        Command( [ 'git', 'submodule', 'update', '--init', '--recursive' ], self.fdLog ).execute()
         return
 
 
 class Configuration ( object ):
 
     PrimaryNames = \
-        [ 'sender'      , 'receivers'
-        , 'coriolisRepo', 'benchsRepo' , 'supportRepos'
-        , 'homeDir'     , 'masterHost'
-        , 'debugArg'    , 'nightlyMode', 'dockerMode', 'chrootMode'
-        , 'rmSource'    , 'rmBuild'
-        , 'doGit'       , 'doAlliance' , 'doCoriolis', 'doBenchs', 'doPyBenchs', 'doSendReport'
-        , 'success'     , 'rcode'
+        [ 'sender'          , 'receivers'
+        , 'coriolisRepo'    , 'benchsRepo' , 'supportRepos'
+        , 'pdkIHPsg13g2Repo', 'pdkIHPsg13g2c4mRepo'
+        , 'pdkGF180mcuRepo' , 'pdkGF180mcuc4mRepo'
+        , 'homeDir'         , 'masterHost'
+        , 'debugArg'        , 'nightlyMode', 'dockerMode', 'chrootMode'
+        , 'rmSource'        , 'rmBuild'
+        , 'doGit'           , 'doAlliance'       , 'doCoriolis'   , 'doBenchs', 'doPyBenchs', 'doSendReport'
+        , 'doPdkIHPsg13g2'  , 'doPdkIHPsg13g2c4m', 'doPdkGF180mcu', 'doPdkGF180mcuc4m'
+        , 'success'         , 'rcode'
         ]
     SecondaryNames = \
         [ 'rootDir', 'srcDir', 'logDir', 'logs', 'fds', 'yosysBin', 'benchsDir'
         ]
 
     def __init__ ( self ):
-        self._sender       = 'Jean-Paul.Chaput@soc.lip6.fr'
-        self._receivers    = [ 'Jean-Paul.Chaput@lip6.fr', ]
-        self._supportRepos = [ 'https://github.com/Tencent/rapidjson.git' ]
-        self._allianceRepo = 'https://github.com/lip6/alliance.git'
-        self._coriolisRepo = 'https://github.com/lip6/coriolis.git'
-        self._benchsRepo   = 'https://github.com/lip6/alliance-check-toolkit.git'
-        self._homeDir      = os.environ['HOME']
-        self._debugArg     = ''
-        self._rmSource     = False
-        self._rmBuild      = False
-        self._doGit        = True
-        self._doYosys      = False
-        self._doAlliance   = False
-        self._doCoriolis   = False
-        self._doBenchs     = False
-        self._doPyBenchs   = False
-        self._doSendReport = False
-        self._nightlyMode  = False
-        self._dockerMode   = False
-        self._chrootMode   = None
-        self._logs         = { 'alliance':None, 'coriolis':None, 'benchs':None }
-        self._fds          = { 'alliance':None, 'coriolis':None, 'benchs':None }
-        self._benchsDir    = None
-        self._masterHost   = self._detectMasterHost()
-        self._success      = False
-        self._rcode        = 0
+        self._sender              = 'Jean-Paul.Chaput@soc.lip6.fr'
+        self._receivers           = [ 'Jean-Paul.Chaput@lip6.fr', ]
+        self._supportRepos        = [ 'https://github.com/Tencent/rapidjson.git' ]
+        self._allianceRepo        = 'https://github.com/lip6/alliance.git'
+        self._coriolisRepo        = 'https://github.com/lip6/coriolis.git'
+        self._pdkIHPsg13g2Repo    = 'https://github.com/lip6/coriolis-pdk-ihpsg13g2.git'
+        self._pdkIHPsg13g2c4mRepo = 'https://github.com/lip6/coriolis-pdk-ihpsg13g2-c4m.git'
+        self._pdkGF180mcuRepo     = 'https://github.com/lip6/coriolis-pdk-gf180mcu.git'
+        self._pdkGF180mcuc4mRepo  = 'https://github.com/lip6/coriolis-pdk-gf180mcu-c4m.git'
+        self._benchsRepo          = 'https://github.com/lip6/alliance-check-toolkit.git'
+        self._homeDir           = os.environ['HOME']
+        self._debugArg          = ''
+        self._rmSource          = False
+        self._rmBuild           = False
+        self._doGit             = True
+        self._doYosys           = False
+        self._doAlliance        = False
+        self._doCoriolis        = False
+        self._doPdkIHPsg13g2    = False
+        self._doPdkIHPsg13g2c4m = False
+        self._doPdkGF180mcu     = False
+        self._doPdkGF180mcuc4m  = False
+        self._doBenchs          = False
+        self._doPyBenchs        = False
+        self._doSendReport      = False
+        self._nightlyMode       = False
+        self._dockerMode        = False
+        self._chrootMode        = None
+        self._logs              = { 'alliance'       :None
+                                  , 'coriolis'       :None
+                                  , 'pdkIHPsg13g2'   :None
+                                  , 'pdkIHPsg13g2c4m':None
+                                  , 'pdkGF180mcu'    :None
+                                  , 'pdkGF180mcuc4m' :None
+                                  , 'benchs'         :None }
+        self._fds               = { 'alliance'       :None
+                                  , 'coriolis'       :None
+                                  , 'pdkIHPsg13g2'   :None
+                                  , 'pdkIHPsg13g2c4m':None
+                                  , 'pdkGF180mcu'    :None
+                                  , 'pdkGF180mcuc4m' :None
+                                  , 'benchs'         :None }
+        self._benchsDir         = None
+        self._masterHost        = self._detectMasterHost()
+        self._success           = False
+        self._rcode             = 0
         self._updateSecondaries()
         return
 
@@ -449,6 +503,17 @@ class Configuration ( object ):
                 commands.append( CoriolisCommand( self.srcDir, 3, fdLog=self.fds['coriolis'] ) )
             elif target == 'Ubuntu18' or target == 'Debian9' or target == 'Debian10':
                 commands.append( CoriolisCommand( self.srcDir, 3, otherArgs, fdLog=self.fds['coriolis'] ) )
+        pdkOtherArgs = []
+        if self.nightlyMode:
+            pdkOtherArgs.append( '--nightly' )
+        if self.doPdkIHPsg13g2:
+            commands.append( PdkIHPsg13g2Command( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkIHPsg13g2'] ) )
+        if self.doPdkIHPsg13g2c4m:
+            commands.append( PdkIHPsg13g2c4mCommand( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkIHPsg13g2c4m'] ) )
+        if self.doPdkGF180mcu:
+            commands.append( PdkGF180mcuCommand( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkGF180mcu'] ) )
+        if self.doPdkGF180mcuc4m:
+            commands.append( PdkGF180mcuc4mCommand( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkGF180mcuc4m'] ) )
         if self.doBenchs:
             commands.append( BenchsCommand( self.benchsDir, fdLog=self.fds['benchs'] ) )
         if self.doPyBenchs:
@@ -525,49 +590,60 @@ class Report ( object ):
 
 
 parser = optparse.OptionParser ()  
-parser.add_option ( "--debug"       , action="store_true" ,                dest="debug"        , help="Build a <Debug> aka (-g) version." )
-parser.add_option ( "--no-git"      , action="store_true" ,                dest="noGit"        , help="Do not pull/update Git repositories before building." )
-parser.add_option ( "--do-yosys"    , action="store_true" ,                dest="doYosys"      , help="Rebuild Yosys." )
-parser.add_option ( "--do-alliance" , action="store_true" ,                dest="doAlliance"   , help="Rebuild the Alliance tools." )
-parser.add_option ( "--do-coriolis" , action="store_true" ,                dest="doCoriolis"   , help="Rebuild the Coriolis tools." )
-parser.add_option ( "--do-report"   , action="store_true" ,                dest="doReport"     , help="Send a final report." )
-parser.add_option ( "--nightly"     , action="store_true" ,                dest="nightly"      , help="Perform a nighly build." )
-parser.add_option ( "--docker"      , action="store_true" ,                dest="docker"       , help="Perform a build inside a docker container." )
-parser.add_option ( "--chroot"      , action="store_true" ,                dest="chroot"       , help="Perform a build inside a chrooted environment." )
-parser.add_option ( "--benchs"      , action="store_true" ,                dest="benchs"       , help="Run the <alliance-checker-toolkit> sanity benchs (make)." )
-parser.add_option ( "--pybenchs"    , action="store_true" ,                dest="pybenchs"     , help="Run the <alliance-checker-toolkit> sanity benchs (doit)." )
-parser.add_option ( "--rm-build"    , action="store_true" ,                dest="rmBuild"      , help="Remove the build/install directories." )
-parser.add_option ( "--rm-source"   , action="store_true" ,                dest="rmSource"     , help="Remove the Git source repositories." )
-parser.add_option ( "--rm-all"      , action="store_true" ,                dest="rmAll"        , help="Remove everything (source+build+install)." )
-parser.add_option ( "--root"        , action="store"      , type="string", dest="rootDir"      , help="The root directory (default: <~/coriolis-2.x/>)." )
-parser.add_option ( "--profile"     , action="store"      , type="string", dest="profile"      , help="The targeted OS for the build." )
+parser.add_option ( "--debug"          , action="store_true",                dest="debug"            , help="Build a <Debug> aka (-g) version." )
+parser.add_option ( "--no-git"         , action="store_true" ,               dest="noGit"            , help="Do not pull/update Git repositories before building." )
+parser.add_option ( "--do-yosys"       , action="store_true",                dest="doYosys"          , help="Rebuild Yosys." )
+parser.add_option ( "--do-alliance"    , action="store_true",                dest="doAlliance"       , help="Rebuild the Alliance tools." )
+parser.add_option ( "--do-coriolis"    , action="store_true",                dest="doCoriolis"       , help="Rebuild the Coriolis tools." )
+parser.add_option ( "--do-ihpsg13g2"   , action="store_true",                dest="doPdkIHPsg13g2"   , help="Rebuild the IHP SG13G2 PDK." )
+parser.add_option ( "--do-ihpsg13g2c4m", action="store_true",                dest="doPdkIHPsg13g2c4m", help="Rebuild the IHP SG13G2 PDK, with C4M standard cells." )
+parser.add_option ( "--do-gf180mcu"    , action="store_true",                dest="doPdkGF180mcu"    , help="Rebuild the GF 180 MCU PDK." )
+parser.add_option ( "--do-gf180mcuc4m" , action="store_true",                dest="doPdkGF180mcuc4m" , help="Rebuild the GF 180 MCU PDK, with C4M standard cells." )
+parser.add_option ( "--do-report"      , action="store_true",                dest="doReport"         , help="Send a final report." )
+parser.add_option ( "--nightly"        , action="store_true",                dest="nightly"          , help="Perform a nighly build." )
+parser.add_option ( "--docker"         , action="store_true",                dest="docker"           , help="Perform a build inside a docker container." )
+parser.add_option ( "--chroot"         , action="store_true",                dest="chroot"           , help="Perform a build inside a chrooted environment." )
+parser.add_option ( "--benchs"         , action="store_true",                dest="benchs"           , help="Run the <alliance-checker-toolkit> sanity benchs (make)." )
+parser.add_option ( "--pybenchs"       , action="store_true",                dest="pybenchs"         , help="Run the <alliance-checker-toolkit> sanity benchs (doit)." )
+parser.add_option ( "--rm-build"       , action="store_true",                dest="rmBuild"          , help="Remove the build/install directories." )
+parser.add_option ( "--rm-source"      , action="store_true",                dest="rmSource"         , help="Remove the Git source repositories." )
+parser.add_option ( "--rm-all"         , action="store_true",                dest="rmAll"            , help="Remove everything (source+build+install)." )
+parser.add_option ( "--root"           , action="store"     , type="string", dest="rootDir"          , help="The root directory (default: <~/coriolis-2.x/>)." )
+parser.add_option ( "--profile"        , action="store"     , type="string", dest="profile"          , help="The targeted OS for the build." )
 (options, args) = parser.parse_args ()
 
 
 conf = Configuration()
 
 try:
-    if options.debug:                     conf.debugArg     = '--debug' 
-    if options.nightly:                   conf.nightlyMode  = True
-    if options.docker:                    conf.dockerMode   = True
-    if options.chroot:                    conf.chrootMode   = True
-    if options.noGit:                     conf.doGit        = False
-    if options.doYosys:                   conf.doYosys      = True
-    if options.doAlliance:                conf.doAlliance   = True
-    if options.doCoriolis:                conf.doCoriolis   = True
-    if options.benchs:                    conf.doBenchs     = True
-    if options.pybenchs:                  conf.doPyBenchs   = True
-    if options.doReport:                  conf.doSendReport = True
-    if options.rmSource or options.rmAll: conf.rmSource     = True
-    if options.rmBuild  or options.rmAll: conf.rmBuild      = True
+    if options.debug:                     conf.debugArg          = '--debug' 
+    if options.nightly:                   conf.nightlyMode       = True
+    if options.docker:                    conf.dockerMode        = True
+    if options.chroot:                    conf.chrootMode        = True
+    if options.noGit:                     conf.doGit             = False
+    if options.doYosys:                   conf.doYosys           = True
+    if options.doAlliance:                conf.doAlliance        = True
+    if options.doCoriolis:                conf.doCoriolis        = True
+    if options.doPdkIHPsg13g2:            conf.doPdkIHPsg13g2    = True
+    if options.doPdkIHPsg13g2c4m:         conf.doPdkIHPsg13g2c4m = True
+    if options.doPdkGF180mcu:             conf.doPdkGF180mcu     = True
+    if options.doPdkGF180mcuc4m:          conf.doPdkGF180mcuc4m  = True
+    if options.benchs:                    conf.doBenchs          = True
+    if options.pybenchs:                  conf.doPyBenchs        = True
+    if options.doReport:                  conf.doSendReport      = True
+    if options.rmSource or options.rmAll: conf.rmSource          = True
+    if options.rmBuild  or options.rmAll: conf.rmBuild           = True
 
-
-    if conf.doYosys:    conf.openLog( 'yosys'    )
-    if conf.doAlliance: conf.openLog( 'alliance' )
-    if conf.doCoriolis: conf.openLog( 'coriolis' )
-    if conf.doBenchs:   conf.openLog( 'benchs'   )
-    if conf.doPyBenchs: conf.openLog( 'benchs'   )
-    if conf.dockerMode: os.environ['USER'] = 'root'
+    if conf.doYosys:           conf.openLog( 'yosys'           )
+    if conf.doAlliance:        conf.openLog( 'alliance'        )
+    if conf.doCoriolis:        conf.openLog( 'coriolis'        )
+    if conf.doPdkIHPsg13g2:    conf.openLog( 'pdkIHPsg13g2'    )
+    if conf.doPdkIHPsg13g2c4m: conf.openLog( 'pdkIHPsg13g2c4m' )
+    if conf.doPdkGF180mcu:     conf.openLog( 'pdkGF180mcu'     )
+    if conf.doPdkGF180mcuc4m:  conf.openLog( 'pdkGF180mcuc4m'  )
+    if conf.doBenchs:          conf.openLog( 'benchs'          )
+    if conf.doPyBenchs:        conf.openLog( 'benchs'          )
+    if conf.dockerMode:        os.environ['USER'] = 'root'
 
     gitSupports = []
     for supportRepo in conf.supportRepos:
@@ -577,6 +653,18 @@ try:
 
     if conf.doAlliance:
         gitAlliance = GitRepository( conf.allianceRepo, conf.srcDir, conf.fds['alliance'] )
+
+    if conf.doPdkIHPsg13g2:
+        gitPdkIHPsg13g2 = GitRepository( conf.pdkIHPsg13g2Repo, conf.srcDir, conf.fds['pdkIHPsg13g2'] )
+
+    if conf.doPdkIHPsg13g2c4m:
+        gitPdkIHPsg13g2c4m = GitRepository( conf.pdkIHPsg13g2c4mRepo, conf.srcDir, conf.fds['pdkIHPsg13g2c4m'] )
+
+    if conf.doPdkGF180mcu:
+        gitPdkGF180mcu = GitRepository( conf.pdkGF180mcuRepo, conf.srcDir, conf.fds['pdkGF180mcu'] )
+
+    if conf.doPdkGF180mcuc4m:
+        gitPdkGF180mcuc4m = GitRepository( conf.pdkGF180mcuc4mRepo, conf.srcDir, conf.fds['pdkGF180mcuc4m'] )
 
     if conf.doGit:
         for gitSupport in gitSupports:
@@ -596,8 +684,29 @@ try:
             if conf.rmSource: gitCoriolis.removeLocalRepo()
             gitCoriolis.clone   ()
             gitCoriolis.checkout( 'main' )
-            gitCoriolis.submoduleInit()
             gitCoriolis.submoduleUpdate()
+        
+        if conf.doPdkIHPsg13g2:
+            if conf.rmSource: gitPdkIHPsg13g2.removeLocalRepo()
+            gitPdkIHPsg13g2.clone   ()
+            gitPdkIHPsg13g2.checkout( 'main' )
+            gitPdkIHPsg13g2.submoduleUpdate()
+        
+        if conf.doPdkIHPsg13g2c4m:
+            if conf.rmSource: gitPdkIHPsg13g2c4m.removeLocalRepo()
+            gitPdkIHPsg13g2c4m.clone   ()
+            gitPdkIHPsg13g2c4m.checkout( 'main' )
+        
+        if conf.doPdkGF180mcu:
+            if conf.rmSource: gitPdkGF180mcu.removeLocalRepo()
+            gitPdkGF180mcu.clone   ()
+            gitPdkGF180mcu.checkout( 'main' )
+            gitPdkGF180mcu.submoduleUpdate()
+        
+        if conf.doPdkGF180mcuc4m:
+            if conf.rmSource: gitPdkGF180mcuc4m.removeLocalRepo()
+            gitPdkGF180mcuc4m.clone   ()
+            gitPdkGF180mcuc4m.checkout( 'main' )
       
         if conf.rmSource: gitBenchs.removeLocalRepo()
         gitBenchs.clone()
