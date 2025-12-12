@@ -1,6 +1,7 @@
 
 import os
 from   pathlib           import Path
+from   doit              import get_var
 from   coriolis          import Cfg
 from   coriolis.helpers  import overlay
 from   pdks.gf180mcu_c4m import setup
@@ -28,15 +29,18 @@ from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.yosys    import Yosys
 from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.alias    import Alias
+from coriolis.designflow.copy     import Copy
 from coriolis.designflow.clean    import Clean
 from coriolis.designflow.klayout  import Klayout, ShowDRC
 from pdks.gf180mcu.designflow.drc import DRC
 import doDesign
 
 PnR.textMode = True
+reuseBlif    = get_var( 'reuse-blif', None )
 pnrSuffix    = '_cts_r'
 topName      = 'arlet6502'
 
+doDesign.buildChip = False
 if doDesign.buildChip:
     pnrFiles = [ 'chip_r.gds'
                , 'chip_r.vst'
@@ -59,7 +63,10 @@ else:
                , 'arlet6502_cts_r.vst'
                ]
 
-ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
+if reuseBlif:
+    ruleYosys = Copy.mkRule( 'yosys', 'Arlet6502.blif', './non_generateds/Arlet6502.{}.blif'.format( reuseBlif ))
+else:
+    ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
 ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )

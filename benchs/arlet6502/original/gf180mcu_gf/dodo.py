@@ -40,6 +40,7 @@ reuseBlif    = get_var( 'reuse-blif', None )
 
 import doDesign
 
+doDesign.buildChip = False
 if doDesign.buildChip:
     pnrFiles = [ 'chip_r.gds'
                , 'chip_r.vst'
