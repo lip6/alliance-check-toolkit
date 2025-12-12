@@ -714,7 +714,7 @@ try:
 
     if conf.rmBuild:
         for entry in os.listdir(conf.rootDir):
-            if entry.startswith('Linux.'):
+            if entry.startswith('Linux.') or entry == "release":
                 buildDir = conf.rootDir+'/'+entry
                 print( 'Removing OS build directory: "{}"'.format(buildDir) )
                 shutil.rmtree( buildDir )
