@@ -19,7 +19,7 @@ def userSettings ():
 
 
 userSettings()
-setup( checkToolkit=Path('../../../..') )
+setup()
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 

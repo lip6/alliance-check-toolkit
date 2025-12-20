@@ -55,7 +55,7 @@
  benchRules["ao68000/ihpsg13s2_c4m"]="gds"
  benchRules["ao68000/gf180mcu_gf"]="${gf180rule}"
  benchRules["RISC-V/Vex/cmos"]="druc lvx"
- benchRules["RISC-V/picorv32/sky13_c4m"]="gds"
+ benchRules["RISC-V/picorv32/sky130_c4m"]="gds"
  benchRules["RISC-V/picorv32/ihpsg13g2_c4m"]="gds"
  benchRules["RISC-V/picorv32/gf180mcu_gf"]="${gf180rule}"
  benchRules["ARM/cmos"]="druc lvx"

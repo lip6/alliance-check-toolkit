@@ -40,13 +40,7 @@ def scriptMain ( **kw ):
     try:
        #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 99 )
-        if 'CHECK_TOOLKIT' in os.environ:
-            checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
-            harnessProjectDir = checkToolkitDir + '/cells/sky130'
-        else:
-            print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
-            print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
-            sys.exit( 1 )
+        harnessProjectDir = '../../../../cells/sky130'
         cell, editor = plugins.kwParseMain( **kw )
         cellName = 'arlet6502'
         if buildChip:

@@ -29,13 +29,13 @@ def scriptMain ( **kw ):
     try:
         #setTraceLevel( 540 )
         #Breakpoint.setStopLevel( 100 )
-        if 'CHECK_TOOLKIT' in os.environ:
-            checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
-            harnessProjectDir = checkToolkitDir + '/cells/sky130'
-        else:
-            print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
-            print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
-            sys.exit( 1 )
+        #if 'CHECK_TOOLKIT' in os.environ:
+        #    checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
+        #    harnessProjectDir = checkToolkitDir + '/cells/sky130'
+        #else:
+        #    print( '[ERROR] The "CHECK_TOOLKIT" environment variable has not been set.'  )
+        #    print( '        Please check "./mk/users.d/user-CONFIG.mk".'  )
+        #    sys.exit( 1 )
         cell, editor = plugins.kwParseMain( **kw )
 
         if loadOpenROAD:
@@ -154,13 +154,14 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.02
-        conf.cfg.anabatic.searchHalo         = 2
+        conf.cfg.anabatic.searchHalo         = 1
         conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.katana.maxFlatEdgeOverflow  = 200
         conf.cfg.anabatic.topRoutingLayer    = 'm4'
-        conf.cfg.katana.hTracksReservedLocal = 11
-        conf.cfg.katana.vTracksReservedLocal = 11
-        conf.cfg.katana.hTracksReservedMin   = 6
-        conf.cfg.katana.vTracksReservedMin   = 6
+        conf.cfg.katana.hTracksReservedLocal = 12
+        conf.cfg.katana.vTracksReservedLocal = 16
+        conf.cfg.katana.hTracksReservedMin   = 4
+        conf.cfg.katana.vTracksReservedMin   = 4
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
@@ -178,7 +179,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = conf.computeCoreSize( 92*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 100*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u(   2020.0), u( 2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:
