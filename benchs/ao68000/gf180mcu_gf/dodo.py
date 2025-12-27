@@ -37,6 +37,8 @@ from coriolis.designflow.alias    import Alias
 from pdks.gf180mcu.designflow.drc import DRC
 PnR.textMode = True
 reuseBlif    = get_var( 'reuse-blif', None )
+#drcFlags     = DRC.SHOW_ERRORS
+drcFlags     = 0
 
 
 from doDesign  import scriptMain
@@ -52,7 +54,7 @@ rulePnR    = PnR       .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
                                          , [ruleYosys]
                                        , scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'   , [rulePnR] )
-ruleDRC     = DRC     .mkRule( 'drc'   , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
+ruleDRC     = DRC     .mkRule( 'drc'   , [rulePnR], DRC.GF180MCU_C|drcFlags )
 ruleCgt     = PnR     .mkRule( 'cgt' )
 ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()

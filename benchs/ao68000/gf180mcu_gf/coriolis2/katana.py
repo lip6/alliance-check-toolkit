@@ -70,3 +70,7 @@ from coriolis.Hurricane import DebugSession
 # Pb <id:1377612 Vertical CLK_I_root_bl_tl_br_br_0 Metal3 [184.72um 232.49um] 
 #DebugSession.addToTrace( katana.getCell().getNet( 'CLK_I_root_bl_tl_br_br_0' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_68674_new_n5573' ) )
+# Pb @(376,413) Notch on abc_71324_new_n14998
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_71324_new_n14998' ) )
+# Pb @(384,460) Notch on abc_71324_new_n3672
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_71324_new_n3672' ) )

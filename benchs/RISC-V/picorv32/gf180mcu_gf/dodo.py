@@ -39,6 +39,8 @@ from pdks.gf180mcu.designflow.drc import DRC
 from doDesign                               import scriptMain
 PnR.textMode = True
 reuseBlif    = get_var( 'reuse-blif', None )
+#drcFlags     = DRC.SHOW_ERRORS
+drcFlags     = 0
 
 
 import doDesign
@@ -72,7 +74,7 @@ else:
 
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
-ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|drcFlags )
 ruleCgt     = PnR     .mkRule( 'cgt'     )
 ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()

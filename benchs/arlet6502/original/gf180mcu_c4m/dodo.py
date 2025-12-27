@@ -39,6 +39,8 @@ PnR.textMode = True
 reuseBlif    = get_var( 'reuse-blif', None )
 pnrSuffix    = '_cts_r'
 topName      = 'arlet6502'
+#drcFlags     = DRC.SHOW_ERRORS
+drcFlags     = 0
 
 doDesign.buildChip = False
 if doDesign.buildChip:
@@ -70,7 +72,7 @@ else:
 ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
-ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS|DRC.ANTENNA )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.ANTENNA|drcFlags )
 ruleCgt     = PnR     .mkRule( 'cgt'     )   
 ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()

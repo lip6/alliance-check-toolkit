@@ -32,7 +32,8 @@ reuseBlif          = get_var( 'reuse-blif', None )
 doDesign.buildChip = False
 PnR.textMode       = True
 enableFiller       = True
-drcFlags           = DRC.SHOW_ERRORS
+#drcFlags           = DRC.SHOW_ERRORS
+drcFlags           = 0
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
 

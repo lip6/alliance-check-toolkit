@@ -25,15 +25,16 @@ def scriptMain ( **kw ):
     global af, buildChip
 
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
-        cfg.misc.verboseLevel1    = True
-        cfg.misc.verboseLevel2    = True
+        cfg.misc.logMode       = False
+        cfg.misc.verboseLevel2 = True
+        cfg.misc.verboseLevel2 = True
 
     rvalue = True
     try:
         #setTraceLevel( 550 )
         #for cell in af.getAllianceLibrary(1).getLibrary().getCells():
         #    print( '"{}" {}'.format(cell.getName(),cell) )
-        #Breakpoint.setStopLevel( 99 )
+        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'ao68000' )
         if editor:
@@ -72,15 +73,15 @@ def scriptMain ( **kw ):
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #conf.cfg.etesian.spaceMargin         = 0.10
        #conf.cfg.anabatic.searchHalo         = 2
-        conf.cfg.anabatic.gcellAspectRatio   = 1.8
+        conf.cfg.anabatic.gcellAspectRatio   = 2.0
         conf.cfg.anabatic.globalIterations   = 30
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
         conf.cfg.katana.hTracksReservedLocal = 13
-        conf.cfg.katana.vTracksReservedLocal = 16
+        conf.cfg.katana.vTracksReservedLocal = 17
         conf.cfg.katana.hTracksReservedMin   = 11
-        conf.cfg.katana.vTracksReservedMin   = 12
+        conf.cfg.katana.vTracksReservedMin   = 13
         conf.cfg.katana.trackFill            = 0
-        conf.cfg.katana.runRealignStage      = False
+        conf.cfg.katana.runRealignStage      = True
         conf.cfg.block.spareSide             = 8*conf.sliceHeight
         conf.editor              = editor
         conf.ioPinsInTracks      = True
@@ -89,7 +90,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = conf.computeCoreSize( 170*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 176*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( 100*conf.sliceHeight, 100*conf.sliceHeight )
         conf.useHTree( 'CLK_I', Spares.HEAVY_LEAF_LOAD )
         conf.useHTree( 'reset_n' )

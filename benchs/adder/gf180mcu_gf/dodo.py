@@ -39,6 +39,8 @@ import doDesign
 reuseBlif          = get_var( 'reuse-blif', None )
 PnR.textMode       = True
 doDesign.buildChip = False
+#drcFlags           = DRC.SHOW_ERRORS
+drcFlags           = 0
 
 
 if reuseBlif:
@@ -69,7 +71,7 @@ else:
                                  , [ruleYosys]
                                  , doDesign.scriptMain )
 
-ruleDRC     = DRC     .mkRule( 'drc' , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS|DRC.ANTENNA )
+ruleDRC     = DRC     .mkRule( 'drc' , [rulePnR], DRC.GF180MCU_C|DRC.ANTENNA|drcFlags )
 ruleGds     = Alias   .mkRule( 'gds', [rulePnR] )
 ruleCgt     = PnR     .mkRule( 'cgt' )
 ruleKlayout = Klayout .mkRule( 'klayout' )

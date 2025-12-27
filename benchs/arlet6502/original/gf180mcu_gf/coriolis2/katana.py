@@ -174,3 +174,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11867_new_n529' ) )
 # Pb on RP id:493841 too close non-pref and non-fused.
 #DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502_AXYS_0_1' ) )
+# Pb @(210,163)
+# Pb @(205,57) Min dist M2
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_11951_new_n1279' ) )
+# Pb @(45,203) Min dist M3

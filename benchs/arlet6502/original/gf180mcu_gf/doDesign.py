@@ -135,7 +135,7 @@ def scriptMain ( **kw ):
         designConf.cfg.katana.hTracksReservedMin   = 6
         designConf.cfg.katana.vTracksReservedMin   = 12
         designConf.cfg.katana.trackFill            = 0
-        designConf.cfg.katana.runRealignStage      = False
+        designConf.cfg.katana.runRealignStage      = True
         designConf.cfg.block.spareSide             = 8*sliceHeight
         designConf.coreToChipClass     = CoreToChip
         designConf.editor              = editor
