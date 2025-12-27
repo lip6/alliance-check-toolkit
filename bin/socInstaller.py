@@ -267,6 +267,24 @@ class PdkGF180mcuc4mCommand ( CommandArg ):
         return
 
 
+class PdkSky130c4mCommand ( CommandArg ):
+
+    def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
+        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+                                  , wd=srcDir+'/coriolis-pdk-sky130-c4m'
+                                  , fdLog=fdLog )
+        return
+
+
+class PdkNsx2Command ( CommandArg ):
+
+    def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
+        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+                                  , wd=srcDir+'/coriolis-pdk-nsx2'
+                                  , fdLog=fdLog )
+        return
+
+
 class BenchsCommand ( CommandArg ):
 
     def __init__ ( self, benchsDir, fdLog=None ):
@@ -358,6 +376,8 @@ class Configuration ( object ):
         self._pdkIHPsg13g2c4mRepo = 'https://github.com/lip6/coriolis-pdk-ihpsg13g2-c4m.git'
         self._pdkGF180mcuRepo     = 'https://github.com/lip6/coriolis-pdk-gf180mcu.git'
         self._pdkGF180mcuc4mRepo  = 'https://github.com/lip6/coriolis-pdk-gf180mcu-c4m.git'
+        self._pdkSky130c4mRepo    = 'https://github.com/lip6/coriolis-pdk-sky130-c4m.git'
+        self._pdkNsx2Repo         = 'https://github.com/lip6/coriolis-pdk-nsx2.git'
         self._benchsRepo          = 'https://github.com/lip6/alliance-check-toolkit.git'
         self._homeDir           = os.environ['HOME']
         self._debugArg          = ''
@@ -383,6 +403,8 @@ class Configuration ( object ):
                                   , 'pdkIHPsg13g2c4m':None
                                   , 'pdkGF180mcu'    :None
                                   , 'pdkGF180mcuc4m' :None
+                                  , 'pdkSky130c4m'   :None
+                                  , 'pdkNsx2'        :None
                                   , 'benchs'         :None }
         self._fds               = { 'alliance'       :None
                                   , 'coriolis'       :None
@@ -390,6 +412,8 @@ class Configuration ( object ):
                                   , 'pdkIHPsg13g2c4m':None
                                   , 'pdkGF180mcu'    :None
                                   , 'pdkGF180mcuc4m' :None
+                                  , 'pdkSky130c4m'   :None
+                                  , 'pdkNsx2'        :None
                                   , 'benchs'         :None }
         self._benchsDir         = None
         self._masterHost        = self._detectMasterHost()
@@ -514,6 +538,10 @@ class Configuration ( object ):
             commands.append( PdkGF180mcuCommand( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkGF180mcu'] ) )
         if self.doPdkGF180mcuc4m:
             commands.append( PdkGF180mcuc4mCommand( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkGF180mcuc4m'] ) )
+        if self.doPdkSky130c4m:
+            commands.append( PdkSky130c4mCommand( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkSky130c4m'] ) )
+        if self.doPdkNsx2:
+            commands.append( PdkNsx2Command( self.srcDir, 1, pdkOtherArgs, fdLog=self.fds['pdkNsx2'] ) )
         if self.doBenchs:
             commands.append( BenchsCommand( self.benchsDir, fdLog=self.fds['benchs'] ) )
         if self.doPyBenchs:
@@ -599,6 +627,8 @@ parser.add_option ( "--do-ihpsg13g2"   , action="store_true",                des
 parser.add_option ( "--do-ihpsg13g2c4m", action="store_true",                dest="doPdkIHPsg13g2c4m", help="Rebuild the IHP SG13G2 PDK, with C4M standard cells." )
 parser.add_option ( "--do-gf180mcu"    , action="store_true",                dest="doPdkGF180mcu"    , help="Rebuild the GF 180 MCU PDK." )
 parser.add_option ( "--do-gf180mcuc4m" , action="store_true",                dest="doPdkGF180mcuc4m" , help="Rebuild the GF 180 MCU PDK, with C4M standard cells." )
+parser.add_option ( "--do-sky130c4m"   , action="store_true",                dest="doPdkSky130c4m"   , help="Rebuild the SkyWater 130A PDK, with C4M standard cells." )
+parser.add_option ( "--do-nsx2"        , action="store_true",                dest="doPdkNsx2"        , help="Rebuild the Symbolic NSxLib 2 PDK." )
 parser.add_option ( "--do-report"      , action="store_true",                dest="doReport"         , help="Send a final report." )
 parser.add_option ( "--nightly"        , action="store_true",                dest="nightly"          , help="Perform a nighly build." )
 parser.add_option ( "--docker"         , action="store_true",                dest="docker"           , help="Perform a build inside a docker container." )
@@ -628,6 +658,8 @@ try:
     if options.doPdkIHPsg13g2c4m:         conf.doPdkIHPsg13g2c4m = True
     if options.doPdkGF180mcu:             conf.doPdkGF180mcu     = True
     if options.doPdkGF180mcuc4m:          conf.doPdkGF180mcuc4m  = True
+    if options.doPdkSky130c4m:            conf.doPdkSky130c4m    = True
+    if options.doPdkNsx2:                 conf.doPdkNsx2         = True
     if options.benchs:                    conf.doBenchs          = True
     if options.pybenchs:                  conf.doPyBenchs        = True
     if options.doReport:                  conf.doSendReport      = True
@@ -641,6 +673,8 @@ try:
     if conf.doPdkIHPsg13g2c4m: conf.openLog( 'pdkIHPsg13g2c4m' )
     if conf.doPdkGF180mcu:     conf.openLog( 'pdkGF180mcu'     )
     if conf.doPdkGF180mcuc4m:  conf.openLog( 'pdkGF180mcuc4m'  )
+    if conf.doPdkSky130c4m:    conf.openLog( 'pdkSky130c4m'    )
+    if conf.doPdkNsx2:         conf.openLog( 'pdkNsx2'         )
     if conf.doBenchs:          conf.openLog( 'benchs'          )
     if conf.doPyBenchs:        conf.openLog( 'benchs'          )
     if conf.dockerMode:        os.environ['USER'] = 'root'
@@ -665,6 +699,12 @@ try:
 
     if conf.doPdkGF180mcuc4m:
         gitPdkGF180mcuc4m = GitRepository( conf.pdkGF180mcuc4mRepo, conf.srcDir, conf.fds['pdkGF180mcuc4m'] )
+
+    if conf.doPdkGF180mcuc4m:
+        gitPdkSky130c4m = GitRepository( conf.pdkSky130c4mRepo, conf.srcDir, conf.fds['pdkSky130c4m'] )
+
+    if conf.doPdkNsx2:
+        gitPdkNsx2 = GitRepository( conf.pdkNsx2Repo, conf.srcDir, conf.fds['pdkNsx2'] )
 
     if conf.doGit:
         for gitSupport in gitSupports:
@@ -707,6 +747,16 @@ try:
             if conf.rmSource: gitPdkGF180mcuc4m.removeLocalRepo()
             gitPdkGF180mcuc4m.clone   ()
             gitPdkGF180mcuc4m.checkout( 'main' )
+        
+        if conf.doPdkSky130c4m:
+            if conf.rmSource: gitPdkSky130c4m.removeLocalRepo()
+            gitPdkSky130c4m.clone   ()
+            gitPdkSky130c4m.checkout( 'main' )
+        
+        if conf.doPdkNsx2:
+            if conf.rmSource: gitPdkNsx2.removeLocalRepo()
+            gitPdkNsx2.clone   ()
+            gitPdkNsx2.checkout( 'main' )
       
         if conf.rmSource: gitBenchs.removeLocalRepo()
         gitBenchs.clone()
