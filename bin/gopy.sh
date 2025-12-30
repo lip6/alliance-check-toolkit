@@ -14,15 +14,17 @@
    printf "%u:%02u" $mins $secs
  }
 
-  runSetId="not_set"
-  onGithub="false"
- gf180rule="gds"
+      runSetId="not_set"
+      onGithub="false"
+     gf180rule="gds"
+ ihpsg13g2rule="gds"
  while [ $# -gt 0 ]; do
    case $1 in
      --github-runner) echo "Github/runner mode..";
                       onGithub="true";;
      --run-set=*)     runSetId=`getString $1`;;
      --gf180-drc)     gf180rule="drc";;
+     --ihpsg13g2-drc) ihpsg13g2rule="drc";;
    esac
    shift
  done
@@ -41,22 +43,22 @@
  benchRules["arlet6502/original/tsmc_c018"]="gds"
  benchRules["arlet6502/original/freepdk45_c4m"]="gds"
  benchRules["arlet6502/original/sky130_c4m"]="gds"
- benchRules["arlet6502/original/ihpsg13s2_c4m"]="gds"
+ benchRules["arlet6502/original/ihpsg13s2_c4m"]="${ihpsg13g2rule}"
  benchRules["arlet6502/original/gf180mcu_c4m"]="${gf180rule}"
  benchRules["arlet6502/original/gf180mcu_gf"]="${gf180rule}"
- benchRules["arlet6502/asic_fixed/ihpsg13g2_c4m"]="gds"
- benchRules["arlet6502/asic_serialized/ihpsg13g2_c4m"]="gds"
+ benchRules["arlet6502/asic_fixed/ihpsg13g2_c4m"]="${ihpsg13g2rule}"
+ benchRules["arlet6502/asic_serialized/ihpsg13g2_c4m"]="${ihpsg13g2rule}"
  benchRules["MIPS/microprogrammed"]="druc lvx"
  benchRules["MIPS/pipeline"]="druc lvx"
  benchRules["snx/cmos"]="druc lvx"
  benchRules["ao68000/tsmc_c018"]="gds"
  benchRules["ao68000/freepdk45_c4m"]="gds"
  benchRules["ao68000/sky130_c4m"]="gds"
- benchRules["ao68000/ihpsg13s2_c4m"]="gds"
+ benchRules["ao68000/ihpsg13s2_c4m"]="${ihpsg13g2rule}"
  benchRules["ao68000/gf180mcu_gf"]="${gf180rule}"
  benchRules["RISC-V/Vex/cmos"]="druc lvx"
  benchRules["RISC-V/picorv32/sky130_c4m"]="gds"
- benchRules["RISC-V/picorv32/ihpsg13g2_c4m"]="gds"
+ benchRules["RISC-V/picorv32/ihpsg13g2_c4m"]="${ihpsg13g2rule}"
  benchRules["RISC-V/picorv32/gf180mcu_gf"]="${gf180rule}"
  benchRules["ARM/cmos"]="druc lvx"
  if [ "${onGithub}" = "true" ]; then
@@ -122,6 +124,15 @@
    echo "        (${crlenv})"
    exit 1
  fi
+ if [ "${runSetId}" = "not_set" ]; then
+   if [ "${gf180rule}" = "drc" ]; then
+     echo "  o  DRC for GF 180 MCU enabled."
+   fi
+   if [ "${ihpsg13g2rule}" = "drc" ]; then
+     echo "  o  DRC for IHP sg13g2 enabled."
+   fi
+ fi
+     
 #mode="stopOnFailure"
  mode="ignoreFailure"
 # hline="+---+----+--------------------------------+------------+----------+-----------+"
@@ -204,7 +215,8 @@
 
  timedRunSet () {
    args=""
-   if [ "${gf180rule}" != "gds" ]; then args="${args} --gf180-drc"; fi
+   if [ "${gf180rule}"     != "gds" ]; then args="${args} --gf180-drc";     fi
+   if [ "${ihpsg13g2rule}" != "gds" ]; then args="${args} --ihpsg13g2-drc"; fi
    startTime="$SECONDS"
    setId="$1"
    rvalue=0

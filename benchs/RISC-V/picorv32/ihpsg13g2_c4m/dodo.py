@@ -70,12 +70,9 @@ rulePnR   = PnR     .mkRule( 'gds'  , [ 'picorv32_cts_r.gds'
 #shellEnv[ 'REPORT_FILE' ] = rulePnR.file_target(0).with_suffix('.kdrc-report.txt').as_posix()
 #shellEnv[ 'CELL_NAME'   ] = rulePnR.file_target(0).stem
 #shellEnv.export()
-#ruleDRC    = DRC   .mkRule( 'drc', rulePnR.file_target(0) )
-ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), DRC.Minimal )
-ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), DRC.Maximal )
-ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), DRC.C4M )
-ruleSTA     = STA    .mkRule( 'sta'    , rulePnR.file_target(2))
-ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
+ruleDrc     = DRC    .mkRule( 'drc' , rulePnR.file_target(0), DRC.NoDensity )
+ruleSTA     = STA    .mkRule( 'sta' , rulePnR.file_target(2))
+ruleXTas    = XTas   .mkRule( 'xtas', ruleSTA.file_target(0) )
 
 # To run individual tools in stand-alone mode.
 ruleCgt     = PnR    .mkRule( 'cgt' )

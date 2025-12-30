@@ -38,12 +38,10 @@ rulePnR   = PnR     .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
                                     , scriptMain )
 staLayout   = rulePnR.file_target( 2 )
 ruleCgt     = PnR    .mkRule( 'cgt' )
-ruleGds     = Alias  .mkRule( 'gds'    , [rulePnR] )
-ruleDrcMin  = DRC    .mkRule( 'drc_min', rulePnR.file_target(0), DRC.Minimal )
-ruleDrcMax  = DRC    .mkRule( 'drc_max', rulePnR.file_target(0), DRC.Maximal )
-ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', rulePnR.file_target(0), DRC.C4M )
-ruleSTA     = STA    .mkRule( 'sta'    , staLayout )
-ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
+ruleGds     = Alias  .mkRule( 'gds' , [rulePnR] )
+ruleDrc     = DRC    .mkRule( 'drc' , rulePnR.file_target(0), DRC.NoDensity )
+ruleSTA     = STA    .mkRule( 'sta' , staLayout )
+ruleXTas    = XTas   .mkRule( 'xtas', ruleSTA.file_target(0) )
 ruleClean   = Clean  .mkRule( [ 'ao68000.00.density.histogram.dat'
                              , 'ao68000.00.density.histogram.plt'
                              , 'ao68000.katana.dat' ] ) 

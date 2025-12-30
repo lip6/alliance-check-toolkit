@@ -32,8 +32,7 @@ reuseBlif          = get_var( 'reuse-blif', None )
 doDesign.buildChip = False
 PnR.textMode       = True
 enableFiller       = True
-#drcFlags           = DRC.SHOW_ERRORS
-drcFlags           = 0
+drcFlags           = DRC.NoDensity
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
 
@@ -91,11 +90,9 @@ else:
     ruleIverilog = Iverilog.mkRule( 'iverilog', [ ruleVasy, 'tb_gate_cpu.v' ] )
     ruleGtkWave  = GtkWave .mkRule( 'gtkwave', [ruleIverilog] )
 
-ruleDrcMin  = DRC    .mkRule( 'drc_min', drcLayout, drcFlags|DRC.Minimal )
-ruleDrcMax  = DRC    .mkRule( 'drc_max', drcLayout, drcFlags|DRC.Maximal )
-ruleDrcC4M  = DRC    .mkRule( 'drc_c4m', drcLayout, drcFlags|DRC.C4M )
-ruleSTA     = STA    .mkRule( 'sta'    , staLayout )
-ruleXTas    = XTas   .mkRule( 'xtas'   , ruleSTA.file_target(0) )
+ruleDrc     = DRC    .mkRule( 'drc' , drcLayout, drcFlags )
+ruleSTA     = STA    .mkRule( 'sta' , staLayout )
+ruleXTas    = XTas   .mkRule( 'xtas', ruleSTA.file_target(0) )
 ruleCgt     = PnR    .mkRule( 'cgt' )
 ruleKlayout = Klayout.mkRule( 'klayout', depends=drcLayout )
 ruleClean   = Clean  .mkRule( [ 'lefRWarning.log', 'cgt.log' ] )
