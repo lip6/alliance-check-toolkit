@@ -27,7 +27,7 @@ import doDesign
 
 reuseBlif          = get_var( 'reuse-blif', None )
 PnR.textMode       = True
-doDesign.buildChip = True
+doDesign.buildChip = False
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
 drcFlags           = DRC.NoDensity
