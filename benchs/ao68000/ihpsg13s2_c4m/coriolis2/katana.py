@@ -18,4 +18,5 @@ from coriolis.Hurricane import DebugSession
 # id:2208364 -> event:00178312
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_68950_new_n20700' ))
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_68950_new_n20881' ))
-
+# Pb @(568,151) Notch Metal2 on same net.
+# <id:2191090 Vertical abc_71600_new_n14460_hfns_7 Metal2 [181um 263.145um] ...>

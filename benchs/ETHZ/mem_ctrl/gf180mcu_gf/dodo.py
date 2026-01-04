@@ -33,6 +33,8 @@ from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.clean    import Clean
 from pdks.gf180mcu.designflow.drc import DRC
 PnR.textMode = True
+#drcFlags     = DRC.SHOW_ERRORS
+drcFlags     = 0
 
 import doDesign
 
@@ -62,7 +64,7 @@ else:
 ruleYosys   = Yosys   .mkRule( 'yosys'   , 'mem_ctrl.v' )
 ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'mem_ctrl.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
-ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.SHOW_ERRORS )
+ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|drcFlags )
 ruleCgt     = PnR     .mkRule( 'cgt'     )
 ruleKlayout = Klayout .mkRule( 'klayout' )
 ruleClean   = Clean   .mkRule()

@@ -35,7 +35,7 @@ def scriptMain ( **kw ):
         gaugeName = cfg.anabatic.routingGauge
     try:
         #setTraceLevel( 540 )
-        #Breakpoint.setStopLevel( 99 )
+        #Breakpoint.setStopLevel( 100 )
 
         if loadOpenROAD:
             db      = DataBase.getDB()

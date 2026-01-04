@@ -39,8 +39,8 @@ from pdks.gf180mcu.designflow.drc import DRC
 from doDesign                               import scriptMain
 PnR.textMode = True
 reuseBlif    = get_var( 'reuse-blif', None )
-#drcFlags     = DRC.SHOW_ERRORS
-drcFlags     = 0
+drcFlags     = DRC.SHOW_ERRORS
+#drcFlags     = 0
 
 
 import doDesign

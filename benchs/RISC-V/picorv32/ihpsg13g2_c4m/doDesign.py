@@ -38,7 +38,7 @@ def scriptMain ( **kw ):
 
     try:
         #setTraceLevel( 540 )
-        #Breakpoint.setStopLevel( 99 )
+        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'picorv32' )
         if editor:
@@ -94,10 +94,10 @@ def scriptMain ( **kw ):
         conf.cfg.katana.maxFlatEdgeOverflow  = 100
         conf.cfg.katana.hTracksReservedLocal = 16
         conf.cfg.katana.vTracksReservedLocal = 15
-        conf.cfg.katana.hTracksReservedMin   = 7
-        conf.cfg.katana.vTracksReservedMin   = 5
+        conf.cfg.katana.hTracksReservedMin   = 8
+        conf.cfg.katana.vTracksReservedMin   = 6
         conf.cfg.katana.trackFill            = 0
-        conf.cfg.katana.runRealignStage      = False
+        conf.cfg.katana.runRealignStage      = True
         conf.cfg.block.spareSide             = 8*conf.sliceHeight
         conf.editor              = editor
         conf.ioPinsInTracks      = True
@@ -107,7 +107,7 @@ def scriptMain ( **kw ):
         conf.bRows               = 2
         conf.chipName            = 'chip'
         conf.coreToChipClass     = CoreToChip
-        conf.coreSize            = conf.computeCoreSize( 88*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 89*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u( 8*85 + 2*270.0), u( 8*85 + 2*300.0) )
         conf.doLvx               = 'corona'
         conf.useHTree( 'clk', Spares.HEAVY_LEAF_LOAD )

@@ -58,3 +58,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n4431' ))
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n4436' ))
 #DebugSession.addToTrace( katana.getCell().getNet( 'latched_rd(2)' ))
+# Pb @(140,219) Metal3 minimum area
+DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n3346' ))
