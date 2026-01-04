@@ -25,6 +25,8 @@
      --run-set=*)     runSetId=`getString $1`;;
      --gf180-drc)     gf180rule="drc";;
      --ihpsg13g2-drc) ihpsg13g2rule="drc";;
+     --all-drc)       gf180rule="drc"
+		      ihpsg13g2rule="drc";;
    esac
    shift
  done
