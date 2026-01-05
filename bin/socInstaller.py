@@ -36,6 +36,7 @@ try:
     import re
     import bz2
     import smtplib
+    from pathlib                import Path
     from io                     import IOBase
     from email.mime.text        import MIMEText
     from email.mime.multipart   import MIMEMultipart
@@ -295,7 +296,14 @@ class BenchsCommand ( CommandArg ):
 class PyBenchsCommand ( CommandArg ):
 
     def __init__ ( self, benchsDir, fdLog=None ):
-        CommandArg.__init__ ( self, [ '../bin/gopy.sh' ], wd=benchsDir, fdLog=fdLog )
+        CommandArg.__init__ ( self, [ '../bin/gopy.sh', '--all-drc' ], wd=benchsDir, fdLog=fdLog )
+        return
+
+
+class DesignsCommand ( CommandArg ):
+
+    def __init__ ( self, benchsDir, fdLog=None ):
+        CommandArg.__init__ ( self, [ './bin/regression.sh', '--all-drc' ], wd=benchsDir, fdLog=fdLog )
         return
         
 
@@ -358,12 +366,13 @@ class Configuration ( object ):
         , 'homeDir'         , 'masterHost'
         , 'debugArg'        , 'nightlyMode', 'dockerMode', 'chrootMode'
         , 'rmSource'        , 'rmBuild'
-        , 'doGit'           , 'doAlliance'       , 'doCoriolis'   , 'doBenchs', 'doPyBenchs', 'doSendReport'
+        , 'doGit'           , 'doAlliance' , 'doCoriolis', 'doBenchs', 'doPyBenchs', 'doDesigns'
+        , 'doSendReport'
         , 'doPdkIHPsg13g2'  , 'doPdkIHPsg13g2c4m', 'doPdkGF180mcu', 'doPdkGF180mcuc4m'
         , 'success'         , 'rcode'
         ]
     SecondaryNames = \
-        [ 'rootDir', 'srcDir', 'logDir', 'logs', 'fds', 'yosysBin', 'benchsDir'
+        [ 'rootDir', 'srcDir', 'logDir', 'logs', 'fds', 'yosysBin', 'benchsDir', 'designsDir'
         ]
 
     def __init__ ( self ):
@@ -379,6 +388,7 @@ class Configuration ( object ):
         self._pdkSky130c4mRepo    = 'https://github.com/lip6/coriolis-pdk-sky130-c4m.git'
         self._pdkNsx2Repo         = 'https://github.com/lip6/coriolis-pdk-nsx2.git'
         self._benchsRepo          = 'https://github.com/lip6/alliance-check-toolkit.git'
+        self._designsRepo         = 'https://github.com/lip6/coriolis-designs.git'
         self._homeDir           = os.environ['HOME']
         self._debugArg          = ''
         self._rmSource          = False
@@ -393,6 +403,7 @@ class Configuration ( object ):
         self._doPdkGF180mcuc4m  = False
         self._doBenchs          = False
         self._doPyBenchs        = False
+        self._doDesigns         = False
         self._doSendReport      = False
         self._nightlyMode       = False
         self._dockerMode        = False
@@ -416,6 +427,7 @@ class Configuration ( object ):
                                   , 'pdkNsx2'        :None
                                   , 'benchs'         :None }
         self._benchsDir         = None
+        self._designsDir        = None
         self._masterHost        = self._detectMasterHost()
         self._success           = False
         self._rcode             = 0
@@ -459,6 +471,7 @@ class Configuration ( object ):
         self._logDir     = self._srcDir  + '/logs'
         self._yosysBin   = self._srcDir  + '/' + GitRepository.getLocalRepository(self._coriolisRepo) + '/bootstrap/yosysInstaller.sh'
         self._benchsDir  = self._srcDir  + '/' + GitRepository.getLocalRepository(self._benchsRepo  ) + '/benchs'
+        self._designsDir = self._srcDir  + '/' + GitRepository.getLocalRepository(self._designsRepo )
         self._masterHost = self._detectMasterHost()
         return
 
@@ -546,6 +559,8 @@ class Configuration ( object ):
             commands.append( BenchsCommand( self.benchsDir, fdLog=self.fds['benchs'] ) )
         if self.doPyBenchs:
             commands.append( PyBenchsCommand( self.benchsDir, fdLog=self.fds['benchs'] ) )
+        if self.doDesigns:
+            commands.append( DesignsCommand( self.designsDir, fdLog=self.fds['benchs'] ) )
         return commands
 
 
@@ -635,6 +650,7 @@ parser.add_option ( "--docker"         , action="store_true",                des
 parser.add_option ( "--chroot"         , action="store_true",                dest="chroot"           , help="Perform a build inside a chrooted environment." )
 parser.add_option ( "--benchs"         , action="store_true",                dest="benchs"           , help="Run the <alliance-checker-toolkit> sanity benchs (make)." )
 parser.add_option ( "--pybenchs"       , action="store_true",                dest="pybenchs"         , help="Run the <alliance-checker-toolkit> sanity benchs (doit)." )
+parser.add_option ( "--do-designs"     , action="store_true",                dest="designs"          , help="Run the <coriolis-designs> sanity benchs (doit)." )
 parser.add_option ( "--rm-build"       , action="store_true",                dest="rmBuild"          , help="Remove the build/install directories." )
 parser.add_option ( "--rm-source"      , action="store_true",                dest="rmSource"         , help="Remove the Git source repositories." )
 parser.add_option ( "--rm-all"         , action="store_true",                dest="rmAll"            , help="Remove everything (source+build+install)." )
@@ -662,6 +678,7 @@ try:
     if options.doPdkNsx2:                 conf.doPdkNsx2         = True
     if options.benchs:                    conf.doBenchs          = True
     if options.pybenchs:                  conf.doPyBenchs        = True
+    if options.designs:                   conf.doDesigns         = True
     if options.doReport:                  conf.doSendReport      = True
     if options.rmSource or options.rmAll: conf.rmSource          = True
     if options.rmBuild  or options.rmAll: conf.rmBuild           = True
@@ -677,13 +694,19 @@ try:
     if conf.doPdkNsx2:         conf.openLog( 'pdkNsx2'         )
     if conf.doBenchs:          conf.openLog( 'benchs'          )
     if conf.doPyBenchs:        conf.openLog( 'benchs'          )
+    if conf.doDesigns:         conf.openLog( 'benchs'          )
     if conf.dockerMode:        os.environ['USER'] = 'root'
+
+    pdmCacheDir = Path.home() / '.cache' / 'pdm'
+    print( f'Removing PDM cache directory: "{pdmCacheDir}"' )
+    shutil.rmtree( pdmCacheDir.as_posix() )
 
     gitSupports = []
     for supportRepo in conf.supportRepos:
         gitSupports.append( GitRepository( supportRepo, conf.srcDir+'/support' ) )
     gitCoriolis = GitRepository( conf.coriolisRepo, conf.srcDir, conf.fds['coriolis'] )
     gitBenchs   = GitRepository( conf.benchsRepo  , conf.srcDir, conf.fds['coriolis'] )
+    gitDesigns  = GitRepository( conf.designsRepo , conf.srcDir, conf.fds['coriolis'] )
 
     if conf.doAlliance:
         gitAlliance = GitRepository( conf.allianceRepo, conf.srcDir, conf.fds['alliance'] )
@@ -761,6 +784,10 @@ try:
         if conf.rmSource: gitBenchs.removeLocalRepo()
         gitBenchs.clone()
         gitBenchs.checkout( 'main' )
+      
+        if conf.rmSource: gitDesigns.removeLocalRepo()
+        gitDesigns.clone()
+        gitDesigns.checkout( 'main' )
 
     if conf.rmBuild:
         for entry in os.listdir(conf.rootDir):
