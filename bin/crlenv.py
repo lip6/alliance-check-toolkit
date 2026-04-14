@@ -14,6 +14,8 @@ reCoriolisPattern = re.compile( r".*coriolis.*" )
 reReleasePattern  = re.compile( r".*release.*" )
 reDebugPattern    = re.compile( r".*debug.*" )
 
+sitePackagesDir   = None
+
 
 def isInVenv():
     return (hasattr(sys, 'real_prefix') or
@@ -56,7 +58,15 @@ def envWriteBack ( pathName, pathValues ):
 
 def setupPaths ( verbose, debug=False ):
     """
-    Guess and setup the main variables to use Coriolis:
+    Guess and setup the main variables to use Coriolis. It will look
+    into the following directories, and in that order of priority:
+
+    1. ``<>/src/../release/install``, installation inside a devel.
+    2. ``<HOME>/coriolis-2.x/release/install`` .
+    3. ``/soc/coriolis2/``, LIP6 network shared install.
+    4. ``/usr``, native system install (packaged).
+
+    Set variables:
 
     * ``PATH``, to find the binaries.
     * ``LD_LIBRARY_PATH``, to access the dynamic libraries.
@@ -83,7 +93,15 @@ def setupPaths ( verbose, debug=False ):
     scriptPath = Path( __file__ ).resolve()
     topDirs    = []
 
-    topDirs  += [ homeDir / 'coriolis-2.x' / buildType / 'install'
+    selfDir = Path.cwd()
+    while selfDir != Path('/'):
+        if selfDir.name == 'src':
+            selfDir = selfDir.parents[0] / buildType / 'install'
+            break
+        selfDir = selfDir.parents[0]
+
+    topDirs  += [ selfDir
+                , homeDir / 'coriolis-2.x' / buildType / 'install'
                 , Path( '/soc/coriolis2' ) 
                 , Path( '/usr' ) 
                 ]
@@ -154,7 +172,7 @@ def setupPaths ( verbose, debug=False ):
 
     # Setup PYTHONPATH.
     v = sys.version_info
-    sitePackagesDir = None
+    global sitePackagesDir
     for libDir in libDirs:
         for pyPackageDir in [ Path('python{}.{}'.format(v.major,v.minor)) / 'site-packages'
                             , Path('python{}.{}'.format(v.major,v.minor)) / 'dist-packages'
@@ -241,12 +259,16 @@ if __name__ == '__main__':
        ego@home:~>
     """
     parser = argparse.ArgumentParser()  
-    parser.add_argument( '-v', '--verbose', action='store_true', dest='verbose' )
-    parser.add_argument( '-d', '--debug'  , action='store_true', dest='debug'   )
+    parser.add_argument( '-v', '--verbose'    , action='store_true', dest='verbose'       )
+    parser.add_argument( '-d', '--debug'      , action='store_true', dest='debug'         )
+    parser.add_argument( '-P', '--python-path', action='store_true', dest='askPythonPath' )
     parser.add_argument( 'command', nargs='*' )
     args = parser.parse_args()
 
     setupPaths( args.verbose, args.debug )
+    if args.askPythonPath:
+        print( sitePackagesDir )
+        sys.exit( 0 )
     if not len(args.command):
         printEnvironment()
         sys.exit( 0 )

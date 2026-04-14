@@ -213,7 +213,7 @@ class AllianceCommand ( CommandArg ):
 
     def __init__ ( self, srcDir, fdLog=None ):
         CommandArg.__init__ ( self, [ 'make'
-                                    , '-f', 'Makefile.LIP6'
+                                    , '-f', 'Makefile.devs'
                                     , 'install_alliance' ]
                                   , wd=srcDir+'/coriolis'
                                   , fdLog=fdLog )
@@ -224,7 +224,7 @@ class CoriolisCommand ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
         CommandArg.__init__ ( self, [ 'make'
-                                    , '-f', 'Makefile.LIP6'
+                                    , '-f', 'Makefile.devs'
                                     , 'install'
                                     ] + otherArgs
                                   , wd=srcDir+'/coriolis'
@@ -235,7 +235,7 @@ class CoriolisCommand ( CommandArg ):
 class PdkIHPsg13g2Command ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
-        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+        CommandArg.__init__ ( self, [ './build-devs.sh' ] + otherArgs
                                   , wd=srcDir+'/coriolis-pdk-ihpsg13g2'
                                   , fdLog=fdLog )
         return
@@ -244,7 +244,7 @@ class PdkIHPsg13g2Command ( CommandArg ):
 class PdkIHPsg13g2c4mCommand ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
-        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+        CommandArg.__init__ ( self, [ './build-devs.sh' ] + otherArgs
                                   , wd=srcDir+'/coriolis-pdk-ihpsg13g2-c4m'
                                   , fdLog=fdLog )
         return
@@ -253,7 +253,7 @@ class PdkIHPsg13g2c4mCommand ( CommandArg ):
 class PdkGF180mcuCommand ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
-        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+        CommandArg.__init__ ( self, [ './build-devs.sh' ] + otherArgs
                                   , wd=srcDir+'/coriolis-pdk-gf180mcu'
                                   , fdLog=fdLog )
         return
@@ -262,7 +262,7 @@ class PdkGF180mcuCommand ( CommandArg ):
 class PdkGF180mcuc4mCommand ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
-        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+        CommandArg.__init__ ( self, [ './build-devs.sh' ] + otherArgs
                                   , wd=srcDir+'/coriolis-pdk-gf180mcu-c4m'
                                   , fdLog=fdLog )
         return
@@ -271,7 +271,7 @@ class PdkGF180mcuc4mCommand ( CommandArg ):
 class PdkSky130c4mCommand ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
-        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+        CommandArg.__init__ ( self, [ './build-devs.sh' ] + otherArgs
                                   , wd=srcDir+'/coriolis-pdk-sky130-c4m'
                                   , fdLog=fdLog )
         return
@@ -280,7 +280,7 @@ class PdkSky130c4mCommand ( CommandArg ):
 class PdkNsx2Command ( CommandArg ):
 
     def __init__ ( self, srcDir, threads=1, otherArgs=[], fdLog=None ):
-        CommandArg.__init__ ( self, [ './build-LIP6.sh' ] + otherArgs
+        CommandArg.__init__ ( self, [ './build-devs.sh' ] + otherArgs
                                   , wd=srcDir+'/coriolis-pdk-nsx2'
                                   , fdLog=fdLog )
         return
