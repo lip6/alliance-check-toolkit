@@ -40,7 +40,7 @@ def scriptMain ( **kw ):
         gaugeName = cfg.anabatic.routingGauge
     try:
        #setTraceLevel( 550 )
-        Breakpoint.setStopLevel( 100 )
+       #Breakpoint.setStopLevel( 100 )
         if 'CHECK_TOOLKIT' in os.environ:
             checkToolkitDir   = os.environ[ 'CHECK_TOOLKIT' ]
             harnessProjectDir = checkToolkitDir + '/cells/sky130'
@@ -66,15 +66,15 @@ def scriptMain ( **kw ):
        #conf.cfg.etesian.bloat               = 'Flexlib'
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        conf.cfg.etesian.spaceMargin         = 0.10
+        conf.cfg.etesian.spaceMargin         = 0.70
         conf.cfg.anabatic.globalIterations   = 20
        #conf.cfg.katana.longWireUpReserve1   = 3.0
         conf.cfg.anabatic.gcellAspectRatio   = 1.8 
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
         conf.cfg.katana.hTracksReservedLocal = 20
         conf.cfg.katana.vTracksReservedLocal = 26
-        conf.cfg.katana.hTracksReservedMin   = 9
-        conf.cfg.katana.vTracksReservedMin   = 12
+        conf.cfg.katana.hTracksReservedMin   = 8
+        conf.cfg.katana.vTracksReservedMin   = 11
        #conf.cfg.katana.hTracksReservedMin   = 7
        #conf.cfg.katana.hTracksReservedLocal = 25
        #conf.cfg.katana.vTracksReservedMin   = 5
@@ -89,7 +89,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = conf.computeCoreSize( 300*sliceHeight )
+        conf.coreSize            = conf.computeCoreSize( 390*sliceHeight )
        #conf.coreSize            = ( u(1658*0.76), u(210*6.0) )
        #conf.chipSize            = ( u(  2020.0), u(  2060.0) )
         conf.coreToChipClass     = CoreToChip

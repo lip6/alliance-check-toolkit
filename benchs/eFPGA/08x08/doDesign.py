@@ -2,19 +2,19 @@
 
 import sys
 import traceback
-import CRL
-import helpers
+from   coriolis import CRL
+from   coriolis import helpers
 helpers.loadUserSettings()
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import trace, l, u, n
-import plugins
-from   Hurricane  import DbU, Breakpoint, Cell
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-from   plugins.alpha.core2chip.niolib     import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
+from   coriolis.helpers.io import ErrorMessage, WarningMessage
+from   coriolis.helpers    import trace, l, u, n
+from   coriolis            import plugins
+from   coriolis.Hurricane  import DbU, Breakpoint, Cell
+from   coriolis.plugins.block.block          import Block
+from   coriolis.plugins.block.configuration  import IoPin, GaugeConf
+from   coriolis.plugins.block.spares         import Spares
+from   coriolis.plugins.core2chip.niolib     import CoreToChip
+from   coriolis.plugins.chip.configuration   import ChipConf
+from   coriolis.plugins.chip.chip            import Chip
 
 
 af = CRL.AllianceFramework.get()

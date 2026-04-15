@@ -118,12 +118,15 @@ def setupPaths ( verbose, debug=False ):
     for topDir in topDirs:
         if not coriolisTop:
             libHurricaneFound = False
-            if   (topDir / 'lib64' / 'libhurricane.so').is_file(): libHurricaneFound = True
-            elif (topDir / 'lib'   / 'libhurricane.so').is_file(): libHurricaneFound = True
+            if   (topDir / 'lib64' / 'libhurricane.so'   ).is_file(): libHurricaneFound = True
+            elif (topDir / 'lib'   / 'libhurricane.so'   ).is_file(): libHurricaneFound = True
+            elif (topDir / 'lib64' / 'libhurricane.dylib').is_file(): libHurricaneFound = True
+            elif (topDir / 'lib'   / 'libhurricane.dylib').is_file(): libHurricaneFound = True
             else:
                 if (topDir / 'lib').is_dir():
                     for subDir in (topDir / 'lib').iterdir():
-                        if (subDir / 'libhurricane.so').is_file():
+                        if    (subDir / 'libhurricane.so'   ).is_file() \
+                           or (subDir / 'libhurricane.dylib').is_file():
                             libArchDir        = subDir
                             libHurricaneFound = True
                             break

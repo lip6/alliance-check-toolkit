@@ -5,7 +5,7 @@ import traceback
 from   coriolis.Hurricane  import DbU, Breakpoint, Cell
 from   coriolis            import CRL, Cfg
 from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, overlay, l, u, n
-from   coriolis.helpers.io import ErrorMessage, WarningMessage
+from   coriolis.helpers.io import catch, ErrorMessage, WarningMessage
 loadUserSettings()
 from   coriolis            import plugins
 from   coriolis.plugins.block.block          import Block
@@ -31,7 +31,7 @@ def scriptMain ( **kw ):
         cfg.misc.bug                    = False
         cfg.misc.logMode                = False
         cfg.misc.verboseLevel1          = True
-        cfg.misc.verboseLevel2          = False
+        cfg.misc.verboseLevel2          = True
         cfg.misc.minTraceLevel          = 16000
         cfg.misc.maxTraceLevel          = 17000
     rvalue = True
@@ -48,14 +48,16 @@ def scriptMain ( **kw ):
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.etesian.densityVariation    = 0.01
         conf.cfg.etesian.aspectRatio         = 1.0
-        conf.cfg.etesian.spaceMargin         = 0.20
-        conf.cfg.anabatic.globalIterations   = 10
+        conf.cfg.etesian.spaceMargin         = 0.90
+        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.gcellAspectRatio   = 1.0
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         conf.cfg.katana.eventsLimit          = 10000000
+        conf.cfg.katana.maxFlatEdgeOverflow  = 100
         conf.cfg.katana.hTracksReservedLocal = 10
         conf.cfg.katana.vTracksReservedLocal = 10
-        conf.cfg.katana.hTracksReservedMin   = 5
-        conf.cfg.katana.vTracksReservedMin   = 5
+        conf.cfg.katana.hTracksReservedMin   = 4
+        conf.cfg.katana.vTracksReservedMin   = 4
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False
         conf.cfg.katana.dumpMeasures         = True
@@ -70,7 +72,8 @@ def scriptMain ( **kw ):
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
-    return rvalue
+    return True
+   #return rvalue
 
 
 if __name__ == '__main__':

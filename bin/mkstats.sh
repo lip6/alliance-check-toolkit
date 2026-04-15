@@ -54,13 +54,13 @@
  benchs="${benchs} eFPGA/04x08"
  benchs="${benchs} DCT/dct_lvl3"
  benchs="${benchs} DCT/dct_lvl2"
- benchs="${benchs} ao68000/sky130_c4m"
  benchs="${benchs} ieee_division"
  benchs="${benchs} eFPGA/08x08"
  benchs="${benchs} vld"
  benchs="${benchs} eFPGA/08x16"
- benchs="${benchs} ethmac/sky130_c4m"
- benchs="${benchs} RISC-V/Minerva/sky130_c4m"
+ benchs="${benchs} ao68000/sky130_c4m"
+#benchs="${benchs} ethmac/sky130_c4m"
+#benchs="${benchs} RISC-V/Minerva/sky130_c4m"
  benchs="${benchs} eFPGA/16x16"
 
 #benchs="${benchs} adder/cmos"
@@ -94,7 +94,14 @@
 #  benchs="${benchs} RISC-V/Minerva/sky130_c4m"
 #fi
 
- statsTag="lepka/20220528"
+ crlenv="`pwd`/../bin/crlenv.py"
+ if [ ! -x "${crlenv}" ]; then
+   echo "[ERROR] mkstats.sh: Unable to find crlenv.py script."
+   echo "        (${crlenv})"
+   exit 1
+ fi
+
+ statsTag="lepka/20260201"
  mode="stopOnFailure"
 #mode="ignoreFailure"
  benchLog="`pwd`/make-stats.log"
@@ -122,7 +129,8 @@
    if [ $? -ne 0 ]; then
     #make clean >> ${benchLog} 2>&1
      for rule in ${rules}; do
-       make ${rule} >> ${benchLog} 2>&1
+       ${crlenv} -- doit clean_flow --extras    >> ${benchLog} 2>&1
+       ${crlenv} -- doit ${rule} reuse-blif=v58 >> ${benchLog} 2>&1
        if [ $? -ne 0 ]; then
          result="\"${rule}\" failed."
          if [ "${mode}" = "stopOnFailure" ]; then

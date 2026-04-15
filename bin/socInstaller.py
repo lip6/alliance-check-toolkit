@@ -699,7 +699,7 @@ try:
 
     pdmCacheDir = Path.home() / '.cache' / 'pdm'
     print( f'Removing PDM cache directory: "{pdmCacheDir}"' )
-    shutil.rmtree( pdmCacheDir.as_posix() )
+    shutil.rmtree( pdmCacheDir.as_posix(), ignore_errors=True )
 
     gitSupports = []
     for supportRepo in conf.supportRepos:

@@ -2,21 +2,21 @@
 import sys
 import traceback
 from   pathlib    import Path
-import CRL
-import helpers
+from   coriolis   import CRL
+from   coriolis   import helpers
 helpers.loadUserSettings()
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import overlay, trace, l, u, n
-import plugins
-from   Hurricane  import DebugSession, Breakpoint, DbU, Box , Transformation, \
-                         Instance
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-from   plugins.alpha.core2chip.libresocio import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
-from   plugins.sram.sram_256x32           import SRAM_256x32
+from   coriolis.helpers.io import ErrorMessage, WarningMessage
+from   coriolis.helpers    import overlay, trace, l, u, n
+from   coriolis   import plugins
+from   coriolis.Hurricane  import DebugSession, Breakpoint, DbU, Box , Transformation, \
+                                  Instance
+from   coriolis.plugins.block.block          import Block
+from   coriolis.plugins.block.configuration  import IoPin, GaugeConf
+from   coriolis.plugins.block.spares         import Spares
+from   coriolis.plugins.core2chip.libresocio import CoreToChip
+from   coriolis.plugins.chip.configuration   import ChipConf
+from   coriolis.plugins.chip.chip            import Chip
+from   coriolis.plugins.sram.sram_256x32     import SRAM_256x32
 
 
 """
@@ -266,7 +266,7 @@ def scriptMain ( **kw ):
         ethmacConf.cfg.etesian.densityVariation    = 0.05
         ethmacConf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
-        ethmacConf.cfg.etesian.spaceMargin         = 0.10
+        ethmacConf.cfg.etesian.spaceMargin         = 0.15
         ethmacConf.cfg.anabatic.searchHalo         = 2
         ethmacConf.cfg.anabatic.globalIterations   = 20
         ethmacConf.cfg.anabatic.topRoutingLayer    = topMetal

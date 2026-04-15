@@ -1,11 +1,16 @@
 
 from coriolis.designflow.technos import setupCMOS
+from coriolis import CRL
 
 setupCMOS()
+
+af  = CRL.AllianceFramework.get()
+env = af.getEnvironment()
+env.addSYSTEM_LIBRARY( library='../efpgalib', mode=CRL.Environment.Prepend )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 
 from coriolis.designflow.task import Tasks
-from coriolis.designflow      import pnrcheck
+from coriolis.designflow      import routecheck
 
-pnrcheck.mkRuleSet( globals(), 'matrix_16_16_flat', pnrcheck.NoSynthesis|pnrcheck.NoGDS )
+routecheck.mkRuleSet( globals(), 'matrix_16_16_flat' )

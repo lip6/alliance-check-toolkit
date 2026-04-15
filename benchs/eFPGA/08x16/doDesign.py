@@ -2,19 +2,19 @@
 
 import sys
 import traceback
-import CRL
-import helpers
+from   coriolis  import CRL
+from   coriolis  import helpers
 helpers.loadUserSettings()
-from   helpers.io import ErrorMessage, WarningMessage
-from   helpers    import trace, l, u, n
-import plugins
-from   Hurricane  import DbU, Breakpoint, Cell
-from   plugins.alpha.block.block          import Block
-from   plugins.alpha.block.configuration  import IoPin, GaugeConf
-from   plugins.alpha.block.spares         import Spares
-from   plugins.alpha.core2chip.niolib     import CoreToChip
-from   plugins.alpha.chip.configuration   import ChipConf
-from   plugins.alpha.chip.chip            import Chip
+from   coriolis.helpers.io import ErrorMessage, WarningMessage
+from   coriolis.helpers    import trace, l, u, n
+from   coriolis            import plugins
+from   coriolis.Hurricane  import DbU, Breakpoint, Cell
+from   coriolis.plugins.block.block          import Block
+from   coriolis.plugins.block.configuration  import IoPin, GaugeConf
+from   coriolis.plugins.block.spares         import Spares
+from   coriolis.plugins.core2chip.niolib     import CoreToChip
+from   coriolis.plugins.chip.configuration   import ChipConf
+from   coriolis.plugins.chip.chip            import Chip
 
 
 af = CRL.AllianceFramework.get()
@@ -37,10 +37,12 @@ def scriptMain ( **kw ):
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
-       #conf.cfg.katana.hTracksReservedLocal = 0
-       #conf.cfg.katana.vTracksReservedLocal = 0
-        conf.cfg.katana.hTracksReservedMin   = 7
-        conf.cfg.katana.vTracksReservedMin   = 5
+        conf.cfg.etesian.spaceMargin         = 0.20
+        conf.cfg.katana.maxFlatEdgeOverflow  = 200
+        conf.cfg.katana.hTracksReservedLocal = 12
+        conf.cfg.katana.vTracksReservedLocal = 12
+        conf.cfg.katana.hTracksReservedMin   = 6
+        conf.cfg.katana.vTracksReservedMin   = 4
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
@@ -56,6 +58,7 @@ def scriptMain ( **kw ):
         rvalue = False
     sys.stdout.flush()
     sys.stderr.flush()
+    rvalue = True
     return rvalue
 
 

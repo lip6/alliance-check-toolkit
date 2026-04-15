@@ -190,7 +190,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.vTracksReservedMin   = 9
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False
-        conf.cfg.katana.dumpMeasures         = False
+        conf.cfg.katana.dumpMeasures         = True
         conf.cfg.block.spareSide             = 8*conf.sliceHeight
         conf.cfg.chip.useAbstractPads        = False
         conf.editor              = editor
