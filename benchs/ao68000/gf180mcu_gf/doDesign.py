@@ -90,7 +90,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = conf.computeCoreSize( 176*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 177*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( 100*conf.sliceHeight, 100*conf.sliceHeight )
         conf.useHTree( 'CLK_I', Spares.HEAVY_LEAF_LOAD )
         conf.useHTree( 'reset_n' )
