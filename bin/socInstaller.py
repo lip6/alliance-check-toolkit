@@ -698,8 +698,9 @@ try:
     if conf.dockerMode:        os.environ['USER'] = 'root'
 
     pdmCacheDir = Path.home() / '.cache' / 'pdm'
-    print( f'Removing PDM cache directory: "{pdmCacheDir}"' )
-    shutil.rmtree( pdmCacheDir.as_posix(), ignore_errors=True )
+    if pdmCacheDir.is_dir():
+        print( f'Removing PDM cache directory: "{pdmCacheDir}"' )
+        shutil.rmtree( pdmCacheDir.as_posix(), ignore_errors=True )
 
     gitSupports = []
     for supportRepo in conf.supportRepos:
