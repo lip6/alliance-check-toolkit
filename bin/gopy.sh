@@ -14,6 +14,35 @@
    printf "%u:%02u" $mins $secs
  }
 
+ toDeterministicLog ()
+ {
+   logFile="$1"
+   sed -e 's,.*/coriolis-2.x/,,' \
+       -e '/Cfg.so loaded/d'     \
+       -e '/[KMG]b$/d'           \
+       -e '/bytes$/d'            \
+       -e '/[[:digit:]]s$/d'     \
+       -i "${logFile}"
+ }
+
+ checkDeterminism ()
+ {
+   currentFile="$1"
+       refFile="`echo $currentFile | sed s,logs,logs.$2,`.gz"
+
+   if [ ! -f "$refFile" ]; then echo "N/A"; return; fi
+
+  #echo $currentFile $refFile
+
+   currentMD5=` cat $currentFile | md5sum | cut -f1 -d' '`
+       refMD5=`zcat $refFile     | md5sum | cut -f1 -d' '`
+
+  #echo $currentMD5 $refMD5
+   if [ "$currentMD5" != "$refMD5" ]; then echo "var"; return; fi
+   echo "DET"
+ }
+
+     refGittag="2c93175e6"
       runSetId="not_set"
       onGithub="false"
      gf180rule="gds"
@@ -181,9 +210,9 @@
      success="true"
      pushd ${bench} > /dev/null
      startTime="$SECONDS"
-     ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
+     ${crlenv} -- doit clean_flow --extras > /dev/null 2>&1
      for rule in ${rules}; do
-       ${crlenv} -- doit ${rule} reuse-blif=v58 >> ${benchLog} 2>&1
+       ${crlenv} -- doit -n 1 ${rule} reuse-blif=v58 >> ${benchLog} 2>&1
        if [ $? -ne 0 ]; then
          success="false"
          printf "${statusLine}\n" "$setIdStr" $benchCount "<${bench}>" "${rule}" "`getRuntime $startTime`" "FAILED"
@@ -197,14 +226,16 @@
          break
        fi
      done
-     ${crlenv} -- doit clean_flow --extras >> ${benchLog} 2>&1
+     ${crlenv} -- doit -n 1 clean_flow --extras >> ${benchLog} 2>&1
      if [ "${success}" = "true" ]; then
+       toDeterministicLog ${benchLog}
+       deterministic=`checkDeterminism ${benchLog} ${refGittag}`
        printf "${statusLine}\n" "$setIdStr"  \
                                 $benchCount  \
                                 "<${bench}>" \
 				"`echo \"${rules}\" | sed 's/ /,/g'`" \
 				"`getRuntime $startTime`" \
-				"success"
+				"success+${deterministic}"
      fi
      popd > /dev/null
      benchCount=`expr ${benchCount} + 1`
