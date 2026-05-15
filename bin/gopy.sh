@@ -17,12 +17,18 @@
  toDeterministicLog ()
  {
    logFile="$1"
-   sed -e 's,.*/coriolis-2.x/,,' \
-       -e '/Cfg.so loaded/d'     \
-       -e '/[KMG]b$/d'           \
-       -e '/bytes$/d'            \
-       -e '/[[:digit:]]s$/d'     \
-       -i "${logFile}"
+   sed -E -e 's,.*/coriolis-2.x/,,' \
+          -e '/Cfg.so loaded/d'     \
+          -e '/[KMG]b$/d'           \
+          -e '/bytes$/d'            \
+          -e '/[[:digit:]]s$/d'     \
+          -e 's/([[:digit:]]+ sec)/(X sec)/' \
+          -e '/^End of script/d'    \
+          -e '/^Time spent/d'       \
+          -e 's/yosys-abc-[[:alnum:]]+/yosys-abc-XXXX/'  \
+          -e 's/^ABC: Memory = .*/ABC: Memory = DETER/'  \
+          -e 's/Time = .*/Time = DETER/' \
+          -i "${logFile}"
  }
 
  checkDeterminism ()
