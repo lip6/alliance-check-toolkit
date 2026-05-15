@@ -22,6 +22,7 @@
           -e '/[KMG]b$/d'           \
           -e '/bytes$/d'            \
           -e '/[[:digit:]]s$/d'     \
+          -e 's/0x[[:xdigit:]]{5,}\>/0xXXXXXXXX/' \
           -e 's/([[:digit:]]+ sec)/(X sec)/' \
           -e '/^(\.)|(--) +fifo32$/d'        \
           -e '/^(\.)|(--) +fifo32_u01$/d'    \
@@ -64,7 +65,7 @@
        refMD5=`zcat $refFile     | md5sum | cut -f1 -d' '`
 
   #echo $currentMD5 $refMD5
-   if [ "$currentMD5" != "$refMD5" ]; then echo "var"; return; fi
+   if [ "$currentMD5" != "$refMD5" ]; then echo "---"; return; fi
    echo "DET"
  }
 
