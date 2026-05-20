@@ -25,7 +25,7 @@ def scriptMain ( **kw ):
     global af, buildChip
 
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
-        cfg.misc.logMode       = False
+        cfg.misc.logMode       = True
         cfg.misc.verboseLevel2 = True
         cfg.misc.verboseLevel2 = True
 

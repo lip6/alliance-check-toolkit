@@ -97,7 +97,7 @@ def scriptMain ( **kw ):
        #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'ao68000', CRL.Catalog.State.Logical )
+        cell = CRL.Blif.load( 'ao68000', CRL.Blif.EnforceVhdl )
         toVhdlInterface( cell )
         if editor:
             editor.setCell( cell ) 

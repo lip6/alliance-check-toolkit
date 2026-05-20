@@ -9,7 +9,7 @@ sed -E -e 's,.*/coriolis-2.x/,,' \
        -e '/bytes$/d'            \
        -e '/[[:digit:]]s$/d'     \
        -e 's/([[:digit:]]+ sec)/(X sec)/' \
-       -e 's/0x[[:xdigit:]]{5,}\>/0xXXXXXXXX/' \
+       -e 's/0x[[:xdigit:]]{5,}\>/0xXXXXXXXX/g' \
        -e '/^(\.)|(--) +fifo32$/d'        \
        -e '/^(\.)|(--) +fifo32_u01$/d'    \
        -e '/^(\.)|(--) +fifo72$/d'        \

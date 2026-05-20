@@ -74,3 +74,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_71324_new_n14998' ) )
 # Pb @(384,460) Notch on abc_71324_new_n3672
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_71324_new_n3672' ) )
+# Placed OK, but impact on 1139286 of n7437
+# <id:1249378 Vertical $abc$71324$new_n7006_hfns_1 Metal2 [675.08um 595.56um] ...> 
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7006_hfns_1' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7437' ) )

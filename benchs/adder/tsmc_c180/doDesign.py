@@ -26,7 +26,7 @@ def scriptMain ( **kw ):
        #Breakpoint.setStopLevel( 99 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'adder', CRL.Catalog.State.Logical )
+        cell = CRL.Blif.load( 'adder.blif', CRL.Blif.EnforceVhdl )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )

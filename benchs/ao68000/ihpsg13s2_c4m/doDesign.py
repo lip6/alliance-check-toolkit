@@ -111,7 +111,7 @@ def scriptMain ( **kw ):
        #setTraceLevel( 550 )
        #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = CRL.Blif.load( 'ao68000' )
+        cell = CRL.Blif.load( 'ao68000', CRL.Blif.EnforceVhdl )
        #toVhdlInterface( cell )
         if editor:
             editor.setCell( cell ) 

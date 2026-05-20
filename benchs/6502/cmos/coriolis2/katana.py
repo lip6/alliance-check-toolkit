@@ -39,3 +39,5 @@ from coriolis.Hurricane import DebugSession
 # Pb unrouted <id:66511 Vertical abc_13156_new_n676 METAL2 [1090um 1085um] ...>
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_13156_new_n676' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_13156_new_n530' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$13156$new_n331' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$13156$new_n1699' ) )

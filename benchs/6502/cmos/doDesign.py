@@ -23,7 +23,7 @@ def scriptMain ( **kw ):
         #setTraceLevel( 550 )
         #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = CRL.Blif.load( 'm65s' )
+        cell = CRL.Blif.load( 'm65s', CRL.Blif.EnforceVhdl )
         if editor: editor.setCell( cell ) 
 
         # ioPinsSpec, for peripheral pin placement as a standalone block.

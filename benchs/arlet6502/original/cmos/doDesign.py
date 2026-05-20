@@ -58,7 +58,7 @@ def scriptMain ( **kw ):
         #Breakpoint.setStopLevel( 100 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
-        cell = CRL.Blif.load( 'Arlet6502' )
+        cell = CRL.Blif.load( 'Arlet6502', CRL.Blif.EnforceVhdl )
         cell.setName( 'arlet6502' )
         if editor:
             editor.setCell( cell ) 
