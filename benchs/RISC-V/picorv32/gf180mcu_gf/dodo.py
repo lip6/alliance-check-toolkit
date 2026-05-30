@@ -19,7 +19,7 @@ def userSetup ():
         cfg.misc.verboseLevel2       = True
 
 userSetup()
-setup( checkToolkit=Path('../../..'), useHV=True )
+setup( useHV=True )
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 

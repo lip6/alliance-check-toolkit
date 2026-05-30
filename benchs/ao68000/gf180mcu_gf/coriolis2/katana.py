@@ -77,4 +77,4 @@ from coriolis.Hurricane import DebugSession
 # Placed OK, but impact on 1139286 of n7437
 # <id:1249378 Vertical $abc$71324$new_n7006_hfns_1 Metal2 [675.08um 595.56um] ...> 
 #DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7006_hfns_1' ) )
-#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7437' ) )
+DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7437' ) )
