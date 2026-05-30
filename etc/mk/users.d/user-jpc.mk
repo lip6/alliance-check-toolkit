@@ -12,8 +12,8 @@
  export AMS_C35B4     = ${NDA_TOP}/AMS/035hv-4.10
  export FreePDK_45    = ${HOME}/coriolis-2.x/work/DKs/FreePDK45
  export FlexLib_CM018 = ${NDA_TOP}/etc/coriolis2/NDA/node180/tsmc_c018
- export CORIOLIS_TOP  = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/$(BUILD_TYPE_DIR)/install
- export ALLIANCE_TOP  = $(HOME)/coriolis-2.x/$(BUILD_VARIANT)$(LIB_SUFFIX_)/Release.Shared/install
+ export CORIOLIS_TOP  = $(HOME)/coriolis-2.x/release/install
+ export ALLIANCE_TOP  = $(HOME)/coriolis-2.x/release/install
  export CHECK_TOOLKIT = $(HOME)/coriolis-2.x/src/alliance-check-toolkit
  export AVERTEC_TOP   = ${ALLIANCE_TOP}/share/tasyag
  export YOSYS_TOP     = /usr
