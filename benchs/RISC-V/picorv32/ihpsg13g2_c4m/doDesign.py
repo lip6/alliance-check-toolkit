@@ -95,7 +95,7 @@ def scriptMain ( **kw ):
         conf.cfg.katana.hTracksReservedLocal = 16
         conf.cfg.katana.vTracksReservedLocal = 15
         conf.cfg.katana.hTracksReservedMin   = 8
-        conf.cfg.katana.vTracksReservedMin   = 6
+        conf.cfg.katana.vTracksReservedMin   = 7
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.block.spareSide             = 8*conf.sliceHeight

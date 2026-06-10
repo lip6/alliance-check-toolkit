@@ -33,6 +33,23 @@ def scriptMain ( **kw ):
             editor.setCell( cell ) 
         ioPadsSpec = []
         ioPinsSpec = []
+        #              Side                      | Stem      |Offset       |Stp|Cnt|
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 's0({})'  ,           16, 10, 16)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 's1({})'  ,   16*10 + 16, 10, 16)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 's2({})'  , 2*16*10 + 16, 10, 16)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 's3({})'  , 3*16*10 + 16, 10, 16)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x0({})'  ,           16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x1({})'  ,  2*8*10 + 16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x2({})'  ,  3*8*10 + 16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x3({})'  ,  4*8*10 + 16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x4({})'  ,  5*8*10 + 16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x5({})'  ,  6*8*10 + 16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x6({})'  ,  7*8*10 + 16, 10,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'x7({})'  ,  8*8*10 + 16, 10,  8)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'rst'     ,   10*16     ,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'stop'    ,   11*16     ,  0 , 1)
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'toto'    ,   12*16     ,  0 , 1)
+                     ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.anabatic.topRoutingLayer    = 'METAL5'
@@ -43,8 +60,9 @@ def scriptMain ( **kw ):
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = True
-        conf.useSpares = False
-        conf.editor    = editor
+        conf.ioPinsInTracks = True
+        conf.useSpares      = False
+        conf.editor         = editor
         blockBuilder = Block( conf )
         cell.setTerminalNetlist( False )
         rvalue = blockBuilder.doPnR()

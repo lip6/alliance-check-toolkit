@@ -60,3 +60,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'latched_rd(2)' ))
 # Pb @(140,219) Metal3 minimum area
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n3346' ))
+# Pb: <id:942269 Horizontal $abc$30656$new_n4897 Metal2 [302.59um 420.84um] ...> bad source cap.
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$30656$new_n4897' ))

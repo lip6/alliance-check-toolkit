@@ -179,14 +179,14 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.spaceMargin         = 1.45
         conf.cfg.anabatic.searchHalo         = 1
         conf.cfg.anabatic.gcellAspectRatio   = 2.0
-        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.globalIterations   = 25
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
         conf.cfg.anabatic.topRoutingLayer    = 'm4'
        #conf.cfg.anabatic.gcellAspectRatio   = 1.8 
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
         conf.cfg.katana.hTracksReservedLocal = 20
         conf.cfg.katana.vTracksReservedLocal = 26
-        conf.cfg.katana.hTracksReservedMin   = 9
+        conf.cfg.katana.hTracksReservedMin   = 10
         conf.cfg.katana.vTracksReservedMin   = 9
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False

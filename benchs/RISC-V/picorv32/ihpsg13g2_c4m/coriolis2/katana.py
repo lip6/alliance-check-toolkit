@@ -24,3 +24,6 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n3534' ) )
 # Pb unrouted <id:1473066 Vertical abc_30656_new_n6896 Metal2 [87.305um 232um] 
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n6896' ) )
+# id:1506904
+# id:1507249
+#DebugSession.addToTrace( katana.getCell().getNet( 'mem_rdata_q[10]' ) )
