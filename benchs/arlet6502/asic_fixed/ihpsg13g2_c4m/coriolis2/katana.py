@@ -22,3 +22,18 @@ from coriolis.Hurricane import DebugSession
 # Solved -> Do dot use TopMetal1 for normal net routing (VIA side increase).
 # DRC M2.d @(1045,1027)
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.abc_12301_new_n2046' ) )
+# DRC M2.d @(201,176) Min area.
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$12391$new_n1919' ) )
+# <id:1220279 Horizontal $abc$12391$new_n1469 Metal2 [129.845um 10um] ...> bad sourceU.
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$12391$new_n1469' ) )
+# DRC M2.d @(186,186)
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_12391_new_n2071' ) )
+# DRC M2.d @(188,181)
+# DRC M2.d @(140,227)
+# DRC M2.d @(132,146)
+# <id:1226295 Vertical abc_12391_new_n530 Metal2 [97.335um 112.5um] ...> unrouted, false positive.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_12391_new_n530' ) )
+# <id:1211500 Horizontal abc_12391_new_n792 Metal2 [50.145um 148.5um] ...> false unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_12391_new_n792' ) )
+# <id:1250009 Horizontal abc_12391_new_n767 Metal2 [18.145um 48.5um] ...> false unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_12391_new_n767' ) )

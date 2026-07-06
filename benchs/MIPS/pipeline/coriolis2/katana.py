@@ -31,3 +31,10 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_shift32_rshift_se_msb' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_ct_ao22_x2_54_sig' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_toper_rd(4)' ) )
+#In topology of &<id:260936 ContactTerminal mips_r3000_1m_dp_instseqadr_sd_pi_0_12 VIA12 [3165.0L 610.0L] 1.0L x 1.0L -T------->
+#  A: &<id:104364 RoutingPad mips_r3000_1m_dp_instseqadr_sd_pi_0_12 [3165.0L 625.0L] Sh--- <Occurrence <id:120 Cell mips_r3000_1m_core_flat>:mips_r3000_1m_dp_instseqadr_sd_pg_i1_1_13:<id:5832 Vertical i0 METAL1 [5.0L 15.0L] [5.0L 35.0L] 2.0L>>>
+#  G: &<id:210336 Horizontal mips_r3000_1m_dp_instseqadr_sd_pi_0_12 METAL2 [3165.0L 610.0L] [3225.0L 610.0L] 2.0L rpD:0 bl:0 -----U-G--T------i----bt-- [3164.0L:3226.0L]>
+#  No verticals connecteds
+#  Terminal horizontal segment Y 610.0L axis is outside RoutingPad [615.0L 635.0L].
+#  Segment constraints: [615.0L 635.0L]
+#DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_instseqadr_sd_pi_0_12' ) )

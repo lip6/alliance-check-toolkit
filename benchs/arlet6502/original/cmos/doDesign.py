@@ -55,7 +55,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
         #setTraceLevel( 550 )
-        #Breakpoint.setStopLevel( 100 )
+        #Breakpoint.setStopLevel( 99 )
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'Arlet6502', CRL.Blif.EnforceVhdl )
@@ -113,7 +113,7 @@ def scriptMain ( **kw ):
         arlet6502Conf.cfg.katana.hTracksReservedLocal = 15
         arlet6502Conf.cfg.katana.vTracksReservedLocal = 15
         arlet6502Conf.cfg.katana.hTracksReservedMin   = 7
-        arlet6502Conf.cfg.katana.vTracksReservedMin   = 7
+        arlet6502Conf.cfg.katana.vTracksReservedMin   = 8
         arlet6502Conf.cfg.katana.trackFill            = 0
         arlet6502Conf.cfg.katana.runRealignStage      = False
         arlet6502Conf.cfg.block.spareSide             = l(14*50.0)

@@ -27,12 +27,13 @@ import doDesign
 
 
 reuseBlif          = get_var( 'reuse-blif', None )
+logMode            = get_var( 'logMode'   , 'True' )
 PnR.textMode       = True
 pnrSuffix          = '_cts_r'
 topName            = 'picorv32'
 TasYagle.ClockName = 'clk'
 
-print( 'reuseBlif', reuseBlif )
+doDesign.logMode = True if logMode == 'True' else False
 if reuseBlif:
     ruleYosys = Copy.mkRule( 'yosys', 'picorv32.blif', './non_generateds/picorv32.{}.blif'.format( reuseBlif ))
 else:

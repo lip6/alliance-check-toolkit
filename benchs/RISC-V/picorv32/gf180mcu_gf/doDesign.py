@@ -16,6 +16,7 @@ from   coriolis.plugins.chip.configuration   import ChipConf
 from   coriolis.plugins.chip.chip            import Chip
 from   pdks.gf180mcu.core2chip.gf180mcu      import CoreToChip
 
+logMode   = True
 buildChip = False
 af        = CRL.AllianceFramework.get()
 
@@ -30,12 +31,12 @@ def scriptMain ( **kw ):
     with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
         cfg.misc.verboseLevel1    = True
         cfg.misc.verboseLevel2    = True
-        cfg.misc.logMode          = True
+        cfg.misc.logMode          = logMode
         cfg.anabatic.routingGauge = None   # Trigger disk loading.
         gaugeName = cfg.anabatic.routingGauge
     try:
         #setTraceLevel( 540 )
-        #Breakpoint.setStopLevel( 100 )
+        #Breakpoint.setStopLevel( 99 )
 
         if loadOpenROAD:
             db      = DataBase.getDB()
@@ -54,9 +55,7 @@ def scriptMain ( **kw ):
             return True
 
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'picorv32', CRL.Catalog.State.Logical )
-        if not cell:
-            cell = CRL.Blif.load( 'picorv32' )
+        cell = CRL.Blif.load( 'picorv32', CRL.Blif.EnforceVhdl )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )

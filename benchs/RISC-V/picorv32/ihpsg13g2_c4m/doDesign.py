@@ -17,6 +17,7 @@ from   coriolis.plugins.chip.chip            import Chip
 from   pdks.ihpsg13g2_c4m.core2chip.sg13g2io import CoreToChip
 
 af        = CRL.AllianceFramework.get()
+logMode   = True
 buildChip = False
 
 
@@ -30,7 +31,7 @@ def scriptMain ( **kw ):
         cfg.misc.info                   = False
         cfg.misc.paranoid               = False
         cfg.misc.bug                    = False
-        cfg.misc.logMode                = True
+        cfg.misc.logMode                = logMode
         cfg.misc.verboseLevel1          = True
         cfg.misc.verboseLevel2          = True
         cfg.misc.minTraceLevel          = 16000

@@ -17,6 +17,7 @@ from   coriolis.plugins.chip.chip            import Chip
 
 af        = CRL.AllianceFramework.get()
 buildChip = False
+logMode   = True
 
 
 def scriptMain ( **kw ):
@@ -27,7 +28,7 @@ def scriptMain ( **kw ):
         cfg.misc.info          = False
         cfg.misc.paranoid      = False
         cfg.misc.bug           = False
-        cfg.misc.logMode       = True
+        cfg.misc.logMode       = logMode
         cfg.misc.verboseLevel1 = True
         cfg.misc.verboseLevel2 = True
         cfg.misc.minTraceLevel = 16000
@@ -40,9 +41,7 @@ def scriptMain ( **kw ):
         #    print( '"{}" {}'.format(cell.getName(),cell) )
         #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
-        cell = af.getCell( 'Arlet6502', CRL.Catalog.State.Logical )
-        if not cell:
-            cell = CRL.Blif.load( 'Arlet6502' )
+        cell = CRL.Blif.load( 'Arlet6502', CRL.Blif.EnforceVhdl )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )
@@ -119,7 +118,7 @@ def scriptMain ( **kw ):
         conf.cfg.anabatic.globalIterations   = 10
         conf.cfg.katana.hTracksReservedLocal = 20
         conf.cfg.katana.vTracksReservedLocal = 20
-        conf.cfg.katana.hTracksReservedMin   = 6
+        conf.cfg.katana.hTracksReservedMin   = 8
         conf.cfg.katana.vTracksReservedMin   = 6
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = False

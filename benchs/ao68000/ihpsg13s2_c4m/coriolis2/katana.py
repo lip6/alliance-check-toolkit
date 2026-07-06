@@ -20,3 +20,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_68950_new_n20881' ))
 # Pb @(568,151) Notch Metal2 on same net.
 # <id:2191090 Vertical abc_71600_new_n14460_hfns_7 Metal2 [181um 263.145um] ...>
+# Pb @(423,568) M2.b
+# Sets in AnabaticEngine::_loadGrByNet().
+#DebugSession.addToTrace( katana.getCell().getNet( 'auto_ff_cc_721_flip_bits_71500_hfns_0' ))
+

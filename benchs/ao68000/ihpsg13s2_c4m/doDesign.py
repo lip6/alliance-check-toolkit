@@ -18,6 +18,7 @@ from   coriolis.plugins.chip.chip            import Chip
 
 af         = CRL.AllianceFramework.get()
 buildChip  = False
+logMode    = True
 powerCount = 0
 
 
@@ -100,7 +101,7 @@ def scriptMain ( **kw ):
         cfg.misc.info                   = False
         cfg.misc.paranoid               = False
         cfg.misc.bug                    = False
-        cfg.misc.logMode                = True
+        cfg.misc.logMode                = logMode
         cfg.misc.verboseLevel1          = True
         cfg.misc.verboseLevel2          = True
         cfg.misc.minTraceLevel          = 16000
@@ -109,7 +110,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #setTraceLevel( 550 )
-       #Breakpoint.setStopLevel( 100 )
+       #Breakpoint.setStopLevel( 99 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'ao68000', CRL.Blif.EnforceVhdl )
        #toVhdlInterface( cell )
@@ -192,10 +193,10 @@ def scriptMain ( **kw ):
        #conf.cfg.anabatic.topRoutingLayer    = 'm5'
         conf.cfg.katana.hTracksReservedLocal = 15
         conf.cfg.katana.vTracksReservedLocal = 23
-        conf.cfg.katana.hTracksReservedMin   = 8
+        conf.cfg.katana.hTracksReservedMin   = 9
         conf.cfg.katana.vTracksReservedMin   = 9
        #conf.cfg.katana.trackFill            = 0
-        conf.cfg.katana.runRealignStage      = False
+        conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = False
         conf.cfg.block.spareSide             = 8*conf.sliceHeight
         conf.cfg.chip.useAbstractPads        = False

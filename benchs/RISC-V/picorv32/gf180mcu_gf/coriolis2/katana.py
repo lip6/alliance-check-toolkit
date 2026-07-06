@@ -62,3 +62,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n3346' ))
 # Pb: <id:942269 Horizontal $abc$30656$new_n4897 Metal2 [302.59um 420.84um] ...> bad source cap.
 #DebugSession.addToTrace( katana.getCell().getNet( '$abc$30656$new_n4897' ))
+# Pb: <id:881078 Horizontal abc_30656_new_n4222 Metal2 [150.95um 190.12um] ...> unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n4222' ))
+#DebugSession.addToTrace( katana.getCell().getNet( 'abc_30656_new_n3953' ))
+

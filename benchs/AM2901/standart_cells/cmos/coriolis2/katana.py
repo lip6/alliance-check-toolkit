@@ -31,3 +31,14 @@ from Hurricane import UpdateSession
 #
 #UpdateSession.close()
 
+# - Short circuit between 2 nets:
+#   | "core.r(3)".
+#   | "core.ialu.not_r(0)".
+#   + Shorted components:
+#     > T A:&<id:77273 Horizontal core.ialu.not_r(0) METAL2 [790.0L 1650.0L] [1175.0L 1650.0L] 2.0L>
+#     | Event 8928.
+#     | T B:&<id:77525 Horizontal core.r(3) METAL2 [710.0L 1650.0L] [1150.0L 1650.0L] 2.0L> 
+#     | Event 5319.
+#     | Shorting @<Box 789.0L 1649.0L 1151.0L 1651.0L>
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.r(3)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.ialu.not_r(0)' ) )

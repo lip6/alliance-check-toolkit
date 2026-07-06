@@ -27,3 +27,11 @@ from coriolis.Hurricane import DebugSession
 # id:1506904
 # id:1507249
 #DebugSession.addToTrace( katana.getCell().getNet( 'mem_rdata_q[10]' ) )
+# Pb @(308,265)
+# Pb @(338,94)
+#DebugSession.addToTrace( katana.getCell().getNet( 'cpuregs[17][18]' ) )
+# Pb @(70,406) M2.d
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$30656$auto$rtlil.cc:3381:MuxGate$29019' ) )
+# Pb @(55,183) M2.d
+# Pb @(454,503) M3.d
+# Pb @(281,469) M3.d

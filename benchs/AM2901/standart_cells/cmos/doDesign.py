@@ -2,7 +2,7 @@
 import sys
 import traceback
 from   coriolis            import CRL
-from   coriolis.Hurricane  import DbU
+from   coriolis.Hurricane  import DbU, Breakpoint
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
 from   coriolis.helpers    import setTraceLevel, trace, l, u, n
 from   coriolis            import plugins
@@ -23,6 +23,7 @@ def scriptMain ( **kw ):
     rvalue = True
     try:
        #setTraceLevel( 540 )
+       #Breakpoint.setStopLevel( 100 )
         buildChip = True
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'coeur', CRL.Catalog.State.Logical )

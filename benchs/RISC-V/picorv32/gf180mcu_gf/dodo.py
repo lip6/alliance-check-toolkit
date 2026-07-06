@@ -39,6 +39,7 @@ from pdks.gf180mcu.designflow.drc import DRC
 from doDesign                               import scriptMain
 PnR.textMode = True
 reuseBlif    = get_var( 'reuse-blif', None )
+logMode      = get_var( 'log-mode'  , 'True' )
 drcFlags     = DRC.SHOW_ERRORS
 #drcFlags     = 0
 
@@ -67,6 +68,7 @@ else:
                , 'picorv32_cts_r.vst'
                ]
 
+doDesign.logMode = True if logMode == 'True' else False
 if reuseBlif:
     ruleYosys = Copy.mkRule( 'yosys', 'picorv32.blif', './non_generateds/picorv32.{}.blif'.format( reuseBlif ))
 else:

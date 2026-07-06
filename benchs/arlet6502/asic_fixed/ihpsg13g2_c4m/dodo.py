@@ -29,6 +29,7 @@ from pdks.ihpsg13g2_c4m.designflow.drc      import DRC
 import doDesign
 
 reuseBlif          = get_var( 'reuse-blif', None )
+logMode            = get_var( 'log-mode'  , 'True' )
 doDesign.buildChip = False
 PnR.textMode       = True
 enableFiller       = True
@@ -36,12 +37,11 @@ drcFlags           = DRC.NoDensity
 pnrSuffix          = '_cts_r'
 topName            = 'arlet6502'
 
-
+doDesign.logMode = True if logMode == 'True' else False    
 if reuseBlif:
     ruleYosys = Copy.mkRule( 'yosys', 'Arlet6502.blif', './non_generateds/Arlet6502.{}.blif'.format( reuseBlif ))
 else:
     ruleYosys = Yosys.mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , 'arlet6502.vst', [ruleYosys], flags=0 )
 
 if doDesign.buildChip:
     TasYagle.ClockName = 'clk_from_pad'
@@ -76,7 +76,7 @@ else:
     rulePnR = PnR.mkRule( 'gds'    , [ 'Arlet6502_cts_r.gds'
                                      , 'arlet6502_cts_r.vst'
                                      , 'Arlet6502_cts_r.spi' ]
-                                     , [ruleB2V]
+                                     , [ruleYosys]
                                    , doDesign.scriptMain
                                    , topName=topName )
     ruleX2Y = x2y.mkRule( 'spi2vst', 'arlet6502_cts_r_spi.vst', 'Arlet6502_cts_r.spi' )

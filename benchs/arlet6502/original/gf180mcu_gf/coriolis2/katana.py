@@ -178,3 +178,25 @@ from coriolis.Hurricane import DebugSession
 # Pb @(205,57) Min dist M2
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_11951_new_n1279' ) )
 # Pb @(45,203) Min dist M3
+# Pb @(97,204) Min dist M3 (loop)
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n459' ) )
+# Pb @(54,107) Min dist M2 (notch)
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n1322' ) )
+# Pb @(38,51) Min dist M2 (loop)
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n1400' ) )
+# - Short circuit between 2 nets:
+#   | "$abc$11951$new_n543".
+#   | "$abc$11951$new_n1158".
+#   + Shorted components:
+#     > T A:&<id:526353 Vertical $abc$11951$new_n1158 Metal3 [209.22um 133um] [209.22um 143.08um] 0.28um>  
+#     | T B:&<id:563033 Contact $abc$11951$new_n543 VIA23 [209.16um 138.6um] 0.26um x 0.26um>
+#     | Shorting @<Box 209.08um 138.41um 209.35um 138.79um>
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n1158' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n543' ) )
+# Pb @(208,178) Min dist M2.2a
+#DebugSession.addToTrace( katana.getCell().getNet( 'MOS6502.state[2]' ) )
+# Pb @(126,98) Min dist M2.2a
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n549' ) )
+# Pb @(68,218) Min dist M2.2a
+# Pb @(123,168) Min dist M2.2a
+
