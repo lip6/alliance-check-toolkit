@@ -56,7 +56,6 @@ else:
 #                                    , topName=topName )
 # Rule for block generation.
 rulePnR   = PnR     .mkRule( 'gds'  , [ 'picorv32_cts_r.gds'
-                                      , 'picorv32_cts_r.vst'
                                       , 'picorv32_cts_r.spi' ]
                                       , [ruleYosys]
                                     , doDesign.scriptMain
@@ -72,7 +71,7 @@ rulePnR   = PnR     .mkRule( 'gds'  , [ 'picorv32_cts_r.gds'
 #shellEnv[ 'CELL_NAME'   ] = rulePnR.file_target(0).stem
 #shellEnv.export()
 ruleDrc     = DRC    .mkRule( 'drc' , rulePnR.file_target(0), DRC.NoDensity )
-ruleSTA     = STA    .mkRule( 'sta' , rulePnR.file_target(2))
+ruleSTA     = STA    .mkRule( 'sta' , rulePnR.file_target(1))
 ruleXTas    = XTas   .mkRule( 'xtas', ruleSTA.file_target(0) )
 
 # To run individual tools in stand-alone mode.

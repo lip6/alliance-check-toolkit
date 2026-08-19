@@ -41,3 +41,7 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( 'abc_13156_new_n530' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( '$abc$13156$new_n331' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( '$abc$13156$new_n1699' ) )
+#
+# Upgrade to Yosys 0.68.
+#
+#DebugSession.addToTrace( katana.getCell().getNet( 'adrs(2)' ) )

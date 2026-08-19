@@ -28,10 +28,10 @@ def scriptMain ( **kw ):
         #Breakpoint.setStopLevel( 100 )
         cell, editor = plugins.kwParseMain( **kw )
         cell = af.getCell( 'vexriscv', CRL.Catalog.State.Logical )
-        for netName in ( 'dbus_rsp_error'
-                       , 'ibus_rsp_inst(0)'
-                       , 'ibus_rsp_inst(1)'
-                       , 'ibus_rsp_error' ):
+        for netName in ( 'dBus_rsp_error'
+                       , 'iBus_rsp_inst(0)'
+                       , 'iBus_rsp_inst(1)'
+                       , 'iBus_rsp_error' ):
             cell.getNet( netName ).destroy()
         af.saveCell( cell, CRL.Catalog.State.Logical )
         if editor:
@@ -40,7 +40,7 @@ def scriptMain ( **kw ):
         ioPinsSpec = []
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
         conf.cfg.tramontana.instancesPerWindows = 10000
-        conf.cfg.etesian.spaceMargin         = 0.10
+        conf.cfg.etesian.spaceMargin         = 0.12
         conf.cfg.etesian.aspectRatio         = 1.00
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.anabatic.globalIterations   = 10

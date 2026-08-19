@@ -18,7 +18,6 @@ from doDesign  import scriptMain
 
 rulePnR   = PnR .mkRule( 'pnr', [ 'mips_r3000_1m_core_flat_r.ap'
                                 , 'mips_r3000_1m_core_flat_r.vst'
-                                , 'mips_r3000_1m_core_flat_r.spi'
                                 ]
                               , [ 'mips_r3000_1m_core_flat.vst'
                                 , 'mips_r3000_1m_core_flat.ap'

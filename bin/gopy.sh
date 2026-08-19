@@ -74,12 +74,15 @@
       onGithub="false"
      gf180rule="gds"
  ihpsg13g2rule="gds"
+   blifVersion="v68"
  while [ $# -gt 0 ]; do
    case $1 in
      --github-runner) echo "Github/runner mode..";
                       onGithub="true";;
      --run-set=*)     runSetId=`getString $1`;;
      --gf180-drc)     gf180rule="drc";;
+     --blif-v58)      blifVersion="v58";;
+     --blif-v68)      blifVersion="v68";;
      --ihpsg13g2-drc) ihpsg13g2rule="drc";;
      --all-drc)       gf180rule="drc"
 		      ihpsg13g2rule="drc";;
@@ -239,7 +242,8 @@
      startTime="$SECONDS"
      ${crlenv} -- doit clean_flow --extras > /dev/null 2>&1
      for rule in ${rules}; do
-       ${crlenv} -- doit -n 1 ${rule} reuse-blif=v58 >> ${benchLog} 2>&1
+       ${crlenv} -- doit -n 1 ${rule} reuse-blif="${blifVersion}" >> ${benchLog} 2>&1
+      #${crlenv} -- doit -n 1 ${rule} >> ${benchLog} 2>&1
        if [ $? -ne 0 ]; then
          success="false"
          printf "${statusLine}\n" "$setIdStr" $benchCount "<${bench}>" "${rule}" "`getRuntime $startTime`" "FAILED"
@@ -253,6 +257,11 @@
          break
        fi
      done
+    #blifFile="`ls *.blif 2>/dev/null`"
+    #if [ ! -z "${blifFile}" ]; then
+    #  blifV68="`basename ${blifFile} .blif`.v68.blif"
+    #  mv "${blifFile}" "./non_generateds/${blifV68}"
+    #fi
      ${crlenv} -- doit -n 1 clean_flow --extras >> ${benchLog} 2>&1
      if [ "${success}" = "true" ]; then
        toDeterministicLog ${benchLog}

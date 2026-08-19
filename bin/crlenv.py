@@ -242,9 +242,10 @@ def printEnvironment ():
 
 if __name__ == '__main__':
     """
-    Run any script in a environmnent set for Coriolis.
+    Run any script in a environmnent set for Coriolis. For debugging purpose,
+    the program can be run *through* ``valgrind``.
 
-    Example:
+    Examples:
 
     .. code:: bash
 
@@ -257,14 +258,22 @@ if __name__ == '__main__':
        yosys        Run <yosys Arlet6502.v top=Arlet6502 blackboxes=[] flattens=[]>.
        ego@home:~> crlenv.py -- bash
        [ego@home]$ echo $CORIOLIS_TOP
-       /home/ego/coriolis-2.x/Linux.el9/Release.Shared/install
+       /home/ego/coriolis-2.x/release/install
        [ego@home]$ exit
        ego@home:~>
+ 
+    Run through ``valgrind``:
+ 
+    .. code:: bash
+ 
+       ego@home:~> crlenv.py --valgrind -- doit gds
+
     """
     parser = argparse.ArgumentParser()  
     parser.add_argument( '-v', '--verbose'    , action='store_true', dest='verbose'       )
     parser.add_argument( '-d', '--debug'      , action='store_true', dest='debug'         )
     parser.add_argument( '-P', '--python-path', action='store_true', dest='askPythonPath' )
+    parser.add_argument(       '--valgrind'   , action='store_true', dest='valgrind'      )
     parser.add_argument( 'command', nargs='*' )
     args = parser.parse_args()
 
@@ -275,5 +284,10 @@ if __name__ == '__main__':
     if not len(args.command):
         printEnvironment()
         sys.exit( 0 )
+    if args.valgrind:
+        args.command[0:0] = [ 'valgrind'
+                            , '--keep-stacktraces=alloc-and-free'
+                            , '--read-var-info=yes'
+                            , '--trace-children=yes' ]
     state = subprocess.run( args.command )
     sys.exit( state.returncode )

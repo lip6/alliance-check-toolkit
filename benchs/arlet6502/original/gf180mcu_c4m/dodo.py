@@ -45,31 +45,23 @@ drcFlags     = 0
 doDesign.buildChip = False
 if doDesign.buildChip:
     pnrFiles = [ 'chip_r.gds'
-               , 'chip_r.vst'
                , 'chip_r.spi'
-               , 'chip.vst'
                , 'chip.spi'
-               , 'corona_cts_r.vst'
                , 'corona_cts_r.spi'
-               , 'corona_r.vst'
                , 'corona_r.spi'
-               , 'corona.vst'
                , 'corona.spi'
-               , 'arlet6502_cts.vst'
                , 'arlet6502_cts.spi'
                , 'arlet6502.spi'
                ]
 else:
     pnrFiles = [ 'Arlet6502_cts_r.gds'
                , 'Arlet6502_cts_r.spi'
-               , 'arlet6502_cts_r.vst'
                ]
 
 if reuseBlif:
     ruleYosys = Copy.mkRule( 'yosys', 'Arlet6502.blif', './non_generateds/Arlet6502.{}.blif'.format( reuseBlif ))
 else:
     ruleYosys   = Yosys   .mkRule( 'yosys'   , 'Arlet6502.v' )
-ruleB2V     = Blif2Vst.mkRule( 'b2v'     , 'arlet6502.vst', [ruleYosys], flags=0 )
 rulePnR     = PnR     .mkRule( 'pnr'     , pnrFiles, [ruleYosys], doDesign.scriptMain )
 ruleGds     = Alias   .mkRule( 'gds'     , [rulePnR] )
 ruleDRC     = DRC     .mkRule( 'drc'     , [rulePnR], DRC.GF180MCU_C|DRC.ANTENNA|drcFlags )

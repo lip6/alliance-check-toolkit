@@ -16,22 +16,14 @@ PnR.textMode  = True
 from doDesign  import scriptMain
 
 ruleYosys = Yosys   .mkRule( 'yosys', 'Arlet6502.v' )
-ruleB2V   = Blif2Vst.mkRule( 'b2v'  , [ 'arlet6502.vst' ]
-                                    , [ruleYosys]
-                                    , flags=0 )
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'chip_r.gds'
-                                      , 'chip_r.vst'
                                       , 'chip_r.spi'
-                                      , 'chip.vst'
                                       , 'chip.spi'
-                                      , 'corona_cts_r.vst'
                                       , 'corona_cts_r.spi'
-                                      , 'corona.vst'
                                       , 'corona.spi'
-                                      , 'arlet6502.spi'
-                                      , 'arlet6502_cts.spi'
-                                      , 'arlet6502_cts.vst' ]
-                                    , [ruleB2V]
+                                      , 'Arlet6502.spi'
+                                      , 'Arlet6502_cts.spi' ]
+                                    , [ruleYosys]
                                     , scriptMain )
 ruleCgt   = PnR  .mkRule( 'cgt' )
 ruleGds   = Alias.mkRule( 'gds', [rulePnR] )

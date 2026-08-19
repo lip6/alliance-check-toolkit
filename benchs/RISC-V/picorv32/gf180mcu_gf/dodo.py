@@ -48,24 +48,17 @@ import doDesign
 
 if doDesign.buildChip:
     pnrFiles = [ 'chip_r.gds'
-               , 'chip_r.vst'
                , 'chip_r.spi'
-               , 'chip.vst'
                , 'chip.spi'
-               , 'corona_cts_r.vst'
                , 'corona_cts_r.spi'
-               , 'corona_r.vst'
                , 'corona_r.spi'
-               , 'corona.vst'
                , 'corona.spi'
-               , 'picorv32_cts.vst'
                , 'picorv32_cts.spi'
                , 'picorv32.spi'
                ]
 else:
     pnrFiles = [ 'picorv32_cts_r.gds'
                , 'picorv32_cts_r.spi'
-               , 'picorv32_cts_r.vst'
                ]
 
 doDesign.logMode = True if logMode == 'True' else False

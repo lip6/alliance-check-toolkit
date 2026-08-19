@@ -53,7 +53,7 @@ def scriptMain ( **kw ):
         m65sConf.cfg.katana.eventsLimit          = 1000000
         m65sConf.cfg.anabatic.moveUpReserve      = 1.5
         m65sConf.cfg.katana.hTracksReservedMin   = 7 
-        m65sConf.cfg.katana.vTracksReservedMin   = 6
+        m65sConf.cfg.katana.vTracksReservedMin   = 7
         m65sConf.cfg.katana.hTracksReservedLocal = 9 
         m65sConf.cfg.katana.vTracksReservedLocal = 9 
         m65sConf.cfg.katana.runRealignStage      = True

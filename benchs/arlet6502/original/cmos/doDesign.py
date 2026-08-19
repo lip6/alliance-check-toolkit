@@ -59,7 +59,7 @@ def scriptMain ( **kw ):
         buildChip = False
         cell, editor = plugins.kwParseMain( **kw )
         cell = CRL.Blif.load( 'Arlet6502', CRL.Blif.EnforceVhdl )
-        cell.setName( 'arlet6502' )
+        af.renameCell( cell, 'arlet6502' )
         if editor:
             editor.setCell( cell ) 
             editor.setDbuMode( DbU.StringModePhysical )

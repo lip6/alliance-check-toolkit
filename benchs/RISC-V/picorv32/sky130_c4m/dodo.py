@@ -25,8 +25,7 @@ else:
     ruleYosys = Yosys.mkRule( 'yosys', 'picorv32.v' )
 
 rulePnR   = PnR     .mkRule( 'pnr'  , [ 'picorv32_cts_r.gds'
-                                      , 'picorv32_cts_r.spi'
-                                      , 'picorv32_cts_r.vst' ]
+                                      , 'picorv32_cts_r.spi' ]
                                     , [ruleYosys]
                                     , scriptMain )
 ruleCgt   = PnR     .mkRule( 'cgt' )

@@ -70,7 +70,7 @@ def scriptMain ( **kw ):
     katana.finalizeLayout()
     success = katana.isDetailedRoutingSuccess()
     katana.destroy()
-    cell.setName( cell.getName()+'_r' )
+    af.renameCell( cell, cell.getName()+'_r' )
     rsave( cell, CRL.Catalog.State.Logical|CRL.Catalog.State.Physical )
     if not success:
         return success

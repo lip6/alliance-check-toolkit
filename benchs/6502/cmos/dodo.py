@@ -16,7 +16,6 @@ from coriolis.designflow.druc     import Druc
 from coriolis.designflow.graal    import Graal
 from coriolis.designflow.dreal    import Dreal
 from coriolis.designflow.yosys    import Yosys
-from coriolis.designflow.blif2vst import Blif2Vst
 from coriolis.designflow.pnr      import PnR
 from coriolis.designflow.clean    import Clean
 PnR.textMode = True

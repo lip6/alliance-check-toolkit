@@ -45,24 +45,17 @@ import doDesign
 doDesign.buildChip = False
 if doDesign.buildChip:
     pnrFiles = [ 'chip_r.gds'
-               , 'chip_r.vst'
                , 'chip_r.spi'
-               , 'chip.vst'
                , 'chip.spi'
-               , 'corona_cts_r.vst'
                , 'corona_cts_r.spi'
-               , 'corona_r.vst'
                , 'corona_r.spi'
-               , 'corona.vst'
                , 'corona.spi'
-               , 'arlet6502_cts.vst'
-               , 'arlet6502_cts.spi'
-               , 'arlet6502.spi'
+               , 'Arlet6502_cts.spi'
+               , 'Arlet6502.spi'
                ]
 else:
     pnrFiles = [ 'Arlet6502_cts_r.gds'
                , 'Arlet6502_cts_r.spi'
-               , 'arlet6502_cts_r.vst'
                ]
 
 

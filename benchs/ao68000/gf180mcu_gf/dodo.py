@@ -49,7 +49,6 @@ else:
     ruleYosys  = Yosys     .mkRule( 'yosys', 'ao68000.v' )
 
 rulePnR    = PnR       .mkRule( 'pnr'  , [ 'ao68000_cts_r.gds'
-                                         , 'ao68000_cts_r.vst'
                                          , 'ao68000_cts_r.spi' ]
                                          , [ruleYosys]
                                        , scriptMain )

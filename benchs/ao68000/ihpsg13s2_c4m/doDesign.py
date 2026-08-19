@@ -188,13 +188,13 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.spaceMargin         = 0.80
         conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.gcellAspectRatio   = 1.5
-        conf.cfg.anabatic.globalIterations   = 20
+        conf.cfg.anabatic.globalIterations   = 30
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
        #conf.cfg.anabatic.topRoutingLayer    = 'm5'
-        conf.cfg.katana.hTracksReservedLocal = 15
+        conf.cfg.katana.hTracksReservedLocal = 16
         conf.cfg.katana.vTracksReservedLocal = 23
-        conf.cfg.katana.hTracksReservedMin   = 9
-        conf.cfg.katana.vTracksReservedMin   = 9
+        conf.cfg.katana.hTracksReservedMin   = 11
+        conf.cfg.katana.vTracksReservedMin   = 10
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.katana.dumpMeasures         = False
@@ -209,7 +209,7 @@ def scriptMain ( **kw ):
         conf.bRows               = 2
         conf.chipName            = 'chip'
         conf.coreToChipClass     = CoreToChip
-        conf.coreSize            = conf.computeCoreSize( 151*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 141*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
         conf.useHTree( 'CLK_I', Spares.HEAVY_LEAF_LOAD )
         conf.useHTree( 'reset_n' )
