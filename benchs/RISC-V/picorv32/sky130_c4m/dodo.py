@@ -1,8 +1,8 @@
 
 from doit import get_var
-from coriolis.designflow.technos import setupSky130_c4m
+from pdks.sky130_c4m import setup
 
-setupSky130_c4m( '../../../..', '../../../../pdkmaster/C4M.Sky130' )
+setup()
 
 DOIT_CONFIG = { 'verbosity' : 2 }
 

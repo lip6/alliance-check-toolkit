@@ -56,20 +56,26 @@ def scriptMain ( **kw ):
                      , (IoPin.WEST |IoPin.A_BEGIN, 'SGL_O'    , 11*vspace, 0, 1)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'STB_O'    , 12*vspace, 0, 1)
                      , (IoPin.WEST |IoPin.A_BEGIN, 'WE_O'     , 14*vspace, 0, 1)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'ipl_i({})', 15*vspace,   vspace, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'BTE_O({})', 18*vspace,   vspace, 2 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'CTI_O({})', 20*vspace,   vspace, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN,  'fc_o({})', 23*vspace,   vspace, 3 )
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'SEL_O({})', 27*vspace,   vspace, 4 )
-                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'DAT_I({})',    hspace,   hspace, 32 )
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'ADR_O({})',    vspace, 4*vspace, range(2,32) )
-                     , (IoPin.NORTH|IoPin.A_BEGIN, 'DAT_O({})',    hspace, 4*hspace, 32 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'ipl_i[{}]', 15*vspace,   vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'BTE_O[{}]', 18*vspace,   vspace, 2 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'CTI_O[{}]', 20*vspace,   vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN,  'fc_o[{}]', 23*vspace,   vspace, 3 )
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'SEL_O[{}]', 27*vspace,   vspace, 4 )
+                     , (IoPin.SOUTH|IoPin.A_BEGIN, 'DAT_I[{}]',    hspace,   hspace, 32 )
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'ADR_O[{}]',    vspace, 4*vspace, range(2,32) )
+                     , (IoPin.NORTH|IoPin.A_BEGIN, 'DAT_O[{}]',    hspace, 4*hspace, 32 )
                      ]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=[] ) 
+        conf.cfg.etesian.latchUpDistance     = 0
         conf.cfg.etesian.bloat               = 'disabled'
        #conf.cfg.etesian.bloat               = 'nsxlib'
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
+        conf.cfg.etesian.densificationMode             = 'Old'
+        conf.cfg.etesian.densificationTargetDensity    = 1.0
+        conf.cfg.etesian.densificationMaxFactor        = 5.0
+        conf.cfg.etesian.densificationNbRampSteps      = 1
+        conf.cfg.etesian.densificationTargetedStrength = 0.5
        # etesian.spaceMargin is ignored if the coreSize is directly set.
        #conf.cfg.etesian.spaceMargin         = 0.10
        #conf.cfg.anabatic.searchHalo         = 2
@@ -78,8 +84,8 @@ def scriptMain ( **kw ):
         conf.cfg.katana.maxFlatEdgeOverflow  = 300
         conf.cfg.katana.hTracksReservedLocal = 13
         conf.cfg.katana.vTracksReservedLocal = 17
-        conf.cfg.katana.hTracksReservedMin   = 11
-        conf.cfg.katana.vTracksReservedMin   = 13
+        conf.cfg.katana.hTracksReservedMin   = 10
+        conf.cfg.katana.vTracksReservedMin   = 14
         conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
         conf.cfg.block.spareSide             = 8*conf.sliceHeight
@@ -90,6 +96,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
+       #conf.coreSize            = conf.computeCoreSize( 177*conf.sliceHeight, 1.0 )
         conf.coreSize            = conf.computeCoreSize( 177*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( 100*conf.sliceHeight, 100*conf.sliceHeight )
         conf.useHTree( 'CLK_I', Spares.HEAVY_LEAF_LOAD )

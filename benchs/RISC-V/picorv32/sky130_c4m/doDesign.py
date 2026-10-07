@@ -110,22 +110,22 @@ def scriptMain ( **kw ):
             vspace     = 9
             hspace     = 7
             ioPadsSpec = [ ]
-            ioPinsSpec = [ (IoPin.NORTH|IoPin.A_BEGIN, 'trace_data({})'  ,     vspace, vspace, range(0, 36))
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'mem_la_wdata({})',  38*vspace, vspace, range(0, 32))
-                         , (IoPin.NORTH|IoPin.A_BEGIN, 'mem_la_addr({})' ,  70*vspace, vspace, range(0, 32))
-                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'eoi({})'         ,     vspace, vspace, range(0, 32))
-                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'mem_addr({})'    ,  33*vspace, vspace, range(0, 32))
-                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'mem_wdata({})'   ,  65*vspace, vspace, range(0, 32))
-                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'mem_rdata({})'   ,  97*vspace, vspace, range(0,  4))
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'mem_rdata({})'   ,     hspace+5, hspace, range(4, 32))
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'irq({})'         ,  33*hspace, hspace, range(0, 32))
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'pcpi_insn({})'   ,  65*hspace, hspace, range(0, 32))
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'pcpi_rs1({})'    ,  97*hspace, hspace, range(0,  8))
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_rs1({})'    ,     hspace, hspace, range(8, 32))
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_rd({})'     ,  33*hspace, hspace, range(0, 32))
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_rs2({})'    ,  97*hspace, hspace, range(8, 32))
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'mem_wstrb({})'   , 121*hspace, hspace, range(0,  4))
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'mem_la_wstrb({})', 125*hspace, hspace, range(0,  4))
+            ioPinsSpec = [ (IoPin.NORTH|IoPin.A_BEGIN, 'trace_data[{}]'  ,     vspace, vspace, range(0, 36))
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'mem_la_wdata[{}]',  38*vspace, vspace, range(0, 32))
+                         , (IoPin.NORTH|IoPin.A_BEGIN, 'mem_la_addr[{}]' ,  70*vspace, vspace, range(0, 32))
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'eoi[{}]'         ,     vspace, vspace, range(0, 32))
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'mem_addr[{}]'    ,  33*vspace, vspace, range(0, 32))
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'mem_wdata[{}]'   ,  65*vspace, vspace, range(0, 32))
+                         , (IoPin.SOUTH|IoPin.A_BEGIN, 'mem_rdata[{}]'   ,  97*vspace, vspace, range(0,  4))
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'mem_rdata[{}]'   ,     hspace+5, hspace, range(4, 32))
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'irq[{}]'         ,  33*hspace, hspace, range(0, 32))
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'pcpi_insn[{}]'   ,  65*hspace, hspace, range(0, 32))
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'pcpi_rs1[{}]'    ,  97*hspace, hspace, range(0,  8))
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_rs1[{}]'    ,     hspace, hspace, range(8, 32))
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_rd[{}]'     ,  33*hspace, hspace, range(0, 32))
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_rs2[{}]'    ,  97*hspace, hspace, range(8, 32))
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'mem_wstrb[{}]'   , 121*hspace, hspace, range(0,  4))
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'mem_la_wstrb[{}]', 125*hspace, hspace, range(0,  4))
                          , (IoPin.WEST |IoPin.A_BEGIN, 'mem_la_write'    , 129*hspace, 0, range(0, 1))
                          , (IoPin.WEST |IoPin.A_BEGIN, 'trap'            , 130*hspace, 0, range(0, 1))
                          , (IoPin.WEST |IoPin.A_BEGIN, 'resetn'          , 131*hspace, 0, range(0, 1))
@@ -179,7 +179,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = conf.computeCoreSize( 100*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 110*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u(   2020.0), u( 2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:

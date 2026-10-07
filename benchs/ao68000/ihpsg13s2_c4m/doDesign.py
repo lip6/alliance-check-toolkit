@@ -186,6 +186,11 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.80
+        conf.cfg.etesian.densificationMode             = 'Old'
+        conf.cfg.etesian.densificationTargetDensity    = 1.0
+        conf.cfg.etesian.densificationMaxFactor        = 5.0
+        conf.cfg.etesian.densificationNbRampSteps      = 1
+        conf.cfg.etesian.densificationTargetedStrength = 0.5
         conf.cfg.anabatic.searchHalo         = 2
         conf.cfg.anabatic.gcellAspectRatio   = 1.5
         conf.cfg.anabatic.globalIterations   = 30
@@ -193,7 +198,7 @@ def scriptMain ( **kw ):
        #conf.cfg.anabatic.topRoutingLayer    = 'm5'
         conf.cfg.katana.hTracksReservedLocal = 16
         conf.cfg.katana.vTracksReservedLocal = 23
-        conf.cfg.katana.hTracksReservedMin   = 11
+        conf.cfg.katana.hTracksReservedMin   = 12
         conf.cfg.katana.vTracksReservedMin   = 10
        #conf.cfg.katana.trackFill            = 0
         conf.cfg.katana.runRealignStage      = True
@@ -209,7 +214,7 @@ def scriptMain ( **kw ):
         conf.bRows               = 2
         conf.chipName            = 'chip'
         conf.coreToChipClass     = CoreToChip
-        conf.coreSize            = conf.computeCoreSize( 141*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 145*conf.sliceHeight, 1.0 ) # old, 60.5%
         conf.chipSize            = ( u( 40*90.0+5.0 + 2*214.0), u( 40*90.0+5.0 + 2*214.0) )
         conf.useHTree( 'CLK_I', Spares.HEAVY_LEAF_LOAD )
         conf.useHTree( 'reset_n' )

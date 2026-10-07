@@ -97,9 +97,9 @@ def scriptMain ( **kw ):
                          ]
         else:
             ioPadsSpec = [ ]
-            ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  , 10, 10,  8)
-                         , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , 15, 10,  8)
-                         , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   , 20, 15, 16)
+            ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI[{}]'  , 10, 10,  8)
+                         , (IoPin.WEST |IoPin.A_BEGIN, 'DO[{}]'  , 15, 10,  8)
+                         , (IoPin.EAST |IoPin.A_BEGIN, 'A[{}]'   , 20, 15, 16)
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 100, 0,  1)
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 110, 0,  1)
                          , (IoPin.NORTH|IoPin.A_BEGIN, 'NMI'     , 120, 0,  1)
@@ -142,7 +142,7 @@ def scriptMain ( **kw ):
         conf.bColumns            = 2
         conf.bRows               = 2
         conf.chipName            = 'chip'
-        conf.coreSize            = conf.computeCoreSize( 40*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 41*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u(2020.0), u(2060.0) )
         conf.coreToChipClass     = CoreToChip
         if buildChip:

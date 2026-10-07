@@ -132,7 +132,7 @@ def scriptMain ( **kw ):
         conf.chipName            = 'chip'
         conf.chipConf.ioPadGauge = 'LEF.IO_Site'
         conf.coreToChipClass     = CoreToChip
-        conf.coreSize            = conf.computeCoreSize( 40*conf.sliceHeight, 1.0 )
+        conf.coreSize            = conf.computeCoreSize( 42*conf.sliceHeight, 1.0 )
         conf.chipSize            = ( u(16*85 + 2*260.0 + 40.0), u(18*85 + 2*260.0) )
         if buildChip:
             conf.useHTree( 'clk_from_pad', Spares.HEAVY_LEAF_LOAD )
