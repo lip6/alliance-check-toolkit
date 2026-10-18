@@ -109,9 +109,9 @@ def scriptMain ( **kw ):
                      , (IoPin.NORTH, None, 'a_14'       , 'a(14)'  , 'A(14)'  )
                      , (IoPin.NORTH, None, 'a_15'       , 'a(15)'  , 'A(15)'  )
                      ]
-        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI({})'  ,    16, 16,  8)
-                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO({})'  , 14*16, 16,  8)
-                     , (IoPin.EAST |IoPin.A_BEGIN, 'A({})'   ,    16, 16, 16)
+        ioPinsSpec = [ (IoPin.WEST |IoPin.A_BEGIN, 'DI[{}]'  ,    16, 16,  8)
+                     , (IoPin.WEST |IoPin.A_BEGIN, 'DO[{}]'  , 14*16, 16,  8)
+                     , (IoPin.EAST |IoPin.A_BEGIN, 'A[{}]'   ,    16, 16, 16)
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'clk'     , 10*16,  0 , 1)
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'IRQ'     , 11*16,  0 , 1)
                      , (IoPin.NORTH|IoPin.A_BEGIN, 'NMI'     , 12*16,  0 , 1)

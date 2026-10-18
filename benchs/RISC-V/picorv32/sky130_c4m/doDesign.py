@@ -3,10 +3,10 @@
 import sys
 import os
 import traceback
-from   coriolis            import CRL
+from   coriolis            import Cfg, CRL
 from   coriolis.Hurricane  import DbU, Breakpoint, DataBase, Library
 from   coriolis.helpers.io import ErrorMessage, WarningMessage, catch
-from   coriolis.helpers    import loadUserSettings, setTraceLevel, trace, l, u, n
+from   coriolis.helpers    import loadUserSettings, setTraceLevel, overlay, trace, l, u, n
 loadUserSettings()
 from   coriolis            import plugins
 from   coriolis.plugins.block.block         import Block
@@ -26,6 +26,16 @@ def scriptMain ( **kw ):
  
     loadOpenROAD = False
     rvalue       = True
+    with overlay.CfgCache(priority=Cfg.Parameter.Priority.UserFile) as cfg:
+        cfg.misc.catchCore        = False
+        cfg.misc.minTraceLevel    = 12300
+        cfg.misc.maxTraceLevel    = 12400
+        cfg.misc.info             = False
+        cfg.misc.paranoid         = False
+        cfg.misc.bug              = False
+        cfg.misc.verboseLevel1    = True
+        cfg.misc.verboseLevel2    = True
+        cfg.misc.logMode          = True
     try:
         #setTraceLevel( 540 )
         #Breakpoint.setStopLevel( 100 )
@@ -140,15 +150,6 @@ def scriptMain ( **kw ):
                          , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_valid'      , 140*hspace, 0, range(0, 1))
                          , (IoPin.WEST |IoPin.A_BEGIN, 'pcpi_ready'      , 141*hspace-5, 0, range(0, 1))]
         conf = ChipConf( cell, ioPins=ioPinsSpec, ioPads=ioPadsSpec ) 
-        conf.cfg.misc.catchCore              = False
-        conf.cfg.misc.minTraceLevel          = 12300
-        conf.cfg.misc.maxTraceLevel          = 12400
-        conf.cfg.misc.info                   = False
-        conf.cfg.misc.paranoid               = False
-        conf.cfg.misc.bug                    = False
-        conf.cfg.misc.logMode                = False
-        conf.cfg.misc.verboseLevel1          = True
-        conf.cfg.misc.verboseLevel2          = True
        #conf.cfg.etesian.bloat               = 'Flexlib'
         conf.cfg.etesian.densityVariation    = 0.05
         conf.cfg.etesian.aspectRatio         = 1.0
