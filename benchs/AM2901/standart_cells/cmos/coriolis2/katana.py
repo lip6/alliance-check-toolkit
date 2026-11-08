@@ -42,3 +42,4 @@ from Hurricane import UpdateSession
 #     | Shorting @<Box 789.0L 1649.0L 1151.0L 1651.0L>
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.r(3)' ) )
 #DebugSession.addToTrace( katana.getCell().getNet( 'core.ialu.not_r(0)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'core.iram.o3_x2_14_sig' ) )

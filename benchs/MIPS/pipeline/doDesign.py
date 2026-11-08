@@ -29,11 +29,12 @@ def scriptMain ( **kw ):
         #cfg.misc.maxTraceLevel          = 120
         cfg.anabatic.globalIterations   = 40
         cfg.anabatic.topRoutingLayer    = 'METAL5'
+        cfg.anabatic.layerAssign.seedMoveUpReserve = 4.0
         cfg.katana.searchHalo           = 1
         cfg.katana.eventsLimit          = 1000000
         cfg.katana.hTracksReservedLocal = 9 
         cfg.katana.vTracksReservedLocal = 7 
-        cfg.katana.hTracksReservedMin   = 3 
+        cfg.katana.hTracksReservedMin   = 4 
         cfg.katana.vTracksReservedMin   = 5 
         cfg.katana.globalRipupLimit     = 7 
         cfg.katana.nonPrefRipupLimit    = 7

@@ -199,4 +199,5 @@ from coriolis.Hurricane import DebugSession
 #DebugSession.addToTrace( katana.getCell().getNet( '$abc$11951$new_n549' ) )
 # Pb @(68,218) Min dist M2.2a
 # Pb @(123,168) Min dist M2.2a
-
+# Pb <id:538255 Horizontal $abc$12097$new_n718 Metal2 [192.36um 153.16um] ...> unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$12097$new_n718' ) )

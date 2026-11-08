@@ -77,4 +77,16 @@ from coriolis.Hurricane import DebugSession
 # Placed OK, but impact on 1139286 of n7437
 # <id:1249378 Vertical $abc$71324$new_n7006_hfns_1 Metal2 [675.08um 595.56um] ...> 
 #DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7006_hfns_1' ) )
-DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7437' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71324$new_n7437' ) )
+# [ERROR] Overlap in <HorizontalTrack [651] Metal2 @364.84um [-0.42um:886.34um] [198/256]> between: 
+#   <id:1114439 Horizontal $abc$71845$new_n8865 Metal2 [252.28um 364.84um] [262.36um 364.84um] 0.28um rpD:3 bl:0 ------CG--------------tt-- [251.95um:262.69um] [251.95um:291.81um] 39.86um ------T--->
+#   <id:1135609 Horizontal $abc$71845$new_n9714 Metal2 [264.6um 364.84um] [309.4um 364.84um] 0.28um rpD:3 bl:0 ------CG--------------tt-- [264.27um:309.73um] [264.27um:309.73um] 45.46um ------T--->
+#   TargetU:291.81um SourceU:264.27um
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71845$new_n8865' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71845$new_n9714' ) )
+# <id:982125 Vertical $abc$71845$new_n13198_hfns_0 Metal3 [622.44um 234.92um] ...> unrouted.
+# DebugSession.addToTrace( katana.getCell().getNet( '$abc$71845$new_n13358' ) )
+# Pb: <id:1456022 Vertical $abc$71845$new_n11651 Metal3 [415.8um 198.52um] ...> unrouted.
+#DebugSession.addToTrace( katana.getCell().getNet( '$abc$71845$new_n11651' ) )
+# id:1043409 Horizontal $abc$71845$new_n3283 Metal2 [79.24um 622.44um] ...> unrouted.
+DebugSession.addToTrace( katana.getCell().getNet( '$abc$71845$new_n3283' ) )

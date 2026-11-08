@@ -62,7 +62,7 @@ def scriptMain ( **kw ):
         af.renameCell( cell, 'arlet6502' )
         if editor:
             editor.setCell( cell ) 
-            editor.setDbuMode( DbU.StringModePhysical )
+            editor.setDbuMode( DbU.StringModeSymbolic )
         ioPadsSpec = []
         ioPadsSpec.append(( IoPin.WEST , None, 'di_{}'  , 'DI({})' , 'DI({})', range( 0, 4) ))
         addSupplyPads(      IoPin.WEST , ioPadsSpec )

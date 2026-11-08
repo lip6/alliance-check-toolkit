@@ -51,11 +51,11 @@ def scriptMain ( **kw ):
         m65sConf.cfg.etesian.densityVariation    = 0.05
         m65sConf.cfg.anabatic.topRoutingLayer    = 'METAL5'
         m65sConf.cfg.katana.eventsLimit          = 1000000
-        m65sConf.cfg.anabatic.moveUpReserve      = 1.5
+        m65sConf.cfg.anabatic.moveUpReserve      = 2.0
         m65sConf.cfg.katana.hTracksReservedMin   = 7 
         m65sConf.cfg.katana.vTracksReservedMin   = 7
-        m65sConf.cfg.katana.hTracksReservedLocal = 9 
-        m65sConf.cfg.katana.vTracksReservedLocal = 9 
+        m65sConf.cfg.katana.hTracksReservedLocal = 10 
+        m65sConf.cfg.katana.vTracksReservedLocal = 10 
         m65sConf.cfg.katana.runRealignStage      = True
         m65sConf.cfg.block.spareSide             = l(1000)
         m65sConf.editor     = editor

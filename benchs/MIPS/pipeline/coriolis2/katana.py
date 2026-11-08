@@ -50,5 +50,9 @@ from coriolis.Hurricane import DebugSession
 #         * <VerticalTrack [242] METAL3 @1210.0L [-3.5L:2953.5L] [0/0]> 
 #         * <id:325919 Vertical mips_r3000_1m_dp_banc_nck METAL3 [1212.5L 1690.0L] [1212.5L 1690.0L] 2.0L rpD:0 bl:0 F-----C---T-----------bb-- [1689.0L:1691.0L] [1689.0L:1691.0L] 2.0L -F----T--->
 #DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_banc_nck' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'wreg_sw(7)' ) )
+#DebugSession.addToTrace( katana.getCell().getNet( 'rsdnbr_sd(7)' ) )
+# Pb: <id:246652 Horizontal mips_r3000_1m_dp_rshift_se(16) METAL4 [5095.0L 775.0L] ...> unrouted
+#DebugSession.addToTrace( katana.getCell().getNet( 'mips_r3000_1m_dp_rshift_se(16)' ))
 
 

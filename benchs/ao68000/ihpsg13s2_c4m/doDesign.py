@@ -186,7 +186,7 @@ def scriptMain ( **kw ):
         conf.cfg.etesian.aspectRatio         = 1.0
        # etesian.spaceMargin is ignored if the coreSize is directly set.
         conf.cfg.etesian.spaceMargin         = 0.80
-        conf.cfg.etesian.densificationMode             = 'Old'
+        conf.cfg.etesian.densificationMode             = 'PrePlace'
         conf.cfg.etesian.densificationTargetDensity    = 1.0
         conf.cfg.etesian.densificationMaxFactor        = 5.0
         conf.cfg.etesian.densificationNbRampSteps      = 1
